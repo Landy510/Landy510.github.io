@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://example.com/image/line_height.png">
 <meta property="og:image" content="http://example.com/image/img_bug.png">
 <meta property="article:published_time" content="2020-12-14T08:08:22.000Z">
-<meta property="article:modified_time" content="2020-12-14T09:21:24.957Z">
+<meta property="article:modified_time" content="2020-12-14T09:24:41.537Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="第一週前端體驗營">
 <meta name="twitter:card" content="summary">
@@ -178,7 +178,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-12-14 16:08:22 / Modified: 17:21:24" itemprop="dateCreated datePublished" datetime="2020-12-14T16:08:22+08:00">2020-12-14</time>
+              <time title="Created: 2020-12-14 16:08:22 / Modified: 17:24:41" itemprop="dateCreated datePublished" datetime="2020-12-14T16:08:22+08:00">2020-12-14</time>
             </span>
 
           
@@ -212,7 +212,7 @@
 </li>
 </ol>
 <h2 id="第一週作業"><a href="#第一週作業" class="headerlink" title="第一週作業"></a>第一週作業</h2><ol>
-<li><p>想嵌入的字體，但原本的預設字體庫中沒有，要怎麼嵌入呢?<br> 直接在css的文件裡面，隨邊你要寫在css文件的哪邊都可以，我是都習慣直接寫在css文件的前面的位置。<br> 接著，使用<code>@font-face</code>加入，你想加入的字體的路徑 與 該字體你想要怎麼命名。</p>
+<li><p>想嵌入的字體，但原本的預設字體庫中沒有，要怎麼嵌入呢?<br> 直接在css的文件裡面，使用<code>@font-face</code>加入你想加入的字體的路徑 與 該字體你想要怎麼命名。<br> 另外，這些<code>@font-face</code>的內容，我都習慣寫在css文件的開頭的部分。</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@font-face&#123;</span><br><span class="line">    font-family: &#39;SF Pro Text, Regular&#39;;   &#x2F;&#x2F; 我將這個嵌入的字體命名為&#39;SF Pro Text, Regular&#39;</span><br><span class="line">    src: url(&#39;&#x2F;font_family&#x2F;FontsFree-Net-SFProText-Regular.ttf&#39;);  &#x2F;&#x2F; 這個嵌入字體檔案的路徑</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p> 如果你想要嵌入兩種字體的話，就將<code>@font-face</code>寫兩遍，然後，更改裡面的內容就可以囉~</p>
