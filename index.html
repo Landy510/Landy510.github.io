@@ -248,10 +248,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-13 16:13:18 / Modified: 16:42:22" itemprop="dateCreated datePublished" datetime="2020-12-13T16:13:18+08:00">2020-12-13</time>
+              <time title="Created: 2020-12-13 16:13:18" itemprop="dateCreated datePublished" datetime="2020-12-13T16:13:18+08:00">2020-12-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-15 22:40:52" itemprop="dateModified" datetime="2020-12-15T22:40:52+08:00">2020-12-15</time>
+              </span>
 
           
 
@@ -273,20 +279,14 @@
 <h3 id="創建物件的方式"><a href="#創建物件的方式" class="headerlink" title="創建物件的方式"></a>創建物件的方式</h3><p>在書中有提到兩種創建物件的方式<br>．用new的方式創物件<br>．用物件實字方式創物件</p>
 <h4 id="Way1-用new的方式創物件"><a href="#Way1-用new的方式創物件" class="headerlink" title="Way1. 用new的方式創物件"></a>Way1. 用new的方式創物件</h4><p>ex:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let person &#x3D; new Object(); &#x2F;&#x2F; 創建一個叫person的物件</span><br><span class="line">person.name &#x3D; &#39;Jared&#39;;</span><br><span class="line">person.job &#x3D; &#39;Back-end engineer&#39;;</span><br><span class="line">person.sayName &#x3D; function()&#123;</span><br><span class="line">    alert(this.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Way2-用物件實字方式創物件"><a href="#Way2-用物件實字方式創物件" class="headerlink" title="Way2. 用物件實字方式創物件"></a>Way2. 用物件實字方式創物件</h4><p>這種創建方式，同時也是JSON格式的核心語法。</p>
-<p>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let person &#x3D; &#123;</span><br><span class="line">    name: &#39;Jared&#39;,</span><br><span class="line">    job: &#39;Back-end engineer&#39;,</span><br><span class="line">    sayName: function()&#123;</span><br><span class="line">        alert(this.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="物件屬性存取"><a href="#物件屬性存取" class="headerlink" title="物件屬性存取"></a>物件屬性存取</h3><p>物件可以透過「.」(點號) 或 [] (中括號) 來存取。<br>ex: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">person.name;</span><br><span class="line">person.job;</span><br><span class="line">person[&quot;name&quot;]; &#x2F;&#x2F; 中括號裡面放入屬性名稱的字串</span><br><span class="line">person[&quot;sayName&quot;];</span><br></pre></td></tr></table></figure>
-<h4 id="透過中括號-存取屬性的好處"><a href="#透過中括號-存取屬性的好處" class="headerlink" title="透過中括號[]存取屬性的好處"></a>透過中括號[]存取屬性的好處</h4><p>當屬性值是不合法的JavaScript識別字時，就需要用中括號的方式來提取該屬性的值。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let person &#x3D; &#123;</span><br><span class="line">    name: &#39;Jared&#39;,</span><br><span class="line">    &#39;001&#39;: &#39;你好&#39;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">console.log(person.001);    &#x2F;&#x2F; 報錯!! Uncaught SyntaxError</span><br><span class="line">console.log(person[&quot;001&quot;]); &#x2F;&#x2F; &#39;你好&#39;</span><br></pre></td></tr></table></figure>
-
-<p>上面這個例子，要特別注意一下，要用這些不合法的JS屬性值來創屬性時，要用<code>字串</code>的方式來創該屬性，<br>像上面就是用<code>&#39;001&#39;: &#39;你好&#39;</code> ，來創立001這個屬性。<br>接著，提取該屬性值，就要用中括號並將該屬性的字串放在中括號中，就可以提取該屬性的內容囉~<br>但是，用「.」(點號)來提取屬性值的話，會報錯。</p>
-<h4 id="判斷屬性是否存在"><a href="#判斷屬性是否存在" class="headerlink" title="判斷屬性是否存在"></a>判斷屬性是否存在</h4><p>當嘗試去存取物件中不存在的屬性時，會回傳<code>undefined</code><br>書中有提供以下三種方式<br>．直接用「.」(點號)來嘗試提取屬性值，若沒有該屬性就回傳undefined<br>．in 運算子<br>．hasOwnProperty()方法</p>
-<p>另外，in運算子 和 hasOwnProperty的方法差別在會不會順著原形鍊向上查找該屬性是否存在<br>hasOwnProperty()方法 - 不會順著原形鍊向上查找，只會檢查該物件是否有該屬性<br>in運算子 - 會順著原形鍊向上查找</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/13/Day01-%E7%AD%86%E8%A8%9803/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
