@@ -28,7 +28,7 @@
 <meta property="og:description" content="JavaScript 運算子(Operator)算數運算子之一: 四則運算加號(+)Infinity, -Infinity, NaN 皆屬於「特殊數字」 當NaN在運算式中，其結果必為NaNex: 12console.log(10 + NaN); &#x2F;&#x2F; NaNconsole.log(Infinity + NaN); &#x2F;&#x2F; NaN  若加號的某一方不是數字，而">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-15T14:46:04.000Z">
-<meta property="article:modified_time" content="2020-12-17T08:36:23.897Z">
+<meta property="article:modified_time" content="2020-12-17T09:34:35.817Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="008重新認識JavaScript筆記">
 <meta name="twitter:card" content="summary">
@@ -181,7 +181,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-17 16:36:23" itemprop="dateModified" datetime="2020-12-17T16:36:23+08:00">2020-12-17</time>
+                <time title="Modified: 2020-12-17 17:34:35" itemprop="dateModified" datetime="2020-12-17T17:34:35+08:00">2020-12-17</time>
               </span>
 
           
@@ -202,7 +202,7 @@
 <h5 id="若加號的某一方不是數字，而是「字串」呢"><a href="#若加號的某一方不是數字，而是「字串」呢" class="headerlink" title="若加號的某一方不是數字，而是「字串」呢?"></a>若加號的某一方不是數字，而是「字串」呢?</h5><p>若其中一方是字串，則另一端會自動會被轉型為字串，接著，再連接再一起。<br>ex:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">100 + &quot;100&quot;;  &#x2F;&#x2F; &quot;100100&quot;</span><br><span class="line">100 + &quot;ABC&quot;;  &#x2F;&#x2F; &quot;100ABC&quot;</span><br><span class="line">&quot;XZY&quot; + &quot;ABC&quot;;  &quot;XZYABC&quot;</span><br></pre></td></tr></table></figure>
 
-<p>所以，當一端是字串型別，<br>而另一端是<code>number</code>型別、<code>boolean</code>型別、<code>Object</code>型別時，會先去呼叫<code>toString()</code>方法，<br>將他們轉為字串。<br>若另一段是<code>null</code> 或<code>undefined</code>，則通過<code>toString()</code>轉型後，分別會是字串’null’和字串’undefined’。<br>ex:</p>
+<p>所以，當一端是字串型別，<br>而另一端是<code>number</code>型別、<code>boolean</code>型別、<code>Object</code>型別時，會先去呼叫<code>toString()</code>方法，<br>將他們轉為字串。<br>若另一段是<code>null</code> 或<code>undefined</code>，則通過<code>toString()</code>轉型後，分別會是字串<code>null</code>和字串<code>undefined</code>。<br>ex:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">10 + &#39;abc&#39;; &#x2F;&#x2F; &#39;10abc&#39;</span><br><span class="line">true + &#39;abc&#39;; &#x2F;&#x2F; &#39;trueabc&#39;</span><br><span class="line">100 + &#123;&#125;; &#x2F;&#x2F; &#39;100[object object]&#39;</span><br><span class="line">&#39;123&#39; + null; &#x2F;&#x2F; &#39;123null&#39;</span><br><span class="line">&#39;123&#39; + undefined; &#x2F;&#x2F; &#39;123undefined&#39;</span><br><span class="line"></span><br><span class="line">--若一方是數字型別，另一方是null或undefined的話呢?--</span><br><span class="line">123 + null; &#x2F;&#x2F; 123，而null會被Number()轉成數字型別，轉型的結果是0，故123+0等於123</span><br><span class="line">123 + undefined; &#x2F;&#x2F; NaN，因為undefined經過Number()轉型結果是NaN，故123+NaN等於NaN</span><br></pre></td></tr></table></figure>
 
 <h1 id="減號"><a href="#減號" class="headerlink" title="減號(-)"></a>減號(-)</h1><h5 id="若減號的某一方不是數字呢"><a href="#若減號的某一方不是數字呢" class="headerlink" title="若減號的某一方不是數字呢?"></a>若減號的某一方不是數字呢?</h5><p>若另一端是基礎型別但不是number型別，則JS會先將它分用<code>Number()</code>方法嘗試將它們<br>轉成數字型別<br>ex:</p>
@@ -250,7 +250,10 @@
     <a href="/2020/12/14/%E7%AC%AC%E4%B8%80%E9%80%B1%E5%89%8D%E7%AB%AF%E4%BD%9C%E6%A5%AD%E8%88%87%E8%AA%B2%E7%A8%8B/" rel="prev" title="第一週前端作業與課程">
       <i class="fa fa-chevron-left"></i> 第一週前端作業與課程
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/17/Day02-%E7%AD%86%E8%A8%9801/" rel="next" title="008重新認識JS-Day02-筆記1">
+      008重新認識JS-Day02-筆記1 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -323,7 +326,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
