@@ -145,6 +145,92 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/22/%E7%AC%AC%E4%BA%8C%E9%80%B1%E5%89%8D%E7%AB%AF%E4%BD%9C%E6%A5%AD%E8%88%87%E8%AA%B2%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/22/%E7%AC%AC%E4%BA%8C%E9%80%B1%E5%89%8D%E7%AB%AF%E4%BD%9C%E6%A5%AD%E8%88%87%E8%AA%B2%E7%A8%8B/" class="post-title-link" itemprop="url">第二週前端作業與課程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-12-22 16:38:25 / Modified: 18:18:45" itemprop="dateCreated datePublished" datetime="2020-12-22T16:38:25+08:00">2020-12-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="在第二週上的課程-和-作業中遇到的重點與問題-紀錄"><a href="#在第二週上的課程-和-作業中遇到的重點與問題-紀錄" class="headerlink" title="在第二週上的課程 和 作業中遇到的重點與問題 紀錄"></a>在第二週上的課程 和 作業中遇到的重點與問題 紀錄</h1><h2 id="第二週"><a href="#第二週" class="headerlink" title="第二週"></a>第二週</h2><ol>
+<li>在<code>.product-list</code>中的<code>li</code>和其slogon的position之間的關係<br><img src="/image/position_attribute.png"></li>
+</ol>
+<p>父元素的<code>position</code>屬性的值設為<code>relative</code>，<br>子元素的<code>position</code>屬性設為<code>absolute</code>，接著，再用<code>left</code>, <code>right</code>, <code>top</code>, <code>bottom</code>之類的屬性去設定你要的位置。<br><img src="/image/position_attribute-layout.png"></p>
+<ol start="2">
+<li>垂直文字的css樣式寫法<br><code>writing-mode: vertical-lr</code><br>對於向左對其的內容而言，<code>vertical-lr</code>和<code>vertical-rl</code>的差別在於下一行是會在上一行的左邊或右邊<br><img src="/image/writing_mode.png"></li>
+</ol>
+<p>由上面的語法，就可以達成以下圖片中，本日精選的垂直的文字寫法囉<br><img src="/image/position_attribute.png"></p>
+<ol start="3">
+<li><code>letter-spacing</code>文字間隔設定<br>以上的css樣式設定，可以決定文字與文字間的間隔距離，語法的寫法如下<br><code>letter-spacing: 10px;</code></li>
+</ol>
+<p><img src="/image/letter-spacing.png"></p>
+<p>這上面的語法是運用在第二週作業中的本日精選，這四個字彼此的間隔的設定。</p>
+<ol start="4">
+<li>作業中搜尋框的作法<br><img src="/image/search-section.png"></li>
+</ol>
+<p>以下這一段程式碼是實作出搜尋框的html結構</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;footer-search-frame&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;input-section&quot;&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;input-icon&quot;&gt;&lt;i class&#x3D;&quot;fas fa-envelope&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;input-content-section&quot;&gt;</span><br><span class="line">            &lt;input class&#x3D;&quot;input-content&quot; type&#x3D;&quot;text&quot;&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;    </span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;button class&#x3D;&quot;input-button&quot;&gt;&lt;i class&#x3D;&quot;fas fa-arrow-right&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;button&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>主要是先由最外層元素<code>.footer-search-frame</code>包起來，<br>接著，第二層又兩個元素<code>input-section</code>和<code>input-button</code>構成。</p>
+<p>先講<code>.footer-search-frame</code>，就是利用<code>display:flex</code>的屬性設定將上面這兩個子元素弄成水平的，<br>然後，在讓這兩個子元素自己定義自己的寬度要多少，來達成版面要得設計效果。</p>
+<p>接著，第二層<br><code>input-button</code><br>它就是一個button元素，裡面就只有放一個fontawesome的樣式在裡面<br><code>input-section</code><br>裡面有放兩個div元素，分別為<code>input-icon</code>和<code>input-content-section</code><br>它的屬性一樣有加上<code>display:flex;</code>，來讓裡面的元素水平排列</p>
+<p>接著，第三層<br><code>input-icon</code><br>裡面就只有放一個fontawesome的元素而已</p>
+<p><code>input-content-section</code><br>裡面就只有放一個input元素<code>input-content</code></p>
+<p>接著，第四層<br><code>input-content</code><br>它是一個input元素，然後可以利用<code>height</code>元素來決定輸入文字的大小，順便也可以調整整體<code>.footer-search-frame</code><br>的高度大小，也可以說<code>.footer-search-frame</code>是由這個input元素的<code>height</code>數值所決定的。</p>
+<ol start="5">
+<li>a連結使用<code>a:mail</code> 和 <code>a:tel</code><br>當你的a連結中是要放mail的地址或電話的時候，<br>你可以先寫出a:mail，接著，按下tab鍵就會跑出以下的內容<br><code>&lt;a href=&quot;mailto:&quot;&gt;&lt;/a&gt;</code><br>接著，你再那個mailto的旁邊加入你想要填入的email網址，並將eamil的內容加到a連結的內容，就可以讓這個a連結連動到你的email囉~<br>即<br><code>&lt;a href=&quot;mailto:randychen510.gmail.com&quot;&gt;randychen510.gmail.com&lt;/a&gt;</code> </li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/21/Day02-%E7%AD%86%E8%A8%9803/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -484,10 +570,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-14 16:08:22 / Modified: 17:27:51" itemprop="dateCreated datePublished" datetime="2020-12-14T16:08:22+08:00">2020-12-14</time>
+              <time title="Created: 2020-12-14 16:08:22" itemprop="dateCreated datePublished" datetime="2020-12-14T16:08:22+08:00">2020-12-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-22 17:11:20" itemprop="dateModified" datetime="2020-12-22T17:11:20+08:00">2020-12-22</time>
+              </span>
 
           
 
@@ -515,6 +607,13 @@
 <li><p><code>&lt;img&gt;</code>元素的天生bug<br> <code>&lt;img&gt;</code>元素有個天生的bug，就是在<code>&lt;img&gt;</code>的下方會多一個<code>2px</code>左右的留白。</p>
 <p> <img src="/image/img_bug.png"></p>
 <p> 那要消除這個<code>&lt;img&gt;</code>的bug，就只要將它的<code>display</code>屬性改成<code>block</code>，就ok了~</p>
+</li>
+<li><p>父類別使用<code>display:flex</code>，讓子元素的高度被拉長填滿父元素，造成子元素的圖片長寬比不正確的問題<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---html文件---</span><br><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">  &lt;img class&#x3D;&quot;image&quot; src&#x3D;&quot;https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2020&#x2F;12&#x2F;22&#x2F;xPVBgS.jpg&quot; alt&#x3D;&quot;&quot;&gt;    </span><br><span class="line">  &lt;p&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, provident. Quis porro obcaecati rerum consequuntur accusantium ab error qui exercitationem.&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---css文件---</span><br><span class="line">.image&#123;</span><br><span class="line">  width: 300px;</span><br><span class="line">&#125;</span><br><span class="line">.container&#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  height: 600px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面這個例子，你就會看到在.container的父元素裡面的子元素img的圖片高度會完全填滿父元素的高度，進而造成該圖片的比例很怪，<br>解法是 在這個img的外面再套一個div，這樣就可以看到img的圖片回到正常的長寬比了。而css的樣式，是不需要做任何修改的囉~</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---html文件---</span><br><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">  &lt;div&gt;   &#x2F;&#x2F; 新增這個div包在img外面</span><br><span class="line">    &lt;img class&#x3D;&quot;image&quot; src&#x3D;&quot;https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2020&#x2F;12&#x2F;22&#x2F;xPVBgS.jpg&quot; alt&#x3D;&quot;&quot;&gt;    </span><br><span class="line">  &lt;&#x2F;div&gt; </span><br><span class="line">  &lt;p&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, provident. Quis porro obcaecati rerum consequuntur accusantium ab error qui exercitationem.&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---css文件---</span><br><span class="line">.image&#123;</span><br><span class="line">  width: 300px;</span><br><span class="line">&#125;</span><br><span class="line">.container&#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  height: 600px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/12/14/%E7%AC%AC%E4%B8%80%E9%80%B1%E5%89%8D%E7%AB%AF%E4%BD%9C%E6%A5%AD%E8%88%87%E8%AA%B2%E7%A8%8B/#more" rel="contents">
@@ -906,7 +1005,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
