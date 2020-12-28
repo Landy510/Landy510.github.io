@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="DOM節點的選取DOM除了有「HTML元素節點」外，還有「文字節點」、「註解節點」…等等。選取DOM的節點方法如下：ex: 12345678910111213141516---html文件---&lt;div id&#x3D;&quot;content&quot;&gt;內容一&lt;&#x2F;div&gt;&lt;p　class&#x3D;&quot;paragraph&quot;&gt;內文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="008重新認識JS-Day03-筆記2">
+<meta property="og:url" content="http://example.com/2020/12/25/Day03-%E7%AD%86%E8%A8%9802/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="DOM節點的選取DOM除了有「HTML元素節點」外，還有「文字節點」、「註解節點」…等等。選取DOM的節點方法如下：ex: 12345678910111213141516---html文件---&lt;div id&#x3D;&quot;content&quot;&gt;內容一&lt;&#x2F;div&gt;&lt;p　class&#x3D;&quot;paragraph&quot;&gt;內文">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/sibiling_node.png">
+<meta property="article:published_time" content="2020-12-25T07:55:46.000Z">
+<meta property="article:modified_time" content="2020-12-28T03:55:18.612Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="008重新認識JavaScript筆記">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/sibiling_node.png">
+
+<link rel="canonical" href="http://example.com/2020/12/25/Day03-%E7%AD%86%E8%A8%9802/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>008重新認識JS-Day03-筆記2 | Landy Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/25/Day03-%E7%AD%86%E8%A8%9802/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          008重新認識JS-Day03-筆記2
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-25 15:55:46" itemprop="dateCreated datePublished" datetime="2020-12-25T15:55:46+08:00">2020-12-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-28 11:55:18" itemprop="dateModified" datetime="2020-12-28T11:55:18+08:00">2020-12-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="DOM節點的選取"><a href="#DOM節點的選取" class="headerlink" title="DOM節點的選取"></a>DOM節點的選取</h1><p>DOM除了有「HTML元素節點」外，還有「文字節點」、「註解節點」…等等。<br>選取DOM的節點方法如下：<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---html文件---</span><br><span class="line">&lt;div id&#x3D;&quot;content&quot;&gt;內容一&lt;&#x2F;div&gt;</span><br><span class="line">&lt;p　class&#x3D;&quot;paragraph&quot;&gt;內文一&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">&lt;h2　class&#x3D;&quot;title_two&gt;標題二&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;h2　class&#x3D;&quot;title_two&gt;標題二&lt;&#x2F;h2&gt;</span><br><span class="line"></span><br><span class="line">---DOM節點擷取---</span><br><span class="line">document.getElementsById(&#39;content&#39;);</span><br><span class="line">document.getTagName(&#39;DIV&#39;);</span><br><span class="line">document.getByClassNamw(&#39;paragraph&#39;);</span><br><span class="line"></span><br><span class="line">document.querySelector(&#39;.paragraph&#39;);  &#x2F;&#x2F; 回傳第一個符合該className的節點</span><br><span class="line">document.querySelector(&#39;#content&#39;);　　&#x2F;&#x2F; 回傳第一個符合該id的節點</span><br><span class="line"></span><br><span class="line">document.querySelectorAll(&#39;.paragraph&#39;); &#x2F;&#x2F; 回傳符合該className的NodeList</span><br></pre></td></tr></table></figure>
+
+<h1 id="DOM節點間的查找遍歷-Traversing"><a href="#DOM節點間的查找遍歷-Traversing" class="headerlink" title="DOM節點間的查找遍歷(Traversing)"></a>DOM節點間的查找遍歷(Traversing)</h1><p>DOM節點與節點之間，大致分成以下兩種:<br>父子關係：　該節點的上一層node是「父節點」，該節點的下一層節點是「子節點」。<br>兄弟關係：　有同一個「父節點」的節點，彼此之間就稱為「兄弟節點」。<br><img src="/image/sibiling_node.png"></p>
+<p>另外，有以下幾種方法可以取得子節點、父節點、兄弟節點的方法：<br><code>Node.childNodes</code>: 會回傳的NodeList，並用這個回傳的NodeList來遍歷每個子節點<br><code>Node.firstChild</code>: 取得Node節點的第一個子節點<br><code>Node.lastNodes</code>: 取得Node節點的最後一個子節點<br><code>Node.parentNode</code>: 取得父元素，回傳值有可能是一個元素節點、根節點 或 DocumentFragment<br><code>Node.previousSibling</code>: 取得同一層之間的「前一個」節點，若該節點已經是　第一個節點　時，回傳<code>null</code><br><code>Node.nextSibling</code>: 取得同一層之間的「下一個」節點，若該節點已經是　最後一個節點　時，回傳<code>null</code></p>
+<h1 id="document-getElementsBy-與-document-querySelector-document-querySelectorAll-的差異"><a href="#document-getElementsBy-與-document-querySelector-document-querySelectorAll-的差異" class="headerlink" title="document.getElementsBy*** 與 document.querySelector/document.querySelectorAll 的差異"></a>document.getElementsBy*** 與 document.querySelector/document.querySelectorAll 的差異</h1><ol>
+<li><code>document.getElementById</code> 以及 <code>document.querySelector</code> 只會取得一個元素/節點，故不會有index和length屬性。</li>
+<li><code>document.getElementsBy***</code> 與 <code>document.querySelector/document.querySelectorAll</code> 分別會回傳<br> 「HTML Collection」與「NodeList」。<br> HTML Collection: 只收集HTML元素節點。<br> NodeList除了HTML節點，也會回傳文字節點 和 屬性節點等。<a id="more"></a>
+<h2 id="document-querySelector-document-querySelectorAll-取得的NodeList是靜態的"><a href="#document-querySelector-document-querySelectorAll-取得的NodeList是靜態的" class="headerlink" title="document.querySelector/document.querySelectorAll 取得的NodeList是靜態的"></a>document.querySelector/document.querySelectorAll 取得的NodeList是靜態的</h2>即透過<code>document.querySelector/document.querySelectorAll</code>取得的NodeList，不會動態地隨著網頁元素的增減，跟著一起變動。</li>
+</ol>
+<p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">---HTML文件---</span><br><span class="line">&lt;div id&#x3D;&quot;outer&quot;&gt;</span><br><span class="line">    &lt;div id&#x3D;&quot;inner&quot;&gt;inner&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript文件---</span><br><span class="line">var outerDiv &#x3D; document.getElementById(&#39;outer&#39;);</span><br><span class="line">var allDiv &#x3D; document.querSelectorAll(&#39;div);</span><br><span class="line">console.log(allDiv.length); &#x2F;&#x2F; 2，目前有兩個div標籤元素</span><br><span class="line"></span><br><span class="line">outerDiv.innerHTML &#x3D; &#39;&#39;; &#x2F;&#x2F;把outerDiv的內容全部清掉</span><br><span class="line"></span><br><span class="line">console.log(allDiv.length); &#x2F;&#x2F; 2，還是保持2，並沒有隨著outerDiv把內部元素清空而變成1</span><br></pre></td></tr></table></figure>
+
+<h1 id="DOM-Node-的建立、刪除、修改與外觀"><a href="#DOM-Node-的建立、刪除、修改與外觀" class="headerlink" title="DOM Node 的建立、刪除、修改與外觀"></a>DOM Node 的建立、刪除、修改與外觀</h1><h2 id="DOM-節點的新增"><a href="#DOM-節點的新增" class="headerlink" title="DOM 節點的新增"></a>DOM 節點的新增</h2><ol>
+<li><code>document.createElement(tagName)</code><br>ex:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let newDiv &#x3D; document.createElement(&#39;div&#39;);</span><br></pre></td></tr></table></figure>
+經過<code>document.createElement(tagName)</code>新增的元素，我們還無法在網頁上看到它們，<br>需要透過<code>appendChild()</code>、<code>inserBefore()</code>、<code>replaceChild()</code>等方法，將這些新元素加入指定的位置，<br>才能在網頁上看到它們。</li>
+</ol>
+<p>另外，我們也可以直接對這些新增元素新增屬性<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">newDiv.id &#x3D; &#39;newDiv&#39;;  &#x2F;&#x2F; 新增id屬性</span><br><span class="line">newDiv.className &#x3D; &#39;box&#39;;  &#x2F;&#x2F; 新增className </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p><code>document.createTextNode()</code><br>a. 用來建立文字節點<br>b. 在新增的TextNode被加入某個節點前，是無法看不到它的<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let newDiv &#x3D; document.createElement(&#39;div&#39;);</span><br><span class="line">let newTextNode &#x3D; document.createTextNode(&#39;Hello World&#39;);</span><br><span class="line">newDiv.appendChild(newTextNode); &#x2F;&#x2F; 將newTextNode塞入newDiv裡面</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>document.createDocumentFragment()</code><br> a. 它是一種沒有父層節點的「最小化文件」<br> b. 如同標準文件一般的方式來保存「片段的文件結構」<br> c. DocumentFragment不是真實的DOM結構，<br> 所以，DocumentFragment變動並不會影響目前網頁文件，也不會導致回流(reflow)或引起<br> 任何影響效能的狀況。<br> 故當要大量操作DOM的元素時，用DocumentFragment的效能會比直接操作DOM還要好。</p>
+</li>
+<li><p><code>document.write()</code><br>可用<code>write()</code>將某內容寫入網頁中，其內容可以不只是單純的字串，也可以是HTML的標籤。</p>
+</li>
+</ol>
+<p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.write(&quot;&lt;h1&gt;hello world&lt;&#x2F;h1&gt;&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>甚至要新增<code>&lt;script&gt;</code>標籤，並指定外部js資源也是可以。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.write(&quot;&lt;script type&#x3D;\&quot;text\javascript\&quot; src&#x3D;\&quot;file.js\&quot;&gt;&quot; + &quot;&lt;\&#x2F;script&gt;&quot;);</span><br></pre></td></tr></table></figure>
+<p><code>write()</code>裡面的內容，會完全覆蓋目前網頁的內容。</p>
+<h1 id="DOM節點的修改與刪除"><a href="#DOM節點的修改與刪除" class="headerlink" title="DOM節點的修改與刪除"></a>DOM節點的修改與刪除</h1><p>書中介紹了一下幾種方法</p>
+<ol>
+<li><code>NODE.appendChild(childNode)</code><br>此方法會將childNode插入父容器節點末端</li>
+<li><code>NODE.insertBefore(newNode, refNode)</code><br>將newNode節點插在redNode前面</li>
+<li><code>NODE.replaceChild(newChildNode, oldChildNode)</code><br>將oldChildNode換成指定的newChildNode</li>
+<li><code>NODE.removeChild(childNode)</code><br>將指定的子節點childNode刪除</li>
+</ol>
+<h1 id="修改元素的style屬性"><a href="#修改元素的style屬性" class="headerlink" title="修改元素的style屬性"></a>修改元素的style屬性</h1><p>透過JS來修改元素的style屬性，就是屬於修改「行內樣式」的類型。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---HTML文件---</span><br><span class="line">&lt;div class&#x3D;&quot;box&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JS文件---</span><br><span class="line">let box &#x3D; document.querySlector(&#39;.box&#39;);</span><br><span class="line">box.style.color &#x3D; &#39;red&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>a. 以上這種寫法的優先權會高過很多其他的寫法(<code>!important</code>除外)。<br>b. 另外，很多css屬性名中有破折號-，故你用上面這種JS修改的寫法得改成”駝峰式”的寫法<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">box.style.font-size &#x3D; &#39;10px&#39;;  &#x2F;&#x2F; 不允許!!!</span><br><span class="line"></span><br><span class="line">要改成下面這種寫法</span><br><span class="line">box.style.fontSize &#x3D; &#39;10px&#39;;  &#x2F;&#x2F; OK!!!</span><br></pre></td></tr></table></figure>
+
+<h1 id="修改元素的class屬性"><a href="#修改元素的class屬性" class="headerlink" title="修改元素的class屬性"></a>修改元素的class屬性</h1><p>透過<code>className</code>來操作網頁標籤內的class屬性<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---html文件---</span><br><span class="line">&lt;article id&#x3D;&quot;article&quot; class&#x3D;&quot;small-font&quot;&gt;......&lt;&#x2F;article&gt;</span><br><span class="line"></span><br><span class="line">---JS文件---</span><br><span class="line">let article &#x3D; document.querySelector(&#39;#article&#39;);</span><br><span class="line">article.className &#x3D; &#39;large-font&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>用以上這種寫法的話，會有一種問題，就是不會保留原本的className。<br>所以，DOM api提供了<code>classList</code>屬性來取代<code>className</code>。</p>
+<p><code>classList</code>是一個唯讀的屬性。<br>即我們無法透過這個屬性直接更改class的屬性。<br>但能透過<code>classList.add()</code>和<code>classList.remove()</code>來修改它。</p>
+<p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---html文件---</span><br><span class="line">&lt;article id&#x3D;&quot;article&quot; class&#x3D;&quot;small-font&quot;&gt;......&lt;&#x2F;article&gt;</span><br><span class="line"></span><br><span class="line">---JS文件---</span><br><span class="line">let article &#x3D; document.querySelector(&#39;.small-font&#39;);</span><br><span class="line">article.classList.remove(&#39;.small-font&#39;);</span><br><span class="line">article.classList.add(&#39;.large-font&#39;);</span><br><span class="line"></span><br><span class="line">&#x3D;&gt;最後會變成&lt;article id&#x3D;&quot;article&quot; class&#x3D;&quot;large-font&quot;&gt;......&lt;&#x2F;article&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="利用JavaScript直接寫入CSS樣式"><a href="#利用JavaScript直接寫入CSS樣式" class="headerlink" title="利用JavaScript直接寫入CSS樣式"></a>利用JavaScript直接寫入CSS樣式</h1><p>way1. 在<code>&lt;head&gt;</code>利用<code>document.write</code>寫入CSS<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.write(&#39;&lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;xxx.css&quot;&#x2F;&gt;&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>way2. 利用<code>document.createElement</code>來新增link標籤<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let head &#x3D; document.querySelector(&#39;head&#39;);</span><br><span class="line">let linkTag &#x3D; document.createElement(&#39;link&#39;);</span><br><span class="line"></span><br><span class="line">if(某個條件)&#123;</span><br><span class="line">    linkTag.rel &#x3D; &#39;stylesheet;</span><br><span class="line">    linkTag.type &#x3D; &#39;text\css;</span><br><span class="line">    linkTag.href &#x3D; &#39;customMobile.css;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上這種方法，可以在滿足某個條件下，才寫入特定的CSS樣式</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/008%E9%87%8D%E6%96%B0%E8%AA%8D%E8%AD%98JavaScript%E7%AD%86%E8%A8%98/" rel="tag"># 008重新認識JavaScript筆記</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/25/Day03-%E7%AD%86%E8%A8%9801/" rel="prev" title="008重新認識JS-Day03-筆記1">
+      <i class="fa fa-chevron-left"></i> 008重新認識JS-Day03-筆記1
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM%E7%AF%80%E9%BB%9E%E7%9A%84%E9%81%B8%E5%8F%96"><span class="nav-number">1.</span> <span class="nav-text">DOM節點的選取</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM%E7%AF%80%E9%BB%9E%E9%96%93%E7%9A%84%E6%9F%A5%E6%89%BE%E9%81%8D%E6%AD%B7-Traversing"><span class="nav-number">2.</span> <span class="nav-text">DOM節點間的查找遍歷(Traversing)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#document-getElementsBy-%E8%88%87-document-querySelector-document-querySelectorAll-%E7%9A%84%E5%B7%AE%E7%95%B0"><span class="nav-number">3.</span> <span class="nav-text">document.getElementsBy*** 與 document.querySelector&#x2F;document.querySelectorAll 的差異</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#document-querySelector-document-querySelectorAll-%E5%8F%96%E5%BE%97%E7%9A%84NodeList%E6%98%AF%E9%9D%9C%E6%85%8B%E7%9A%84"><span class="nav-number">3.1.</span> <span class="nav-text">document.querySelector&#x2F;document.querySelectorAll 取得的NodeList是靜態的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM-Node-%E7%9A%84%E5%BB%BA%E7%AB%8B%E3%80%81%E5%88%AA%E9%99%A4%E3%80%81%E4%BF%AE%E6%94%B9%E8%88%87%E5%A4%96%E8%A7%80"><span class="nav-number">4.</span> <span class="nav-text">DOM Node 的建立、刪除、修改與外觀</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM-%E7%AF%80%E9%BB%9E%E7%9A%84%E6%96%B0%E5%A2%9E"><span class="nav-number">4.1.</span> <span class="nav-text">DOM 節點的新增</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM%E7%AF%80%E9%BB%9E%E7%9A%84%E4%BF%AE%E6%94%B9%E8%88%87%E5%88%AA%E9%99%A4"><span class="nav-number">5.</span> <span class="nav-text">DOM節點的修改與刪除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0%E7%9A%84style%E5%B1%AC%E6%80%A7"><span class="nav-number">6.</span> <span class="nav-text">修改元素的style屬性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0%E7%9A%84class%E5%B1%AC%E6%80%A7"><span class="nav-number">7.</span> <span class="nav-text">修改元素的class屬性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A9%E7%94%A8JavaScript%E7%9B%B4%E6%8E%A5%E5%AF%AB%E5%85%A5CSS%E6%A8%A3%E5%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">利用JavaScript直接寫入CSS樣式</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
