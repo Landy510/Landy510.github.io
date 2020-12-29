@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="上一篇的Bootstrap筆記，是大略的紀錄一下，Bootstrap的格線系統用法。這篇彼既仕用來記錄，如何將Bootstrap的scss檔案引入進你的專案檔，並修改Bootstrap scss的檔案，將裡面的元件樣式改成自己想要的樣子。 引入Bootstrap的scss檔案 首先，你先去Bootstrap的github下載他們釋出的scss檔案。Bootstrap_github連結  你可以去下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bootstrap筆記-01">
+<meta property="og:url" content="http://example.com/2020/12/29/Bootstrap%E7%AD%86%E8%A8%98-01/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="上一篇的Bootstrap筆記，是大略的紀錄一下，Bootstrap的格線系統用法。這篇彼既仕用來記錄，如何將Bootstrap的scss檔案引入進你的專案檔，並修改Bootstrap scss的檔案，將裡面的元件樣式改成自己想要的樣子。 引入Bootstrap的scss檔案 首先，你先去Bootstrap的github下載他們釋出的scss檔案。Bootstrap_github連結  你可以去下">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/bootstrap_github.png">
+<meta property="og:image" content="http://example.com/image/bootstrap_github1.png">
+<meta property="og:image" content="http://example.com/image/bootstrap_scss_system.png">
+<meta property="article:published_time" content="2020-12-29T04:35:38.000Z">
+<meta property="article:modified_time" content="2020-12-29T06:40:06.276Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Bootstrap">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/bootstrap_github.png">
+
+<link rel="canonical" href="http://example.com/2020/12/29/Bootstrap%E7%AD%86%E8%A8%98-01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Bootstrap筆記-01 | Landy Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/29/Bootstrap%E7%AD%86%E8%A8%98-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Bootstrap筆記-01
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-12-29 12:35:38 / Modified: 14:40:06" itemprop="dateCreated datePublished" datetime="2020-12-29T12:35:38+08:00">2020-12-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>上一篇的<a target="_blank" rel="noopener" href="http://localhost:4000/2020/12/29/Bootstrap%E7%AD%86%E8%A8%98/">Bootstrap筆記</a>，是大略的紀錄一下，Bootstrap的格線系統用法。<br>這篇彼既仕用來記錄，如何將Bootstrap的scss檔案引入進你的專案檔，<br>並修改Bootstrap scss的檔案，將裡面的元件樣式改成自己想要的樣子。</p>
+<h1 id="引入Bootstrap的scss檔案"><a href="#引入Bootstrap的scss檔案" class="headerlink" title="引入Bootstrap的scss檔案"></a>引入Bootstrap的scss檔案</h1><ol>
+<li><p>首先，你先去Bootstrap的github下載他們釋出的scss檔案。<br><a target="_blank" rel="noopener" href="https://github.com/twbs/bootstrap">Bootstrap_github連結</a></p>
+<p> 你可以去下載，Bootrap釋出的最新版本的soucecode，它就在github頁面的右邊的Release的地方，就可以看到了。<br> <img src="/image/bootstrap_github.png"></p>
+<p> 接著，你點進去之後，在該頁面的最下方，有這個Source Code的載點。</p>
+<p> <img src="/image/bootstrap_github1.png"></p>
+<p> 下載完之後，在將這個bootstrap的資料夾，放到你的scss檔案裡面。<br> 記得!!你要將這個下載的資料夾放在跟你all.scss同樣目錄底下。</p>
+<a id="more"></a></li>
+<li><p>專案的scss與bootstrap檔案架構</p>
+<p> <img src="/image/bootstrap_scss_system.png"></p>
+<p> 以上這張圖，就是將Bootstrap的scss檔案引入我們自己的專案的架構。<br> 首先，<br> 在我們專案中的all.scss檔案中，引入我們自己的scss檔案之外，<br> 接著，<br> 再引入bootstrap資料夾中的bootstrap.scss的核心檔案。<br> 那在bootstrap.scss這個檔案裏面，就有所有bootstrap的樣式的scss檔案了。</p>
+<p>接著，你在你的all.scss檔案中，<br>寫入<code>@import &quot;bootstrap/bootstrap.sccss</code> 引入你的bootstrap.sccss的路徑。<br>接著，你在隨便貼個boostrap的元件，若可以正確呈現在你的網頁上，就代表Boostrap框架引入成功囉~</p>
+</li>
+</ol>
+<h2 id="修改Bootstrap的CSS樣式"><a href="#修改Bootstrap的CSS樣式" class="headerlink" title="修改Bootstrap的CSS樣式"></a>修改Bootstrap的CSS樣式</h2><p>在Bootstrap的scss檔案中，有個叫_variables.scss的檔案<br>裡面有超多參數，我們就舉其中一個範例<br>在裡面有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$theme-colors: map-merge(</span><br><span class="line">  (</span><br><span class="line">    &quot;primary&quot;:    $primary,</span><br><span class="line">    &quot;secondary&quot;:  $secondary,</span><br><span class="line">    &quot;success&quot;:    $success,</span><br><span class="line">    &quot;info&quot;:       $info,</span><br><span class="line">    &quot;warning&quot;:    $warning,</span><br><span class="line">    &quot;danger&quot;:     $danger,</span><br><span class="line">    &quot;light&quot;:      $light,</span><br><span class="line">    &quot;dark&quot;:       $dark</span><br><span class="line">  ),</span><br><span class="line">  $theme-colors</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>直接修改primary改成紅色，<br>並且自訂義一個變數selfdefined並將該變數設為灰色。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$theme-colors: map-merge(</span><br><span class="line">  (</span><br><span class="line">    &quot;primary&quot;:    red,</span><br><span class="line">    &quot;secondary&quot;:  $secondary,</span><br><span class="line">    &quot;success&quot;:    $success,</span><br><span class="line">    &quot;info&quot;:       $info,</span><br><span class="line">    &quot;warning&quot;:    $warning,</span><br><span class="line">    &quot;danger&quot;:     $danger,</span><br><span class="line">    &quot;light&quot;:      $light,</span><br><span class="line">    &quot;dark&quot;:       $dark,</span><br><span class="line">    &quot;selfdefined&quot;: grey</span><br><span class="line">  ),</span><br><span class="line">  $theme-colors</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>接著，<br>你就可以看到元件的primary顏色被改成紅色，並且，你也可以在各個元件加上你自定義的顏色。</p>
+<p><code>&lt;button type=&quot;button&quot; class=&quot;btn btn-selfdefined&quot;&gt;自定義顏色的按鈕&lt;/button&gt;</code></p>
+<h2 id="修改Bootstrap的utility-scss"><a href="#修改Bootstrap的utility-scss" class="headerlink" title="修改Bootstrap的utility.scss"></a>修改Bootstrap的utility.scss</h2><p>這個scss檔案裡面，放的都是工具的設定，像是<code>margin</code>或<code>padding</code>這種推擠語法的基礎單位。</p>
+<h3 id="推擠語法"><a href="#推擠語法" class="headerlink" title="推擠語法"></a>推擠語法</h3><p>Bootstrap的推擠語法，<br><code>pr-1</code>: 代表padding-right 一個單位<br><code>pr-md-1</code>: 代表在768px-991px之間時，padding-right 一個單位</p>
+<h2 id="d-flex語法"><a href="#d-flex語法" class="headerlink" title="d-flex語法"></a>d-flex語法</h2><p>為區塊加上<code>flex</code>屬性，就是直接在class中加上<code>d-flex</code>即可。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;d-flex&quot;&gt;I&#39;m a flexbox container!&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>那在d-flex也有響應式的特性，像是<code>d-sm-flex</code>, <code>d-md-flex</code> 之類的語法。<br>可以決定是在哪個斷點該區塊才有flex屬性。</p>
+<h3 id="d-flex的方向性語法"><a href="#d-flex的方向性語法" class="headerlink" title="d-flex的方向性語法"></a>d-flex的方向性語法</h3><p>在flex屬性裡面有flex-direction的屬性，分別有column, column-reverse, row, row-reverse。<br>你可以在class加上flex-row 或 flex-column就可以達到這樣的效果。<br>而預設的屬性是flex-row，也就是水平排列。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;d-flex flex-column&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;&quot;&gt;Flex item 1&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;&quot;&gt;Flex item 2&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;&quot;&gt;Flex item 3&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Bootstrap/" rel="tag"># Bootstrap</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/29/Bootstrap%E7%AD%86%E8%A8%98/" rel="prev" title="Bootstrap筆記">
+      <i class="fa fa-chevron-left"></i> Bootstrap筆記
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E5%85%A5Bootstrap%E7%9A%84scss%E6%AA%94%E6%A1%88"><span class="nav-number">1.</span> <span class="nav-text">引入Bootstrap的scss檔案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9Bootstrap%E7%9A%84CSS%E6%A8%A3%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">修改Bootstrap的CSS樣式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9Bootstrap%E7%9A%84utility-scss"><span class="nav-number">1.2.</span> <span class="nav-text">修改Bootstrap的utility.scss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E6%93%A0%E8%AA%9E%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">推擠語法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#d-flex%E8%AA%9E%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">d-flex語法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#d-flex%E7%9A%84%E6%96%B9%E5%90%91%E6%80%A7%E8%AA%9E%E6%B3%95"><span class="nav-number">1.3.1.</span> <span class="nav-text">d-flex的方向性語法</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
