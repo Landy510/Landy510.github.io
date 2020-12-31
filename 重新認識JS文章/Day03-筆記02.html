@@ -21,9 +21,9 @@
   </script>
 
   <meta name="description" content="DOM節點的選取DOM除了有「HTML元素節點」外，還有「文字節點」、「註解節點」…等等。選取DOM的節點方法如下：ex: 12345678910111213141516---html文件---&lt;div id&#x3D;&quot;content&quot;&gt;內容一&lt;&#x2F;div&gt;&lt;p　class&#x3D;&quot;paragraph&quot;&gt;內文">
-<meta property="og:type" content="article">
+<meta property="og:type" content="website">
 <meta property="og:title" content="008重新認識JS-Day03-筆記2">
-<meta property="og:url" content="http://example.com/2020/12/25/Day03-%E7%AD%86%E8%A8%9802/index.html">
+<meta property="og:url" content="http://example.com/%E9%87%8D%E6%96%B0%E8%AA%8D%E8%AD%98JS%E6%96%87%E7%AB%A0/Day03-%E7%AD%86%E8%A8%9802.html">
 <meta property="og:site_name" content="Landy Blog">
 <meta property="og:description" content="DOM節點的選取DOM除了有「HTML元素節點」外，還有「文字節點」、「註解節點」…等等。選取DOM的節點方法如下：ex: 12345678910111213141516---html文件---&lt;div id&#x3D;&quot;content&quot;&gt;內容一&lt;&#x2F;div&gt;&lt;p　class&#x3D;&quot;paragraph&quot;&gt;內文">
 <meta property="og:locale" content="en_US">
@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/image/sibiling_node.png">
 
-<link rel="canonical" href="http://example.com/2020/12/25/Day03-%E7%AD%86%E8%A8%9802/">
+<link rel="canonical" href="http://example.com/%E9%87%8D%E6%96%B0%E8%AA%8D%E8%AD%98JS%E6%96%87%E7%AB%A0/Day03-%E7%AD%86%E8%A8%9802">
 
 
 <script id="page-configurations">
@@ -43,12 +43,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'en'
   };
 </script>
 
-  <title>008重新認識JS-Day03-筆記2 | Landy Blog</title>
+  <title>008重新認識JS-Day03-筆記2 | Landy Blog
+</title>
   
 
 
@@ -145,59 +146,33 @@
       <div class="main-inner">
         <div class="content-wrap">
           
+  
+  
 
-          <div class="content post posts-expand">
+          <div class="content page posts-expand">
             
 
     
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/25/Day03-%E7%AD%86%E8%A8%9802/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
+    
+    
+    <div class="post-block" lang="en">
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          008重新認識JS-Day03-筆記2
-        </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+<h1 class="post-title" itemprop="name headline">008重新認識JS-Day03-筆記2
+</h1>
 
-              <time title="Created: 2020-12-25 15:55:46" itemprop="dateCreated datePublished" datetime="2020-12-25T15:55:46+08:00">2020-12-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-28 11:55:18" itemprop="dateModified" datetime="2020-12-28T11:55:18+08:00">2020-12-28</time>
-              </span>
+<div class="post-meta">
+  
 
-          
+</div>
 
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
-        <h1 id="DOM節點的選取"><a href="#DOM節點的選取" class="headerlink" title="DOM節點的選取"></a>DOM節點的選取</h1><p>DOM除了有「HTML元素節點」外，還有「文字節點」、「註解節點」…等等。<br>選取DOM的節點方法如下：<br>ex:</p>
+      
+      
+      <div class="post-body">
+          <h1 id="DOM節點的選取"><a href="#DOM節點的選取" class="headerlink" title="DOM節點的選取"></a>DOM節點的選取</h1><p>DOM除了有「HTML元素節點」外，還有「文字節點」、「註解節點」…等等。<br>選取DOM的節點方法如下：<br>ex:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---html文件---</span><br><span class="line">&lt;div id&#x3D;&quot;content&quot;&gt;內容一&lt;&#x2F;div&gt;</span><br><span class="line">&lt;p　class&#x3D;&quot;paragraph&quot;&gt;內文一&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">&lt;h2　class&#x3D;&quot;title_two&gt;標題二&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;h2　class&#x3D;&quot;title_two&gt;標題二&lt;&#x2F;h2&gt;</span><br><span class="line"></span><br><span class="line">---DOM節點擷取---</span><br><span class="line">document.getElementsById(&#39;content&#39;);</span><br><span class="line">document.getTagName(&#39;DIV&#39;);</span><br><span class="line">document.getByClassNamw(&#39;paragraph&#39;);</span><br><span class="line"></span><br><span class="line">document.querySelector(&#39;.paragraph&#39;);  &#x2F;&#x2F; 回傳第一個符合該className的節點</span><br><span class="line">document.querySelector(&#39;#content&#39;);　　&#x2F;&#x2F; 回傳第一個符合該id的節點</span><br><span class="line"></span><br><span class="line">document.querySelectorAll(&#39;.paragraph&#39;); &#x2F;&#x2F; 回傳符合該className的NodeList</span><br></pre></td></tr></table></figure>
 
 <h1 id="DOM節點間的查找遍歷-Traversing"><a href="#DOM節點間的查找遍歷-Traversing" class="headerlink" title="DOM節點間的查找遍歷(Traversing)"></a>DOM節點間的查找遍歷(Traversing)</h1><p>DOM節點與節點之間，大致分成以下兩種:<br>父子關係：　該節點的上一層node是「父節點」，該節點的下一層節點是「子節點」。<br>兄弟關係：　有同一個「父節點」的節點，彼此之間就稱為「兄弟節點」。<br><img src="/image/sibiling_node.png"></p>
@@ -261,38 +236,16 @@
 
 <p>以上這種方法，可以在滿足某個條件下，才寫入特定的CSS樣式</p>
 
+      </div>
+      
+      
+      
     </div>
+    
 
     
     
     
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/008%E9%87%8D%E6%96%B0%E8%AA%8D%E8%AD%98JavaScript%E7%AD%86%E8%A8%98/" rel="tag"># 008重新認識JavaScript筆記</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/12/25/Day03-%E7%AD%86%E8%A8%9801/" rel="prev" title="008重新認識JS-Day03-筆記1">
-      <i class="fa fa-chevron-left"></i> 008重新認識JS-Day03-筆記1
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/12/28/Day03-%E7%AD%86%E8%A8%9803/" rel="next" title="008重新認識JS-Day03-筆記3">
-      008重新認識JS-Day03-筆記3 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
 
 
           </div>
@@ -357,7 +310,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

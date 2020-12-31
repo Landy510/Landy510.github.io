@@ -21,9 +21,9 @@
   </script>
 
   <meta name="description" content="BOM 與 window物件window物件提供的屬性有document, frames, history, location, navigator, screen。可以看到document物件也是屬於window物件的屬性之一。也就是說BOM包含了DOM所以，像前面所說的document.querySelector實際上是window.document.querySlector。而window是">
-<meta property="og:type" content="article">
+<meta property="og:type" content="website">
 <meta property="og:title" content="008重新認識JS-Day03-筆記3">
-<meta property="og:url" content="http://example.com/2020/12/28/Day03-%E7%AD%86%E8%A8%9803/index.html">
+<meta property="og:url" content="http://example.com/%E9%87%8D%E6%96%B0%E8%AA%8D%E8%AD%98JS%E6%96%87%E7%AB%A0/Day03-%E7%AD%86%E8%A8%9803.html">
 <meta property="og:site_name" content="Landy Blog">
 <meta property="og:description" content="BOM 與 window物件window物件提供的屬性有document, frames, history, location, navigator, screen。可以看到document物件也是屬於window物件的屬性之一。也就是說BOM包含了DOM所以，像前面所說的document.querySelector實際上是window.document.querySlector。而window是">
 <meta property="og:locale" content="en_US">
@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/image/window_location.png">
 
-<link rel="canonical" href="http://example.com/2020/12/28/Day03-%E7%AD%86%E8%A8%9803/">
+<link rel="canonical" href="http://example.com/%E9%87%8D%E6%96%B0%E8%AA%8D%E8%AD%98JS%E6%96%87%E7%AB%A0/Day03-%E7%AD%86%E8%A8%9803">
 
 
 <script id="page-configurations">
@@ -43,12 +43,13 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'en'
   };
 </script>
 
-  <title>008重新認識JS-Day03-筆記3 | Landy Blog</title>
+  <title>008重新認識JS-Day03-筆記3 | Landy Blog
+</title>
   
 
 
@@ -145,53 +146,33 @@
       <div class="main-inner">
         <div class="content-wrap">
           
+  
+  
 
-          <div class="content post posts-expand">
+          <div class="content page posts-expand">
             
 
     
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/28/Day03-%E7%AD%86%E8%A8%9803/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
+    
+    
+    <div class="post-block" lang="en">
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          008重新認識JS-Day03-筆記3
-        </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
+<h1 class="post-title" itemprop="name headline">008重新認識JS-Day03-筆記3
+</h1>
 
-              <time title="Created: 2020-12-28 12:03:05 / Modified: 12:40:22" itemprop="dateCreated datePublished" datetime="2020-12-28T12:03:05+08:00">2020-12-28</time>
-            </span>
+<div class="post-meta">
+  
 
-          
+</div>
 
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
-        <h1 id="BOM-與-window物件"><a href="#BOM-與-window物件" class="headerlink" title="BOM 與 window物件"></a>BOM 與 window物件</h1><p>window物件提供的屬性有<code>document</code>, <code>frames</code>, <code>history</code>, <code>location</code>, <code>navigator</code>, <code>screen</code>。<br>可以看到document物件也是屬於window物件的屬性之一。<br>也就是說BOM包含了DOM<br>所以，像前面所說的document.querySelector實際上是window.document.querySlector。<br>而window是全域物件，可以省略不寫。</p>
+      
+      
+      <div class="post-body">
+          <h1 id="BOM-與-window物件"><a href="#BOM-與-window物件" class="headerlink" title="BOM 與 window物件"></a>BOM 與 window物件</h1><p>window物件提供的屬性有<code>document</code>, <code>frames</code>, <code>history</code>, <code>location</code>, <code>navigator</code>, <code>screen</code>。<br>可以看到document物件也是屬於window物件的屬性之一。<br>也就是說BOM包含了DOM<br>所以，像前面所說的document.querySelector實際上是window.document.querySlector。<br>而window是全域物件，可以省略不寫。</p>
 <h1 id="window物件"><a href="#window物件" class="headerlink" title="window物件"></a>window物件</h1><p>每一個獨立瀏覽器視窗的window物件彼此是獨立的。<br>換言之，每開一個新網頁，原本的變數、屬性並沒有辦法再另外一頁存取。<br>(但SPA單頁式應用 與 localStorage/cookies等情況例外)</p>
 <h1 id="與網址列相關的東西-location-與-history"><a href="#與網址列相關的東西-location-與-history" class="headerlink" title="與網址列相關的東西: location 與 history"></a>與網址列相關的東西: location 與 history</h1><h2 id="location物件"><a href="#location物件" class="headerlink" title="location物件"></a>location物件</h2><p>window.location 物件包含了所有與目前頁面網址相關的資訊<br><img src="/image/window_location.png"><br>以上這張圖片代表location物件所有的所有屬性。</p>
 <a id="more"></a>
@@ -211,38 +192,16 @@
 
 <p>但是，因為無法取得完整得url的完整清單，所以，<code>go()</code>不如<code>back()</code>和<code>forward()</code>有用，<br>因為，無法掌握使用者會被history導致哪一頁。</p>
 
+      </div>
+      
+      
+      
     </div>
+    
 
     
     
     
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/008%E9%87%8D%E6%96%B0%E8%AA%8D%E8%AD%98JavaScript%E7%AD%86%E8%A8%98/" rel="tag"># 008重新認識JavaScript筆記</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/12/25/Day03-%E7%AD%86%E8%A8%9802/" rel="prev" title="008重新認識JS-Day03-筆記2">
-      <i class="fa fa-chevron-left"></i> 008重新認識JS-Day03-筆記2
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/12/29/Bootstrap%E7%AD%86%E8%A8%98/" rel="next" title="Bootstrap筆記">
-      Bootstrap筆記 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
 
 
           </div>
@@ -307,7 +266,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
