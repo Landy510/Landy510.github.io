@@ -170,7 +170,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-05 10:20:36 / Modified: 11:58:47" itemprop="dateCreated datePublished" datetime="2021-01-05T10:20:36+08:00">2021-01-05</time>
+              <time title="Created: 2021-01-05 10:20:36 / Modified: 12:03:08" itemprop="dateCreated datePublished" datetime="2021-01-05T10:20:36+08:00">2021-01-05</time>
             </span>
 
           
@@ -196,23 +196,14 @@
 <p><code>backwards</code>: 代表這段動畫執行完成後，執行這段動畫的區塊會回到這個區塊原本的狀態。<br>以上面的codepen為例，<code>div</code>會回到一開始的<code>background:pink;left:0px;top:0px;</code> 的位置。</p>
 <p><code>both</code>: 同時擁有<code>forwards</code>和<code>backwards</code>的效果。</p>
 <h3 id="animation-iteration-count"><a href="#animation-iteration-count" class="headerlink" title="animation-iteration-count"></a><code>animation-iteration-count</code></h3><p>這段程式碼表示你設計的這段動畫總共要執行多少次。<br>以上面的codepen為例，這段動畫總共會做2次。<br>如果你想要無限循環執行這段動畫的話，你就將這個屬性的值設為<code>Infinity</code>。</p>
-<h2 id="transform效果"><a href="#transform效果" class="headerlink" title="transform效果"></a><code>transform</code>效果</h2><p><code>transform</code>所增加的css效果，並不會產生與其他元素有推擠的問題，是個好用的效果。</p>
-<iframe src="https://codepen.io/RandyChen/embed/jOMxVrR?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>你可以看到就算.box區塊旋轉了，也不會推擠到下面的按鈕的位置。</p>
-<h2 id="套件-animate-css"><a href="#套件-animate-css" class="headerlink" title="套件 animate.css"></a>套件 animate.css</h2><p>這個套件可以讓你的某些區塊有一些飛入或淡出的效果。<br>首先，你要先載入它們家提供的CDN檔案。<br>接著，在他們的官網裡面有個Utility classes的單元，說明了要怎麼使用他們家的效果。</p>
-<iframe src="https://codepen.io/RandyChen/embed/abmGBqJ?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上這個範例，就直接在這個標題的class中加入<code>animate__animated animate__bounce</code>，就可以讓這個標題<br>有彈跳的效果囉。</p>
-<h2 id="Aos-套件"><a href="#Aos-套件" class="headerlink" title="Aos 套件"></a>Aos 套件</h2><h3 id="你要先載入他們家的css和js檔案"><a href="#你要先載入他們家的css和js檔案" class="headerlink" title="你要先載入他們家的css和js檔案"></a>你要先載入他們家的css和js檔案</h3><p><a target="_blank" rel="noopener" href="https://michalsnik.github.io/aos/">AOS官網</a></p>
-<h3 id="另外，要在你的專案的scipt中加入以下這段，初始化AOS套件的程式碼"><a href="#另外，要在你的專案的scipt中加入以下這段，初始化AOS套件的程式碼" class="headerlink" title="另外，要在你的專案的scipt中加入以下這段，初始化AOS套件的程式碼"></a>另外，要在你的專案的scipt中加入以下這段，初始化AOS套件的程式碼</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    AOS.init(&#123;</span><br><span class="line">        &#x2F;&#x2F; Global settings:</span><br><span class="line">        disable: false, &#x2F;&#x2F; accepts following values: &#39;phone&#39;, &#39;tablet&#39;, &#39;mobile&#39;, boolean, expression or function</span><br><span class="line">        startEvent: &#39;DOMContentLoaded&#39;, &#x2F;&#x2F; name of the event dispatched on the document, that AOS should initialize on</span><br><span class="line">        initClassName: &#39;aos-init&#39;, &#x2F;&#x2F; class applied after initialization</span><br><span class="line">        animatedClassName: &#39;aos-animate&#39;, &#x2F;&#x2F; class applied on animation</span><br><span class="line">        useClassNames: false, &#x2F;&#x2F; if true, will add content of &#96;data-aos&#96; as classes on scroll</span><br><span class="line">        disableMutationObserver: false, &#x2F;&#x2F; disables automatic mutations&#39; detections (advanced)</span><br><span class="line">        debounceDelay: 50, &#x2F;&#x2F; the delay on debounce used while resizing window (advanced)</span><br><span class="line">        throttleDelay: 99, &#x2F;&#x2F; the delay on throttle used while scrolling the page (advanced)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; Settings that can be overridden on per-element basis, by &#96;data-aos-*&#96; attributes:</span><br><span class="line">        offset: 120, &#x2F;&#x2F; offset (in px) from the original trigger point</span><br><span class="line">        delay: 0, &#x2F;&#x2F; values from 0 to 3000, with step 50ms</span><br><span class="line">        duration: 400, &#x2F;&#x2F; values from 0 to 3000, with step 50ms</span><br><span class="line">        easing: &#39;ease&#39;, &#x2F;&#x2F; default easing for AOS animations</span><br><span class="line">        once: false, &#x2F;&#x2F; whether animation should happen only once - while scrolling down</span><br><span class="line">        mirror: false, &#x2F;&#x2F; whether elements should animate out while scrolling past them</span><br><span class="line">        anchorPlacement: &#39;top-bottom&#39;, &#x2F;&#x2F; defines which position of the element regarding to window should trigger the animation</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>上面這段初始化的內容，是許多有關AOS元件的效果的設定。<br>像是<code>offset</code>就是，要決定當你的畫面距離該目標區塊的多少距離時，該AOS元件的相對應的動畫就會執行。</p>
-<h3 id="接著，你去他們家的官網上，找一個你想要的效果，然後，再仿照官網上的方式將"><a href="#接著，你去他們家的官網上，找一個你想要的效果，然後，再仿照官網上的方式將" class="headerlink" title="接著，你去他們家的官網上，找一個你想要的效果，然後，再仿照官網上的方式將"></a>接著，你去他們家的官網上，找一個你想要的效果，然後，再仿照官網上的方式將</h3><p>相關的內容貼到你的專案上面，就會有一樣的效果了。</p>
-<iframe src="https://codepen.io/RandyChen/embed/MWjGbzy?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>像這邊的例子，就是加入了<code>data-aos=&quot;fade-right&quot;</code>讓該<code>p</code>段落，有漸漸從左邊出現的效果。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
