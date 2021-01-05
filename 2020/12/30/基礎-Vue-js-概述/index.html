@@ -28,7 +28,7 @@
 <meta property="og:description" content="MVVMVue的整體概念是MVVM。View(介面) -&gt; ViewModel(資料繫結器) -&gt; Model(資料狀態)在MVVM的架構中，各部份處理的任務是  模型(Model)：負責提供數據，例如：新增、刪除、修改。 介面(View)：負責展示數據。 ViewModel(VM)：負責處理業務邏輯(像是觸發事件)。將 View 和 Model 綁定為 ViewModel，當數據發生">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-30T01:08:33.000Z">
-<meta property="article:modified_time" content="2020-12-30T02:51:41.641Z">
+<meta property="article:modified_time" content="2021-01-04T02:20:34.082Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-30 09:08:33 / Modified: 10:51:41" itemprop="dateCreated datePublished" datetime="2020-12-30T09:08:33+08:00">2020-12-30</time>
+              <time title="Created: 2020-12-30 09:08:33" itemprop="dateCreated datePublished" datetime="2020-12-30T09:08:33+08:00">2020-12-30</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-04 10:20:34" itemprop="dateModified" datetime="2021-01-04T10:20:34+08:00">2021-01-04</time>
+              </span>
 
           
 
@@ -210,6 +216,9 @@
 <h2 id="v-html"><a href="#v-html" class="headerlink" title="v-html"></a>v-html</h2><p><code>v-html</code>: 可以插入新的html標籤。<br>ex: </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;div v-html&#x3D;&quot;message&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">    el: &#39;#app&#39;,</span><br><span class="line">    data: &#123;</span><br><span class="line">    message: &#39;&lt;h1&gt;標題一&lt;&#x2F;h1&gt;&#39;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>以上這個範例，透過<code>v-html</code>，我們就可以將message存的html標籤的語法內容，帶入目的地。</p>
+<p>要特別注意，如果你不是在某個html標籤中，將<code>v-html</code>的內容鑲進去的話，該html的內容是沒有作用的喔<br>即:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;div&gt;你好&lt;&#x2F;div&gt;</span><br><span class="line">    &#123;&#123;message&#125;&#125;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">    el: &#39;#app&#39;,</span><br><span class="line">    data: &#123;</span><br><span class="line">    message: &#39;&lt;h1&gt;標題一&lt;&#x2F;h1&gt;&#39;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上面這個範例，在的部分會直接變成字串’<h1>標題一</h1>‘，而沒有<code>h1</code>的html標籤的功能喔。</p>
 <h2 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h2><p><code>v-bind</code>: 如果要將某個內容(像是className或網址)，直接加到某個元件的html屬性上，可使用<code>v-bind</code>。<br><code>v-bind</code>還有另一 個寫法，就是縮寫<code>:</code>。<br>ex:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;img v-bind:src&#x3D;&quot;imgSrc&quot; v-bind:class&#x3D;&quot;className&quot; alt&#x3D;&quot;&quot;&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---v-bind的縮寫寫法---</span><br><span class="line"></span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;img :src&#x3D;&quot;imgSrc&quot; :class&#x3D;&quot;className&quot; alt&#x3D;&quot;&quot;&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
 <p>另外，不要跟<code>v-model</code>搞混。<br><code>v-model</code>跟資料做雙向綁定。<br><code>v-bind</code>將某些內容加到某個元件的html屬性上。<br>ex:</p>
@@ -329,7 +338,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MVVM"><span class="nav-number">1.</span> <span class="nav-text">MVVM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%B5%E5%BB%BAVue%E7%89%A9%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">創建Vue物件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue%E7%89%A9%E4%BB%B6%E4%B8%8D%E8%A6%81%E5%B7%A2%E7%8B%80%E7%9A%84%E6%96%B9%E5%BC%8F%E5%89%B5%E5%BB%BA"><span class="nav-number">1.2.</span> <span class="nav-text">Vue物件不要巢狀的方式創建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-model"><span class="nav-number">1.3.</span> <span class="nav-text">v-model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-text"><span class="nav-number">1.4.</span> <span class="nav-text">v-text</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-html"><span class="nav-number">1.5.</span> <span class="nav-text">v-html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-bind"><span class="nav-number">1.6.</span> <span class="nav-text">v-bind</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-for"><span class="nav-number">1.7.</span> <span class="nav-text">v-for</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-if"><span class="nav-number">1.8.</span> <span class="nav-text">v-if</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-on"><span class="nav-number">1.9.</span> <span class="nav-text">v-on</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%8F%E9%81%8E%E4%BF%AE%E9%A3%BE%E7%AC%A6%EF%BC%8C%E8%AE%93v-on%E6%93%8D%E4%BD%9C%E6%9B%B4%E7%B0%A1%E4%BE%BF"><span class="nav-number">1.10.</span> <span class="nav-text">透過修飾符，讓v-on操作更簡便</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-class"><span class="nav-number">1.11.</span> <span class="nav-text">v-class</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MVVM"><span class="nav-number">1.</span> <span class="nav-text">MVVM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%B5%E5%BB%BAVue%E7%89%A9%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">創建Vue物件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue%E7%89%A9%E4%BB%B6%E4%B8%8D%E8%A6%81%E5%B7%A2%E7%8B%80%E7%9A%84%E6%96%B9%E5%BC%8F%E5%89%B5%E5%BB%BA"><span class="nav-number">1.2.</span> <span class="nav-text">Vue物件不要巢狀的方式創建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-model"><span class="nav-number">1.3.</span> <span class="nav-text">v-model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-text"><span class="nav-number">1.4.</span> <span class="nav-text">v-text</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-html"><span class="nav-number">1.5.</span> <span class="nav-text">v-html</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">標題一</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#v-bind"><span class="nav-number">2.1.</span> <span class="nav-text">v-bind</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-for"><span class="nav-number">2.2.</span> <span class="nav-text">v-for</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-if"><span class="nav-number">2.3.</span> <span class="nav-text">v-if</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-on"><span class="nav-number">2.4.</span> <span class="nav-text">v-on</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%8F%E9%81%8E%E4%BF%AE%E9%A3%BE%E7%AC%A6%EF%BC%8C%E8%AE%93v-on%E6%93%8D%E4%BD%9C%E6%9B%B4%E7%B0%A1%E4%BE%BF"><span class="nav-number">2.5.</span> <span class="nav-text">透過修飾符，讓v-on操作更簡便</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-class"><span class="nav-number">2.6.</span> <span class="nav-text">v-class</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -343,7 +352,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -375,7 +384,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
