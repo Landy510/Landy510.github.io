@@ -145,6 +145,327 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-03-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-03-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89/" class="post-title-link" itemprop="url">bootstrap-form的功能筆記-03-表單驗證</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-09 18:55:20 / Modified: 23:16:02" itemprop="dateCreated datePublished" datetime="2021-01-09T18:55:20+08:00">2021-01-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>bootstrap有提供兩種驗證方法</p>
+<ol>
+<li>伺服器端驗證</li>
+<li>瀏覽器端驗證</li>
+</ol>
+<p>透過<code>:invalid</code>和<code>:valid</code>來驗證是否該欄位是否通過驗證，<br>若沒通過該欄位外框呈現紅色，若有通過該欄位外框呈現綠色。</p>
+<p>如果，是伺服器端驗證的話，需要自己手動在相對應元件的class中加入<code>.is-invalid</code>和<code>.is-valid</code>，<br>來替換掉<code>:invalid</code>和<code>:valid</code>。</p>
+<h1 id="伺服器端驗證"><a href="#伺服器端驗證" class="headerlink" title="伺服器端驗證"></a>伺服器端驗證</h1><p>首先，來介紹伺服器端驗證的範例</p>
+<iframe src="https://codepen.io/RandyChen/embed/OJRwwxd?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>首先，你要記得在那些要被驗證<code>input</code>的html標籤中加入<code>required</code>屬性。<br>接著，以上的範例，你可以看到，我們故意在firstname的<code>input</code>欄位和lastname的<code>input</code>欄位的class中加入<code>is-valid</code>，<br>此時，在畫面中，可以看到它們的<code>input</code>外框呈現綠色的，代表驗證正確。<br>那我們在下面的City, State, Road的<code>input</code>欄位的class中，都加入了<code>is-invalid</code>，<br>在畫面中，可以看到他們的<code>input</code>外框呈現紅色的，代表驗證錯誤。<br>那在驗證錯誤的欄位附近會呈現一段回饋的提示訊息，<br>這段回饋的提示訊息，你需要在相對應區塊中加入<code>div</code>區塊，並為這<code>div</code>區塊加入class名稱<code>invalid-feedback</code>，<br>接著，你在這個<code>invalid-feedback</code>的區塊裡面加入你想要呈現的錯誤回饋內容即可。</p>
+<p>伺服器端驗證的範例中的<code>is-valid</code>和<code>is-invalid</code>，其實，實際的運作是當使用者輸入的內容，會由後端判斷其內容是否符合規範，此時，後端會回傳<br>是否使用者內容符合規範的提示給前端，接著前端再為這些<code>input</code>欄位的className中，動態地加入<code>is-valid</code>或<code>is-invalid</code>這兩個className。</p>
+<h1 id="瀏覽器端驗證"><a href="#瀏覽器端驗證" class="headerlink" title="瀏覽器端驗證"></a>瀏覽器端驗證</h1><p>它是透過bootstrap提供的JavaScript內容去觸發某個還沒有被驗證的相對應表單，等到瀏覽器驗證完成後，再由瀏覽器回饋給我們。<br>所以，<br>我們必須在想要被驗證的<code>form</code>命名一個<code>id</code>名稱，並將該<code>id</code>名稱提供給script。<br>並且，也要在該<code>form</code>的html標籤加上<code>novalidate</code>，代表該表單還沒有被驗證。<br>那些需要錯誤回饋部分，一樣要加入class名稱為<code>invalid-feedback</code>的區塊，就像伺服器驗證那樣加到相對應的區塊中。</p>
+<p>接著，你要加入bootstrap官網提供的script驗證的程式碼，而這段驗證的程式碼，在bootstrap的官網上就有提供了～～</p>
+<iframe src="https://codepen.io/RandyChen/embed/vYXaVpg?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<h2 id="加入瀏覽器驗證的JS程式碼，並輸入相對應form的id"><a href="#加入瀏覽器驗證的JS程式碼，並輸入相對應form的id" class="headerlink" title="加入瀏覽器驗證的JS程式碼，並輸入相對應form的id"></a>加入瀏覽器驗證的JS程式碼，並輸入相對應form的id</h2><p>你可以在以上範例的JavaScript中的程式碼看到，<br>有一段用<code>getElementsByClassName</code>去取得你的需要被驗證的表單className，你就填入你相對應的表單className後，就可以執行瀏覽器端驗證囉。<br>當你按下該<code>form</code>的傳送表單的鈕，就會觸發這段驗證，進而驗證你那些欄位沒有填入相對應的內容囉。<br>另外，傳送表單的按鈕的<code>type</code>屬性要設定為<code>submit</code>喔。</p>
+<h2 id="不需要在input欄位加入-is-valid和-is-invalid"><a href="#不需要在input欄位加入-is-valid和-is-invalid" class="headerlink" title="不需要在input欄位加入.is-valid和.is-invalid"></a>不需要在input欄位加入.is-valid和.is-invalid</h2><p>記得～　不需要在各個被驗證的<code>input</code>欄位的class中，加入<code>.is-valid</code>或<code>.is-invalid</code>，<br>因為，當瀏覽器驗證該欄位有誤，會自動的幫我們在該欄位加上<code>.is-valid</code>或<code>.is-invalid</code>，<br>並呈現相對應的驗證樣式囉。</p>
+<h2 id="記得加入required"><a href="#記得加入required" class="headerlink" title="記得加入required"></a>記得加入required</h2><p>記得～～要在需要被驗證的<code>input</code>欄位的html標籤中加入<code>required</code>的屬性喔，<br>不然，那一個<code>input</code>欄位是不會被驗證到的喔。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-02/" class="post-title-link" itemprop="url">bootstrap-form的功能筆記-02</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-09 18:25:21 / Modified: 18:52:07" itemprop="dateCreated datePublished" datetime="2021-01-09T18:25:21+08:00">2021-01-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>接續著上一篇記錄有關Bootstrap的<code>form</code>元件有關的內容。</p>
+<h1 id="input-group"><a href="#input-group" class="headerlink" title="input-group"></a>input-group</h1><p>首先將你想要合併的內容，用<code>input-group</code>把它們包起來。</p>
+<iframe src="https://codepen.io/RandyChen/embed/bGwjjpz?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>你可以看到上面的範例，最外層用<code>.input-group</code>包起來，<br>然後，內層的<code>input</code>欄位保持不變，其class名稱還是保持<code>form-control</code>，<br>接著，要跟這個<code>input</code>欄位接在一起的<code>span</code>就會再被一個<code>input-group-append</code>區塊包起來，<br>然後，最終這個<code>span</code>自己的class名稱命名為<code>input-group-text</code>。<br>至於，<br>為什麼有<code>input-group-append</code> 和 <code>input-group-prepend</code>的˙差別，<br>這就要看你希望這個<code>input-group-text</code>要接在鄰近的<code>input</code>欄位的前面或後面來決定囉。</p>
+<p>另外，當你要將某個內容接在<code>input</code>欄位的後面，除了它的外層區塊className要為<code>input-group-append</code>，<br>在html文件中，這個<code>input-group-append</code>區塊撰寫的順序也要在鄰近<code>input</code>欄位的後面喔。</p>
+<h2 id="同時加入-input-group-prepend-和-input-group-append"><a href="#同時加入-input-group-prepend-和-input-group-append" class="headerlink" title="同時加入 input-group-prepend 和 input-group-append"></a>同時加入 input-group-prepend 和 input-group-append</h2><p>同時加入 <code>input-group-prepend</code> 和 <code>input-group-append</code>在一個<code>input-group</code>中</p>
+<iframe src="https://codepen.io/RandyChen/embed/abmjjpp?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>以上這個範例你可以看到<code>input</code>欄位的前面加入了一個$號，而後方加入了一個藍色的按鈕。</p>
+<h2 id="input-group尺寸"><a href="#input-group尺寸" class="headerlink" title="input-group尺寸"></a>input-group尺寸</h2><p>你只需要在該<code>input-group</code>的class中再加上<code>input-group-sm</code>或<code>input-group-lg</code>就能調整其大小囉。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;input-group input-group-sm&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;input-group-prepend&quot;&gt;</span><br><span class="line">      &lt;span class&#x3D;&quot;input-group-text&quot; id&#x3D;&quot;inputGroup-sizing-sm&quot;&gt;@&lt;&#x2F;span&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Username&quot; aria-label&#x3D;&quot;Username&quot; aria-describedby&#x3D;&quot;inputGroup-sizing-sm&quot;&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;br&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;input-group input-group-lg&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;input-group-prepend&quot;&gt;</span><br><span class="line">      &lt;span class&#x3D;&quot;input-group-text&quot; id&#x3D;&quot;inputGroup-sizing-lg&quot;&gt;@&lt;&#x2F;span&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Username&quot; aria-label&#x3D;&quot;Username&quot; aria-describedby&#x3D;&quot;inputGroup-sizing-lg&quot;&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="input-group的dropdown功能"><a href="#input-group的dropdown功能" class="headerlink" title="input-group的dropdown功能"></a>input-group的dropdown功能</h2><iframe src="https://codepen.io/RandyChen/embed/VwKBBpQ?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>首先，你要達成bootstrap的dropdown功能的話，你需要先載入它們家的js檔案進去你的專案。<br>以上這個範例，最外層還是一樣用<code>.input-group</code>包起來，<br>在<code>.input-group</code>裡面包了<code>input</code>欄位和一個<code>div</code>區塊，<br>那這個<code>div</code>區塊的class名稱為<code>input-group-prepend</code>，代表它要接在這個<code>input</code>欄位的前面。<br>接著，你就在這個<code>input-group-prepend</code>的區塊中，加入<code>dropdown</code>的按鈕，與其要觸發的內容，<br>這樣就完成利用<code>input-group</code>達成<code>dropdown</code>的效果囉~</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-01/" class="post-title-link" itemprop="url">bootstrap form的功能筆記-01</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-09 11:02:06 / Modified: 18:24:29" itemprop="dateCreated datePublished" datetime="2021-01-09T11:02:06+08:00">2021-01-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>接續上一篇還沒紀錄完的bootstrap form元件的內容。</p>
+<h1 id="form-check"><a href="#form-check" class="headerlink" title="form-check"></a>form-check</h1><p>當裡面是要使用<code>checkbox</code>和<code>radiobox</code>元件的時候，它們的外層，是要用<code>form-check</code>包裹起來喔。</p>
+<ol>
+<li>checkbox<iframe src="https://codepen.io/RandyChen/embed/ExgpQGV?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+</li>
+</ol>
+<p>在以上這個範例可以看到在<code>checkbox</code>中的其中一個<code>input</code>標籤上有寫了<code>disabled</code>，<br>代表該<code>input</code>無法被點取囉。<br>如果你希望整個checkbox都無法被選取的話，你要在這些checkbox的外層用一個<code>&lt;fieldset&gt;&lt;/fieldset&gt;</code>標籤把他們整個包起來，並在這個<code>fieldset</code>的html標籤上加入<code>disabled</code>屬性就可以達成囉。</p>
+<ol start="2">
+<li>radiobox<iframe src="https://codepen.io/RandyChen/embed/eYdjVLq?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+</li>
+</ol>
+<p>那這個<code>radiobox</code>的範例，你可以看到有三個<code>form-check</code>構成這個radiobox。<br>那你可以看到每一個<code>form-check</code>裡面的<code>input</code>欄位的name屬性值都是一樣的，代表它們是屬於同一個<code>radiobox</code>。<br>那它的<code>type</code>要寫入<code>radio</code>，它會變成<code>radiobox</code>的選項模式。<br>那在每個<code>form-check</code>的<code>input</code>的class名稱一樣是要寫入<code>form-check-input</code>，而<code>label</code>標籤的class名稱是<code>form-check-label</code>。<br>在最後一個<code>input</code>欄位中，加入了<code>disabled</code>屬性，所以，該選項就無法被選取囉~</p>
+<h2 id="form-check-inline-使選項水平排列"><a href="#form-check-inline-使選項水平排列" class="headerlink" title="form-check-inline 使選項水平排列"></a>form-check-inline 使選項水平排列</h2><p>如果我們不希望<code>heckbox</code>和<code>radiobox</code>它們的選項不要垂直排列的話，<br>我們只需要在外層的<code>form-check</code>的class中，再加上<code>form-check-inline</code>，就可以囉。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox1&quot; value&#x3D;&quot;option1&quot;&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox1&quot;&gt;1&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox2&quot; value&#x3D;&quot;option2&quot;&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox2&quot;&gt;2&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox3&quot; value&#x3D;&quot;option3&quot; disabled&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox3&quot;&gt;3 (disabled)&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="form-row調整格線系統間距"><a href="#form-row調整格線系統間距" class="headerlink" title="form-row調整格線系統間距"></a>form-row調整格線系統間距</h2><iframe src="https://codepen.io/RandyChen/embed/ExgpEjy?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>你可以看到用<code>form-row</code>那一個區塊的<code>input</code>欄位之間會比較接近。<br>原本的<code>row</code>那一個區塊的<code>input</code>欄位之間會比較遠。<br>那由於<code>form-row</code>的關係，可以讓我們的<code>form</code>內容的排列更為彈性囉。<br>也因為用<code>form-row</code>的關係我們可以利用格線系統將三個選項排在同一行中。</p>
+<h3 id="col-form-label"><a href="#col-form-label" class="headerlink" title="col-form-label"></a>col-form-label</h3><p>像上面<code>form-row</code>的範例中，你注意在那些<code>lable</code>中的class有特別加入<code>col-form-label</code>，<br>這個class的效果是為了讓在在格線系統下的<code>label</code>和<code>input</code>欄位能夠更為對齊。<br>特別是在一個<code>form-group</code>有使用格線系統，並把<code>label</code>和<code>input</code>欄位分配在左右兩邊的排版時，<code>label</code>的className建議要加入<code>control-form-label</code>，來讓排版更為美觀。</p>
+<iframe src="https://codepen.io/RandyChen/embed/ExgpEyN?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>以上這個範例，就可以看到有加<code>control-form-label</code>的<code>label</code>的高度跟右邊的<code>input</code>欄位的高度比較對齊。</p>
+<h2 id="行內表單-form-inline-讓內部元素排成一列"><a href="#行內表單-form-inline-讓內部元素排成一列" class="headerlink" title="行內表單 form-inline 讓內部元素排成一列"></a>行內表單 form-inline 讓內部元素排成一列</h2><p>原本bootstrap的<code>input</code>欄位的寬度預設是100%，故它會把整個父元素寬度佔滿，讓接在這個<code>input</code>欄位的下一個元件直接換行，<br>如果，你希望這些元件都排在同一行，又不想要動用到格線系統來達成這種佈局的話，<br>你就必須在<code>form</code>的class中加上<code>form-inline</code>，當加上這個class時，這個<code>form</code>會被加上<code>display:flex</code>的屬性，<br>進而讓內部的元素全部排成同一行。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;form class&#x3D;&quot;form-inline&quot;&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;sr-only&quot; for&#x3D;&quot;inlineFormInputName2&quot;&gt;Name&lt;&#x2F;label&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control mb-2 mr-sm-2&quot; id&#x3D;&quot;inlineFormInputName2&quot; placeholder&#x3D;&quot;Jane Doe&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;label class&#x3D;&quot;sr-only&quot; for&#x3D;&quot;inlineFormInputGroupUsername2&quot;&gt;Username&lt;&#x2F;label&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;input-group mb-2 mr-sm-2&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;input-group-prepend&quot;&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;input-group-text&quot;&gt;@&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;inlineFormInputGroupUsername2&quot; placeholder&#x3D;&quot;Username&quot;&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;div class&#x3D;&quot;form-check mb-2 mr-sm-2&quot;&gt;</span><br><span class="line">      &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineFormCheck&quot;&gt;</span><br><span class="line">      &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineFormCheck&quot;&gt;</span><br><span class="line">        Remember me</span><br><span class="line">      &lt;&#x2F;label&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary mb-2&quot;&gt;Submit&lt;&#x2F;button&gt;</span><br><span class="line">  &lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="form-text-表單文字"><a href="#form-text-表單文字" class="headerlink" title="form-text 表單文字"></a>form-text 表單文字</h3><p>你在某一個段落的class中，加入<code>form-text</code>，其樣式就會變成表單文字的樣式。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;label for&#x3D;&quot;inputPassword5&quot;&gt;Password&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;password&quot; id&#x3D;&quot;inputPassword5&quot; class&#x3D;&quot;form-control&quot; aria-describedby&#x3D;&quot;passwordHelpBlock&quot;&gt;</span><br><span class="line">  &lt;small id&#x3D;&quot;passwordHelpBlock&quot; class&#x3D;&quot;form-text text-muted&quot;&gt;</span><br><span class="line">    Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.</span><br><span class="line">  &lt;&#x2F;small&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>可以看到這邊是為<code>small</code>的class加入<code>form-text</code>，讓其內文格式變成表單樣式。</p>
+<h2 id="禁用表單"><a href="#禁用表單" class="headerlink" title="禁用表單"></a>禁用表單</h2><p>當你想要禁用單一的<code>input</code>的話，你就在它的html標籤中，加入<code>disabled</code>屬性就可以了。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;form-group&quot; &gt;</span><br><span class="line">	&lt;label for&#x3D;&quot;disabledTextInput&quot;&gt;Disabled input&lt;&#x2F;label&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;disabledTextInput&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Disabled input&quot; disabled&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>若你想要對整個表單都禁用的話，你就直接在它的外層加上<code>disabled</code>屬性。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;form&gt;</span><br><span class="line">    &lt;fieldset disabled&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;form-group&quot; &gt;</span><br><span class="line">        &lt;label for&#x3D;&quot;disabledTextInput&quot;&gt;Disabled input&lt;&#x2F;label&gt;</span><br><span class="line">        &lt;input  type&#x3D;&quot;text&quot; id&#x3D;&quot;disabledTextInput&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Disabled input&quot; &gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">        &lt;label for&#x3D;&quot;disabledSelect&quot;&gt;Disabled select menu&lt;&#x2F;label&gt;</span><br><span class="line">        &lt;select id&#x3D;&quot;disabledSelect&quot; class&#x3D;&quot;form-control&quot;&gt;</span><br><span class="line">          &lt;option&gt;Disabled select&lt;&#x2F;option&gt;</span><br><span class="line">        &lt;&#x2F;select&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;form-check&quot;&gt;</span><br><span class="line">        &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;disabledFieldsetCheck&quot; disabled&gt;</span><br><span class="line">        &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;disabledFieldsetCheck&quot;&gt;</span><br><span class="line">          Can&#39;t check this</span><br><span class="line">        &lt;&#x2F;label&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Submit&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;&#x2F;fieldset&gt;</span><br><span class="line">  &lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到我們直接對外層的<code>&lt;fieldset&gt;</code>標籤直接加上<code>disabled</code>屬性，就可直接禁用整個<code>form</code>表單了。</p>
+<h2 id="自訂表單樣式"><a href="#自訂表單樣式" class="headerlink" title="自訂表單樣式"></a>自訂表單樣式</h2><h3 id="checkbox"><a href="#checkbox" class="headerlink" title="checkbox"></a>checkbox</h3><iframe src="https://codepen.io/RandyChen/embed/oNzMyrZ?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>你可以看到包裹那些input和label的最外層的div區塊的class名稱是由基底className和樣式className組成的，<br>分別為<code>custom-control</code>和<code>custom-check</code>一起組成。<br>而內層的<code>input</code>欄位的className是<code>custom-control-input</code>。<br>而內層的<code>label</code>的className是<code>custom-control-label</code></p>
+<h3 id="radiobox"><a href="#radiobox" class="headerlink" title="radiobox"></a>radiobox</h3><iframe src="https://codepen.io/RandyChen/embed/gOwjjbK?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>你可以看到包裹那些<code>input</code>和<code>label</code>的最外層的<code>div</code>區塊的class名稱是由基底className和樣式className組成的，<br>分別為<code>custom-control</code>和<code>custom-radio</code>。<br>而內層的<code>input</code>欄位的className是<code>custom-control-input</code>。<br>而內層的<code>label</code>的className是<code>custom-control-label</code>。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">bootstrap form的功能筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-09 09:55:55 / Modified: 11:25:41" itemprop="dateCreated datePublished" datetime="2021-01-09T09:55:55+08:00">2021-01-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>這邊的筆記主要紀錄Bootstrap的form表單元件的兩個部分</p>
+<ol>
+<li>跟form表單相關的className套在哪一個標籤上</li>
+<li>HTML5表單觀念</li>
+</ol>
+<h1 id="form-group"><a href="#form-group" class="headerlink" title="form-group"></a>form-group</h1><p>當某個className叫<code>form-group</code>的HTML標籤，通常其內部都會包住以下三種元素<br><code>label</code>標籤、<code>input</code>標籤 和 <code>small</code>標籤，那<code>small</code>標籤不一定會存在。<br>以下的例題中有六種狀況，會在下面分別對這六種狀況做介紹</p>
+<iframe src="https://codepen.io/RandyChen/embed/XWjBZXG?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<h2 id="範例中第一個form-group"><a href="#範例中第一個form-group" class="headerlink" title="範例中第一個form-group"></a>範例中第一個form-group</h2><p>那你可以看到在<code>&lt;form&gt;</code>標籤裡面的第一層<code>div</code>，他的<code>class</code>就是<code>form-group</code>。<br>那在這個<code>form-group</code>裡面的<code>input</code>欄位的class名稱是<code>form-control</code>，<br>那在這個<code>form-group</code>裡面的<code>label</code>是不用特地為它的className做設定的，<br>那在這個<code>form-group</code>裡面的<code>samll</code>標籤的class名稱是<code>form-text</code><br>此時，<code>input</code>欄位和<code>small</code>標籤的樣式，都會變成Bootstrap的制定樣式了。</p>
+<h2 id="範例中第二個form-group"><a href="#範例中第二個form-group" class="headerlink" title="範例中第二個form-group"></a>範例中第二個form-group</h2><p>它的<code>input</code>標籤的className一樣要被命名為<code>form-control</code>。<br>那跟第一個<code>form-group</code>的<code>input</code>欄位不同的地方是<code>type</code>，<br>因為，一個是要輸入email，另一個是要輸入password，所以，功能不一樣，type的內容也會不一樣。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/08/Vue%E5%85%83%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -595,298 +916,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">第四週前端課程筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-05 10:20:36 / Modified: 12:03:08" itemprop="dateCreated datePublished" datetime="2021-01-05T10:20:36+08:00">2021-01-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，"><a href="#在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，" class="headerlink" title="在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，"></a>在css文件中，加入以下的程式碼，就可以對<code>div</code>區塊做出由左到右的移動，</h2><p>與<code>background</code>顏色漸變的動畫。</p>
-<iframe src="https://codepen.io/RandyChen/embed/vYXJMXQ?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>接下來介紹一下上面的動畫程式碼</p>
-<h3 id="keyframes-example"><a href="#keyframes-example" class="headerlink" title="@keyframes example"></a><code>@keyframes example</code></h3><p>在<code>@keyframes</code>的右邊名稱example就是你為這段動畫效果的命名。<br>那這個名稱必須要跟，要做這段動畫效果的區塊中的css樣式中<code>animation-name</code>一樣。</p>
-<h3 id="animation-duration"><a href="#animation-duration" class="headerlink" title="animation-duration"></a><code>animation-duration</code></h3><p>在要做這段動畫效果的區塊中的css樣式中的<code>animation-duration</code>的值，<br>是代表這段動畫總共要做多少時間。<br>像以上這段codepen的範例，就是設定4s，也就是這段動畫總共時間是4秒。<br><img src="/image/animation_duration.png"></p>
-<p>那在<code>@keyframe</code>中，有寫0%, 25%, 50%, 75%, 100%的內容，<br>就像上面這張圖畫的一樣，它會將<code>animation-duration</code>的時間，平均分到這些區間裡面，<br>所以，這邊的code總共有4段，所以，4s/4 = 1s。<br>也就是每一段動畫的執行時間是1秒。</p>
-<h3 id="animation-delay"><a href="#animation-delay" class="headerlink" title="animation-delay"></a><code>animation-delay</code></h3><p>這段程式碼表示這段動畫要延後<code>animation-delay</code>所設定的時間後，才會開始執行這段動畫。</p>
-<h3 id="animation-fill-mode"><a href="#animation-fill-mode" class="headerlink" title="animation-fill-mode"></a><code>animation-fill-mode</code></h3><p>這段程式碼以下三種選項可以寫:<br><code>forwards</code>: 代表動畫效果會停留到最後的效果，以上面的codepen為例，<code>div</code>會停留在最後的<br><code>background:pink;left:0px;top:-2000px;</code> 的位置。</p>
-<p><code>backwards</code>: 代表這段動畫執行完成後，執行這段動畫的區塊會回到這個區塊原本的狀態。<br>以上面的codepen為例，<code>div</code>會回到一開始的<code>background:pink;left:0px;top:0px;</code> 的位置。</p>
-<p><code>both</code>: 同時擁有<code>forwards</code>和<code>backwards</code>的效果。</p>
-<h3 id="animation-iteration-count"><a href="#animation-iteration-count" class="headerlink" title="animation-iteration-count"></a><code>animation-iteration-count</code></h3><p>這段程式碼表示你設計的這段動畫總共要執行多少次。<br>以上面的codepen為例，這段動畫總共會做2次。<br>如果你想要無限循環執行這段動畫的話，你就將這個屬性的值設為<code>Infinity</code>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/05/Bootstrap%E7%AD%86%E8%A8%98-02/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/05/Bootstrap%E7%AD%86%E8%A8%98-02/" class="post-title-link" itemprop="url">Bootstrap筆記-02</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-05 10:01:35 / Modified: 10:06:00" itemprop="dateCreated datePublished" datetime="2021-01-05T10:01:35+08:00">2021-01-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>bootstrap的載入scss檔案的細節<br>如果你的all.css檔案本身就已經有引入了，bootstrap的scss的檔案時，<br>記得不要再你的檔案裏面又再引入一次bootstrap的scss檔案囉~</p>
-</li>
-<li><p>載入bootstrap的js檔案<br>當你像要利用bootstrap中，某些互動性的效果，就得載入它們家的js程式碼。<br>bootstrap的js檔案，要放在<code>&lt;/body&gt;</code>前面。</p>
-</li>
-<li><p>在bootstrap的按鈕樣式裡面<br>寫法如下<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;btn btn-primary&quot;&gt;按鈕&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>你可以看到以上是按鈕的bootstrap寫法，<br>第一個.btn的className，是用來為按鈕樣式打底的<br>第二個.btn-primary的className是擴充樣式，可能是來為這個按鈕新增顏色，或者，修改該按鈕大小之類<br>的功能。<br>bootstrap是用這樣模組化的方式，來讓他們的框架的code比較簡潔，不會出現大量重複的code內容。</p>
-</li>
-<li><p>在bootstrap中的.row，原本就有<code>display:flex</code>的屬性了，<br>所以，你不需要在.row中新增<code>d-flex</code>的className了。</p>
-</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/05/Bootstrap%E7%AD%86%E8%A8%98-02/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/05/%E7%AC%AC%E4%B8%83%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/05/%E7%AC%AC%E4%B8%83%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">第七週前端課程筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-05 09:45:06 / Modified: 10:05:49" itemprop="dateCreated datePublished" datetime="2021-01-05T09:45:06+08:00">2021-01-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>坊間有兩套css reset<br>一套是meyerweb，另一套是Normalize。<br>但要記得，它們兩個不能共同使用。<br>所以，當你使用bootstrap的scss的時候，就不要再使用meyerweb了，<br>因為，bootstrap的css reset就有載入normalize了。</p>
-</li>
-<li><p>在專案的<code>head</code>中，常用的語法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;HTML、CSS教學&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;link rel&#x3D;&quot;shortcut icon&quot; href&#x3D;&quot;favicon.ico&quot;&gt;</span><br><span class="line">    &lt;meta name&#x3D;&#39;description&#39; content&#x3D;&#39;網站描述文字&#39; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;meta property&#x3D;&quot;og:title&quot; content&#x3D;&quot;FB的標題&quot; &#x2F;&gt;</span><br><span class="line">    &lt;meta property&#x3D;&quot;og:description&quot; content&#x3D;&quot;FB的描述&quot;&gt;</span><br><span class="line">    &lt;meta property&#x3D;&quot;og:type&quot; content&#x3D;&quot;website&quot; &#x2F;&gt;</span><br><span class="line">    &lt;meta property&#x3D;&quot;og:url&quot; content&#x3D;&quot;FB上的網址&quot; &#x2F;&gt;</span><br><span class="line">    &lt;meta property&#x3D;&quot;og:image&quot; content&#x3D;&quot;FB的圖片&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;link href&#x3D;&quot;圖片路徑&quot; rel&#x3D;&quot;apple-touch-icon&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;meta http-equiv&#x3D;&quot;X-UA-Compatible&quot; content&#x3D;&quot;IE&#x3D;Edge&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;CSS檔案路徑&quot;&gt;</span><br><span class="line">    &lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;JS檔案路徑&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/05/%E7%AC%AC%E4%B8%83%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/31/JavaScript%E4%B8%AD%E7%9A%84this/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/31/JavaScript%E4%B8%AD%E7%9A%84this/" class="post-title-link" itemprop="url">JavaScript中的this</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-12-31 18:01:59 / Modified: 18:09:12" itemprop="dateCreated datePublished" datetime="2020-12-31T18:01:59+08:00">2020-12-31</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>不同的物件呼叫同一個function，在該function的this會不同。</li>
-<li>巢狀函式造成的不同的this<br> a. 因為JavaScript的變數的最小區分單位是function<br> b. 在JavaScript中，this變數預設綁定的是window物件<br> c. 這種情況可以利用用一個變數存存外層的this，在傳入內層函式</li>
-<li>強制綁定this<br> a. 箭頭函式<br> b. bind()<br> c. call()<br> d. apply()<br> e. 關鍵字new來創建一個新物件</li>
-<li>‘use strict’造成this無法再預設綁定成window物件了。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -952,7 +985,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
