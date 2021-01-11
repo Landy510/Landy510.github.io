@@ -145,6 +145,225 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/11/Vuejs%E5%85%83%E4%BB%B603-%E5%85%83%E4%BB%B6%E6%8F%92%E6%A7%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/11/Vuejs%E5%85%83%E4%BB%B603-%E5%85%83%E4%BB%B6%E6%8F%92%E6%A7%BD/" class="post-title-link" itemprop="url">Vuejs元件03-元件插槽</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-11 14:42:58 / Modified: 15:16:27" itemprop="dateCreated datePublished" datetime="2021-01-11T14:42:58+08:00">2021-01-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>這邊接續著上一篇”Vuejs元件02-emit事件”的文章，繼續做筆記。</p>
+<h1 id="元件插槽"><a href="#元件插槽" class="headerlink" title="元件插槽"></a>元件插槽</h1><p>有時候我們需要替換某些元件的部分內容，而Vue.js就是利用元件插槽的概念來做到這件事情。<br>這邊會介紹三種狀況</p>
+<ol>
+<li>沒有插槽的元件</li>
+<li>單一插槽的元件</li>
+<li>具名插槽</li>
+</ol>
+<h2 id="沒有插槽的元件"><a href="#沒有插槽的元件" class="headerlink" title="沒有插槽的元件"></a>沒有插槽的元件</h2><iframe src="https://codepen.io/RandyChen/embed/YzGOQee?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上範例，你會看到我在no-slot-component中間插入了一個<code>p</code>段落，但是，畫面上並沒有呈現這個插入的<code>p</code>段落，<br>而這個就是若你在沒有插槽的元件中，插入其他內容，而這些插入的內容是不會被呈現在畫面上的。</p>
+<h2 id="單一插槽的元件"><a href="#單一插槽的元件" class="headerlink" title="單一插槽的元件"></a>單一插槽的元件</h2><iframe src="https://codepen.io/RandyChen/embed/xxEarzd?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>以上這個範例你會看到在單一插槽元件定義它元件內容的地方，我們有放一個<code>&lt;slot&gt;&lt;/slot&gt;</code>標籤，<br>那此時，夾在single-slot-component標籤中間的<code>p</code>段落的內容，在網頁上就會呈現在<code>&lt;slot&gt;&lt;/slot&gt;</code>標籤的位置囉。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/11/Vuejs%E5%85%83%E4%BB%B603-%E5%85%83%E4%BB%B6%E6%8F%92%E6%A7%BD/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/11/Vuejs%E5%85%83%E4%BB%B602-emit%E4%BA%8B%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/11/Vuejs%E5%85%83%E4%BB%B602-emit%E4%BA%8B%E4%BB%B6/" class="post-title-link" itemprop="url">Vuejs元件02-emit事件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-11 14:19:31 / Modified: 14:42:12" itemprop="dateCreated datePublished" datetime="2021-01-11T14:19:31+08:00">2021-01-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>這邊接續著上一篇”Vuejs元件01”的文章，繼續做筆記。</p>
+<h1 id="emit-向外層傳遞事件"><a href="#emit-向外層傳遞事件" class="headerlink" title="emit 向外層傳遞事件"></a>emit 向外層傳遞事件</h1><p>我們前面是利用<code>porps</code>將資料由外層串入內層，但是，我們還是有時候需要將資料由內層傳到外層，<br>此時，我們要用到的技術就是<code>emit</code>。</p>
+<iframe src="https://codepen.io/RandyChen/embed/gOwdRwz?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上這個修改完的範例你可以看到，我們在button-counter元件的<code>methods</code>中的incrementCounter事件的<code>emit</code>，多新增了將button-counter元件自己的counter成員屬性值傳遞出去，此時因為increment觸發了外部的incrementTotal事件，所以，incrementTotal也就接收到了button-counter元件的counter成員屬性值，<br>所以，我們就可以在incrementTotal中，新增參數newNumber，而這參數就是button-counter元件counter成員屬性值，<br>並將這個newNumber參數與app物件自身的cash成員互相做加總，最後，再把加總的結果呈現在畫面中。</p>
+<h2 id="注意emit傳出去的資料型別是否正確"><a href="#注意emit傳出去的資料型別是否正確" class="headerlink" title="注意emit傳出去的資料型別是否正確"></a>注意emit傳出去的資料型別是否正確</h2><p>你要特別注意一下，我們在<code>emit</code>傳出的counter的值，有特別用<code>Number</code>轉型成數字型別，如果你沒這麼做它會直接傳字串型別的值出去，這樣加總的結果就不會是我們想要的囉。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/" class="post-title-link" itemprop="url">Vue-js元件-01</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-11 13:05:23 / Modified: 15:16:34" itemprop="dateCreated datePublished" datetime="2021-01-11T13:05:23+08:00">2021-01-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>接續上一篇，Vue-js元件沒有記錄完的內容。</p>
+<h1 id="props使用上的注意事項"><a href="#props使用上的注意事項" class="headerlink" title="props使用上的注意事項"></a>props使用上的注意事項</h1><p>本單元要講解主要有以下三部分</p>
+<ol>
+<li>單向數據流</li>
+<li>物件傳參考特性 及 尚未宣告的變數</li>
+<li>如何維持元件的生命週期</li>
+</ol>
+<h2 id="單向數據流"><a href="#單向數據流" class="headerlink" title="單向數據流"></a>單向數據流</h2><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;h2&gt;單向數據流&lt;&#x2F;h2&gt;</span><br><span class="line">  &lt;photo :img-url&#x3D;&quot;url&quot;&gt;&lt;&#x2F;photo&gt;</span><br><span class="line">  &lt;p&gt;修正單向數據流所造成的錯誤&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;x-template&quot; id&#x3D;&quot;photo&quot;&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">	  &lt;img :src&#x3D;&quot;imgUrl&quot; class&#x3D;&quot;img-fluid&quot; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">	  &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;imgUrl&quot;&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">Vue.component(&#39;photo&#39;, &#123;</span><br><span class="line">  props: [&#39;imgUrl&#39;],</span><br><span class="line">  template: &#39;#photo&#39;,</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		url: &#39;https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1522204538344-922f76ecc041?ixlib&#x3D;rb-0.3.5&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;s&#x3D;50e38600a12d623a878983fc5524423f&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1351&amp;q&#x3D;80&#39;,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>像是面的範例，你在畫面上可以看到一張圖片和下面的一個<code>input</code>欄位，<code>input</code>裡面有這張圖片的網址，<br>當我們直接修改<code>input</code>欄位裡面的內容時，瀏覽器會報錯，報錯內容為”不要直接對props傳入的資料做修改”，<br>那此時，我們要怎麼修正這個錯誤呢?</p>
+<p>將以上的範例，修改成下面這個樣子</p>
+<iframe src="https://codepen.io/RandyChen/embed/qBaMmod?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>修改了兩個地方，<br>第一，一個是我們在photo的元件定義中，新增一個變數newUrl，讓它吃到photo元件的媒介屬性imgUrl的值，<br>最後，再回傳newUrl。<br>第二，我們把<code>x-template</code>中定義photo元件的<code>input</code>欄位的<code>v-model</code>改成跟newUrl綁定。<br>這樣一來，我們在input修改的其實是變數newUrl，就不在是直接對props傳入的資料做修改囉。<br>可以看出來<code>props</code>是單向資料流的概念，只能由外部傳入內部，不能再由內部去修改外部傳入的資訊。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-03-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -170,7 +389,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-09 18:55:20 / Modified: 23:16:02" itemprop="dateCreated datePublished" datetime="2021-01-09T18:55:20+08:00">2021-01-09</time>
+              <time title="Created: 2021-01-09 18:55:20 / Modified: 23:26:50" itemprop="dateCreated datePublished" datetime="2021-01-09T18:55:20+08:00">2021-01-09</time>
             </span>
 
           
@@ -199,11 +418,14 @@
 <h1 id="瀏覽器端驗證"><a href="#瀏覽器端驗證" class="headerlink" title="瀏覽器端驗證"></a>瀏覽器端驗證</h1><p>它是透過bootstrap提供的JavaScript內容去觸發某個還沒有被驗證的相對應表單，等到瀏覽器驗證完成後，再由瀏覽器回饋給我們。<br>所以，<br>我們必須在想要被驗證的<code>form</code>命名一個<code>id</code>名稱，並將該<code>id</code>名稱提供給script。<br>並且，也要在該<code>form</code>的html標籤加上<code>novalidate</code>，代表該表單還沒有被驗證。<br>那些需要錯誤回饋部分，一樣要加入class名稱為<code>invalid-feedback</code>的區塊，就像伺服器驗證那樣加到相對應的區塊中。</p>
 <p>接著，你要加入bootstrap官網提供的script驗證的程式碼，而這段驗證的程式碼，在bootstrap的官網上就有提供了～～</p>
 <iframe src="https://codepen.io/RandyChen/embed/vYXaVpg?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<h2 id="加入瀏覽器驗證的JS程式碼，並輸入相對應form的id"><a href="#加入瀏覽器驗證的JS程式碼，並輸入相對應form的id" class="headerlink" title="加入瀏覽器驗證的JS程式碼，並輸入相對應form的id"></a>加入瀏覽器驗證的JS程式碼，並輸入相對應form的id</h2><p>你可以在以上範例的JavaScript中的程式碼看到，<br>有一段用<code>getElementsByClassName</code>去取得你的需要被驗證的表單className，你就填入你相對應的表單className後，就可以執行瀏覽器端驗證囉。<br>當你按下該<code>form</code>的傳送表單的鈕，就會觸發這段驗證，進而驗證你那些欄位沒有填入相對應的內容囉。<br>另外，傳送表單的按鈕的<code>type</code>屬性要設定為<code>submit</code>喔。</p>
-<h2 id="不需要在input欄位加入-is-valid和-is-invalid"><a href="#不需要在input欄位加入-is-valid和-is-invalid" class="headerlink" title="不需要在input欄位加入.is-valid和.is-invalid"></a>不需要在input欄位加入.is-valid和.is-invalid</h2><p>記得～　不需要在各個被驗證的<code>input</code>欄位的class中，加入<code>.is-valid</code>或<code>.is-invalid</code>，<br>因為，當瀏覽器驗證該欄位有誤，會自動的幫我們在該欄位加上<code>.is-valid</code>或<code>.is-invalid</code>，<br>並呈現相對應的驗證樣式囉。</p>
-<h2 id="記得加入required"><a href="#記得加入required" class="headerlink" title="記得加入required"></a>記得加入required</h2><p>記得～～要在需要被驗證的<code>input</code>欄位的html標籤中加入<code>required</code>的屬性喔，<br>不然，那一個<code>input</code>欄位是不會被驗證到的喔。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-03-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -247,7 +469,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-09 18:25:21 / Modified: 18:52:07" itemprop="dateCreated datePublished" datetime="2021-01-09T18:25:21+08:00">2021-01-09</time>
+              <time title="Created: 2021-01-09 18:25:21 / Modified: 23:26:44" itemprop="dateCreated datePublished" datetime="2021-01-09T18:25:21+08:00">2021-01-09</time>
             </span>
 
           
@@ -267,16 +489,14 @@
 
 <p>你可以看到上面的範例，最外層用<code>.input-group</code>包起來，<br>然後，內層的<code>input</code>欄位保持不變，其class名稱還是保持<code>form-control</code>，<br>接著，要跟這個<code>input</code>欄位接在一起的<code>span</code>就會再被一個<code>input-group-append</code>區塊包起來，<br>然後，最終這個<code>span</code>自己的class名稱命名為<code>input-group-text</code>。<br>至於，<br>為什麼有<code>input-group-append</code> 和 <code>input-group-prepend</code>的˙差別，<br>這就要看你希望這個<code>input-group-text</code>要接在鄰近的<code>input</code>欄位的前面或後面來決定囉。</p>
 <p>另外，當你要將某個內容接在<code>input</code>欄位的後面，除了它的外層區塊className要為<code>input-group-append</code>，<br>在html文件中，這個<code>input-group-append</code>區塊撰寫的順序也要在鄰近<code>input</code>欄位的後面喔。</p>
-<h2 id="同時加入-input-group-prepend-和-input-group-append"><a href="#同時加入-input-group-prepend-和-input-group-append" class="headerlink" title="同時加入 input-group-prepend 和 input-group-append"></a>同時加入 input-group-prepend 和 input-group-append</h2><p>同時加入 <code>input-group-prepend</code> 和 <code>input-group-append</code>在一個<code>input-group</code>中</p>
-<iframe src="https://codepen.io/RandyChen/embed/abmjjpp?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-<p>以上這個範例你可以看到<code>input</code>欄位的前面加入了一個$號，而後方加入了一個藍色的按鈕。</p>
-<h2 id="input-group尺寸"><a href="#input-group尺寸" class="headerlink" title="input-group尺寸"></a>input-group尺寸</h2><p>你只需要在該<code>input-group</code>的class中再加上<code>input-group-sm</code>或<code>input-group-lg</code>就能調整其大小囉。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;input-group input-group-sm&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;input-group-prepend&quot;&gt;</span><br><span class="line">      &lt;span class&#x3D;&quot;input-group-text&quot; id&#x3D;&quot;inputGroup-sizing-sm&quot;&gt;@&lt;&#x2F;span&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Username&quot; aria-label&#x3D;&quot;Username&quot; aria-describedby&#x3D;&quot;inputGroup-sizing-sm&quot;&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;br&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;input-group input-group-lg&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;input-group-prepend&quot;&gt;</span><br><span class="line">      &lt;span class&#x3D;&quot;input-group-text&quot; id&#x3D;&quot;inputGroup-sizing-lg&quot;&gt;@&lt;&#x2F;span&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Username&quot; aria-label&#x3D;&quot;Username&quot; aria-describedby&#x3D;&quot;inputGroup-sizing-lg&quot;&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="input-group的dropdown功能"><a href="#input-group的dropdown功能" class="headerlink" title="input-group的dropdown功能"></a>input-group的dropdown功能</h2><iframe src="https://codepen.io/RandyChen/embed/VwKBBpQ?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>首先，你要達成bootstrap的dropdown功能的話，你需要先載入它們家的js檔案進去你的專案。<br>以上這個範例，最外層還是一樣用<code>.input-group</code>包起來，<br>在<code>.input-group</code>裡面包了<code>input</code>欄位和一個<code>div</code>區塊，<br>那這個<code>div</code>區塊的class名稱為<code>input-group-prepend</code>，代表它要接在這個<code>input</code>欄位的前面。<br>接著，你就在這個<code>input-group-prepend</code>的區塊中，加入<code>dropdown</code>的按鈕，與其要觸發的內容，<br>這樣就完成利用<code>input-group</code>達成<code>dropdown</code>的效果囉~</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-02/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -320,7 +540,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-09 11:02:06 / Modified: 18:24:29" itemprop="dateCreated datePublished" datetime="2021-01-09T11:02:06+08:00">2021-01-09</time>
+              <time title="Created: 2021-01-09 11:02:06 / Modified: 23:26:35" itemprop="dateCreated datePublished" datetime="2021-01-09T11:02:06+08:00">2021-01-09</time>
             </span>
 
           
@@ -350,29 +570,14 @@
 <p>那這個<code>radiobox</code>的範例，你可以看到有三個<code>form-check</code>構成這個radiobox。<br>那你可以看到每一個<code>form-check</code>裡面的<code>input</code>欄位的name屬性值都是一樣的，代表它們是屬於同一個<code>radiobox</code>。<br>那它的<code>type</code>要寫入<code>radio</code>，它會變成<code>radiobox</code>的選項模式。<br>那在每個<code>form-check</code>的<code>input</code>的class名稱一樣是要寫入<code>form-check-input</code>，而<code>label</code>標籤的class名稱是<code>form-check-label</code>。<br>在最後一個<code>input</code>欄位中，加入了<code>disabled</code>屬性，所以，該選項就無法被選取囉~</p>
 <h2 id="form-check-inline-使選項水平排列"><a href="#form-check-inline-使選項水平排列" class="headerlink" title="form-check-inline 使選項水平排列"></a>form-check-inline 使選項水平排列</h2><p>如果我們不希望<code>heckbox</code>和<code>radiobox</code>它們的選項不要垂直排列的話，<br>我們只需要在外層的<code>form-check</code>的class中，再加上<code>form-check-inline</code>，就可以囉。<br>ex:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox1&quot; value&#x3D;&quot;option1&quot;&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox1&quot;&gt;1&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox2&quot; value&#x3D;&quot;option2&quot;&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox2&quot;&gt;2&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox3&quot; value&#x3D;&quot;option3&quot; disabled&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox3&quot;&gt;3 (disabled)&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="form-row調整格線系統間距"><a href="#form-row調整格線系統間距" class="headerlink" title="form-row調整格線系統間距"></a>form-row調整格線系統間距</h2><iframe src="https://codepen.io/RandyChen/embed/ExgpEjy?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>你可以看到用<code>form-row</code>那一個區塊的<code>input</code>欄位之間會比較接近。<br>原本的<code>row</code>那一個區塊的<code>input</code>欄位之間會比較遠。<br>那由於<code>form-row</code>的關係，可以讓我們的<code>form</code>內容的排列更為彈性囉。<br>也因為用<code>form-row</code>的關係我們可以利用格線系統將三個選項排在同一行中。</p>
-<h3 id="col-form-label"><a href="#col-form-label" class="headerlink" title="col-form-label"></a>col-form-label</h3><p>像上面<code>form-row</code>的範例中，你注意在那些<code>lable</code>中的class有特別加入<code>col-form-label</code>，<br>這個class的效果是為了讓在在格線系統下的<code>label</code>和<code>input</code>欄位能夠更為對齊。<br>特別是在一個<code>form-group</code>有使用格線系統，並把<code>label</code>和<code>input</code>欄位分配在左右兩邊的排版時，<code>label</code>的className建議要加入<code>control-form-label</code>，來讓排版更為美觀。</p>
-<iframe src="https://codepen.io/RandyChen/embed/ExgpEyN?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-<p>以上這個範例，就可以看到有加<code>control-form-label</code>的<code>label</code>的高度跟右邊的<code>input</code>欄位的高度比較對齊。</p>
-<h2 id="行內表單-form-inline-讓內部元素排成一列"><a href="#行內表單-form-inline-讓內部元素排成一列" class="headerlink" title="行內表單 form-inline 讓內部元素排成一列"></a>行內表單 form-inline 讓內部元素排成一列</h2><p>原本bootstrap的<code>input</code>欄位的寬度預設是100%，故它會把整個父元素寬度佔滿，讓接在這個<code>input</code>欄位的下一個元件直接換行，<br>如果，你希望這些元件都排在同一行，又不想要動用到格線系統來達成這種佈局的話，<br>你就必須在<code>form</code>的class中加上<code>form-inline</code>，當加上這個class時，這個<code>form</code>會被加上<code>display:flex</code>的屬性，<br>進而讓內部的元素全部排成同一行。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;form class&#x3D;&quot;form-inline&quot;&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;sr-only&quot; for&#x3D;&quot;inlineFormInputName2&quot;&gt;Name&lt;&#x2F;label&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control mb-2 mr-sm-2&quot; id&#x3D;&quot;inlineFormInputName2&quot; placeholder&#x3D;&quot;Jane Doe&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;label class&#x3D;&quot;sr-only&quot; for&#x3D;&quot;inlineFormInputGroupUsername2&quot;&gt;Username&lt;&#x2F;label&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;input-group mb-2 mr-sm-2&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;input-group-prepend&quot;&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;input-group-text&quot;&gt;@&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;inlineFormInputGroupUsername2&quot; placeholder&#x3D;&quot;Username&quot;&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;div class&#x3D;&quot;form-check mb-2 mr-sm-2&quot;&gt;</span><br><span class="line">      &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineFormCheck&quot;&gt;</span><br><span class="line">      &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineFormCheck&quot;&gt;</span><br><span class="line">        Remember me</span><br><span class="line">      &lt;&#x2F;label&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary mb-2&quot;&gt;Submit&lt;&#x2F;button&gt;</span><br><span class="line">  &lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="form-text-表單文字"><a href="#form-text-表單文字" class="headerlink" title="form-text 表單文字"></a>form-text 表單文字</h3><p>你在某一個段落的class中，加入<code>form-text</code>，其樣式就會變成表單文字的樣式。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;label for&#x3D;&quot;inputPassword5&quot;&gt;Password&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;password&quot; id&#x3D;&quot;inputPassword5&quot; class&#x3D;&quot;form-control&quot; aria-describedby&#x3D;&quot;passwordHelpBlock&quot;&gt;</span><br><span class="line">  &lt;small id&#x3D;&quot;passwordHelpBlock&quot; class&#x3D;&quot;form-text text-muted&quot;&gt;</span><br><span class="line">    Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.</span><br><span class="line">  &lt;&#x2F;small&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>可以看到這邊是為<code>small</code>的class加入<code>form-text</code>，讓其內文格式變成表單樣式。</p>
-<h2 id="禁用表單"><a href="#禁用表單" class="headerlink" title="禁用表單"></a>禁用表單</h2><p>當你想要禁用單一的<code>input</code>的話，你就在它的html標籤中，加入<code>disabled</code>屬性就可以了。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;form-group&quot; &gt;</span><br><span class="line">	&lt;label for&#x3D;&quot;disabledTextInput&quot;&gt;Disabled input&lt;&#x2F;label&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;disabledTextInput&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Disabled input&quot; disabled&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>若你想要對整個表單都禁用的話，你就直接在它的外層加上<code>disabled</code>屬性。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;form&gt;</span><br><span class="line">    &lt;fieldset disabled&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;form-group&quot; &gt;</span><br><span class="line">        &lt;label for&#x3D;&quot;disabledTextInput&quot;&gt;Disabled input&lt;&#x2F;label&gt;</span><br><span class="line">        &lt;input  type&#x3D;&quot;text&quot; id&#x3D;&quot;disabledTextInput&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Disabled input&quot; &gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">        &lt;label for&#x3D;&quot;disabledSelect&quot;&gt;Disabled select menu&lt;&#x2F;label&gt;</span><br><span class="line">        &lt;select id&#x3D;&quot;disabledSelect&quot; class&#x3D;&quot;form-control&quot;&gt;</span><br><span class="line">          &lt;option&gt;Disabled select&lt;&#x2F;option&gt;</span><br><span class="line">        &lt;&#x2F;select&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;form-check&quot;&gt;</span><br><span class="line">        &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;disabledFieldsetCheck&quot; disabled&gt;</span><br><span class="line">        &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;disabledFieldsetCheck&quot;&gt;</span><br><span class="line">          Can&#39;t check this</span><br><span class="line">        &lt;&#x2F;label&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Submit&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;&#x2F;fieldset&gt;</span><br><span class="line">  &lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
-<p>你可以看到我們直接對外層的<code>&lt;fieldset&gt;</code>標籤直接加上<code>disabled</code>屬性，就可直接禁用整個<code>form</code>表單了。</p>
-<h2 id="自訂表單樣式"><a href="#自訂表單樣式" class="headerlink" title="自訂表單樣式"></a>自訂表單樣式</h2><h3 id="checkbox"><a href="#checkbox" class="headerlink" title="checkbox"></a>checkbox</h3><iframe src="https://codepen.io/RandyChen/embed/oNzMyrZ?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-<p>你可以看到包裹那些input和label的最外層的div區塊的class名稱是由基底className和樣式className組成的，<br>分別為<code>custom-control</code>和<code>custom-check</code>一起組成。<br>而內層的<code>input</code>欄位的className是<code>custom-control-input</code>。<br>而內層的<code>label</code>的className是<code>custom-control-label</code></p>
-<h3 id="radiobox"><a href="#radiobox" class="headerlink" title="radiobox"></a>radiobox</h3><iframe src="https://codepen.io/RandyChen/embed/gOwjjbK?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-<p>你可以看到包裹那些<code>input</code>和<code>label</code>的最外層的<code>div</code>區塊的class名稱是由基底className和樣式className組成的，<br>分別為<code>custom-control</code>和<code>custom-radio</code>。<br>而內層的<code>input</code>欄位的className是<code>custom-control-input</code>。<br>而內層的<code>label</code>的className是<code>custom-control-label</code>。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-01/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -416,7 +621,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-09 09:55:55 / Modified: 11:25:41" itemprop="dateCreated datePublished" datetime="2021-01-09T09:55:55+08:00">2021-01-09</time>
+              <time title="Created: 2021-01-09 09:55:55 / Modified: 23:26:54" itemprop="dateCreated datePublished" datetime="2021-01-09T09:55:55+08:00">2021-01-09</time>
             </span>
 
           
@@ -683,239 +888,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-02/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-02/" class="post-title-link" itemprop="url">進階模板語法-02</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-06 11:21:12 / Modified: 12:14:47" itemprop="dateCreated datePublished" datetime="2021-01-06T11:21:12+08:00">2021-01-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>接續著上一篇的進階模板語法-01的內容繼續記錄。</p>
-<h2 id="Computed與Watch"><a href="#Computed與Watch" class="headerlink" title="Computed與Watch"></a>Computed與Watch</h2><h3 id="Computed過濾陣列內容"><a href="#Computed過濾陣列內容" class="headerlink" title="Computed過濾陣列內容"></a>Computed過濾陣列內容</h3><p>之前的章節是利用按下一個鈕，觸發methods裡面的一個function進而來過濾陣列，並將過濾完的結果<br>呈現在畫面上。<br>那這邊的話，我們希望使用者輸入完內容後，就會自動的將過濾完且符合搜尋內容的條件給呈現在畫面上。<br>那這樣的話，我們就需要用到computed來達成，不需要額外操作(像是:按下enter)才達成這種效果。</p>
-<iframe src="https://codepen.io/RandyChen/embed/rNMvbNK?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>上面這個例子，當我們在<code>input</code>欄位裡面輸入搜尋值，此時，filterText會變動，<br>也就會連動到<code>computed</code>中的filterData，並在filterData裡面做判斷，若輸入的搜尋內容<br>有符合arrayData的內容的話，就回傳該元素值到filterData中，進而在畫面呈現filterData，<br>但以上這個例子，在資料量大的話會有效能上的議題。</p>
-<h2 id="使用-Computed-來呈現時間格式。"><a href="#使用-Computed-來呈現時間格式。" class="headerlink" title="使用 Computed 來呈現時間格式。"></a>使用 Computed 來呈現時間格式。</h2><p>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;p&gt;&#123;&#123;formatTime&#125;&#125;&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el:&#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		newDate:0</span><br><span class="line">	&#125;,</span><br><span class="line">	computed:&#123;</span><br><span class="line">		formatTime: function()&#123;</span><br><span class="line">			this.newDate &#x3D; new Date();</span><br><span class="line">			var dates &#x3D; this.newDate;</span><br><span class="line">			var year &#x3D; dates.getFullYear();</span><br><span class="line">			var month &#x3D; dates.getMonth() + 1;</span><br><span class="line">			var date &#x3D; dates.getDate();</span><br><span class="line">			var hours &#x3D; dates.getHours();</span><br><span class="line">			var minutes &#x3D; dates.getMinutes();</span><br><span class="line">			var seconds &#x3D; dates.getSeconds();</span><br><span class="line">			return &#96;$&#123;year&#125;&#x2F;$&#123;month&#125;&#x2F;$&#123;date&#125; $&#123;hours&#125;:$&#123;minutes&#125;:$&#123;seconds&#125;&#96;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>以上用<code>computed</code>的方式，就能即時的呈現當下的時間囉~</p>
-<h2 id="Watch"><a href="#Watch" class="headerlink" title="Watch"></a>Watch</h2><p>當特定的變數變化的時候，會去執行特定的function</p>
-<iframe src="https://codepen.io/RandyChen/embed/PoGegzG?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上這個範例，就是利用<code>watch</code>去監聽trigger是否有變動，若有，就去執行相對應的function。<br>也就是當1秒後，trigger的值會被切回去<code>false</code>，也就是把rotate的效果給拿掉。</p>
-<h2 id="表單細節操作"><a href="#表單細節操作" class="headerlink" title="表單細節操作"></a>表單細節操作</h2><p>透過<code>v-for</code>來製作<code>selected</code>裡面的資料<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;select name&#x3D;&quot;&quot; id&#x3D;&quot;&quot; class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;selected2&quot;&gt;</span><br><span class="line">		&lt;option disabled value&#x3D;&quot;&quot;&gt;請選擇&lt;&#x2F;option&gt;</span><br><span class="line">		&lt;option :value&#x3D;&quot;item&quot; v-for&#x3D;&quot;item in selecData&quot;&gt;&#123;&#123;item&#125;&#125;&lt;&#x2F;option&gt;</span><br><span class="line">	&lt;&#x2F;select&gt;</span><br><span class="line">	&lt;p&gt;小明喜歡的女生是 &#123;&#123; selected2 &#125;&#125;。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">--JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el:&#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		selectData:[&#39;阿明&#39;, &#39;力宏&#39;, &#39;漂亮阿姨&#39;],</span><br><span class="line">		selected2:&#39;&#39;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>以上的範例，就會動態的將selectData陣列裡面的元素渲染進<code>option</code>裡面。<br>但要特別記得，每個<code>option</code>的<code>value</code>屬性都是動態的被加入的，所以，前面要記得加<code>v-bind</code>。<br>另外，當點選某個<code>option</code>的時候，該<code>option</code>的<code>value</code>會被塞到<code>selected2</code>裡面，<br>所以，最終在<code>p</code>段落裡面就會成現selected2的值，也就是你選取的<code>option</code>的<code>value</code>囉~</p>
-<h2 id="多選"><a href="#多選" class="headerlink" title="多選"></a>多選</h2><p>只要在<code>select</code>的HTML標籤中，加入<code>multiple</code>就可以有多選的功能囉<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;select name&#x3D;&quot;&quot; id&#x3D;&quot;&quot; class&#x3D;&quot;form-control&quot; multiple v-model&#x3D;&quot;selected2&quot;&gt;  &#x2F;&#x2F; 加入multiple</span><br><span class="line">		&lt;option disabled value&#x3D;&quot;&quot;&gt;請選擇&lt;&#x2F;option&gt;</span><br><span class="line">		&lt;option :value&#x3D;&quot;item&quot; v-for&#x3D;&quot;item in selecData&quot;&gt;&#123;&#123;item&#125;&#125;&lt;&#x2F;option&gt;</span><br><span class="line">	&lt;&#x2F;select&gt;</span><br><span class="line">	&lt;p&gt;小明喜歡的女生是 &#123;&#123; selected2 &#125;&#125;。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>當你在<code>select</code>中加入<code>multiple</code>時，你在點選該欄位中的<code>option</code>時，記得按下Ctrl鍵來複選，<br>此時，selected2裡的內容，就是你複選完的結果囉。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-02/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/" class="post-title-link" itemprop="url">進階模板語法-01</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-06 10:28:54 / Modified: 12:14:56" itemprop="dateCreated datePublished" datetime="2021-01-06T10:28:54+08:00">2021-01-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>接續著上一篇的進階模板語法的內容繼續記錄。</p>
-<h2 id="反轉陣列元素-透過key"><a href="#反轉陣列元素-透過key" class="headerlink" title="反轉陣列元素-透過key"></a>反轉陣列元素-透過key</h2><p>因為Vue在操作DOM元素的時候，是用快速置換的方式操作，導致有些元素不會被置換掉。<br>所以，我們會透過將<code>key</code>的屬性，來綁定元素某些獨有的屬性，來讓各元素的整體DOM都可以被完整置換。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li v-for&#x3D;&quot;(item, key) in arrayData&quot; :key&#x3D;&quot;item.age&quot;&gt;</span><br><span class="line">      &#123;&#123; key &#125;&#125; - &#123;&#123; item.name &#125;&#125; &#123;&#123; item.age &#125;&#125; 歲 &lt;input type&#x3D;&quot;text&quot;&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">  &lt;&#x2F;ul&gt;</span><br><span class="line">  &lt;button class&#x3D;&quot;btn btn-outline-primary&quot; @click&#x3D;&quot;reverseArray&quot;&gt;反轉陣列&lt;&#x2F;button&gt;</span><br><span class="line">  </span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		arrayData:[</span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;漂亮阿姨&#39;,</span><br><span class="line">				age: 24</span><br><span class="line">			&#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;小明&#39;,</span><br><span class="line">				age: 10</span><br><span class="line">			&#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;力宏&#39;,</span><br><span class="line">				age: 35</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	methods: &#123;</span><br><span class="line">		reverseArray: function()&#123;</span><br><span class="line">			this.arrayData.reverse()</span><br><span class="line">			console.log(this.arrayData)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>可以看到以上這個範例，我們在<code>ul</code>的<code>li</code>透過<code>v-bind</code>綁上<code>key</code>這個屬性，<br>而要用item.age去作為<code>key</code>的值，是因為每個元素的age的值都不一樣，所以，可以代表各個的元素，<br>用這種方式就可以整體置換對應的DOM元素，而不是只有部分的DOM元素被置換。</p>
-<h2 id="filter-過濾"><a href="#filter-過濾" class="headerlink" title="filter 過濾"></a>filter 過濾</h2><iframe src="https://codepen.io/RandyChen/embed/poEVYrN?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上這個範例，<br>當你在<code>input</code>欄位輸入內容，並按下enter後，會觸發filterData函式，<br>此時，會先對dataArray使用filter，當<code>input</code>欄位輸入的內容跟dataArray裡面的元素的name的成員屬性有匹配的話，<br>就會把那個物件push進去filterArray陣列裡面。<br>最後，在<code>ul</code>的區塊中去遍歷filterArray陣列裡面的元素，並用該元素的age為索引，<br>來置換頁面上的DOM內容。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95/" class="post-title-link" itemprop="url">進階模板語法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-06 09:20:03 / Modified: 12:14:36" itemprop="dateCreated datePublished" datetime="2021-01-06T09:20:03+08:00">2021-01-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="v-html可能被XSS攻擊"><a href="#v-html可能被XSS攻擊" class="headerlink" title="v-html可能被XSS攻擊"></a>v-html可能被XSS攻擊</h2><p>Vue的<code>v-html</code>的語法，盡量不要用在可以讓使用者提交資料的欄位中。<br>因為，有可能被有心人士使用XSS的方式，來攻擊你的網站。</p>
-<h2 id="v-once單次綁定"><a href="#v-once單次綁定" class="headerlink" title="v-once單次綁定"></a>v-once單次綁定</h2><p>當你希望該欄位的資料，只會變更一次，那你就要使用v-once<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;text&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;div v-text&#x3D;&quot;text&quot;&gt;內容&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>在以上這個範例，當你在<code>input</code>欄位輸入的內容，會更改到text成員屬性的值，<br>而<code>div</code>這個內容因為有利用<code>v-text</code>去綁定text成員屬性的值，所以，<br><code>div</code>內的內容，會連動<code>input</code>所輸入的內容。</p>
-<p>以下是用<code>v-once</code>綁定更改後的內容<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;text&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;div v-text&#x3D;&quot;text&quot; v-once&gt;內容&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>透過在<code>div</code>的html標籤內，寫入<code>v-once</code>，我們就可以讓，<code>div</code>的內容，只會更動一次。</p>
-<h2 id="在大括號中輸入表達式"><a href="#在大括號中輸入表達式" class="headerlink" title="在大括號中輸入表達式"></a>在大括號中輸入表達式</h2><p>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&#123;&#123;text + rwHtml&#125;&#125;</span><br><span class="line">	&#123;&#123;text.split(&#39;&#39;).reverse().join(&#39;&#39;)&#125;&#125;</span><br><span class="line">	&#123;&#123;number1 + number2&#125;&#125;  &#x2F;&#x2F; 也可以在你面放入計算式</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		text: &#39;這是一段文字&#39;,</span><br><span class="line">        rawHtml: &#39;示範文字&#39;,</span><br><span class="line">		number1: 100,</span><br><span class="line">		number2: 400</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="透過資料狀態，來操作HTML屬性"><a href="#透過資料狀態，來操作HTML屬性" class="headerlink" title="透過資料狀態，來操作HTML屬性"></a>透過資料狀態，來操作HTML屬性</h2><p>我們可以透過<code>v-bind</code>來為HTML標籤動態綁定一些屬性，像是<code>id</code>或是<code>className</code><br>而下面的範例，我們是要透過<code>v-bind</code>來為一個<code>input</code>欄位的<code>disabled</code>綁定一個成員屬性值。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; :disabled&#x3D;&quot;isDisabled&quot;&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el:&#123;</span><br><span class="line">		isDisabled:true</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>以上的範例，就可以看到我們透過<code>v-bind</code>將<code>disable</code>d屬性透過<code>v-bind</code>綁定isDisabled，<br>如此，該<code>input</code>欄位的<code>disabled</code>屬性值會為<code>true</code>，造成該<code>input</code>欄位不能被輸入任何內容。<br>若你希望該<code>input</code>欄位可以被輸入內容的話，就只要將isDisabled改成<code>false</code>即可。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -985,7 +957,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

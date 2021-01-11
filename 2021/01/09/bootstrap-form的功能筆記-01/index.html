@@ -28,7 +28,7 @@
 <meta property="og:description" content="接續上一篇還沒紀錄完的bootstrap form元件的內容。 form-check當裡面是要使用checkbox和radiobox元件的時候，它們的外層，是要用form-check包裹起來喔。  checkbox    在以上這個範例可以看到在checkbox中的其中一個input標籤上有寫了disabled，代表該input無法被點取囉。如果你希望整個checkbox都無法被選取的話，你要在這">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-09T03:02:06.000Z">
-<meta property="article:modified_time" content="2021-01-09T10:24:29.204Z">
+<meta property="article:modified_time" content="2021-01-09T15:26:35.188Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="Bootstrap">
 <meta name="twitter:card" content="summary">
@@ -175,7 +175,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-09 11:02:06 / Modified: 18:24:29" itemprop="dateCreated datePublished" datetime="2021-01-09T11:02:06+08:00">2021-01-09</time>
+              <time title="Created: 2021-01-09 11:02:06 / Modified: 23:26:35" itemprop="dateCreated datePublished" datetime="2021-01-09T11:02:06+08:00">2021-01-09</time>
             </span>
 
           
@@ -205,7 +205,7 @@
 <p>那這個<code>radiobox</code>的範例，你可以看到有三個<code>form-check</code>構成這個radiobox。<br>那你可以看到每一個<code>form-check</code>裡面的<code>input</code>欄位的name屬性值都是一樣的，代表它們是屬於同一個<code>radiobox</code>。<br>那它的<code>type</code>要寫入<code>radio</code>，它會變成<code>radiobox</code>的選項模式。<br>那在每個<code>form-check</code>的<code>input</code>的class名稱一樣是要寫入<code>form-check-input</code>，而<code>label</code>標籤的class名稱是<code>form-check-label</code>。<br>在最後一個<code>input</code>欄位中，加入了<code>disabled</code>屬性，所以，該選項就無法被選取囉~</p>
 <h2 id="form-check-inline-使選項水平排列"><a href="#form-check-inline-使選項水平排列" class="headerlink" title="form-check-inline 使選項水平排列"></a>form-check-inline 使選項水平排列</h2><p>如果我們不希望<code>heckbox</code>和<code>radiobox</code>它們的選項不要垂直排列的話，<br>我們只需要在外層的<code>form-check</code>的class中，再加上<code>form-check-inline</code>，就可以囉。<br>ex:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox1&quot; value&#x3D;&quot;option1&quot;&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox1&quot;&gt;1&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox2&quot; value&#x3D;&quot;option2&quot;&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox2&quot;&gt;2&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox3&quot; value&#x3D;&quot;option3&quot; disabled&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox3&quot;&gt;3 (disabled)&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-
+<a id="more"></a>
 <h2 id="form-row調整格線系統間距"><a href="#form-row調整格線系統間距" class="headerlink" title="form-row調整格線系統間距"></a>form-row調整格線系統間距</h2><iframe src="https://codepen.io/RandyChen/embed/ExgpEjy?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
 
 <p>你可以看到用<code>form-row</code>那一個區塊的<code>input</code>欄位之間會比較接近。<br>原本的<code>row</code>那一個區塊的<code>input</code>欄位之間會比較遠。<br>那由於<code>form-row</code>的關係，可以讓我們的<code>form</code>內容的排列更為彈性囉。<br>也因為用<code>form-row</code>的關係我們可以利用格線系統將三個選項排在同一行中。</p>
@@ -324,7 +324,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

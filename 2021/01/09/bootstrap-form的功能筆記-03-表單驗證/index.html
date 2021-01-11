@@ -28,7 +28,7 @@
 <meta property="og:description" content="bootstrap有提供兩種驗證方法  伺服器端驗證 瀏覽器端驗證  透過:invalid和:valid來驗證是否該欄位是否通過驗證，若沒通過該欄位外框呈現紅色，若有通過該欄位外框呈現綠色。 如果，是伺服器端驗證的話，需要自己手動在相對應元件的class中加入.is-invalid和.is-valid，來替換掉:invalid和:valid。 伺服器端驗證首先，來介紹伺服器端驗證的範例   首先，">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-09T10:55:20.000Z">
-<meta property="article:modified_time" content="2021-01-09T15:16:02.561Z">
+<meta property="article:modified_time" content="2021-01-09T15:26:50.299Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="Bootstrap">
 <meta name="twitter:card" content="summary">
@@ -175,7 +175,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-09 18:55:20 / Modified: 23:16:02" itemprop="dateCreated datePublished" datetime="2021-01-09T18:55:20+08:00">2021-01-09</time>
+              <time title="Created: 2021-01-09 18:55:20 / Modified: 23:26:50" itemprop="dateCreated datePublished" datetime="2021-01-09T18:55:20+08:00">2021-01-09</time>
             </span>
 
           
@@ -204,7 +204,7 @@
 <h1 id="瀏覽器端驗證"><a href="#瀏覽器端驗證" class="headerlink" title="瀏覽器端驗證"></a>瀏覽器端驗證</h1><p>它是透過bootstrap提供的JavaScript內容去觸發某個還沒有被驗證的相對應表單，等到瀏覽器驗證完成後，再由瀏覽器回饋給我們。<br>所以，<br>我們必須在想要被驗證的<code>form</code>命名一個<code>id</code>名稱，並將該<code>id</code>名稱提供給script。<br>並且，也要在該<code>form</code>的html標籤加上<code>novalidate</code>，代表該表單還沒有被驗證。<br>那些需要錯誤回饋部分，一樣要加入class名稱為<code>invalid-feedback</code>的區塊，就像伺服器驗證那樣加到相對應的區塊中。</p>
 <p>接著，你要加入bootstrap官網提供的script驗證的程式碼，而這段驗證的程式碼，在bootstrap的官網上就有提供了～～</p>
 <iframe src="https://codepen.io/RandyChen/embed/vYXaVpg?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
+<a id="more"></a>
 <h2 id="加入瀏覽器驗證的JS程式碼，並輸入相對應form的id"><a href="#加入瀏覽器驗證的JS程式碼，並輸入相對應form的id" class="headerlink" title="加入瀏覽器驗證的JS程式碼，並輸入相對應form的id"></a>加入瀏覽器驗證的JS程式碼，並輸入相對應form的id</h2><p>你可以在以上範例的JavaScript中的程式碼看到，<br>有一段用<code>getElementsByClassName</code>去取得你的需要被驗證的表單className，你就填入你相對應的表單className後，就可以執行瀏覽器端驗證囉。<br>當你按下該<code>form</code>的傳送表單的鈕，就會觸發這段驗證，進而驗證你那些欄位沒有填入相對應的內容囉。<br>另外，傳送表單的按鈕的<code>type</code>屬性要設定為<code>submit</code>喔。</p>
 <h2 id="不需要在input欄位加入-is-valid和-is-invalid"><a href="#不需要在input欄位加入-is-valid和-is-invalid" class="headerlink" title="不需要在input欄位加入.is-valid和.is-invalid"></a>不需要在input欄位加入.is-valid和.is-invalid</h2><p>記得～　不需要在各個被驗證的<code>input</code>欄位的class中，加入<code>.is-valid</code>或<code>.is-invalid</code>，<br>因為，當瀏覽器驗證該欄位有誤，會自動的幫我們在該欄位加上<code>.is-valid</code>或<code>.is-invalid</code>，<br>並呈現相對應的驗證樣式囉。</p>
 <h2 id="記得加入required"><a href="#記得加入required" class="headerlink" title="記得加入required"></a>記得加入required</h2><p>記得～～要在需要被驗證的<code>input</code>欄位的html標籤中加入<code>required</code>的屬性喔，<br>不然，那一個<code>input</code>欄位是不會被驗證到的喔。</p>
@@ -229,7 +229,10 @@
     <a href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-02/" rel="prev" title="bootstrap-form的功能筆記-02">
       <i class="fa fa-chevron-left"></i> bootstrap-form的功能筆記-02
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/" rel="next" title="Vue-js元件-01">
+      Vue-js元件-01 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -302,7 +305,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
