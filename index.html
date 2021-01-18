@@ -145,6 +145,306 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-02/" class="post-title-link" itemprop="url">JavaScript-ES6-課程筆記-02</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-18 11:57:28 / Modified: 12:00:39" itemprop="dateCreated datePublished" datetime="2021-01-18T11:57:28+08:00">2021-01-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#　箭頭函式 v.s 傳統函式</p>
+<h2 id="一般函式-－-傳統寫法-v-s-箭頭函式"><a href="#一般函式-－-傳統寫法-v-s-箭頭函式" class="headerlink" title="一般函式　－　傳統寫法 v.s 箭頭函式"></a>一般函式　－　傳統寫法 v.s 箭頭函式</h2><p>ex: (傳統寫法)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var callSomeone &#x3D; function(somebody)&#123;</span><br><span class="line">    return somebody + &#39;該吃飯囉&#39;;</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#39;小明&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>改寫成 箭頭函式<br>ex: (箭頭函式)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var callSomeone &#x3D; (somebody)&#x3D;&gt;&#123;</span><br><span class="line">    return somebody + &#39;該吃飯囉&#39;;</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#39;小明&#39;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="箭頭函式-只有一行內容"><a href="#箭頭函式-只有一行內容" class="headerlink" title="箭頭函式 - 只有一行內容"></a>箭頭函式 - 只有一行內容</h3><p>像上面的範例，若箭頭函式中只有一行的話，你可以省略花括號　和　<code>return</code>。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var callSomeone &#x3D; (somebody) &#x3D;&gt; somebody + &#39;該吃飯囉&#39;;</span><br></pre></td></tr></table></figure>
+<h3 id="箭頭函式-如果只有傳入一個參數"><a href="#箭頭函式-如果只有傳入一個參數" class="headerlink" title="箭頭函式 - 如果只有傳入一個參數"></a>箭頭函式 - 如果只有傳入一個參數</h3><p>如果傳入的參數只有一個的話，連那個參數的括號都可以省略。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var callSomeone &#x3D; somebody &#x3D;&gt; somebody + &#39;該吃飯囉&#39;;</span><br></pre></td></tr></table></figure>
+<h3 id="箭頭函式-如果沒有傳入參數"><a href="#箭頭函式-如果沒有傳入參數" class="headerlink" title="箭頭函式 - 如果沒有傳入參數"></a>箭頭函式 - 如果沒有傳入參數</h3><p>但是，你沒有要傳入任何參數的話，那個參數的括號是不能省略的喔，<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var show &#x3D; () &#x3D;&gt; &#39;展示一下&#39; ;</span><br><span class="line">console.log(show()); &#x2F;&#x2F; 展示一下</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-02/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-03/" class="post-title-link" itemprop="url">JavaScript-ES6-課程筆記-03</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-18 11:33:10 / Modified: 12:04:43" itemprop="dateCreated datePublished" datetime="2021-01-18T11:33:10+08:00">2021-01-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="常用陣列方法-上"><a href="#常用陣列方法-上" class="headerlink" title="常用陣列方法(上)"></a>常用陣列方法(上)</h1><h2 id="陣列方法-forEach"><a href="#陣列方法-forEach" class="headerlink" title="陣列方法-forEach"></a>陣列方法-forEach</h2><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">const people &#x3D; [</span><br><span class="line">	&#123;</span><br><span class="line">		name: &#39;小明&#39;,</span><br><span class="line">		friends: 2</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		name: &#39;阿姨&#39;,</span><br><span class="line">		friends: 999</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		name: &#39;邊緣人&#39;,</span><br><span class="line">		friends: 0</span><br><span class="line">	&#125;</span><br><span class="line">]</span><br><span class="line">people.forEach(function(item, index, array)&#123;</span><br><span class="line">	console.log(item);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>forEach</code>中的三個引數分別為:<br>item: 遍歷當下的元素<br>index: 當下在陣列的第幾個元素<br>array: 該陣列本身</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-03/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-01/" class="post-title-link" itemprop="url">JavaScript ES6 課程筆記-01</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-18 10:47:50 / Modified: 11:55:56" itemprop="dateCreated datePublished" datetime="2021-01-18T10:47:50+08:00">2021-01-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>接續上一篇JavaScript ES6 課程筆記的內容，繼續記錄。</p>
+<h1 id="縮寫"><a href="#縮寫" class="headerlink" title="縮寫"></a>縮寫</h1><h2 id="物件縮寫"><a href="#物件縮寫" class="headerlink" title="物件縮寫"></a>物件縮寫</h2><p>若新物件的屬性名稱跟被賦值的屬性名稱相同的話，就可以不用重複寫屬性名稱了。<br>ex: (傳統寫法)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let lee &#x3D; &#39;力宏&#39;;</span><br><span class="line">let family &#x3D; &#123;</span><br><span class="line">    ming: &#39;小明&#39;,</span><br><span class="line">    mom: &#39;老媽&#39;</span><br><span class="line">&#125;</span><br><span class="line">let newObj &#x3D; &#123;</span><br><span class="line">    family &#x3D; family,</span><br><span class="line">    lee &#x3D; lee</span><br><span class="line">&#125;</span><br><span class="line">console.log(newObj);</span><br></pre></td></tr></table></figure>
+<p>以上這個範例，可以看到newObj的屬性名稱，跟被賦予的內容名稱相同。<br>所以，我們可以省略其中一個，改寫成<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let lee &#x3D; &#39;力宏&#39;;</span><br><span class="line">let family &#x3D; &#123;</span><br><span class="line">    ming: &#39;小明&#39;,</span><br><span class="line">    mom: &#39;老媽&#39;</span><br><span class="line">&#125;</span><br><span class="line">let newObj &#x3D; &#123;</span><br><span class="line">    family,</span><br><span class="line">    lee</span><br><span class="line">&#125;</span><br><span class="line">console.log(newObj);</span><br></pre></td></tr></table></figure>
+<p>只要寫該屬性名稱就可以囉，編譯器會自動為你賦予，跟你屬性名稱一樣的內容了。</p>
+<h2 id="在-Vue-Cli-的情境中"><a href="#在-Vue-Cli-的情境中" class="headerlink" title="在 Vue Cli 的情境中"></a>在 Vue Cli 的情境中</h2><p>ex:(傳統寫法)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import router from &#39;.&#x2F;router&#39;</span><br><span class="line">&#x2F;&#x2F; 將套件由 &#39;.&#x2F;App&#39; 路徑載入，並使用 App 這個變數名稱</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  router:router,</span><br><span class="line">  template: &#39;&lt;App&#x2F;&gt;&#39;,</span><br><span class="line">  components: &#123; App &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>以上範例，我們利用router載入外部的東西，而router的名稱又剛好跟Vue物件中的<br>屬性router名稱一模一樣，所以，我們可以直接省略其中一個不寫，<br>改寫成下面這樣<br>ex:(縮寫寫法)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import router from &#39;.&#x2F;router&#39;</span><br><span class="line">&#x2F;&#x2F; 將套件由 &#39;.&#x2F;App&#39; 路徑載入，並使用 App 這個變數名稱</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  router,</span><br><span class="line">  template: &#39;&lt;App&#x2F;&gt;&#39;,</span><br><span class="line">  components: &#123; App &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-01/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">JavaScript ES6 課程筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-18 09:14:59 / Modified: 10:47:23" itemprop="dateCreated datePublished" datetime="2021-01-18T09:14:59+08:00">2021-01-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="使用let-與-const-宣告變數"><a href="#使用let-與-const-宣告變數" class="headerlink" title="使用let 與 const 宣告變數"></a>使用let 與 const 宣告變數</h1><p>ex: (var 宣告)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(mom); &#x2F;&#x2F; undefined</span><br><span class="line">var mom &#x3D; &#39;老媽&#39;;</span><br><span class="line">(function()&#123;</span><br><span class="line">    console.log(mom); &#x2F;&#x2F; 老媽</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>ex: (let 宣告)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(mom);  &#x2F;&#x2F; mom is not defined</span><br><span class="line">let mom &#x3D; &#39;老媽&#39;;</span><br><span class="line">(function()&#123;</span><br><span class="line">    console.log(mom); &#x2F;&#x2F; 老媽</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>以上這兩個宣告方法的差異可以看出來，用<code>let</code>宣告是沒有Hoisting的特性，<br>所以，導致在<code>let</code>定義變數之前，就取用該變數的話，會跳出該變數沒有被定義的錯誤，<br>而<code>var</code>宣告是有Hoisting的特性，<br>所以，在<code>var</code>定義變數之前，就取用該變數的話，會跳出<code>undefined</code>的值。</p>
+<h2 id="var-與-let-作用域的不同"><a href="#var-與-let-作用域的不同" class="headerlink" title="var 與 let 作用域的不同"></a>var 與 let 作用域的不同</h2><p><code>var</code>的作用域是function scope<br><code>let</code>的作用域是block</p>
+<p>ex: (var 作用域)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function varMing()&#123;</span><br><span class="line">    var ming &#x3D; &#39;小明&#39;;</span><br><span class="line">    if(true)&#123;</span><br><span class="line">        var ming &#x3D; &#39;傑哥&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(ming); &#x2F;&#x2F; 傑哥</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上範例可以看到，<code>if</code>判斷式的範圍跟外層的<code>var ming = &#39;小明&#39;</code>作用域範圍是相同的，<br>因為，它們都是存在同一個function scope裡面(即函式varMing裡面)，不要被<code>if</code>判斷式的花括號給誤導了，<br>所以，再重新定義一次變數ming是會影響最後變數ming的數值。</p>
+<p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function(let 作用域)</span><br><span class="line">function varMing()&#123;</span><br><span class="line">    let ming &#x3D; &#39;小明&#39;;</span><br><span class="line">    if(true)&#123;</span><br><span class="line">        let ming &#x3D; &#39;傑哥&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(ming); &#x2F;&#x2F; 小明</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>以上這個範例可以看到，最終結果是小明，<br>原因是<code>let</code>的作用域是用block來區分，所以，<code>if</code>判斷式中的作用域跟外層的作用域是分開的，<br>所以，我們在<code>if</code>中再次對ming變數做定義，是不會影響到外層變數ming的值的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/11/Vuejs%E5%85%83%E4%BB%B603-%E5%85%83%E4%BB%B6%E6%8F%92%E6%A7%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -592,302 +892,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">bootstrap form的功能筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-09 09:55:55 / Modified: 23:26:54" itemprop="dateCreated datePublished" datetime="2021-01-09T09:55:55+08:00">2021-01-09</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>這邊的筆記主要紀錄Bootstrap的form表單元件的兩個部分</p>
-<ol>
-<li>跟form表單相關的className套在哪一個標籤上</li>
-<li>HTML5表單觀念</li>
-</ol>
-<h1 id="form-group"><a href="#form-group" class="headerlink" title="form-group"></a>form-group</h1><p>當某個className叫<code>form-group</code>的HTML標籤，通常其內部都會包住以下三種元素<br><code>label</code>標籤、<code>input</code>標籤 和 <code>small</code>標籤，那<code>small</code>標籤不一定會存在。<br>以下的例題中有六種狀況，會在下面分別對這六種狀況做介紹</p>
-<iframe src="https://codepen.io/RandyChen/embed/XWjBZXG?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<h2 id="範例中第一個form-group"><a href="#範例中第一個form-group" class="headerlink" title="範例中第一個form-group"></a>範例中第一個form-group</h2><p>那你可以看到在<code>&lt;form&gt;</code>標籤裡面的第一層<code>div</code>，他的<code>class</code>就是<code>form-group</code>。<br>那在這個<code>form-group</code>裡面的<code>input</code>欄位的class名稱是<code>form-control</code>，<br>那在這個<code>form-group</code>裡面的<code>label</code>是不用特地為它的className做設定的，<br>那在這個<code>form-group</code>裡面的<code>samll</code>標籤的class名稱是<code>form-text</code><br>此時，<code>input</code>欄位和<code>small</code>標籤的樣式，都會變成Bootstrap的制定樣式了。</p>
-<h2 id="範例中第二個form-group"><a href="#範例中第二個form-group" class="headerlink" title="範例中第二個form-group"></a>範例中第二個form-group</h2><p>它的<code>input</code>標籤的className一樣要被命名為<code>form-control</code>。<br>那跟第一個<code>form-group</code>的<code>input</code>欄位不同的地方是<code>type</code>，<br>因為，一個是要輸入email，另一個是要輸入password，所以，功能不一樣，type的內容也會不一樣。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/08/Vue%E5%85%83%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/08/Vue%E5%85%83%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/" class="post-title-link" itemprop="url">Vue元件的生命週期</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-08 10:26:37 / Modified: 10:41:40" itemprop="dateCreated datePublished" datetime="2021-01-08T10:26:37+08:00">2021-01-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="語法標籤"><a href="#語法標籤" class="headerlink" title="語法標籤"></a>語法<keep-alive></keep-alive>標籤</h1><h2 id="沒有keep-alive標籤的元件，資料不保留"><a href="#沒有keep-alive標籤的元件，資料不保留" class="headerlink" title="沒有keep-alive標籤的元件，資料不保留"></a>沒有keep-alive標籤的元件，資料不保留</h2><p>如果該Vue元件沒有加上<code>&lt;keep-alive&gt;&lt;/keep-alive&gt;</code>標籤，<br>當該元件不被顯示的時候，就會執行<code>beforeDestroy</code> 和 <code>destroyed</code> 這兩個解構式<br>連帶的會將此次的在該元件上的資料全部消滅掉。<br>等到你下次又要調用該元件的時候，資料會是全新的，不會保留上一次的輸入內容。</p>
-<h2 id="有keep-alive標籤的元件，資料會保留"><a href="#有keep-alive標籤的元件，資料會保留" class="headerlink" title="有keep-alive標籤的元件，資料會保留"></a>有keep-alive標籤的元件，資料會保留</h2><p>如果在這個Vue元件的外圍，加上<code>&lt;keep-alive&gt;&lt;/keep-alive&gt;</code>標籤，<br>此時，你的元件的hook事件會多兩個分別是<code>activated</code>和<code>deactivated</code>。<br>在你不顯示該元件的時候，該元件不會觸發<code>beforeDestroy</code> 和 <code>destroyed</code> 這兩個解構式<br>而是改為觸發<code>deactived</code>，且該元件的資料會被保留下來。<br>當你下次再使用該元件的時候，<br>不會再次觸發<code>beforeCreate</code>, <code>created</code>, <code>beforeMount</code>, <code>mounted</code>這些hook，<br>而是直接觸發<code>actived</code>這個hook，並直接呈現上一次的資料內容。</p>
-<h2 id="可以運用在頁籤上"><a href="#可以運用在頁籤上" class="headerlink" title="可以運用在頁籤上"></a>可以運用在頁籤上</h2><p>這種技巧常會用在頁籤中，你只是想要切換頁面的內容，但並不想要把上一頁的內容<br>刪除掉，就可以為頁籤元件加上<code>&lt;keep-alive&gt;&lt;/keep-alive&gt;</code>標籤。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/08/Vue%E5%85%83%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/08/Vue-js%E5%85%83%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/08/Vue-js%E5%85%83%E4%BB%B6/" class="post-title-link" itemprop="url">Vue.js元件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-08 09:35:32 / Modified: 10:44:08" itemprop="dateCreated datePublished" datetime="2021-01-08T09:35:32+08:00">2021-01-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Vue-js元件概念介紹"><a href="#Vue-js元件概念介紹" class="headerlink" title="Vue.js元件概念介紹"></a>Vue.js元件概念介紹</h1><p>外層要傳遞資料到內層的時候，會用一個叫<code>props</code>的方法，<br>內層要往外層送的話，會用一個叫<code>emit Event</code>的方法，<br>而emit Event是一個事件，所以，每當內層要往外層送資料的時候，<br>都會觸發這個<code>emit</code>事件。<br>所以，相對於外層往內層送資料是即時的，<br>內層往外層送資料，得透過觸發<code>emit Event</code>才能將資料往外層送。</p>
-<p>SPA的概念是由元件的概念所構成的，所以，元件在Vue.js中是一個很重要的部分。</p>
-<h1 id="使用-x-template-建立元件"><a href="#使用-x-template-建立元件" class="headerlink" title="使用 x-template 建立元件"></a>使用 x-template 建立元件</h1><p>首先，我們先使用<code>x-template</code>的寫法來使用自訂義的元件<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;table class&#x3D;&quot;table&quot;&gt;</span><br><span class="line">    &lt;thead&gt;</span><br><span class="line">    &lt;&#x2F;thead&gt;</span><br><span class="line">    &lt;tbody&gt;</span><br><span class="line">      &lt;row-component v-for&#x3D;&quot;(item,key) in data&quot; :key&#x3D;&quot;key&gt;&lt;&#x2F;row-component&gt;</span><br><span class="line">      </span><br><span class="line">    &lt;&#x2F;tbody&gt;</span><br><span class="line">  &lt;&#x2F;table&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;x-template&quot; id&#x3D;&quot;rowComponenttemplate&quot;&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;&#123;&#123; item.name &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;&#123;&#123; item.cash &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;&#123;&#123; item.icash &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	Vue.component(&#39;row-component&#39;,&#123;</span><br><span class="line">		template:&#39;#rowComponenttemplate&#39;</span><br><span class="line">	&#125;);</span><br><span class="line">	var app &#x3D; new Vue(&#123;</span><br><span class="line">		el: &#39;#app&#39;,</span><br><span class="line">		data:&#123;</span><br><span class="line">			data:[</span><br><span class="line">			  &#123;</span><br><span class="line">				name: &#39;小明&#39;,</span><br><span class="line">				cash: 100,</span><br><span class="line">				icash: 500,</span><br><span class="line">			  &#125;,</span><br><span class="line">			  &#123;</span><br><span class="line">				name: &#39;杰倫&#39;,</span><br><span class="line">				cash: 10000,</span><br><span class="line">				icash: 5000,</span><br><span class="line">			  &#125;,</span><br><span class="line">			  &#123;</span><br><span class="line">				name: &#39;漂亮阿姨&#39;,</span><br><span class="line">				cash: 500,</span><br><span class="line">				icash: 500,</span><br><span class="line">			  &#125;,</span><br><span class="line">			  &#123;</span><br><span class="line">				name: &#39;老媽&#39;,</span><br><span class="line">				cash: 10000,</span><br><span class="line">				icash: 100,</span><br><span class="line">			  &#125;,</span><br><span class="line">			]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-<p>以上的內容，可以看到我們額外寫了一個<script></script>特別給<code>x-template</code>來撰寫，<br>並利用<code>id</code>來跟Vue的<code>row-component</code>自訂義元件來做綁定。<br>接著，我們在<code>x-template</code>的區域中，放入了<code>tr</code> <code>td</code>的內容，也就是我們想要製作的部分。<br>但是，當你的程式碼只有寫到上面這個範例的內容的話，瀏覽器會跳”item is not defined”。<br>因為，Vue的元件環境跟外部是區隔開的，所以，裡面的環境會不知道傳入的item是誰，<br>這個時候，我們就要用到<code>props</code>的技巧，將外部的資料送進去裡面囉。</p>
-<h2 id="第一步，props-引入媒介屬性"><a href="#第一步，props-引入媒介屬性" class="headerlink" title="第一步，props 引入媒介屬性"></a>第一步，props 引入媒介屬性</h2><p>將以上的範例修改成以下這樣子<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;table class&#x3D;&quot;table&gt;</span><br><span class="line">        &lt;thead&gt;&lt;&#x2F;thead&gt;</span><br><span class="line">        &lt;tbody&gt;</span><br><span class="line">            &lt;row-component v-for&#x3D;&quot;(item, key) in data&quot; :person&#x3D;&quot;item&quot; :key&#x3D;&quot;key&quot;&lt;&#x2F;row-component&gt; &#x2F;&#x2F; 加入:person綁定</span><br><span class="line">        &lt;&#x2F;tbody&gt;</span><br><span class="line">    &lt;&#x2F;table&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;x-template&quot; id&#x3D;&quot;rowComponenttemplate&quot;&gt;</span><br><span class="line">    &lt;tr&gt;</span><br><span class="line">        &lt;td&gt;&#123;&#123;person.name&#125;&#125;&lt;&#x2F;td&gt;  &#x2F;&#x2F; 將原本的item改成你綁定的屬性名稱person</span><br><span class="line">        &lt;td&gt;&#123;&#123;person.age&#125;&#125;&lt;&#x2F;td&gt;   &#x2F;&#x2F; 將原本的item改成你綁定的屬性名稱person</span><br><span class="line">        &lt;td&gt;&#123;&#123;person.cash&#125;&#125;&lt;&#x2F;td&gt;  &#x2F;&#x2F; 將原本的item改成你綁定的屬性名稱person</span><br><span class="line">    &lt;&#x2F;tr&gt;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    Vue.component(&#39;row-component&#39;,&#123;</span><br><span class="line">        props:[&#39;person&#39;],         &#x2F;&#x2F; 加入props，且用陣列的寫法</span><br><span class="line">        template: &#39;#rowComponenttemplate&#39;</span><br><span class="line">    &#125;)</span><br><span class="line">    var app&#x3D; new Vue(&#123;</span><br><span class="line">        el: &#39;#app&#39;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            data:[</span><br><span class="line">                &#123;</span><br><span class="line">				name: &#39;小明&#39;,</span><br><span class="line">				cash: 100,</span><br><span class="line">				icash: 500,</span><br><span class="line">			  &#125;,</span><br><span class="line">			  &#123;</span><br><span class="line">				name: &#39;杰倫&#39;,</span><br><span class="line">				cash: 10000,</span><br><span class="line">				icash: 5000,</span><br><span class="line">			  &#125;,</span><br><span class="line">			  &#123;</span><br><span class="line">				name: &#39;漂亮阿姨&#39;,</span><br><span class="line">				cash: 500,</span><br><span class="line">				icash: 500,</span><br><span class="line">			  &#125;,</span><br><span class="line">			  &#123;</span><br><span class="line">				name: &#39;老媽&#39;,</span><br><span class="line">				cash: 10000,</span><br><span class="line">				icash: 100,</span><br><span class="line">			  &#125;,</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-<p>以上修改的地方，特別是在元件的定義內容中，新增<code>props</code>，且<code>props</code>是要用陣列的方式將你想要綁定的屬性名稱加進去。<br>接著，在你自訂義的元件上，寫入你新增的媒介屬性，<br>並為這個新增的媒介屬性person，用<code>v-bind</code>來綁定你想由外往內傳的資料，像這邊就是綁定外層的data陣列的元素item。<br>如此，就可以在畫面上呈現陣列的資料內容了。</p>
-<h2 id="第二步，利用is-引入Vue自訂義元件-使元件呈現正確的HTML布局"><a href="#第二步，利用is-引入Vue自訂義元件-使元件呈現正確的HTML布局" class="headerlink" title="第二步，利用is 引入Vue自訂義元件-使元件呈現正確的HTML布局"></a>第二步，利用is 引入Vue自訂義元件-使元件呈現正確的HTML布局</h2><p>但是，你發現上面的資料呈現方式並沒有按照表格的布局方式，正確的呈現內容。<br>而原因是因為，在<code>&lt;tbody&gt;</code>裡面就是要放<code>&lt;tr&gt;</code>，而在<code>&lt;tr&gt;</code>裡面就是要放<code>&lt;td&gt;</code>，<br>結果，我們破壞HTML既有的規則，直接在<code>&lt;tbody&gt;</code>加入我們自訂義的元件，當然，就無法呈現正確的布局。<br>所以，我們這時候要用<code>is</code>來引入我們的元件，進而讓整體布局是正確的。<br>我們只需要修改html的部分就ok了。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;table class&#x3D;&quot;table&quot;&gt;</span><br><span class="line">    &lt;thead&gt;</span><br><span class="line">    &lt;&#x2F;thead&gt;</span><br><span class="line">    &lt;tbody&gt;</span><br><span class="line">      &lt;tr is&#x3D;&quot;row-component&quot; v-for&#x3D;&quot;(item, key) in data&quot; :person&#x3D;&quot;item&quot; :key&#x3D;&quot;key&quot;&gt;&lt;&#x2F;tr&gt;  </span><br><span class="line">    &lt;&#x2F;tbody&gt;</span><br><span class="line">  &lt;&#x2F;table&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>可以看到，我們直接在<code>tr</code>標籤中加入<code>is</code>去綁定我們自訂義的元件，接著，後面的<code>v-for</code>和:person寫法都和之前的一樣。<br>如此，就可以將資料呈現在正確的HTML布局下了。</p>
-<h2 id="將Vue的自訂義元件改成局部註冊"><a href="#將Vue的自訂義元件改成局部註冊" class="headerlink" title="將Vue的自訂義元件改成局部註冊"></a>將Vue的自訂義元件改成局部註冊</h2><p>上面的範例是用全域的範圍中，註冊我們自訂義的Vue元件。<br>那這邊我們把上面的’row-component’改成局部註冊，讓特定Vue物件才能調用這個元件，<br>而其他的Vue物件是無法調用到它的，只需要修改<code>script</code>的部分<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">&#x2F;*  把原本全域註冊的部分註解掉</span><br><span class="line">	Vue.component(&#39;row-component&#39;,&#123;</span><br><span class="line">		props:[&#39;person&#39;],   &#x2F;&#x2F; 加入props，且用陣列的寫法</span><br><span class="line">		template:&#39;#rowComponenttemplate&#39;</span><br><span class="line">	&#125;);</span><br><span class="line">*&#x2F;</span><br><span class="line"></span><br><span class="line">	var child &#x3D; &#123;  &#x2F;&#x2F; 新增一個物件，裡面放的就是自訂義元件中的物件內容</span><br><span class="line">		props:[&#39;person&#39;],   </span><br><span class="line">		template:&#39;#rowComponenttemplate&#39;</span><br><span class="line">	&#125;</span><br><span class="line">	var app &#x3D; new Vue(&#123;</span><br><span class="line">		el: &#39;#app&#39;,</span><br><span class="line">		data:&#123;</span><br><span class="line">			data:[</span><br><span class="line">			  &#123;</span><br><span class="line">				name: &#39;小明&#39;,</span><br><span class="line">				cash: 100,</span><br><span class="line">				icash: 500,</span><br><span class="line">			  &#125;,</span><br><span class="line">			  &#123;</span><br><span class="line">				name: &#39;杰倫&#39;,</span><br><span class="line">				cash: 10000,</span><br><span class="line">				icash: 5000,</span><br><span class="line">			  &#125;,</span><br><span class="line">			  &#123;</span><br><span class="line">				name: &#39;漂亮阿姨&#39;,</span><br><span class="line">				cash: 500,</span><br><span class="line">				icash: 500,</span><br><span class="line">			  &#125;,</span><br><span class="line">			  &#123;</span><br><span class="line">				name: &#39;老媽&#39;,</span><br><span class="line">				cash: 10000,</span><br><span class="line">				icash: 100,</span><br><span class="line">			  &#125;,</span><br><span class="line">			]</span><br><span class="line">		&#125;,</span><br><span class="line">		components:&#123;  &#x2F;&#x2F; 將我們定義的物件丟進components中</span><br><span class="line">			&#39;row-component&#39;: child</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-<p>以上例子，先將原本的自訂義元件中的物件引數的內容，改為由另為一個變數child存起來。<br>接著，在你指定的Vue物件的<code>components</code>成員屬性底下，<br>新增該元件的名稱，像此例就是’row-component’，接著，在這個屬性值後面接上你剛剛存放物件引數內容的變數。<br>如此，就可以只讓app這個Vue物件，去調用’row-component’這個自訂義元件囉。</p>
-<h1 id="使用-function-return-建構資料格式"><a href="#使用-function-return-建構資料格式" class="headerlink" title="使用 function return 建構資料格式"></a>使用 function return 建構資料格式</h1><p>當你自訂義元件的時候，要調用它自身的屬性值的時候，必須要用<code>function return</code>的方式，來取得該屬性值，<br>不然，會報錯喔。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;counter-component&gt;&lt;&#x2F;counter-component&gt;</span><br><span class="line">  &lt;counter-component&gt;&lt;&#x2F;counter-component&gt;</span><br><span class="line">  &lt;counter-component&gt;&lt;&#x2F;counter-component&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;x-template&quot; id&#x3D;&quot;counter-component&quot;&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">	  你已經點擊 &lt;button class&#x3D;&quot;btn btn-outline-secondary btn-sm&quot; @click&#x3D;&quot;counter +&#x3D; 1&quot;&gt;&#123;&#123; counter &#125;&#125;&lt;&#x2F;button&gt; 下。</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	Vue.component(&#39;counter-component&#39;, &#123;</span><br><span class="line">	  data: function()&#123;</span><br><span class="line">		return &#123;</span><br><span class="line">		  counter:0</span><br><span class="line">		&#125;</span><br><span class="line">	  &#125;</span><br><span class="line">	  ,</span><br><span class="line">	  template: &#39;#counter-component&#39;</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	var app &#x3D; new Vue(&#123;</span><br><span class="line">	  el: &#39;#app&#39;,</span><br><span class="line">	&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-<p>以上可以看到元件’counter-component’的成員屬性counter，是用<code>function return</code>的方式來取得它的值的。<br>要記得是自訂義的元件才需要這樣做喔，不要連用new Vue的物件的data都這樣做。</p>
-<h1 id="props-基本觀念"><a href="#props-基本觀念" class="headerlink" title="props 基本觀念"></a>props 基本觀念</h1><p>在這部分展示透過<code>props</code>將外界的資料傳入元件中，並呈現靜態傳遞與動態傳遞寫法上的差異</p>
-<iframe src="https://codepen.io/RandyChen/embed/KKgBPMG?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>動態傳遞的概念像這張圖片一樣。<br><img src="/image/%E9%9D%9C%E6%85%8B%E5%82%B3%E9%81%9E_%E5%8B%95%E6%85%8B%E5%82%B3%E9%81%9E.png"><br>這個例子，我們自己製作了一個元件’photo’。<br>並利用<code>props</code>為這個元件創了一個媒介屬性叫imgUrl。<br>另外，我們用<code>x-template</code>中定義photo元件的內部內容，<br>在<code>x-template</code>裡面的<code>img</code>標籤，它的<code>src</code>屬性利用<code>v-bind</code>跟photo元件的媒介屬性imgUrl綁定在一起。<br>而在photo元件上，我們在透過img-url來綁定在app物件中的url屬性，用這用的方式達成動態傳遞的效果。<br>在靜態傳遞的部分，<br>在靜態傳遞的photo區塊，利用媒介屬性img-url直接將該圖片的網址指定到這個媒介屬性上，以此達成靜態傳遞的效果。</p>
-<h2 id="小駝峰寫法"><a href="#小駝峰寫法" class="headerlink" title="小駝峰寫法"></a>小駝峰寫法</h2><p>在上面這個範例要注意的地方，在JavaScript文件中，photo元件的<code>props</code>新增媒介屬性是用駝峰式的寫法imgUrl，<br>而在HTML文件中，若我們還是用駝峰式寫法imgUrl，這樣子的格式式不符合規範的，所以，<br>要改成img-url，中間要加個-，且大寫的U要改成小寫的u。</p>
-<h2 id="src-”圖片網址”-而不是-src-”圖片網址”"><a href="#src-”圖片網址”-而不是-src-”圖片網址”" class="headerlink" title=":src=”圖片網址” 而不是 src=”圖片網址”"></a>:src=”圖片網址” 而不是 src=”圖片網址”</h2><p>上面這個範例在<code>x-template</code>裡面是用:src來跟媒介屬性來做綁定(透過<code>v-bind</code>)，不要跟一般的src的屬性使用搞混囉，一般的src屬性後面就直接接網址了，沒有在綁定變數的。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/07/scss%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/07/scss%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">scss筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-07 10:40:32 / Modified: 11:48:31" itemprop="dateCreated datePublished" datetime="2021-01-07T10:40:32+08:00">2021-01-07</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="在VSCode的編譯器中安裝live-sass"><a href="#在VSCode的編譯器中安裝live-sass" class="headerlink" title="在VSCode的編譯器中安裝live sass"></a>在VSCode的編譯器中安裝live sass</h2><p><img src="/image/live_sass.png"><br>我是在我的vscode的編譯器裡面安裝這個live sass的擴充軟體。<br>接著，你新增一個檔案，其檔名叫做all.scss。<br>再來你對這個all.scss檔案按下編譯器右下角的一個按鈕”Watch Sass”，<br><img src="/image/live_sass_watch.png"><br>按下去之後，你應該會看到跟all.scss檔案相同目錄下，會自動產出一個all.css檔案。<br><img src="/image/live_sass_all_css.png"><br>之後，你只要在all.scss檔案裡面新增或修改任何css樣式，只要你按下存檔，<br>live sass就會將你修改的css樣式內容，同步更新到all.css檔案裡面。</p>
-<p>注意~~~~但是，你的專案檔要引入的css檔案是all.css喔，不是all.scss檔案喔!!</p>
-<h2 id="修改live-sass軟體產出all-css檔案的路徑"><a href="#修改live-sass軟體產出all-css檔案的路徑" class="headerlink" title="修改live sass軟體產出all.css檔案的路徑"></a>修改live sass軟體產出all.css檔案的路徑</h2><p>live sass這個軟件，它預設產出的all.css檔案的路徑，會跟all.scss檔案在相同目錄下。<br>但是，你想要分隔管理all.css檔案和all.scss檔案的話，就需要修改live sass軟件預設的產出all.css檔案路徑。</p>
-<p><img src="/image/live_scss_step1.png"><br><img src="/image/live_scss_step2.png"><br>接著，上圖中的step1的紅框中，有”使用者”和”工作區”兩個選項，<br>這兩個選項的意思是<br>“使用者”:代表你接下來的設定，會是全域的設定，即每個專案都會被這個設定影響到。<br>“工作區”:代表只有你現在使用的這個專案檔，會被你這個設定影響到。</p>
-<p>我這邊只希望只有修改正在使用的專案它的live sass的產出all.css的路徑，所以，我會選擇”工作區”這個選項。<br><img src="/image/live_scss_step3.png"><br>當你按下上一張圖中的step2按下的鈕時，就會跳出這張圖中的settings.json檔案。<br>接著，你就把圖中的code貼進去這個settings.json檔案中。</p>
-<p>這段code你可以在live sass的軟件的官方文件就可以找到囉。</p>
-<p>那這段code有三個項目，<br>第一個format項目    -&gt; 代表產出的檔案格式是壓縮檔<br>第二個extension項目 -&gt; 代表產出的檔案的檔名<br>第三個savePath項目  -&gt; 代表產出的all.css檔案路徑設定<br>那你就可以在第三個savePath項目就可以設定你這個專案產出的all.css要產出在哪裡囉。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/07/scss%E7%AD%86%E8%A8%98/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -957,7 +961,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
