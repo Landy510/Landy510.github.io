@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="購物車按鈕這邊購物車的按鈕，你只要看上面範例的navbar的購物車按鈕部分就好。  首先，我們在navbar裡面塞了一個購物車的按鈕，這個按鈕有套用dropdown的功能，我們就可以利用點選它跳出相對應的產品內容。  在購物車上方的數字，適用bootstrap中的badges元件所製作出來的。接著，我們需要將這個badge的位置樣式改成postion:absolute。並在他的外層加上posi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bootstrap_製作購物車網頁">
+<meta property="og:url" content="http://example.com/2021/01/19/bootstrap-%E8%A3%BD%E4%BD%9C%E8%B3%BC%E7%89%A9%E8%BB%8A%E7%B6%B2%E9%A0%81/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="購物車按鈕這邊購物車的按鈕，你只要看上面範例的navbar的購物車按鈕部分就好。  首先，我們在navbar裡面塞了一個購物車的按鈕，這個按鈕有套用dropdown的功能，我們就可以利用點選它跳出相對應的產品內容。  在購物車上方的數字，適用bootstrap中的badges元件所製作出來的。接著，我們需要將這個badge的位置樣式改成postion:absolute。並在他的外層加上posi">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-19T02:37:01.000Z">
+<meta property="article:modified_time" content="2021-01-19T02:49:48.233Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Bootstrap">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/01/19/bootstrap-%E8%A3%BD%E4%BD%9C%E8%B3%BC%E7%89%A9%E8%BB%8A%E7%B6%B2%E9%A0%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>bootstrap_製作購物車網頁 | Landy Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/19/bootstrap-%E8%A3%BD%E4%BD%9C%E8%B3%BC%E7%89%A9%E8%BB%8A%E7%B6%B2%E9%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          bootstrap_製作購物車網頁
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-19 10:37:01 / Modified: 10:49:48" itemprop="dateCreated datePublished" datetime="2021-01-19T10:37:01+08:00">2021-01-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <iframe src="https://codepen.io/RandyChen/embed/pojYNwK?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<h1 id="購物車按鈕"><a href="#購物車按鈕" class="headerlink" title="購物車按鈕"></a>購物車按鈕</h1><p>這邊購物車的按鈕，你只要看上面範例的navbar的購物車按鈕部分就好。</p>
+<ol>
+<li><p>首先，我們在<code>navbar</code>裡面塞了一個購物車的按鈕，<br>這個按鈕有套用<code>dropdown</code>的功能，我們就可以利用點選它跳出相對應的產品內容。</p>
+</li>
+<li><p>在購物車上方的數字，適用bootstrap中的<code>badges</code>元件所製作出來的。<br>接著，我們需要將這個<code>badge</code>的位置樣式改成<code>postion:absolute</code>。<br>並在他的外層加上<code>position:relative</code>。<br>並在<code>badge</code>裡面設定相對的<code>top</code>和<code>right</code>來讓他在cart相對應的位置上。</p>
+</li>
+<li><p>購務車的<code>dropdown</code>的內容<br>我們可以在<code>dropdown-menu</code>的內容中加入表格、按鈕或相關的內容</p>
+</li>
+</ol>
+<h2 id="dropdown-menu在navbar底下會超出頁面"><a href="#dropdown-menu在navbar底下會超出頁面" class="headerlink" title="dropdown-menu在navbar底下會超出頁面"></a>dropdown-menu在navbar底下會超出頁面</h2><ol start="4">
+<li>購物車點選出來的<code>dropdown-menu</code>內容超出頁面<br>在bootstrap中有提到，當<code>dropdown-menu</code>的功能在<code>navbar</code>中使用的時候，<br>官網的提示:<br>Heads up!<br>Dropdowns are positioned thanks to Popper (except when they are contained in a navbar).</li>
+</ol>
+<p>它就不會自動去計算<code>dropdown-menu</code>的區塊大小是否有超出頁面囉。<br>首先，先為你的.dropdown-menu加入.dropdown-menu-end<br>接著，我們要自己寫css樣式來為.dropdown-menu-end調整<br>寫下以下的內容:<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.dropdown-menu-end&#123;</span><br><span class="line">  right:0;</span><br><span class="line">  left: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此時，當我們點擊購物車按鈕，這個dropdown-menu就不會超出頁面囉。</p>
+<h1 id="jumbotron"><a href="#jumbotron" class="headerlink" title="jumbotron"></a>jumbotron</h1><p>當我們有大版面要用的話，就可以套入<code>jumbotron</code>元件囉。<br>那這邊就為這個<code>jumbotron</code>加入一張大圖，並利用<br><code>background-size:cover; </code>和 <code>background-position: center center;</code><br>來讓這張圖辨變清楚，並且置中。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div class&#x3D;&quot;jumbotron jumbotron-fluid jumbotron_bg&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">    &lt;h1 class&#x3D;&quot;display-4&quot;&gt;Fluid jumbotron&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;p class&#x3D;&quot;lead&quot;&gt;This is a modified jumbotron that occupies the entire horizontal space of its parent.&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---CSS---</span><br><span class="line">.jumbotron_bg&#123;</span><br><span class="line"> background-image: url(&quot;https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2021&#x2F;01&#x2F;14&#x2F;PMgNkr.jpg&quot;);</span><br><span class="line">  background-size:cover;</span><br><span class="line">  background-position: center center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="卡片式排版與-Grid-System-整齊排版手法"><a href="#卡片式排版與-Grid-System-整齊排版手法" class="headerlink" title="卡片式排版與 Grid System 整齊排版手法"></a>卡片式排版與 Grid System 整齊排版手法</h1><p>我們可以利用格線系統，並在格線系統內加入<code>card</code>元件，<br>如此一來就可以在當某一行的<code>card</code>元素超過格線系統的佈局時，就換行，達成好看的排版。</p>
+<h2 id="card-body有自動延展的效果"><a href="#card-body有自動延展的效果" class="headerlink" title="card-body有自動延展的效果"></a>card-body有自動延展的效果</h2><p>我們在這邊會使用<code>card</code>元件是因為<code>card-body</code>會隨著內容的增加而延展他自己的高度，並不會去擠壓到在同一元件內，像是<code>card-header</code>和<code>card-footer</code>的高度，相當方便。<br>如果，你希望同一區域的<code>card</code>的高度都一樣的話，為<code>card</code>元件加上<code>h-100</code>這個className，這樣就可以讓各個<code>card</code>都對齊，儘管他們的內容多寡不同。</p>
+<iframe src="https://codepen.io/RandyChen/embed/QWKJdMV?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>你可以看到右邊欄位的<code>card</code>的高度都一樣，儘管他們的<code>card-body</code>內容不一樣。<br>另外，就算上方的圖片大小不一樣，也一樣不會影響排版喔。</p>
+<h2 id="加上衣服尺寸的樣式使用btn-group"><a href="#加上衣服尺寸的樣式使用btn-group" class="headerlink" title="加上衣服尺寸的樣式使用btn-group"></a>加上衣服尺寸的樣式使用btn-group</h2><p>我們可以在上面的範例中的<code>card-footer</code>取代掉原本的按鈕，加入<code>btn-group</code>，來創出一個有sm, m, l大小的按鈕，<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;btn-group btn-group-sm&quot;&gt;</span><br><span class="line">      &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-outline-primary&quot; aria-current&#x3D;&quot;page&quot;&gt;sm &lt;&#x2F;a&gt;</span><br><span class="line">      &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-outline-primary disabled&quot; &gt;m&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-outline-primary&quot;&gt;L&lt;&#x2F;a&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>而其中，我們有為其中的m的class加上<code>disabled</code>，這可以讓該按鈕的樣式無法被點選，用來表示它賣完囉~</p>
+<h2 id="為card加上box-shadow的效果"><a href="#為card加上box-shadow的效果" class="headerlink" title="為card加上box-shadow的效果"></a>為card加上box-shadow的效果</h2><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---CSS---</span><br><span class="line">.box-shadow&#123;</span><br><span class="line">	box-shadow:0 3px 5px rgba(0, 0, 0, 0.4);</span><br><span class="line">	transition:box-shadow .3s;</span><br><span class="line">&#125;</span><br><span class="line">.box-shadow:hover&#123;</span><br><span class="line">	box-shadow:0 3px 5px rgba(0, 0, 0, 0.24);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你為card加上這個box-show的class就有滑過去有陰影變換的效果囉。</p>
+<h1 id="利用list-group來變換頁面"><a href="#利用list-group來變換頁面" class="headerlink" title="利用list-group來變換頁面"></a>利用list-group來變換頁面</h1><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;col-4&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;list-group&quot; id&#x3D;&quot;list-tab&quot; role&#x3D;&quot;tablist&quot;&gt;</span><br><span class="line">      &lt;a class&#x3D;&quot;list-group-item list-group-item-action active&quot; id&#x3D;&quot;list-home-list&quot; data-bs-toggle&#x3D;&quot;list&quot; href&#x3D;&quot;#list-home&quot; role&#x3D;&quot;tab&quot; aria-controls&#x3D;&quot;home&quot;&gt;Home&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;a class&#x3D;&quot;list-group-item list-group-item-action&quot; id&#x3D;&quot;list-profile-list&quot; data-bs-toggle&#x3D;&quot;list&quot; href&#x3D;&quot;#list-profile&quot; role&#x3D;&quot;tab&quot; aria-controls&#x3D;&quot;profile&quot;&gt;Profile&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;a class&#x3D;&quot;list-group-item list-group-item-action&quot; id&#x3D;&quot;list-messages-list&quot; data-bs-toggle&#x3D;&quot;list&quot; href&#x3D;&quot;#list-messages&quot; role&#x3D;&quot;tab&quot; aria-controls&#x3D;&quot;messages&quot;&gt;Messages&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;a class&#x3D;&quot;list-group-item list-group-item-action&quot; id&#x3D;&quot;list-settings-list&quot; data-bs-toggle&#x3D;&quot;list&quot; href&#x3D;&quot;#list-settings&quot; role&#x3D;&quot;tab&quot; aria-controls&#x3D;&quot;settings&quot;&gt;Settings&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;col-8&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;tab-content&quot; id&#x3D;&quot;nav-tabContent&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;tab-pane fade show active&quot; id&#x3D;&quot;list-home&quot; role&#x3D;&quot;tabpanel&quot; aria-labelledby&#x3D;&quot;list-home-list&quot;&gt;...&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;tab-pane fade&quot; id&#x3D;&quot;list-profile&quot; role&#x3D;&quot;tabpanel&quot; aria-labelledby&#x3D;&quot;list-profile-list&quot;&gt;...&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;tab-pane fade&quot; id&#x3D;&quot;list-messages&quot; role&#x3D;&quot;tabpanel&quot; aria-labelledby&#x3D;&quot;list-messages-list&quot;&gt;...&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;tab-pane fade&quot; id&#x3D;&quot;list-settings&quot; role&#x3D;&quot;tabpanel&quot; aria-labelledby&#x3D;&quot;list-settings-list&quot;&gt;...&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>這段比較單純，你叫按照bootstrap的官網提供的內容貼到你的專案中，並更改相對應的<code>id</code>和<code>href</code>值，如此應可達成變換頁面的效果了。</p>
+<h2 id="btn-group用label和input所構成的樣式"><a href="#btn-group用label和input所構成的樣式" class="headerlink" title="btn-group用label和input所構成的樣式"></a>btn-group用label和input所構成的樣式</h2><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;btn-group&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Basic radio toggle button group&quot;&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;radio&quot; class&#x3D;&quot;btn-check&quot; name&#x3D;&quot;btnradio&quot; id&#x3D;&quot;btnradio1&quot; autocomplete&#x3D;&quot;off&quot;&gt;</span><br><span class="line">  &lt;label class&#x3D;&quot;btn btn-outline-primary&quot; for&#x3D;&quot;btnradio1&quot;&gt;Radio 1&lt;&#x2F;label&gt;</span><br><span class="line"></span><br><span class="line">  &lt;input type&#x3D;&quot;radio&quot; class&#x3D;&quot;btn-check&quot; name&#x3D;&quot;btnradio&quot; id&#x3D;&quot;btnradio2&quot; autocomplete&#x3D;&quot;off&quot; disabled&gt;</span><br><span class="line">  &lt;label class&#x3D;&quot;btn btn-outline-primary&quot; for&#x3D;&quot;btnradio2&quot;&gt;Radio 2&lt;&#x2F;label&gt;</span><br><span class="line"></span><br><span class="line">  &lt;input type&#x3D;&quot;radio&quot; class&#x3D;&quot;btn-check&quot; name&#x3D;&quot;btnradio&quot; id&#x3D;&quot;btnradio3&quot; autocomplete&#x3D;&quot;off&quot;&gt;</span><br><span class="line">  &lt;label class&#x3D;&quot;btn btn-outline-primary&quot; for&#x3D;&quot;btnradio3&quot;&gt;Radio 3&lt;&#x2F;label&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>上面這個範例，是用<code>label</code>和<code>input</code>所構成的btn-group。<br>其中有一個<code>input</code>被我們加入了<code>disabled</code>，表示該選項不能被選擇。</p>
+<h3 id="有disabled屬性的input造成radio為空值的問題"><a href="#有disabled屬性的input造成radio為空值的問題" class="headerlink" title="有disabled屬性的input造成radio為空值的問題"></a>有disabled屬性的input造成radio為空值的問題</h3><p>但是，當使用者點到這個被<code>disabled</code>的選項的時候，這個<code>radio</code>會呈現空值的狀態，<br>所以，要避免這種狀況的話，我們要對他的css樣式，加入以下的內容。<br>記得，這是在用<code>input</code>和<code>label</code>構成的input-group才會有的問題喔。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---CSS---</span><br><span class="line">.btn .disabled&#123;</span><br><span class="line">	pointer-events: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下來，你就為那個有disabled屬性的input欄位的className加入disabled，也就是你剛剛自己寫的部分，<br>如此，就可以避免點擊到disabled的<code>input</code>選項時，造成該<code>radio</code>為空值的問題囉。</p>
+<h1 id="使用-Alert-元件製作多步驟提示"><a href="#使用-Alert-元件製作多步驟提示" class="headerlink" title="使用 Alert 元件製作多步驟提示"></a>使用 Alert 元件製作多步驟提示</h1><iframe src="https://codepen.io/RandyChen/embed/LYRXWVL?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上這個範例我們是利用<code>.form-row</code>來做這個格線系統，並搭配<code>alert</code>元件來完成這個購買流程的效果。</p>
+<h1 id="收合購物車列表及表單排版技巧"><a href="#收合購物車列表及表單排版技巧" class="headerlink" title="收合購物車列表及表單排版技巧"></a>收合購物車列表及表單排版技巧</h1><p>在手機板的時候，防止客戶的選購產品太多會占頁面，故我們會用一個收合的效果，當他要開就打開，不要看就收起來，進而提升使用者體驗。</p>
+<iframe src="https://codepen.io/RandyChen/embed/WNGYpGq?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上的範例，就是用<code>card</code>元件的版，套進<code>collapse</code>的效果，當你按<code>下card-header</code>中的按鈕時，就會顯示出你的商品，若不要看就收闔起來。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Bootstrap/" rel="tag"># Bootstrap</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/19/bootstrap-Modal%E4%BA%92%E5%8B%95%E8%A6%96%E7%AA%97/" rel="prev" title="bootstrap_Modal互動視窗">
+      <i class="fa fa-chevron-left"></i> bootstrap_Modal互動視窗
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/19/bootstrap-Modal%E7%8B%80%E6%B3%81/" rel="next" title="bootstrap_Modal狀況">
+      bootstrap_Modal狀況 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B3%BC%E7%89%A9%E8%BB%8A%E6%8C%89%E9%88%95"><span class="nav-number">1.</span> <span class="nav-text">購物車按鈕</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dropdown-menu%E5%9C%A8navbar%E5%BA%95%E4%B8%8B%E6%9C%83%E8%B6%85%E5%87%BA%E9%A0%81%E9%9D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">dropdown-menu在navbar底下會超出頁面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jumbotron"><span class="nav-number">2.</span> <span class="nav-text">jumbotron</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%A1%E7%89%87%E5%BC%8F%E6%8E%92%E7%89%88%E8%88%87-Grid-System-%E6%95%B4%E9%BD%8A%E6%8E%92%E7%89%88%E6%89%8B%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">卡片式排版與 Grid System 整齊排版手法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#card-body%E6%9C%89%E8%87%AA%E5%8B%95%E5%BB%B6%E5%B1%95%E7%9A%84%E6%95%88%E6%9E%9C"><span class="nav-number">3.1.</span> <span class="nav-text">card-body有自動延展的效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E4%B8%8A%E8%A1%A3%E6%9C%8D%E5%B0%BA%E5%AF%B8%E7%9A%84%E6%A8%A3%E5%BC%8F%E4%BD%BF%E7%94%A8btn-group"><span class="nav-number">3.2.</span> <span class="nav-text">加上衣服尺寸的樣式使用btn-group</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BAcard%E5%8A%A0%E4%B8%8Abox-shadow%E7%9A%84%E6%95%88%E6%9E%9C"><span class="nav-number">3.3.</span> <span class="nav-text">為card加上box-shadow的效果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A9%E7%94%A8list-group%E4%BE%86%E8%AE%8A%E6%8F%9B%E9%A0%81%E9%9D%A2"><span class="nav-number">4.</span> <span class="nav-text">利用list-group來變換頁面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#btn-group%E7%94%A8label%E5%92%8Cinput%E6%89%80%E6%A7%8B%E6%88%90%E7%9A%84%E6%A8%A3%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">btn-group用label和input所構成的樣式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89disabled%E5%B1%AC%E6%80%A7%E7%9A%84input%E9%80%A0%E6%88%90radio%E7%82%BA%E7%A9%BA%E5%80%BC%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="nav-number">4.1.1.</span> <span class="nav-text">有disabled屬性的input造成radio為空值的問題</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Alert-%E5%85%83%E4%BB%B6%E8%A3%BD%E4%BD%9C%E5%A4%9A%E6%AD%A5%E9%A9%9F%E6%8F%90%E7%A4%BA"><span class="nav-number">5.</span> <span class="nav-text">使用 Alert 元件製作多步驟提示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%B6%E5%90%88%E8%B3%BC%E7%89%A9%E8%BB%8A%E5%88%97%E8%A1%A8%E5%8F%8A%E8%A1%A8%E5%96%AE%E6%8E%92%E7%89%88%E6%8A%80%E5%B7%A7"><span class="nav-number">6.</span> <span class="nav-text">收合購物車列表及表單排版技巧</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

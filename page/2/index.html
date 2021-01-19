@@ -145,6 +145,380 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/11/Vuejs%E5%85%83%E4%BB%B602-emit%E4%BA%8B%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/11/Vuejs%E5%85%83%E4%BB%B602-emit%E4%BA%8B%E4%BB%B6/" class="post-title-link" itemprop="url">Vuejs元件02-emit事件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-11 14:19:31 / Modified: 14:42:12" itemprop="dateCreated datePublished" datetime="2021-01-11T14:19:31+08:00">2021-01-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>這邊接續著上一篇”Vuejs元件01”的文章，繼續做筆記。</p>
+<h1 id="emit-向外層傳遞事件"><a href="#emit-向外層傳遞事件" class="headerlink" title="emit 向外層傳遞事件"></a>emit 向外層傳遞事件</h1><p>我們前面是利用<code>porps</code>將資料由外層串入內層，但是，我們還是有時候需要將資料由內層傳到外層，<br>此時，我們要用到的技術就是<code>emit</code>。</p>
+<iframe src="https://codepen.io/RandyChen/embed/gOwdRwz?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上這個修改完的範例你可以看到，我們在button-counter元件的<code>methods</code>中的incrementCounter事件的<code>emit</code>，多新增了將button-counter元件自己的counter成員屬性值傳遞出去，此時因為increment觸發了外部的incrementTotal事件，所以，incrementTotal也就接收到了button-counter元件的counter成員屬性值，<br>所以，我們就可以在incrementTotal中，新增參數newNumber，而這參數就是button-counter元件counter成員屬性值，<br>並將這個newNumber參數與app物件自身的cash成員互相做加總，最後，再把加總的結果呈現在畫面中。</p>
+<h2 id="注意emit傳出去的資料型別是否正確"><a href="#注意emit傳出去的資料型別是否正確" class="headerlink" title="注意emit傳出去的資料型別是否正確"></a>注意emit傳出去的資料型別是否正確</h2><p>你要特別注意一下，我們在<code>emit</code>傳出的counter的值，有特別用<code>Number</code>轉型成數字型別，如果你沒這麼做它會直接傳字串型別的值出去，這樣加總的結果就不會是我們想要的囉。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/" class="post-title-link" itemprop="url">Vue-js元件-01</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-11 13:05:23 / Modified: 15:16:34" itemprop="dateCreated datePublished" datetime="2021-01-11T13:05:23+08:00">2021-01-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>接續上一篇，Vue-js元件沒有記錄完的內容。</p>
+<h1 id="props使用上的注意事項"><a href="#props使用上的注意事項" class="headerlink" title="props使用上的注意事項"></a>props使用上的注意事項</h1><p>本單元要講解主要有以下三部分</p>
+<ol>
+<li>單向數據流</li>
+<li>物件傳參考特性 及 尚未宣告的變數</li>
+<li>如何維持元件的生命週期</li>
+</ol>
+<h2 id="單向數據流"><a href="#單向數據流" class="headerlink" title="單向數據流"></a>單向數據流</h2><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;h2&gt;單向數據流&lt;&#x2F;h2&gt;</span><br><span class="line">  &lt;photo :img-url&#x3D;&quot;url&quot;&gt;&lt;&#x2F;photo&gt;</span><br><span class="line">  &lt;p&gt;修正單向數據流所造成的錯誤&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;x-template&quot; id&#x3D;&quot;photo&quot;&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">	  &lt;img :src&#x3D;&quot;imgUrl&quot; class&#x3D;&quot;img-fluid&quot; alt&#x3D;&quot;&quot; &#x2F;&gt;</span><br><span class="line">	  &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;imgUrl&quot;&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">Vue.component(&#39;photo&#39;, &#123;</span><br><span class="line">  props: [&#39;imgUrl&#39;],</span><br><span class="line">  template: &#39;#photo&#39;,</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		url: &#39;https:&#x2F;&#x2F;images.unsplash.com&#x2F;photo-1522204538344-922f76ecc041?ixlib&#x3D;rb-0.3.5&amp;ixid&#x3D;eyJhcHBfaWQiOjEyMDd9&amp;s&#x3D;50e38600a12d623a878983fc5524423f&amp;auto&#x3D;format&amp;fit&#x3D;crop&amp;w&#x3D;1351&amp;q&#x3D;80&#39;,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>像是面的範例，你在畫面上可以看到一張圖片和下面的一個<code>input</code>欄位，<code>input</code>裡面有這張圖片的網址，<br>當我們直接修改<code>input</code>欄位裡面的內容時，瀏覽器會報錯，報錯內容為”不要直接對props傳入的資料做修改”，<br>那此時，我們要怎麼修正這個錯誤呢?</p>
+<p>將以上的範例，修改成下面這個樣子</p>
+<iframe src="https://codepen.io/RandyChen/embed/qBaMmod?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>修改了兩個地方，<br>第一，一個是我們在photo的元件定義中，新增一個變數newUrl，讓它吃到photo元件的媒介屬性imgUrl的值，<br>最後，再回傳newUrl。<br>第二，我們把<code>x-template</code>中定義photo元件的<code>input</code>欄位的<code>v-model</code>改成跟newUrl綁定。<br>這樣一來，我們在input修改的其實是變數newUrl，就不在是直接對props傳入的資料做修改囉。<br>可以看出來<code>props</code>是單向資料流的概念，只能由外部傳入內部，不能再由內部去修改外部傳入的資訊。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-03-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-03-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89/" class="post-title-link" itemprop="url">bootstrap-form的功能筆記-03-表單驗證</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-09 18:55:20 / Modified: 23:26:50" itemprop="dateCreated datePublished" datetime="2021-01-09T18:55:20+08:00">2021-01-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>bootstrap有提供兩種驗證方法</p>
+<ol>
+<li>伺服器端驗證</li>
+<li>瀏覽器端驗證</li>
+</ol>
+<p>透過<code>:invalid</code>和<code>:valid</code>來驗證是否該欄位是否通過驗證，<br>若沒通過該欄位外框呈現紅色，若有通過該欄位外框呈現綠色。</p>
+<p>如果，是伺服器端驗證的話，需要自己手動在相對應元件的class中加入<code>.is-invalid</code>和<code>.is-valid</code>，<br>來替換掉<code>:invalid</code>和<code>:valid</code>。</p>
+<h1 id="伺服器端驗證"><a href="#伺服器端驗證" class="headerlink" title="伺服器端驗證"></a>伺服器端驗證</h1><p>首先，來介紹伺服器端驗證的範例</p>
+<iframe src="https://codepen.io/RandyChen/embed/OJRwwxd?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>首先，你要記得在那些要被驗證<code>input</code>的html標籤中加入<code>required</code>屬性。<br>接著，以上的範例，你可以看到，我們故意在firstname的<code>input</code>欄位和lastname的<code>input</code>欄位的class中加入<code>is-valid</code>，<br>此時，在畫面中，可以看到它們的<code>input</code>外框呈現綠色的，代表驗證正確。<br>那我們在下面的City, State, Road的<code>input</code>欄位的class中，都加入了<code>is-invalid</code>，<br>在畫面中，可以看到他們的<code>input</code>外框呈現紅色的，代表驗證錯誤。<br>那在驗證錯誤的欄位附近會呈現一段回饋的提示訊息，<br>這段回饋的提示訊息，你需要在相對應區塊中加入<code>div</code>區塊，並為這<code>div</code>區塊加入class名稱<code>invalid-feedback</code>，<br>接著，你在這個<code>invalid-feedback</code>的區塊裡面加入你想要呈現的錯誤回饋內容即可。</p>
+<p>伺服器端驗證的範例中的<code>is-valid</code>和<code>is-invalid</code>，其實，實際的運作是當使用者輸入的內容，會由後端判斷其內容是否符合規範，此時，後端會回傳<br>是否使用者內容符合規範的提示給前端，接著前端再為這些<code>input</code>欄位的className中，動態地加入<code>is-valid</code>或<code>is-invalid</code>這兩個className。</p>
+<h1 id="瀏覽器端驗證"><a href="#瀏覽器端驗證" class="headerlink" title="瀏覽器端驗證"></a>瀏覽器端驗證</h1><p>它是透過bootstrap提供的JavaScript內容去觸發某個還沒有被驗證的相對應表單，等到瀏覽器驗證完成後，再由瀏覽器回饋給我們。<br>所以，<br>我們必須在想要被驗證的<code>form</code>命名一個<code>id</code>名稱，並將該<code>id</code>名稱提供給script。<br>並且，也要在該<code>form</code>的html標籤加上<code>novalidate</code>，代表該表單還沒有被驗證。<br>那些需要錯誤回饋部分，一樣要加入class名稱為<code>invalid-feedback</code>的區塊，就像伺服器驗證那樣加到相對應的區塊中。</p>
+<p>接著，你要加入bootstrap官網提供的script驗證的程式碼，而這段驗證的程式碼，在bootstrap的官網上就有提供了～～</p>
+<iframe src="https://codepen.io/RandyChen/embed/vYXaVpg?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-03-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-02/" class="post-title-link" itemprop="url">bootstrap-form的功能筆記-02</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-09 18:25:21 / Modified: 23:26:44" itemprop="dateCreated datePublished" datetime="2021-01-09T18:25:21+08:00">2021-01-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>接續著上一篇記錄有關Bootstrap的<code>form</code>元件有關的內容。</p>
+<h1 id="input-group"><a href="#input-group" class="headerlink" title="input-group"></a>input-group</h1><p>首先將你想要合併的內容，用<code>input-group</code>把它們包起來。</p>
+<iframe src="https://codepen.io/RandyChen/embed/bGwjjpz?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>你可以看到上面的範例，最外層用<code>.input-group</code>包起來，<br>然後，內層的<code>input</code>欄位保持不變，其class名稱還是保持<code>form-control</code>，<br>接著，要跟這個<code>input</code>欄位接在一起的<code>span</code>就會再被一個<code>input-group-append</code>區塊包起來，<br>然後，最終這個<code>span</code>自己的class名稱命名為<code>input-group-text</code>。<br>至於，<br>為什麼有<code>input-group-append</code> 和 <code>input-group-prepend</code>的˙差別，<br>這就要看你希望這個<code>input-group-text</code>要接在鄰近的<code>input</code>欄位的前面或後面來決定囉。</p>
+<p>另外，當你要將某個內容接在<code>input</code>欄位的後面，除了它的外層區塊className要為<code>input-group-append</code>，<br>在html文件中，這個<code>input-group-append</code>區塊撰寫的順序也要在鄰近<code>input</code>欄位的後面喔。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-02/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-01/" class="post-title-link" itemprop="url">bootstrap form的功能筆記-01</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-09 11:02:06 / Modified: 23:26:35" itemprop="dateCreated datePublished" datetime="2021-01-09T11:02:06+08:00">2021-01-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>接續上一篇還沒紀錄完的bootstrap form元件的內容。</p>
+<h1 id="form-check"><a href="#form-check" class="headerlink" title="form-check"></a>form-check</h1><p>當裡面是要使用<code>checkbox</code>和<code>radiobox</code>元件的時候，它們的外層，是要用<code>form-check</code>包裹起來喔。</p>
+<ol>
+<li>checkbox<iframe src="https://codepen.io/RandyChen/embed/ExgpQGV?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+</li>
+</ol>
+<p>在以上這個範例可以看到在<code>checkbox</code>中的其中一個<code>input</code>標籤上有寫了<code>disabled</code>，<br>代表該<code>input</code>無法被點取囉。<br>如果你希望整個checkbox都無法被選取的話，你要在這些checkbox的外層用一個<code>&lt;fieldset&gt;&lt;/fieldset&gt;</code>標籤把他們整個包起來，並在這個<code>fieldset</code>的html標籤上加入<code>disabled</code>屬性就可以達成囉。</p>
+<ol start="2">
+<li>radiobox<iframe src="https://codepen.io/RandyChen/embed/eYdjVLq?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+</li>
+</ol>
+<p>那這個<code>radiobox</code>的範例，你可以看到有三個<code>form-check</code>構成這個radiobox。<br>那你可以看到每一個<code>form-check</code>裡面的<code>input</code>欄位的name屬性值都是一樣的，代表它們是屬於同一個<code>radiobox</code>。<br>那它的<code>type</code>要寫入<code>radio</code>，它會變成<code>radiobox</code>的選項模式。<br>那在每個<code>form-check</code>的<code>input</code>的class名稱一樣是要寫入<code>form-check-input</code>，而<code>label</code>標籤的class名稱是<code>form-check-label</code>。<br>在最後一個<code>input</code>欄位中，加入了<code>disabled</code>屬性，所以，該選項就無法被選取囉~</p>
+<h2 id="form-check-inline-使選項水平排列"><a href="#form-check-inline-使選項水平排列" class="headerlink" title="form-check-inline 使選項水平排列"></a>form-check-inline 使選項水平排列</h2><p>如果我們不希望<code>heckbox</code>和<code>radiobox</code>它們的選項不要垂直排列的話，<br>我們只需要在外層的<code>form-check</code>的class中，再加上<code>form-check-inline</code>，就可以囉。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox1&quot; value&#x3D;&quot;option1&quot;&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox1&quot;&gt;1&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox2&quot; value&#x3D;&quot;option2&quot;&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox2&quot;&gt;2&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox3&quot; value&#x3D;&quot;option3&quot; disabled&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox3&quot;&gt;3 (disabled)&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-01/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -520,384 +894,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/" class="post-title-link" itemprop="url">進階模板語法-01</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-06 10:28:54 / Modified: 12:14:56" itemprop="dateCreated datePublished" datetime="2021-01-06T10:28:54+08:00">2021-01-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>接續著上一篇的進階模板語法的內容繼續記錄。</p>
-<h2 id="反轉陣列元素-透過key"><a href="#反轉陣列元素-透過key" class="headerlink" title="反轉陣列元素-透過key"></a>反轉陣列元素-透過key</h2><p>因為Vue在操作DOM元素的時候，是用快速置換的方式操作，導致有些元素不會被置換掉。<br>所以，我們會透過將<code>key</code>的屬性，來綁定元素某些獨有的屬性，來讓各元素的整體DOM都可以被完整置換。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li v-for&#x3D;&quot;(item, key) in arrayData&quot; :key&#x3D;&quot;item.age&quot;&gt;</span><br><span class="line">      &#123;&#123; key &#125;&#125; - &#123;&#123; item.name &#125;&#125; &#123;&#123; item.age &#125;&#125; 歲 &lt;input type&#x3D;&quot;text&quot;&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">  &lt;&#x2F;ul&gt;</span><br><span class="line">  &lt;button class&#x3D;&quot;btn btn-outline-primary&quot; @click&#x3D;&quot;reverseArray&quot;&gt;反轉陣列&lt;&#x2F;button&gt;</span><br><span class="line">  </span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		arrayData:[</span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;漂亮阿姨&#39;,</span><br><span class="line">				age: 24</span><br><span class="line">			&#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;小明&#39;,</span><br><span class="line">				age: 10</span><br><span class="line">			&#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;力宏&#39;,</span><br><span class="line">				age: 35</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	methods: &#123;</span><br><span class="line">		reverseArray: function()&#123;</span><br><span class="line">			this.arrayData.reverse()</span><br><span class="line">			console.log(this.arrayData)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>可以看到以上這個範例，我們在<code>ul</code>的<code>li</code>透過<code>v-bind</code>綁上<code>key</code>這個屬性，<br>而要用item.age去作為<code>key</code>的值，是因為每個元素的age的值都不一樣，所以，可以代表各個的元素，<br>用這種方式就可以整體置換對應的DOM元素，而不是只有部分的DOM元素被置換。</p>
-<h2 id="filter-過濾"><a href="#filter-過濾" class="headerlink" title="filter 過濾"></a>filter 過濾</h2><iframe src="https://codepen.io/RandyChen/embed/poEVYrN?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上這個範例，<br>當你在<code>input</code>欄位輸入內容，並按下enter後，會觸發filterData函式，<br>此時，會先對dataArray使用filter，當<code>input</code>欄位輸入的內容跟dataArray裡面的元素的name的成員屬性有匹配的話，<br>就會把那個物件push進去filterArray陣列裡面。<br>最後，在<code>ul</code>的區塊中去遍歷filterArray陣列裡面的元素，並用該元素的age為索引，<br>來置換頁面上的DOM內容。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95/" class="post-title-link" itemprop="url">進階模板語法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-06 09:20:03 / Modified: 12:14:36" itemprop="dateCreated datePublished" datetime="2021-01-06T09:20:03+08:00">2021-01-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="v-html可能被XSS攻擊"><a href="#v-html可能被XSS攻擊" class="headerlink" title="v-html可能被XSS攻擊"></a>v-html可能被XSS攻擊</h2><p>Vue的<code>v-html</code>的語法，盡量不要用在可以讓使用者提交資料的欄位中。<br>因為，有可能被有心人士使用XSS的方式，來攻擊你的網站。</p>
-<h2 id="v-once單次綁定"><a href="#v-once單次綁定" class="headerlink" title="v-once單次綁定"></a>v-once單次綁定</h2><p>當你希望該欄位的資料，只會變更一次，那你就要使用v-once<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;text&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;div v-text&#x3D;&quot;text&quot;&gt;內容&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>在以上這個範例，當你在<code>input</code>欄位輸入的內容，會更改到text成員屬性的值，<br>而<code>div</code>這個內容因為有利用<code>v-text</code>去綁定text成員屬性的值，所以，<br><code>div</code>內的內容，會連動<code>input</code>所輸入的內容。</p>
-<p>以下是用<code>v-once</code>綁定更改後的內容<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;text&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;div v-text&#x3D;&quot;text&quot; v-once&gt;內容&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>透過在<code>div</code>的html標籤內，寫入<code>v-once</code>，我們就可以讓，<code>div</code>的內容，只會更動一次。</p>
-<h2 id="在大括號中輸入表達式"><a href="#在大括號中輸入表達式" class="headerlink" title="在大括號中輸入表達式"></a>在大括號中輸入表達式</h2><p>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&#123;&#123;text + rwHtml&#125;&#125;</span><br><span class="line">	&#123;&#123;text.split(&#39;&#39;).reverse().join(&#39;&#39;)&#125;&#125;</span><br><span class="line">	&#123;&#123;number1 + number2&#125;&#125;  &#x2F;&#x2F; 也可以在你面放入計算式</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		text: &#39;這是一段文字&#39;,</span><br><span class="line">        rawHtml: &#39;示範文字&#39;,</span><br><span class="line">		number1: 100,</span><br><span class="line">		number2: 400</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="透過資料狀態，來操作HTML屬性"><a href="#透過資料狀態，來操作HTML屬性" class="headerlink" title="透過資料狀態，來操作HTML屬性"></a>透過資料狀態，來操作HTML屬性</h2><p>我們可以透過<code>v-bind</code>來為HTML標籤動態綁定一些屬性，像是<code>id</code>或是<code>className</code><br>而下面的範例，我們是要透過<code>v-bind</code>來為一個<code>input</code>欄位的<code>disabled</code>綁定一個成員屬性值。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; :disabled&#x3D;&quot;isDisabled&quot;&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el:&#123;</span><br><span class="line">		isDisabled:true</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>以上的範例，就可以看到我們透過<code>v-bind</code>將<code>disable</code>d屬性透過<code>v-bind</code>綁定isDisabled，<br>如此，該<code>input</code>欄位的<code>disabled</code>屬性值會為<code>true</code>，造成該<code>input</code>欄位不能被輸入任何內容。<br>若你希望該<code>input</code>欄位可以被輸入內容的話，就只要將isDisabled改成<code>false</code>即可。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">第四週前端課程筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-05 10:20:36 / Modified: 12:03:08" itemprop="dateCreated datePublished" datetime="2021-01-05T10:20:36+08:00">2021-01-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，"><a href="#在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，" class="headerlink" title="在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，"></a>在css文件中，加入以下的程式碼，就可以對<code>div</code>區塊做出由左到右的移動，</h2><p>與<code>background</code>顏色漸變的動畫。</p>
-<iframe src="https://codepen.io/RandyChen/embed/vYXJMXQ?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>接下來介紹一下上面的動畫程式碼</p>
-<h3 id="keyframes-example"><a href="#keyframes-example" class="headerlink" title="@keyframes example"></a><code>@keyframes example</code></h3><p>在<code>@keyframes</code>的右邊名稱example就是你為這段動畫效果的命名。<br>那這個名稱必須要跟，要做這段動畫效果的區塊中的css樣式中<code>animation-name</code>一樣。</p>
-<h3 id="animation-duration"><a href="#animation-duration" class="headerlink" title="animation-duration"></a><code>animation-duration</code></h3><p>在要做這段動畫效果的區塊中的css樣式中的<code>animation-duration</code>的值，<br>是代表這段動畫總共要做多少時間。<br>像以上這段codepen的範例，就是設定4s，也就是這段動畫總共時間是4秒。<br><img src="/image/animation_duration.png"></p>
-<p>那在<code>@keyframe</code>中，有寫0%, 25%, 50%, 75%, 100%的內容，<br>就像上面這張圖畫的一樣，它會將<code>animation-duration</code>的時間，平均分到這些區間裡面，<br>所以，這邊的code總共有4段，所以，4s/4 = 1s。<br>也就是每一段動畫的執行時間是1秒。</p>
-<h3 id="animation-delay"><a href="#animation-delay" class="headerlink" title="animation-delay"></a><code>animation-delay</code></h3><p>這段程式碼表示這段動畫要延後<code>animation-delay</code>所設定的時間後，才會開始執行這段動畫。</p>
-<h3 id="animation-fill-mode"><a href="#animation-fill-mode" class="headerlink" title="animation-fill-mode"></a><code>animation-fill-mode</code></h3><p>這段程式碼以下三種選項可以寫:<br><code>forwards</code>: 代表動畫效果會停留到最後的效果，以上面的codepen為例，<code>div</code>會停留在最後的<br><code>background:pink;left:0px;top:-2000px;</code> 的位置。</p>
-<p><code>backwards</code>: 代表這段動畫執行完成後，執行這段動畫的區塊會回到這個區塊原本的狀態。<br>以上面的codepen為例，<code>div</code>會回到一開始的<code>background:pink;left:0px;top:0px;</code> 的位置。</p>
-<p><code>both</code>: 同時擁有<code>forwards</code>和<code>backwards</code>的效果。</p>
-<h3 id="animation-iteration-count"><a href="#animation-iteration-count" class="headerlink" title="animation-iteration-count"></a><code>animation-iteration-count</code></h3><p>這段程式碼表示你設計的這段動畫總共要執行多少次。<br>以上面的codepen為例，這段動畫總共會做2次。<br>如果你想要無限循環執行這段動畫的話，你就將這個屬性的值設為<code>Infinity</code>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/05/Bootstrap%E7%AD%86%E8%A8%98-02/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/05/Bootstrap%E7%AD%86%E8%A8%98-02/" class="post-title-link" itemprop="url">Bootstrap筆記-02</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-05 10:01:35 / Modified: 10:06:00" itemprop="dateCreated datePublished" datetime="2021-01-05T10:01:35+08:00">2021-01-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>bootstrap的載入scss檔案的細節<br>如果你的all.css檔案本身就已經有引入了，bootstrap的scss的檔案時，<br>記得不要再你的檔案裏面又再引入一次bootstrap的scss檔案囉~</p>
-</li>
-<li><p>載入bootstrap的js檔案<br>當你像要利用bootstrap中，某些互動性的效果，就得載入它們家的js程式碼。<br>bootstrap的js檔案，要放在<code>&lt;/body&gt;</code>前面。</p>
-</li>
-<li><p>在bootstrap的按鈕樣式裡面<br>寫法如下<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;btn btn-primary&quot;&gt;按鈕&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>你可以看到以上是按鈕的bootstrap寫法，<br>第一個.btn的className，是用來為按鈕樣式打底的<br>第二個.btn-primary的className是擴充樣式，可能是來為這個按鈕新增顏色，或者，修改該按鈕大小之類<br>的功能。<br>bootstrap是用這樣模組化的方式，來讓他們的框架的code比較簡潔，不會出現大量重複的code內容。</p>
-</li>
-<li><p>在bootstrap中的.row，原本就有<code>display:flex</code>的屬性了，<br>所以，你不需要在.row中新增<code>d-flex</code>的className了。</p>
-</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/05/Bootstrap%E7%AD%86%E8%A8%98-02/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/05/%E7%AC%AC%E4%B8%83%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/05/%E7%AC%AC%E4%B8%83%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">第七週前端課程筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-05 09:45:06 / Modified: 10:05:49" itemprop="dateCreated datePublished" datetime="2021-01-05T09:45:06+08:00">2021-01-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li><p>坊間有兩套css reset<br>一套是meyerweb，另一套是Normalize。<br>但要記得，它們兩個不能共同使用。<br>所以，當你使用bootstrap的scss的時候，就不要再使用meyerweb了，<br>因為，bootstrap的css reset就有載入normalize了。</p>
-</li>
-<li><p>在專案的<code>head</code>中，常用的語法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;HTML、CSS教學&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;link rel&#x3D;&quot;shortcut icon&quot; href&#x3D;&quot;favicon.ico&quot;&gt;</span><br><span class="line">    &lt;meta name&#x3D;&#39;description&#39; content&#x3D;&#39;網站描述文字&#39; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;meta property&#x3D;&quot;og:title&quot; content&#x3D;&quot;FB的標題&quot; &#x2F;&gt;</span><br><span class="line">    &lt;meta property&#x3D;&quot;og:description&quot; content&#x3D;&quot;FB的描述&quot;&gt;</span><br><span class="line">    &lt;meta property&#x3D;&quot;og:type&quot; content&#x3D;&quot;website&quot; &#x2F;&gt;</span><br><span class="line">    &lt;meta property&#x3D;&quot;og:url&quot; content&#x3D;&quot;FB上的網址&quot; &#x2F;&gt;</span><br><span class="line">    &lt;meta property&#x3D;&quot;og:image&quot; content&#x3D;&quot;FB的圖片&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;link href&#x3D;&quot;圖片路徑&quot; rel&#x3D;&quot;apple-touch-icon&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;meta http-equiv&#x3D;&quot;X-UA-Compatible&quot; content&#x3D;&quot;IE&#x3D;Edge&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;CSS檔案路徑&quot;&gt;</span><br><span class="line">    &lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;JS檔案路徑&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/05/%E7%AC%AC%E4%B8%83%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -963,12 +963,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
