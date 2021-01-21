@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="JQ選擇器ex: 1234567891011121314151617---HTML---&lt;div class&#x3D;&quot;header&quot;&gt;	&lt;h1&gt;標題一&lt;&#x2F;h1&gt;&lt;&#x2F;div&gt;&lt;div id&#x3D;&quot;app&quot;&gt;	&lt;h2&gt;標題二&lt;&#x2F;h2&gt;&amp;lt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JQ課程筆記-JQ選擇器">
+<meta property="og:url" content="http://example.com/2021/01/21/JQ%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-JQ%E9%81%B8%E6%93%87%E5%99%A8/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="JQ選擇器ex: 1234567891011121314151617---HTML---&lt;div class&#x3D;&quot;header&quot;&gt;	&lt;h1&gt;標題一&lt;&#x2F;h1&gt;&lt;&#x2F;div&gt;&lt;div id&#x3D;&quot;app&quot;&gt;	&lt;h2&gt;標題二&lt;&#x2F;h2&gt;&amp;lt">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/jq_console_debug.png">
+<meta property="article:published_time" content="2021-01-21T02:09:43.000Z">
+<meta property="article:modified_time" content="2021-01-21T02:33:32.761Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="jQuery">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/jq_console_debug.png">
+
+<link rel="canonical" href="http://example.com/2021/01/21/JQ%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-JQ%E9%81%B8%E6%93%87%E5%99%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>JQ課程筆記-JQ選擇器 | Landy Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/21/JQ%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-JQ%E9%81%B8%E6%93%87%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JQ課程筆記-JQ選擇器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-21 10:09:43 / Modified: 10:33:32" itemprop="dateCreated datePublished" datetime="2021-01-21T10:09:43+08:00">2021-01-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="JQ選擇器"><a href="#JQ選擇器" class="headerlink" title="JQ選擇器"></a>JQ選擇器</h1><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div class&#x3D;&quot;header&quot;&gt;</span><br><span class="line">	&lt;h1&gt;標題一&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;h2&gt;標題二&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(function(e)&#123;</span><br><span class="line">    $(&#39;.header h1&#39;).hide();</span><br><span class="line">    </span><br><span class="line">    $(&#39;#app h2&#39;).fadeIn(1000);</span><br><span class="line">&#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>以上範例你可以看到，jQ選擇dom元素的方法跟CSS樣式命名差不多，<br>只不過，我們要透過jQ來選擇dom元素的話，都要加<code>$&#123;&#39;目標dom元素&#39;&#125;</code><br>在以上這個寫法的單引號中間，放入你的目標 dom即可選到它了。<br>接著，在你寫完選擇器後，再接內建的jQ語法囉。</p>
+<a id="more"></a>
+<h2 id="HTML標籤選擇"><a href="#HTML標籤選擇" class="headerlink" title="HTML標籤選擇"></a>HTML標籤選擇</h2><p><code>$(&#39;h1&#39;).hide();</code></p>
+<h2 id="Class-選擇"><a href="#Class-選擇" class="headerlink" title="Class 選擇"></a>Class 選擇</h2><p><code>$(&#39;.header&#39;).hide();</code></p>
+<h2 id="ID-選擇"><a href="#ID-選擇" class="headerlink" title="ID 選擇"></a>ID 選擇</h2><p><code>$(&#39;#box&#39;).hide();</code></p>
+<h1 id="輕鬆撰寫第一個網頁設計互動效果"><a href="#輕鬆撰寫第一個網頁設計互動效果" class="headerlink" title="輕鬆撰寫第一個網頁設計互動效果"></a>輕鬆撰寫第一個網頁設計互動效果</h1><iframe src="https://codepen.io/RandyChen/embed/rNMPbQV?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>以上這個範例，就是透過按一個按鈕，就讓該區塊已逐漸消失的效果。</p>
+<h1 id="使用-toggle-切換開啟或隱藏效果"><a href="#使用-toggle-切換開啟或隱藏效果" class="headerlink" title="使用 toggle 切換開啟或隱藏效果"></a>使用 toggle 切換開啟或隱藏效果</h1><iframe src="https://codepen.io/RandyChen/embed/poEGBqM?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>以上範例，你可以看到，我們對<code>list</code>區塊加上的<code>toggle</code>的語法。<br>當我們點擊”隱藏選單”的按鈕的時候，jQ會因為<code>toggle</code>的語法自行去判斷該元素是被開啟或是關閉，<br>如果是被開啟就直接關閉它，反之，就開啟它。</p>
+<h1 id="jQuery-辭典-輕鬆查詢功能一把抓"><a href="#jQuery-辭典-輕鬆查詢功能一把抓" class="headerlink" title="jQuery 辭典 - 輕鬆查詢功能一把抓"></a>jQuery 辭典 - 輕鬆查詢功能一把抓</h1><p>jQ有提供一個線上字典，提供你去查詢它有提供什麼功能。<br>[jQ線上辭典](<a target="_blank" rel="noopener" href="https://oscarotero.com/jquery/%EF%BC%89">https://oscarotero.com/jquery/）</a></p>
+<h1 id="使用-Slide-設計滑動效果"><a href="#使用-Slide-設計滑動效果" class="headerlink" title="使用 Slide 設計滑動效果"></a>使用 Slide 設計滑動效果</h1><h2 id="slideToggle"><a href="#slideToggle" class="headerlink" title="slideToggle"></a>slideToggle</h2><iframe src="https://codepen.io/RandyChen/embed/eYdxaLR?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>以上這個範例，我們先將<code>form</code>的<code>display</code>的屬性先設定為<code>none</code>。<br>此時，我們按下隱藏選單的按鈕，會觸發它的<code>click</code>事件，此時就會觸發該<code>form</code>的<code>slideToggle</code>事件，<br>這個時候jQ發現你的<code>form</code>元素是隱藏起來的，故它會把它打開。<br>等到，你再按一次隱藏選單按鈕，會再次觸發<code>form</code>的<code>slideToggle</code>事件，jQ發現你的<code>form</code>是打開的，故它就會將它關起來。</p>
+<h3 id="slideToggle組成效果"><a href="#slideToggle組成效果" class="headerlink" title="slideToggle組成效果"></a>slideToggle組成效果</h3><p>其實<code>slideToggle</code>是由<code>slideIn</code>和<code>slideOut</code> 所組合起來的效果。</p>
+<h1 id="使用-fadeToggle-設計漸入漸出效果"><a href="#使用-fadeToggle-設計漸入漸出效果" class="headerlink" title="使用 fadeToggle 設計漸入漸出效果"></a>使用 fadeToggle 設計漸入漸出效果</h1><h2 id="fadeToggle"><a href="#fadeToggle" class="headerlink" title="fadeToggle"></a>fadeToggle</h2><iframe src="https://codepen.io/RandyChen/embed/mdrvYYZ?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>以上這個範例，我們先將<code>form</code>的<code>display</code>的屬性先設定為<code>none</code>。<br>此時，我們按下隱藏選單的按鈕，會觸發它的<code>click</code>事件，此時就會觸發該<code>form</code>的<code>fadeToggle</code>事件，<br>這個時候jQ發現你的<code>form</code>元素是隱藏起來的，故它會把它打開。<br>等到，你再按一次隱藏選單按鈕，會再次觸發<code>form</code>的<code>fadeToggle</code>事件，jQ發現你的<code>form</code>是打開的，故它就會將它關起來。</p>
+<h3 id="fadeToggle組成效果"><a href="#fadeToggle組成效果" class="headerlink" title="fadeToggle組成效果"></a>fadeToggle組成效果</h3><p>其實<code>fadeToggle</code>是由<code>fadeIn</code>和<code>fadeOut</code> 所組合起來的效果。</p>
+<h1 id="toggleClass"><a href="#toggleClass" class="headerlink" title="toggleClass"></a>toggleClass</h1><p>不要濫用jQ的內建方法，因為，會很吃瀏覽器效能。<br>所以，我們改用動態塞入className的方式來更改目標元素的樣式，來解決以上這種問題。</p>
+<iframe src="https://codepen.io/RandyChen/embed/GRjzbRK?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>你可以看到我們按下隱藏選單按鈕，可以為<code>form</code>的className加上或移除active這個名稱，進而切換它是否呈現在畫面上。</p>
+<p>注意~~~~ 在jQ中的<code>toggleClass</code>的active前面不要加點號，直接放入active這個className即可。<br>即:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    $(&#39;form&#39;).toggleClass(&#39;active&#39;);</span><br><span class="line"></span><br><span class="line">    ----不要寫成----</span><br><span class="line">    $(&#39;form&#39;).toggleClass(&#39;.active&#39;);  &#x2F;&#x2F; 多一個點號在active這是錯的喔!!!</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>另外，我們還加入了<code>transition:all 1s;</code>的轉場效果，讓css樣式被漸進式的被切換。</p>
+<h2 id="transition-過場的雷點-display-none"><a href="#transition-過場的雷點-display-none" class="headerlink" title="transition 過場的雷點 - display:none"></a>transition 過場的雷點 - display:none</h2><p>當你的元素要讓它有淡入淡出的效果的話，我的第一直覺是會用<code>display:none</code>和<code>display:block</code>來做切換，<br>但是，我們用這種方式做切換時，再搭配<code>transition</code>是不會有過場的效果的!!!<br>因為<code>display:none</code>和<code>display:block</code>中的<code>none</code>與<code>block</code>並不是數值，你要瀏覽器怎麼計算，<br>所以，改用<code>opacity:0</code> 和 <code>opacity:1</code> 並搭配<code>transition</code>s，來完成淡入淡出的過場效果囉~~</p>
+<h3 id="組成效果"><a href="#組成效果" class="headerlink" title="組成效果"></a>組成效果</h3><p>其實<code>toggleClass</code>是由<code>addClass</code>和<code>removeClass</code> 所組合起來的效果。</p>
+<h2 id="overflow-的動畫技巧"><a href="#overflow-的動畫技巧" class="headerlink" title="overflow 的動畫技巧"></a>overflow 的動畫技巧</h2><iframe src="https://codepen.io/RandyChen/embed/WNGPqdO?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>step1. 以上範例，你可以看到，我們先限定.title的寬度等於父元素.box的寬度，</p>
+<p>step2. 接著，我們在.title的元素下<code>position:absolute</code>, <code>bottom:-80px</code>，並在父元素.box中設定<code>position:relative</code>。<br>讓.title元素在原本是處在父元素的<code>-80px</code>的位置。</p>
+<p>step3. 我們對父元素.box加入<code>overflow:hidden</code>的語法，讓在.box元素範圍以外的內容都消失，<br>所以，在<code>bottom:-80px</code>的.title元素就會消失。</p>
+<p>Step4.<br>最後，加入以下程式碼</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box:hover .title&#123;</span><br><span class="line">	bottom:-10px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用上面的程式碼，來達成當滑鼠移入.box的時候，.title的<code>bottom</code>屬性會被改成<code>-10px</code>，就會滑入.box裡面囉。<br>很炫炮吧~~~</p>
+<h2 id="自己寫的transition炫炮效果"><a href="#自己寫的transition炫炮效果" class="headerlink" title="自己寫的transition炫炮效果"></a>自己寫的transition炫炮效果</h2><iframe src="https://codepen.io/RandyChen/embed/mdrvNMM?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<h2 id="jQuery-鏈式寫法"><a href="#jQuery-鏈式寫法" class="headerlink" title="jQuery 鏈式寫法"></a>jQuery 鏈式寫法</h2><iframe src="https://codepen.io/RandyChen/embed/wvzNLRe?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>可以看到上面這個範例，我們在<code>slideUp</code>後面又接了一個<code>slideDown</code>，所以，當<code>slideUp</code>結束後，<br>緊接著，又會再執行<code>slideDown</code>。<br>而你鍊式寫法後面要接多少的事件都是ok的。</p>
+<h1 id="善用-Chrome-內建開發工具，提升撰寫-jQuery-效率"><a href="#善用-Chrome-內建開發工具，提升撰寫-jQuery-效率" class="headerlink" title="善用 Chrome 內建開發工具，提升撰寫 jQuery 效率"></a>善用 Chrome 內建開發工具，提升撰寫 jQuery 效率</h1><p><img src="/image/jq_console_debug.png" alt="Chrome內建開發工具"><br>你在開發者介面中，有一個Source的選項，接著，你可以看到你的專案檔JavaScript引入的js檔案，<br>你就點選all.js檔案，就可以直接在介面上看到你的程式碼內容。<br>你就可以直接對這些程式碼內容做修改，儲存，並直接在網頁上測試你更動的內容囉~</p>
+<h3 id="無法在此介面中新增程式碼"><a href="#無法在此介面中新增程式碼" class="headerlink" title="無法在此介面中新增程式碼"></a>無法在此介面中新增程式碼</h3><p>無法在這個除錯的視窗中，新增程式碼內容，只能從既有的內容去修改它們的效果。<br>也就是說，你如果想要新增效果並測試結果是否正確，你還是得要先去專案檔的js檔裡新增那部分的內容，如此，<br>才能在這個除錯視窗中修改新增的這些效果喔。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/21/JQ%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-JQ%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/" rel="prev" title="JQ課程筆記-JQ環境設定">
+      <i class="fa fa-chevron-left"></i> JQ課程筆記-JQ環境設定
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JQ%E9%81%B8%E6%93%87%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">JQ選擇器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML%E6%A8%99%E7%B1%A4%E9%81%B8%E6%93%87"><span class="nav-number">1.1.</span> <span class="nav-text">HTML標籤選擇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Class-%E9%81%B8%E6%93%87"><span class="nav-number">1.2.</span> <span class="nav-text">Class 選擇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ID-%E9%81%B8%E6%93%87"><span class="nav-number">1.3.</span> <span class="nav-text">ID 選擇</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BC%95%E9%AC%86%E6%92%B0%E5%AF%AB%E7%AC%AC%E4%B8%80%E5%80%8B%E7%B6%B2%E9%A0%81%E8%A8%AD%E8%A8%88%E4%BA%92%E5%8B%95%E6%95%88%E6%9E%9C"><span class="nav-number">2.</span> <span class="nav-text">輕鬆撰寫第一個網頁設計互動效果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-toggle-%E5%88%87%E6%8F%9B%E9%96%8B%E5%95%9F%E6%88%96%E9%9A%B1%E8%97%8F%E6%95%88%E6%9E%9C"><span class="nav-number">3.</span> <span class="nav-text">使用 toggle 切換開啟或隱藏效果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jQuery-%E8%BE%AD%E5%85%B8-%E8%BC%95%E9%AC%86%E6%9F%A5%E8%A9%A2%E5%8A%9F%E8%83%BD%E4%B8%80%E6%8A%8A%E6%8A%93"><span class="nav-number">4.</span> <span class="nav-text">jQuery 辭典 - 輕鬆查詢功能一把抓</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Slide-%E8%A8%AD%E8%A8%88%E6%BB%91%E5%8B%95%E6%95%88%E6%9E%9C"><span class="nav-number">5.</span> <span class="nav-text">使用 Slide 設計滑動效果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#slideToggle"><span class="nav-number">5.1.</span> <span class="nav-text">slideToggle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#slideToggle%E7%B5%84%E6%88%90%E6%95%88%E6%9E%9C"><span class="nav-number">5.1.1.</span> <span class="nav-text">slideToggle組成效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-fadeToggle-%E8%A8%AD%E8%A8%88%E6%BC%B8%E5%85%A5%E6%BC%B8%E5%87%BA%E6%95%88%E6%9E%9C"><span class="nav-number">6.</span> <span class="nav-text">使用 fadeToggle 設計漸入漸出效果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fadeToggle"><span class="nav-number">6.1.</span> <span class="nav-text">fadeToggle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fadeToggle%E7%B5%84%E6%88%90%E6%95%88%E6%9E%9C"><span class="nav-number">6.1.1.</span> <span class="nav-text">fadeToggle組成效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#toggleClass"><span class="nav-number">7.</span> <span class="nav-text">toggleClass</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#transition-%E9%81%8E%E5%A0%B4%E7%9A%84%E9%9B%B7%E9%BB%9E-display-none"><span class="nav-number">7.1.</span> <span class="nav-text">transition 過場的雷點 - display:none</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%84%E6%88%90%E6%95%88%E6%9E%9C"><span class="nav-number">7.1.1.</span> <span class="nav-text">組成效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#overflow-%E7%9A%84%E5%8B%95%E7%95%AB%E6%8A%80%E5%B7%A7"><span class="nav-number">7.2.</span> <span class="nav-text">overflow 的動畫技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%B7%B1%E5%AF%AB%E7%9A%84transition%E7%82%AB%E7%82%AE%E6%95%88%E6%9E%9C"><span class="nav-number">7.3.</span> <span class="nav-text">自己寫的transition炫炮效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-%E9%8F%88%E5%BC%8F%E5%AF%AB%E6%B3%95"><span class="nav-number">7.4.</span> <span class="nav-text">jQuery 鏈式寫法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%96%84%E7%94%A8-Chrome-%E5%85%A7%E5%BB%BA%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7%EF%BC%8C%E6%8F%90%E5%8D%87%E6%92%B0%E5%AF%AB-jQuery-%E6%95%88%E7%8E%87"><span class="nav-number">8.</span> <span class="nav-text">善用 Chrome 內建開發工具，提升撰寫 jQuery 效率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%84%A1%E6%B3%95%E5%9C%A8%E6%AD%A4%E4%BB%8B%E9%9D%A2%E4%B8%AD%E6%96%B0%E5%A2%9E%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">8.0.1.</span> <span class="nav-text">無法在此介面中新增程式碼</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

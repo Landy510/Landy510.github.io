@@ -145,6 +145,152 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-02/" class="post-title-link" itemprop="url">JavaScript-ES6-課程筆記-02</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-18 11:57:28 / Modified: 12:00:39" itemprop="dateCreated datePublished" datetime="2021-01-18T11:57:28+08:00">2021-01-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#　箭頭函式 v.s 傳統函式</p>
+<h2 id="一般函式-－-傳統寫法-v-s-箭頭函式"><a href="#一般函式-－-傳統寫法-v-s-箭頭函式" class="headerlink" title="一般函式　－　傳統寫法 v.s 箭頭函式"></a>一般函式　－　傳統寫法 v.s 箭頭函式</h2><p>ex: (傳統寫法)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var callSomeone &#x3D; function(somebody)&#123;</span><br><span class="line">    return somebody + &#39;該吃飯囉&#39;;</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#39;小明&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>改寫成 箭頭函式<br>ex: (箭頭函式)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var callSomeone &#x3D; (somebody)&#x3D;&gt;&#123;</span><br><span class="line">    return somebody + &#39;該吃飯囉&#39;;</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#39;小明&#39;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="箭頭函式-只有一行內容"><a href="#箭頭函式-只有一行內容" class="headerlink" title="箭頭函式 - 只有一行內容"></a>箭頭函式 - 只有一行內容</h3><p>像上面的範例，若箭頭函式中只有一行的話，你可以省略花括號　和　<code>return</code>。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var callSomeone &#x3D; (somebody) &#x3D;&gt; somebody + &#39;該吃飯囉&#39;;</span><br></pre></td></tr></table></figure>
+<h3 id="箭頭函式-如果只有傳入一個參數"><a href="#箭頭函式-如果只有傳入一個參數" class="headerlink" title="箭頭函式 - 如果只有傳入一個參數"></a>箭頭函式 - 如果只有傳入一個參數</h3><p>如果傳入的參數只有一個的話，連那個參數的括號都可以省略。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var callSomeone &#x3D; somebody &#x3D;&gt; somebody + &#39;該吃飯囉&#39;;</span><br></pre></td></tr></table></figure>
+<h3 id="箭頭函式-如果沒有傳入參數"><a href="#箭頭函式-如果沒有傳入參數" class="headerlink" title="箭頭函式 - 如果沒有傳入參數"></a>箭頭函式 - 如果沒有傳入參數</h3><p>但是，你沒有要傳入任何參數的話，那個參數的括號是不能省略的喔，<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var show &#x3D; () &#x3D;&gt; &#39;展示一下&#39; ;</span><br><span class="line">console.log(show()); &#x2F;&#x2F; 展示一下</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-02/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-03/" class="post-title-link" itemprop="url">JavaScript-ES6-課程筆記-03</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-18 11:33:10 / Modified: 12:04:43" itemprop="dateCreated datePublished" datetime="2021-01-18T11:33:10+08:00">2021-01-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="常用陣列方法-上"><a href="#常用陣列方法-上" class="headerlink" title="常用陣列方法(上)"></a>常用陣列方法(上)</h1><h2 id="陣列方法-forEach"><a href="#陣列方法-forEach" class="headerlink" title="陣列方法-forEach"></a>陣列方法-forEach</h2><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">const people &#x3D; [</span><br><span class="line">	&#123;</span><br><span class="line">		name: &#39;小明&#39;,</span><br><span class="line">		friends: 2</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		name: &#39;阿姨&#39;,</span><br><span class="line">		friends: 999</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		name: &#39;邊緣人&#39;,</span><br><span class="line">		friends: 0</span><br><span class="line">	&#125;</span><br><span class="line">]</span><br><span class="line">people.forEach(function(item, index, array)&#123;</span><br><span class="line">	console.log(item);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>forEach</code>中的三個引數分別為:<br>item: 遍歷當下的元素<br>index: 當下在陣列的第幾個元素<br>array: 該陣列本身</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-03/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -746,149 +892,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">bootstrap form的功能筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-09 09:55:55 / Modified: 23:26:54" itemprop="dateCreated datePublished" datetime="2021-01-09T09:55:55+08:00">2021-01-09</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>這邊的筆記主要紀錄Bootstrap的form表單元件的兩個部分</p>
-<ol>
-<li>跟form表單相關的className套在哪一個標籤上</li>
-<li>HTML5表單觀念</li>
-</ol>
-<h1 id="form-group"><a href="#form-group" class="headerlink" title="form-group"></a>form-group</h1><p>當某個className叫<code>form-group</code>的HTML標籤，通常其內部都會包住以下三種元素<br><code>label</code>標籤、<code>input</code>標籤 和 <code>small</code>標籤，那<code>small</code>標籤不一定會存在。<br>以下的例題中有六種狀況，會在下面分別對這六種狀況做介紹</p>
-<iframe src="https://codepen.io/RandyChen/embed/XWjBZXG?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<h2 id="範例中第一個form-group"><a href="#範例中第一個form-group" class="headerlink" title="範例中第一個form-group"></a>範例中第一個form-group</h2><p>那你可以看到在<code>&lt;form&gt;</code>標籤裡面的第一層<code>div</code>，他的<code>class</code>就是<code>form-group</code>。<br>那在這個<code>form-group</code>裡面的<code>input</code>欄位的class名稱是<code>form-control</code>，<br>那在這個<code>form-group</code>裡面的<code>label</code>是不用特地為它的className做設定的，<br>那在這個<code>form-group</code>裡面的<code>samll</code>標籤的class名稱是<code>form-text</code><br>此時，<code>input</code>欄位和<code>small</code>標籤的樣式，都會變成Bootstrap的制定樣式了。</p>
-<h2 id="範例中第二個form-group"><a href="#範例中第二個form-group" class="headerlink" title="範例中第二個form-group"></a>範例中第二個form-group</h2><p>它的<code>input</code>標籤的className一樣要被命名為<code>form-control</code>。<br>那跟第一個<code>form-group</code>的<code>input</code>欄位不同的地方是<code>type</code>，<br>因為，一個是要輸入email，另一個是要輸入password，所以，功能不一樣，type的內容也會不一樣。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/08/Vue%E5%85%83%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/08/Vue%E5%85%83%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/" class="post-title-link" itemprop="url">Vue元件的生命週期</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-08 10:26:37 / Modified: 10:41:40" itemprop="dateCreated datePublished" datetime="2021-01-08T10:26:37+08:00">2021-01-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="語法標籤"><a href="#語法標籤" class="headerlink" title="語法標籤"></a>語法<keep-alive></keep-alive>標籤</h1><h2 id="沒有keep-alive標籤的元件，資料不保留"><a href="#沒有keep-alive標籤的元件，資料不保留" class="headerlink" title="沒有keep-alive標籤的元件，資料不保留"></a>沒有keep-alive標籤的元件，資料不保留</h2><p>如果該Vue元件沒有加上<code>&lt;keep-alive&gt;&lt;/keep-alive&gt;</code>標籤，<br>當該元件不被顯示的時候，就會執行<code>beforeDestroy</code> 和 <code>destroyed</code> 這兩個解構式<br>連帶的會將此次的在該元件上的資料全部消滅掉。<br>等到你下次又要調用該元件的時候，資料會是全新的，不會保留上一次的輸入內容。</p>
-<h2 id="有keep-alive標籤的元件，資料會保留"><a href="#有keep-alive標籤的元件，資料會保留" class="headerlink" title="有keep-alive標籤的元件，資料會保留"></a>有keep-alive標籤的元件，資料會保留</h2><p>如果在這個Vue元件的外圍，加上<code>&lt;keep-alive&gt;&lt;/keep-alive&gt;</code>標籤，<br>此時，你的元件的hook事件會多兩個分別是<code>activated</code>和<code>deactivated</code>。<br>在你不顯示該元件的時候，該元件不會觸發<code>beforeDestroy</code> 和 <code>destroyed</code> 這兩個解構式<br>而是改為觸發<code>deactived</code>，且該元件的資料會被保留下來。<br>當你下次再使用該元件的時候，<br>不會再次觸發<code>beforeCreate</code>, <code>created</code>, <code>beforeMount</code>, <code>mounted</code>這些hook，<br>而是直接觸發<code>actived</code>這個hook，並直接呈現上一次的資料內容。</p>
-<h2 id="可以運用在頁籤上"><a href="#可以運用在頁籤上" class="headerlink" title="可以運用在頁籤上"></a>可以運用在頁籤上</h2><p>這種技巧常會用在頁籤中，你只是想要切換頁面的內容，但並不想要把上一頁的內容<br>刪除掉，就可以為頁籤元件加上<code>&lt;keep-alive&gt;&lt;/keep-alive&gt;</code>標籤。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/08/Vue%E5%85%83%E4%BB%B6%E7%9A%84%E7%94%9F%E5%91%BD%E9%80%B1%E6%9C%9F/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -958,12 +961,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
