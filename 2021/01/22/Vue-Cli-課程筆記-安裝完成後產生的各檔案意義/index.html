@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="#　Vue Cli 所產生的資料夾結構說明 在VScode的環境下使用Vue你先用vscode打開那個vue專案檔，接著，在你的編譯器中輸入ctrl+(反斜線)， 這時候，會跳出來可以輸入指令的區塊，接著，你就輸入npm run dev，就會跳出http:\localhost:8080的提示訊息，接著，你就又能在瀏覽器中輸入http:\localhost:8080&#96;，然後，打開專案囉~ 接下來是v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue_Cli_課程筆記-安裝完成後產生的各檔案意義">
+<meta property="og:url" content="http://example.com/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E5%AE%8C%E6%88%90%E5%BE%8C%E7%94%A2%E7%94%9F%E7%9A%84%E5%90%84%E6%AA%94%E6%A1%88%E6%84%8F%E7%BE%A9/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="#　Vue Cli 所產生的資料夾結構說明 在VScode的環境下使用Vue你先用vscode打開那個vue專案檔，接著，在你的編譯器中輸入ctrl+(反斜線)， 這時候，會跳出來可以輸入指令的區塊，接著，你就輸入npm run dev，就會跳出http:\localhost:8080的提示訊息，接著，你就又能在瀏覽器中輸入http:\localhost:8080&#96;，然後，打開專案囉~ 接下來是v">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/vue_bootstrap_fail.png">
+<meta property="og:image" content="http://example.com/image/vue_bootstrap_fail_1.png">
+<meta property="article:published_time" content="2021-01-22T01:59:46.000Z">
+<meta property="article:modified_time" content="2021-01-22T02:25:10.215Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/vue_bootstrap_fail.png">
+
+<link rel="canonical" href="http://example.com/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E5%AE%8C%E6%88%90%E5%BE%8C%E7%94%A2%E7%94%9F%E7%9A%84%E5%90%84%E6%AA%94%E6%A1%88%E6%84%8F%E7%BE%A9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Vue_Cli_課程筆記-安裝完成後產生的各檔案意義 | Landy Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E5%AE%8C%E6%88%90%E5%BE%8C%E7%94%A2%E7%94%9F%E7%9A%84%E5%90%84%E6%AA%94%E6%A1%88%E6%84%8F%E7%BE%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue_Cli_課程筆記-安裝完成後產生的各檔案意義
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-22 09:59:46 / Modified: 10:25:10" itemprop="dateCreated datePublished" datetime="2021-01-22T09:59:46+08:00">2021-01-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>#　Vue Cli 所產生的資料夾結構說明</p>
+<h2 id="在VScode的環境下使用Vue"><a href="#在VScode的環境下使用Vue" class="headerlink" title="在VScode的環境下使用Vue"></a>在VScode的環境下使用Vue</h2><p>你先用vscode打開那個vue專案檔，接著，在你的編譯器中輸入ctrl+<code>(反斜線)， 這時候，會跳出來可以輸入指令的區塊，接著，你就輸入</code>npm run dev<code>，就會跳出</code>http:\localhost:8080<code>的提示訊息，接著，你就又能在瀏覽器中輸入</code>http:\localhost:8080`，然後，打開專案囉~</p>
+<p>接下來是vue cli產生的檔案介紹</p>
+<h3 id="README-md"><a href="#README-md" class="headerlink" title="README.md"></a>README.md</h3><p>這個檔案裡面，有提供一些vue cli可以用的指令<br><code>npm install</code> 就是安裝相關的套件。<br><code>npm run dev</code>　運行開發中的環境<br><code>npm run bulid</code> 運行正式版的環境</p>
+<p>當我們執行<code>npm run build</code>，它會運行build/build.js　的檔案，將所有的網頁內容打包壓縮。<br>當我們輸入這個指令之後，專案檔會產生出一個dist的資料夾。<br>那在這個生成的dist資料夾中，會有一個index.html，這個html一定要在HTTP的server下才能運行，將它直接打開是沒有辦法運行的喔。</p>
+<h4 id="小插曲-index-html中引入css和js-報MIME-type錯誤問題"><a href="#小插曲-index-html中引入css和js-報MIME-type錯誤問題" class="headerlink" title="小插曲 - index.html中引入css和js 報MIME type錯誤問題"></a>小插曲 - index.html中引入css和js 報MIME type錯誤問題</h4><p>當我用嘗試用<code>Go live</code>來將dist資料夾中的index.html在瀏覽器中開啟，<br>但是，卻出現以下的錯誤log<br>!()[image/Vue_cli_webpack_error.png]<br>這個問題主要是因為讀不到專案檔裡面的樣式檔導致的，<br>所以，你看以上的圖片中它是說該錯誤是發生在index.html檔案中，<br>所以，你就去dist資料夾中的index.html中，該改它引入的路徑<br>原本預設的路徑是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;&#x2F;static&#x2F;js&#x2F;manifest.2ae2e69a05c33dfc65f8.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;&#x2F;static&#x2F;js&#x2F;vendor.0aad2172a75b8ed4f46c.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;&#x2F;static&#x2F;js&#x2F;app.2f2e5edd9af2c59aa514.js&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到<code>src</code>的最前面都有一個反斜線<code>\</code>，<br>你就將這個反斜線都去掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;static&#x2F;js&#x2F;manifest.2ae2e69a05c33dfc65f8.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;static&#x2F;js&#x2F;vendor.0aad2172a75b8ed4f46c.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;static&#x2F;js&#x2F;app.2f2e5edd9af2c59aa514.js&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>改完之後，就能正常的在VSCode中的live Server中，正確的在瀏覽器中，打開dist資料夾中的index.html檔案囉。</p>
+<a id="more"></a>
+<h3 id="最外層的index-html-v-s-dist資料夾中的index-html"><a href="#最外層的index-html-v-s-dist資料夾中的index-html" class="headerlink" title="最外層的index.html　v.s dist資料夾中的index.html"></a>最外層的index.html　v.s dist資料夾中的index.html</h3><p>!()[image/Vue_cli_webpack_03.png]　<br>如上圖，<br>在你的專案檔中的最外層有一個index.html的檔案(不是dist資料中的index.html那個喔)，<br>你之後的專案的code就會在這邊做撰寫，<br>但是，為什麼它css和js檔案都沒有引入呢？<br>因為，當你使用<code>npm run build</code>這個指令時，編譯器會將src資料夾中的套件直接注入到你的dist資料夾中的index.html檔案中，<br>也就是說，你在index.html寫的內容，在你使用<code>npm run build</code>的時候，會被複製到dist資料夾中的index.html檔案中，<br>並且將src中的套件也一併注入到dist資料夾中的index.html檔案中。<br>所以，你在最外層的index.html檔案只需要撰寫你的code的內容，不需要在這邊撰寫你要加入那些套件，<br>如果，你需要新增套件的話，就應該將那些套件加到src資料夾中，<br>最終，在你使用<code>npm run build</code>指令時，編譯器就會自動將原本的套件和你新增的套件，都加入到dist資料夾中的index.html檔案了。</p>
+<p>注意～～～　在最外層的inde.html檔案中，有一段註解掉的程式碼，<br><code>&lt;!-- built files will be auto injected --&gt;</code><br>這行是代表，那些被注入的套件的內容會被加到這行註解底下，<br>所以!!! 你在寫程式碼內容的時候，不要寫到這行程式碼下面喔!! 不然，程式應該會無法運行。</p>
+<h3 id="postcssrc-js-檔案-和-babelrc檔案"><a href="#postcssrc-js-檔案-和-babelrc檔案" class="headerlink" title=".postcssrc.js　檔案 和　.babelrc檔案"></a>.postcssrc.js　檔案 和　.babelrc檔案</h3><p>這兩個檔案，是有關我們的編譯器的相關設定，<br>但是，Vue cli都已經為我們把這兩個設定檔都設定好了，所以，我們比較不需要去了解怎麼設定囉。</p>
+<h3 id="src資料夾-所有要引入的檔案放這"><a href="#src資料夾-所有要引入的檔案放這" class="headerlink" title="src資料夾 - 所有要引入的檔案放這"></a>src資料夾 - 所有要引入的檔案放這</h3><p>這個資料夾中，會涵蓋所有我們要引入的檔案。</p>
+<h3 id="static-資料夾-資料不會被編譯"><a href="#static-資料夾-資料不會被編譯" class="headerlink" title="static 資料夾 - 資料不會被編譯"></a>static 資料夾 - 資料不會被編譯</h3><p>這個資料夾是放入不會被編譯的檔案。</p>
+<h3 id="src資料夾-assets資料夾"><a href="#src資料夾-assets資料夾" class="headerlink" title="src資料夾 - assets資料夾"></a>src資料夾 - assets資料夾</h3><p>在這個資料夾中的檔案是會被編譯的</p>
+<h3 id="src資料夾-main-js"><a href="#src資料夾-main-js" class="headerlink" title="src資料夾 - main.js"></a>src資料夾 - main.js</h3><p>這個檔案，就是Vue專案檔中，所有Vue.js的進入點。<br>在這個檔案中，你會看到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	components: &#123;App&#125;,</span><br><span class="line">	template: &#39;&lt;App&#x2F;&gt;&#39;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>這段內容，就是之前課程內容，用來綁定index.html中的app的區塊。</p>
+<p>接著，在它上方有<code>import App from &#39;./App&#39;</code><br>這個APP是元件的名稱，<br>那這個元件的定義的檔案就在main.js的同一層，一個叫App.vue的檔案。<br>這個App.vue元件檔有包含<br><code>x-template</code>, <code>javascript</code>, <code>style</code>這三個部分整合在一起，就是一個vue檔案，也就是一個元件檔。</p>
+<p>那在vue元件檔中，可以再<code>import</code>其他元件的檔案。<br>像在App.vue的元件檔中，就又有在<code>import</code>一個components資料夾中的Helloworld的元件檔。</p>
+<h3 id="node-modules資料夾"><a href="#node-modules資料夾" class="headerlink" title="node_modules資料夾"></a>node_modules資料夾</h3><p>這個套件中的檔案，就是我們利用<code>npm install</code>所安裝的套件，都會放在這個資料夾中。<br>這個套件有包含webpack的套件，也有一些前端的套件(像是:jQuery…)都會放在這個資料夾中。</p>
+<h3 id="dist資料夾"><a href="#dist資料夾" class="headerlink" title="dist資料夾"></a>dist資料夾</h3><p>前面有說過了，這個檔案就是透過<code>npm run build</code>所生成的檔案。<br>那它的index.html一定要在HTTP Server底下才能運作喔。</p>
+<h2 id="Webpack運行觀念"><a href="#Webpack運行觀念" class="headerlink" title="Webpack運行觀念"></a>Webpack運行觀念</h2><p>!()[image/webpack.png]<br>在webpack中有一個main.js檔案，它會引入其他相依內容，像是vue, sass, js之類的，<br>並且webpack會去監控這個main.js檔案，以及它所引入的檔案，<br>當他們有更動時，webpack會產生出相應的js, jpg…的檔案。</p>
+<h3 id="entry"><a href="#entry" class="headerlink" title="entry"></a>entry</h3><p>所以，webpack有一個entry的屬性，當這個entry的進入點所監控的檔案，有變動的話，就會去做編譯。</p>
+<h3 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h3><p>webpack有一個loader，它會決定引入的檔案要怎麼輸出在js檔案裡面。</p>
+<h3 id="output"><a href="#output" class="headerlink" title="output"></a>output</h3><p>最終的檔案，會被webpack ouput輸出。</p>
+<h3 id="build-資料夾"><a href="#build-資料夾" class="headerlink" title="build 資料夾"></a>build 資料夾</h3><p>在你的專案檔的build資料夾中，會有一個webpack.base.conf.js的檔案，<br>那在這個檔案裡面你就可以看到</p>
+<h4 id="entry-1"><a href="#entry-1" class="headerlink" title="entry"></a>entry</h4><p>entry這個物件，它裡面就是監控的檔案路徑</p>
+<h4 id="output-1"><a href="#output-1" class="headerlink" title="output"></a>output</h4><p>output物件，就是它會輸出到你哪裡。</p>
+<h4 id="resolve"><a href="#resolve" class="headerlink" title="resolve"></a>resolve</h4><p><code>resolve</code>物件，裡面有一個extension屬性，裡面是放路徑中 可省略的附檔名<br>像是: APP.vue 在路徑中就不用寫.vue 直接寫APP就可以了。<br><code>alias</code>屬性，是路徑的別名<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alias: &#123;</span><br><span class="line">      &#39;vue$&#39;: &#39;vue&#x2F;dist&#x2F;vue.esm.js&#39;,</span><br><span class="line">      &#39;@&#39;: resolve(&#39;src&#39;),</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>這行程式碼中，可以看到@是可以直接代表src這個路徑。</p>
+<h4 id="module"><a href="#module" class="headerlink" title="module"></a>module</h4><p>那在webpack中有loader，那在webpack.base.conf.js中的module中<br>的內容就是loader的內容。</p>
+<p>那不是全部的loader都寫在這個檔案中，有些loader也寫在build資料夾中的utils.js中。<br>像是sass的loader就是寫在這個檔案中喔。</p>
+<h2 id="config-資料夾"><a href="#config-資料夾" class="headerlink" title="config 資料夾"></a>config 資料夾</h2><h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><p>這個檔案是針對整個編譯環境所使用的。<br>它可以改變你的host或你的port。</p>
+<h3 id="dev-env-js-和-prod-env-js"><a href="#dev-env-js-和-prod-env-js" class="headerlink" title="dev.env.js 和 prod.env.js"></a>dev.env.js 和 prod.env.js</h3><p>這兩個檔案的內容，是我們在寫vue時，可以用到的環境變數。<br>那這些環境變數是可以輸出到vue檔中的。</p>
+<h4 id="dev-env-js-和-prod-env-js-使用時機"><a href="#dev-env-js-和-prod-env-js-使用時機" class="headerlink" title="dev.env.js 和 prod.env.js 使用時機"></a>dev.env.js 和 prod.env.js 使用時機</h4><p>那為什麼要特意切成兩個環境變數來實用呢? 他們不是一樣的效果嗎?<br>原因是，開發時，許多變數或設定在測試機與正式機是不同的<br>dev.env.js  是用在測試使用<br>prod.env.js 是用在正式機使用<br>這時候就可以使用環境變數來切換喔。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">---dev.env.js檔案---</span><br><span class="line">&#39;use strict&#39;</span><br><span class="line">const merge &#x3D; require(&#39;webpack-merge&#39;)</span><br><span class="line">const prodEnv &#x3D; require(&#39;.&#x2F;prod.env&#39;)</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; merge(prodEnv, &#123;</span><br><span class="line">  NODE_ENV: &#39;&quot;development&quot;&#39;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">---HelloWorld.vue 元件檔---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;HelloWorld&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      msg: process.env.NODE_ENV</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>在上面這個範例你可以看到在dev.env.js檔案中，<br>有一個變數叫NODE_ENV，然後它的內容是’”development”‘，<br>這樣就可以將元件HelloWorld的msg內容就可以修改成NODE_ENV的內容囉。</p>
+<p>在dev.env.js檔案新增變數<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">---dev.env.js檔案---</span><br><span class="line">&#39;use strict&#39;</span><br><span class="line">const merge &#x3D; require(&#39;webpack-merge&#39;)</span><br><span class="line">const prodEnv &#x3D; require(&#39;.&#x2F;prod.env&#39;)</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; merge(prodEnv, &#123;</span><br><span class="line">  NODE_ENV: &#39;&quot;development&quot;&#39;,</span><br><span class="line">  HTTP_PATH: &#39;&quot;http:&#x2F;&#x2F;localhost&#x2F;&quot;&#39;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">---HelloWorld.vue 元件檔---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;HelloWorld&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      msg: process.env.NODE_ENV,</span><br><span class="line">	  http: process.env.HTTP_PATH</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>這邊要特別注意一下，變數的內容要用單引號和雙引號把內容包起來喔，<br>即: ‘“<a target="_blank" rel="noopener" href="http://localhost/&quot;&#39;%EF%BC%8C">http://localhost/&quot;&#39;，</a><br>當你新增完環境變數之後，你要在此輸入<code>npm run dev</code>才能將新變數新增到你的專案檔中喔。<br>那你在dev.env.js檔案中，新增的參數，也要手動加入到prod.env.js的檔案中喔。<br>因為，dev.env.js  是在測試機使用，prod.env.js 是在正式機使用，<br>若在測試機上測是沒問題，當然要把這些沒問題的部分都加到正式機的變數環境裏頭囉，不然你測試幹嘛。</p>
+<h2 id="安裝套件在-Vue-Webpack-中"><a href="#安裝套件在-Vue-Webpack-中" class="headerlink" title="安裝套件在 Vue Webpack 中"></a>安裝套件在 Vue Webpack 中</h2><p>怎麼透過Vue Webpacl來載入外部的套件<br>在課程中示範了載入以下兩個外部套件<br>一個是載入Bootstrap<br>一個是載入vue-axios -&gt; 它是使用ajax的一個工具</p>
+<h3 id="Bootstrap部分下載"><a href="#Bootstrap部分下載" class="headerlink" title="Bootstrap部分下載"></a>Bootstrap部分下載</h3><p>首先，先輸入<br><code>npm install bootstrap </code><br>但是，課程中有提到要用sass的方式來載入，但是，在vue中，sass並沒有安裝完整的loader，<br>所以，我們這邊也要一併安裝，所以，最終的指令是<br><code>npm install bootstrap  node-sass sass-loader --save</code>，如此就會安裝bootstrap和sass囉。</p>
+<p>第二，測試一下是不是sass可以運作<br>我們直接在App.vue元件檔中，修改最下面的一段<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">#app &#123;</span><br><span class="line">  font-family: &#39;Avenir&#39;, Helvetica, Arial, sans-serif;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">  -moz-osx-font-smoothing: grayscale;</span><br><span class="line">  text-align: center;</span><br><span class="line">  color: #2c3e50;</span><br><span class="line">  margin-top: 60px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<p>把它改成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;style lang&#x3D;&quot;scss&quot;&gt;</span><br><span class="line">$color: red;</span><br><span class="line">body&#123;</span><br><span class="line">	 background-color:$color;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<p>修改完之後，重新輸入<code>npm run dev</code>指令，如此，應該就能看到背景被你改成紅色囉，<br>如果是這樣的話，就代表你的sass有成功載入囉。</p>
+<h3 id="小插曲-測試sass載入成功與否-gt-測試結果失敗"><a href="#小插曲-測試sass載入成功與否-gt-測試結果失敗" class="headerlink" title="小插曲 - 測試sass載入成功與否-&gt;測試結果失敗"></a>小插曲 - 測試sass載入成功與否-&gt;測試結果失敗</h3><p>當我按照老師的方式修改App.vue中的內容，按下<code>npm run dev</code>，發現編譯器complie超久，<br>然後，我就看到討論區以下的解法<br><img src="/image/vue_bootstrap_fail.png" alt="同學提問"><br><img src="/image/vue_bootstrap_fail_1.png" alt="同學提問"><br>上面是同學的提問，跟我的問題一樣，<br>接著，下面是助教的解法，它提議先將你安裝完的node-sass和sass-loader刪掉，<br>接著，再安裝助教在討論區提供的版本。<br>按照助教的操作後，確實可以讓scss在vue的專案檔中使用囉~~~</p>
+<h3 id="引入bootstrap"><a href="#引入bootstrap" class="headerlink" title="引入bootstrap"></a>引入bootstrap</h3><p>接著我們將上面的範例中的內容改成引入bootstrap的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---在App.vue元件檔中---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;img src&#x3D;&quot;.&#x2F;assets&#x2F;logo.png&quot;&gt;</span><br><span class="line">    &lt;HelloWorld&#x2F;&gt;</span><br><span class="line">    &lt;button class&#x3D;&quot;btn btn-danger&quot;&gt;按鈕&lt;&#x2F;button&gt;  </span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang&#x3D;&quot;scss&quot;&gt;</span><br><span class="line"> @import &quot;~bootstrap&#x2F;scss&#x2F;bootstrap&quot;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，我們在App.vue的元件檔中的<code>style</code>中，引入了bootstrap。<br>接著，你要測試是否你有成功引入bootstrap，你就在同一文件中的<code>template</code>中隨便寫一個bootstrap的元件，像這邊就是寫入一個bootstrap樣式的按鈕，如果，<br>有正確出現bootstrap的樣式的話，就代表bootstrap引入成功囉。</p>
+<p>那我們是怎麼知道引入bootstrap的路徑的，其實你在node_modules資料夾中的boostrap資料夾，<br>它的scss資料夾中，就有一個boostrap.scss的檔案，所以，我們其實就是直接引入該bootstrap.scss在專案檔中的路徑進來而已。</p>
+<h2 id="安裝vue-axios套件"><a href="#安裝vue-axios套件" class="headerlink" title="安裝vue.axios套件"></a>安裝vue.axios套件</h2><p>你先輸入<code>npm install --save axios vue-axios</code><br>接著，安裝完成後，我們就要運行它<br>在官網中就有提到，要將以下的內容加到entry的檔案中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import axios from &#39;axios&#39;</span><br><span class="line">import VueAxios from &#39;vue-axios&#39;</span><br></pre></td></tr></table></figure>
+
+<p>所以，你就將以上的內容貼到在src資料夾中的main.js檔案中。</p>
+<p>那<code>import axios from &#39;axios&#39;</code>這行的功能為將Ajax主要功能引入進來。<br><code>import VueAxios from &#39;vue-axios&#39;</code>這行的功能是將它轉為Vue的套件。</p>
+<p>那在官網還有特別提到，<br>你要在Vue使用的話，你還要再加入<code>Vue.use(VueAxios, axios)</code> 這一行，<br>那因為，我是用Vue2所以，是加入這一行，Vue3要加入的內容就又不一樣囉。<br>所以，你就將<code>Vue.use(VueAxios, axios)</code> 一樣加入到main.js檔案中。</p>
+<p>當加完這一行之後，我們就可以在其他地方使用Vue.axios囉。</p>
+<h3 id="測試Vue-axios是否有載入正確"><a href="#測試Vue-axios是否有載入正確" class="headerlink" title="測試Vue.axios是否有載入正確"></a>測試Vue.axios是否有載入正確</h3><p>首先，你先去以下這個網站<br><a target="_blank" rel="noopener" href="https://randomuser.me/">任意產生api的網址</a></p>
+<p>上面這個可以任意產生api的網址的地方，將其api取下來。</p>
+<p>第二，去App.vue元件檔中，<br>它的<code>script</code>中去新增vue.axios的內容，來將api的內容取進來</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">import HelloWorld from &#39;.&#x2F;components&#x2F;HelloWorld&#39;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    HelloWorld</span><br><span class="line">  &#125;,</span><br><span class="line">  created()&#123;</span><br><span class="line">    this.$http.get(&#39;https:&#x2F;&#x2F;randomuser.me&#x2F;api&#x2F;&#39;).then((reponse) &#x3D;&gt;&#123;</span><br><span class="line">      console.log(reponse);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，我為這個元件新增的<code>created</code>的<code>hook</code>，並在裡面加入了vue.axios取得api資料的語法，而這段語法你可以去vue.axios的官網查到喔。<br>就由<code>console.log</code> 來看reponse的結果，如果確實有結果的話，就代表你成功載入vue.axios囉~~~</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E7%92%B0%E5%A2%83%E6%AD%A5%E9%A9%9F/" rel="prev" title="Vue_Cli_課程筆記">
+      <i class="fa fa-chevron-left"></i> Vue_Cli_課程筆記
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8VScode%E7%9A%84%E7%92%B0%E5%A2%83%E4%B8%8B%E4%BD%BF%E7%94%A8Vue"><span class="nav-number">1.</span> <span class="nav-text">在VScode的環境下使用Vue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#README-md"><span class="nav-number">1.1.</span> <span class="nav-text">README.md</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E6%8F%92%E6%9B%B2-index-html%E4%B8%AD%E5%BC%95%E5%85%A5css%E5%92%8Cjs-%E5%A0%B1MIME-type%E9%8C%AF%E8%AA%A4%E5%95%8F%E9%A1%8C"><span class="nav-number">1.1.1.</span> <span class="nav-text">小插曲 - index.html中引入css和js 報MIME type錯誤問題</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%96%E5%B1%A4%E7%9A%84index-html-v-s-dist%E8%B3%87%E6%96%99%E5%A4%BE%E4%B8%AD%E7%9A%84index-html"><span class="nav-number">1.2.</span> <span class="nav-text">最外層的index.html　v.s dist資料夾中的index.html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postcssrc-js-%E6%AA%94%E6%A1%88-%E5%92%8C-babelrc%E6%AA%94%E6%A1%88"><span class="nav-number">1.3.</span> <span class="nav-text">.postcssrc.js　檔案 和　.babelrc檔案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#src%E8%B3%87%E6%96%99%E5%A4%BE-%E6%89%80%E6%9C%89%E8%A6%81%E5%BC%95%E5%85%A5%E7%9A%84%E6%AA%94%E6%A1%88%E6%94%BE%E9%80%99"><span class="nav-number">1.4.</span> <span class="nav-text">src資料夾 - 所有要引入的檔案放這</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static-%E8%B3%87%E6%96%99%E5%A4%BE-%E8%B3%87%E6%96%99%E4%B8%8D%E6%9C%83%E8%A2%AB%E7%B7%A8%E8%AD%AF"><span class="nav-number">1.5.</span> <span class="nav-text">static 資料夾 - 資料不會被編譯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#src%E8%B3%87%E6%96%99%E5%A4%BE-assets%E8%B3%87%E6%96%99%E5%A4%BE"><span class="nav-number">1.6.</span> <span class="nav-text">src資料夾 - assets資料夾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#src%E8%B3%87%E6%96%99%E5%A4%BE-main-js"><span class="nav-number">1.7.</span> <span class="nav-text">src資料夾 - main.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#node-modules%E8%B3%87%E6%96%99%E5%A4%BE"><span class="nav-number">1.8.</span> <span class="nav-text">node_modules資料夾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dist%E8%B3%87%E6%96%99%E5%A4%BE"><span class="nav-number">1.9.</span> <span class="nav-text">dist資料夾</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Webpack%E9%81%8B%E8%A1%8C%E8%A7%80%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">Webpack運行觀念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#entry"><span class="nav-number">2.1.</span> <span class="nav-text">entry</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loader"><span class="nav-number">2.2.</span> <span class="nav-text">loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#output"><span class="nav-number">2.3.</span> <span class="nav-text">output</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#build-%E8%B3%87%E6%96%99%E5%A4%BE"><span class="nav-number">2.4.</span> <span class="nav-text">build 資料夾</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#entry-1"><span class="nav-number">2.4.1.</span> <span class="nav-text">entry</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#output-1"><span class="nav-number">2.4.2.</span> <span class="nav-text">output</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#resolve"><span class="nav-number">2.4.3.</span> <span class="nav-text">resolve</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#module"><span class="nav-number">2.4.4.</span> <span class="nav-text">module</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config-%E8%B3%87%E6%96%99%E5%A4%BE"><span class="nav-number">3.</span> <span class="nav-text">config 資料夾</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#index-js"><span class="nav-number">3.1.</span> <span class="nav-text">index.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dev-env-js-%E5%92%8C-prod-env-js"><span class="nav-number">3.2.</span> <span class="nav-text">dev.env.js 和 prod.env.js</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#dev-env-js-%E5%92%8C-prod-env-js-%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F"><span class="nav-number">3.2.1.</span> <span class="nav-text">dev.env.js 和 prod.env.js 使用時機</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E5%A5%97%E4%BB%B6%E5%9C%A8-Vue-Webpack-%E4%B8%AD"><span class="nav-number">4.</span> <span class="nav-text">安裝套件在 Vue Webpack 中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bootstrap%E9%83%A8%E5%88%86%E4%B8%8B%E8%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">Bootstrap部分下載</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E6%8F%92%E6%9B%B2-%E6%B8%AC%E8%A9%A6sass%E8%BC%89%E5%85%A5%E6%88%90%E5%8A%9F%E8%88%87%E5%90%A6-gt-%E6%B8%AC%E8%A9%A6%E7%B5%90%E6%9E%9C%E5%A4%B1%E6%95%97"><span class="nav-number">4.2.</span> <span class="nav-text">小插曲 - 測試sass載入成功與否-&gt;測試結果失敗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5bootstrap"><span class="nav-number">4.3.</span> <span class="nav-text">引入bootstrap</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9Dvue-axios%E5%A5%97%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">安裝vue.axios套件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%AC%E8%A9%A6Vue-axios%E6%98%AF%E5%90%A6%E6%9C%89%E8%BC%89%E5%85%A5%E6%AD%A3%E7%A2%BA"><span class="nav-number">5.1.</span> <span class="nav-text">測試Vue.axios是否有載入正確</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
