@@ -28,7 +28,7 @@
 <meta property="og:description" content="preventDefault 取消默認行為ex: 123456789---HTML---&lt;a href&#x3D;&quot;http:&#x2F;&#x2F;www.google.com.tw&quot; class&#x3D;&quot;close&gt;按鈕&lt;&#x2F;a&gt;---JavaScript---$(document).ready(function()&amp;#123;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-23T08:53:20.000Z">
-<meta property="article:modified_time" content="2021-01-23T09:12:49.224Z">
+<meta property="article:modified_time" content="2021-01-23T09:24:27.162Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="jQuery">
 <meta name="twitter:card" content="summary">
@@ -175,7 +175,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-23 16:53:20 / Modified: 17:12:49" itemprop="dateCreated datePublished" datetime="2021-01-23T16:53:20+08:00">2021-01-23</time>
+              <time title="Created: 2021-01-23 16:53:20 / Modified: 17:24:27" itemprop="dateCreated datePublished" datetime="2021-01-23T16:53:20+08:00">2021-01-23</time>
             </span>
 
           
@@ -200,7 +200,7 @@
 <p>由以上的範例可以看到，當我們點擊到.box後，可以透過<code>css()</code>來動態的修改它的css樣式。<br>那要特別注意，屬性跟屬性值外圍都要用單引號來把它們包起來喔。</p>
 <h1 id="設計下拉式收闔選單"><a href="#設計下拉式收闔選單" class="headerlink" title="設計下拉式收闔選單"></a>設計下拉式收闔選單</h1><p>本章節是用jQ來設計出下拉選單</p>
 <iframe src="https://codepen.io/RandyChen/embed/BaLEQQq?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
+<h2 id="注意若用flex來讓子元素靠攏，那下拉選單要用position"><a href="#注意若用flex來讓子元素靠攏，那下拉選單要用position" class="headerlink" title="注意若用flex來讓子元素靠攏，那下拉選單要用position"></a>注意若用flex來讓子元素靠攏，那下拉選單要用position</h2><p>你可以看到上面的例子，是用<code>flex</code>來讓子元素向右靠攏，那這個時候你必須要為下拉選單使用<code>position:absolute</code>的屬性，<br>並調整它的<code>top</code>屬性來對齊觸發這個下拉選單的選項的高度，進而達成下拉選單的效果。<br>若你用<code>flex</code>來靠攏，但是沒有對下拉選單使用<code>position:absolute</code>的屬性的話，會導致下拉選單的高度也連父元素的高度都一起被<br>撐開囉。</p>
 <h1 id="delay-延遲動畫效果的好用語法"><a href="#delay-延遲動畫效果的好用語法" class="headerlink" title="delay() - 延遲動畫效果的好用語法"></a>delay() - 延遲動畫效果的好用語法</h1><p>它是一個可以讓dom元素的動畫產生依序產生的效果。</p>
 <iframe src="https://codepen.io/RandyChen/embed/QWKPGzW?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
 
@@ -240,7 +240,10 @@
     <a href="/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E5%AE%8C%E6%88%90%E5%BE%8C%E7%94%A2%E7%94%9F%E7%9A%84%E5%90%84%E6%AA%94%E6%A1%88%E6%84%8F%E7%BE%A9/" rel="prev" title="Vue_Cli_課程筆記-安裝完成後產生的各檔案意義">
       <i class="fa fa-chevron-left"></i> Vue_Cli_課程筆記-安裝完成後產生的各檔案意義
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E6%93%8D%E6%8E%A7dom%E5%85%83%E7%B4%A0/" rel="next" title="jQuery課程筆記-操控dom元素">
+      jQuery課程筆記-操控dom元素 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -299,7 +302,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#preventDefault-%E5%8F%96%E6%B6%88%E9%BB%98%E8%AA%8D%E8%A1%8C%E7%82%BA"><span class="nav-number">1.</span> <span class="nav-text">preventDefault 取消默認行為</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#css-%E5%8B%95%E6%85%8B%E8%BC%89%E5%85%A5-CSS-style-%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text">css() - 動態載入 CSS style 設定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E8%A8%88%E4%B8%8B%E6%8B%89%E5%BC%8F%E6%94%B6%E9%97%94%E9%81%B8%E5%96%AE"><span class="nav-number">3.</span> <span class="nav-text">設計下拉式收闔選單</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#delay-%E5%BB%B6%E9%81%B2%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C%E7%9A%84%E5%A5%BD%E7%94%A8%E8%AA%9E%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">delay() - 延遲動畫效果的好用語法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jQ%E7%9A%84show-%E6%96%B9%E6%B3%95%E8%A6%81%E5%8A%A0%E5%8F%83%E6%95%B8"><span class="nav-number">4.1.</span> <span class="nav-text">jQ的show()方法要加參數</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fixed-%E5%9B%BA%E5%AE%9A%E7%B6%B2%E9%A0%81%E5%85%A7%E5%AE%B9"><span class="nav-number">5.</span> <span class="nav-text">fixed 固定網頁內容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-stop-%E8%AE%93%E4%BD%A0%E7%9A%84%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C%E6%9B%B4%E6%BB%91%E9%A0%86"><span class="nav-number">6.</span> <span class="nav-text">使用 stop() 讓你的動畫效果更滑順</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9Aoffcanvas%E5%B7%A6%E5%8F%B3%E9%81%B8%E5%96%AE%E5%88%87%E6%8F%9B"><span class="nav-number">7.</span> <span class="nav-text">設定offcanvas左右選單切換</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%88%A5%E6%B3%A8%E6%84%8F%EF%BC%8Cmenu%E8%A6%81%E7%94%A8position-absolute%E4%BE%86%E8%AE%93%E5%AE%83%E6%B5%AE%E8%B5%B7%E4%BE%86"><span class="nav-number">7.1.</span> <span class="nav-text">特別注意，menu要用position:absolute來讓它浮起來</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Animate-css-%E8%BC%89%E5%85%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E6%8F%92%E4%BB%B6-%E5%A2%9E%E6%B7%BB%E7%B6%B2%E9%A0%81%E5%8B%95%E7%95%AB%E8%B1%90%E5%AF%8C%E5%BA%A6"><span class="nav-number">8.</span> <span class="nav-text">Animate.css - 載入第三方插件 - 增添網頁動畫豐富度</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#preventDefault-%E5%8F%96%E6%B6%88%E9%BB%98%E8%AA%8D%E8%A1%8C%E7%82%BA"><span class="nav-number">1.</span> <span class="nav-text">preventDefault 取消默認行為</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#css-%E5%8B%95%E6%85%8B%E8%BC%89%E5%85%A5-CSS-style-%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text">css() - 動態載入 CSS style 設定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E8%A8%88%E4%B8%8B%E6%8B%89%E5%BC%8F%E6%94%B6%E9%97%94%E9%81%B8%E5%96%AE"><span class="nav-number">3.</span> <span class="nav-text">設計下拉式收闔選單</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E8%8B%A5%E7%94%A8flex%E4%BE%86%E8%AE%93%E5%AD%90%E5%85%83%E7%B4%A0%E9%9D%A0%E6%94%8F%EF%BC%8C%E9%82%A3%E4%B8%8B%E6%8B%89%E9%81%B8%E5%96%AE%E8%A6%81%E7%94%A8position"><span class="nav-number">3.1.</span> <span class="nav-text">注意若用flex來讓子元素靠攏，那下拉選單要用position</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#delay-%E5%BB%B6%E9%81%B2%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C%E7%9A%84%E5%A5%BD%E7%94%A8%E8%AA%9E%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">delay() - 延遲動畫效果的好用語法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jQ%E7%9A%84show-%E6%96%B9%E6%B3%95%E8%A6%81%E5%8A%A0%E5%8F%83%E6%95%B8"><span class="nav-number">4.1.</span> <span class="nav-text">jQ的show()方法要加參數</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fixed-%E5%9B%BA%E5%AE%9A%E7%B6%B2%E9%A0%81%E5%85%A7%E5%AE%B9"><span class="nav-number">5.</span> <span class="nav-text">fixed 固定網頁內容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-stop-%E8%AE%93%E4%BD%A0%E7%9A%84%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C%E6%9B%B4%E6%BB%91%E9%A0%86"><span class="nav-number">6.</span> <span class="nav-text">使用 stop() 讓你的動畫效果更滑順</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9Aoffcanvas%E5%B7%A6%E5%8F%B3%E9%81%B8%E5%96%AE%E5%88%87%E6%8F%9B"><span class="nav-number">7.</span> <span class="nav-text">設定offcanvas左右選單切換</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%88%A5%E6%B3%A8%E6%84%8F%EF%BC%8Cmenu%E8%A6%81%E7%94%A8position-absolute%E4%BE%86%E8%AE%93%E5%AE%83%E6%B5%AE%E8%B5%B7%E4%BE%86"><span class="nav-number">7.1.</span> <span class="nav-text">特別注意，menu要用position:absolute來讓它浮起來</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Animate-css-%E8%BC%89%E5%85%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E6%8F%92%E4%BB%B6-%E5%A2%9E%E6%B7%BB%E7%B6%B2%E9%A0%81%E5%8B%95%E7%95%AB%E8%B1%90%E5%AF%8C%E5%BA%A6"><span class="nav-number">8.</span> <span class="nav-text">Animate.css - 載入第三方插件 - 增添網頁動畫豐富度</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -313,7 +316,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
