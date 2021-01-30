@@ -28,7 +28,7 @@
 <meta property="og:description" content="你要記得在bootstrap中的dropdown之間，他是用區塊和區塊做區隔的，他並沒有用data-traget 和 id的關係，去搭建觸發元件與被觸發區塊之間的關係。所以，當.dropdown包著一組觸發元件和被觸發dropdown-menu，當你又想要在另一個地方用另外一組dropdown的功能的時候，你要再創一個.dropdown區塊，並將觸發元件和觸發區塊包在這個新的.dropdown區塊">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-19T02:53:10.000Z">
-<meta property="article:modified_time" content="2021-01-19T02:54:06.146Z">
+<meta property="article:modified_time" content="2021-01-30T07:09:07.759Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="Bootstrap">
 <meta name="twitter:card" content="summary">
@@ -118,6 +118,11 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
@@ -178,9 +183,24 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-01-19 10:53:10 / Modified: 10:54:06" itemprop="dateCreated datePublished" datetime="2021-01-19T10:53:10+08:00">2021-01-19</time>
+              <time title="Created: 2021-01-19 10:53:10" itemprop="dateCreated datePublished" datetime="2021-01-19T10:53:10+08:00">2021-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-30 15:09:07" itemprop="dateModified" datetime="2021-01-30T15:09:07+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bootstrap/" itemprop="url" rel="index"><span itemprop="name">Bootstrap</span></a>
+                </span>
             </span>
 
           
@@ -291,19 +311,21 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
         <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
