@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="git remote - 遠端數據庫這小節要教導如何推送其他的branch上去遠端數據庫。step1.若今天你在分支的支線上，直接使用git push，是會失敗的。原因是Github不確定你是要推送到哪一個遠端數據庫上，是推到正式主機上 或是 推送到github上呢? step2.先用git remote 查詢遠端數據庫 git remote - 查詢遠端數據庫你輸入完這個指令之後，git Bas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="github課程筆記-Git團隊合作篇">
+<meta property="og:url" content="http://example.com/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%9C%98%E9%9A%8A%E5%90%88%E4%BD%9C%E7%AF%87/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="git remote - 遠端數據庫這小節要教導如何推送其他的branch上去遠端數據庫。step1.若今天你在分支的支線上，直接使用git push，是會失敗的。原因是Github不確定你是要推送到哪一個遠端數據庫上，是推到正式主機上 或是 推送到github上呢? step2.先用git remote 查詢遠端數據庫 git remote - 查詢遠端數據庫你輸入完這個指令之後，git Bas">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/git_pull.png">
+<meta property="og:image" content="http://example.com/image/git_pull1.png">
+<meta property="og:image" content="http://example.com/image/git_pull2.png">
+<meta property="og:image" content="http://example.com/image/git_pull3.png">
+<meta property="article:published_time" content="2021-01-30T03:14:56.000Z">
+<meta property="article:modified_time" content="2021-01-30T03:25:35.333Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Github">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/git_pull.png">
+
+<link rel="canonical" href="http://example.com/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%9C%98%E9%9A%8A%E5%90%88%E4%BD%9C%E7%AF%87/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>github課程筆記-Git團隊合作篇 | Landy Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%9C%98%E9%9A%8A%E5%90%88%E4%BD%9C%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          github課程筆記-Git團隊合作篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-30 11:14:56 / Modified: 11:25:35" itemprop="dateCreated datePublished" datetime="2021-01-30T11:14:56+08:00">2021-01-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="git-remote-遠端數據庫"><a href="#git-remote-遠端數據庫" class="headerlink" title="git remote - 遠端數據庫"></a>git remote - 遠端數據庫</h1><p>這小節要教導如何推送其他的branch上去遠端數據庫。<br>step1.<br>若今天你在分支的支線上，直接使用git push，是會失敗的。<br>原因是Github不確定你是要推送到哪一個遠端數據庫上，是推到正式主機上 或是 推送到github上呢?</p>
+<p>step2.<br>先用<code>git remote</code> 查詢遠端數據庫</p>
+<h2 id="git-remote-查詢遠端數據庫"><a href="#git-remote-查詢遠端數據庫" class="headerlink" title="git remote - 查詢遠端數據庫"></a>git remote - 查詢遠端數據庫</h2><p>你輸入完這個指令之後，git Bash應該會出現origin，這個origin就代表<br>你用<code>git clone</code> 拉下來的數據庫的名稱，預設叫origin，所以，<br>如果你有很多數據庫的話，你用<code>git remote</code>就會出現很多數據庫的名稱囉。</p>
+<a id="more"></a>
+<h2 id="git-push-遠端數據庫名稱-分支名稱"><a href="#git-push-遠端數據庫名稱-分支名稱" class="headerlink" title="git push 遠端數據庫名稱 分支名稱"></a>git push 遠端數據庫名稱 分支名稱</h2><p>比如 <code>git push origin issue</code>，這段指令的作用就是<br>將issue這個分支，推送到名字叫origin的遠端數據庫，輸入完之後，應該就可以<br>順利將這個分支push到origin數據庫中囉。</p>
+<h2 id="git-remote-rename-重新命名遠端數據庫的名稱"><a href="#git-remote-rename-重新命名遠端數據庫的名稱" class="headerlink" title="git remote rename - 重新命名遠端數據庫的名稱"></a>git remote rename - 重新命名遠端數據庫的名稱</h2><p>比如: <code>git remote rename origin practice</code><br>以上的語法就是將origin的遠端數據庫的名稱改成practice名稱，<br>改完後你再輸入<code>git remote</code>，應該就可以看到改完名的數據庫名稱囉。</p>
+<h1 id="git-pull-下載遠端數據庫"><a href="#git-pull-下載遠端數據庫" class="headerlink" title="git pull - 下載遠端數據庫"></a>git pull - 下載遠端數據庫</h1><p><img src="/image/git_pull.png" alt="git_pull"><br>step1.<br>如果，今天你跟另外一外同事同時將某個數據庫都先拉到自己的工作目錄中。<br>step2.<br>接著，你先跟同事說你先不要動，我先修改一寫檔案。<br>所以，等我修改完之後，提交索引，提交commit更新資料，最後push到遠端數據庫中。</p>
+<p>step3.<br>此時，我跟同事說我已經做好了並提交完囉，換同事接手。<br>此時，同事如果直接在剛剛clone下來的數據庫中，輸入<code>git log</code>指令，會發現什麼紀錄都沒有。<br>這是正常的，因為他當下的環境還處在一開始什麼都沒有變更的狀態。</p>
+<p>step4.</p>
+<h2 id="git-pull-下載遠端數據庫-1"><a href="#git-pull-下載遠端數據庫-1" class="headerlink" title="git pull - 下載遠端數據庫"></a>git pull - 下載遠端數據庫</h2><p>所以，同事就在這個clone的資料夾中，使用<code>git pull</code>的指令將遠端數據庫下載下來。<br>此時，他再輸入一次<code>git log</code>，就會發現我剛剛的修改紀錄，如此，就可以建基於我剛剛修改完的內容，<br>再繼續修改囉。</p>
+<h1 id="git-pull-衝突篇"><a href="#git-pull-衝突篇" class="headerlink" title="git pull - 衝突篇"></a>git pull - 衝突篇</h1><p>有些時候是沒有辦法直接將當地的專案檔push到Github中的。<br>step1.<br>當今天同事和我都同時將github的最新版本存到自己的工作目錄中了。<br>step2.<br>但是，下班之後，我又有小改一些檔案，然後，push到github上面。<br>step3.<br>等到明天上班之後，同事直接用昨天pull下來的檔案直接開發。<br>等到他開發完，提交完索引，提交完commit更新資訊後，使用git push的指令，<br>會發現錯誤。<br><img src="/image/git_pull1.png" alt="git_pill1"><br>此時，他就需要使用git pull的指令，先把最新的程式碼從github中拉下來，<br>但是，在git pull的過程中，如果沒有發生衝突的話，專案檔就會自動合併成功。<br>如果有發生衝突的話，同事就必須手動確認這些衝突的部分。</p>
+<p>step4.<br>等到，同事完成git pull之後，並合併成功後，他就直接輸入git push，<br>就可以成功將合併完成的檔案上傳到github中囉。<br><img src="/image/git_pull2.png"></p>
+<p>step5.<br>接著，等到我也要修改這個Project的時候，就換我要先把專案檔從Github pull下來，才能繼續修改。<br>所以，最後大家的gihub結構會變成下面這樣。<br><img src="/image/git_pull3.png"></p>
+<h1 id="Github-Pages-存放網頁空間流程"><a href="#Github-Pages-存放網頁空間流程" class="headerlink" title="Github Pages - 存放網頁空間流程"></a>Github Pages - 存放網頁空間流程</h1><p>去你想要渲染出網頁的那個repository中的Settings頁面，<br>會有一個GitHub Pages的部分，接著，裡面有Source選項，<br>你就選擇看你想要渲染出哪個分支的網頁在github pages中。</p>
+<p>接著，按下，Save，此時應該就會跳出來該靜態網頁的連結網址囉。</p>
+<p>最後，下面有一個Theme Chooser的選項，<br>擬就隨便選一個主題，然後，儲存它，這樣一來你應該就可以成功的在<br>gitpages提供的網址上看到你的網頁囉。</p>
+<p>這部分的設定，我自己有<a href="/2021/01/19/%E9%83%A8%E5%B1%AC%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99%E5%88%B0Github-Pages%E9%81%87%E5%88%B0%E7%9A%84%E5%95%8F%E9%A1%8C/" title="另外記錄一篇">另外記錄一篇</a>，可以看一下~</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Github/" rel="tag"># Github</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%88%86%E6%94%AF-branch/" rel="prev" title="github課程筆記-Git分支(branch)">
+      <i class="fa fa-chevron-left"></i> github課程筆記-Git分支(branch)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git-remote-%E9%81%A0%E7%AB%AF%E6%95%B8%E6%93%9A%E5%BA%AB"><span class="nav-number">1.</span> <span class="nav-text">git remote - 遠端數據庫</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-remote-%E6%9F%A5%E8%A9%A2%E9%81%A0%E7%AB%AF%E6%95%B8%E6%93%9A%E5%BA%AB"><span class="nav-number">1.1.</span> <span class="nav-text">git remote - 查詢遠端數據庫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-push-%E9%81%A0%E7%AB%AF%E6%95%B8%E6%93%9A%E5%BA%AB%E5%90%8D%E7%A8%B1-%E5%88%86%E6%94%AF%E5%90%8D%E7%A8%B1"><span class="nav-number">1.2.</span> <span class="nav-text">git push 遠端數據庫名稱 分支名稱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-remote-rename-%E9%87%8D%E6%96%B0%E5%91%BD%E5%90%8D%E9%81%A0%E7%AB%AF%E6%95%B8%E6%93%9A%E5%BA%AB%E7%9A%84%E5%90%8D%E7%A8%B1"><span class="nav-number">1.3.</span> <span class="nav-text">git remote rename - 重新命名遠端數據庫的名稱</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-pull-%E4%B8%8B%E8%BC%89%E9%81%A0%E7%AB%AF%E6%95%B8%E6%93%9A%E5%BA%AB"><span class="nav-number">2.</span> <span class="nav-text">git pull - 下載遠端數據庫</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-pull-%E4%B8%8B%E8%BC%89%E9%81%A0%E7%AB%AF%E6%95%B8%E6%93%9A%E5%BA%AB-1"><span class="nav-number">2.1.</span> <span class="nav-text">git pull - 下載遠端數據庫</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-pull-%E8%A1%9D%E7%AA%81%E7%AF%87"><span class="nav-number">3.</span> <span class="nav-text">git pull - 衝突篇</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Github-Pages-%E5%AD%98%E6%94%BE%E7%B6%B2%E9%A0%81%E7%A9%BA%E9%96%93%E6%B5%81%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">Github Pages - 存放網頁空間流程</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
