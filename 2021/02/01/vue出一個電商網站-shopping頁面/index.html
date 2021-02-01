@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="這邊紀錄的內容是專門撰寫有關使用者在使用的shopping的頁面，跟之前紀錄的管理者在使用的狀態是不一樣的喔~~ Dashboard 新增模擬購物頁面 - 新增卡片式產品列表step1.首先，先在pages資料夾中，新建一個CustomerOrder的元件檔。step2.在index.js中引入這個CustomerOrder元件。 123456789101112131415161718192021">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue出一個電商網站-shopping頁面">
+<meta property="og:url" content="http://example.com/2021/02/01/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-shopping%E9%A0%81%E9%9D%A2/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="這邊紀錄的內容是專門撰寫有關使用者在使用的shopping的頁面，跟之前紀錄的管理者在使用的狀態是不一樣的喔~~ Dashboard 新增模擬購物頁面 - 新增卡片式產品列表step1.首先，先在pages資料夾中，新建一個CustomerOrder的元件檔。step2.在index.js中引入這個CustomerOrder元件。 123456789101112131415161718192021">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/image/coupon_code.png">
+<meta property="og:image" content="http://example.com/image/coupon_code1.png">
+<meta property="article:published_time" content="2021-02-01T02:28:43.000Z">
+<meta property="article:modified_time" content="2021-02-01T02:54:16.871Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/coupon_code.png">
+
+<link rel="canonical" href="http://example.com/2021/02/01/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-shopping%E9%A0%81%E9%9D%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>vue出一個電商網站-shopping頁面 | Landy Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/01/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-shopping%E9%A0%81%E9%9D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue出一個電商網站-shopping頁面
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-01 10:28:43 / Modified: 10:54:16" itemprop="dateCreated datePublished" datetime="2021-02-01T10:28:43+08:00">2021-02-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>這邊紀錄的內容是專門撰寫有關使用者在使用的shopping的頁面，<br>跟之前紀錄的管理者在使用的狀態是不一樣的喔~~</p>
+<h1 id="Dashboard-新增模擬購物頁面-新增卡片式產品列表"><a href="#Dashboard-新增模擬購物頁面-新增卡片式產品列表" class="headerlink" title="Dashboard 新增模擬購物頁面 - 新增卡片式產品列表"></a>Dashboard 新增模擬購物頁面 - 新增卡片式產品列表</h1><p>step1.<br>首先，先在pages資料夾中，新建一個CustomerOrder的元件檔。<br>step2.<br>在index.js中引入這個CustomerOrder元件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">---index.js檔案---</span><br><span class="line">import CustomerOrder from &#39;@&#x2F;components&#x2F;pages&#x2F;CustomerOrder&#39;  &#x2F;&#x2F; 引入CustomerOrder元件</span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#39;*&#39;,</span><br><span class="line">      redirect:&#39;login&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#39;&#x2F;login&#39;,</span><br><span class="line">      name: &#39;Login&#39;,</span><br><span class="line">      component: Login</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;admin&#39;,</span><br><span class="line">      name: &#39;HelloWorld&#39;,</span><br><span class="line">      component: DashBoard,</span><br><span class="line">      meta: &#123; requiresAuth: true &#125;,</span><br><span class="line">      children:[</span><br><span class="line">        &#123;</span><br><span class="line">          path:&#39;products&#39;,</span><br><span class="line">          name: &#39;Products&#39;,</span><br><span class="line">          component: Products,</span><br><span class="line">          meta: &#123; requiresAuth: true &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          path:&#39;order&#39;,</span><br><span class="line">          name: &#39;order&#39;,</span><br><span class="line">          component: Order,</span><br><span class="line">          meta: &#123; requiresAuth: true &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          path:&#39;coupon&#39;,</span><br><span class="line">          name: &#39;coupon&#39;,</span><br><span class="line">          component: Coupon,</span><br><span class="line">          meta: &#123; requiresAuth: true &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;  &#x2F;&#x2F; 引入 CustomerOrder的路徑</span><br><span class="line">      path: &#39;&#x2F;&#39;,</span><br><span class="line">      name: &#39;HelloWorld&#39;,</span><br><span class="line">      component: DashBoard,</span><br><span class="line">      children:[</span><br><span class="line">        &#123;</span><br><span class="line">          path:&#39;customer_order&#39;,</span><br><span class="line">          name: &#39;CustomerOrder&#39;,</span><br><span class="line">          component: CustomerOrder,</span><br><span class="line">        &#125;,</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>這邊要注意一下CustomerOrder的路徑，它就不是掛在admin後面，是直接首頁的後面，<br>而且這個頁面也不需要驗證就可以登入進去，因為，它是使用者在用的頁面。<br>不過，要特別注意的是，它也是屬於DahBoard的巢狀router之一喔。</p>
+<a id="more"></a>
+<p>step3.<br>記得去sidebar的元件中加入連到這個頁面的連結</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---sidebar.vue元件檔---</span><br><span class="line">&lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">	&lt;router-link class&#x3D;&quot;nav-link&quot; to&#x3D;&quot;&#x2F;customer_order&quot;&gt;&lt;i class&#x3D;&quot;fas fa-shopping-cart mr-1&quot;&gt;&lt;&#x2F;i&gt;模擬訂單&lt;&#x2F;router-link&gt; </span><br><span class="line">&lt;&#x2F;li&gt;</span><br></pre></td></tr></table></figure>
+
+<p>step4.<br>接著，你就去把取得商品列表的api接進來。<br>在六角課程有提供<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E5%8F%96%E5%BE%97%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8">這個api</a><br>你要記得，這邊的話是要用客戶免驗證那邊的api，不是用後台的那一個admin的api喔。</p>
+<p>step5.<br>將網上提供的模擬訂單的card模板拉到你的這個CustomerOrder元件檔中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---CusteomerOrder.vue元件檔---</span><br><span class="line">&lt;div class&#x3D;&quot;card border-0 shadow-sm&quot;&gt;</span><br><span class="line">	&lt;div style&#x3D;&quot;height: 150px; background-size: cover; background-position: center&quot; :style&#x3D;&quot;&#123;backgroundImage:&#96;url($&#123;item.imageUrl&#125;)&#96;&#125;&quot;&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;card-body&quot;&gt;</span><br><span class="line">	&lt;span class&#x3D;&quot;badge badge-secondary float-right ml-2&quot;&gt;分類&lt;&#x2F;span&gt;</span><br><span class="line">	&lt;h5 class&#x3D;&quot;card-title&quot;&gt;</span><br><span class="line">		&lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;text-dark&quot;&gt;標題&lt;&#x2F;a&gt;</span><br><span class="line">	&lt;&#x2F;h5&gt;</span><br><span class="line">	&lt;p class&#x3D;&quot;card-text&quot;&gt;內容&lt;&#x2F;p&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;d-flex justify-content-between align-items-baseline&quot;&gt;</span><br><span class="line">		&lt;!-- &lt;div class&#x3D;&quot;h5&quot;&gt;2,800 元&lt;&#x2F;div&gt; --&gt;</span><br><span class="line">		&lt;del class&#x3D;&quot;h6&quot;&gt;原價 2,800 元&lt;&#x2F;del&gt;</span><br><span class="line">		&lt;div class&#x3D;&quot;h5&quot;&gt;現在只要 1,400 元&lt;&#x2F;div&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>你要特別注意一下這邊card的背景圖案引用圖片的寫法，原本的<code>background-image</code>要寫成駝峰式<code>backgroundImag</code>這樣才<br>有辦法吃到這個css樣式。</p>
+<h1 id="取得單一產品"><a href="#取得單一產品" class="headerlink" title="取得單一產品"></a>取得單一產品</h1><p>此小節要完成，當你點擊查看更多的按鈕時，會挑出一個大Modal，呈現該品項的詳細資訊。<br>step1.<br>取得單一商品也有它自己的api喔。<br>以下就是六角提供的<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E5%96%AE%E4%B8%80%E5%95%86%E5%93%81%E7%B4%B0%E7%AF%80">單一商品api</a></p>
+<p>step2.<br>我們先在customer_order元件檔中，新增一個getProduct的方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">---customer_order.vue元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-outline-secondary btn-sm&quot; @click&#x3D;&quot;getProduct(item.id)&quot;&gt;</span><br><span class="line">		&lt;i class&#x3D;&quot;fas fa-spinner fa-spin&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">		查看更多</span><br><span class="line">	&lt;&#x2F;button&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	data()&#123;</span><br><span class="line">		return &#123;</span><br><span class="line">			pagination:&#123;&#125;,</span><br><span class="line">			products:[],</span><br><span class="line">			product:&#123;&#125;,   &#x2F;&#x2F; 新增product物件</span><br><span class="line">			tempProduct:&#123;&#125;,</span><br><span class="line">			isLoading:false,</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	methods:&#123;</span><br><span class="line">		</span><br><span class="line">		getProduct(id)&#123;</span><br><span class="line">			const vm &#x3D; this;</span><br><span class="line">			const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;product&#x2F;$&#123;id&#125;&#96;;</span><br><span class="line">			this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">				vm.product &#x3D; response.data.product;</span><br><span class="line">				</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>step3.<br>接著，我們就引用使用Modal的部分。<br>所以，我們一樣需要引用jQuery</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">	import $ from &#39;jquery&#39;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>step4.<br>那在跳出來的樣式的modal，我們就先沿用之前的productModal的樣式。<br>裡面的一些樣式，你還是要自己修改<br>那以下是我自己寫的Modal樣式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;modal fade&quot; id&#x3D;&quot;productModal&quot; tabindex&#x3D;&quot;-1&quot; role&#x3D;&quot;dialog&quot; aria-labelledby&#x3D;&quot;exampleModalLabel&quot; aria-hidden&#x3D;&quot;true&quot;&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;modal-dialog modal-lg&quot; role&#x3D;&quot;document&quot;&gt;</span><br><span class="line">		&lt;div class&#x3D;&quot;modal-content border-0&quot;&gt;</span><br><span class="line">		&lt;div class&#x3D;&quot;modal-header text-dark&quot;&gt;</span><br><span class="line">			&lt;h3 class&#x3D;&quot;modal-title&quot; id&#x3D;&quot;exampleModalLabel&quot;&gt;</span><br><span class="line">			&lt;span class&#x3D;&quot;font-weight-bold&quot;&gt;&#123;&#123;product.title&#125;&#125;&lt;&#x2F;span&gt;</span><br><span class="line">			&lt;&#x2F;h3&gt;</span><br><span class="line">			&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; data-dismiss&#x3D;&quot;modal&quot; aria-label&#x3D;&quot;Close&quot;&gt;</span><br><span class="line">			&lt;span aria-hidden&#x3D;&quot;true&quot;&gt;&amp;times;&lt;&#x2F;span&gt;</span><br><span class="line">			&lt;&#x2F;button&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;div class&#x3D;&quot;modal-body&quot;&gt;</span><br><span class="line">			&lt;div class&#x3D;&quot;card&quot;&gt;</span><br><span class="line">				&lt;img class&#x3D;&quot;card-img-top&quot; :src&#x3D; &quot;product.imageUrl&quot; alt&#x3D;&quot;Card image cap&quot;&gt;</span><br><span class="line">				&lt;div class&#x3D;&quot;card-body&quot;&gt;</span><br><span class="line">					&lt;h5 class&#x3D;&quot;card-title&quot;&gt;&#123;&#123;product.description&#125;&#125;&lt;&#x2F;h5&gt;</span><br><span class="line">					&lt;div class&#x3D;&quot;d-flex justify-content-between align-items-end&quot;&gt;</span><br><span class="line">						&lt;del class&#x3D;&quot;h4&quot;&gt;原價&#123;&#123;product.origin_price&#125;&#125;元&lt;&#x2F;del&gt;</span><br><span class="line">						&lt;strong class&#x3D;&quot;h2&quot;&gt;現在只要&#123;&#123;product.price&#125;&#125;元&lt;&#x2F;strong&gt;</span><br><span class="line">					&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">					&lt;div class&#x3D;&quot;form-group mt-3&quot;&gt;</span><br><span class="line">						&lt;select class&#x3D;&quot;form-control form-control-lg&quot; aria-label&#x3D;&quot;Default select example&quot;&gt;</span><br><span class="line">						&lt;option selected disabled value&#x3D;&quot;&quot;&gt;---選購商品---&lt;&#x2F;option&gt;</span><br><span class="line">						&lt;option value&#x3D;&quot;1&quot;&gt;選購1件&lt;&#x2F;option&gt;</span><br><span class="line">						&lt;option value&#x3D;&quot;2&quot;&gt;選購2件&lt;&#x2F;option&gt;</span><br><span class="line">						&lt;option value&#x3D;&quot;3&quot;&gt;選購3件&lt;&#x2F;option&gt;</span><br><span class="line">						&lt;&#x2F;select&gt;</span><br><span class="line">					&lt;&#x2F;div&gt; </span><br><span class="line">					</span><br><span class="line">				&lt;&#x2F;div&gt;</span><br><span class="line">			&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;div class&#x3D;&quot;modal-footer&quot;&gt;</span><br><span class="line">			&lt;span class&#x3D;&quot;h4 text-muted&quot;&gt;小計 &#123;&#123;product.price&#125;&#125; 元&lt;&#x2F;span&gt;</span><br><span class="line">			&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;加到購物車&lt;&#x2F;button&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>step5.<br>接著，我們要專門新增一個變數，用來放Modal目前正在顯示的物品的id。<br>並透過這個變數，來判斷目前是哪個產品在loading中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-outline-secondary btn-sm&quot; @click&#x3D;&quot;getProduct(item.id)&quot;&gt;</span><br><span class="line">		&lt;i class&#x3D;&quot;fas fa-spinner fa-spin&quot; v-if&#x3D;&quot;status.loadingItem&#x3D;&#x3D;&#x3D;item.id&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">		查看更多</span><br><span class="line">	&lt;&#x2F;button&gt;</span><br><span class="line">	&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-outline-danger btn-sm ml-auto&quot;&gt;</span><br><span class="line">		&lt;i class&#x3D;&quot;fas fa-spinner fa-spin&quot; v-if&#x3D;&quot;status.loadingItem&#x3D;&#x3D;&#x3D;item.id&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">		加到購物車</span><br><span class="line">	&lt;&#x2F;button&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    import $ from &#39;jquery&#39;;   &#x2F;&#x2F; 引入jquery</span><br><span class="line">    import pagination from &#39;.&#x2F;pagination&#39;;</span><br><span class="line"></span><br><span class="line">    export default&#123;</span><br><span class="line">        data()&#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                pagination:&#123;&#125;,</span><br><span class="line">                products:[],</span><br><span class="line">                product:&#123;&#125;,</span><br><span class="line">                tempProduct:&#123;&#125;,</span><br><span class="line">                isLoading:false,</span><br><span class="line">                status:&#123;              &#x2F;&#x2F; 新增status變數</span><br><span class="line">                    loadingItem: &#39;&#39;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            getProducts(page &#x3D; 1)&#123;</span><br><span class="line">                const vm &#x3D; this;</span><br><span class="line">                const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;products?page&#x3D;$&#123;page&#125;&#96;;</span><br><span class="line">                vm.isLoading &#x3D; true;</span><br><span class="line">                this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">                    </span><br><span class="line">                    vm.isLoading &#x3D; false;</span><br><span class="line">                    vm.products &#x3D; response.data.products;</span><br><span class="line">                    </span><br><span class="line">                    vm.pagination &#x3D; response.data.pagination;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;,</span><br><span class="line">            getProduct(id)&#123;</span><br><span class="line">                const vm &#x3D; this;</span><br><span class="line">                const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;product&#x2F;$&#123;id&#125;&#96;;</span><br><span class="line">                vm.status.loadingItem &#x3D; id;   &#x2F;&#x2F; 存取丟進來的id</span><br><span class="line">                this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">                    $(&#39;#productModal&#39;).modal(&#39;show&#39;);</span><br><span class="line">                    vm.product &#x3D; response.data.product;</span><br><span class="line">                    console.log(vm.product);</span><br><span class="line">                    vm.status.loadingItem &#x3D; &#39;&#39;;  &#x2F;&#x2F; 完成之後，將這個id還原成預設值</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        created()&#123;</span><br><span class="line">            this.getProducts();   </span><br><span class="line">        &#125;,</span><br><span class="line">        components:&#123;</span><br><span class="line">            pagination,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>你可以看到，我們在察看更多 和 加到購物車 這兩個按鈕加入了，判斷當下的loadingItem的值<br>是不是跟該樣品的id一樣，如果一樣的話，就會跑fontawesome的動畫特效。</p>
+<h1 id="購產品及加入購物車"><a href="#購產品及加入購物車" class="headerlink" title="購產品及加入購物車"></a>購產品及加入購物車</h1><p>本小節要教怎麼寫加入到購物車的功能。<br>step1.<br>這邊要注意，加入購物車的功能，只會傳入該產品的id和數量。<br>那加入購物車也有<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E5%8A%A0%E5%85%A5%E8%B3%BC%E7%89%A9%E8%BB%8A">自己的api網址</a> 喔 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">---CustomerOrder.vue---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-outline-danger btn-sm ml-auto&quot; @click&#x3D;&quot;addToCart(item.id)&quot;&gt;</span><br><span class="line">		&lt;i class&#x3D;&quot;fas fa-spinner fa-spin&quot; v-if&#x3D;&quot;status.loadingItem&#x3D;&#x3D;&#x3D;item.id&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">		加到購物車</span><br><span class="line">	&lt;&#x2F;button&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    </span><br><span class="line">methods:&#123;</span><br><span class="line">		</span><br><span class="line">	addToCart(id, qty &#x3D; 1)&#123;</span><br><span class="line">		const vm &#x3D; this;</span><br><span class="line">		const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;cart&#96;;</span><br><span class="line">		vm.status.loadingItem &#x3D; id;</span><br><span class="line">		const cart &#x3D; &#123;</span><br><span class="line">			product_id : id,</span><br><span class="line">			qty</span><br><span class="line">		&#125;</span><br><span class="line">		this.$http.post(api, &#123;data: cart&#125;).then((response) &#x3D;&gt; &#123;  </span><br><span class="line">			console.log(response);</span><br><span class="line">			vm.status.loadingItem &#x3D; &#39;&#39;;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>以上你就可以看到，我們加入了addToCart的方法，並傳入產品id和數量(預設是1)，<br>並創一個物件cart把這兩個值包起來，丟到後端去。<br>step2.<br>把跳出來的Modal也加上加到購物車的效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;modal fade&quot; id&#x3D;&quot;productModal&quot; tabindex&#x3D;&quot;-1&quot; role&#x3D;&quot;dialog&quot; aria-labelledby&#x3D;&quot;exampleModalLabel&quot; aria-hidden&#x3D;&quot;true&quot;&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;modal-dialog modal-lg&quot; role&#x3D;&quot;document&quot;&gt;</span><br><span class="line">		&lt;div class&#x3D;&quot;modal-content border-0&quot;&gt;</span><br><span class="line">		&lt;div class&#x3D;&quot;modal-header text-dark&quot;&gt;</span><br><span class="line">			&lt;h3 class&#x3D;&quot;modal-title&quot; id&#x3D;&quot;exampleModalLabel&quot;&gt;</span><br><span class="line">			&lt;span class&#x3D;&quot;font-weight-bold&quot;&gt;&#123;&#123;product.title&#125;&#125;&lt;&#x2F;span&gt;</span><br><span class="line">			&lt;&#x2F;h3&gt;</span><br><span class="line">			&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; data-dismiss&#x3D;&quot;modal&quot; aria-label&#x3D;&quot;Close&quot;&gt;</span><br><span class="line">			&lt;span aria-hidden&#x3D;&quot;true&quot;&gt;&amp;times;&lt;&#x2F;span&gt;</span><br><span class="line">			&lt;&#x2F;button&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;div class&#x3D;&quot;modal-body&quot;&gt;</span><br><span class="line">			&lt;div class&#x3D;&quot;card&quot;&gt;</span><br><span class="line">				&lt;img class&#x3D;&quot;card-img-top&quot; :src&#x3D; &quot;product.imageUrl&quot; alt&#x3D;&quot;Card image cap&quot;&gt;</span><br><span class="line">				&lt;div class&#x3D;&quot;card-body&quot;&gt;</span><br><span class="line">					&lt;h5 class&#x3D;&quot;card-title&quot;&gt;&#123;&#123;product.description&#125;&#125;&lt;&#x2F;h5&gt;</span><br><span class="line">					&lt;div class&#x3D;&quot;d-flex justify-content-between align-items-end&quot;&gt;</span><br><span class="line">						&lt;del class&#x3D;&quot;h4&quot;&gt;原價&#123;&#123;product.origin_price&#125;&#125;元&lt;&#x2F;del&gt;</span><br><span class="line">						&lt;strong class&#x3D;&quot;h2&quot;&gt;現在只要&#123;&#123;product.price&#125;&#125;元&lt;&#x2F;strong&gt;</span><br><span class="line">					&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">					&lt;div class&#x3D;&quot;form-group mt-3&quot;&gt;</span><br><span class="line">						&lt;select class&#x3D;&quot;form-control form-control-lg&quot; aria-label&#x3D;&quot;Default select example&quot; v-model&#x3D;&quot;product.num&quot;&gt;  &#x2F;&#x2F; 將選擇的數量綁在product的num屬性上</span><br><span class="line">							&lt;option :value&#x3D;&quot;num&quot; v-for&#x3D;&quot;num in 10&quot; :key&#x3D;&quot;num&quot;&gt;選購&#123;&#123;num&#125;&#125; &#123;&#123;product.unit&#125;&#125;&lt;&#x2F;option&gt;   &#x2F;&#x2F; 動態產生10個選項</span><br><span class="line">							</span><br><span class="line">						&lt;&#x2F;select&gt;</span><br><span class="line">					&lt;&#x2F;div&gt; </span><br><span class="line">					</span><br><span class="line">				&lt;&#x2F;div&gt;</span><br><span class="line">			&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;div class&#x3D;&quot;modal-footer&quot;&gt;</span><br><span class="line">			&lt;span class&#x3D;&quot;h4 text-muted&quot;&gt;小計 &#123;&#123;product.price*product.num&#125;&#125; 元&lt;&#x2F;span&gt;   &#x2F;&#x2F; 計算總共多少錢</span><br><span class="line">			&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; @click&#x3D;&quot;addToCart(product.id, product.num)&quot;&gt;加到購物車&lt;&#x2F;button&gt;  &#x2F;&#x2F; 將product.id和選購數量丟到addToCart中</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>以上的部分就是為跳出來的Modal新增的部分，最主要是在<code>&lt;select&gt;</code>標籤那邊為它綁定product.num的屬性，以取得選購了多少商品。</p>
+<p>step3.<br>取得購物車列表也有<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E5%8A%A0%E5%85%A5%E8%B3%BC%E7%89%A9%E8%BB%8A">自己的api</a> 喔。<br>那它會回傳一個陣列，裏面包含了所有選購商品，另外，它也回傳總價 和 經過優惠券計算之後的價格。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">	addToCart(id, qty &#x3D; 1)&#123;</span><br><span class="line">		const vm &#x3D; this;</span><br><span class="line">		const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;cart&#96;;</span><br><span class="line">		vm.status.loadingItem &#x3D; id;</span><br><span class="line">		const cart &#x3D; &#123;</span><br><span class="line">			product_id : id,</span><br><span class="line">			qty</span><br><span class="line">		&#125;</span><br><span class="line">		this.$http.post(api, &#123;data: cart&#125;).then((response) &#x3D;&gt; &#123;  </span><br><span class="line">			console.log(response);</span><br><span class="line">			vm.status.loadingItem &#x3D; &#39;&#39;;</span><br><span class="line">			$(&#39;#productModal&#39;).modal(&#39;hide&#39;);</span><br><span class="line">		&#125;)</span><br><span class="line">		vm.getCart(); &#x2F;&#x2F; 取得購物車列表</span><br><span class="line">	&#125;,</span><br><span class="line">	getCart()&#123;</span><br><span class="line">		const vm &#x3D; this;</span><br><span class="line">		const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;cart&#96;;</span><br><span class="line">		this.$http.get(api).then((response) &#x3D;&gt; &#123;  </span><br><span class="line">			console.log(response);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br><span class="line">created()&#123;</span><br><span class="line">	this.getProducts();  </span><br><span class="line">	this.getCart();  &#x2F;&#x2F; 取得購物車列表</span><br><span class="line">&#125;,</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+<p>你可以看到我們除了增加了取得購物車列表的方法getCart之外，我們也分別在<code>created</code>和完成增加購物車的這兩個動作之後，<br>也分別加上了取得購物車列表的功能喔。</p>
+<h1 id="刪除購物車品項及新增優惠碼"><a href="#刪除購物車品項及新增優惠碼" class="headerlink" title="刪除購物車品項及新增優惠碼"></a>刪除購物車品項及新增優惠碼</h1><p>step1.<br>刪除某一筆購物車內的資料</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;tr v-for&#x3D;&quot;(item, key) in cartTotal&quot; :key&#x3D;&quot;key&quot;&gt;</span><br><span class="line">		&lt;td&gt;</span><br><span class="line">			&lt;a class&#x3D;&quot;btn fas fa-trash-alt btn-outline-danger rounded&quot; @click.prevent&#x3D;&quot;delCart(item.id)&quot;&gt;&lt;&#x2F;a&gt; </span><br><span class="line">		&lt;&#x2F;td&gt;</span><br><span class="line">		&lt;td&gt;&#123;&#123;item.product.title&#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">		&lt;td&gt;&#123;&#123;item.qty&#125;&#125;&#x2F;&#123;&#123;item.unit&#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">		&lt;td class&#x3D;&quot;text-right&quot;&gt;&#123;&#123;item.total&#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">	&lt;&#x2F;tr&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	methods:&#123;</span><br><span class="line">		delCart(id)&#123;</span><br><span class="line">			const vm &#x3D; this;</span><br><span class="line">			console.log(id);</span><br><span class="line">			vm.isLoading &#x3D; true;</span><br><span class="line">			const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;cart&#x2F;$&#123;id&#125;&#96;;</span><br><span class="line">			this.$http.delete(api).then((response) &#x3D;&gt; &#123;  </span><br><span class="line">				vm.isLoading &#x3D; false;</span><br><span class="line">				console.log(response);</span><br><span class="line">				this.getCart(); </span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，在刪除的按鈕連動到刪除購物車產品的方法delCart。<br>如此就可以刪除該購物車項目囉。</p>
+<p>另外，要注意，當購物車有加入產品的時候，購物車列表才會顯現出來，不然，就不要產出來。</p>
+<p>step2.<br>套用優惠碼的功能。<br>那在課程中也是有提供，套用優惠券的api喔。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;input-group w-50&quot;&gt;</span><br><span class="line">		&lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Username&quot; v-model&#x3D;&quot;coupon_code&quot; aria-label&#x3D;&quot;Username&quot; aria-describedby&#x3D;&quot;basic-addon1&quot;&gt;</span><br><span class="line">		&lt;div class&#x3D;&quot;input-group-append&quot;&gt;</span><br><span class="line">			&lt;button class&#x3D;&quot;btn btn-primary&quot; id&#x3D;&quot;basic-addon1&quot; @click&#x3D;&quot;addCouponCode&quot;&gt;套用優惠碼&lt;&#x2F;button&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">addCouponCode()&#123;</span><br><span class="line">	const vm &#x3D; this;</span><br><span class="line">	</span><br><span class="line">	vm.isLoading &#x3D; true;</span><br><span class="line">	const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;coupon&#96;;</span><br><span class="line">	const coupon &#x3D; &#123;</span><br><span class="line">		code:vm.coupon_code</span><br><span class="line">	&#125;</span><br><span class="line">	this.$http.post(api, &#123;data:coupon&#125;).then((response) &#x3D;&gt; &#123;  </span><br><span class="line">		this.getCart();  &#x2F;&#x2F; 取得購物車列表</span><br><span class="line">		vm.isLoading &#x3D; false;</span><br><span class="line">	&#125;)</span><br><span class="line">	 </span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，我們額外新增了一個coupon_code的屬性來綁定輸入的coupon內容，接著，在addCouponCode的方法裡面，<br>在新增一個變數coupon物件，來將coupon_code包起來，丟到後端api就可以囉。</p>
+<p>step3.<br>那當你輸入正確的coupon_code後，就會跳出不一樣的total和final_total，<br>那每一個品項也都會有不一樣的品項價格<br><img src="/image/coupon_code.png"><br>所以，就介面上就要加入哪個產品有加套入優惠券的字樣喔。<br><img src="/image/coupon_code1.png"></p>
+<h1 id="建立訂單及表單驗證技巧"><a href="#建立訂單及表單驗證技巧" class="headerlink" title="*建立訂單及表單驗證技巧"></a>*建立訂單及表單驗證技巧</h1><p>這邊除了要做出送出表單的功能外，還要做出表單驗證的功能。<br>這邊我們就會用一個叫<code>vee-validate</code>的套件來實做出這個功能。<br>step1.<br>你可以將<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue-course-api-wiki/wiki/%E8%AA%B2%E7%A8%8B%E9%83%A8%E5%88%86%E6%A8%A1%E6%9D%BF#%E5%BB%BA%E7%AB%8B%E8%A8%82%E5%96%AE%E5%8F%8A%E8%B3%BC%E7%89%A9%E8%BB%8A%E9%A0%81%E9%9D%A2%E9%A9%97%E8%AD%89">網上提供的公版</a> 先抓下來使用。<br>step2.<br>接著，你去<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue-course-api-wiki/wiki/%E8%AA%B2%E7%A8%8B%E9%83%A8%E5%88%86%E6%A8%A1%E6%9D%BF#%E5%BB%BA%E7%AB%8B%E8%A8%82%E5%96%AE%E5%8F%8A%E8%B3%BC%E7%89%A9%E8%BB%8A%E9%A0%81%E9%9D%A2%E9%A9%97%E8%AD%89">結帳頁面的api</a><br>可以看到你回傳的資料格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">	&quot;user&quot;: &#123;</span><br><span class="line">	  &quot;name&quot;: &quot;test&quot;,</span><br><span class="line">	  &quot;email&quot;: &quot;test@gmail.com&quot;,</span><br><span class="line">	  &quot;tel&quot;: &quot;0912346768&quot;,</span><br><span class="line">	  &quot;address&quot;: &quot;kaohsiung&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;message&quot;: &quot;這是留言&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而為了要跟這個格式一樣，所以，我們也創出了以下的資料成員，並將它們分別綁入每個結帳頁面中的對應欄位中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">data:&#123;</span><br><span class="line">	form:&#123;</span><br><span class="line">		user:&#123;</span><br><span class="line">			name:&#39;&#39;,</span><br><span class="line">			email:&#39;&#39;,</span><br><span class="line">			tel:&#39;&#39;,</span><br><span class="line">			address:&#39;&#39;,</span><br><span class="line">		&#125;,</span><br><span class="line">		message:&#39;&#39;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>step3.<br>製作提交的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;form @submit.prevent&#x3D;&quot;createOrder&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">methods:&#123;</span><br><span class="line">	createOrder()&#123;</span><br><span class="line">		const vm &#x3D; this; </span><br><span class="line">		vm.isLoading &#x3D; true;</span><br><span class="line">		const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;order&#96;;</span><br><span class="line">		</span><br><span class="line">		this.$http.post(api).then((response) &#x3D;&gt; &#123;  </span><br><span class="line">			console.log(&#39;訂單已建立&#39;, response);</span><br><span class="line">			vm.isLoading &#x3D; false;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上你可以看到我們新增了createOrder方法之外，也在<code>form</code>標籤上新增了綁定createOrder的提交事件。</p>
+<p>step4.</p>
+<h2 id="安裝表單驗證工具vee-validate"><a href="#安裝表單驗證工具vee-validate" class="headerlink" title="安裝表單驗證工具vee-validate"></a>安裝表單驗證工具vee-validate</h2><p>a.<br>首先，先輸入指令<code>npm install vee-validate --save</code><br>安裝這個套件。<br>b.<br>接下來就到main.js檔案中，來引用這個套件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---main.js---</span><br><span class="line"></span><br><span class="line">import VeeValidate from &#39;vee-validate&#39;;  &#x2F;&#x2F; 注入vee-validate</span><br><span class="line"></span><br><span class="line">Vue.use(VueAxios, axios)</span><br><span class="line">Vue.use(VeeValidate);   &#x2F;&#x2F; 啟用 vee-validate</span><br></pre></td></tr></table></figure>
+<h3 id="小插曲-安裝vue-i18n來支援中文化"><a href="#小插曲-安裝vue-i18n來支援中文化" class="headerlink" title="小插曲-安裝vue-i18n來支援中文化"></a>小插曲-安裝vue-i18n來支援中文化</h3><p>在這邊我們又要額外安裝<code>vue-i18n</code>這個套件來支援中文化，不然，按照當時教課的環境跟步驟是無法跑出驗證的效果喔。<br>那詳細的安裝介紹，在這位<a target="_blank" rel="noopener" href="https://hao1229.github.io/2019/08/09/EcommercePractice8/">同學的網誌</a> 上有提到，安照這個步驟裝就ok囉。</p>
+<p>step5.<br>接下來我們再表單驗證中的其中一個單位加入<code>vee-validate</code>的驗證內容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">	&lt;label for&#x3D;&quot;username&quot;&gt;收件人姓名&lt;&#x2F;label&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot;  v-validate&#x3D;&quot;&#39;required&#39;&quot; name&#x3D;&quot;name&quot; id&#x3D;&quot;username&quot;</span><br><span class="line">		v-model&#x3D;&quot;form.user.name&quot; placeholder&#x3D;&quot;輸入姓名&quot; :class&#x3D;&quot;&#123;&#39;is-invalid&#39;: errors.has(&#39;name&#39;)&#125;&quot;&gt;</span><br><span class="line">	&lt;span class&#x3D;&quot;text-danger&quot; v-if&#x3D;&quot;errors.has(&#39;name&#39;)&quot;&gt;姓名必須輸入&lt;&#x2F;span&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>這邊的寫法有幾個重點，<br>a.<br><code>input</code>欄位裡面一定要有<code>name</code>屬性，那<code>name</code>屬性裡面的內容值是自訂義的，這邊剛好是name，就看當下的情況決定。<br>b.<br>你可以看到我們在<code>input</code>欄位加入了<code>v-validate=&quot;&#39;requierd&#39;&quot;</code>，來讓這個套件知道這個欄位需要被驗證。<br>c.<br>最後，在是否跳出驗證提是內容的地方，我們利用判斷<code>v-if=&quot;errors.has(&#39;name&#39;)&quot;</code>，若它為<code>true</code>就顯示，若為<code>false</code>就不顯示。<br>那這個name就是<code>input</code>欄位的<code>name</code>屬性裡面的值。<br>d.<br>另外，我在<code>input</code>欄位裡面，也加入了透過判斷<code>errors.has(&#39;name&#39;)</code>，是否要為該<code>input</code>欄位加入紅框提示框或不用加入紅框提示框。</p>
+<p>step6.<br>接下來，我們為<code>email</code>的欄位做驗證。<br>像這種有特定內容的欄位，<code>vee-validate</code>就有特定的相對應的驗證方式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">	&lt;label for&#x3D;&quot;useremail&quot;&gt;Email&lt;&#x2F;label&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;email&quot; class&#x3D;&quot;form-control&quot; name&#x3D;&quot;email&quot; id&#x3D;&quot;useremail&quot;</span><br><span class="line">		v-model&#x3D;&quot;form.user.email&quot; placeholder&#x3D;&quot;請輸入 Email&quot; required v-validate&#x3D;&quot;&#39;required|email&#39;&quot;&gt;</span><br><span class="line">	&lt;span class&#x3D;&quot;text-danger&quot; v-if&#x3D;&quot;errors.has(&#39;email&#39;)&quot;&gt;&#123;&#123;errors.first(&#39;email&#39;)&#125;&#125;&lt;&#x2F;span&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>那你可以看到，在錯誤提示部分，我們是用官方提供的寫法<code>errors.first(&#39;email&#39;)</code>，但是，這種提示的內容是英文的，所以，接下來是介紹怎麼<br>把它弄成中文的。</p>
+<p>step7.<br>首先，你先到main.js檔案分別引入<code>vee-validate</code>的中文檔案並啟用它</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---main.js---</span><br><span class="line">import zhTWValidate from &#39;vee-validate&#x2F;dist&#x2F;locale&#x2F;zh_TW&#39;  &#x2F;&#x2F; 引入中文檔</span><br><span class="line"></span><br><span class="line">VeeValidate.Validator.localize(&#39;zh_TW&#39;, zhTWValidate);  &#x2F;&#x2F; 啟用這個這文檔</span><br></pre></td></tr></table></figure>
+<p>要注意一下，已用的啟用該中文檔是用<code>VeeValidate.Validator.localize</code>的語法，比較特別一點。</p>
+<p>step8.<br>接著，加入<code>vee-validate</code>的表單整體驗證的js程式碼，在<a target="_blank" rel="noopener" href="https://vee-validate.logaretm.com/v2/guide/events.html#disabling-events-validation">官方文件</a> 有提供。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">	methods:&#123;</span><br><span class="line">		createOrder()&#123;</span><br><span class="line">			const vm &#x3D; this; </span><br><span class="line">			</span><br><span class="line">			const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;order&#96;;</span><br><span class="line">			this.$validator.validate().then(valid &#x3D;&gt; &#123;</span><br><span class="line">				if (!valid) &#123;</span><br><span class="line">					console.log(&#39;欄位不完整&#39;);</span><br><span class="line">				&#125; else &#123;</span><br><span class="line">					this.$http.post(api).then((response) &#x3D;&gt; &#123;  </span><br><span class="line">						console.log(&#39;訂單已建立&#39;, response);</span><br><span class="line">						</span><br><span class="line">					&#125;)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，我們將提交表單的程式碼塞到<code>vee-valid</code>官方提供的驗正程式碼裡面，如此，就可以達到總表單驗證的功能囉。<br>另外，我自己改了一下發送表單的觸發程式碼</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;form class&#x3D;&quot;col-md-6&quot;&gt;  &#x2F;&#x2F; 把@submit.prevent&#x3D;&quot;createOrder&quot;拿掉</span><br><span class="line"></span><br><span class="line">	&lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">	&lt;label for&#x3D;&quot;comment&quot;&gt;留言&lt;&#x2F;label&gt;</span><br><span class="line">	&lt;textarea name&#x3D;&quot;&quot; id&#x3D;&quot;comment&quot; class&#x3D;&quot;form-control&quot; cols&#x3D;&quot;30&quot; rows&#x3D;&quot;10&quot; v-model&#x3D;&quot;form.message&quot;&gt;&lt;&#x2F;textarea&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;text-right&quot;&gt;</span><br><span class="line">		&lt;button class&#x3D;&quot;btn btn-danger&quot; type&#x3D;&quot;submit&quot; @click.prevent&#x3D;&quot;createOrder&quot;&gt;送出訂單&lt;&#x2F;button&gt;  &#x2F;&#x2F; 由它來發送表單</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到我把<code>form</code>標籤上的發送功能拿掉了，換成由送出訂單的按鈕來擔任發送表單的功能，另外，記得要為它加上<code>type=&quot;submit&quot;</code>的屬性喔。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%9C%98%E9%9A%8A%E5%90%88%E4%BD%9C%E7%AF%87/" rel="prev" title="github課程筆記-Git團隊合作篇">
+      <i class="fa fa-chevron-left"></i> github課程筆記-Git團隊合作篇
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/01/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%983/" rel="next" title="vue出一個電商網站-課程筆記3">
+      vue出一個電商網站-課程筆記3 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dashboard-%E6%96%B0%E5%A2%9E%E6%A8%A1%E6%93%AC%E8%B3%BC%E7%89%A9%E9%A0%81%E9%9D%A2-%E6%96%B0%E5%A2%9E%E5%8D%A1%E7%89%87%E5%BC%8F%E7%94%A2%E5%93%81%E5%88%97%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">Dashboard 新增模擬購物頁面 - 新增卡片式產品列表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%96%E5%BE%97%E5%96%AE%E4%B8%80%E7%94%A2%E5%93%81"><span class="nav-number">2.</span> <span class="nav-text">取得單一產品</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B3%BC%E7%94%A2%E5%93%81%E5%8F%8A%E5%8A%A0%E5%85%A5%E8%B3%BC%E7%89%A9%E8%BB%8A"><span class="nav-number">3.</span> <span class="nav-text">購產品及加入購物車</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%AA%E9%99%A4%E8%B3%BC%E7%89%A9%E8%BB%8A%E5%93%81%E9%A0%85%E5%8F%8A%E6%96%B0%E5%A2%9E%E5%84%AA%E6%83%A0%E7%A2%BC"><span class="nav-number">4.</span> <span class="nav-text">刪除購物車品項及新增優惠碼</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%A8%82%E5%96%AE%E5%8F%8A%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89%E6%8A%80%E5%B7%A7"><span class="nav-number">5.</span> <span class="nav-text">*建立訂單及表單驗證技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89%E5%B7%A5%E5%85%B7vee-validate"><span class="nav-number">5.1.</span> <span class="nav-text">安裝表單驗證工具vee-validate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E6%8F%92%E6%9B%B2-%E5%AE%89%E8%A3%9Dvue-i18n%E4%BE%86%E6%94%AF%E6%8F%B4%E4%B8%AD%E6%96%87%E5%8C%96"><span class="nav-number">5.1.1.</span> <span class="nav-text">小插曲-安裝vue-i18n來支援中文化</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
