@@ -155,6 +155,444 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98-01/" class="post-title-link" itemprop="url">Vue Router筆記-01</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-25 10:15:12" itemprop="dateCreated datePublished" datetime="2021-01-25T10:15:12+08:00">2021-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-30 15:06:41" itemprop="dateModified" datetime="2021-01-30T15:06:41+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Vue-Router-參數設定"><a href="#Vue-Router-參數設定" class="headerlink" title="Vue Router 參數設定"></a>Vue Router 參數設定</h1><p>在vue的官方文件中，有針對router的設定做了詳細的介紹，<br>像是你在router資料夾中的index.js檔中，你為各元件所設定的<code>name</code>, <code>path</code>這些屬性都是在<br>這份文件中有介紹到。</p>
+<h2 id="router-mode-可選值"><a href="#router-mode-可選值" class="headerlink" title="router mode 可選值"></a>router mode 可選值</h2><p>在課堂上有特別講到router的<code>mode</code>屬性<br><a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/api/#mode">官方文件的Router的mode介紹</a></p>
+<h3 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h3><p>這個屬性有三個值可以使用，那我們一般是用預設值<code>hash</code>，<br>也就是你的網址中路由前面會出現一個<code>#</code>號</p>
+<h3 id="history-不建議使用"><a href="#history-不建議使用" class="headerlink" title="history - 不建議使用"></a>history - 不建議使用</h3><p>那如果你設定<code>history</code>的話</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">---router資料夾中的index.js檔案---</span><br><span class="line">export default new VueRouter(&#123;</span><br><span class="line">    mode:&#39;history&#39;,  &#x2F;&#x2F; 改成history模式</span><br><span class="line">    routes:[</span><br><span class="line">        &#123;</span><br><span class="line">            name:&#39;首頁&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">            path:&#39;&#x2F;index&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">            component:Home , &#x2F;&#x2F;它所對應的原件</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &#x2F;&#x2F;name:&#39;分頁&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">            path:&#39;&#x2F;page&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">            &#x2F;&#x2F;component:Page , &#x2F;&#x2F;它所對應的原件</span><br><span class="line">            components:&#123;</span><br><span class="line">                default: Page,</span><br><span class="line">                menu: Menu,</span><br><span class="line">            &#125;,</span><br><span class="line">            children:[</span><br><span class="line">                &#123;</span><br><span class="line">                    name:&#39;child1&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">                    path:&#39;&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">                    component:child_1 , &#x2F;&#x2F;它所對應的原件    </span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    name:&#39;child2&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">                    path:&#39;child2&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">                    component:child_2 , &#x2F;&#x2F;它所對應的原件      </span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    name:&#39;child3&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">                    path:&#39;child3&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">                    component:child_3 , &#x2F;&#x2F;它所對應的原件      </span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;     </span><br><span class="line">    ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>你會發現你的網址在做路由切換的時候，<code>#</code>號不見了，<br><img src="/image/router_mode_history.png" alt="沒有#號的網址"><br>你要特別注意，當沒有<code>#</code>號的時候，它是使用後方的路由，不是只有使用前端的路由，<br>因此，當我們用<code>history</code>模式的時候，必須要前後端一起搭配，<br>所以，不建議你用這種模式喔，用預設的就好。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98-01/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">Vue Router筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-25 09:43:09" itemprop="dateCreated datePublished" datetime="2021-01-25T09:43:09+08:00">2021-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-30 15:06:48" itemprop="dateModified" datetime="2021-01-30T15:06:48+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="使用Vue-Router-及配置路由文件"><a href="#使用Vue-Router-及配置路由文件" class="headerlink" title="使用Vue Router 及配置路由文件"></a>使用Vue Router 及配置路由文件</h1><p><img src="/image/SPA_1.png" alt="user頁面"><br><img src="/image/SPA_2.png" alt="product頁面"><br>以上範例，你可以看到它們都是停留在index的網址上，<br>但是，會因為我們在#後面所接入的內容不同，來呈現不同元件的內容。<br>像現在是#/user，所以，此時是呈現user元件。<br>像現在是#/product，所以，此時是呈現Admin元件。</p>
+<p>故本節是教導怎麼建立Vue Router</p>
+<p>Router會包含幾個檔案</p>
+<p>首先，進入點<br>包含它會注入src資料夾中的元件檔和其他的component檔案。</p>
+<p>第二，新增路由的配置檔案<br>這個配置檔案會決定在哪個路由中呈現哪個元件檔案。<br>那它執行的路徑會在router/index.js 中。</p>
+<p>第三，分頁內容</p>
+<p>Vue Components 就是一些元件的檔案，例如專案檔中的Hellowolrd.vue檔。</p>
+<p>接下來，介紹安裝vue 的router步驟<br>step1.<br>先輸入 <code>npm install vue-router --save</code> 指令</p>
+<p>step2.<br>在src資料夾中，新建一個叫router的資料夾<br>在router下再新增一個叫index.js的檔案，這個檔案就是要放整個路由的配置檔。</p>
+<p>step3.<br>在index.js檔案中輸入<br><code>import Vue from &#39;vue&#39;</code><br><code>import VueRouter from &#39;vue-router&#39;</code></p>
+<p>以上這兩行呢，是將官方提供的元件給引入進來。</p>
+<p>接下來，在這兩行之後就是引入我們自己的元件囉。<br><code>import Home from &#39;@/component/HelloWorld&#39;</code><br>引入在src資料夾中的HelloWorld元件檔，並將它訂為Home</p>
+<p>step4.<br>在你引入完官方元件 和你自己的元件檔之後，<br>就是要輸入啟用的指令，<br>那你就在同一個index.js檔案中，在引入程式碼的後方輸入<code>Vue.use(VueRouter)</code><br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import VueRouter from &#39;vue-router&#39;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 以上為官方提供的元件</span><br><span class="line">import Home from &#39;@&#x2F;component&#x2F;HelloWorld&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter)  &#x2F;&#x2F; 啟用指令</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E6%93%8D%E6%8E%A7dom%E5%85%83%E7%B4%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E6%93%8D%E6%8E%A7dom%E5%85%83%E7%B4%A0/" class="post-title-link" itemprop="url">jQuery課程筆記-操控dom元素</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-23 17:14:17" itemprop="dateCreated datePublished" datetime="2021-01-23T17:14:17+08:00">2021-01-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-30 15:14:33" itemprop="dateModified" datetime="2021-01-30T15:14:33+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index"><span itemprop="name">jQuery</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="this-教你如何操作本身元素"><a href="#this-教你如何操作本身元素" class="headerlink" title="this - 教你如何操作本身元素"></a>this - 教你如何操作本身元素</h1><p><code>this</code> 指的是觸發該事件的元素<br>所以，我們利用<code>this</code>來指定觸發該事件的元素，並利用<code>this</code>來做一些操作。</p>
+<iframe src="https://codepen.io/RandyChen/embed/YzGMZOp?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<h1 id="parent-找到父階層元素"><a href="#parent-找到父階層元素" class="headerlink" title="parent() - 找到父階層元素"></a>parent() - 找到父階層元素</h1><p>利用<code>parent()</code>語法，來找到父元素，並為父元素修改它的css樣式。</p>
+<iframe src="https://codepen.io/RandyChen/embed/gOwyWWj?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>在以上的範例中，當按下<code>a</code>連結按鈕，就利用<code>parent</code>去找到它的外層父元素，也就是<code>li</code>，故我們就可以直接為<code>li</code>修改它的CSS樣式囉。</p>
+<h1 id="siblings-同層元素"><a href="#siblings-同層元素" class="headerlink" title="siblings() - 同層元素"></a>siblings() - 同層元素</h1><p>利用語法<code>siblings()</code>來找到同一層中的其他元素，並為它們修改CSS樣式</p>
+<iframe src="https://codepen.io/RandyChen/embed/PoGgmaX?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>你可以看到以上範例的JS檔案中，在我們按下<code>a</code>連結按鈕後，會先用<code>parent()</code>去找它的父元素，也就是<code>li</code>。<br>接著，找到父元素後，會接著執行<code>toggleClass(&#39;active&#39;)</code>，再來，會執行<code>sibilings()</code>，去找其他同層的<code>li</code>，並執行<code>removeClass</code>，<br>來消除它們的<code>bg-warning text-white</code>的className。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-CSS-jQuery%E5%90%84%E5%BC%8F%E5%90%84%E6%A8%A3%E7%9A%84%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-CSS-jQuery%E5%90%84%E5%BC%8F%E5%90%84%E6%A8%A3%E7%9A%84%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C/" class="post-title-link" itemprop="url">jQuery課程筆記-CSS+jQuery各式各樣的動畫效果</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-23 16:53:20" itemprop="dateCreated datePublished" datetime="2021-01-23T16:53:20+08:00">2021-01-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-30 15:14:37" itemprop="dateModified" datetime="2021-01-30T15:14:37+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index"><span itemprop="name">jQuery</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="preventDefault-取消默認行為"><a href="#preventDefault-取消默認行為" class="headerlink" title="preventDefault 取消默認行為"></a>preventDefault 取消默認行為</h1><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;a href&#x3D;&quot;http:&#x2F;&#x2F;www.google.com.tw&quot; class&#x3D;&quot;close&gt;按鈕&lt;&#x2F;a&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">	$(&#39;.close&#39;).click(function(e)&#123;</span><br><span class="line">		e.preventDefault();</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>由以上的程式碼就可以將原本<code>a</code>連結的預設效果給取消。<br>所以，當我們按下這個<code>a</code>連結，就不會跳轉到<a target="_blank" rel="noopener" href="http://www.google.com.tw/">http://www.google.com.tw</a> 網址囉。</p>
+<p>那為什麼要在<code>a</code>連結的js中，加上<code>preventDefault</code>呢，是因為今天該<code>a</code>連結<br>如果，只有要觸發某個事件，並沒有要讓頁面連到別的網頁的時候，<br>就需要用到<code>preventDefault</code>囉。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-CSS-jQuery%E5%90%84%E5%BC%8F%E5%90%84%E6%A8%A3%E7%9A%84%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E5%AE%8C%E6%88%90%E5%BE%8C%E7%94%A2%E7%94%9F%E7%9A%84%E5%90%84%E6%AA%94%E6%A1%88%E6%84%8F%E7%BE%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E5%AE%8C%E6%88%90%E5%BE%8C%E7%94%A2%E7%94%9F%E7%9A%84%E5%90%84%E6%AA%94%E6%A1%88%E6%84%8F%E7%BE%A9/" class="post-title-link" itemprop="url">Vue_Cli_課程筆記-安裝完成後產生的各檔案意義</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-22 09:59:46" itemprop="dateCreated datePublished" datetime="2021-01-22T09:59:46+08:00">2021-01-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-30 15:05:58" itemprop="dateModified" datetime="2021-01-30T15:05:58+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#　Vue Cli 所產生的資料夾結構說明</p>
+<h2 id="在VScode的環境下使用Vue"><a href="#在VScode的環境下使用Vue" class="headerlink" title="在VScode的環境下使用Vue"></a>在VScode的環境下使用Vue</h2><p>你先用vscode打開那個vue專案檔，接著，在你的編譯器中輸入ctrl+<code>(反斜線)， 這時候，會跳出來可以輸入指令的區塊，接著，你就輸入</code>npm run dev<code>，就會跳出</code>http:\localhost:8080<code>的提示訊息，接著，你就又能在瀏覽器中輸入</code>http:\localhost:8080`，然後，打開專案囉~</p>
+<p>接下來是vue cli產生的檔案介紹</p>
+<h3 id="README-md"><a href="#README-md" class="headerlink" title="README.md"></a>README.md</h3><p>這個檔案裡面，有提供一些vue cli可以用的指令<br><code>npm install</code> 就是安裝相關的套件。<br><code>npm run dev</code>　運行開發中的環境<br><code>npm run bulid</code> 運行正式版的環境</p>
+<p>當我們執行<code>npm run build</code>，它會運行build/build.js　的檔案，將所有的網頁內容打包壓縮。<br>當我們輸入這個指令之後，專案檔會產生出一個dist的資料夾。<br>那在這個生成的dist資料夾中，會有一個index.html，這個html一定要在HTTP的server下才能運行，將它直接打開是沒有辦法運行的喔。</p>
+<h4 id="小插曲-index-html中引入css和js-報MIME-type錯誤問題"><a href="#小插曲-index-html中引入css和js-報MIME-type錯誤問題" class="headerlink" title="小插曲 - index.html中引入css和js 報MIME type錯誤問題"></a>小插曲 - index.html中引入css和js 報MIME type錯誤問題</h4><p>當我用嘗試用<code>Go live</code>來將dist資料夾中的index.html在瀏覽器中開啟，<br>但是，卻出現以下的錯誤log<br>!()[image/Vue_cli_webpack_error.png]<br>這個問題主要是因為讀不到專案檔裡面的樣式檔導致的，<br>所以，你看以上的圖片中它是說該錯誤是發生在index.html檔案中，<br>所以，你就去dist資料夾中的index.html中，該改它引入的路徑<br>原本預設的路徑是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;&#x2F;static&#x2F;js&#x2F;manifest.2ae2e69a05c33dfc65f8.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;&#x2F;static&#x2F;js&#x2F;vendor.0aad2172a75b8ed4f46c.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;&#x2F;static&#x2F;js&#x2F;app.2f2e5edd9af2c59aa514.js&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到<code>src</code>的最前面都有一個反斜線<code>\</code>，<br>你就將這個反斜線都去掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;static&#x2F;js&#x2F;manifest.2ae2e69a05c33dfc65f8.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;static&#x2F;js&#x2F;vendor.0aad2172a75b8ed4f46c.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;static&#x2F;js&#x2F;app.2f2e5edd9af2c59aa514.js&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>改完之後，就能正常的在VSCode中的live Server中，正確的在瀏覽器中，打開dist資料夾中的index.html檔案囉。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E5%AE%8C%E6%88%90%E5%BE%8C%E7%94%A2%E7%94%9F%E7%9A%84%E5%90%84%E6%AA%94%E6%A1%88%E6%84%8F%E7%BE%A9/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E7%92%B0%E5%A2%83%E6%AD%A5%E9%A9%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -579,453 +1017,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/19/Bootstrap%E4%BD%9C%E5%93%81%E9%9B%86-%E6%8A%80%E5%B7%A7%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/19/Bootstrap%E4%BD%9C%E5%93%81%E9%9B%86-%E6%8A%80%E5%B7%A7%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">Bootstrap作品集_技巧筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-19 17:58:26" itemprop="dateCreated datePublished" datetime="2021-01-19T17:58:26+08:00">2021-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:10:05" itemprop="dateModified" datetime="2021-01-30T15:10:05+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bootstrap/" itemprop="url" rel="index"><span itemprop="name">Bootstrap</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>這邊記錄一下，我的Bootstrap作品集中有用到的技巧，不然都忘到爆XDD<br><a target="_blank" rel="noopener" href="https://landy510.github.io/new_Bootstrap_portfolio/">Bootstrap作品集</a></p>
-<h1 id="紀錄在index-html頁面中，使用的當滑入時，照片會從模糊變成清楚"><a href="#紀錄在index-html頁面中，使用的當滑入時，照片會從模糊變成清楚" class="headerlink" title="紀錄在index.html頁面中，使用的當滑入時，照片會從模糊變成清楚"></a>紀錄在index.html頁面中，使用的當滑入時，照片會從模糊變成清楚</h1><iframe src="https://codepen.io/RandyChen/embed/wvzOwzZ?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>你可以看到，這邊的範例，總由四個部分所組成</p>
-<ol>
-<li>最外面的區塊 content</li>
-<li>蓋在區塊上的薄膜 cover</li>
-<li>區塊中的文字 text</li>
-<li>區塊中的圖片 content_img</li>
-</ol>
-<h2 id="第一區塊-content"><a href="#第一區塊-content" class="headerlink" title="第一區塊 content"></a>第一區塊 content</h2><p>首先，我們最外面的區域我是故意用a連結使用，用意是模擬，<br>如果今天要點及這個區塊來連動其他頁面的時候，就需要a連結。</p>
-<p>在這個a連結裡面我們先設定好它的寬度和高度。<br>接著，還為它設入<code>overflow:hidden</code>的特性，這個特性後面會說明為什麼要它。</p>
-<h2 id="第二區塊-cover"><a href="#第二區塊-cover" class="headerlink" title="第二區塊 cover"></a>第二區塊 cover</h2><p>第一<br>這個區域是蓋在整體區塊上方的薄膜。<br>我們利用定位的效果加入position:absolute, top:0, right:0, bottom:0, left:0。<br>為得是要讓這個區塊能夠完全展開覆蓋住父元素.content。</p>
-<p>第二，我們為它加z-index:1，因為，它要蓋在上方，並在文字下方，所以，設為1是ok的。<br>第三，加入filter:blur(5px);，讓它產生模糊的效果。<br>第四，我們為它加入transform:translateY(-400px)，為得是要讓它的區塊先位在整體區塊的-400px位置，<br>並在你滑入的時候，transform:translateY(0px)，會改成0px，所以，就有從上方往下方移入的效果。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/19/Bootstrap%E4%BD%9C%E5%93%81%E9%9B%86-%E6%8A%80%E5%B7%A7%E7%AD%86%E8%A8%98/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/19/%E9%83%A8%E5%B1%AC%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99%E5%88%B0Github-Pages%E9%81%87%E5%88%B0%E7%9A%84%E5%95%8F%E9%A1%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/19/%E9%83%A8%E5%B1%AC%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99%E5%88%B0Github-Pages%E9%81%87%E5%88%B0%E7%9A%84%E5%95%8F%E9%A1%8C/" class="post-title-link" itemprop="url">部屬靜態網站到Github Pages遇到的問題</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-19 10:55:06" itemprop="dateCreated datePublished" datetime="2021-01-19T10:55:06+08:00">2021-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-28 16:34:40" itemprop="dateModified" datetime="2021-01-28T16:34:40+08:00">2021-01-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>看一下github_pages來部屬靜態網頁</p>
-<h1 id="Github-Pages沒有顯示出我專案的問題"><a href="#Github-Pages沒有顯示出我專案的問題" class="headerlink" title="Github Pages沒有顯示出我專案的問題?"></a>Github Pages沒有顯示出我專案的問題?</h1><p>Ans:<br>我找到原因了，<br>首先我是在這篇文章的問答區找到以下的答案的<br><a target="_blank" rel="noopener" href="https://github.community/t/pages-user-site-not-published/10280/21">https://github.community/t/pages-user-site-not-published/10280/21</a><br>你搜尋一個叫wwyc的回答者的回答就有了。</p>
-<p>用我原本的方式部屬上去是沒問題的，但是，你在你的那個repository的settings裡面，<br>有一個GitHub Pages<br>然後，在GitHub Pages裡面有一個選項Theme Chooser，<br><img src="/image/Github_pages_changeTheme.png" alt="GitHub Pages改變主題"><br>你要點Change Theme，任選一個主題，並儲存你選擇的主題後，<br>再次點擊你的Github Pages連結後，就可以顯示出你的網站囉。</p>
-<h1 id="Github-pages顯示出來的網站並沒有吃到bootstrap的效果"><a href="#Github-pages顯示出來的網站並沒有吃到bootstrap的效果" class="headerlink" title="Github pages顯示出來的網站並沒有吃到bootstrap的效果?"></a>Github pages顯示出來的網站並沒有吃到bootstrap的效果?</h1><p>step1. 首先，它會跳出跟symlink相關的錯誤，<br>因為，檔名的副檔名是<code>.md</code>結尾的檔案是<code>symlink</code>檔案，代表它是一個虛擬的檔案，無法被實際引入。<br>那在bootstrap的docs資料夾裡面全部都是這類的檔案，你可以直接將這個docs資料夾直接刪除掉，<br>因為這裡面的md檔案都只是說明檔。</p>
-<p>step2. 接著，它會說bootstrap的檔案中有一個index.html(注意~~這個不是你寫的那個，這是bootstrap自己內建的)，<br>然後，他會說這個index.html檔案不存在<code>_include</code>的路徑裡面，你就直接把這個index.html檔案剪下，移到<br>bootstrap的<code>_include</code>的資料夾裡面就ok了。</p>
-<p>step3. 經過以上兩個步驟的處理，<br>你應該可以在你的github pages頁面上看到沒有bootstrap css樣式的奇怪網站XDD，<br>這時，你先對Github pages部屬出來的網站，打開它的開發者介面，<br>應該會發現Console有一堆Error發生，大部分都是讀不到相關檔案。</p>
-<p>那大部分，它會讀不到檔案，是因為路徑不對<br>再你自己再撰寫專案的時候，本地端的路徑，是這樣<br><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/css/all.css&quot;&gt;</code><br>你的<code>href</code>前面，有一個反斜線<code>/</code>，那多這個反斜線會導致github pages讀不到那個檔案，<br>所以，你只要將該反斜線拿掉就可以了。<br>就變成以下這樣<br><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;css/css/all.css&quot;&gt;</code></p>
-<p>經過以上這些步驟，github pages就可以讀到你的css樣式，應該就可以正確在githubpages裡面，看到正確渲染的成果囉~~~</p>
-<h1 id="在Github-Pages上的banner的背景圖片，Github一直讀不到它"><a href="#在Github-Pages上的banner的背景圖片，Github一直讀不到它" class="headerlink" title="在Github Pages上的banner的背景圖片，Github一直讀不到它?"></a>在Github Pages上的banner的背景圖片，Github一直讀不到它?</h1><p>Ans:<br>首先，我把原本圖片的檔名改成全部小寫，也沒有任何的底線之類的東西。<br>即:<br><code>Banner_Background.jpg</code> 改成<code>bannerbackground.jpg</code>。<br>第二，我本來是透過class的樣式來引入<code>background-img</code>的樣式。<br>我就直接用inline-style的方式來引入這個<code>background-img</code>的樣式，<br>像下面這樣，為這個區塊的inline-style直接加入<code>background-image</code>樣式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;banner&quot; data-aos&#x3D;&quot;fade-right&quot; style&#x3D;&quot;background-image: url(&#39;img&#x2F;bannerbackground.jpg&#39;);&quot;&gt;</span><br><span class="line">    &lt;h2 class&#x3D;&quot;banner-solgan&quot;&gt;</span><br><span class="line">        想長肉--</span><br><span class="line">        &lt;br&gt;</span><br><span class="line">        &lt;span&gt;就是現在&lt;&#x2F;span&gt;</span><br><span class="line">    &lt;&#x2F;h2&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-
-<p>就可以成功在Github Pages裡面呈現這張照片囉~~~</p>
-<h1 id="選擇要部屬哪一個分支的網頁"><a href="#選擇要部屬哪一個分支的網頁" class="headerlink" title="選擇要部屬哪一個分支的網頁"></a>選擇要部屬哪一個分支的網頁</h1><p>在Settings這個頁面中的，會有一個Github Pages的主題，<br>然後，會有一個Source的選項，接著你就可以選擇你要在github pages中渲染出的網頁是哪一個分支的。<br><img src="/image/githubpages.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/19/bootstrap-%E4%BD%9C%E5%93%81%E9%9B%86dropdown%E5%95%8F%E9%A1%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/19/bootstrap-%E4%BD%9C%E5%93%81%E9%9B%86dropdown%E5%95%8F%E9%A1%8C/" class="post-title-link" itemprop="url">bootstrap_作品集dropdown問題</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-19 10:53:10" itemprop="dateCreated datePublished" datetime="2021-01-19T10:53:10+08:00">2021-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:09:07" itemprop="dateModified" datetime="2021-01-30T15:09:07+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bootstrap/" itemprop="url" rel="index"><span itemprop="name">Bootstrap</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>你要記得在bootstrap中的dropdown之間，<br>他是用區塊和區塊做區隔的，他並沒有用<code>data-traget</code> 和 <code>id</code>的關係，<br>去搭建觸發元件與被觸發區塊之間的關係。<br>所以，當<code>.dropdown</code>包著一組觸發元件和被觸發<code>dropdown-menu</code>，<br>當你又想要在另一個地方用另外一組dropdown的功能的時候，<br>你要再創一個.dropdown區塊，並將觸發元件和觸發區塊包在這個新的.dropdown區塊中，<br>如此一來，他們就不會互相干擾了。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/19/bootstrap-Modal%E7%8B%80%E6%B3%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/19/bootstrap-Modal%E7%8B%80%E6%B3%81/" class="post-title-link" itemprop="url">bootstrap_Modal狀況</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-19 10:50:39" itemprop="dateCreated datePublished" datetime="2021-01-19T10:50:39+08:00">2021-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:10:00" itemprop="dateModified" datetime="2021-01-30T15:10:00+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bootstrap/" itemprop="url" rel="index"><span itemprop="name">Bootstrap</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="不要把Modal按鈕和被觸發的區塊放在同一個區塊中"><a href="#不要把Modal按鈕和被觸發的區塊放在同一個區塊中" class="headerlink" title="不要把Modal按鈕和被觸發的區塊放在同一個區塊中"></a>不要把Modal按鈕和被觸發的區塊放在同一個區塊中</h1><p>我發現觸發Modal的按鈕 和 被觸發的區塊不能放在同一個區塊中，<br>不然，你按下這個觸發鈕的時候，沒辦法，觸發相對應的Modal區塊。</p>
-<p>故我把觸發區塊，放在整個專案的<code>footer</code>的後面的地方就沒問題了。</p>
-<p>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--這一份html檔案，是整體layout的公版，保存了header和footer的部分版型--&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;link rel&#x3D;&quot;shortcut icon&quot; href&#x3D;&quot;&#x2F;img&#x2F;favicon.png&quot;&gt;</span><br><span class="line">    &lt;meta name&#x3D;&#39;description&#39; content&#x3D;&#39;雕塑你我的美妙身材&#39; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;link href&#x3D;&quot;&#x2F;img&#x2F;favicon.png&quot; rel&#x3D;&quot;apple-touch-icon&quot; &#x2F;&gt;</span><br><span class="line">    &lt;meta http-equiv&#x3D;&quot;X-UA-Compatible&quot; content&#x3D;&quot;IE&#x3D;Edge&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;&#x2F;css&#x2F;css&#x2F;all.css&quot;&gt;</span><br><span class="line">    &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;&#x2F;css&#x2F;all.min.css&quot;&gt;</span><br><span class="line">    &lt;link href&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;aos@2.3.1&#x2F;dist&#x2F;aos.css&quot; rel&#x3D;&quot;stylesheet&quot;&gt;</span><br><span class="line">    &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https:&#x2F;&#x2F;cdnjs.cloudflare.com&#x2F;ajax&#x2F;libs&#x2F;animate.css&#x2F;4.1.1&#x2F;animate.min.css&quot;&#x2F;&gt;</span><br><span class="line">    &lt;script src&#x3D;&quot;&#x2F;javascript&#x2F;jquery-3.5.1.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">    </span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;header&quot;&gt;</span><br><span class="line">            &lt;nav class&#x3D;&quot;navbar navbar-expand-md navbar-light bg-yl&quot;&gt;</span><br><span class="line">                &lt;button class&#x3D;&quot;navbar-toggler rwd-hamburger-btn&quot; type&#x3D;&quot;button&quot; data-toggle&#x3D;&quot;collapse&quot; data-target&#x3D;&quot;#navbarToggleExternalContent&quot;  aria-controls&#x3D;&quot;navbarToggleExternalContent&quot; aria-expanded&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Toggle navigation&quot;&gt;</span><br><span class="line">                    &lt;a href&#x3D;&quot;#&quot;&gt;&lt;i class&#x3D;&quot;fas fa-bars&quot;&gt;&lt;&#x2F;i&gt;&lt;&#x2F;a&gt;</span><br><span class="line">                &lt;&#x2F;button&gt;</span><br><span class="line"></span><br><span class="line">                &lt;a class&#x3D;&quot;navbar-brand&quot; href&#x3D;&quot;landing_page.html&quot;&gt;</span><br><span class="line">                    &lt;img src&#x3D;&quot;&#x2F;img&#x2F;protectionshield.svg&quot; width&#x3D;&quot;50&quot; height&#x3D;&quot;50&quot; class&#x3D;&quot;d-inline-block&quot; alt&#x3D;&quot;&quot;&gt;</span><br><span class="line">                    &lt;span class&#x3D;&quot;d-none d-md-inline-block&quot;&gt;Berserker Fittness&lt;&#x2F;span&gt; </span><br><span class="line">                &lt;&#x2F;a&gt;</span><br><span class="line">                </span><br><span class="line">                &lt;div class&#x3D;&quot;collapse navbar-collapse&quot; id&#x3D;&quot;navbarText&quot;&gt;</span><br><span class="line">                   </span><br><span class="line">                  </span><br><span class="line">                  &lt;ul class&#x3D;&quot;navbar-nav ml-auto&quot;&gt;</span><br><span class="line">                    &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">                      &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;landing_page.html&quot;&gt;首頁&lt;&#x2F;a&gt;</span><br><span class="line">                    &lt;&#x2F;li&gt;</span><br><span class="line">                    &lt;li class&#x3D;&quot;nav-item ml-4&quot;&gt;</span><br><span class="line">                      &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;lecture_page.html&quot;&gt;課程&lt;&#x2F;a&gt;</span><br><span class="line">                    &lt;&#x2F;li&gt;</span><br><span class="line">                    &lt;li class&#x3D;&quot;nav-item ml-4&quot;&gt;</span><br><span class="line">                      &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;register_page.html&quot;&gt;登入&lt;&#x2F;a&gt;</span><br><span class="line">                    &lt;&#x2F;li&gt;</span><br><span class="line">                    &lt;li class&#x3D;&quot;nav-item ml-4&quot;&gt;</span><br><span class="line">                        &lt;div class&#x3D;&quot;dropdown&quot;&gt;</span><br><span class="line">                            &lt;button class&#x3D;&quot;btn btn-secondary cart_btn&quot; type&#x3D;&quot;button&quot; id&#x3D;&quot;dropdownMenuButton&quot; data-toggle&#x3D;&quot;dropdown&quot; aria-expanded&#x3D;&quot;false&quot;&gt;</span><br><span class="line">                                &lt;i class&#x3D;&quot;fas fa-shopping-cart text-dark&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">                            &lt;&#x2F;button&gt;</span><br><span class="line">                            &lt;div class&#x3D;&quot;dropdown-menu product_list_dropdown p-0&quot; aria-labelledby&#x3D;&quot;dropdownMenuButton&quot;&gt;</span><br><span class="line">                                &lt;div class&#x3D;&quot;card rounded-0&quot;&gt;</span><br><span class="line">                                    &lt;h5 class&#x3D;&quot;card-header&quot;&gt;已選購商品&lt;&#x2F;h5&gt;</span><br><span class="line">                                    &lt;div class&#x3D;&quot;card-body p-0&quot;&gt;</span><br><span class="line">                                        &lt;table class&#x3D;&quot;table productlist_table m-0&quot;&gt;</span><br><span class="line">                                            &lt;tbody&gt;</span><br><span class="line">                                                &lt;tr&gt;</span><br><span class="line">                                                    &lt;th class&#x3D;&quot;border-top-0&quot; scope&#x3D;&quot;row&quot;&gt;</span><br><span class="line">                                                        &lt;a data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;#removeModal&quot; data-whatever&#x3D;&quot;金牌西裝&quot; href&#x3D;&quot;#&quot;&gt;</span><br><span class="line">                                                            &lt;i class&#x3D;&quot;fas fa-trash-alt&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">                                                        &lt;&#x2F;a&gt;</span><br><span class="line">                                                    &lt;&#x2F;th&gt;</span><br><span class="line">                                                    &lt;td class&#x3D;&quot;border-top-0 w-50&quot;&gt;</span><br><span class="line">                                                        &lt;img src&#x3D;&quot;&#x2F;img&#x2F;arm-train.jpg&quot; class&#x3D;&quot;bg-cover productlist_table_img&quot; alt&#x3D;&quot;&quot;&gt;</span><br><span class="line">                                                        &lt;p class&#x3D;&quot;m-0&quot;&gt;手部訓練&lt;&#x2F;p&gt;</span><br><span class="line">                                                    &lt;&#x2F;td&gt;</span><br><span class="line">                                                    &lt;td class&#x3D;&quot;border-top-0&quot; &gt;x2&lt;&#x2F;td&gt;</span><br><span class="line">                                                    &lt;td class&#x3D;&quot;border-top-0 w-25&quot;&gt;NT$900&lt;&#x2F;td&gt;</span><br><span class="line">                                                &lt;&#x2F;tr&gt;</span><br><span class="line">                                              &lt;tr&gt;</span><br><span class="line">                                                &lt;th class&#x3D;&quot;border-top-0&quot; scope&#x3D;&quot;row&quot;&gt;</span><br><span class="line">                                                    &lt;a href&#x3D;&quot;#&quot;&gt;</span><br><span class="line">                                                        &lt;i class&#x3D;&quot;fas fa-trash-alt&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">                                                    &lt;&#x2F;a&gt;</span><br><span class="line">                                                    </span><br><span class="line">                                                &lt;&#x2F;th&gt;</span><br><span class="line">                                                &lt;td class&#x3D;&quot;border-top-0&quot;&gt;</span><br><span class="line">                                                    &lt;img src&#x3D;&quot;&#x2F;img&#x2F;back-train.jpg&quot; class&#x3D;&quot;bg-cover productlist_table_img&quot; alt&#x3D;&quot;&quot;&gt;</span><br><span class="line">                                                    &lt;p class&#x3D;&quot;m-0&quot;&gt;背部訓練&lt;&#x2F;p&gt;</span><br><span class="line">                                                &lt;&#x2F;td&gt;</span><br><span class="line">                                                &lt;td class&#x3D;&quot;border-top-0&quot;&gt;x3&lt;&#x2F;td&gt;</span><br><span class="line">                                                &lt;td class&#x3D;&quot;border-top-0&quot;&gt;NT$1350&lt;&#x2F;td&gt;</span><br><span class="line">                                              &lt;&#x2F;tr&gt;</span><br><span class="line">                                              </span><br><span class="line">                                              </span><br><span class="line">                                            &lt;&#x2F;tbody&gt;</span><br><span class="line">                                            </span><br><span class="line">                                        &lt;&#x2F;table&gt;</span><br><span class="line">                                    &lt;&#x2F;div&gt;</span><br><span class="line">                                    &lt;div class&#x3D;&quot;cart-footer&quot;&gt;</span><br><span class="line">                                        &lt;a href&#x3D;&quot;cart_page1.html&quot; class&#x3D;&quot;btn btn-yl btn-lg w-100 rounded-0 font-weight-bold&quot;&gt;結帳去&lt;&#x2F;a&gt;</span><br><span class="line">                                    &lt;&#x2F;div&gt;</span><br><span class="line">                                &lt;&#x2F;div&gt;</span><br><span class="line">                            &lt;&#x2F;div&gt;</span><br><span class="line">                        &lt;&#x2F;div&gt;</span><br><span class="line">                        </span><br><span class="line">                    &lt;&#x2F;li&gt;</span><br><span class="line">                  &lt;&#x2F;ul&gt;</span><br><span class="line">                  </span><br><span class="line">                &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">                &lt;div class&#x3D;&quot;dropdown&quot;&gt;</span><br><span class="line">                    &lt;button class&#x3D;&quot;btn btn-secondary cart_btn rwd-cart-btn&quot; type&#x3D;&quot;button&quot; id&#x3D;&quot;dropdownMenuButton&quot; data-toggle&#x3D;&quot;dropdown&quot; aria-expanded&#x3D;&quot;false&quot;&gt;</span><br><span class="line">                        &lt;i class&#x3D;&quot;fas fa-shopping-cart text-dark&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">                    &lt;&#x2F;button&gt;</span><br><span class="line">                    &lt;div class&#x3D;&quot;dropdown-menu product_list_dropdown p-0&quot; aria-labelledby&#x3D;&quot;dropdownMenuButton&quot;&gt;</span><br><span class="line">                        &lt;div class&#x3D;&quot;card&quot;&gt;</span><br><span class="line">                            &lt;h5 class&#x3D;&quot;card-header&quot;&gt;已選購商品&lt;&#x2F;h5&gt;</span><br><span class="line">                            &lt;div class&#x3D;&quot;card-body p-0&quot;&gt;</span><br><span class="line">                                &lt;table class&#x3D;&quot;table productlist_table&quot;&gt;</span><br><span class="line">                                    &lt;tbody&gt;</span><br><span class="line">                                        &lt;tr&gt;</span><br><span class="line">                                            &lt;th class&#x3D;&quot;border-top-0&quot; scope&#x3D;&quot;row&quot;&gt;</span><br><span class="line">                                                &lt;a href&#x3D;&quot;#&quot;&gt;</span><br><span class="line">                                                    &lt;i class&#x3D;&quot;fas fa-trash-alt&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">                                                &lt;&#x2F;a&gt; </span><br><span class="line">                                            &lt;&#x2F;th&gt;</span><br><span class="line">                                            &lt;td class&#x3D;&quot;border-top-0 w-50&quot;&gt;</span><br><span class="line">                                                &lt;img src&#x3D;&quot;&#x2F;img&#x2F;arm-train.jpg&quot; class&#x3D;&quot;bg-cover productlist_table_img&quot; alt&#x3D;&quot;&quot;&gt;</span><br><span class="line">                                                &lt;p class&#x3D;&quot;m-0&quot;&gt;手部訓練&lt;&#x2F;p&gt;</span><br><span class="line">                                            &lt;&#x2F;td&gt;</span><br><span class="line">                                            &lt;td class&#x3D;&quot;border-top-0&quot; &gt;x2&lt;&#x2F;td&gt;</span><br><span class="line">                                            &lt;td class&#x3D;&quot;border-top-0 w-25&quot;&gt;NT$900&lt;&#x2F;td&gt;</span><br><span class="line">                                        &lt;&#x2F;tr&gt;</span><br><span class="line">                                      &lt;tr&gt;</span><br><span class="line">                                        &lt;th class&#x3D;&quot;border-top-0&quot; scope&#x3D;&quot;row&quot;&gt;</span><br><span class="line">                                            &lt;a href&#x3D;&quot;#&quot;&gt;</span><br><span class="line">                                                &lt;i class&#x3D;&quot;fas fa-trash-alt&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">                                            &lt;&#x2F;a&gt;</span><br><span class="line">                                            </span><br><span class="line">                                        &lt;&#x2F;th&gt;</span><br><span class="line">                                        &lt;td class&#x3D;&quot;border-top-0&quot;&gt;</span><br><span class="line">                                            &lt;img src&#x3D;&quot;&#x2F;img&#x2F;back-train.jpg&quot; class&#x3D;&quot;bg-cover productlist_table_img&quot; alt&#x3D;&quot;&quot;&gt;</span><br><span class="line">                                            &lt;p class&#x3D;&quot;m-0&quot;&gt;背部訓練&lt;&#x2F;p&gt;</span><br><span class="line">                                        &lt;&#x2F;td&gt;</span><br><span class="line">                                        &lt;td class&#x3D;&quot;border-top-0&quot;&gt;x3&lt;&#x2F;td&gt;</span><br><span class="line">                                        &lt;td class&#x3D;&quot;border-top-0&quot;&gt;NT$1350&lt;&#x2F;td&gt;</span><br><span class="line">                                      &lt;&#x2F;tr&gt;</span><br><span class="line">                                      </span><br><span class="line">                                      </span><br><span class="line">                                    &lt;&#x2F;tbody&gt;</span><br><span class="line">                                &lt;&#x2F;table&gt;</span><br><span class="line">                            &lt;&#x2F;div&gt;</span><br><span class="line">                            &lt;div class&#x3D;&quot;cart-footer&quot;&gt;</span><br><span class="line">                                &lt;a href&#x3D;&quot;cart_page1.html&quot; class&#x3D;&quot;btn btn-yl btn-lg w-100 rounded-0 font-weight-bold&quot;&gt;結帳去&lt;&#x2F;a&gt;</span><br><span class="line">                            &lt;&#x2F;div&gt;</span><br><span class="line">                        &lt;&#x2F;div&gt;</span><br><span class="line">                    &lt;&#x2F;div&gt;</span><br><span class="line">                &lt;&#x2F;div&gt;</span><br><span class="line">                </span><br><span class="line">            &lt;&#x2F;nav&gt;</span><br><span class="line">            </span><br><span class="line">            &lt;div class&#x3D;&quot;banner&quot; data-aos&#x3D;&quot;fade-right&quot;&gt;</span><br><span class="line">                &lt;h2 class&#x3D;&quot;banner-solgan&quot;&gt;</span><br><span class="line">                    想長肉--</span><br><span class="line">                    &lt;br&gt;</span><br><span class="line">                    &lt;span&gt;就是現在&lt;&#x2F;span&gt;</span><br><span class="line">                &lt;&#x2F;h2&gt;</span><br><span class="line">            &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;ul class&#x3D;&quot;hide-nav list-unstyled collapse&quot; id&#x3D;&quot;navbarToggleExternalContent&quot;&gt;</span><br><span class="line">            &lt;li class&#x3D;&quot;p-2&quot;&gt;</span><br><span class="line">                &lt;a href&#x3D;&quot;landing_page.html&quot;&gt;首頁&lt;&#x2F;a&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">            &lt;li class&#x3D;&quot;p-2&quot;&gt;</span><br><span class="line">                &lt;a href&#x3D;&quot;lecture_page.html&quot; &gt;課程&lt;&#x2F;a&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">            &lt;li class&#x3D;&quot;p-2&quot;&gt;</span><br><span class="line">                &lt;a href&#x3D;&quot;register_page.html&quot;&gt;登入&lt;&#x2F;a&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">        &lt;&#x2F;ul&gt;</span><br><span class="line">        </span><br><span class="line">    &lt;&#x2F;div&gt;    </span><br><span class="line">    &lt;!--客製化頁面開始--&gt;</span><br><span class="line">    </span><br><span class="line">   </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">      </span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">    &lt;!--客製化頁面結束--&gt;</span><br><span class="line">    &lt;footer&gt;</span><br><span class="line">        </span><br><span class="line">    &lt;&#x2F;footer&gt;</span><br><span class="line">	</span><br><span class="line">    &lt;!--Modal--&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;modal fade&quot; data-backdrop&#x3D;&quot;static&quot; id&#x3D;&quot;removeModal&quot; tabindex&#x3D;&quot;-1&quot; role&#x3D;&quot;dialog&quot; aria-labelledby&#x3D;&quot;exampleModalLabel&quot; aria-hidden&#x3D;&quot;true&quot;&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;modal-dialog&quot;&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;modal-content&quot;&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;modal-header bg-danger text-white&quot;&gt;</span><br><span class="line">            &lt;h5 class&#x3D;&quot;modal-title&quot; id&#x3D;&quot;exampleModalLabel&quot;&gt;Modal title&lt;&#x2F;h5&gt;</span><br><span class="line">            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; data-dismiss&#x3D;&quot;modal&quot; aria-label&#x3D;&quot;Close&quot;&gt;</span><br><span class="line">                &lt;span aria-hidden&#x3D;&quot;true&quot;&gt;&amp;times;&lt;&#x2F;span&gt;</span><br><span class="line">            &lt;&#x2F;button&gt;</span><br><span class="line">            &lt;&#x2F;div&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;modal-body&quot;&gt;</span><br><span class="line">            ...</span><br><span class="line">            &lt;&#x2F;div&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;modal-footer&quot;&gt;</span><br><span class="line">            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; data-dismiss&#x3D;&quot;modal&quot;&gt;否&lt;&#x2F;button&gt;</span><br><span class="line">            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-outline-danger px-5&quot;&gt;是&lt;&#x2F;button&gt;</span><br><span class="line">            &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;code.jquery.com&#x2F;jquery-3.3.1.slim.min.js&quot; integrity&#x3D;&quot;sha384-q8i&#x2F;X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo&quot; crossorigin&#x3D;&quot;anonymous&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">    &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdnjs.cloudflare.com&#x2F;ajax&#x2F;libs&#x2F;popper.js&#x2F;1.14.6&#x2F;umd&#x2F;popper.min.js&quot; integrity&#x3D;&quot;sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ&#x2F;yoi7FRNXMRBu5WHdZYu1hA6ZOblgut&quot; crossorigin&#x3D;&quot;anonymous&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">    &lt;script src&#x3D;&quot;https:&#x2F;&#x2F;stackpath.bootstrapcdn.com&#x2F;bootstrap&#x2F;4.2.1&#x2F;js&#x2F;bootstrap.min.js&quot; integrity&#x3D;&quot;sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U&#x2F;mkkaduKaBhlAXv9k&quot; crossorigin&#x3D;&quot;anonymous&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">   </span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
-<p>你可以看到以上的案例中，在.product_list_dropdown中的垃圾桶按鈕，他會觸發<code>id</code>為removeModal的區塊，<br>那你可以看到，我把removeModal的區塊放在<code>&lt;footer&gt;&lt;/footer&gt;</code>的後面，就可以正常觸發。<br>但是，如果我把removeModal的區塊放在放在跟.product_list_dropdown中的垃圾桶按鈕同一個區塊中，<br>也就是同一個<code>&lt;th&gt;&lt;/th&gt;</code>裡面的話，就無法觸發這個removeModal區塊了。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/19/bootstrap-%E8%A3%BD%E4%BD%9C%E8%B3%BC%E7%89%A9%E8%BB%8A%E7%B6%B2%E9%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/19/bootstrap-%E8%A3%BD%E4%BD%9C%E8%B3%BC%E7%89%A9%E8%BB%8A%E7%B6%B2%E9%A0%81/" class="post-title-link" itemprop="url">bootstrap_製作購物車網頁</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-19 10:37:01" itemprop="dateCreated datePublished" datetime="2021-01-19T10:37:01+08:00">2021-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:09:30" itemprop="dateModified" datetime="2021-01-30T15:09:30+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bootstrap/" itemprop="url" rel="index"><span itemprop="name">Bootstrap</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <iframe src="https://codepen.io/RandyChen/embed/pojYNwK?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<h1 id="購物車按鈕"><a href="#購物車按鈕" class="headerlink" title="購物車按鈕"></a>購物車按鈕</h1><p>這邊購物車的按鈕，你只要看上面範例的navbar的購物車按鈕部分就好。</p>
-<ol>
-<li><p>首先，我們在<code>navbar</code>裡面塞了一個購物車的按鈕，<br>這個按鈕有套用<code>dropdown</code>的功能，我們就可以利用點選它跳出相對應的產品內容。</p>
-</li>
-<li><p>在購物車上方的數字，適用bootstrap中的<code>badges</code>元件所製作出來的。<br>接著，我們需要將這個<code>badge</code>的位置樣式改成<code>postion:absolute</code>。<br>並在他的外層加上<code>position:relative</code>。<br>並在<code>badge</code>裡面設定相對的<code>top</code>和<code>right</code>來讓他在cart相對應的位置上。</p>
-</li>
-<li><p>購務車的<code>dropdown</code>的內容<br>我們可以在<code>dropdown-menu</code>的內容中加入表格、按鈕或相關的內容</p>
-</li>
-</ol>
-<h2 id="dropdown-menu在navbar底下會超出頁面"><a href="#dropdown-menu在navbar底下會超出頁面" class="headerlink" title="dropdown-menu在navbar底下會超出頁面"></a>dropdown-menu在navbar底下會超出頁面</h2><ol start="4">
-<li>購物車點選出來的<code>dropdown-menu</code>內容超出頁面<br>在bootstrap中有提到，當<code>dropdown-menu</code>的功能在<code>navbar</code>中使用的時候，<br>官網的提示:<br>Heads up!<br>Dropdowns are positioned thanks to Popper (except when they are contained in a navbar).</li>
-</ol>
-<p>它就不會自動去計算<code>dropdown-menu</code>的區塊大小是否有超出頁面囉。<br>首先，先為你的.dropdown-menu加入.dropdown-menu-end<br>接著，我們要自己寫css樣式來為.dropdown-menu-end調整<br>寫下以下的內容:<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.dropdown-menu-end&#123;</span><br><span class="line">  right:0;</span><br><span class="line">  left: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此時，當我們點擊購物車按鈕，這個dropdown-menu就不會超出頁面囉。</p>
-<h1 id="jumbotron"><a href="#jumbotron" class="headerlink" title="jumbotron"></a>jumbotron</h1><p>當我們有大版面要用的話，就可以套入<code>jumbotron</code>元件囉。<br>那這邊就為這個<code>jumbotron</code>加入一張大圖，並利用<br><code>background-size:cover; </code>和 <code>background-position: center center;</code><br>來讓這張圖辨變清楚，並且置中。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div class&#x3D;&quot;jumbotron jumbotron-fluid jumbotron_bg&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">    &lt;h1 class&#x3D;&quot;display-4&quot;&gt;Fluid jumbotron&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;p class&#x3D;&quot;lead&quot;&gt;This is a modified jumbotron that occupies the entire horizontal space of its parent.&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---CSS---</span><br><span class="line">.jumbotron_bg&#123;</span><br><span class="line"> background-image: url(&quot;https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2021&#x2F;01&#x2F;14&#x2F;PMgNkr.jpg&quot;);</span><br><span class="line">  background-size:cover;</span><br><span class="line">  background-position: center center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="卡片式排版與-Grid-System-整齊排版手法"><a href="#卡片式排版與-Grid-System-整齊排版手法" class="headerlink" title="卡片式排版與 Grid System 整齊排版手法"></a>卡片式排版與 Grid System 整齊排版手法</h1><p>我們可以利用格線系統，並在格線系統內加入<code>card</code>元件，<br>如此一來就可以在當某一行的<code>card</code>元素超過格線系統的佈局時，就換行，達成好看的排版。</p>
-<h2 id="card-body有自動延展的效果"><a href="#card-body有自動延展的效果" class="headerlink" title="card-body有自動延展的效果"></a>card-body有自動延展的效果</h2><p>我們在這邊會使用<code>card</code>元件是因為<code>card-body</code>會隨著內容的增加而延展他自己的高度，並不會去擠壓到在同一元件內，像是<code>card-header</code>和<code>card-footer</code>的高度，相當方便。<br>如果，你希望同一區域的<code>card</code>的高度都一樣的話，為<code>card</code>元件加上<code>h-100</code>這個className，這樣就可以讓各個<code>card</code>都對齊，儘管他們的內容多寡不同。</p>
-<iframe src="https://codepen.io/RandyChen/embed/QWKJdMV?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>你可以看到右邊欄位的<code>card</code>的高度都一樣，儘管他們的<code>card-body</code>內容不一樣。<br>另外，就算上方的圖片大小不一樣，也一樣不會影響排版喔。</p>
-<h2 id="加上衣服尺寸的樣式使用btn-group"><a href="#加上衣服尺寸的樣式使用btn-group" class="headerlink" title="加上衣服尺寸的樣式使用btn-group"></a>加上衣服尺寸的樣式使用btn-group</h2><p>我們可以在上面的範例中的<code>card-footer</code>取代掉原本的按鈕，加入<code>btn-group</code>，來創出一個有sm, m, l大小的按鈕，<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;btn-group btn-group-sm&quot;&gt;</span><br><span class="line">      &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-outline-primary&quot; aria-current&#x3D;&quot;page&quot;&gt;sm &lt;&#x2F;a&gt;</span><br><span class="line">      &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-outline-primary disabled&quot; &gt;m&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-outline-primary&quot;&gt;L&lt;&#x2F;a&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>而其中，我們有為其中的m的class加上<code>disabled</code>，這可以讓該按鈕的樣式無法被點選，用來表示它賣完囉~</p>
-<h2 id="為card加上box-shadow的效果"><a href="#為card加上box-shadow的效果" class="headerlink" title="為card加上box-shadow的效果"></a>為card加上box-shadow的效果</h2><p>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---CSS---</span><br><span class="line">.box-shadow&#123;</span><br><span class="line">	box-shadow:0 3px 5px rgba(0, 0, 0, 0.4);</span><br><span class="line">	transition:box-shadow .3s;</span><br><span class="line">&#125;</span><br><span class="line">.box-shadow:hover&#123;</span><br><span class="line">	box-shadow:0 3px 5px rgba(0, 0, 0, 0.24);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>你為card加上這個box-show的class就有滑過去有陰影變換的效果囉。</p>
-<h1 id="利用list-group來變換頁面"><a href="#利用list-group來變換頁面" class="headerlink" title="利用list-group來變換頁面"></a>利用list-group來變換頁面</h1><p>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;col-4&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;list-group&quot; id&#x3D;&quot;list-tab&quot; role&#x3D;&quot;tablist&quot;&gt;</span><br><span class="line">      &lt;a class&#x3D;&quot;list-group-item list-group-item-action active&quot; id&#x3D;&quot;list-home-list&quot; data-bs-toggle&#x3D;&quot;list&quot; href&#x3D;&quot;#list-home&quot; role&#x3D;&quot;tab&quot; aria-controls&#x3D;&quot;home&quot;&gt;Home&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;a class&#x3D;&quot;list-group-item list-group-item-action&quot; id&#x3D;&quot;list-profile-list&quot; data-bs-toggle&#x3D;&quot;list&quot; href&#x3D;&quot;#list-profile&quot; role&#x3D;&quot;tab&quot; aria-controls&#x3D;&quot;profile&quot;&gt;Profile&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;a class&#x3D;&quot;list-group-item list-group-item-action&quot; id&#x3D;&quot;list-messages-list&quot; data-bs-toggle&#x3D;&quot;list&quot; href&#x3D;&quot;#list-messages&quot; role&#x3D;&quot;tab&quot; aria-controls&#x3D;&quot;messages&quot;&gt;Messages&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;a class&#x3D;&quot;list-group-item list-group-item-action&quot; id&#x3D;&quot;list-settings-list&quot; data-bs-toggle&#x3D;&quot;list&quot; href&#x3D;&quot;#list-settings&quot; role&#x3D;&quot;tab&quot; aria-controls&#x3D;&quot;settings&quot;&gt;Settings&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;col-8&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;tab-content&quot; id&#x3D;&quot;nav-tabContent&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;tab-pane fade show active&quot; id&#x3D;&quot;list-home&quot; role&#x3D;&quot;tabpanel&quot; aria-labelledby&#x3D;&quot;list-home-list&quot;&gt;...&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;tab-pane fade&quot; id&#x3D;&quot;list-profile&quot; role&#x3D;&quot;tabpanel&quot; aria-labelledby&#x3D;&quot;list-profile-list&quot;&gt;...&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;tab-pane fade&quot; id&#x3D;&quot;list-messages&quot; role&#x3D;&quot;tabpanel&quot; aria-labelledby&#x3D;&quot;list-messages-list&quot;&gt;...&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;tab-pane fade&quot; id&#x3D;&quot;list-settings&quot; role&#x3D;&quot;tabpanel&quot; aria-labelledby&#x3D;&quot;list-settings-list&quot;&gt;...&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>這段比較單純，你叫按照bootstrap的官網提供的內容貼到你的專案中，並更改相對應的<code>id</code>和<code>href</code>值，如此應可達成變換頁面的效果了。</p>
-<h2 id="btn-group用label和input所構成的樣式"><a href="#btn-group用label和input所構成的樣式" class="headerlink" title="btn-group用label和input所構成的樣式"></a>btn-group用label和input所構成的樣式</h2><p>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;btn-group&quot; role&#x3D;&quot;group&quot; aria-label&#x3D;&quot;Basic radio toggle button group&quot;&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;radio&quot; class&#x3D;&quot;btn-check&quot; name&#x3D;&quot;btnradio&quot; id&#x3D;&quot;btnradio1&quot; autocomplete&#x3D;&quot;off&quot;&gt;</span><br><span class="line">  &lt;label class&#x3D;&quot;btn btn-outline-primary&quot; for&#x3D;&quot;btnradio1&quot;&gt;Radio 1&lt;&#x2F;label&gt;</span><br><span class="line"></span><br><span class="line">  &lt;input type&#x3D;&quot;radio&quot; class&#x3D;&quot;btn-check&quot; name&#x3D;&quot;btnradio&quot; id&#x3D;&quot;btnradio2&quot; autocomplete&#x3D;&quot;off&quot; disabled&gt;</span><br><span class="line">  &lt;label class&#x3D;&quot;btn btn-outline-primary&quot; for&#x3D;&quot;btnradio2&quot;&gt;Radio 2&lt;&#x2F;label&gt;</span><br><span class="line"></span><br><span class="line">  &lt;input type&#x3D;&quot;radio&quot; class&#x3D;&quot;btn-check&quot; name&#x3D;&quot;btnradio&quot; id&#x3D;&quot;btnradio3&quot; autocomplete&#x3D;&quot;off&quot;&gt;</span><br><span class="line">  &lt;label class&#x3D;&quot;btn btn-outline-primary&quot; for&#x3D;&quot;btnradio3&quot;&gt;Radio 3&lt;&#x2F;label&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>上面這個範例，是用<code>label</code>和<code>input</code>所構成的btn-group。<br>其中有一個<code>input</code>被我們加入了<code>disabled</code>，表示該選項不能被選擇。</p>
-<h3 id="有disabled屬性的input造成radio為空值的問題"><a href="#有disabled屬性的input造成radio為空值的問題" class="headerlink" title="有disabled屬性的input造成radio為空值的問題"></a>有disabled屬性的input造成radio為空值的問題</h3><p>但是，當使用者點到這個被<code>disabled</code>的選項的時候，這個<code>radio</code>會呈現空值的狀態，<br>所以，要避免這種狀況的話，我們要對他的css樣式，加入以下的內容。<br>記得，這是在用<code>input</code>和<code>label</code>構成的input-group才會有的問題喔。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---CSS---</span><br><span class="line">.btn .disabled&#123;</span><br><span class="line">	pointer-events: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>接下來，你就為那個有disabled屬性的input欄位的className加入disabled，也就是你剛剛自己寫的部分，<br>如此，就可以避免點擊到disabled的<code>input</code>選項時，造成該<code>radio</code>為空值的問題囉。</p>
-<h1 id="使用-Alert-元件製作多步驟提示"><a href="#使用-Alert-元件製作多步驟提示" class="headerlink" title="使用 Alert 元件製作多步驟提示"></a>使用 Alert 元件製作多步驟提示</h1><iframe src="https://codepen.io/RandyChen/embed/LYRXWVL?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上這個範例我們是利用<code>.form-row</code>來做這個格線系統，並搭配<code>alert</code>元件來完成這個購買流程的效果。</p>
-<h1 id="收合購物車列表及表單排版技巧"><a href="#收合購物車列表及表單排版技巧" class="headerlink" title="收合購物車列表及表單排版技巧"></a>收合購物車列表及表單排版技巧</h1><p>在手機板的時候，防止客戶的選購產品太多會占頁面，故我們會用一個收合的效果，當他要開就打開，不要看就收起來，進而提升使用者體驗。</p>
-<iframe src="https://codepen.io/RandyChen/embed/WNGYpGq?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上的範例，就是用<code>card</code>元件的版，套進<code>collapse</code>的效果，當你按<code>下card-header</code>中的按鈕時，就會顯示出你的商品，若不要看就收闔起來。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1091,7 +1086,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">65</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

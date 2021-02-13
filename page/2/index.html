@@ -155,6 +155,381 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%9C%98%E9%9A%8A%E5%90%88%E4%BD%9C%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%9C%98%E9%9A%8A%E5%90%88%E4%BD%9C%E7%AF%87/" class="post-title-link" itemprop="url">github課程筆記-Git團隊合作篇</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-30 11:14:56 / Modified: 11:25:35" itemprop="dateCreated datePublished" datetime="2021-01-30T11:14:56+08:00">2021-01-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="git-remote-遠端數據庫"><a href="#git-remote-遠端數據庫" class="headerlink" title="git remote - 遠端數據庫"></a>git remote - 遠端數據庫</h1><p>這小節要教導如何推送其他的branch上去遠端數據庫。<br>step1.<br>若今天你在分支的支線上，直接使用git push，是會失敗的。<br>原因是Github不確定你是要推送到哪一個遠端數據庫上，是推到正式主機上 或是 推送到github上呢?</p>
+<p>step2.<br>先用<code>git remote</code> 查詢遠端數據庫</p>
+<h2 id="git-remote-查詢遠端數據庫"><a href="#git-remote-查詢遠端數據庫" class="headerlink" title="git remote - 查詢遠端數據庫"></a>git remote - 查詢遠端數據庫</h2><p>你輸入完這個指令之後，git Bash應該會出現origin，這個origin就代表<br>你用<code>git clone</code> 拉下來的數據庫的名稱，預設叫origin，所以，<br>如果你有很多數據庫的話，你用<code>git remote</code>就會出現很多數據庫的名稱囉。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%9C%98%E9%9A%8A%E5%90%88%E4%BD%9C%E7%AF%87/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%88%86%E6%94%AF-branch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%88%86%E6%94%AF-branch/" class="post-title-link" itemprop="url">github課程筆記-Git分支(branch)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-30 10:54:46 / Modified: 11:13:00" itemprop="dateCreated datePublished" datetime="2021-01-30T10:54:46+08:00">2021-01-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="分支簡介"><a href="#分支簡介" class="headerlink" title="分支簡介"></a>分支簡介</h1><p>首先，網站上面的正式版本，都是在master的這條線底下。<br>但是，當你想要修改網站上的bug或者想要新增功能的時候，一定會在修改完後，<br>進行很多次的重新整理，這個時候，如果你用master底下的正式版的程式碼的話，<br>會影響到使用者在使用網站。<br>所以，這時候，我們需要多開其他的分支，也就是所謂的branch。<br>那我們在branch底下，可以盡情的修改或新增內容，等到全部的變更都確定之後，<br>才將最終定稿的程式碼，丟到master中，更新網頁的正式版程式碼。</p>
+<p><a target="_blank" rel="noopener" href="https://nvie.com/posts/a-successful-git-branching-model/">範例分支圖網址</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%88%86%E6%94%AF-branch/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/29/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E6%92%B0%E5%AF%ABDashBoard-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/29/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E6%92%B0%E5%AF%ABDashBoard-02/" class="post-title-link" itemprop="url">Vue-vue出一個電商網站-撰寫DashBoard-02</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-29 10:30:39" itemprop="dateCreated datePublished" datetime="2021-01-29T10:30:39+08:00">2021-01-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-30 15:06:54" itemprop="dateModified" datetime="2021-01-30T15:06:54+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="增加使用者體驗-讀取中效果製作"><a href="#增加使用者體驗-讀取中效果製作" class="headerlink" title="增加使用者體驗 - 讀取中效果製作"></a>增加使用者體驗 - 讀取中效果製作</h1><p>製作局部和全部的loading效果。<br>step1.</p>
+<h2 id="全域loading效果-Vue-Loading-Overlay"><a href="#全域loading效果-Vue-Loading-Overlay" class="headerlink" title="全域loading效果 - Vue Loading Overlay"></a>全域loading效果 - Vue Loading Overlay</h2><p>在這邊我們會直接安裝Vue Loading Overlay套件，來達成全域的loading效果。<br>輸入指令 <code>npm install vue-loading-overlay</code> ，來為你的編譯器安裝這個套件。</p>
+<p>step2.<br>在main.js檔案中，加入overlay的套件，也要加入啟用的程式碼</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">---main.js---</span><br><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import axios from &#39;axios&#39;</span><br><span class="line">import VueAxios from &#39;vue-axios&#39;</span><br><span class="line">import Loading from &#39;vue-loading-overlay&#39;;          &#x2F;&#x2F; 引入overlay元件</span><br><span class="line">import &#39;vue-loading-overlay&#x2F;dist&#x2F;vue-loading.css&#39;;  &#x2F;&#x2F; 引入overlay元件</span><br><span class="line">import &#39;bootstrap&#39;</span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import router from &#39;.&#x2F;router&#39;</span><br><span class="line">Vue.use(VueAxios, axios)</span><br><span class="line">Vue.config.productionTip &#x3D; false</span><br><span class="line">Vue.component(&#39;Loading&#39;, Loading);  &#x2F;&#x2F; 將overlay元件宣告成全域的元件</span><br><span class="line"></span><br><span class="line">axios.defaults.withCredentials &#x3D; true;</span><br><span class="line">&#x2F;* eslint-disable no-new *&#x2F;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  router,</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: &#39;&lt;App&#x2F;&gt;&#39;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/29/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E6%92%B0%E5%AF%ABDashBoard-02/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/29/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E6%92%B0%E5%AF%ABDashBoard/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/29/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E6%92%B0%E5%AF%ABDashBoard/" class="post-title-link" itemprop="url">Vue-vue出一個電商網站-撰寫DashBoard</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-29 09:34:16" itemprop="dateCreated datePublished" datetime="2021-01-29T09:34:16+08:00">2021-01-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-30 15:06:59" itemprop="dateModified" datetime="2021-01-30T15:06:59+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="套用-Bootstrap-Dashboard-版型"><a href="#套用-Bootstrap-Dashboard-版型" class="headerlink" title="套用 Bootstrap Dashboard 版型"></a>套用 Bootstrap Dashboard 版型</h1><p>step1.<br>首先，你可以先去<a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/5.0/examples/">Bootstrap的公版的網站</a> 中，選取Dashboard的主題，來當作我們的Dashboard的版型。</p>
+<p>step2.<br>接著，你點開Dashboard的主題，然後對這個網頁點擊右鍵查看原始碼，為的是要將這個Dashboard的html程式碼抓下來。</p>
+<p>step3.<br>去你的專案檔中的assets資料夾目錄底下，新增一個_Dashboard.scss檔案，<br>接著，去你剛剛在察看Dashboard原始碼的頁面中，找尋dashboard.css這個關鍵字，<br>並把這個超連結打開，裡面的內容就是這個Dashboard所用到的css樣式。</p>
+<p>step4.<br>將你剛剛開的dashboard.css裡面的內容，複製起來貼到你的_Dashboard.scss檔案中。<br>接著，在all.scss檔案中將這個_Dashboard.scss檔案給<code>import</code>進來。</p>
+<p>step5.<br>去components資料夾底下，新增一個DashBoard.vue的元件檔<br>並將dashboard公版內的html內容加入到你的DashBoard.vue的元件檔中。<br>記得，在公版的<code>script</code>部分的內容是不需要複製的喔，因為，我們只有要用html的內容部份。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/29/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E6%92%B0%E5%AF%ABDashBoard/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/28/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git-%E7%92%B0%E5%A2%83%E5%AE%89%E8%A3%9D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/28/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git-%E7%92%B0%E5%A2%83%E5%AE%89%E8%A3%9D/" class="post-title-link" itemprop="url">github課程筆記-Git 環境安裝</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-01-28 10:02:48 / Modified: 10:23:27" itemprop="dateCreated datePublished" datetime="2021-01-28T10:02:48+08:00">2021-01-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="下載github到電腦中"><a href="#下載github到電腦中" class="headerlink" title="下載github到電腦中"></a>下載github到電腦中</h1><p>首先，先上網下載github到你的電腦中。<br><a target="_blank" rel="noopener" href="https://git-scm.com/">git下載官網</a></p>
+<p>接著，下載完並安裝完後，在你的我的開始列表中，<br>會出現一個Git資料夾，裡面會有一個Git Bash，點擊它。<br>接著，輸入<code>git version</code>如果有出現相對應的git版本號的話，就代表安裝成功囉。</p>
+<h1 id="Windows-命令提示字元教學"><a href="#Windows-命令提示字元教學" class="headerlink" title="Windows - 命令提示字元教學"></a>Windows - 命令提示字元教學</h1><h2 id="移動路徑-cd"><a href="#移動路徑-cd" class="headerlink" title="移動路徑 cd"></a>移動路徑 cd</h2><h2 id="移動到上一層-cd"><a href="#移動到上一層-cd" class="headerlink" title="移動到上一層 cd .."></a>移動到上一層 cd ..</h2><h2 id="展開列表-ls"><a href="#展開列表-ls" class="headerlink" title="展開列表 ls"></a>展開列表 ls</h2><h2 id="開新資料夾-mkdir"><a href="#開新資料夾-mkdir" class="headerlink" title="開新資料夾 mkdir"></a>開新資料夾 mkdir</h2><p>你就在目標目錄下，輸入<code>mkdir 資料夾名稱</code>，就可以在這個目錄底下新增這個資料夾囉。</p>
+<h2 id="新增檔案-touch"><a href="#新增檔案-touch" class="headerlink" title="新增檔案 touch"></a>新增檔案 touch</h2><p>你就在目標目錄下，輸入<code>touch 資料名稱</code>，就可以在這個目錄底下新增這個檔案囉。</p>
+<h1 id="Git-環境設定"><a href="#Git-環境設定" class="headerlink" title="Git 環境設定"></a>Git 環境設定</h1><h2 id="輸入user-name和user-email"><a href="#輸入user-name和user-email" class="headerlink" title="輸入user.name和user.email"></a>輸入user.name和user.email</h2><p>接著輸入作者的email和名稱<br>你直接在git bash中輸入以下兩段，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.eamil &quot;xxx@gmail.com&quot;</span><br><span class="line">git config --global user.name &quot;xxxx&quot;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/28/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git-%E7%92%B0%E5%A2%83%E5%AE%89%E8%A3%9D/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/28/%E5%BC%95%E5%85%A5%E6%AA%94%E6%A1%88%E8%B7%AF%E5%BE%91%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -563,448 +938,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98-01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98-01/" class="post-title-link" itemprop="url">Vue Router筆記-01</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-25 10:15:12" itemprop="dateCreated datePublished" datetime="2021-01-25T10:15:12+08:00">2021-01-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:06:41" itemprop="dateModified" datetime="2021-01-30T15:06:41+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Vue-Router-參數設定"><a href="#Vue-Router-參數設定" class="headerlink" title="Vue Router 參數設定"></a>Vue Router 參數設定</h1><p>在vue的官方文件中，有針對router的設定做了詳細的介紹，<br>像是你在router資料夾中的index.js檔中，你為各元件所設定的<code>name</code>, <code>path</code>這些屬性都是在<br>這份文件中有介紹到。</p>
-<h2 id="router-mode-可選值"><a href="#router-mode-可選值" class="headerlink" title="router mode 可選值"></a>router mode 可選值</h2><p>在課堂上有特別講到router的<code>mode</code>屬性<br><a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/api/#mode">官方文件的Router的mode介紹</a></p>
-<h3 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h3><p>這個屬性有三個值可以使用，那我們一般是用預設值<code>hash</code>，<br>也就是你的網址中路由前面會出現一個<code>#</code>號</p>
-<h3 id="history-不建議使用"><a href="#history-不建議使用" class="headerlink" title="history - 不建議使用"></a>history - 不建議使用</h3><p>那如果你設定<code>history</code>的話</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">---router資料夾中的index.js檔案---</span><br><span class="line">export default new VueRouter(&#123;</span><br><span class="line">    mode:&#39;history&#39;,  &#x2F;&#x2F; 改成history模式</span><br><span class="line">    routes:[</span><br><span class="line">        &#123;</span><br><span class="line">            name:&#39;首頁&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">            path:&#39;&#x2F;index&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">            component:Home , &#x2F;&#x2F;它所對應的原件</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &#x2F;&#x2F;name:&#39;分頁&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">            path:&#39;&#x2F;page&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">            &#x2F;&#x2F;component:Page , &#x2F;&#x2F;它所對應的原件</span><br><span class="line">            components:&#123;</span><br><span class="line">                default: Page,</span><br><span class="line">                menu: Menu,</span><br><span class="line">            &#125;,</span><br><span class="line">            children:[</span><br><span class="line">                &#123;</span><br><span class="line">                    name:&#39;child1&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">                    path:&#39;&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">                    component:child_1 , &#x2F;&#x2F;它所對應的原件    </span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    name:&#39;child2&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">                    path:&#39;child2&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">                    component:child_2 , &#x2F;&#x2F;它所對應的原件      </span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    name:&#39;child3&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">                    path:&#39;child3&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">                    component:child_3 , &#x2F;&#x2F;它所對應的原件      </span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;     </span><br><span class="line">    ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>你會發現你的網址在做路由切換的時候，<code>#</code>號不見了，<br><img src="/image/router_mode_history.png" alt="沒有#號的網址"><br>你要特別注意，當沒有<code>#</code>號的時候，它是使用後方的路由，不是只有使用前端的路由，<br>因此，當我們用<code>history</code>模式的時候，必須要前後端一起搭配，<br>所以，不建議你用這種模式喔，用預設的就好。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98-01/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">Vue Router筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-25 09:43:09" itemprop="dateCreated datePublished" datetime="2021-01-25T09:43:09+08:00">2021-01-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:06:48" itemprop="dateModified" datetime="2021-01-30T15:06:48+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="使用Vue-Router-及配置路由文件"><a href="#使用Vue-Router-及配置路由文件" class="headerlink" title="使用Vue Router 及配置路由文件"></a>使用Vue Router 及配置路由文件</h1><p><img src="/image/SPA_1.png" alt="user頁面"><br><img src="/image/SPA_2.png" alt="product頁面"><br>以上範例，你可以看到它們都是停留在index的網址上，<br>但是，會因為我們在#後面所接入的內容不同，來呈現不同元件的內容。<br>像現在是#/user，所以，此時是呈現user元件。<br>像現在是#/product，所以，此時是呈現Admin元件。</p>
-<p>故本節是教導怎麼建立Vue Router</p>
-<p>Router會包含幾個檔案</p>
-<p>首先，進入點<br>包含它會注入src資料夾中的元件檔和其他的component檔案。</p>
-<p>第二，新增路由的配置檔案<br>這個配置檔案會決定在哪個路由中呈現哪個元件檔案。<br>那它執行的路徑會在router/index.js 中。</p>
-<p>第三，分頁內容</p>
-<p>Vue Components 就是一些元件的檔案，例如專案檔中的Hellowolrd.vue檔。</p>
-<p>接下來，介紹安裝vue 的router步驟<br>step1.<br>先輸入 <code>npm install vue-router --save</code> 指令</p>
-<p>step2.<br>在src資料夾中，新建一個叫router的資料夾<br>在router下再新增一個叫index.js的檔案，這個檔案就是要放整個路由的配置檔。</p>
-<p>step3.<br>在index.js檔案中輸入<br><code>import Vue from &#39;vue&#39;</code><br><code>import VueRouter from &#39;vue-router&#39;</code></p>
-<p>以上這兩行呢，是將官方提供的元件給引入進來。</p>
-<p>接下來，在這兩行之後就是引入我們自己的元件囉。<br><code>import Home from &#39;@/component/HelloWorld&#39;</code><br>引入在src資料夾中的HelloWorld元件檔，並將它訂為Home</p>
-<p>step4.<br>在你引入完官方元件 和你自己的元件檔之後，<br>就是要輸入啟用的指令，<br>那你就在同一個index.js檔案中，在引入程式碼的後方輸入<code>Vue.use(VueRouter)</code><br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import VueRouter from &#39;vue-router&#39;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 以上為官方提供的元件</span><br><span class="line">import Home from &#39;@&#x2F;component&#x2F;HelloWorld&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter)  &#x2F;&#x2F; 啟用指令</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E6%93%8D%E6%8E%A7dom%E5%85%83%E7%B4%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E6%93%8D%E6%8E%A7dom%E5%85%83%E7%B4%A0/" class="post-title-link" itemprop="url">jQuery課程筆記-操控dom元素</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-23 17:14:17" itemprop="dateCreated datePublished" datetime="2021-01-23T17:14:17+08:00">2021-01-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:14:33" itemprop="dateModified" datetime="2021-01-30T15:14:33+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jQuery/" itemprop="url" rel="index"><span itemprop="name">jQuery</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="this-教你如何操作本身元素"><a href="#this-教你如何操作本身元素" class="headerlink" title="this - 教你如何操作本身元素"></a>this - 教你如何操作本身元素</h1><p><code>this</code> 指的是觸發該事件的元素<br>所以，我們利用<code>this</code>來指定觸發該事件的元素，並利用<code>this</code>來做一些操作。</p>
-<iframe src="https://codepen.io/RandyChen/embed/YzGMZOp?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<h1 id="parent-找到父階層元素"><a href="#parent-找到父階層元素" class="headerlink" title="parent() - 找到父階層元素"></a>parent() - 找到父階層元素</h1><p>利用<code>parent()</code>語法，來找到父元素，並為父元素修改它的css樣式。</p>
-<iframe src="https://codepen.io/RandyChen/embed/gOwyWWj?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>在以上的範例中，當按下<code>a</code>連結按鈕，就利用<code>parent</code>去找到它的外層父元素，也就是<code>li</code>，故我們就可以直接為<code>li</code>修改它的CSS樣式囉。</p>
-<h1 id="siblings-同層元素"><a href="#siblings-同層元素" class="headerlink" title="siblings() - 同層元素"></a>siblings() - 同層元素</h1><p>利用語法<code>siblings()</code>來找到同一層中的其他元素，並為它們修改CSS樣式</p>
-<iframe src="https://codepen.io/RandyChen/embed/PoGgmaX?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>你可以看到以上範例的JS檔案中，在我們按下<code>a</code>連結按鈕後，會先用<code>parent()</code>去找它的父元素，也就是<code>li</code>。<br>接著，找到父元素後，會接著執行<code>toggleClass(&#39;active&#39;)</code>，再來，會執行<code>sibilings()</code>，去找其他同層的<code>li</code>，並執行<code>removeClass</code>，<br>來消除它們的<code>bg-warning text-white</code>的className。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-CSS-jQuery%E5%90%84%E5%BC%8F%E5%90%84%E6%A8%A3%E7%9A%84%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-CSS-jQuery%E5%90%84%E5%BC%8F%E5%90%84%E6%A8%A3%E7%9A%84%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C/" class="post-title-link" itemprop="url">jQuery課程筆記-CSS+jQuery各式各樣的動畫效果</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-23 16:53:20" itemprop="dateCreated datePublished" datetime="2021-01-23T16:53:20+08:00">2021-01-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:14:37" itemprop="dateModified" datetime="2021-01-30T15:14:37+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jQuery/" itemprop="url" rel="index"><span itemprop="name">jQuery</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="preventDefault-取消默認行為"><a href="#preventDefault-取消默認行為" class="headerlink" title="preventDefault 取消默認行為"></a>preventDefault 取消默認行為</h1><p>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;a href&#x3D;&quot;http:&#x2F;&#x2F;www.google.com.tw&quot; class&#x3D;&quot;close&gt;按鈕&lt;&#x2F;a&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">	$(&#39;.close&#39;).click(function(e)&#123;</span><br><span class="line">		e.preventDefault();</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>由以上的程式碼就可以將原本<code>a</code>連結的預設效果給取消。<br>所以，當我們按下這個<code>a</code>連結，就不會跳轉到<a target="_blank" rel="noopener" href="http://www.google.com.tw/">http://www.google.com.tw</a> 網址囉。</p>
-<p>那為什麼要在<code>a</code>連結的js中，加上<code>preventDefault</code>呢，是因為今天該<code>a</code>連結<br>如果，只有要觸發某個事件，並沒有要讓頁面連到別的網頁的時候，<br>就需要用到<code>preventDefault</code>囉。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-CSS-jQuery%E5%90%84%E5%BC%8F%E5%90%84%E6%A8%A3%E7%9A%84%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E5%AE%8C%E6%88%90%E5%BE%8C%E7%94%A2%E7%94%9F%E7%9A%84%E5%90%84%E6%AA%94%E6%A1%88%E6%84%8F%E7%BE%A9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E5%AE%8C%E6%88%90%E5%BE%8C%E7%94%A2%E7%94%9F%E7%9A%84%E5%90%84%E6%AA%94%E6%A1%88%E6%84%8F%E7%BE%A9/" class="post-title-link" itemprop="url">Vue_Cli_課程筆記-安裝完成後產生的各檔案意義</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-22 09:59:46" itemprop="dateCreated datePublished" datetime="2021-01-22T09:59:46+08:00">2021-01-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:05:58" itemprop="dateModified" datetime="2021-01-30T15:05:58+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#　Vue Cli 所產生的資料夾結構說明</p>
-<h2 id="在VScode的環境下使用Vue"><a href="#在VScode的環境下使用Vue" class="headerlink" title="在VScode的環境下使用Vue"></a>在VScode的環境下使用Vue</h2><p>你先用vscode打開那個vue專案檔，接著，在你的編譯器中輸入ctrl+<code>(反斜線)， 這時候，會跳出來可以輸入指令的區塊，接著，你就輸入</code>npm run dev<code>，就會跳出</code>http:\localhost:8080<code>的提示訊息，接著，你就又能在瀏覽器中輸入</code>http:\localhost:8080`，然後，打開專案囉~</p>
-<p>接下來是vue cli產生的檔案介紹</p>
-<h3 id="README-md"><a href="#README-md" class="headerlink" title="README.md"></a>README.md</h3><p>這個檔案裡面，有提供一些vue cli可以用的指令<br><code>npm install</code> 就是安裝相關的套件。<br><code>npm run dev</code>　運行開發中的環境<br><code>npm run bulid</code> 運行正式版的環境</p>
-<p>當我們執行<code>npm run build</code>，它會運行build/build.js　的檔案，將所有的網頁內容打包壓縮。<br>當我們輸入這個指令之後，專案檔會產生出一個dist的資料夾。<br>那在這個生成的dist資料夾中，會有一個index.html，這個html一定要在HTTP的server下才能運行，將它直接打開是沒有辦法運行的喔。</p>
-<h4 id="小插曲-index-html中引入css和js-報MIME-type錯誤問題"><a href="#小插曲-index-html中引入css和js-報MIME-type錯誤問題" class="headerlink" title="小插曲 - index.html中引入css和js 報MIME type錯誤問題"></a>小插曲 - index.html中引入css和js 報MIME type錯誤問題</h4><p>當我用嘗試用<code>Go live</code>來將dist資料夾中的index.html在瀏覽器中開啟，<br>但是，卻出現以下的錯誤log<br>!()[image/Vue_cli_webpack_error.png]<br>這個問題主要是因為讀不到專案檔裡面的樣式檔導致的，<br>所以，你看以上的圖片中它是說該錯誤是發生在index.html檔案中，<br>所以，你就去dist資料夾中的index.html中，該改它引入的路徑<br>原本預設的路徑是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;&#x2F;static&#x2F;js&#x2F;manifest.2ae2e69a05c33dfc65f8.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;&#x2F;static&#x2F;js&#x2F;vendor.0aad2172a75b8ed4f46c.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;&#x2F;static&#x2F;js&#x2F;app.2f2e5edd9af2c59aa514.js&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-<p>你可以看到<code>src</code>的最前面都有一個反斜線<code>\</code>，<br>你就將這個反斜線都去掉</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;static&#x2F;js&#x2F;manifest.2ae2e69a05c33dfc65f8.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;static&#x2F;js&#x2F;vendor.0aad2172a75b8ed4f46c.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;static&#x2F;js&#x2F;app.2f2e5edd9af2c59aa514.js&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-<p>改完之後，就能正常的在VSCode中的live Server中，正確的在瀏覽器中，打開dist資料夾中的index.html檔案囉。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E5%AE%8C%E6%88%90%E5%BE%8C%E7%94%A2%E7%94%9F%E7%9A%84%E5%90%84%E6%AA%94%E6%A1%88%E6%84%8F%E7%BE%A9/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1070,7 +1007,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">65</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
