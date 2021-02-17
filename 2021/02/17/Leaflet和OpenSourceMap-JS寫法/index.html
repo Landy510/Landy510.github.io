@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="AJAX 與函式應用教學這個章節主要是教怎麼用XML物件來將口罩地圖的opendata載入下來，接著，再對載入的資料做相對應的處理。注意!!!!!!!!!!其中一個特別需要注意的技巧，是載入loading圖片的作法。老師的作法是當資料庫的資料還再載入的時候，顯示loading的圖片，如果，資料源載入完成後，就不用再顯示loading的圖片了。那切換要不要再放loading圖片的程式碼，你就放在XM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leaflet和OpenSourceMap-JS寫法">
+<meta property="og:url" content="http://example.com/2021/02/17/Leaflet%E5%92%8COpenSourceMap-JS%E5%AF%AB%E6%B3%95/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="AJAX 與函式應用教學這個章節主要是教怎麼用XML物件來將口罩地圖的opendata載入下來，接著，再對載入的資料做相對應的處理。注意!!!!!!!!!!其中一個特別需要注意的技巧，是載入loading圖片的作法。老師的作法是當資料庫的資料還再載入的時候，顯示loading的圖片，如果，資料源載入完成後，就不用再顯示loading的圖片了。那切換要不要再放loading圖片的程式碼，你就放在XM">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-17T02:49:50.000Z">
+<meta property="article:modified_time" content="2021-02-17T03:20:09.699Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="AJAX">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/02/17/Leaflet%E5%92%8COpenSourceMap-JS%E5%AF%AB%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Leaflet和OpenSourceMap-JS寫法 | Landy Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/17/Leaflet%E5%92%8COpenSourceMap-JS%E5%AF%AB%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Leaflet和OpenSourceMap-JS寫法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-17 10:49:50 / Modified: 11:20:09" itemprop="dateCreated datePublished" datetime="2021-02-17T10:49:50+08:00">2021-02-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AJAX/" itemprop="url" rel="index"><span itemprop="name">AJAX</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="AJAX-與函式應用教學"><a href="#AJAX-與函式應用教學" class="headerlink" title="AJAX 與函式應用教學"></a>AJAX 與函式應用教學</h1><p>這個章節主要是教怎麼用XML物件來將口罩地圖的opendata載入下來，接著，再對載入的資料做相對應的處理。<br>注意!!!!!!!!!!<br>其中一個特別需要注意的技巧，是載入loading圖片的作法。<br>老師的作法是<br>當資料庫的資料還再載入的時候，顯示loading的圖片，如果，資料源載入完成後，就不用再顯示loading的圖片了。<br>那切換要不要再放loading圖片的程式碼，你就放在XML物件的onload的函式裡面，因為，onload的函式就是當資料源的資料有完整載入完成後，才會觸發的event，所以，放在裡面是不錯的選擇。</p>
+<a id="more"></a>
+<h1 id="Leaflet-OpenStreetMap-地圖應用開發"><a href="#Leaflet-OpenStreetMap-地圖應用開發" class="headerlink" title="Leaflet + OpenStreetMap 地圖應用開發"></a>Leaflet + OpenStreetMap 地圖應用開發</h1><p>這一小節是六角在Youtube的教學影片，<br>主要是在教怎麼利用地圖服務來完成口罩地圖作業的右手邊的地圖的效果。<br>裡面有用到兩種服務<br>Leaflet (JS框架 - 常見處理)<br>我們通常使用Leaflet 來在圖資裡面下標示點，而這個標示點的效果就是利用Leaflet來達成的優~~</p>
+<p>OpenStreetMp (圖資 - 地圖資料)<br>它就是圖資的來源，它提供的服務跟GooleMap很像，就是提供每個地區的地圖醬。</p>
+<p>注意!!!!<br>你在引入Leaflet的時候，有一個要特別注意的地方<br>例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var mymap &#x3D; L.map(&#39;mapid&#39;).setView([51.505, -0.09], 13);</span><br><span class="line"></span><br><span class="line">L.tileLayer(&#39;https:&#x2F;&#x2F;api.mapbox.com&#x2F;styles&#x2F;v1&#x2F;&#123;id&#125;&#x2F;tiles&#x2F;&#123;z&#125;&#x2F;&#123;x&#125;&#x2F;&#123;y&#125;?access_token&#x3D;&#123;accessToken&#125;&#39;, &#123;</span><br><span class="line">    attribution: &#39;Map data &amp;copy; &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.openstreetmap.org&#x2F;&quot;&gt;OpenStreetMap&lt;&#x2F;a&gt; contributors, &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;creativecommons.org&#x2F;licenses&#x2F;by-sa&#x2F;2.0&#x2F;&quot;&gt;CC-BY-SA&lt;&#x2F;a&gt;, Imagery © &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.mapbox.com&#x2F;&quot;&gt;Mapbox&lt;&#x2F;a&gt;&#39;,</span><br><span class="line">    maxZoom: 18,</span><br><span class="line">    id: &#39;mapbox&#x2F;streets-v11&#39;,</span><br><span class="line">    tileSize: 512,</span><br><span class="line">    zoomOffset: -1,</span><br><span class="line">    accessToken: &#39;pk.eyJ1Ijoic3RlYWxpbmc2MTAiLCJhIjoiY2tlZ3ppaWRvMHNycjJ6czQ0OW5jNWQ0ciJ9.QQg3D8n65YmbvnxIVymYoQ&#39;</span><br><span class="line">&#125;).addTo(mymap);</span><br></pre></td></tr></table></figure>
+<p>以上這兩段程式碼的意思為<br>第一段，將地圖的經緯線畫出來，並將經緯度和地圖的縮放比例設定完成<br>第二段，將圖磚載入並放入你的瀏覽器裡面<br>所以，地圖的構成很像公司的WaferMap的構成，第一層是PreocessInfo，即各個DieState ，第二層就是WaferMap的圖磚。<br>另外，圖磚的本身就是由很多張的png圖片構成的</p>
+<p>你可以注意到在L.tileLayer裡面有一個accessToken的選項，它在官網的預設值是your.mapbox.access.token，這不是一個真的accessToken喔，如果你用這種token去用它的服務的話，會得到一張灰色的圖，然後，你看瀏覽器的開發者模式中，會得到401的回傳錯誤，裡面會寫說Unauthorized。<br>代表你沒有被授權使用這個服務。<br>其實，在Leaflet的官網裡面，有特別提到accessToken的部份，他說你要放入你自己的accessToken才能使用這個服務，那你得自己去申請一個才行使用，<br>它其實有提供一個註冊MapBox的網址，等你註冊完後，MapBox會自動產出一個accessToken的內容，你再將這串內容放到accessToken的屬性值裡面之後，應該就可以順利的在瀏覽器上面看到地圖囉~~~</p>
+<p>我覺得這個人在介紹圖資和標示點之間的構成，<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/28377862">這篇文章</a> 介紹的蠻好懂得。</p>
+<p>另外，如何找到你想要的目標位置的經緯度資訊<br>你直接在googleMap裡面搜尋你的目的地，接著，在網址欄位裡面<br>就會出現像以下這種內容<br><a target="_blank" rel="noopener" href="https://www.google.com.tw/maps/place/%E9%99%B3%E8%8C%82%E9%9B%84%E4%B8%AD%E9%86%AB%E8%A8%BA%E6%89%80/@23.9653536,120.5748983,17z/data=!3m1!4b1!4m5!3m4!1s0x346936f91f6b9eb1:0x532af3e1429da4f9!8m2!3d23.9653536!4d120.577087?hl=zh-TW">https://www.google.com.tw/maps/place/%E9%99%B3%E8%8C%82%E9%9B%84%E4%B8%AD%E9%86%AB%E8%A8%BA%E6%89%80/@23.9653536,120.5748983,17z/data=!3m1!4b1!4m5!3m4!1s0x346936f91f6b9eb1:0x532af3e1429da4f9!8m2!3d23.9653536!4d120.577087?hl=zh-TW</a><br>然後，你可以看到@後面接的就是目的地的經緯度囉，你在將你的經緯度丟到L.map的setView裡面，這樣Map就會呈現你輸入的經緯度的位置囉~</p>
+<p>接著，是介紹怎麼在Map上加marker，<br>例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var marker &#x3D; L.marker([23.9653536,120.5748983]).addTo(mymap);</span><br><span class="line">marker.bindPopup(&quot;&lt;b&gt;Hello world!&lt;&#x2F;b&gt;&lt;br&gt;I am a 陳茂雄中醫診所.&quot;).openPopup();</span><br></pre></td></tr></table></figure>
+<p>第一行程式碼就是在你輸入的經緯度上方加上一個marker，<br>第二行程式碼，會在你剛剛創的marker中綁了兩個函式<br>第一個bindPopup 可以加入你想要的html標籤到marker上的註釋框<br>第二個openPopup函式，當你點擊那個marker的時候，可以將那個註釋框關閉，在點擊一下打開。</p>
+<p>接著，是介紹怎麼修改marker的顏色樣式，<br>你可以到<a target="_blank" rel="noopener" href="https://github.com/pointhi/leaflet-color-markers">這個網址</a> 裡面抓到開源碼，就可以修改marker的顏色樣式了，<br>之後，你就可以依照該藥局口罩的數量多寡，來設定不一樣顏色樣式的marker。</p>
+<p>接著，是效能議題<br>當你插入marker的時候，其實每一個marker都是一張png，如果，你不管當下map的zoom level是多少，就都把它全部顯示出來，它會導致你的網頁效果很爛，所以，在這邊有額外插入一個插件，叫markercluster，<br>它是可以判定當你的zoom level很小的時候，顯示較少的marker，當你的zoom level很大的時候，才把marker全部顯示出來，這樣的好處就是可以提高效能喔~ 那加入這個markercluster插件，其實，就很像在插入另外一個圖層的概念。<br>注意~~~~~~~~~~~~~~~~~<br>當你要插入markercluster插件時，要記得也要引入該插件自己的css檔案和js檔案喔，不然，該插件的效果會出不來。 這個插件的相關連結在六角的課程裏面有提供。</p>
+<p>另外，找到自己座標的語法<br>你上google找關鍵字HTML5 geolocation api的相關內容，<br>接著，你利用這個內容抓到自深的經緯度後，將這個經緯度塞入<br>一開始在創map物件的setView的經緯度欄位中<br>即<br><code>var mymap = L.map(&#39;mapid&#39;).setView([你的經度, 你的緯度], 13);</code><br>這樣子地圖就可以以使用者的位置作展開囉~</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AJAX/" rel="tag"># AJAX</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/16/AJAX%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-2/" rel="prev" title="AJAX課程筆記-2">
+      <i class="fa fa-chevron-left"></i> AJAX課程筆記-2
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/17/Leaflet%E5%92%8COpenSourceMap-Vue%E5%AF%AB%E6%B3%95/" rel="next" title="Leaflet和OpenSourceMap-Vue寫法">
+      Leaflet和OpenSourceMap-Vue寫法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AJAX-%E8%88%87%E5%87%BD%E5%BC%8F%E6%87%89%E7%94%A8%E6%95%99%E5%AD%B8"><span class="nav-number">1.</span> <span class="nav-text">AJAX 與函式應用教學</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Leaflet-OpenStreetMap-%E5%9C%B0%E5%9C%96%E6%87%89%E7%94%A8%E9%96%8B%E7%99%BC"><span class="nav-number">2.</span> <span class="nav-text">Leaflet + OpenStreetMap 地圖應用開發</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

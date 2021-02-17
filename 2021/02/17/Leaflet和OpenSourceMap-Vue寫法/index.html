@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="這一篇就記錄一下，使用Vue的環境來製作口罩地圖的過程。 安裝相關套件和口罩地圖API網址step1.首先先用vue create指令創建你的專案。step2.我們先把，原本vue專案中預設設置的Helloworld的元件內容先拿掉。直接在APP.vue的元件檔中，做所有的事。step3.將bootstrap加入你的專案檔中。所以，輸入指令npm install bootstrap接著，導入boo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leaflet和OpenSourceMap-Vue寫法">
+<meta property="og:url" content="http://example.com/2021/02/17/Leaflet%E5%92%8COpenSourceMap-Vue%E5%AF%AB%E6%B3%95/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="這一篇就記錄一下，使用Vue的環境來製作口罩地圖的過程。 安裝相關套件和口罩地圖API網址step1.首先先用vue create指令創建你的專案。step2.我們先把，原本vue專案中預設設置的Helloworld的元件內容先拿掉。直接在APP.vue的元件檔中，做所有的事。step3.將bootstrap加入你的專案檔中。所以，輸入指令npm install bootstrap接著，導入boo">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-17T03:03:41.000Z">
+<meta property="article:modified_time" content="2021-02-17T03:19:23.193Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="AJAX">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/02/17/Leaflet%E5%92%8COpenSourceMap-Vue%E5%AF%AB%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Leaflet和OpenSourceMap-Vue寫法 | Landy Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/17/Leaflet%E5%92%8COpenSourceMap-Vue%E5%AF%AB%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Leaflet和OpenSourceMap-Vue寫法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-17 11:03:41 / Modified: 11:19:23" itemprop="dateCreated datePublished" datetime="2021-02-17T11:03:41+08:00">2021-02-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AJAX/" itemprop="url" rel="index"><span itemprop="name">AJAX</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>這一篇就記錄一下，使用Vue的環境來製作口罩地圖的過程。</p>
+<h1 id="安裝相關套件和口罩地圖API網址"><a href="#安裝相關套件和口罩地圖API網址" class="headerlink" title="安裝相關套件和口罩地圖API網址"></a>安裝相關套件和口罩地圖API網址</h1><p>step1.<br>首先先用<code>vue create</code>指令創建你的專案。<br>step2.<br>我們先把，原本vue專案中預設設置的Helloworld的元件內容先拿掉。<br>直接在APP.vue的元件檔中，做所有的事。<br>step3.<br>將bootstrap加入你的專案檔中。<br>所以，輸入指令<code>npm install bootstrap</code><br>接著，導入bootstrap。<br>你就在App.vue的檔案中的引入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---App.vue元件檔---</span><br><span class="line">&lt;style lang&#x3D;&quot;scss&quot;&gt;</span><br><span class="line">    @import &#39;bootstrap&#x2F;scss&#x2F;bootstrap&#39;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<p>然後，你就再這個檔案中隨便套一個bootstrap的元件看看你有沒有引入成功囉。</p>
+<p>step4.<br>接著你到課堂上<a target="_blank" rel="noopener" href="https://github.com/Wcc723/wheremask/blob/master/src/App.vue">提供的公版</a> 貼到你的App.vue元件檔中。，</p>
+<p>step5.<br>以下這個連結就是<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json">口罩地圖的API</a>。<br>你打開這個api的網址，就可以看到資料個格式和內容囉。</p>
+<p>step6.<br>我們要利用vue-axios這個套件來將以上的api內容，接進來你的專案檔裡面。<br>接著，我們就輸入指令<code>npm install --save axios vue-axios</code>來安裝這個套件。<br>再來你要將vue-axios的相關程式碼加入到你的main.js檔案。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---main.js---</span><br><span class="line">import axios from &#39;axios&#39;</span><br><span class="line">import VueAxios from &#39;vue-axios&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(VueAxios, axios)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="將API的資料接進來"><a href="#將API的資料接進來" class="headerlink" title="將API的資料接進來"></a>將API的資料接進來</h1><p>step7.<br>引入完成以上的vue-axios套件之後，我們就可以套過它，來將上面的口罩地圖的api內的資料，接進來囉。<br>這邊要特別注意一下，我們因為要在地圖的元件完整建立好之後，才去取得api的資訊，<br>所以，我們要在App.vue元件檔中的<code>mounted</code>生命週期時，才加入取得api資料的內容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">---App.vue---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  data: () &#x3D;&gt; (&#123;</span><br><span class="line"></span><br><span class="line">  &#125;),</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    const api &#x3D; &#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kiang&#x2F;pharmacies&#x2F;master&#x2F;json&#x2F;points.json&#39;</span><br><span class="line">    this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">      console.log(response)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>從以上的內容中，我們利用vue-axios元件的get方法，就可以取得api的內容囉。</p>
+<p>step8.<br>接著，我們將從api取得的內容存入我們定義的物件裡面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  data: () &#x3D;&gt; (&#123;</span><br><span class="line">    data: []</span><br><span class="line">  &#125;),</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    const vm &#x3D; this</span><br><span class="line">    const api &#x3D; &#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kiang&#x2F;pharmacies&#x2F;master&#x2F;json&#x2F;points.json&#39;</span><br><span class="line">    this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">      console.log(response)</span><br><span class="line">      vm.data &#x3D; response.data.features  &#x2F;&#x2F; 將資料存入data陣列中</span><br><span class="line">      console.log(vm.data)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="利用leaflet將圖資放上網頁"><a href="#利用leaflet將圖資放上網頁" class="headerlink" title="利用leaflet將圖資放上網頁"></a>利用leaflet將圖資放上網頁</h1><p>step9.<br>接著，我們要將leaflex元件加入我們的專案檔中囉。<br>你就輸入指令<code>npm install leaflet</code>，來安裝這個套件。<br>另外，你還要再額外手動加入它的css的cdn到你的public資料夾中的index.html檔案中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---index.html---</span><br><span class="line">&lt;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;leaflet@1.7.1&#x2F;dist&#x2F;leaflet.css&quot;</span><br><span class="line">  integrity&#x3D;&quot;sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6&#x2F;keqq&#x2F;sMZMZ19scR4PsZChSR7A&#x3D;&#x3D;&quot;</span><br><span class="line">  crossorigin&#x3D;&quot;&quot;&#x2F;&gt;    &#x2F;&#x2F; 將leaflet的cdn加入index.html裡面</span><br><span class="line">  </span><br><span class="line">&lt;&#x2F;head&gt;</span><br></pre></td></tr></table></figure>
+
+<p>step10.<br>你要在App.vue的元件檔中，將leaflet檔案載入進來。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">import L from &#39;leaflet&#39;  &#x2F;&#x2F; 載入leaflet元件，它叫做L</span><br><span class="line">console.log(L)  &#x2F;&#x2F; 加這一行的原因是因為，ESLint會報錯，說你沒有在用L元件。</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  data: () &#x3D;&gt; (&#123;</span><br><span class="line">    data: []</span><br><span class="line">  &#125;),</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    const vm &#x3D; this</span><br><span class="line">    const api &#x3D; &#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kiang&#x2F;pharmacies&#x2F;master&#x2F;json&#x2F;points.json&#39;</span><br><span class="line">    this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">      console.log(response)</span><br><span class="line">      vm.data &#x3D; response.data.features</span><br><span class="line">      console.log(vm.data)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>step11.<br>接著，將leaflet的地圖放上來。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">---App.vue的HTML---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">		&lt;div class&#x3D;&quot;row no-gutters&quot;&gt;</span><br><span class="line">			&lt;div class&#x3D;&quot;col-sm-3&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">			&lt;div class&#x3D;&quot;col-sm-9&quot;&gt;</span><br><span class="line">			  &lt;div id&#x3D;&quot;map&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">			&lt;&#x2F;div&gt;</span><br><span class="line">		  &lt;&#x2F;div&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---App.vue的JS---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import L from &#39;leaflet&#39;</span><br><span class="line">console.log(L)</span><br><span class="line">let osmMap &#x3D; &#123;&#125;   &#x2F;&#x2F; 宣告一個變數來將一些圖資資訊存入在它裡面</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  data: () &#x3D;&gt; (&#123;</span><br><span class="line">    data: &#123;&#125;</span><br><span class="line">  &#125;),</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    const vm &#x3D; this</span><br><span class="line">    const api &#x3D; &#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kiang&#x2F;pharmacies&#x2F;master&#x2F;json&#x2F;points.json&#39;</span><br><span class="line">    this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">      console.log(response)</span><br><span class="line">      vm.data &#x3D; response.data.features</span><br><span class="line">      console.log(vm.data)</span><br><span class="line">    &#125;)</span><br><span class="line">    osmMap &#x3D; L.map(&#39;map&#39;, &#123;</span><br><span class="line">      center: [25.03, 121.55],</span><br><span class="line">      zoom: 15</span><br><span class="line">    &#125;)  &#x2F;&#x2F; 存入座標和縮放大小</span><br><span class="line">    L.tileLayer(&#39;https:&#x2F;&#x2F;&#123;s&#125;.tile.openstreetmap.org&#x2F;&#123;z&#125;&#x2F;&#123;x&#125;&#x2F;&#123;y&#125;.png&#39;, &#123;</span><br><span class="line">      attribution: &#39;&lt;a target&#x3D;&quot;_blank&quot; href&#x3D;&quot;https:&#x2F;&#x2F;www.openstreetmap.org&#x2F;&quot;&gt;© OpenStreetMap 貢獻者&lt;&#x2F;a&gt;&#39;,</span><br><span class="line">      maxZoom: 18</span><br><span class="line">    &#125;).addTo(osmMap)   &#x2F;&#x2F; 以該變數的座標為中心，來展開地圖</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>經過以上的操作你應該就可以看到，你的畫面上，有地圖在上面了。</p>
+<p>step12.<br>我們將課堂上提供的一份，將各主城市中的縣市做過分類的<a target="_blank" rel="noopener" href="https://github.com/Wcc723/wheremask/blob/master/src/assets/cityName.json">口罩地圖資料</a> ，存成JSON檔案。<br>這個json的分類檔，為的是要當你點擊特定縣市的時候，你的圖磚不會呈現所有的資訊，只會呈現局部的資訊而已，這樣你的網頁就比較不會卡頓了。<br>那這邊呢，我只有擷取<code>cityName:台北市</code>這一區塊的資料而已。<br>接著，你將這些資料貼到一個新的檔案中，並將它命名為cityName.json並把它存在assets資料夾中。<br>然後，我們在App.vue元件檔中，以cityName這個變數將這個json資料中的檔案讀進來，<br>並將這個變數新增成App.vue元件的其中一個成員</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">import L from &#39;leaflet&#39;</span><br><span class="line">import cityName from &#39;.&#x2F;assets&#x2F;cityName.json&#39;  &#x2F;&#x2F; 新增cityName變數，將該json資料存進來</span><br><span class="line">console.log(L)</span><br><span class="line">let osmMap &#x3D; &#123;&#125;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  data: () &#x3D;&gt; (&#123;</span><br><span class="line">    data: &#123;&#125;,</span><br><span class="line">    cityName    &#x2F;&#x2F; 將cityName新增其中一個成員屬性</span><br><span class="line">  &#125;),</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    const vm &#x3D; this</span><br><span class="line">    const api &#x3D; &#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kiang&#x2F;pharmacies&#x2F;master&#x2F;json&#x2F;points.json&#39;</span><br><span class="line">    this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">      console.log(response)</span><br><span class="line">      &#x2F;&#x2F; vm.data &#x3D; response.data.features</span><br><span class="line">      vm.data &#x3D; response.data.features.filter((item, index) &#x3D;&gt; &#123;</span><br><span class="line">        if (index &lt; 10) &#123;</span><br><span class="line">          return true</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">      console.log(vm.data)</span><br><span class="line">    &#125;)</span><br><span class="line">    osmMap &#x3D; L.map(&#39;map&#39;, &#123;</span><br><span class="line">      center: [25.03, 121.55],</span><br><span class="line">      zoom: 15</span><br><span class="line">    &#125;)</span><br><span class="line">    L.tileLayer(&#39;https:&#x2F;&#x2F;&#123;s&#125;.tile.openstreetmap.org&#x2F;&#123;z&#125;&#x2F;&#123;x&#125;&#x2F;&#123;y&#125;.png&#39;, &#123;</span><br><span class="line">      attribution: &#39;&lt;a target&#x3D;&quot;_blank&quot; href&#x3D;&quot;https:&#x2F;&#x2F;www.openstreetmap.org&#x2F;&quot;&gt;© OpenStreetMap 貢獻者&lt;&#x2F;a&gt;&#39;,</span><br><span class="line">      maxZoom: 18</span><br><span class="line">    &#125;).addTo(osmMap)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>step13.<br>接著，我們將左邊呈現可以選擇縣市公版的內容貼上去。<br>並新增了成員屬性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select: &#123;</span><br><span class="line">  city: &#39;臺北市&#39;,</span><br><span class="line">  area: &#39;大安區&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這個時候，你應該就可以，成功的在你的畫面上看到，選擇欄的內容囉。</p>
+<h1 id="加入Marker的效果"><a href="#加入Marker的效果" class="headerlink" title="加入Marker的效果"></a>加入Marker的效果</h1><p>step14.<br>接下來，我們要將Marker的效果補上去。<br>首先，我們會先增一個方法，用來將跟你在選擇欄中選擇的城市一樣的資料都另外存到另一個陣列中。<br>接著，再利用這個陣列取出每一個元素的經緯度，接著，在將這些經緯度塞到Marker的語法中，就可以在各經緯度上<br>創出相對應的Marker囉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">import L from &#39;leaflet&#39;</span><br><span class="line">import cityName from &#39;.&#x2F;assets&#x2F;cityName.json&#39;</span><br><span class="line">console.log(L)</span><br><span class="line">let osmMap &#x3D; &#123;&#125;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  data: () &#x3D;&gt; (&#123;</span><br><span class="line">    data: [],</span><br><span class="line">    cityName,</span><br><span class="line">    select: &#123;</span><br><span class="line">      city: &#39;臺北市&#39;,</span><br><span class="line">      area: &#39;大安區&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;),</span><br><span class="line">  methods: &#123;</span><br><span class="line">    updateMap () &#123;</span><br><span class="line">      const pharmacies &#x3D; this.data.filter(item &#x3D;&gt; &#123;</span><br><span class="line">        if (item.properties.county &#x3D;&#x3D;&#x3D; this.select.city) return true   &#x2F;&#x2F; 當該資料的county跟選取的一樣，就存入pharmacies中</span><br><span class="line">      &#125;)</span><br><span class="line">      pharmacies.forEach(item &#x3D;&gt; &#123;</span><br><span class="line">        L.marker([item.geometry.coordinates[1], item.geometry.coordinates[0]]).addTo(osmMap)   &#x2F;&#x2F; 為每個元素都加上Marker</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    const vm &#x3D; this</span><br><span class="line">    const api &#x3D; &#39;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kiang&#x2F;pharmacies&#x2F;master&#x2F;json&#x2F;points.json&#39;</span><br><span class="line">    vm.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">      console.log(response)</span><br><span class="line">      vm.data &#x3D; response.data.features</span><br><span class="line">      vm.updateMap()  &#x2F;&#x2F; 當將data的資料存取完成後，才執行updateMap方法，來繪製Marker</span><br><span class="line">    &#125;)</span><br><span class="line">    osmMap &#x3D; L.map(&#39;map&#39;, &#123;</span><br><span class="line">      center: [25.03, 121.55],</span><br><span class="line">      zoom: 15</span><br><span class="line">    &#125;)</span><br><span class="line">    L.tileLayer(&#39;https:&#x2F;&#x2F;&#123;s&#125;.tile.openstreetmap.org&#x2F;&#123;z&#125;&#x2F;&#123;x&#125;&#x2F;&#123;y&#125;.png&#39;, &#123;</span><br><span class="line">      attribution: &#39;&lt;a target&#x3D;&quot;_blank&quot; href&#x3D;&quot;https:&#x2F;&#x2F;www.openstreetmap.org&#x2F;&quot;&gt;© OpenStreetMap 貢獻者&lt;&#x2F;a&gt;&#39;,</span><br><span class="line">      maxZoom: 18</span><br><span class="line">    &#125;).addTo(osmMap)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>經過以上的撰寫，你就可以看到畫面上在各點上都有相對應的Marker囉。</p>
+<h2 id="為Marker加入bindPopup的內容"><a href="#為Marker加入bindPopup的內容" class="headerlink" title="為Marker加入bindPopup的內容"></a>為Marker加入bindPopup的內容</h2><p>step15.<br>將該藥局的相關文字描述利用popup來呈現在地圖上面。<br>你就直接在updateMap裡面加上popup的語法就可以囉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---App.vue---</span><br><span class="line">methods: &#123;</span><br><span class="line">	updateMap () &#123;</span><br><span class="line">	  const pharmacies &#x3D; this.data.filter(item &#x3D;&gt; &#123;</span><br><span class="line">		if (item.properties.county &#x3D;&#x3D;&#x3D; this.select.city) return true</span><br><span class="line">	  &#125;)</span><br><span class="line">	  pharmacies.forEach(item &#x3D;&gt; &#123;</span><br><span class="line">		L.marker([item.geometry.coordinates[1], item.geometry.coordinates[0]]).addTo(osmMap).bindPopup(&#96;&lt;strong&gt;$&#123;item.properties.name&#125;&lt;&#x2F;strong&gt; &lt;br&gt;</span><br><span class="line">	口罩剩餘：&lt;strong&gt;成人 - $&#123;item.properties.mask_adult ? &#96;$&#123;item.properties.mask_adult&#125; 個&#96; : &#39;未取得資料&#39;&#125;&#x2F; 兒童 - $&#123;item.properties.mask_child ? &#96;$&#123;item.properties.mask_child&#125; 個&#96; : &#39;未取得資料&#39;&#125;&lt;&#x2F;strong&gt;</span><br><span class="line">	&lt;br&gt;</span><br><span class="line">	地址: &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.google.com.tw&#x2F;maps&#x2F;place&#x2F;$&#123;item.properties.address&#125;&quot; target&#x3D;&quot;_blank&quot;&gt;$&#123;item.properties.address&#125;&lt;&#x2F;a&gt;&lt;br&gt;</span><br><span class="line">	電話: $&#123;item.properties.phone&#125;&lt;br&gt;</span><br><span class="line">	&lt;small&gt;最後更新時間: $&#123;item.properties.updated&#125;&lt;&#x2F;small&gt;&#96;)</span><br><span class="line">	  &#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以看到我們在addTo後面加上了bindPopup那一大串，就是為每一個Marker加上註釋囉。</p>
+<p>step15.<br>另外，還有<a target="_blank" rel="noopener" href="https://github.com/Wcc723/wheremask/blob/master/src/App.vue">PenTo的功能相關連結</a> ，你再看看要怎麼寫吧，這邊就不贅述囉，概念就是將圖資的中心經緯度轉移成<br>你選取的那筆資料的經緯度。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AJAX/" rel="tag"># AJAX</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/17/Leaflet%E5%92%8COpenSourceMap-JS%E5%AF%AB%E6%B3%95/" rel="prev" title="Leaflet和OpenSourceMap-JS寫法">
+      <i class="fa fa-chevron-left"></i> Leaflet和OpenSourceMap-JS寫法
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E7%9B%B8%E9%97%9C%E5%A5%97%E4%BB%B6%E5%92%8C%E5%8F%A3%E7%BD%A9%E5%9C%B0%E5%9C%96API%E7%B6%B2%E5%9D%80"><span class="nav-number">1.</span> <span class="nav-text">安裝相關套件和口罩地圖API網址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%87API%E7%9A%84%E8%B3%87%E6%96%99%E6%8E%A5%E9%80%B2%E4%BE%86"><span class="nav-number">2.</span> <span class="nav-text">將API的資料接進來</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A9%E7%94%A8leaflet%E5%B0%87%E5%9C%96%E8%B3%87%E6%94%BE%E4%B8%8A%E7%B6%B2%E9%A0%81"><span class="nav-number">3.</span> <span class="nav-text">利用leaflet將圖資放上網頁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5Marker%E7%9A%84%E6%95%88%E6%9E%9C"><span class="nav-number">4.</span> <span class="nav-text">加入Marker的效果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BAMarker%E5%8A%A0%E5%85%A5bindPopup%E7%9A%84%E5%85%A7%E5%AE%B9"><span class="nav-number">4.1.</span> <span class="nav-text">為Marker加入bindPopup的內容</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
