@@ -155,6 +155,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/20/Vue%E5%B8%B8%E7%94%A8API/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/20/Vue%E5%B8%B8%E7%94%A8API/" class="post-title-link" itemprop="url">Vue常用API</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-20 11:35:17" itemprop="dateCreated datePublished" datetime="2021-01-20T11:35:17+08:00">2021-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-30 15:07:22" itemprop="dateModified" datetime="2021-01-30T15:07:22+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Extend"><a href="#Extend" class="headerlink" title="Extend"></a>Extend</h1><p>假設今天有兩個元件，他們的差異非常小，<br>只有少部分不同的話，該怎麼處理呢?</p>
+<p>那就先把兩個元件重複的部分抓取出來，接著，用<code>Vue.extend</code>的技巧將重複的部分存起來。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;table class&#x3D;&quot;table&quot;&gt;</span><br><span class="line">    &lt;tbody&gt;</span><br><span class="line">      &lt;tr is&#x3D;&quot;row-component-one&quot; v-for&#x3D;&quot;(item, key) in data&quot; </span><br><span class="line">        v-if&#x3D;&quot;key % 2&quot;</span><br><span class="line">        :item&#x3D;&quot;item&quot; :key&#x3D;&quot;key&quot;&gt;&lt;&#x2F;tr&gt;</span><br><span class="line">      &lt;tr is&#x3D;&quot;row-component-two&quot; v-for&#x3D;&quot;(item, key) in data&quot; </span><br><span class="line">        v-if&#x3D;&quot;(key - 1) % 2&quot;</span><br><span class="line">        :item&#x3D;&quot;item&quot; :key&#x3D;&quot;key&quot;&gt;&lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;&#x2F;tbody&gt;</span><br><span class="line">  &lt;&#x2F;table&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;x-template&quot; id&#x3D;&quot;row-component&quot;&gt;</span><br><span class="line">  &lt;tr&gt;</span><br><span class="line">    &lt;td&gt;&#123;&#123; item.name &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;&#123;&#123; item.cash | currency | dollarSign &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;&#123;&#123; item.icash | currency | dollarSign &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;x-template&quot; id&#x3D;&quot;row-component-two&quot;&gt;</span><br><span class="line">  &lt;tr class&#x3D;&quot;bg-primary text-white&quot;&gt;</span><br><span class="line">    &lt;td&gt;&#123;&#123; item.name &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;&#123;&#123; item.cash | currency | dollarSign &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">    &lt;td&gt;&#123;&#123; item.icash | currency | dollarSign &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">  &lt;&#x2F;tr&gt;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	var childOne &#x3D; &#123;</span><br><span class="line">  props: [&#39;item&#39;],</span><br><span class="line">  data: function() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      data: &#123;&#125;,</span><br><span class="line">      extendData: &#39;這段文字是 extend 得到&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  template: &#39;#row-component&#39;,</span><br><span class="line">  filters: &#123;</span><br><span class="line">    dollarSign: function (n) &#123;</span><br><span class="line">      return &#96;$ $&#123;n&#125;&#96;</span><br><span class="line">    &#125;,</span><br><span class="line">    currency: function(n) &#123;</span><br><span class="line">      return n.toFixed(2).replace(&#x2F;.&#x2F;g, function(c, i, a) &#123;</span><br><span class="line">          return i &amp;&amp; c !&#x3D;&#x3D; &quot;.&quot; &amp;&amp; ((a.length - i) % 3 &#x3D;&#x3D;&#x3D; 0) ? &#39;,&#39; + c : c;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted: function() &#123;</span><br><span class="line">    console.log(&#39;Extend:&#39;, this)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var childTwo &#x3D; &#123;</span><br><span class="line">  props: [&#39;item&#39;],</span><br><span class="line">  data: function() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      data: &#123;&#125;,</span><br><span class="line">      extendData: &#39;這段文字是 extend 得到&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  template: &#39;#row-component-two&#39;,</span><br><span class="line">  filters: &#123;</span><br><span class="line">    dollarSign: function (n) &#123;</span><br><span class="line">      return &#96;$ $&#123;n&#125;&#96;</span><br><span class="line">    &#125;,</span><br><span class="line">    currency: function(n) &#123;</span><br><span class="line">      return n.toFixed(2).replace(&#x2F;.&#x2F;g, function(c, i, a) &#123;</span><br><span class="line">          return i &amp;&amp; c !&#x3D;&#x3D; &quot;.&quot; &amp;&amp; ((a.length - i) % 3 &#x3D;&#x3D;&#x3D; 0) ? &#39;,&#39; + c : c;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted: function() &#123;</span><br><span class="line">    console.log(&#39;Extend:&#39;, this)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    data: [</span><br><span class="line">      &#123;</span><br><span class="line">        name: &#39;小明&#39;,</span><br><span class="line">        cash: 100,</span><br><span class="line">        icash: 500,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        name: &#39;杰倫&#39;,</span><br><span class="line">        cash: 10000,</span><br><span class="line">        icash: 5000,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        name: &#39;漂亮阿姨&#39;,</span><br><span class="line">        cash: 500,</span><br><span class="line">        icash: 500,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        name: &#39;老媽&#39;,</span><br><span class="line">        cash: 10000,</span><br><span class="line">        icash: 100,</span><br><span class="line">      &#125;,</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    &quot;row-component-one&quot;: childOne,</span><br><span class="line">    &quot;row-component-two&quot;: childTwo,</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted: function() &#123;</span><br><span class="line">    console.log(&#39;Vue init:&#39;, this)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/20/Vue%E5%B8%B8%E7%94%A8API/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/20/Vue%E5%B8%B8%E7%94%A8API-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -968,96 +1051,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-01/" class="post-title-link" itemprop="url">JavaScript ES6 課程筆記-01</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-18 10:47:50" itemprop="dateCreated datePublished" datetime="2021-01-18T10:47:50+08:00">2021-01-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:11:24" itemprop="dateModified" datetime="2021-01-30T15:11:24+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>接續上一篇JavaScript ES6 課程筆記的內容，繼續記錄。</p>
-<h1 id="縮寫"><a href="#縮寫" class="headerlink" title="縮寫"></a>縮寫</h1><h2 id="物件縮寫"><a href="#物件縮寫" class="headerlink" title="物件縮寫"></a>物件縮寫</h2><p>若新物件的屬性名稱跟被賦值的屬性名稱相同的話，就可以不用重複寫屬性名稱了。<br>ex: (傳統寫法)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let lee &#x3D; &#39;力宏&#39;;</span><br><span class="line">let family &#x3D; &#123;</span><br><span class="line">    ming: &#39;小明&#39;,</span><br><span class="line">    mom: &#39;老媽&#39;</span><br><span class="line">&#125;</span><br><span class="line">let newObj &#x3D; &#123;</span><br><span class="line">    family &#x3D; family,</span><br><span class="line">    lee &#x3D; lee</span><br><span class="line">&#125;</span><br><span class="line">console.log(newObj);</span><br></pre></td></tr></table></figure>
-<p>以上這個範例，可以看到newObj的屬性名稱，跟被賦予的內容名稱相同。<br>所以，我們可以省略其中一個，改寫成<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let lee &#x3D; &#39;力宏&#39;;</span><br><span class="line">let family &#x3D; &#123;</span><br><span class="line">    ming: &#39;小明&#39;,</span><br><span class="line">    mom: &#39;老媽&#39;</span><br><span class="line">&#125;</span><br><span class="line">let newObj &#x3D; &#123;</span><br><span class="line">    family,</span><br><span class="line">    lee</span><br><span class="line">&#125;</span><br><span class="line">console.log(newObj);</span><br></pre></td></tr></table></figure>
-<p>只要寫該屬性名稱就可以囉，編譯器會自動為你賦予，跟你屬性名稱一樣的內容了。</p>
-<h2 id="在-Vue-Cli-的情境中"><a href="#在-Vue-Cli-的情境中" class="headerlink" title="在 Vue Cli 的情境中"></a>在 Vue Cli 的情境中</h2><p>ex:(傳統寫法)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import router from &#39;.&#x2F;router&#39;</span><br><span class="line">&#x2F;&#x2F; 將套件由 &#39;.&#x2F;App&#39; 路徑載入，並使用 App 這個變數名稱</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  router:router,</span><br><span class="line">  template: &#39;&lt;App&#x2F;&gt;&#39;,</span><br><span class="line">  components: &#123; App &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>以上範例，我們利用router載入外部的東西，而router的名稱又剛好跟Vue物件中的<br>屬性router名稱一模一樣，所以，我們可以直接省略其中一個不寫，<br>改寫成下面這樣<br>ex:(縮寫寫法)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import router from &#39;.&#x2F;router&#39;</span><br><span class="line">&#x2F;&#x2F; 將套件由 &#39;.&#x2F;App&#39; 路徑載入，並使用 App 這個變數名稱</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  router,</span><br><span class="line">  template: &#39;&lt;App&#x2F;&gt;&#39;,</span><br><span class="line">  components: &#123; App &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-01/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1127,7 +1120,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">67</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
