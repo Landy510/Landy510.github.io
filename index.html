@@ -155,6 +155,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/24/JS%E6%A0%B8%E5%BF%83-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/24/JS%E6%A0%B8%E5%BF%83-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">JS核心-第四章筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-24 16:30:37" itemprop="dateCreated datePublished" datetime="2021-02-24T16:30:37+08:00">2021-02-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-09 12:50:52" itemprop="dateModified" datetime="2021-03-09T12:50:52+08:00">2021-03-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>JS是一個「事件驅動」的程式語言，必須等到事件被觸發後，才會去執行相對應的內容。</p>
+<h1 id="事件機制的原理"><a href="#事件機制的原理" class="headerlink" title="事件機制的原理"></a>事件機制的原理</h1><p>事件觸發-&gt;去做相對應的內容</p>
+<h1 id="事件流程"><a href="#事件流程" class="headerlink" title="事件流程"></a>事件流程</h1><p>網頁元素接收事件的順序<br>分別有以下兩種:<br>Event Capturing: 事件捕獲 -從document，由上往下傳遞，直到找到啟動元素為止。<br>Event Bubbling: 事件冒泡 - 從觸發事件的目標元素，由下往上傳遞，直到找到document為止。</p>
+<p>那在<code>addEventListener</code>的事件監聽的第三個參數，<code>true</code>代表捕獲，<code>false</code>代表冒泡。</p>
+<h2 id="事件傳遞"><a href="#事件傳遞" class="headerlink" title="事件傳遞"></a>事件傳遞</h2><p>我覺得在事件流程中的捕獲和冒泡的機制，我最不習慣的是事件會傳遞的部分。阿不就點到誰就該由誰跳出來嗎(誤XDD)<br>在JS中，事件會因為捕獲和冒泡的機制而往上傳遞 或 往下傳遞，那這類的應用在本章的最後面的<font color=#FF0000>事件指派</font>的部分，<br>你就會感受到<del>事件傳遞的麻煩</del>，阿不是，是事件傳遞的威力囉~~</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/02/24/JS%E6%A0%B8%E5%BF%83-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%AD%86%E8%A8%98/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/24/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AD%86%E8%A8%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -178,10 +263,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-02-24 10:24:24 / Modified: 12:29:08" itemprop="dateCreated datePublished" datetime="2021-02-24T10:24:24+08:00">2021-02-24</time>
+              <time title="Created: 2021-02-24 10:24:24" itemprop="dateCreated datePublished" datetime="2021-02-24T10:24:24+08:00">2021-02-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-09 09:50:03" itemprop="dateModified" datetime="2021-03-09T09:50:03+08:00">2021-03-09</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -927,94 +1018,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/11/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-BOM/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/11/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-BOM/" class="post-title-link" itemprop="url">JavaScript學徒篇-BOM</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-11 10:57:40" itemprop="dateCreated datePublished" datetime="2021-02-11T10:57:40+08:00">2021-02-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-13 15:16:34" itemprop="dateModified" datetime="2021-02-13T15:16:34+08:00">2021-02-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="瀏覽器功能簡介"><a href="#瀏覽器功能簡介" class="headerlink" title="瀏覽器功能簡介"></a>瀏覽器功能簡介</h1><p>BOM (Browser Object Model)<br>我們可以利用BOM元件來了解瀏覽器的資訊。<br>注意!! 通常我們都是擷取網頁的資訊，但是，<br>BOM元件是可以得知瀏覽器的資訊，像是，使用者目前是不是有網際網路連線的狀態。</p>
-<h1 id="回上頁功能實作"><a href="#回上頁功能實作" class="headerlink" title="回上頁功能實作"></a>回上頁功能實作</h1><p>這個小節就介紹History這個BOM元件的功能。<br>在HTML檔案裏面</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;a href&#x3D;&quot;b_page.html&quot;&gt;到下一頁&lt;&#x2F;a&gt;</span><br><span class="line">&lt;a href&#x3D;&quot;#&quot; id&#x3D;&quot;next&quot;&gt;到下一頁(JS版本)&lt;&#x2F;a&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">   document.getElementById(&#39;.next&#39;).onclick &#x3D; function()&#123;</span><br><span class="line">      window.history.forward();</span><br><span class="line">   &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">---在b_page.html中---</span><br><span class="line">&lt;a href&#x3D;#&quot; id&#x3D;&quot;back&quot;&gt;回到上一頁&lt;&#x2F;a&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">   document.getElementById(&quot;back&quot;).onclick &#x3D; function()&#123;</span><br><span class="line">      window.history.back();</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-<p>以上的範例你可以看到在Javascrip中使用的BOM元件是history，<br>並使用了history的<code>back()</code>和<code>forward()</code>，兩種指令，分別代表回到上一頁和前往下一頁的功能。</p>
-<h1 id="透過-JS-設計列印功能"><a href="#透過-JS-設計列印功能" class="headerlink" title="透過 JS 設計列印功能"></a>透過 JS 設計列印功能</h1><p>在這一小節中，介紹了三種功能，</p>
-<ol>
-<li>分別為呼叫列印功能 <code>window.print();</code></li>
-<li>擷取瀏覽器location資訊功能 <code>location;</code><br>其中，<code>location</code>有一個<code>href</code>，當你在這個屬性裡面塞入你想要移動到的頁面網址，<br>你就可以移動到那個網頁喔~~<br>例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.href &#x3D; &quot;https:&#x2F;&#x2F;www.google.com&#x2F;&quot;;</span><br></pre></td></tr></table></figure></li>
-<li>移動到特定網頁的功能<code>window.open(&quot;https://www.google.com/&quot;);</code>，<code>open</code>裡面就塞你想移動到哪個網頁</li>
-</ol>
-<h1 id="動態擷取瀏覽器高度-innerHeight"><a href="#動態擷取瀏覽器高度-innerHeight" class="headerlink" title="動態擷取瀏覽器高度 - innerHeight"></a>動態擷取瀏覽器高度 - innerHeight</h1><p>這一小節的<code>innerHeight</code>的功能，<br>用在當設計師希望最開頭的banner能一直佔滿瀏覽器當下的畫面，<br>不管使用者將瀏覽器縮小或放大，除非使用者往下滑離開那個banner的區域範圍。</p>
-<p>當使用者縮小或放大瀏覽器時，網頁的當下畫面高度值會改變，<br>此時，就可以用<code>innerHeight</code>來擷取到改變完後的網頁畫面的高度值，<br>並將這個高度值塞到banner區塊的高度屬性內，如此，就能達成囉~~</p>
-<iframe src="https://codepen.io/RandyChen/embed/qBqdjvE?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>由以上的例子可以看到，<br>在javascript檔案中，利用當瀏覽器觸發<code>onresize</code>的事件時，<br>就會將網頁的高度塞給banner的高度，如此，就可以動態的改變banner的大小，<br>進而達到banner不管瀏覽器被放大或縮小，都可以占滿網頁版面的效果。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1084,7 +1087,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">73</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
