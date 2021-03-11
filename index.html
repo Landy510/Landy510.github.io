@@ -155,6 +155,92 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/11/js%E6%A0%B8%E5%BF%83%E7%AF%87-%E4%BD%9C%E7%94%A8%E9%8D%8A%E5%92%8C%E9%96%89%E5%8C%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/11/js%E6%A0%B8%E5%BF%83%E7%AF%87-%E4%BD%9C%E7%94%A8%E9%8D%8A%E5%92%8C%E9%96%89%E5%8C%85/" class="post-title-link" itemprop="url">js核心篇-作用鍊和閉包</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-03-11 17:26:08 / Modified: 18:30:37" itemprop="dateCreated datePublished" datetime="2021-03-11T17:26:08+08:00">2021-03-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>這篇要來記錄一下JS的作用鍊和閉包一些特性。<br>那如果要先來談作用鍊的話，我們一定要先講作用域的部分。</p>
+<h1 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h1><p>引用<a target="_blank" rel="noopener" href="https://blog.huli.tw/2018/12/08/javascript-closure/">Huli文章</a>裡面有關作用域的解釋，作用域就是變數存在的範圍，依但變數脫離這個範圍，我們就無法存取這個變數了。<br>而在es6之前，你要創造一個作用域的話，只要創造一個function，而這個function的內部環境就是一個作用域。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function funcA()&#123;</span><br><span class="line">  var a &#x3D; 10;</span><br><span class="line">&#125;</span><br><span class="line">console.log(a); &#x2F;&#x2F; Error, a is not defined</span><br></pre></td></tr></table></figure>
+<p>上面這個範例就可以看出來，JS變數的最小有效範圍是function，這個funcA就是這個變數的作用域範圍，一旦脫離了funcA這個作用域後，就無法再調用這個變數a囉。</p>
+<h1 id="範圍鍊"><a href="#範圍鍊" class="headerlink" title="範圍鍊"></a>範圍鍊</h1><p>範圍鍊牽涉了以下兩個特性</p>
+<ol>
+<li>在JavaScript的變數的最小有效範圍是function。</li>
+<li>若在自己的層級找不到該變數的話，就會一層一層往外查找，直到找到Global為止，如果還是找不到的話，就報錯。</li>
+<li>因為，在JavaScript中的function是屬於靜態作用域，所以，當函式被定義的當下，其範圍鍊就會順便被定義下來了，而不是在呼叫該函式時，才動態地定義該函式地範圍鍊，<br>但是，JavaScript的this，就是屬於動態作用域，因為，它是被呼叫的時候，才被定義。</li>
+</ol>
+<h2 id="很好詮釋範圍鍊設定的範例"><a href="#很好詮釋範圍鍊設定的範例" class="headerlink" title="很好詮釋範圍鍊設定的範例"></a>很好詮釋範圍鍊設定的範例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; 100;</span><br><span class="line">function funcA() &#123;</span><br><span class="line">  console.log(a); &#x2F;&#x2F; 答案是100 或 200? </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function funcB() &#123;</span><br><span class="line">  var a &#x3D; 200;</span><br><span class="line">  funcA();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funcB();</span><br></pre></td></tr></table></figure>
+<p>上面這個例子我覺得可以很好的詮釋什麼叫函式的範圍鍊是在定義的時候，就被定義完成了。<br>首先，funcA函式定義的部分，它的範圍鍊就是它自己的作用域和全域變數的作用域。<br>第二，所以，當funcA在funcB被呼叫的時候，因為，它的範圍鍊已經被定義好了，所以，它的a就是全域變數的a，也就是100囉。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/11/js%E6%A0%B8%E5%BF%83%E7%AF%87-%E4%BD%9C%E7%94%A8%E9%8D%8A%E5%92%8C%E9%96%89%E5%8C%85/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/11/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F-Promise%E7%89%A9%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -180,7 +266,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-03-11 10:38:31 / Modified: 14:38:30" itemprop="dateCreated datePublished" datetime="2021-03-11T10:38:31+08:00">2021-03-11</time>
+              <time title="Created: 2021-03-11 10:38:31 / Modified: 14:39:26" itemprop="dateCreated datePublished" datetime="2021-03-11T10:38:31+08:00">2021-03-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -209,38 +295,14 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const FirstPromise &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  resolve(某個資料);</span><br><span class="line">  reject(&#39;Promise failure&#39;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p><strong>函式回傳new Promise物件</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function FirstPromise() &#123;</span><br><span class="line">  return new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    resolve(某個資料);</span><br><span class="line">    reject(&#39;Promise failure&#39;);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="then-解決同步問題，依序執行函式"><a href="#then-解決同步問題，依序執行函式" class="headerlink" title="then - 解決同步問題，依序執行函式"></a>then - 解決同步問題，依序執行函式</h3><iframe src="https://codepen.io/RandyChen/embed/RwoEGXr?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上這個範例，可以看到我們利用創三個Promise物件，並利用<code>then</code>，來依序執行這三個非同步的函式內容。</p>
-<h3 id="Promise-all-和-Promise-race-解決非同步問題"><a href="#Promise-all-和-Promise-race-解決非同步問題" class="headerlink" title="Promise.all 和　Promise.race - 解決非同步問題"></a>Promise.all 和　Promise.race - 解決非同步問題</h3><p>若今天我們不在乎函式們的執行順序，只在乎他們有沒有執行完畢的話我們就可以使用 Promise.all 或　Promise.race。<br><strong>Promise.all 和　Promise.race相異之處</strong><br>Promise.all: 會等到所有的函式都執行完resolve之後，才會去執行then的內容。<br>Promise.race: 只要其中一個函式執行完它的resolve後，就會去執行then的內容，但是，其他還沒執行完的函式並不會被取消，也是一樣會被執行喔。</p>
-<p><strong>Promise.all 和　Promise.race相同之處</strong><br>只要有其中一個函式回傳reject的話，就會中止執行其他的函式。</p>
-<p><strong>Promise.all範例</strong></p>
-<iframe src="https://codepen.io/RandyChen/embed/Yzpdppq?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p><strong>Promise.race範例</strong></p>
-<iframe src="https://codepen.io/RandyChen/embed/PobXbpj?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<h3 id="async-await-讓Promise寫法更簡潔"><a href="#async-await-讓Promise寫法更簡潔" class="headerlink" title="async/await - 讓Promise寫法更簡潔"></a>async/await - 讓Promise寫法更簡潔</h3><p>這個寫法是可以讓Promise寫法更簡潔。<br><strong>代替then寫法</strong><br>我們想要依序處理非同步函式，之前我們是用then來達成，那這邊我們使用async/await來達成。<br>step1.<br>先創建一些Promise物件<br>step2.<br>創一個<code>async function</code>並在這個函式裡面，使用<code>await</code>來呼叫在step1創建的Promise物件，最後，程式就會依照<code>await</code>呼叫的順序，<br>來依序執行這些Promise物件，達到跟<code>then</code>一樣的效果囉。</p>
-<iframe src="https://codepen.io/RandyChen/embed/ExNGNoY?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-<p>以上這個範例，就可以看出來我們利用async/await　來控制這些非同步函式的執行順序囉。</p>
-<p><strong>用在Promise.all</strong></p>
-<iframe src="https://codepen.io/RandyChen/embed/WNoLoMy?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>可以看到，Done的內容，會在Promise.all裡面的函式都resolve後，才出現。</p>
-<h3 id="setTimeout-與-setInterval的使用"><a href="#setTimeout-與-setInterval的使用" class="headerlink" title="setTimeout 與 setInterval的使用"></a>setTimeout 與 setInterval的使用</h3><p><strong>setTimeout</strong><br>這個功能是延遲一段時間之後，只執行一次該function內的內容。<br><strong>setInterval</strong><br>這個功能是延遲一段時固定間之後，執行該function內的內容，並循環這樣的操作。</p>
-<h4 id="clearTimeout-timeID-與-clearInterval-timeID"><a href="#clearTimeout-timeID-與-clearInterval-timeID" class="headerlink" title="clearTimeout(timeID) 與 clearInterval(timeID)"></a>clearTimeout(timeID) 與 clearInterval(timeID)</h4><p>它們倆個都會回傳一個timerID，那我們就可以透過這些timerID來將這些相對應的setTimeout和setInterval的功能取消掉。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let timerID &#x3D; window.setTimeout(function()&#123;</span><br><span class="line">  console.log(&#39;first one&#39;);</span><br><span class="line">&#125;, 2000);</span><br><span class="line"></span><br><span class="line">let timerID1 &#x3D; window.setTimeout(function()&#123;</span><br><span class="line">  console.log(&#39;second one&#39;);</span><br><span class="line">&#125;, 1000);</span><br><span class="line"></span><br><span class="line">let timerID2 &#x3D; window.setInterval(function()&#123;</span><br><span class="line">  console.log(&#39;third one&#39;);</span><br><span class="line">&#125;, 1000);</span><br><span class="line">console.log(timerID, timerID1, timerID2)</span><br><span class="line">window.clearTimeout(timerID);  &#x2F;&#x2F; 將timerID取消掉</span><br><span class="line">window.clearInterval(timerID2); &#x2F;&#x2F; 將timerID2取消掉</span><br></pre></td></tr></table></figure>
-<p>但是，要特別注意一下，clearTimeout要在你設定的Timeout時機以內取消掉他才有用喔，不然等它執行之後才取消的話，clearTimeout就沒啥用。</p>
-<h1 id="JS單執行緒-與-同步、非同步之間的關係"><a href="#JS單執行緒-與-同步、非同步之間的關係" class="headerlink" title="JS單執行緒 與 同步、非同步之間的關係"></a>JS單執行緒 與 同步、非同步之間的關係</h1><p>JavaScript是「單執行緒」的語言，就代表它同一時間只能做一項任務。<br>那這樣的話，怎麼還會有同步和非同步的概念的出現呢?<br>這是因為，JS的設計者把要執行的任務分成同步和非同步的任務。<br>而<code>setTimeout</code>和<code>ajax(將口罩地圖的api接近來的行為)</code>這些功能，就是非同步的任務。</p>
-<p>這邊要再複習一下，Promise物件是主要用來控制非同步的任務的作用順序。</p>
-<h2 id="主執行緒-和-Event-Queue"><a href="#主執行緒-和-Event-Queue" class="headerlink" title="主執行緒 和 Event Queue"></a>主執行緒 和 Event Queue</h2><p>JS一開始會把所有任務，不管它是同步還是非同步都會先把它們都放在主執行緒裡面排序好，當程式開始執行主行緒裡面的任務時，<br>當它一遇到非同步的任務，就會跳過不執行，並將該非同步任務放到Event Queue裡面。<br>等到主行緒裡面的任務都執行完畢之後，才接著繼續執行Event Queue裡面的callback function。</p>
-<p><img src="/image/js_eventQueue.png" alt="執行緒的操作過程"></p>
-<iframe src="https://codepen.io/RandyChen/embed/YzpdZwB?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上這個範例你可以看到，就算我們將setTimeout的延遲時間設定為0秒，但最終，還是最後才執行它的內容，由此可以看出來他是被放在event queue裡面，最後才被執行。</p>
-<h3 id="js主執行緒機制會導致非同步函式延遲"><a href="#js主執行緒機制會導致非同步函式延遲" class="headerlink" title="js主執行緒機制會導致非同步函式延遲"></a>js主執行緒機制會導致非同步函式延遲</h3><p>那因為js有以上這種會將非同步函式放在event queue的特性，當主執行緒的執行任務太多，執行時間太久的話，可能會延遲非同步函式的執行時間，進而導致像是setTimeout和setInterval所設定的時間不準。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/11/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F-Promise%E7%89%A9%E4%BB%B6/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -290,7 +352,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-11 10:44:50" itemprop="dateModified" datetime="2021-03-11T10:44:50+08:00">2021-03-11</time>
+                <time title="Modified: 2021-03-11 15:02:58" itemprop="dateModified" datetime="2021-03-11T15:02:58+08:00">2021-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -314,6 +376,8 @@
 
       
           <h1 id="函式"><a href="#函式" class="headerlink" title="函式"></a>函式</h1><p>函式是一個物件，所以，它也可以擁有自己的屬性。<br>它可以被存放在變數、陣列中。</p>
+<h2 id="函式運算式-有括號和沒括號的差別"><a href="#函式運算式-有括號和沒括號的差別" class="headerlink" title="函式運算式-有括號和沒括號的差別"></a>函式運算式-有括號和沒括號的差別</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function inner() &#123;</span><br><span class="line">  return &#39;Hello&#39;;</span><br><span class="line">&#125;</span><br><span class="line">let a &#x3D; inner;  &#x2F;&#x2F; 沒有加括號</span><br><span class="line">let b &#x3D; inner(); &#x2F;&#x2F; 有加括號</span><br><span class="line">console.log(a, b);</span><br><span class="line">console.log(a());</span><br></pre></td></tr></table></figure>
+<p>從console.log的結果a是直接印出整個inner函式內容，而b是印出inner回傳的內容’hello’。<br>那最後那一行，a()就可以執行inner函式，故會回傳內容’hello’。<br>要小心它們之間的不同喔~~~~</p>
 <h1 id="ES6箭頭函式"><a href="#ES6箭頭函式" class="headerlink" title="ES6箭頭函式"></a>ES6箭頭函式</h1><p>這種函式有以下的特性:<br>．<code>this</code>變數的強制綁定<br>．簡短的撰寫方式</p>
 <p>接下來，筆記一下箭頭函式可以簡寫的一些特性:</p>
 <h2 id="可以忽略return的特性"><a href="#可以忽略return的特性" class="headerlink" title="可以忽略return的特性"></a>可以忽略return的特性</h2><p>原本的函式</p>
@@ -922,90 +986,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/16/AJAX%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/16/AJAX%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-1/" class="post-title-link" itemprop="url">AJAX課程筆記-1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-02-16 16:50:12 / Modified: 16:54:56" itemprop="dateCreated datePublished" datetime="2021-02-16T16:50:12+08:00">2021-02-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AJAX/" itemprop="url" rel="index"><span itemprop="name">AJAX</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="什麼是-AJAX？"><a href="#什麼是-AJAX？" class="headerlink" title="什麼是 AJAX？"></a>什麼是 AJAX？</h1><p>AJAX可以達到不需要重新刷新頁面，而達到跟後端取得相對應資料的效果。</p>
-<p>課程名稱: 透過 XMLHttpRequest 物件跨瀏覽器撈資料<br>第一，<br>我們會先創建一個XMLHttpRequest的物件，並利用這個物件去跟伺服器做互動。</p>
-<p>第二，<br>當XMLHttpRequest的物件創立成功時，我們會利用open這個函式來決定我們是要從伺服器端撈資料過來 或是 丟資料到伺服器端<br>即</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var ptr &#x3D; new XMLHttpRequest();</span><br><span class="line">ptr.open(&#39;get&#39;, &#39;你要擷取資料的網址&#39;, true);</span><br></pre></td></tr></table></figure>
-<p>上面的第二行程式碼，open的三個參數代表的意義分別為<br>格式: 最常用的是<code>get</code> (從伺服器端拿資料回來)、<code>post</code>(從本地端丟資料到伺服器端)<br>網址: 將資料源的網址放到這個欄位裡面<br>同步 或 非同步: 當此引數為<code>true</code>(非同步) 而 當此引數為<code>false</code>(同步)</p>
-<p>第三，<br>我們可以利用XMLHttpRequest物件回傳的readyState的值，來判斷本地端和伺服器端彼此之間的關係<br>當readyState = 0，代表XMLHttpRequest物件還沒有完成初始化，還沒有連結到你要撈的資料<br>當readyState = 1，你用了open()，但你還沒有把資料傳過去<br>當readyState = 2，偵測到你有用send()<br>當readyState = 3，loading<br>當readyState = 4，你撈到資料了，數據已經完全接收</p>
-<p>第四，<br>利用XMLHttpRequest物件的send函式<br><code>ptr.send(null);</code></p>
-<p>以上這行在send裡面放入null的原因是因為，我並沒有要送資料到資料端，所以，放null，<br>而當你使用完send函式之後，你看ptr回傳的readyState的值應該會是回傳4，代表已經撈到資料了，<br>接著，你再看responseText這個屬性值，應該就有把資料端的資料讀近來了。<br>而為什麼readyState會直接從1跳到4呢，是因為這次的練習範例的內容很少，<br>所以，讀取資料端的速度很快，其實是有經過2 和 3的過程，只是太快了，你看不到，所以，才會有這種錯覺~~</p>
-<h1 id="AJAX-非同步觀念-上"><a href="#AJAX-非同步觀念-上" class="headerlink" title="AJAX 非同步觀念 (上)"></a>AJAX 非同步觀念 (上)</h1><p>這邊講解XMLHttpRequest物件的open函式的第三個引數的用意<br>若</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ptr.open(&#39;get&#39;, &#39;你要擷取資料的網址&#39;, true);</span><br><span class="line">ptr.send(null);</span><br><span class="line">console.log(ptr.responseText);</span><br></pre></td></tr></table></figure>
-<p>若你在open的第三個引數放入true，你會發現在<code>console.log(ptr.responseText)</code> 出現的內容式空的，<br>若你今天把true改成false時，此時<code>console.log(ptr.responseText)</code>就有資料源的內容。<br>而以上這個現象就是Ajax同步與非同步的體現<br>當第三個引數等於<code>true</code>時，代表非同步，不會等資料傳回來，就讓程式繼續往下跑，等到回傳才會自動回傳<br>當第三個引數等於<code>false</code>時，代表同步，它等資料傳回來，才讓程式繼續往下跑</p>
-<h1 id="AJAX-非同步觀念-下"><a href="#AJAX-非同步觀念-下" class="headerlink" title="AJAX 非同步觀念 (下)"></a>AJAX 非同步觀念 (下)</h1><p>這個小節在講解，當你的AJAX是在非同步的狀態下，要怎在資料回傳的時候，將資料或取出來<br>例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var ptr &#x3D; new XMLHttpRequest();</span><br><span class="line">ptr.open(&#39;get&#39;,&#39;資料源網址&#39;,true);</span><br><span class="line">ptr.send(null);</span><br><span class="line"></span><br><span class="line">ptr.onload &#x3D; function()&#123;</span><br><span class="line">   console.log(ptr.responseText);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上這個onload事件，就是用在當AJAX非同步時，當資料回傳時，就可以把資料源的資料擷取回來。</p>
-<h1 id="HTTP狀態碼"><a href="#HTTP狀態碼" class="headerlink" title="HTTP狀態碼"></a>HTTP狀態碼</h1><p>這小節是在說明你可以利用XMLHttpRequest物件回傳的status屬性值，來判斷你是否有正確地將資料源的資料擷取回來。<br>當status 是200，代表你是從正確的資料源拮取資料<br>當status 是404，代表你是從錯誤的資料源拮取資料<br>例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var ptr &#x3D; new XMLHttpRequest();</span><br><span class="line">ptr.open(&#39;get&#39;,&#39;資料源網址&#39;,true);</span><br><span class="line">ptr.send(null);</span><br><span class="line"></span><br><span class="line">ptr.onload &#x3D; function()&#123;</span><br><span class="line">   if(ptr.status &#x3D;&#x3D; 200)&#123;</span><br><span class="line">      console.log(ptr.responseText);</span><br><span class="line">   &#125;else &#123;</span><br><span class="line">      console.log(&quot;資料錯誤!!&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>你可以看到在ptr的onload事件裡面，你可以利用status的屬性值來寫保護，當回傳是200時，才去截取資料源的資料，若不是就顯示資料錯誤的提示訊息。<br>另外，onload事件是代表加載完成後立即發生，以上面的範例為例，代表當ptr物件加載完成後，才會觸發後面function的內容。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1075,7 +1055,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">76</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
