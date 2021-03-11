@@ -155,6 +155,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/11/Vuejs%E5%85%83%E4%BB%B603-%E5%85%83%E4%BB%B6%E6%8F%92%E6%A7%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/11/Vuejs%E5%85%83%E4%BB%B603-%E5%85%83%E4%BB%B6%E6%8F%92%E6%A7%BD/" class="post-title-link" itemprop="url">Vuejs元件03-元件插槽</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-11 14:42:58" itemprop="dateCreated datePublished" datetime="2021-01-11T14:42:58+08:00">2021-01-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-30 15:07:33" itemprop="dateModified" datetime="2021-01-30T15:07:33+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>這邊接續著上一篇”Vuejs元件02-emit事件”的文章，繼續做筆記。</p>
+<h1 id="元件插槽"><a href="#元件插槽" class="headerlink" title="元件插槽"></a>元件插槽</h1><p>有時候我們需要替換某些元件的部分內容，而Vue.js就是利用元件插槽的概念來做到這件事情。<br>這邊會介紹三種狀況</p>
+<ol>
+<li>沒有插槽的元件</li>
+<li>單一插槽的元件</li>
+<li>具名插槽</li>
+</ol>
+<h2 id="沒有插槽的元件"><a href="#沒有插槽的元件" class="headerlink" title="沒有插槽的元件"></a>沒有插槽的元件</h2><iframe src="https://codepen.io/RandyChen/embed/YzGOQee?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上範例，你會看到我在no-slot-component中間插入了一個<code>p</code>段落，但是，畫面上並沒有呈現這個插入的<code>p</code>段落，<br>而這個就是若你在沒有插槽的元件中，插入其他內容，而這些插入的內容是不會被呈現在畫面上的。</p>
+<h2 id="單一插槽的元件"><a href="#單一插槽的元件" class="headerlink" title="單一插槽的元件"></a>單一插槽的元件</h2><iframe src="https://codepen.io/RandyChen/embed/xxEarzd?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>以上這個範例你會看到在單一插槽元件定義它元件內容的地方，我們有放一個<code>&lt;slot&gt;&lt;/slot&gt;</code>標籤，<br>那此時，夾在single-slot-component標籤中間的<code>p</code>段落的內容，在網頁上就會呈現在<code>&lt;slot&gt;&lt;/slot&gt;</code>標籤的位置囉。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/11/Vuejs%E5%85%83%E4%BB%B603-%E5%85%83%E4%BB%B6%E6%8F%92%E6%A7%BD/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/11/Vuejs%E5%85%83%E4%BB%B602-emit%E4%BA%8B%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -956,104 +1048,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-02/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-02/" class="post-title-link" itemprop="url">進階模板語法-02</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-06 11:21:12" itemprop="dateCreated datePublished" datetime="2021-01-06T11:21:12+08:00">2021-01-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:05:31" itemprop="dateModified" datetime="2021-01-30T15:05:31+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>接續著上一篇的進階模板語法-01的內容繼續記錄。</p>
-<h2 id="Computed與Watch"><a href="#Computed與Watch" class="headerlink" title="Computed與Watch"></a>Computed與Watch</h2><h3 id="Computed過濾陣列內容"><a href="#Computed過濾陣列內容" class="headerlink" title="Computed過濾陣列內容"></a>Computed過濾陣列內容</h3><p>之前的章節是利用按下一個鈕，觸發methods裡面的一個function進而來過濾陣列，並將過濾完的結果<br>呈現在畫面上。<br>那這邊的話，我們希望使用者輸入完內容後，就會自動的將過濾完且符合搜尋內容的條件給呈現在畫面上。<br>那這樣的話，我們就需要用到computed來達成，不需要額外操作(像是:按下enter)才達成這種效果。</p>
-<iframe src="https://codepen.io/RandyChen/embed/rNMvbNK?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>上面這個例子，當我們在<code>input</code>欄位裡面輸入搜尋值，此時，filterText會變動，<br>也就會連動到<code>computed</code>中的filterData，並在filterData裡面做判斷，若輸入的搜尋內容<br>有符合arrayData的內容的話，就回傳該元素值到filterData中，進而在畫面呈現filterData，<br>但以上這個例子，在資料量大的話會有效能上的議題。</p>
-<h2 id="使用-Computed-來呈現時間格式。"><a href="#使用-Computed-來呈現時間格式。" class="headerlink" title="使用 Computed 來呈現時間格式。"></a>使用 Computed 來呈現時間格式。</h2><p>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;p&gt;&#123;&#123;formatTime&#125;&#125;&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el:&#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		newDate:0</span><br><span class="line">	&#125;,</span><br><span class="line">	computed:&#123;</span><br><span class="line">		formatTime: function()&#123;</span><br><span class="line">			this.newDate &#x3D; new Date();</span><br><span class="line">			var dates &#x3D; this.newDate;</span><br><span class="line">			var year &#x3D; dates.getFullYear();</span><br><span class="line">			var month &#x3D; dates.getMonth() + 1;</span><br><span class="line">			var date &#x3D; dates.getDate();</span><br><span class="line">			var hours &#x3D; dates.getHours();</span><br><span class="line">			var minutes &#x3D; dates.getMinutes();</span><br><span class="line">			var seconds &#x3D; dates.getSeconds();</span><br><span class="line">			return &#96;$&#123;year&#125;&#x2F;$&#123;month&#125;&#x2F;$&#123;date&#125; $&#123;hours&#125;:$&#123;minutes&#125;:$&#123;seconds&#125;&#96;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>以上用<code>computed</code>的方式，就能即時的呈現當下的時間囉~</p>
-<h2 id="Watch"><a href="#Watch" class="headerlink" title="Watch"></a>Watch</h2><p>當特定的變數變化的時候，會去執行特定的function</p>
-<iframe src="https://codepen.io/RandyChen/embed/PoGegzG?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上這個範例，就是利用<code>watch</code>去監聽trigger是否有變動，若有，就去執行相對應的function。<br>也就是當1秒後，trigger的值會被切回去<code>false</code>，也就是把rotate的效果給拿掉。</p>
-<h2 id="表單細節操作"><a href="#表單細節操作" class="headerlink" title="表單細節操作"></a>表單細節操作</h2><p>透過<code>v-for</code>來製作<code>selected</code>裡面的資料<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;select name&#x3D;&quot;&quot; id&#x3D;&quot;&quot; class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;selected2&quot;&gt;</span><br><span class="line">		&lt;option disabled value&#x3D;&quot;&quot;&gt;請選擇&lt;&#x2F;option&gt;</span><br><span class="line">		&lt;option :value&#x3D;&quot;item&quot; v-for&#x3D;&quot;item in selecData&quot;&gt;&#123;&#123;item&#125;&#125;&lt;&#x2F;option&gt;</span><br><span class="line">	&lt;&#x2F;select&gt;</span><br><span class="line">	&lt;p&gt;小明喜歡的女生是 &#123;&#123; selected2 &#125;&#125;。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">--JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el:&#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		selectData:[&#39;阿明&#39;, &#39;力宏&#39;, &#39;漂亮阿姨&#39;],</span><br><span class="line">		selected2:&#39;&#39;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>以上的範例，就會動態的將selectData陣列裡面的元素渲染進<code>option</code>裡面。<br>但要特別記得，每個<code>option</code>的<code>value</code>屬性都是動態的被加入的，所以，前面要記得加<code>v-bind</code>。<br>另外，當點選某個<code>option</code>的時候，該<code>option</code>的<code>value</code>會被塞到<code>selected2</code>裡面，<br>所以，最終在<code>p</code>段落裡面就會成現selected2的值，也就是你選取的<code>option</code>的<code>value</code>囉~</p>
-<h2 id="多選"><a href="#多選" class="headerlink" title="多選"></a>多選</h2><p>只要在<code>select</code>的HTML標籤中，加入<code>multiple</code>就可以有多選的功能囉<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;select name&#x3D;&quot;&quot; id&#x3D;&quot;&quot; class&#x3D;&quot;form-control&quot; multiple v-model&#x3D;&quot;selected2&quot;&gt;  &#x2F;&#x2F; 加入multiple</span><br><span class="line">		&lt;option disabled value&#x3D;&quot;&quot;&gt;請選擇&lt;&#x2F;option&gt;</span><br><span class="line">		&lt;option :value&#x3D;&quot;item&quot; v-for&#x3D;&quot;item in selecData&quot;&gt;&#123;&#123;item&#125;&#125;&lt;&#x2F;option&gt;</span><br><span class="line">	&lt;&#x2F;select&gt;</span><br><span class="line">	&lt;p&gt;小明喜歡的女生是 &#123;&#123; selected2 &#125;&#125;。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>當你在<code>select</code>中加入<code>multiple</code>時，你在點選該欄位中的<code>option</code>時，記得按下Ctrl鍵來複選，<br>此時，selected2裡的內容，就是你複選完的結果囉。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-02/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1123,7 +1117,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

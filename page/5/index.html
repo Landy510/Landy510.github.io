@@ -155,6 +155,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/19/Bootstrap%E4%BD%9C%E5%93%81%E9%9B%86-%E6%8A%80%E5%B7%A7%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/19/Bootstrap%E4%BD%9C%E5%93%81%E9%9B%86-%E6%8A%80%E5%B7%A7%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">Bootstrap作品集_技巧筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-19 17:58:26" itemprop="dateCreated datePublished" datetime="2021-01-19T17:58:26+08:00">2021-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-30 15:10:05" itemprop="dateModified" datetime="2021-01-30T15:10:05+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bootstrap/" itemprop="url" rel="index"><span itemprop="name">Bootstrap</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>這邊記錄一下，我的Bootstrap作品集中有用到的技巧，不然都忘到爆XDD<br><a target="_blank" rel="noopener" href="https://landy510.github.io/new_Bootstrap_portfolio/">Bootstrap作品集</a></p>
+<h1 id="紀錄在index-html頁面中，使用的當滑入時，照片會從模糊變成清楚"><a href="#紀錄在index-html頁面中，使用的當滑入時，照片會從模糊變成清楚" class="headerlink" title="紀錄在index.html頁面中，使用的當滑入時，照片會從模糊變成清楚"></a>紀錄在index.html頁面中，使用的當滑入時，照片會從模糊變成清楚</h1><iframe src="https://codepen.io/RandyChen/embed/wvzOwzZ?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>你可以看到，這邊的範例，總由四個部分所組成</p>
+<ol>
+<li>最外面的區塊 content</li>
+<li>蓋在區塊上的薄膜 cover</li>
+<li>區塊中的文字 text</li>
+<li>區塊中的圖片 content_img</li>
+</ol>
+<h2 id="第一區塊-content"><a href="#第一區塊-content" class="headerlink" title="第一區塊 content"></a>第一區塊 content</h2><p>首先，我們最外面的區域我是故意用a連結使用，用意是模擬，<br>如果今天要點及這個區塊來連動其他頁面的時候，就需要a連結。</p>
+<p>在這個a連結裡面我們先設定好它的寬度和高度。<br>接著，還為它設入<code>overflow:hidden</code>的特性，這個特性後面會說明為什麼要它。</p>
+<h2 id="第二區塊-cover"><a href="#第二區塊-cover" class="headerlink" title="第二區塊 cover"></a>第二區塊 cover</h2><p>第一<br>這個區域是蓋在整體區塊上方的薄膜。<br>我們利用定位的效果加入position:absolute, top:0, right:0, bottom:0, left:0。<br>為得是要讓這個區塊能夠完全展開覆蓋住父元素.content。</p>
+<p>第二，我們為它加z-index:1，因為，它要蓋在上方，並在文字下方，所以，設為1是ok的。<br>第三，加入filter:blur(5px);，讓它產生模糊的效果。<br>第四，我們為它加入transform:translateY(-400px)，為得是要讓它的區塊先位在整體區塊的-400px位置，<br>並在你滑入的時候，transform:translateY(0px)，會改成0px，所以，就有從上方往下方移入的效果。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/19/Bootstrap%E4%BD%9C%E5%93%81%E9%9B%86-%E6%8A%80%E5%B7%A7%E7%AD%86%E8%A8%98/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/19/%E9%83%A8%E5%B1%AC%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99%E5%88%B0Github-Pages%E9%81%87%E5%88%B0%E7%9A%84%E5%95%8F%E9%A1%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -972,98 +1066,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/11/Vuejs%E5%85%83%E4%BB%B603-%E5%85%83%E4%BB%B6%E6%8F%92%E6%A7%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/11/Vuejs%E5%85%83%E4%BB%B603-%E5%85%83%E4%BB%B6%E6%8F%92%E6%A7%BD/" class="post-title-link" itemprop="url">Vuejs元件03-元件插槽</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-11 14:42:58" itemprop="dateCreated datePublished" datetime="2021-01-11T14:42:58+08:00">2021-01-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:07:33" itemprop="dateModified" datetime="2021-01-30T15:07:33+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>這邊接續著上一篇”Vuejs元件02-emit事件”的文章，繼續做筆記。</p>
-<h1 id="元件插槽"><a href="#元件插槽" class="headerlink" title="元件插槽"></a>元件插槽</h1><p>有時候我們需要替換某些元件的部分內容，而Vue.js就是利用元件插槽的概念來做到這件事情。<br>這邊會介紹三種狀況</p>
-<ol>
-<li>沒有插槽的元件</li>
-<li>單一插槽的元件</li>
-<li>具名插槽</li>
-</ol>
-<h2 id="沒有插槽的元件"><a href="#沒有插槽的元件" class="headerlink" title="沒有插槽的元件"></a>沒有插槽的元件</h2><iframe src="https://codepen.io/RandyChen/embed/YzGOQee?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上範例，你會看到我在no-slot-component中間插入了一個<code>p</code>段落，但是，畫面上並沒有呈現這個插入的<code>p</code>段落，<br>而這個就是若你在沒有插槽的元件中，插入其他內容，而這些插入的內容是不會被呈現在畫面上的。</p>
-<h2 id="單一插槽的元件"><a href="#單一插槽的元件" class="headerlink" title="單一插槽的元件"></a>單一插槽的元件</h2><iframe src="https://codepen.io/RandyChen/embed/xxEarzd?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-<p>以上這個範例你會看到在單一插槽元件定義它元件內容的地方，我們有放一個<code>&lt;slot&gt;&lt;/slot&gt;</code>標籤，<br>那此時，夾在single-slot-component標籤中間的<code>p</code>段落的內容，在網頁上就會呈現在<code>&lt;slot&gt;&lt;/slot&gt;</code>標籤的位置囉。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/11/Vuejs%E5%85%83%E4%BB%B603-%E5%85%83%E4%BB%B6%E6%8F%92%E6%A7%BD/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1133,7 +1135,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -155,6 +155,110 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/11/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F-Promise%E7%89%A9%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/11/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F-Promise%E7%89%A9%E4%BB%B6/" class="post-title-link" itemprop="url">JS核心-函式-Promise物件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-03-11 10:38:31 / Modified: 14:38:30" itemprop="dateCreated datePublished" datetime="2021-03-11T10:38:31+08:00">2021-03-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>繼<a href="/2021/03/09/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F/" title="上一篇">上一篇</a>，介紹了js中的函式與非同步環境會造成的callback Hell的前因後果，最終需要Promise來解決這個問題的過程後，此篇要記錄怎麼使用Promise物件。</p>
+<h1 id="Promise物件"><a href="#Promise物件" class="headerlink" title="Promise物件"></a>Promise物件</h1><p>Promise物件包含兩個東西，一個叫<code>reslove</code> 另一個叫<code>reject</code>。<br>當該Promise執行成功的話，就會去呼叫<code>reslove</code>，失敗的話，就會去執行<code>reject</code>的內容。</p>
+<h2 id="Promise物件創建的方法"><a href="#Promise物件創建的方法" class="headerlink" title="Promise物件創建的方法"></a>Promise物件創建的方法</h2><p>書中有提供兩種，其實意思差不多<br><strong>函式運算式用new來創建</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const FirstPromise &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  resolve(某個資料);</span><br><span class="line">  reject(&#39;Promise failure&#39;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>函式回傳new Promise物件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function FirstPromise() &#123;</span><br><span class="line">  return new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    resolve(某個資料);</span><br><span class="line">    reject(&#39;Promise failure&#39;);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="then-解決同步問題，依序執行函式"><a href="#then-解決同步問題，依序執行函式" class="headerlink" title="then - 解決同步問題，依序執行函式"></a>then - 解決同步問題，依序執行函式</h3><iframe src="https://codepen.io/RandyChen/embed/RwoEGXr?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上這個範例，可以看到我們利用創三個Promise物件，並利用<code>then</code>，來依序執行這三個非同步的函式內容。</p>
+<h3 id="Promise-all-和-Promise-race-解決非同步問題"><a href="#Promise-all-和-Promise-race-解決非同步問題" class="headerlink" title="Promise.all 和　Promise.race - 解決非同步問題"></a>Promise.all 和　Promise.race - 解決非同步問題</h3><p>若今天我們不在乎函式們的執行順序，只在乎他們有沒有執行完畢的話我們就可以使用 Promise.all 或　Promise.race。<br><strong>Promise.all 和　Promise.race相異之處</strong><br>Promise.all: 會等到所有的函式都執行完resolve之後，才會去執行then的內容。<br>Promise.race: 只要其中一個函式執行完它的resolve後，就會去執行then的內容，但是，其他還沒執行完的函式並不會被取消，也是一樣會被執行喔。</p>
+<p><strong>Promise.all 和　Promise.race相同之處</strong><br>只要有其中一個函式回傳reject的話，就會中止執行其他的函式。</p>
+<p><strong>Promise.all範例</strong></p>
+<iframe src="https://codepen.io/RandyChen/embed/Yzpdppq?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p><strong>Promise.race範例</strong></p>
+<iframe src="https://codepen.io/RandyChen/embed/PobXbpj?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<h3 id="async-await-讓Promise寫法更簡潔"><a href="#async-await-讓Promise寫法更簡潔" class="headerlink" title="async/await - 讓Promise寫法更簡潔"></a>async/await - 讓Promise寫法更簡潔</h3><p>這個寫法是可以讓Promise寫法更簡潔。<br><strong>代替then寫法</strong><br>我們想要依序處理非同步函式，之前我們是用then來達成，那這邊我們使用async/await來達成。<br>step1.<br>先創建一些Promise物件<br>step2.<br>創一個<code>async function</code>並在這個函式裡面，使用<code>await</code>來呼叫在step1創建的Promise物件，最後，程式就會依照<code>await</code>呼叫的順序，<br>來依序執行這些Promise物件，達到跟<code>then</code>一樣的效果囉。</p>
+<iframe src="https://codepen.io/RandyChen/embed/ExNGNoY?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>以上這個範例，就可以看出來我們利用async/await　來控制這些非同步函式的執行順序囉。</p>
+<p><strong>用在Promise.all</strong></p>
+<iframe src="https://codepen.io/RandyChen/embed/WNoLoMy?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>可以看到，Done的內容，會在Promise.all裡面的函式都resolve後，才出現。</p>
+<h3 id="setTimeout-與-setInterval的使用"><a href="#setTimeout-與-setInterval的使用" class="headerlink" title="setTimeout 與 setInterval的使用"></a>setTimeout 與 setInterval的使用</h3><p><strong>setTimeout</strong><br>這個功能是延遲一段時間之後，只執行一次該function內的內容。<br><strong>setInterval</strong><br>這個功能是延遲一段時固定間之後，執行該function內的內容，並循環這樣的操作。</p>
+<h4 id="clearTimeout-timeID-與-clearInterval-timeID"><a href="#clearTimeout-timeID-與-clearInterval-timeID" class="headerlink" title="clearTimeout(timeID) 與 clearInterval(timeID)"></a>clearTimeout(timeID) 與 clearInterval(timeID)</h4><p>它們倆個都會回傳一個timerID，那我們就可以透過這些timerID來將這些相對應的setTimeout和setInterval的功能取消掉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let timerID &#x3D; window.setTimeout(function()&#123;</span><br><span class="line">  console.log(&#39;first one&#39;);</span><br><span class="line">&#125;, 2000);</span><br><span class="line"></span><br><span class="line">let timerID1 &#x3D; window.setTimeout(function()&#123;</span><br><span class="line">  console.log(&#39;second one&#39;);</span><br><span class="line">&#125;, 1000);</span><br><span class="line"></span><br><span class="line">let timerID2 &#x3D; window.setInterval(function()&#123;</span><br><span class="line">  console.log(&#39;third one&#39;);</span><br><span class="line">&#125;, 1000);</span><br><span class="line">console.log(timerID, timerID1, timerID2)</span><br><span class="line">window.clearTimeout(timerID);  &#x2F;&#x2F; 將timerID取消掉</span><br><span class="line">window.clearInterval(timerID2); &#x2F;&#x2F; 將timerID2取消掉</span><br></pre></td></tr></table></figure>
+<p>但是，要特別注意一下，clearTimeout要在你設定的Timeout時機以內取消掉他才有用喔，不然等它執行之後才取消的話，clearTimeout就沒啥用。</p>
+<h1 id="JS單執行緒-與-同步、非同步之間的關係"><a href="#JS單執行緒-與-同步、非同步之間的關係" class="headerlink" title="JS單執行緒 與 同步、非同步之間的關係"></a>JS單執行緒 與 同步、非同步之間的關係</h1><p>JavaScript是「單執行緒」的語言，就代表它同一時間只能做一項任務。<br>那這樣的話，怎麼還會有同步和非同步的概念的出現呢?<br>這是因為，JS的設計者把要執行的任務分成同步和非同步的任務。<br>而<code>setTimeout</code>和<code>ajax(將口罩地圖的api接近來的行為)</code>這些功能，就是非同步的任務。</p>
+<p>這邊要再複習一下，Promise物件是主要用來控制非同步的任務的作用順序。</p>
+<h2 id="主執行緒-和-Event-Queue"><a href="#主執行緒-和-Event-Queue" class="headerlink" title="主執行緒 和 Event Queue"></a>主執行緒 和 Event Queue</h2><p>JS一開始會把所有任務，不管它是同步還是非同步都會先把它們都放在主執行緒裡面排序好，當程式開始執行主行緒裡面的任務時，<br>當它一遇到非同步的任務，就會跳過不執行，並將該非同步任務放到Event Queue裡面。<br>等到主行緒裡面的任務都執行完畢之後，才接著繼續執行Event Queue裡面的callback function。</p>
+<p><img src="/image/js_eventQueue.png" alt="執行緒的操作過程"></p>
+<iframe src="https://codepen.io/RandyChen/embed/YzpdZwB?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上這個範例你可以看到，就算我們將setTimeout的延遲時間設定為0秒，但最終，還是最後才執行它的內容，由此可以看出來他是被放在event queue裡面，最後才被執行。</p>
+<h3 id="js主執行緒機制會導致非同步函式延遲"><a href="#js主執行緒機制會導致非同步函式延遲" class="headerlink" title="js主執行緒機制會導致非同步函式延遲"></a>js主執行緒機制會導致非同步函式延遲</h3><p>那因為js有以上這種會將非同步函式放在event queue的特性，當主執行緒的執行任務太多，執行時間太久的話，可能會延遲非同步函式的執行時間，進而導致像是setTimeout和setInterval所設定的時間不準。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/09/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -178,10 +282,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-03-09 14:51:12 / Modified: 18:00:04" itemprop="dateCreated datePublished" datetime="2021-03-09T14:51:12+08:00">2021-03-09</time>
+              <time title="Created: 2021-03-09 14:51:12" itemprop="dateCreated datePublished" datetime="2021-03-09T14:51:12+08:00">2021-03-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-11 10:44:50" itemprop="dateModified" datetime="2021-03-11T10:44:50+08:00">2021-03-11</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -214,35 +324,14 @@
 <h2 id="若箭頭函式中的括號中沒有參數是不行忽略的括號的"><a href="#若箭頭函式中的括號中沒有參數是不行忽略的括號的" class="headerlink" title="若箭頭函式中的括號中沒有參數是不行忽略的括號的"></a>若箭頭函式中的括號中沒有參數是不行忽略的括號的</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const sayhello &#x3D; () &#x3D;&gt; console.log(&#39;hello&#39;);</span><br><span class="line">sayhello();</span><br></pre></td></tr></table></figure>
 
 <h2 id="若箭頭函式中的括號只有一個參數的話，可以忽略括號"><a href="#若箭頭函式中的括號只有一個參數的話，可以忽略括號" class="headerlink" title="若箭頭函式中的括號只有一個參數的話，可以忽略括號"></a>若箭頭函式中的括號只有一個參數的話，可以忽略括號</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const sayhello(msg) &#x3D;&gt; console.log(msg);</span><br><span class="line">sayhello(&#39;hello&#39;);</span><br></pre></td></tr></table></figure>
-
-<h1 id="arguments-物件"><a href="#arguments-物件" class="headerlink" title="arguments 物件"></a>arguments 物件</h1><p>在函式被呼叫的時候，會產生arguments物件，而這個argument物件就會包含了我們所傳入的參數內容。<br>這個arguments物件是類似於物件的東西，既然是類似，所以，它就不會有陣列才擁有的一些方法，但是，利用迴圈來遍歷這個類陣列的arguments物件，<br>還是可以的喔。<br>所以，當我們不確定該函式會傳入多少個參數的時候，不管是少或多，我們都能透過arguments來得到這些傳入的參數。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const plus &#x3D; function()&#123;</span><br><span class="line">  let num &#x3D; 0;</span><br><span class="line">  for(let i&#x3D;0; i!&#x3D;arguments; i++) &#123;</span><br><span class="line">    num +&#x3D; arguments[i];</span><br><span class="line">  &#125;</span><br><span class="line">  return num;</span><br><span class="line">&#125;</span><br><span class="line">plus(1, 2); &#x2F;&#x2F; 3</span><br></pre></td></tr></table></figure>
-<p>以上這個範例我們可以看到，就算在定義plus函數的時候，並沒有規定要傳入參數，但是，我們刻意傳入參數，最終，還是可以透過arguments來取得這些傳入的內容喔。</p>
-<h2 id="執行遞迴-callee"><a href="#執行遞迴-callee" class="headerlink" title="執行遞迴 - callee"></a>執行遞迴 - callee</h2><p>我們可以利用arguments的一個屬性叫callee，它會回傳目前正在執行的函式。<br>如此，我們就可以透過它在該函式執行時，在其內部再利用callee再次呼叫正在執行的函式，形成遞迴的效果。<br><font color=#FF0000>但這邊要特別注意，前面介紹過的ES6箭頭函式是不能呼叫arguments物件的喔。</font></p>
-<h2 id="箭頭函式使用其餘參數"><a href="#箭頭函式使用其餘參數" class="headerlink" title="箭頭函式使用其餘參數"></a>箭頭函式使用其餘參數</h2><p>雖然我們沒辦法在箭頭函式的情境下使用arguments物件，但是，我們可以使用<strong>其餘參數</strong>來達到一樣的效果。<br>那這邊其餘參數跟arguments物件比較不同的是，<strong>其餘參數是一個真正的陣列</strong>，所以，我們可以對它使用陣列才有的方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const plus &#x3D; (...argu) &#x3D;&gt; &#123;</span><br><span class="line">  let num &#x3D; 0;</span><br><span class="line">  for(let i&#x3D;0; i!&#x3D;argu.length; i++) &#123;</span><br><span class="line">    num +&#x3D; argu[i];</span><br><span class="line">  &#125;</span><br><span class="line">  return num;</span><br><span class="line">&#125;</span><br><span class="line">plus(1, 2);</span><br></pre></td></tr></table></figure>
-<p>將以上例子改寫成直接使用陣列的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const plus &#x3D; (...argu) &#x3D;&gt; argu.reduce((a, b) &#x3D;&gt; a + b);</span><br><span class="line"></span><br><span class="line">plus(1, 2, 3, 4); &#x2F;&#x2F; 10</span><br></pre></td></tr></table></figure>
-
-<h1 id="CallBack-Function"><a href="#CallBack-Function" class="headerlink" title="CallBack Function"></a>CallBack Function</h1><p>這種形式的函式的特性就是，當滿足某種條件時，此函式才會被被動的執行，我們就可以稱該函式為callback function。<br>那我們很常會在addEventListener的狀態下使用到CallBack Function。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let el &#x3D; document.querySelector(&#39;.btn&#39;);</span><br><span class="line">el.addEventListener(&#39;click&#39;, function() &#123;  ***做某些事*** &#125;);</span><br></pre></td></tr></table></figure>
-<p>像以上這個範例中在點擊了btn就會觸發addEventListener裡面的第二個參數，也就是那個匿名函式，啽這個匿名函式就是一個CallBack Function。</p>
-<h2 id="利用CallBack-Function-控制函式執行的順序"><a href="#利用CallBack-Function-控制函式執行的順序" class="headerlink" title="利用CallBack Function 控制函式執行的順序"></a>利用CallBack Function 控制函式執行的順序</h2><p>我們可以透過將某個函式傳入另一個函式中，來達到先處理a函式後，才處理b函式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">let funA &#x3D; function(callback) &#123;</span><br><span class="line">  let i &#x3D; Math.random() + 1;</span><br><span class="line"></span><br><span class="line">  window.setTimeout(function()&#123;</span><br><span class="line">    console.log(&#39;function A&#39;);</span><br><span class="line"></span><br><span class="line">    if(typeof(callback) &#x3D;&#x3D;&#x3D; &#39;function&#39;) &#123;</span><br><span class="line">      callback();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, i*1000);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let funB &#x3D; function() &#123;</span><br><span class="line">  let i &#x3D; Math.random() + 1;</span><br><span class="line">  window.setTimeout(funtion()&#123;</span><br><span class="line">    console.log(&#39;function B&#39;);</span><br><span class="line">  &#125;, i*1000);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funA(funB);</span><br></pre></td></tr></table></figure>
-<p>以上這個範例，我們把funB的呼叫包在funA裡面，呼叫，所以，不管何時執行A函式，都一定是在執行<code>console.log(&#39;function A&#39;)</code>，之後，<br>才會去執行B函式。</p>
-<h3 id="CallBack-Hell"><a href="#CallBack-Hell" class="headerlink" title="CallBack Hell"></a>CallBack Hell</h3><p>如果我們依照上面這個方式來安排函式之間的執行順序，但是，當函式的量一多，呼叫來呼叫去的，你的程式碼會直接變成CallBack 修羅場。<br>也就是書中有提到的CallBack Hell，那這種現象可以利用Promise來解決這種問題囉。</p>
-<h1 id="立即函式"><a href="#立即函式" class="headerlink" title="立即函式"></a>立即函式</h1><p>立即函式顧名思義就是當下就會被執行的函式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for(var i&#x3D;0; i!&#x3D;3; i++) &#123;</span><br><span class="line">  (function(x) &#123;</span><br><span class="line">    window.setTimeout(function()&#123;</span><br><span class="line">      console.log(&#39;現在是第&#39;+x+&#39;次&#39;);</span><br><span class="line">    &#125;, x*1000)</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上這個經典範例，我們會利用立即函式直接將當下的i變數，直接傳入該立即函式，並執行裡面的setTimeout函式。</p>
-<h1 id="同步-v-s-非同步"><a href="#同步-v-s-非同步" class="headerlink" title="同步 v.s 非同步"></a>同步 v.s 非同步</h1><p>書中這邊講得蠻清楚的，所以，很值得紀錄一下~</p>
-<h2 id="非同步的概念"><a href="#非同步的概念" class="headerlink" title="非同步的概念"></a>非同步的概念</h2><p>假設今天要做一道花枝炒飯。<br>今天這是一間大飯店，它有多位廚師，其中一位廚師處理花枝，另外一位廚師處理炒飯的部分，<br>所以，在這個過程中可能花枝先煮好，或者，炒飯先炒好，但沒關係，等到兩道菜都做好後，再一起裝盤出菜。</p>
-<p>所以，非同步處理事件的流程，並不會其中一個步驟而被卡住，這個就是非同步的概念。</p>
-<h2 id="同步的概念"><a href="#同步的概念" class="headerlink" title="同步的概念"></a>同步的概念</h2><p>一樣要做花枝炒飯，<br>但這是一間小店，它只有一位廚師，所以，他得先處理完花枝後，再接著處理炒飯的部分。<br>所以，只能等到一項項目處理完之後，才能再接著處理下一個項目。</p>
-<p>所以，同步的處理事件的概念是，先完成1之後，才能再依序處理2, 3, 4…。<br>所以，<font color=#FF0000>同步</font>這個名詞乍看真的很像全部一起處理，但其實<font color=#FF0000>它是一步一步，按部就班的處理</font>。<br>而<font color=#FF0000>非同步</font>則是<font color=#FF0000>可以同時處理多件事情，不用互等</font>。</p>
-<h3 id="不使用Promise就控制函式的操作順序"><a href="#不使用Promise就控制函式的操作順序" class="headerlink" title="不使用Promise就控制函式的操作順序"></a>不使用Promise就控制函式的操作順序</h3><p>那如果我們希望在非同步的狀態下，想要先不用Promise的方法來達成控制函式的執行順序的話，書中有提供以下的寫法，我順便練習一下，</p>
-<iframe src="https://codepen.io/RandyChen/embed/BaQqgQe?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-<p>以上這個範例就可以看到，等到A, B, C這三個函式都執行完後，才執行D這個函式。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/09/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -917,91 +1006,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/13/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-localStorage%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/13/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-localStorage%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98/" class="post-title-link" itemprop="url">JavaScript學徒篇- localStorage資料儲存</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-02-13 15:18:25 / Modified: 15:21:30" itemprop="dateCreated datePublished" datetime="2021-02-13T15:18:25+08:00">2021-02-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="什麼是-localStorage-？"><a href="#什麼是-localStorage-？" class="headerlink" title="什麼是 localStorage ？"></a>什麼是 localStorage ？</h1><p>它可以將網頁中的資料儲存在本地端中。<br>也就是說它可以將用戶的瀏覽資料存在本地端的瀏覽器中。</p>
-<h2 id="localStorage的重要特性"><a href="#localStorage的重要特性" class="headerlink" title="localStorage的重要特性"></a>localStorage的重要特性</h2><p>目前瀏覽器中都會把localStorage的值型別限定為<code>string</code>型別<br>因為，以上這個特性，導致我們在存取資料到localStorage或取出資料時，需要做一些轉換。<br><img src="/image/localstorage.png"></p>
-<p>以上這張圖的流程，簡易的說明了在localStorage資料的傳遞轉換的過程，以下是程式碼實現的內容</p>
-<iframe src="https://codepen.io/RandyChen/embed/ExNjWoK?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上，這幾行程式碼就是先將陣列形式的原始資料轉成<code>string</code>型別。<br>接著，將這個轉換成<code>string</code>型別的原始資料，存入localStorage中。<br>再來，用<code>getItem</code>將這個<code>string</code>型別的原始資料取出來。<br>最後，再將這個<code>string</code>型別的資列轉回陣列形式。<br>最終，我們就可以用取用JSON格式資料的方式來取用內部的資料囉~~~</p>
-<p>那你可以用開發者介面中的Application選項中，有一個localStorage的選項，你點開應該就可以看到你在這個網站上儲存的localStorage的資料囉~~<br>reference:<br><a target="_blank" rel="noopener" href="https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/232745/">程式前沿文章</a></p>
-<h1 id="data-透過-dataset-讀取自訂資料"><a href="#data-透過-dataset-讀取自訂資料" class="headerlink" title="data-* - 透過 dataset 讀取自訂資料"></a>data-* - 透過 dataset 讀取自訂資料</h1><iframe src="https://codepen.io/RandyChen/embed/oNYXZMe?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>你可以看到，我們為<code>li</code>標籤裡面新增了<code>data-*</code>之類的標籤，<br>並在js中利用<code>dataset.data</code>標籤名稱，來取得相關的<code>data-*</code>內的值。</p>
-<p>另外，<code>data-*</code>和<code>for</code>迴圈的運用</p>
-<iframe src="https://codepen.io/RandyChen/embed/poNJeqo?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>你可以看到我們用<code>for</code>迴圈的方式，來動態產生<code>li</code>的內容。 接著，透過<code>dataset</code>來擷取<code>data-whatever</code>的內容囉。</p>
-<h1 id="splice-刪除-array-資料"><a href="#splice-刪除-array-資料" class="headerlink" title="splice - 刪除 array 資料"></a>splice - 刪除 array 資料</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var myFish &#x3D; [&#39;angel&#39;, &#39;clown&#39;, &#39;drum&#39;, &#39;mandarin&#39;, &#39;sturgeon&#39;];</span><br><span class="line">var removed &#x3D; myFish.splice(3, 1);</span><br><span class="line">console.log(myFish);  [&#39;angel&#39;, &#39;clown&#39;, &#39;drum&#39;, &#39;sturgeon&#39;]</span><br></pre></td></tr></table></figure>
-<p>上面這個範例就是從索引3開始，然後，刪除一個元素。</p>
-<h1 id="localStorage作業"><a href="#localStorage作業" class="headerlink" title="localStorage作業"></a>localStorage作業</h1><p>這邊的作業是結合了localStorage功能的todolist。<br>所以，我的作業是下面這樣。</p>
-<iframe src="https://codepen.io/RandyChen/embed/XWNbRQE?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1071,7 +1075,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">74</span>
+          <span class="site-state-item-count">75</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
