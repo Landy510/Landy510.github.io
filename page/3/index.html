@@ -155,6 +155,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/11/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-%E6%8E%A7%E5%88%B6%E5%88%A4%E6%96%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/11/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-%E6%8E%A7%E5%88%B6%E5%88%A4%E6%96%B7/" class="post-title-link" itemprop="url">JavaScript學徒篇-控制判斷</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-11 10:37:00 / Modified: 10:43:56" itemprop="dateCreated datePublished" datetime="2021-02-11T10:37:00+08:00">2021-02-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="比較運算子：嚴謹模式"><a href="#比較運算子：嚴謹模式" class="headerlink" title="比較運算子：嚴謹模式 ==="></a>比較運算子：嚴謹模式 ===</h1><p>當等號兩邊的數值 和 資料型別都要完全相等的時候，<br>才會回傳<code>true</code>。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">console.log(false &#x3D;&#x3D; 0); &#x2F;&#x2F; true</span><br><span class="line">console.log(false &#x3D;&#x3D;&#x3D; 0); &#x2F;&#x2F; false</span><br><span class="line">console.log(false &#x3D;&#x3D;&#x3D; false); &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+<p>以上可以看到<code>==</code> 和 <code>===</code> 的差別囉，就要自己判斷什麼時機要用<br>嚴謹模式的<code>===</code>囉。</p>
+<h1 id="邏輯運算子：-amp-amp-、-、"><a href="#邏輯運算子：-amp-amp-、-、" class="headerlink" title="邏輯運算子： &amp;&amp;、||、!"></a>邏輯運算子： &amp;&amp;、||、!</h1><p><code>&amp;&amp;</code> 和 <code>||</code> 運算子實際上是回傳兩指定運算元之一，<br>因此用於非布林型態值時，它可能會回傳一個非布林型態的值。 邏輯運算子將在下表中被詳細解釋。</p>
+<h2 id="amp-amp-的部分"><a href="#amp-amp-的部分" class="headerlink" title="&amp;&amp; 的部分"></a>&amp;&amp; 的部分</h2><p>如果前面的運算式可以被轉為<code>false</code>的話，就回傳運算式1。<br>否則，就回傳運算式2。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.log(true &amp;&amp; true);    &#x2F;&#x2F; 回傳true</span><br><span class="line">console.log(&#39;Cat&#39; &amp;&amp; &#39;Dog&#39;);  &#x2F;&#x2F; 回傳Dog</span><br><span class="line">console.log(false &amp;&amp; true);   &#x2F;&#x2F; 回傳false</span><br><span class="line">console.log(&#39;Cat&#39; &amp;&amp; false);  &#x2F;&#x2F; 回傳false</span><br></pre></td></tr></table></figure>
+
+<h2 id="的部分"><a href="#的部分" class="headerlink" title="|| 的部分"></a>|| 的部分</h2><p>如果前面的運算式可以被轉為<code>true</code>的話，就回傳運算式1。<br>否則，就回傳運算式2。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.log(&#39;Cat&#39; || &#39;Dog&#39;);  &#x2F;&#x2F; 回傳Cat</span><br><span class="line">console.log( false || &#39;Dog&#39;);  &#x2F;&#x2F; 回傳Dog</span><br><span class="line">console.log(false || false);  &#x2F;&#x2F; 回傳false</span><br><span class="line">console.log(true || &#39;Dog&#39;);  &#x2F;&#x2F; 回傳true</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-Vue-Cli-3-0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -838,79 +916,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/28/%E5%BC%95%E5%85%A5%E6%AA%94%E6%A1%88%E8%B7%AF%E5%BE%91%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/28/%E5%BC%95%E5%85%A5%E6%AA%94%E6%A1%88%E8%B7%AF%E5%BE%91%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">引入檔案路徑常用指令</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-28 09:53:26" itemprop="dateCreated datePublished" datetime="2021-01-28T09:53:26+08:00">2021-01-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:15:11" itemprop="dateModified" datetime="2021-01-30T15:15:11+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/scss/" itemprop="url" rel="index"><span itemprop="name">scss</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="引用路徑指令"><a href="#引用路徑指令" class="headerlink" title="引用路徑指令"></a>引用路徑指令</h1><h3 id="import-‘-‘-同一層目錄開始找"><a href="#import-‘-‘-同一層目錄開始找" class="headerlink" title="import ‘./‘  - 同一層目錄開始找"></a>import ‘./‘  - 同一層目錄開始找</h3><h3 id="import-‘-‘-上一層目錄開始找"><a href="#import-‘-‘-上一層目錄開始找" class="headerlink" title="import ‘../‘  - 上一層目錄開始找"></a>import ‘../‘  - 上一層目錄開始找</h3><h3 id="import-‘-‘-src目錄開始找-這個是用在vue中的"><a href="#import-‘-‘-src目錄開始找-這個是用在vue中的" class="headerlink" title="import ‘@/‘  - src目錄開始找 (這個是用在vue中的)"></a>import ‘@/‘  - src目錄開始找 (這個是用在vue中的)</h3><h3 id="import-‘’-直接打名稱是node-modules"><a href="#import-‘’-直接打名稱是node-modules" class="headerlink" title="import ‘’  - 直接打名稱是node_modules"></a>import ‘’  - 直接打名稱是node_modules</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -980,7 +985,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">80</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
