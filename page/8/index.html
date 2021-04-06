@@ -155,6 +155,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/07/scss%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/07/scss%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">scss筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-07 10:40:32" itemprop="dateCreated datePublished" datetime="2021-01-07T10:40:32+08:00">2021-01-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-30 15:12:27" itemprop="dateModified" datetime="2021-01-30T15:12:27+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/scss/" itemprop="url" rel="index"><span itemprop="name">scss</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="在VSCode的編譯器中安裝live-sass"><a href="#在VSCode的編譯器中安裝live-sass" class="headerlink" title="在VSCode的編譯器中安裝live sass"></a>在VSCode的編譯器中安裝live sass</h2><p><img src="/image/live_sass.png"><br>我是在我的vscode的編譯器裡面安裝這個live sass的擴充軟體。<br>接著，你新增一個檔案，其檔名叫做all.scss。<br>再來你對這個all.scss檔案按下編譯器右下角的一個按鈕”Watch Sass”，<br><img src="/image/live_sass_watch.png"><br>按下去之後，你應該會看到跟all.scss檔案相同目錄下，會自動產出一個all.css檔案。<br><img src="/image/live_sass_all_css.png"><br>之後，你只要在all.scss檔案裡面新增或修改任何css樣式，只要你按下存檔，<br>live sass就會將你修改的css樣式內容，同步更新到all.css檔案裡面。</p>
+<p>注意~~~~但是，你的專案檔要引入的css檔案是all.css喔，不是all.scss檔案喔!!</p>
+<h2 id="修改live-sass軟體產出all-css檔案的路徑"><a href="#修改live-sass軟體產出all-css檔案的路徑" class="headerlink" title="修改live sass軟體產出all.css檔案的路徑"></a>修改live sass軟體產出all.css檔案的路徑</h2><p>live sass這個軟件，它預設產出的all.css檔案的路徑，會跟all.scss檔案在相同目錄下。<br>但是，你想要分隔管理all.css檔案和all.scss檔案的話，就需要修改live sass軟件預設的產出all.css檔案路徑。</p>
+<p><img src="/image/live_scss_step1.png"><br><img src="/image/live_scss_step2.png"><br>接著，上圖中的step1的紅框中，有”使用者”和”工作區”兩個選項，<br>這兩個選項的意思是<br>“使用者”:代表你接下來的設定，會是全域的設定，即每個專案都會被這個設定影響到。<br>“工作區”:代表只有你現在使用的這個專案檔，會被你這個設定影響到。</p>
+<p>我這邊只希望只有修改正在使用的專案它的live sass的產出all.css的路徑，所以，我會選擇”工作區”這個選項。<br><img src="/image/live_scss_step3.png"><br>當你按下上一張圖中的step2按下的鈕時，就會跳出這張圖中的settings.json檔案。<br>接著，你就把圖中的code貼進去這個settings.json檔案中。</p>
+<p>這段code你可以在live sass的軟件的官方文件就可以找到囉。</p>
+<p>那這段code有三個項目，<br>第一個format項目    -&gt; 代表產出的檔案格式是壓縮檔<br>第二個extension項目 -&gt; 代表產出的檔案的檔名<br>第三個savePath項目  -&gt; 代表產出的all.css檔案路徑設定<br>那你就可以在第三個savePath項目就可以設定你這個專案產出的all.css要產出在哪裡囉。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/07/scss%E7%AD%86%E8%A8%98/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -947,97 +1034,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/30/%E5%9F%BA%E7%A4%8E-Vue-js-%E6%A6%82%E8%BF%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/30/%E5%9F%BA%E7%A4%8E-Vue-js-%E6%A6%82%E8%BF%B0/" class="post-title-link" itemprop="url">基礎 Vue.js 概述</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-12-30 09:08:33" itemprop="dateCreated datePublished" datetime="2020-12-30T09:08:33+08:00">2020-12-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:04:50" itemprop="dateModified" datetime="2021-01-30T15:04:50+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h1><p>Vue的整體概念是MVVM。<br>View(介面) -&gt; ViewModel(資料繫結器) -&gt; Model(資料狀態)<br>在MVVM的架構中，各部份處理的任務是</p>
-<ol>
-<li>模型(Model)：負責提供數據，例如：新增、刪除、修改。</li>
-<li>介面(View)：負責展示數據。</li>
-<li>ViewModel(VM)：負責處理業務邏輯(像是觸發事件)。將 View 和 Model 綁定為 ViewModel，當數據發生改變，View 會即時更新。</li>
-</ol>
-<h2 id="創建Vue物件"><a href="#創建Vue物件" class="headerlink" title="創建Vue物件"></a>創建Vue物件</h2><p>首先，先來介紹一下怎麼在專案上使用Vue。<br>ex: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &#123;&#123;message&#125;&#125;</span><br><span class="line">        &lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;message&quot;&gt; </span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">    el: &#39;#app&#39;,</span><br><span class="line">    data: &#123;</span><br><span class="line">        message: &#39;你好嗎&#39;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>在上面這個範例，在HTML文件中，我們有先為一個區塊命名一個id叫app。<br>接著，你在你的JS檔案裡面，創建一個變數，並用他來創建Vue的物件。<br>像上面這個例子，就是用app這個變數去創建Vue物件。<br>接著，在Vue的物件的成員屬性中，<br><code>el</code> 是代表你要綁定區塊的id或class名稱是什麼。<br>通常我們不會綁定class名稱，因為，相同的class名稱可以在專案裡面重複宣告，這樣會造成<br>Vue的物件綁定錯誤。<br>所以，通常都會綁定id名稱。<br><code>data</code> 這個成員屬性裡面，就放各種資料在裡面，像這邊就是放message這個字串成員。</p>
-<h2 id="Vue物件不要巢狀的方式創建"><a href="#Vue物件不要巢狀的方式創建" class="headerlink" title="Vue物件不要巢狀的方式創建"></a>Vue物件不要巢狀的方式創建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">---html---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">   &#123;&#123; text &#125;&#125;</span><br><span class="line">   &lt;div id&#x3D;&quot;app2&quot;&gt;</span><br><span class="line">         &#123;&#123; text2 &#125;&#125;</span><br><span class="line">   &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">   el: &quot;#app&quot;,</span><br><span class="line">   data:&#123;</span><br><span class="line">      text: &#39;這是一段話&#39;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">var app2 &#x3D; new Vue(&#123;</span><br><span class="line">   el: &quot;#app2&quot;,</span><br><span class="line">   data:&#123;</span><br><span class="line">      text2 : &#39;這是一段話2&#39;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>以上這個範例會報錯，它會說’text2 is not defined’，及瀏覽器找不到text2。<br>由此可知，雖然，創建兩個Vue的應用程式在同一個html文件中是沒問題的。<br>但是，你不能用巢狀的方式來建立Vue的應用程式，這樣會導致內層的Vue物件，<br>瀏覽器會找不到它，進而報錯。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/12/30/%E5%9F%BA%E7%A4%8E-Vue-js-%E6%A6%82%E8%BF%B0/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1107,7 +1103,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-count">86</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
