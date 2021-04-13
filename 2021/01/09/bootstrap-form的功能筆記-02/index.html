@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="http://example.com/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-02/index.html">
 <meta property="og:site_name" content="Landy Blog">
 <meta property="og:description" content="接續著上一篇記錄有關Bootstrap的form元件有關的內容。 input-group首先將你想要合併的內容，用input-group把它們包起來。   你可以看到上面的範例，最外層用.input-group包起來，然後，內層的input欄位保持不變，其class名稱還是保持form-control，接著，要跟這個input欄位接在一起的span就會再被一個input-group-append區">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-01-09T10:25:21.000Z">
 <meta property="article:modified_time" content="2021-01-30T07:09:40.840Z">
 <meta property="article:author" content="Landy">
@@ -42,7 +42,7 @@
     sidebar: "",
     isHome : false,
     isPost : true,
-    lang   : 'en'
+    lang   : 'zh-TW'
   };
 </script>
 
@@ -86,7 +86,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="切換導航欄">
       <span class="toggle-line toggle-line-first"></span>
       <span class="toggle-line toggle-line-middle"></span>
       <span class="toggle-line toggle-line-last"></span>
@@ -115,22 +115,22 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
 
   </li>
   </ul>
@@ -160,7 +160,7 @@
     
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -182,22 +182,22 @@
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">發表於</span>
 
-              <time title="Created: 2021-01-09 18:25:21" itemprop="dateCreated datePublished" datetime="2021-01-09T18:25:21+08:00">2021-01-09</time>
+              <time title="創建時間：2021-01-09 18:25:21" itemprop="dateCreated datePublished" datetime="2021-01-09T18:25:21+08:00">2021-01-09</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-30 15:09:40" itemprop="dateModified" datetime="2021-01-30T15:09:40+08:00">2021-01-30</time>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-30 15:09:40" itemprop="dateModified" datetime="2021-01-30T15:09:40+08:00">2021-01-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">In</span>
+              <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Bootstrap/" itemprop="url" rel="index"><span itemprop="name">Bootstrap</span></a>
                 </span>
@@ -304,10 +304,10 @@
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          Table of Contents
+          文章目錄
         </li>
         <li class="sidebar-nav-overview">
-          Overview
+          本站概要
         </li>
       </ul>
 
@@ -328,20 +328,20 @@
           <a href="/archives/">
         
           <span class="site-state-item-count">88</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
         <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">categories</span></a>
+        <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
         <span class="site-state-item-count">11</span>
-        <span class="site-state-item-name">tags</span></a>
+        <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
 </div>
@@ -373,7 +373,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Landy</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
   </div>
 
         
