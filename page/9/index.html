@@ -155,6 +155,191 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/31/%E7%AE%AD%E9%A0%AD%E5%87%BD%E5%BC%8F%E8%88%87this/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/31/%E7%AE%AD%E9%A0%AD%E5%87%BD%E5%BC%8F%E8%88%87this/" class="post-title-link" itemprop="url">箭頭函式與this</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-12-31 17:58:57 / Modified: 17:59:37" itemprop="dateCreated datePublished" datetime="2020-12-31T17:58:57+08:00">2020-12-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>箭頭函式與this<br>首先，箭頭函式有以下幾種特性</p>
+<ol>
+<li>超簡潔的寫法</li>
+<li>this變數的強制綁定<br>而箭頭函式的的this變數綁定的方式有跟傳統的function不一樣<br>傳統函式: 呼叫該function時的物件<br>箭頭函式: 綁定定義該箭頭函式時的物件</li>
+</ol>
+<p>我們直接用一個含是裡面包另一個函式的範例來看看他們的差別</p>
+<p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">---傳統函式---</span><br><span class="line">let obj &#x3D; &#123;</span><br><span class="line">	test: function()&#123;</span><br><span class="line">		console.log(this); &#x2F;&#x2F; 回傳obj物件</span><br><span class="line">		</span><br><span class="line">		(function()&#123;</span><br><span class="line">			console.log(this); &#x2F;&#x2F; 回傳window物件</span><br><span class="line">		&#125;)();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.test();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---箭頭函式---</span><br><span class="line">let obj &#x3D; &#123;</span><br><span class="line">	test: function()&#123;</span><br><span class="line">		console.log(this); &#x2F;&#x2F; 回傳obj物件</span><br><span class="line">		</span><br><span class="line">		(()&#x3D;&gt;&#123;</span><br><span class="line">			console.log(this); &#x2F;&#x2F; 回傳obj物件</span><br><span class="line">		&#125;)();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.test();</span><br></pre></td></tr></table></figure>
+
+<p>來解釋一下為什麼內層函式回傳的值會不一樣。<br>首先，傳統函式<br>在外層的this回傳是obj物件，是因為呼叫test函式的物件是obj，所以，回傳obj物件。<br>而內層的話，是因為JavaScript的變數的最小區分單位是function，所以，在內部的立即函式的作用環境跟<br>外層是分隔開的，而它所擁有的this變數也是獨立的，而this變數的預設綁定是window物件，所以，最終結果才會回傳window物件。</p>
+<p>接著，箭頭函式<br>外層的函式上面解釋過了，會回傳obj物件。<br>內層的話，會因為該立即函式被定義的時候，是在obj物件的環境下，所以，以箭頭函式定義的立即函式它的this變數會綁定obj，<br>而這也是為什麼它會回傳obj物件的原因。</p>
+<p>———————我是分隔線——————————–<br>接下來，我來改寫一下上面的箭頭函式的範例<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let obj &#x3D; &#123;</span><br><span class="line">	test: ()&#x3D;&gt;&#123;</span><br><span class="line">		console.log(this); &#x2F;&#x2F; 回傳window物件</span><br><span class="line">		(()&#x3D;&gt;&#123;</span><br><span class="line">			console.log(this); &#x2F;&#x2F; 回傳window物件</span><br><span class="line">		&#125;)();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我們將成員函式test也用箭頭函式的形式來定義它，<br>按照arrow function的特性，其this會綁定該arrow function被定義時的物件，<br>而物件obj在定義的時候，它是屬於window物件的其中一個屬性，所以，test的箭頭函式會綁定window物件，<br>而在test內層的IIFE也因為是在外層是window物件的狀態下定義的，故該IIFE的this會綁定window物件。</p>
+<p>從上面的這些範例中，就要特別注意，你在使用arrow function在定義某函式時，其定義當下物件是誰，<br>如果，你有要在這個箭頭函式裡面使用this的變數的話。</p>
+<p>———————我是分隔線——————————–<br>另外，特別紀錄一下，監聽是件如果也用arrow function來撰寫觸發事件的話，回傳的this也會和傳統函式不一樣<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">---傳統函式範例---</span><br><span class="line">---html文件---</span><br><span class="line">&lt;button id&#x3D;&quot;btn&quot;&gt;按鈕&lt;&#x2F;buntton&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---JavaScript文件---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">let el &#x3D; document.getElementById(&#39;btn&#39;).addEventListener(&#39;click&#39;, function()&#123;</span><br><span class="line">	console.log(this);  &#x2F;&#x2F; 回傳被點擊的按鈕物件</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---箭頭範例---</span><br><span class="line">---html文件---</span><br><span class="line">&lt;button id&#x3D;&quot;btn&quot;&gt;按鈕&lt;&#x2F;buntton&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---JavaScript文件---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">let el &#x3D; document.getElementById(&#39;btn&#39;).addEventListener(&#39;click&#39;, ()&#x3D;&gt;&#123;</span><br><span class="line">	console.log(this);  &#x2F;&#x2F; 回傳window物件</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>來解釋一下<br>在傳統函式範例<br>該監聽函式的觸發事件是被button這個物件所觸發的，所以，this會是這個button物件。</p>
+<p>在箭頭函式範例<br>該監聽函式的觸發事件是透過el變數來定義的，而el變數是window物件的其中一個屬性，所以，該監聽事件的箭頭函式<br>的this事綁定window物件。</p>
+<p>———————我是分隔線——————————–<br>比較一下傳統函式在監聽事件 和 一般函式造成的this差別在哪<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">---傳統函式範例---</span><br><span class="line">---html文件---</span><br><span class="line">&lt;button id&#x3D;&quot;btn&quot;&gt;按鈕&lt;&#x2F;buntton&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---JavaScript文件---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">let el &#x3D; document.getElementById(&#39;btn&#39;).addEventListener(&#39;click&#39;, function()&#123;</span><br><span class="line">	console.log(this);  &#x2F;&#x2F; 回傳被點擊的按鈕物件</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>我在這邊順便為傳統函式加一範例，讓整個狀況更混亂XDD</p>
+<p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let foo &#x3D; function()&#123;</span><br><span class="line">	console.log(this);</span><br><span class="line">&#125;</span><br><span class="line">foo();  &#x2F;&#x2F; 回傳window物件</span><br></pre></td></tr></table></figure>
+<p>我在看這個範例的時候，覺得跟上面用傳統函式來撰寫監聽事件的那個範例有點混淆，<br>來講一下this，this是代表”觸發該事件的人”<br>所以，在傳統函式來撰寫監聽事件的那個範例，觸發該事件的物件是那個按鈕物件，所以，this會綁定button物件。<br>而這邊這個範例，<br>我們是利用foo變數來呼叫函式，而變數foo是window物件的屬性，所以，其實是window物件觸發了該事件，<br>所以，該函式裡面的this才會是window。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/30/%E5%9F%BA%E7%A4%8E-Vue-js-%E6%A6%82%E8%BF%B0-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/30/%E5%9F%BA%E7%A4%8E-Vue-js-%E6%A6%82%E8%BF%B0-2/" class="post-title-link" itemprop="url">基礎 Vue.js 概述 - 2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-30 10:58:34" itemprop="dateCreated datePublished" datetime="2020-12-30T10:58:34+08:00">2020-12-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-30 15:04:44" itemprop="dateModified" datetime="2021-01-30T15:04:44+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>接續上一篇還沒介紹完的基礎Vue的功能。</p>
+<h2 id="computed-運算功能"><a href="#computed-運算功能" class="headerlink" title="computed 運算功能"></a>computed 運算功能</h2><p>在<code>computed</code>物件中的屬性，它都會是一個function，而這些function都會回傳一個值。<br>另外，必須要是在同一個Vue物件底下的data物件的屬性值有更動時，<code>computed</code>才會被觸發。<br>換言之，如果不是在同一個Vue物件底下的data物件的屬性值有更動的話，<code>computed</code>是不會被觸發的。</p>
+<iframe src="https://codepen.io/RandyChen/embed/mdrXdMP?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>上面這個例子，當你在<code>input</code>的欄位裡面輸入內容，<br>會直接在的位置，直接呈現被反轉後的字串結果。</p>
+<p>由以上範例可知，當data物件中的text內容有被更動的時候，因為，computed中，有調用data中的text成員，<br>所以，computed會被觸發，而其reverseText屬性會存入函式回傳的text反轉後的字串內容，<br>並透過的方式，呈現在畫面上。<br>另外，要注意，在reverseText中，要調用同一個物件底下的成員屬性時，要記得加<code>this</code>。</p>
+<h2 id="conputed-和-methods的差別"><a href="#conputed-和-methods的差別" class="headerlink" title="conputed 和 methods的差別"></a>conputed 和 methods的差別</h2><p><code>computed</code> 是在監控資料更動後，重新運算結果呈現於畫面上<br>一般來說不會修改資料，只會回傳用於畫面呈現的資料。<br>就像是在<code>computed</code>那邊提到的範例一樣。</p>
+<p><code>methods</code> 就是互動的函式，需要觸發才會運作，<br>像是:按下某個鈕，才會觸發某個事件<br>像是在<code>v-on</code>那邊提到的範例一樣。</p>
+<h2 id="Vue-表單與資料的綁定"><a href="#Vue-表單與資料的綁定" class="headerlink" title="Vue 表單與資料的綁定"></a>Vue 表單與資料的綁定</h2><p>將表單中的值，與陣列資料綁定在一起。<br>用checkBox和radioBox來舉例。<br>其中，checkBox可以多選，radioBox是單選。</p>
+<h3 id="checkBox"><a href="#checkBox" class="headerlink" title="checkBox"></a>checkBox</h3><p>首先，若該選項有值的話，可以將該值塞入到一個陣列裡面。</p>
+<iframe src="https://codepen.io/RandyChen/embed/VwKQwQv?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>當你按下其中一個選項，會將相對應的value塞到陣列checkboxArray裡面，<br>並用<code>v-for</code>的方式去遍歷checkboxArray這個陣列，將裡面的元素印出來。</p>
+<h3 id="radioBox"><a href="#radioBox" class="headerlink" title="radioBox"></a>radioBox</h3><p>接下來，以radioBox為例</p>
+<iframe src="https://codepen.io/RandyChen/embed/WNGMNJd?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>由上面這個例子可以看到，RadioBox是去綁定singleRadio這個值，並將該<br>singleRadio的結果呈現在最後的p段落裡面。其實，用法跟CheckBox差不<br>多啦，只是一個是多選，一個是單選，並且v-model要綁定的對象也不同<br>醬。</p>
+<h3 id="selected"><a href="#selected" class="headerlink" title="selected"></a>selected</h3><p>接下來，以selected為例</p>
+<iframe src="https://codepen.io/RandyChen/embed/yLavLqx?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上面這個例子，你可以看到<code>v-model</code>綁定的是<code>selected</code>，就是被選擇的選項。<br>要注意，在”請選擇”的選項的value要記得給它預設值””。<br>而在請選擇的這個<code>option</code>裡面有<code>disabled</code>這個內容，它的意思是，當其他選<br>項被選擇後，”請選擇”這個選項就不能被選擇了。</p>
+<h2 id="元件基礎概念-如何自製自己的Vue元件"><a href="#元件基礎概念-如何自製自己的Vue元件" class="headerlink" title="元件基礎概念 - 如何自製自己的Vue元件"></a>元件基礎概念 - 如何自製自己的Vue元件</h2><p>這邊是用計數器來作範例</p>
+<iframe src="https://codepen.io/RandyChen/embed/zYKRYJQ?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>首先，在製作Vue物件的內容，要寫在你創建Vue物件的內容的”前面”喔，<br>也就是<code>Vue.component()</code>的內容要寫在<code>var app = new Vue(&#123;&#125;)</code>的前面。<br>不然，自製元件會不見，不過我現在也只有發現這個現象，沒有去深究是為什麼。</p>
+<p>以上這個製作元件的內容<br>在Vue.component中第一個引數，要丟你想製作的標籤的名稱，像這邊就<br>取名為countercomponent，<br>接著，Vue的自製元件的data物件，限定你得用function的形式回傳物件，<br>並在回傳的物件中加入你想要的成員。<br>最後，是這個自製元件的樣式<br>你就在template的指令裡面，加入你想要這個標籤的樣式。<br>最後，你在html文件中，加入妳自定義的標籤，如此，就可以達成標籤與<br>標籤之間，擁有自己的計數器了。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/30/%E5%9F%BA%E7%A4%8E-Vue-js-%E6%A6%82%E8%BF%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -753,20 +938,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">88</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

@@ -155,6 +155,163 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/17/Leaflet%E5%92%8COpenSourceMap-JS%E5%AF%AB%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/17/Leaflet%E5%92%8COpenSourceMap-JS%E5%AF%AB%E6%B3%95/" class="post-title-link" itemprop="url">Leaflet和OpenSourceMap-JS寫法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-17 10:49:50 / Modified: 11:20:09" itemprop="dateCreated datePublished" datetime="2021-02-17T10:49:50+08:00">2021-02-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AJAX/" itemprop="url" rel="index"><span itemprop="name">AJAX</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="AJAX-與函式應用教學"><a href="#AJAX-與函式應用教學" class="headerlink" title="AJAX 與函式應用教學"></a>AJAX 與函式應用教學</h1><p>這個章節主要是教怎麼用XML物件來將口罩地圖的opendata載入下來，接著，再對載入的資料做相對應的處理。<br>注意!!!!!!!!!!<br>其中一個特別需要注意的技巧，是載入loading圖片的作法。<br>老師的作法是<br>當資料庫的資料還再載入的時候，顯示loading的圖片，如果，資料源載入完成後，就不用再顯示loading的圖片了。<br>那切換要不要再放loading圖片的程式碼，你就放在XML物件的onload的函式裡面，因為，onload的函式就是當資料源的資料有完整載入完成後，才會觸發的event，所以，放在裡面是不錯的選擇。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/02/17/Leaflet%E5%92%8COpenSourceMap-JS%E5%AF%AB%E6%B3%95/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/16/AJAX%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/16/AJAX%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-2/" class="post-title-link" itemprop="url">AJAX課程筆記-2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-02-16 16:55:38 / Modified: 16:56:37" itemprop="dateCreated datePublished" datetime="2021-02-16T16:55:38+08:00">2021-02-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AJAX/" itemprop="url" rel="index"><span itemprop="name">AJAX</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="什麼是-Cross-Origin-Resource-Sharing-CORS-？"><a href="#什麼是-Cross-Origin-Resource-Sharing-CORS-？" class="headerlink" title="什麼是 Cross-Origin Resource Sharing (CORS)？"></a>什麼是 Cross-Origin Resource Sharing (CORS)？</h1><p>這個章節在說當你想要擷取線上的開放資料，會遇到CORS的問題。<br>如果資料源的CORS沒有開放，代表該資料源不支持跨網域的功能，即你無法從你的本機端跟該opendata做互動，即做資料的傳輸與擷取。</p>
+<p>你可以利用<br><a target="_blank" rel="noopener" href="http://www.test-cors.org/#?client_method=GET&client_credentials=false&server_url=http%3A%2F%2Fopendata2.epa.gov.tw%2FUV%2FUV.json&server_enable=true&server_status=200&server_credentials=false&server_tabs=remote">這個連結</a><br>這個連結，將你的opendata的連結丟到這個測試網站中的Remote URL<br>的欄位裡面，接著按Send Request按鈕，<br>你可以看XHR status的數字，<br>如果是200代表該opendata 有支援跨網域的功能，<br>如果是0代表該opendata 沒有支援跨網域的功能。</p>
+<h1 id="傳統表單輸入介紹"><a href="#傳統表單輸入介紹" class="headerlink" title="傳統表單輸入介紹"></a>傳統表單輸入介紹</h1><p>這個章節在教有關AJAX的POST技巧，即我們將像帳號或密碼丟到伺服器端做驗證的動作。<br>例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action&#x3D;&quot;index.html&quot;&gt;</span><br><span class="line">   &lt;label for&#x3D;&quot;inputEmail&quot;&gt;帳號&lt;&#x2F;label&gt;</span><br><span class="line">   &lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;account&quot; id&#x3D;&quot;inputEmail&quot;&gt;</span><br><span class="line">   &lt;br&gt;</span><br><span class="line">   &lt;label for&#x3D;&quot;password&quot;&gt;密碼&lt;&#x2F;label&gt;</span><br><span class="line">   &lt;input type&#x3D;&quot;password&quot; name&#x3D;&quot;password&quot; id&#x3D;&quot;password&quot;&gt;</span><br><span class="line">   &lt;br&gt;</span><br><span class="line">   &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;送出&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到以上的form的action屬性值是確定表單資料提交的方向，如果不寫則提交當前頁面，而這邊的範例的話，<br>是直接放當前頁面因為我們沒有要提交該表單。<br>當你提交了此表單之後，你看你的瀏覽器上放網址中的內容<br>file:///D:/hexschool/Javascript_lecture/Ajax_practice/index.html?account=you%40gmail.com&amp;password=123</p>
+<p>你可以看到index.html? 代表你的當前頁面，而在問號後面接的就是這個表單提交的參數，分別是<br>account 就是你輸入的帳號內容<br>password就是放你輸入的密碼</p>
+<h1 id="AJAX-POST-以form表單格式傳送-提供-API-練習"><a href="#AJAX-POST-以form表單格式傳送-提供-API-練習" class="headerlink" title="AJAX POST - 以form表單格式傳送 (提供 API 練習)"></a>AJAX POST - 以form表單格式傳送 (提供 API 練習)</h1><p>這個小節是示範，怎麼將資料丟到伺服器端，並從伺服器端回傳的內容，判斷是否該資料是傳送成功或失敗。<br>例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var xhr &#x3D; new XMLHttpRequest();</span><br><span class="line">xhr.open(&#39;post&#39;,&#39;伺服器端的網址&#39;, true);</span><br><span class="line">xhr.setRequestHeader(&#39;Content-type&#39;,&#39;application&#x2F;x-www-form-urlencoded&#39;);</span><br><span class="line">xhr.send(&#39;email&#x3D;abcd@gmail.com&amp;password&#x3D;123456&#39;);</span><br></pre></td></tr></table></figure>
+<p>以上的程式範例就是將資料post到伺服器端的語法，要特別注意這一行新的指令，<br>即setRequestHeader這一行的指令就是post API的格式，這個是一般表單輸入的格式。</p>
+<p>另外，在xhr的send函式裡面要送哪些訊息，你要先去看你的伺服器端能夠接收那些資料，像這個例題，它能接受的就是email和password的資料。<br>若以上的操作都成功的話，你再呼叫一次xhr這個物件，readyState應該會回傳4，而在responseText欄位裡面應該就會出現註冊成功的字串內容溜~</p>
+<h1 id="從-Chrome-開發人員工具檢視-AJAX-POST"><a href="#從-Chrome-開發人員工具檢視-AJAX-POST" class="headerlink" title="從 Chrome 開發人員工具檢視 AJAX POST"></a>從 Chrome 開發人員工具檢視 AJAX POST</h1><p>你可以利用你的瀏覽器的開發者視窗中的網路這個選項中，<br>有回應跟請求，可以看到用戶端丟了什麼訊息給伺服器端，<br>而伺服器端又回應了什麼樣的訊息給客戶端。</p>
+<h1 id="AJAX-以JSON格式傳遞"><a href="#AJAX-以JSON格式傳遞" class="headerlink" title="AJAX - 以JSON格式傳遞"></a>AJAX - 以JSON格式傳遞</h1><p>本小節是在教導如何改用JSON格式把資料傳送給伺服器端做驗證，其實，跟上面的傳統表單傳送的寫法差不多，一點點差異而已<br>例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var account &#x3D; &#123;</span><br><span class="line">   email: &#39;jaredleto@gmail.com&#39;,</span><br><span class="line">   password: &#39;12313&#39;</span><br><span class="line">&#125;</span><br><span class="line">var xhr &#x3D; new XMLHttpRequest();</span><br><span class="line">xhr.open(&#39;post,&#39;https:&#x2F;&#x2F;hexschool-tutorial.herokuapp.com&#x2F;api&#x2F;signup&#39;,true);</span><br><span class="line">xhr.setRequestHeader(&#39;content-type&#39;,&#39;application&#x2F;json&#39;);</span><br><span class="line">var data &#x3D; JSON.stringify(account);</span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
+<p>以上的範例你可以看到在創XMLHttpRequest物件的方式一模一樣，<br>不同的部分是setRequestHeader有更動內容改成application/json，就代表我們要上傳json的格式資料給伺服器端。<br>而我們要傳入物件account的內容，故我們在上傳此物件時，並須把先它轉成JSON的字串格式給伺服器端，才能將它上傳。</p>
+<p>由此總結在上傳一般表單格式 和 上傳JSON格式的內容給伺服器不一樣的地方為setRequestHeader的內容<br>和 上傳之前是否需要把上傳內容做json的字串轉換。<br>注意~!!在寫json的時候，你要注意json的拚法喔，因為，你會一直寫成<br>JASON 這是不對的，應該是JSON才對，沒有A啦，不要把它跟頂級超市的JASONS搞混了==</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/16/AJAX%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -863,163 +1020,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89%E8%A3%9C%E5%85%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89%E8%A3%9C%E5%85%85/" class="post-title-link" itemprop="url">vue出一個電商網站-表單驗證補充</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-02-03 10:06:46 / Modified: 10:26:28" itemprop="dateCreated datePublished" datetime="2021-02-03T10:06:46+08:00">2021-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="表單驗證補充"><a href="#表單驗證補充" class="headerlink" title="表單驗證補充"></a>表單驗證補充</h1><p>在課程中原本是用第二版的vee-validate，<br>那在第二版是透過vue的指令和html的屬性來驗證。<br>課堂上有提供<a target="_blank" rel="noopener" href="https://courses.hexschool.com/courses/vue/lectures/26741635">安裝與指令步驟</a> 。<br>那新版的vee-validate有很大的不同，就是新版是用元件的方式來進行驗證。<br>step1.<br>先輸入指令<code>npm uninstall vee-validate</code>，將vee-validate給卸載。<br>step2.<br>接著輸入<code>npm install vee-validate --save</code>，來安裝新版的vee-validate套件。<br>step3.<br>接著，你運行vue的環境，此時，會跳出一些錯誤，我們先不管它。<br>step4.<br>接下來，到main.js檔案中做一些調整。<br>我們先將原本引入vee-validate的內容給刪掉</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">---main.js---</span><br><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import axios from &#39;axios&#39;</span><br><span class="line">import VueAxios from &#39;vue-axios&#39;</span><br><span class="line">import Loading from &#39;vue-loading-overlay&#39;;  &#x2F;&#x2F; 引入overlay元件</span><br><span class="line">import &#39;vue-loading-overlay&#x2F;dist&#x2F;vue-loading.css&#39;;  &#x2F;&#x2F; 引入overlay元件</span><br><span class="line">import &#39;bootstrap&#39;</span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import router from &#39;.&#x2F;router&#39;</span><br><span class="line">import &#39;.&#x2F;bus&#39;</span><br><span class="line">import currencyFilter from &#39;.&#x2F;filters&#x2F;currency&#39;</span><br><span class="line">&#x2F;&#x2F;import VeeValidate from &#39;vee-validate&#39;;    &#x2F;&#x2F; 原本的vee-validate內容拿掉</span><br><span class="line">&#x2F;&#x2F;import zhTWValidate from &#39;vee-validate&#x2F;dist&#x2F;locale&#x2F;zh_TW&#39;  &#x2F;&#x2F; 原本的vee-validate內容拿掉</span><br><span class="line">import zhTW from &#39;vee-validate&#x2F;dist&#x2F;locale&#x2F;zh_TW&#39;</span><br><span class="line">import VueI18n from &#39;vue-i18n&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(VueAxios, axios)</span><br><span class="line">&#x2F;&#x2F;Vue.use(VeeValidate);   &#x2F;&#x2F; 原本的vee-validate內容拿掉</span><br><span class="line">&#x2F;&#x2F;VeeValidate.Validator.localize(&#39;zh_TW&#39;, zhTWValidate);   &#x2F;&#x2F; 原本的vee-validate內容拿掉</span><br><span class="line">Vue.config.productionTip &#x3D; false</span><br><span class="line">Vue.component(&#39;Loading&#39;, Loading);  &#x2F;&#x2F; 啟用overlay元件</span><br><span class="line">Vue.filter(&#39;currency&#39;, currencyFilter);  &#x2F;&#x2F; 啟用fiter元件</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Vue.use(VeeValidate, &#123;</span><br><span class="line">&#x2F;&#x2F;   events: &#39;input|blur&#39;, &#x2F;&#x2F;這是為了讓使用者離開該欄位時觸發驗證</span><br><span class="line">&#x2F;&#x2F;   i18n,</span><br><span class="line">&#x2F;&#x2F;   dictionary: &#123;</span><br><span class="line">&#x2F;&#x2F;     zhTW</span><br><span class="line">&#x2F;&#x2F;   &#125;</span><br><span class="line">&#x2F;&#x2F; &#125;)</span><br></pre></td></tr></table></figure>
-<p>你可以看到，我們把引入檔案和創建vee-validate元件的內容給註解掉了。<br>它們是屬於舊版的驗證。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89%E8%A3%9C%E5%85%85/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/01/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%983/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/01/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%983/" class="post-title-link" itemprop="url">vue出一個電商網站-課程筆記3</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-02-01 10:29:56 / Modified: 10:54:23" itemprop="dateCreated datePublished" datetime="2021-02-01T10:29:56+08:00">2021-02-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="套用價格的-Filter-技巧"><a href="#套用價格的-Filter-技巧" class="headerlink" title="套用價格的 Filter 技巧"></a>套用價格的 Filter 技巧</h1><p>step1.<br>首先，我們先在src資料夾中，新增一個資料夾叫filters，<br>接著，我們在這個資料夾裡面新增一個currency.js的檔案。<br>在這個js檔案裡面，貼上網上提供的千分號程式碼。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---currency.js---</span><br><span class="line">export default function (num) &#123;</span><br><span class="line">  const n &#x3D; Number(num);</span><br><span class="line">  return &#96;$$&#123;n.toFixed(0).replace(&#x2F;.&#x2F;g, (c, i, a) &#x3D;&gt; &#123;</span><br><span class="line">    const currency &#x3D; (i &amp;&amp; c !&#x3D;&#x3D; &#39;.&#39; &amp;&amp; ((a.length - i) % 3 &#x3D;&#x3D;&#x3D; 0) ? &#96;, $&#123;c&#125;&#96;.replace(&#x2F;\s&#x2F;g, &#39;&#39;) : c);</span><br><span class="line">    return currency;</span><br><span class="line">  &#125;)&#125;&#96;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>step2.<br>接下來，因為我們想要在全域的狀態下啟用這個currency.js的檔案，<br>所以，我們要將這個檔案注入main.js檔案中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---main.js---</span><br><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import axios from &#39;axios&#39;</span><br><span class="line">import VueAxios from &#39;vue-axios&#39;</span><br><span class="line">import Loading from &#39;vue-loading-overlay&#39;;  &#x2F;&#x2F; 引入overlay元件</span><br><span class="line">import &#39;vue-loading-overlay&#x2F;dist&#x2F;vue-loading.css&#39;;  &#x2F;&#x2F; 引入overlay元件</span><br><span class="line">import &#39;bootstrap&#39;</span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import router from &#39;.&#x2F;router&#39;</span><br><span class="line">import &#39;.&#x2F;bus&#39;</span><br><span class="line">import currencyFilter from &#39;.&#x2F;filters&#x2F;currency&#39;  &#x2F;&#x2F; 引入currency.js</span><br><span class="line"></span><br><span class="line">Vue.use(VueAxios, axios)</span><br><span class="line">Vue.config.productionTip &#x3D; false</span><br><span class="line">Vue.component(&#39;Loading&#39;, Loading);  &#x2F;&#x2F; 啟用overlay元件</span><br><span class="line">Vue.filter(&#39;currency&#39;, currencyFilter);  &#x2F;&#x2F; 啟用fiter元件-千分號效果</span><br></pre></td></tr></table></figure>
-<p>注意一下，這邊的curreny是用vue的<code>filter</code>的方式去註冊的喔。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/01/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%983/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1089,20 +1089,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">88</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
