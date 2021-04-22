@@ -155,6 +155,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/11/Vuejs%E5%85%83%E4%BB%B602-emit%E4%BA%8B%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/11/Vuejs%E5%85%83%E4%BB%B602-emit%E4%BA%8B%E4%BB%B6/" class="post-title-link" itemprop="url">Vuejs元件02-emit事件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-11 14:19:31" itemprop="dateCreated datePublished" datetime="2021-01-11T14:19:31+08:00">2021-01-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-30 15:07:27" itemprop="dateModified" datetime="2021-01-30T15:07:27+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>這邊接續著上一篇”Vuejs元件01”的文章，繼續做筆記。</p>
+<h1 id="emit-向外層傳遞事件"><a href="#emit-向外層傳遞事件" class="headerlink" title="emit 向外層傳遞事件"></a>emit 向外層傳遞事件</h1><p>我們前面是利用<code>porps</code>將資料由外層串入內層，但是，我們還是有時候需要將資料由內層傳到外層，<br>此時，我們要用到的技術就是<code>emit</code>。</p>
+<iframe src="https://codepen.io/RandyChen/embed/gOwdRwz?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上這個修改完的範例你可以看到，我們在button-counter元件的<code>methods</code>中的incrementCounter事件的<code>emit</code>，多新增了將button-counter元件自己的counter成員屬性值傳遞出去，此時因為increment觸發了外部的incrementTotal事件，所以，incrementTotal也就接收到了button-counter元件的counter成員屬性值，<br>所以，我們就可以在incrementTotal中，新增參數newNumber，而這參數就是button-counter元件counter成員屬性值，<br>並將這個newNumber參數與app物件自身的cash成員互相做加總，最後，再把加總的結果呈現在畫面中。</p>
+<h2 id="注意emit傳出去的資料型別是否正確"><a href="#注意emit傳出去的資料型別是否正確" class="headerlink" title="注意emit傳出去的資料型別是否正確"></a>注意emit傳出去的資料型別是否正確</h2><p>你要特別注意一下，我們在<code>emit</code>傳出的counter的值，有特別用<code>Number</code>轉型成數字型別，如果你沒這麼做它會直接傳字串型別的值出去，這樣加總的結果就不會是我們想要的囉。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -975,93 +1054,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/" class="post-title-link" itemprop="url">進階模板語法-01</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-01-06 10:28:54" itemprop="dateCreated datePublished" datetime="2021-01-06T10:28:54+08:00">2021-01-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-30 15:05:28" itemprop="dateModified" datetime="2021-01-30T15:05:28+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>接續著上一篇的進階模板語法的內容繼續記錄。</p>
-<h2 id="反轉陣列元素-透過key"><a href="#反轉陣列元素-透過key" class="headerlink" title="反轉陣列元素-透過key"></a>反轉陣列元素-透過key</h2><p>因為Vue在操作DOM元素的時候，是用快速置換的方式操作，導致有些元素不會被置換掉。<br>所以，我們會透過將<code>key</code>的屬性，來綁定元素某些獨有的屬性，來讓各元素的整體DOM都可以被完整置換。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li v-for&#x3D;&quot;(item, key) in arrayData&quot; :key&#x3D;&quot;item.age&quot;&gt;</span><br><span class="line">      &#123;&#123; key &#125;&#125; - &#123;&#123; item.name &#125;&#125; &#123;&#123; item.age &#125;&#125; 歲 &lt;input type&#x3D;&quot;text&quot;&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">  &lt;&#x2F;ul&gt;</span><br><span class="line">  &lt;button class&#x3D;&quot;btn btn-outline-primary&quot; @click&#x3D;&quot;reverseArray&quot;&gt;反轉陣列&lt;&#x2F;button&gt;</span><br><span class="line">  </span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		arrayData:[</span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;漂亮阿姨&#39;,</span><br><span class="line">				age: 24</span><br><span class="line">			&#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;小明&#39;,</span><br><span class="line">				age: 10</span><br><span class="line">			&#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;力宏&#39;,</span><br><span class="line">				age: 35</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	methods: &#123;</span><br><span class="line">		reverseArray: function()&#123;</span><br><span class="line">			this.arrayData.reverse()</span><br><span class="line">			console.log(this.arrayData)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>可以看到以上這個範例，我們在<code>ul</code>的<code>li</code>透過<code>v-bind</code>綁上<code>key</code>這個屬性，<br>而要用item.age去作為<code>key</code>的值，是因為每個元素的age的值都不一樣，所以，可以代表各個的元素，<br>用這種方式就可以整體置換對應的DOM元素，而不是只有部分的DOM元素被置換。</p>
-<h2 id="filter-過濾"><a href="#filter-過濾" class="headerlink" title="filter 過濾"></a>filter 過濾</h2><iframe src="https://codepen.io/RandyChen/embed/poEVYrN?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上這個範例，<br>當你在<code>input</code>欄位輸入內容，並按下enter後，會觸發filterData函式，<br>此時，會先對dataArray使用filter，當<code>input</code>欄位輸入的內容跟dataArray裡面的元素的name的成員屬性有匹配的話，<br>就會把那個物件push進去filterArray陣列裡面。<br>最後，在<code>ul</code>的區塊中去遍歷filterArray陣列裡面的元素，並用該元素的age為索引，<br>來置換頁面上的DOM內容。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1131,7 +1123,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

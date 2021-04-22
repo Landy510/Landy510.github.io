@@ -155,6 +155,99 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/09/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/09/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F/" class="post-title-link" itemprop="url">JS核心-函式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-03-09 14:51:12" itemprop="dateCreated datePublished" datetime="2021-03-09T14:51:12+08:00">2021-03-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-03-11 15:02:58" itemprop="dateModified" datetime="2021-03-11T15:02:58+08:00">2021-03-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="函式"><a href="#函式" class="headerlink" title="函式"></a>函式</h1><p>函式是一個物件，所以，它也可以擁有自己的屬性。<br>它可以被存放在變數、陣列中。</p>
+<h2 id="函式運算式-有括號和沒括號的差別"><a href="#函式運算式-有括號和沒括號的差別" class="headerlink" title="函式運算式-有括號和沒括號的差別"></a>函式運算式-有括號和沒括號的差別</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function inner() &#123;</span><br><span class="line">  return &#39;Hello&#39;;</span><br><span class="line">&#125;</span><br><span class="line">let a &#x3D; inner;  &#x2F;&#x2F; 沒有加括號</span><br><span class="line">let b &#x3D; inner(); &#x2F;&#x2F; 有加括號</span><br><span class="line">console.log(a, b);</span><br><span class="line">console.log(a());</span><br></pre></td></tr></table></figure>
+<p>從console.log的結果a是直接印出整個inner函式內容，而b是印出inner回傳的內容’hello’。<br>那最後那一行，a()就可以執行inner函式，故會回傳內容’hello’。<br>要小心它們之間的不同喔~~~~</p>
+<h1 id="ES6箭頭函式"><a href="#ES6箭頭函式" class="headerlink" title="ES6箭頭函式"></a>ES6箭頭函式</h1><p>這種函式有以下的特性:<br>．<code>this</code>變數的強制綁定<br>．簡短的撰寫方式</p>
+<p>接下來，筆記一下箭頭函式可以簡寫的一些特性:</p>
+<h2 id="可以忽略return的特性"><a href="#可以忽略return的特性" class="headerlink" title="可以忽略return的特性"></a>可以忽略return的特性</h2><p>原本的函式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const plus &#x3D; function(numA, numB) &#123;</span><br><span class="line">  return numA + numB;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>像上面這個範例，只有需要return計算的結果的話，除了箭頭函式的內容以外，我們還可以把return忽略。<br>所以，就會變成下面這樣:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const plus &#x3D; (numA, numB) &#x3D;&gt; numA + numB;</span><br></pre></td></tr></table></figure>
+
+<h2 id="若箭頭函式中的括號中沒有參數是不行忽略的括號的"><a href="#若箭頭函式中的括號中沒有參數是不行忽略的括號的" class="headerlink" title="若箭頭函式中的括號中沒有參數是不行忽略的括號的"></a>若箭頭函式中的括號中沒有參數是不行忽略的括號的</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const sayhello &#x3D; () &#x3D;&gt; console.log(&#39;hello&#39;);</span><br><span class="line">sayhello();</span><br></pre></td></tr></table></figure>
+
+<h2 id="若箭頭函式中的括號只有一個參數的話，可以忽略括號"><a href="#若箭頭函式中的括號只有一個參數的話，可以忽略括號" class="headerlink" title="若箭頭函式中的括號只有一個參數的話，可以忽略括號"></a>若箭頭函式中的括號只有一個參數的話，可以忽略括號</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const sayhello(msg) &#x3D;&gt; console.log(msg);</span><br><span class="line">sayhello(&#39;hello&#39;);</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/09/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/24/JS%E6%A0%B8%E5%BF%83-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%AD%86%E8%A8%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -896,128 +989,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/11/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-Event/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/11/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-Event/" class="post-title-link" itemprop="url">JavaScript學徒篇-Event</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-02-11 10:58:08" itemprop="dateCreated datePublished" datetime="2021-02-11T10:58:08+08:00">2021-02-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-02-12 12:57:48" itemprop="dateModified" datetime="2021-02-12T12:57:48+08:00">2021-02-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="addEventListener-事件監聽"><a href="#addEventListener-事件監聽" class="headerlink" title="addEventListener - 事件監聽"></a>addEventListener - 事件監聽</h1><p>在<code>addEventListener</code>的括號裡面總共要填入三個引數<br>第一個: 你想使用的事件，比如: <code>&#39;click&#39;</code>  點擊事件<br>第二個: 填入匿名<code>function()</code>，就是你想要做的事情<br>第三個: 填入<code>false</code> (目前，這堂課還沒講為什麼)<br>例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在Javascript檔案中</span><br><span class="line">var btn &#x3D; document.querySelector(&#39;.btn&#39;);</span><br><span class="line">btn.addEventListener( &#39;click&#39;, function(e)&#123;</span><br><span class="line">   alert(&#39;Hello&#39;);</span><br><span class="line">&#125;, false);</span><br></pre></td></tr></table></figure>
-<p>以上這個範例的<code>addEventListener</code>的作用就是，使用click事件，當觸發click事件的時候，就會跳出Hello的提示訊息。</p>
-<h1 id="綁定事件的語法差異-傳統onclick事件-v-s-addEventListener"><a href="#綁定事件的語法差異-傳統onclick事件-v-s-addEventListener" class="headerlink" title="綁定事件的語法差異-傳統onclick事件 v.s addEventListener"></a>綁定事件的語法差異-傳統onclick事件 v.s addEventListener</h1><p>若使用onclick事件<br>例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var btn &#x3D; document.querySelector(&#39;.btn&#39;);</span><br><span class="line">btn.onclick &#x3D; function()&#123;</span><br><span class="line">   alert(&#39;Hello-1&#39;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">btn.onclick &#x3D; function()&#123;</span><br><span class="line">   alert(&#39;Hello-2&#39;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>以上，我們將btn元件綁定兩個<code>onclick</code>事件，但最終當我們點擊btn出現的結果會是Hello-2，即第二個函式的結果，這個就是onclick事件的缺點，當你同時對同一個元件綁定多個onclick事件的時候，最終的結果，只會出現最後那一個函式的內容。</p>
-<h2 id="addEventListener可同時綁定多個事件"><a href="#addEventListener可同時綁定多個事件" class="headerlink" title="addEventListener可同時綁定多個事件"></a>addEventListener可同時綁定多個事件</h2><p>而這也是為什麼有<code>addEventListener</code>的這個功能，因為它可以讓只能綁定一個事件的缺點消失。</p>
-<iframe src="https://codepen.io/RandyChen/embed/yLVNgNP?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>像上面這個例子，就可以將btn物件綁定兩個click事件，當我們點擊btn時，會先跳出Hello-1接著才跳租Hello-2。</p>
-<h1 id="Event-Bubbling、Event-Capturing-差異"><a href="#Event-Bubbling、Event-Capturing-差異" class="headerlink" title="Event Bubbling、Event Capturing 差異"></a>Event Bubbling、Event Capturing 差異</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;body class&#x3D;&quot;body&quot;&gt;</span><br><span class="line">   &lt;ul&gt;</span><br><span class="line">      &lt;li&gt;&lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn&quot;&gt;1234&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;&lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn&quot;&gt;1234&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">   &lt;&#x2F;ul&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line"></span><br><span class="line">---Javascript---</span><br><span class="line">var btn &#x3D; document.querySelector(&#39;.btn&#39;);</span><br><span class="line">btn.addEventListener(&#39;click&#39;,function(e)&#123;</span><br><span class="line">   alert(&#39;btn&#39;);</span><br><span class="line">&#125;,false);</span><br><span class="line"></span><br><span class="line">var body &#x3D; document.querySelector(&#39;.body&#39;);</span><br><span class="line">body.addEventListener(&#39;click&#39;,function(e)&#123;</span><br><span class="line">   alert(&#39;body&#39;);</span><br><span class="line">&#125;,false);</span><br></pre></td></tr></table></figure>
-<p>以上範例，當你點擊btn元件的時候，瀏覽器會先跳出btn，接著，跳出body，會造成這樣的原因，是因為你點擊btn的同時，也會點擊到body的區域。<br>而在addEventListener的最後一個引數false就跟事件觸發的順序有關，<br>引數是false :  代表瀏覽器會從指定元素往外找，直到找到document為止，而這也是為什麼上面這個例子會先出現btn後，才接著出現body，因為，他會先去尋找指定元素btn，跳出btn訊息，接著往外找會找到body，跳出body訊息。<br>引數是true:  代表瀏覽器會從最外層往內找，直到找到指定元素為止，<br>所以，若改成true的話，以上面這個範例，就會先出現body訊息，接著，才會出現btn訊息。</p>
-<p>而以上這兩種狀況分別有各自的術語來代表這些狀況<br>A. 從指定元素，往外找到document為止 -&gt; Event Capturing(事件擷取)<br>B. 從外層往內找到指定元素為止 -&gt; Event Bubbling(事件冒泡)</p>
-<h1 id="stopPropagation-中止冒泡事件"><a href="#stopPropagation-中止冒泡事件" class="headerlink" title="stopPropagation - 中止冒泡事件"></a>stopPropagation - 中止冒泡事件</h1><p>如果，我們想要避免當我們按下指定元素之後，<br>還會再跳出其他外層元素的相關事件內容的話，我們就要在指定元素中，呼叫<code>stopPropagation</code>。<br>例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var btn &#x3D; document.querySelector(&#39;.btn&#39;);</span><br><span class="line">btn.addEventListener(&#39;click&#39;,function(e)&#123;</span><br><span class="line">   e.stopPropagation();   &#x2F;&#x2F; 記得在function中加入引數e                     </span><br><span class="line">   alert(&#39;btn&#39;);</span><br><span class="line">&#125;,false);</span><br><span class="line"></span><br><span class="line">var body &#x3D; document.querySelector(&#39;.body&#39;);</span><br><span class="line">body.addEventListener(&#39;click&#39;,function(e)&#123;</span><br><span class="line">   e.stopPropagation();</span><br><span class="line">   alert(&#39;body&#39;);</span><br><span class="line">&#125;,false);</span><br></pre></td></tr></table></figure>
-<p>以上範例，當你點擊btn的時候，<br>只會出現btn的內容，而沒有再出現body的內容了，<br>都是因為你再指定元素btn的函式裡面加了<code>e.stopPropagation()</code>的原因，<br>瀏覽器只會執行那個被監聽元素的內容。</p>
-<h1 id="preventDefault-取消預設觸發行為"><a href="#preventDefault-取消預設觸發行為" class="headerlink" title="preventDefault - 取消預設觸發行為"></a>preventDefault - 取消預設觸發行為</h1><p>通常都用來取消<code>a</code>連結的預設行為<br>例:<br>在HTML檔案中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn&quot;&gt;btn&lt;&#x2F;a&gt;</span><br><span class="line">&lt;a href&#x3D;&quot;www.google.com&quot; class&#x3D;&quot;btn_1&quot;&gt;btn_1&lt;&#x2F;a&gt;</span><br><span class="line"></span><br><span class="line">在Javscript檔案中</span><br><span class="line">var btn &#x3D; document.querySelector(&#39;.btn&#39;);</span><br><span class="line">btn.addEventListener(&#39;click&#39;,function(e)&#123;</span><br><span class="line">   e.preventDefault();</span><br><span class="line">&#125;,false);</span><br><span class="line"></span><br><span class="line">var btn_1 &#x3D; document.querySelector(&#39;.btn_1&#39;);</span><br><span class="line">btn_1.addEventListener(&#39;click&#39;,function(e)&#123;</span><br><span class="line">   e.preventDefault();</span><br><span class="line">&#125;,false);</span><br></pre></td></tr></table></figure>
-<p>由以上這個例子，<br>我們分別在btn和btn_1的監聽事件裡面加入了<code>preventDefault()</code>，<br>所以，當我點擊了btn網頁就不會回到最上方，而是留在原本瀏覽器的位置。<br>而點擊了btn_1，也不會跳轉到連結的google網頁。</p>
-<p>注意!!!!!!!!!!!  <code>preventDefault()</code> 和 <code>stopPropagation()</code>的作用，不要搞混囉~~~~</p>
-<h1 id="e-target-了解目前所在元素位置"><a href="#e-target-了解目前所在元素位置" class="headerlink" title="e.target - 了解目前所在元素位置"></a>e.target - 了解目前所在元素位置</h1><p>當你在指定元素的監聽事件裡面，丟e.target就可以得知，當下使用者點擊的是這個指定元素範圍內的哪一個標籤元素<br>例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div class&#x3D;&quot;header&quot;&gt;</span><br><span class="line">   &lt;ul&gt;</span><br><span class="line">      &lt;li&gt;&lt;a href&#x3D;&quot;#&quot;&gt;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;</span><br><span class="line">   &lt;&#x2F;ul&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---Javascript---</span><br><span class="line">var el &#x3D; document.querySelector(&#39;header&#39;);</span><br><span class="line"></span><br><span class="line">el.addEventListener(&#39;click&#39;,function(e)&#123;</span><br><span class="line">   console.log(e.target);</span><br><span class="line">   concole.log(e.target.nodeName);</span><br><span class="line">&#125;,false);</span><br></pre></td></tr></table></figure>
-<p>以上面的範例為例，指定元素是header元件，而在header元件區域內有<code>ul</code>, <code>li</code>, <code>a</code>這三種標籤，<br>當我點擊<code>a</code>的時候，<code>console.log</code>會記錄出<code>&lt;a href=&quot;#&quot;&gt;&lt;/a&gt;</code>，即<code>a</code>標籤<br>而第二個標籤，會記錄出<code>A</code>，即<code>a</code>連結的節點名稱。<br>其他的<code>ul</code>和<code>li</code>以此類推。</p>
-<h1 id="change-表單內容更動內容時觸發"><a href="#change-表單內容更動內容時觸發" class="headerlink" title="change - 表單內容更動內容時觸發"></a>change - 表單內容更動內容時觸發</h1><p>當我們有一個表單元件，我們在監聽事件裡面會丟入<code>change</code>，表示當該表單元素有更動的時候，執行你想要執行的函式。<br>例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;select id&#x3D;&quot;areaID&quot;&gt;</span><br><span class="line">   &lt;option value&#x3D;&quot;前鎮區&quot;&gt;前鎮區&lt;&#x2F;option&gt;</span><br><span class="line">   &lt;option value&#x3D;&quot;員林市&quot;&gt;員林市&lt;&#x2F;option&gt;</span><br><span class="line">&lt;&#x2F;select&gt;</span><br><span class="line"></span><br><span class="line">---Javescript---</span><br><span class="line">var el &#x3D; document.querySelector(&#39;#areaID&#39;);</span><br><span class="line"></span><br><span class="line">function updataList(e)&#123;</span><br><span class="line">   &#x2F;&#x2F; do something</span><br><span class="line">&#125;</span><br><span class="line">el.addEventListener(&#39;change&#39;,updateList,false);</span><br></pre></td></tr></table></figure>
-<p>以上的範例，就是當areaID那個表單有更動的時候，就會觸發他的監聽事件，而該監聽事件就會去執行updataList這個函式囉。</p>
-<p>而這個功能跟for迴圈結合的範例</p>
-<iframe src="https://codepen.io/RandyChen/embed/oNYXBBK?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上這個’change’和for迴圈的並用，就是利用list表單有更動的時候，在.name_list裡面顯示出在data陣列裡面area名稱跟option的value的值一樣的name名稱。</p>
-<h1 id="keyCode-點擊鍵盤，射發火箭！"><a href="#keyCode-點擊鍵盤，射發火箭！" class="headerlink" title="keyCode - 點擊鍵盤，射發火箭！"></a>keyCode - 點擊鍵盤，射發火箭！</h1><p>這一個單元教了，<code>keydown</code>這個事件，</p>
-<iframe src="https://codepen.io/RandyChen/embed/xxRGgmK?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上這個範例，你可以看到我們先擷取到使用者在該網頁的body有按下按鈕，此時，就是keydown事件，接著，透過監聽事件去callback goRocket這個函式，<br>接著，<code>switch</code>的判斷式，判斷這個event的keyCode是多少，即擷取使用者是按下哪個鈕，若有滿足則跑case裡面的效果。</p>
-<h1 id="blur-離開焦點時進行事件觸發"><a href="#blur-離開焦點時進行事件觸發" class="headerlink" title="blur - 離開焦點時進行事件觸發"></a>blur - 離開焦點時進行事件觸發</h1><p>這個章節，利用<code>input</code>欄位來展示blur的功能，<br>當使用者將鼠標從input欄位一離開時，就會觸發blur事件，<br>間接的該input欄位的監聽事件會call back某個函式，<br>而該函式就可以檢查使用者是否有在該input欄位填入資料，<br>或者，填入正確型態的資料(像是:應該填入數字 但是 填入字串)，進而跳出相對應的提示訊息來提示使用者。</p>
-<iframe src="https://codepen.io/RandyChen/embed/NWbqpPz?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上範例，就是當使用者離開該input欄位的話，沒有輸入任何東西，會是空字串，則跳出提示訊息囉~~</p>
-<h1 id="mousemove-當滑鼠滑入指定內容時觸發"><a href="#mousemove-當滑鼠滑入指定內容時觸發" class="headerlink" title="mousemove - 當滑鼠滑入指定內容時觸發"></a>mousemove - 當滑鼠滑入指定內容時觸發</h1><p>這章教了，當你對一個物件使用mousemove事件的話，當你的鼠標移入該物件區域時，則會觸發mousemove的事件，並隨即觸發你想要在addEventListener要callback的函式。<br>而這個事件的應用，可以用在像遊戲的電流急急棒中，當你的鼠標碰到某個區域時，遊戲就會通知你碰到了~~~<br>例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">在HTML檔案中</span><br><span class="line">&lt;div class&#x3D;&quot;box&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">在Javascript檔案中</span><br><span class="line">var box &#x3D; document.querySelector(&#39;.box&#39;);</span><br><span class="line">box.addEventListener(&#39;mousemove&#39;,function()&#123;</span><br><span class="line">   alert(&#39;你輸了&#39;);</span><br><span class="line">&#125;,false);</span><br></pre></td></tr></table></figure>
-
-<h1 id="網頁座標-了解-screen、page、client-箇中差異"><a href="#網頁座標-了解-screen、page、client-箇中差異" class="headerlink" title="網頁座標 - 了解 screen、page、client 箇中差異"></a>網頁座標 - 了解 screen、page、client 箇中差異</h1><p>這個章節利用’mousemove’這個事件，來擷取鼠標的座標，進而介紹<br>screen, page, client 之間的差別。<br>screenX, Y: 代表你的鼠標在當前瀏覽器畫面中的鼠標座標(有包含滾動軸和工具列)<br>pageX, Y: 代表你在網頁內鼠標的實際座標<br>clientX, Y: 代表鼠標在當網頁內鼠標的座標<br>你應該會發現我特別，寫瀏覽器畫面和網頁內 這兩個狀態，還有當前的網頁頁面，這些狀態要特別注意</p>
-<h1 id="網頁座標-應用篇"><a href="#網頁座標-應用篇" class="headerlink" title="網頁座標 - 應用篇"></a>網頁座標 - 應用篇</h1><p>這一小節，蠻有趣的，學到的擷取鼠標座標應用在這，<br>將原本的鼠標圖案，換成卡通人物的圖案，並搭配擷取鼠標座標的功能，<br>來達成在網頁畫面上面卡通人物的圖案會跟著我們鼠標的移動一起移動。<br>例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">在HTML檔案中</span><br><span class="line">&lt;body&gt;</span><br><span class="line">   &lt;div&gt;</span><br><span class="line">      &lt;img src&#x3D;&quot;img&#x2F;pic.png&quot; class&#x3D;&quot;cursor_img&quot; alt&#x3D;&quot;&quot; width&#x3D;&quot;100px;&quot;&gt;</span><br><span class="line">   &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line"></span><br><span class="line">在css檔案中</span><br><span class="line">.cursor_img&#123;</span><br><span class="line">   position: fixed;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">在Javascript檔案中</span><br><span class="line">var body &#x3D; document.body;</span><br><span class="line">var img &#x3D; document.querySelector(&#39;.cursor_img&#39;);</span><br><span class="line"></span><br><span class="line">body.addEventListener(&#39;mousemove&#39;,function(e)&#123;</span><br><span class="line">   img.style.left &#x3D; e.clientX;</span><br><span class="line">   img.style.top &#x3D; e.clientY;</span><br><span class="line">&#125;,false);</span><br></pre></td></tr></table></figure>
-<p>你可以注意到在CSS檔案中，我們把那個卡通人物的圖案的CSS屬性position設為fixed，<br>為的是要讓這個卡通人物的圖片能固定在網頁的畫面中，<br>而沒有特別去設定它的left或top的座標，是因為要用javascript來去動態的設定這個卡通人物的left和top的座標。<br>另外，注意!!!!!!<br>你要特別去注意它在Javascript中該卡通人物圖案座標的設定方法，<br>還要特別寫’px’這樣才能將它的座標位置設進去。</p>
-<h1 id="事件監聽優化篇-從父元素來監聽子元素內容"><a href="#事件監聽優化篇-從父元素來監聽子元素內容" class="headerlink" title="事件監聽優化篇 - 從父元素來監聽子元素內容"></a>事件監聽優化篇 - 從父元素來監聽子元素內容</h1><p>這一小節有講到一個特別重要的特性<br>就是<code>querySelector</code>只會去撈父元素裡面的第一筆資料。<br>而這個特性會導致，某些子元素不是父元素的第一筆資料，而不會被監聽到。<br>故我們利用直接監聽該父元素，接著，再用判斷式判斷該事件的nodeName，來看是否是我們想要監聽到的子元素。</p>
-<iframe src="https://codepen.io/RandyChen/embed/ZEBGeBg?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上的例子，可以看到在Javascript中是去監聽父元素.list，而不是直接去監聽子元素.list li。接著，在裡面有個判別nodeName的判斷式，<br>是為了防止當使用者點到<code>li</code>以外的內容，會記錄我們不想要的內容，故以此來防止。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1087,7 +1058,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
