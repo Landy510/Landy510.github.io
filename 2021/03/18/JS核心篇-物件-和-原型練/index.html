@@ -28,7 +28,7 @@
 <meta property="og:description" content="JS是以什麼為基礎的物件導向的語言呢?JS不同於其他物件導向的程式語言，像C++是以「類別」為基礎的物件導向的程式語言。而JS是以「原型」為基礎的物件導向程式語言。 JS創建物件的方法以下記錄幾種JS裡面創建新物件的方法Way1. 用new關鍵字 12const obj &#x3D; new Object()obj.name &#x3D; &#39;物件&#39;  Way2. 物件實字創建 12">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-03-18T02:39:34.000Z">
-<meta property="article:modified_time" content="2021-03-18T09:16:22.648Z">
+<meta property="article:modified_time" content="2021-04-23T02:06:11.924Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -183,10 +183,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2021-03-18 10:39:34 / 修改時間：17:16:22" itemprop="dateCreated datePublished" datetime="2021-03-18T10:39:34+08:00">2021-03-18</time>
+              <time title="創建時間：2021-03-18 10:39:34" itemprop="dateCreated datePublished" datetime="2021-03-18T10:39:34+08:00">2021-03-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-04-23 10:06:11" itemprop="dateModified" datetime="2021-04-23T10:06:11+08:00">2021-04-23</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -218,13 +224,13 @@
 <p><strong>Way3. 透過「建構式」創建</strong> </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function Animal(name, height) &#123;</span><br><span class="line">  this.name &#x3D; name;</span><br><span class="line">  this.height &#x3D; height;</span><br><span class="line"></span><br><span class="line">  this.bark &#x3D; function() &#123;</span><br><span class="line">    console.log(this.name + &#39;汪汪&#39;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">const dog &#x3D; new Animal(&#39;小胖&#39;, 100);</span><br><span class="line">dog.bark(); &#x2F;&#x2F; 小胖汪汪</span><br></pre></td></tr></table></figure>
 
-<p><strong>Way4. 用Object.create()創建</strong><br>以下這個範例，Object.create是透過Animal這個原型物件來創建新的物件。<br>那會因為JS原型的原理，所以，透過都所創建出來的物件都會繼承這個原型物件的屬性和方法。<br>那新創建的物件屬性和方法在沒有重新賦值的狀況下，它的值都會是預設值，也就是原型物件一開始<br>設定的值。</p>
+<p><strong>Way4. 用Object.create()創建</strong><br>以下這個範例，Object.create是透過Animal這個原型物件來創建新的物件。<br>那會因為JS原型的原理，所以，透過Object.create所創建出來的物件都會繼承這個原型物件的屬性和方法。<br>那新創建的物件屬性和方法在沒有重新賦值的狀況下，它的值都會是預設值，也就是原型物件一開始<br>設定的值。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const Animal &#x3D; &#123;</span><br><span class="line">  name: &#39;default name&#39;,</span><br><span class="line">  height: 0,</span><br><span class="line">  bark: function() &#123;</span><br><span class="line">    console.log(this.name + &#39;汪汪&#39;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">const dog &#x3D; Object.create(Animal);</span><br><span class="line">dog.bark(); &#x2F;&#x2F; default name汪汪</span><br><span class="line">dog.name &#x3D; &#39;小胖&#39;</span><br><span class="line">dog.bark(); &#x2F;&#x2F; 小胖汪汪</span><br></pre></td></tr></table></figure>
 
 <p><strong>以下的範例，是利用Object.create()來創建新物件，並透過屬性描述器來更改新創物件的值</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const Animal &#x3D; &#123;</span><br><span class="line">  name: &#39;default name&#39;,</span><br><span class="line">  height: 0,</span><br><span class="line">  bark: function() &#123;</span><br><span class="line">    console.log(this.name + &#39;汪汪&#39;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const dog &#x3D; object.create(Animal, &#123;</span><br><span class="line">  name: &#123;</span><br><span class="line">    writable: true,</span><br><span class="line">    configurable: true,</span><br><span class="line">    value: &#39;小胖&#39;</span><br><span class="line">  &#125;,</span><br><span class="line">  height: &#123;</span><br><span class="line">    writable: true,</span><br><span class="line">    configurable: true,</span><br><span class="line">    value: 100</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(dog.name) &#x2F;&#x2F; 小胖</span><br></pre></td></tr></table></figure>
 
-<h1 id="屬性描述器"><a href="#屬性描述器" class="headerlink" title="屬性描述器"></a>屬性描述器</h1><p>在這部分書中有蠻詳細的描述，但目前我開發的專案蠻少用到這部分的功能，所以，我就先部記錄這部分的功能，但至少，知道了在目前很多的框架，像是Vue，都是會自訂義屬性描述器來達成他們自己框架想要的效果。</p>
+<h1 id="屬性描述器"><a href="#屬性描述器" class="headerlink" title="屬性描述器"></a>屬性描述器</h1><p>在這部分書中有蠻詳細的描述，但目前我開發的專案蠻少用到這部分的功能，所以，我就先不記錄這部分的功能，但至少，知道了在目前很多的框架，像是Vue，都是會自訂義屬性描述器來達成框架想要的效果。</p>
 <h1 id="原型練"><a href="#原型練" class="headerlink" title="原型練"></a>原型練</h1><h2 id="JS實現繼承的方法"><a href="#JS實現繼承的方法" class="headerlink" title="JS實現繼承的方法"></a>JS實現繼承的方法</h2><p>在JavaScript中，並沒有明確的子類和父類，它全靠原型練來實現繼承的效果。</p>
 <p><strong>以下會介紹兩種原型練與繼承產生的狀況</strong></p>
 <ol>
@@ -354,7 +360,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-count">96</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
