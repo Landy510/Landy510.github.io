@@ -970,7 +970,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-30 15:04:44" itemprop="dateModified" datetime="2021-01-30T15:04:44+08:00">2021-01-30</time>
+                <time title="修改時間：2021-04-26 14:38:53" itemprop="dateModified" datetime="2021-04-26T14:38:53+08:00">2021-04-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -999,7 +999,7 @@
 
 <p>上面這個例子，當你在<code>input</code>的欄位裡面輸入內容，<br>會直接在的位置，直接呈現被反轉後的字串結果。</p>
 <p>由以上範例可知，當data物件中的text內容有被更動的時候，因為，computed中，有調用data中的text成員，<br>所以，computed會被觸發，而其reverseText屬性會存入函式回傳的text反轉後的字串內容，<br>並透過的方式，呈現在畫面上。<br>另外，要注意，在reverseText中，要調用同一個物件底下的成員屬性時，要記得加<code>this</code>。</p>
-<h2 id="conputed-和-methods的差別"><a href="#conputed-和-methods的差別" class="headerlink" title="conputed 和 methods的差別"></a>conputed 和 methods的差別</h2><p><code>computed</code> 是在監控資料更動後，重新運算結果呈現於畫面上<br>一般來說不會修改資料，只會回傳用於畫面呈現的資料。<br>就像是在<code>computed</code>那邊提到的範例一樣。</p>
+<h2 id="computed-和-methods的差別"><a href="#computed-和-methods的差別" class="headerlink" title="computed 和 methods的差別"></a>computed 和 methods的差別</h2><p><code>computed</code> 是在監控資料更動後，重新運算結果呈現於畫面上<br>一般來說不會修改資料，只會回傳用於畫面呈現的資料。<br>就像是在<code>computed</code>那邊提到的範例一樣。</p>
 <p><code>methods</code> 就是互動的函式，需要觸發才會運作，<br>像是:按下某個鈕，才會觸發某個事件<br>像是在<code>v-on</code>那邊提到的範例一樣。</p>
 <h2 id="Vue-表單與資料的綁定"><a href="#Vue-表單與資料的綁定" class="headerlink" title="Vue 表單與資料的綁定"></a>Vue 表單與資料的綁定</h2><p>將表單中的值，與陣列資料綁定在一起。<br>用checkBox和radioBox來舉例。<br>其中，checkBox可以多選，radioBox是單選。</p>
 <h3 id="checkBox"><a href="#checkBox" class="headerlink" title="checkBox"></a>checkBox</h3><p>首先，若該選項有值的話，可以將該值塞入到一個陣列裡面。</p>
@@ -1017,7 +1017,7 @@
 <h2 id="元件基礎概念-如何自製自己的Vue元件"><a href="#元件基礎概念-如何自製自己的Vue元件" class="headerlink" title="元件基礎概念 - 如何自製自己的Vue元件"></a>元件基礎概念 - 如何自製自己的Vue元件</h2><p>這邊是用計數器來作範例</p>
 <iframe src="https://codepen.io/RandyChen/embed/zYKRYJQ?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
 
-<p>首先，在製作Vue物件的內容，要寫在你創建Vue物件的內容的”前面”喔，<br>也就是<code>Vue.component()</code>的內容要寫在<code>var app = new Vue(&#123;&#125;)</code>的前面。<br>不然，自製元件會不見，不過我現在也只有發現這個現象，沒有去深究是為什麼。</p>
+<p>首先，在製作Vue物件的內容，要寫在你創建Vue物件的內容的”前面”喔，<br>也就是<code>Vue.component()</code>的內容要寫在<code>var app = new Vue(&#123;&#125;)</code>的前面。<br>不然，自製元件會不見，不過我現在也只有發現這個現象，沒去研究這個現象。</p>
 <p>以上這個製作元件的內容<br>在Vue.component中第一個引數，要丟你想製作的標籤的名稱，像這邊就<br>取名為countercomponent，<br>接著，Vue的自製元件的data物件，限定你得用function的形式回傳物件，<br>並在回傳的物件中加入你想要的成員。<br>最後，是這個自製元件的樣式<br>你就在template的指令裡面，加入你想要這個標籤的樣式。<br>最後，你在html文件中，加入妳自定義的標籤，如此，就可以達成標籤與<br>標籤之間，擁有自己的計數器了。</p>
 
       
