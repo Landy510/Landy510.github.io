@@ -827,7 +827,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-30 15:11:28" itemprop="dateModified" datetime="2021-01-30T15:11:28+08:00">2021-01-30</time>
+                <time title="修改時間：2021-04-27 17:47:15" itemprop="dateModified" datetime="2021-04-27T17:47:15+08:00">2021-04-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -850,12 +850,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>#　箭頭函式 v.s 傳統函式</p>
-<h2 id="一般函式-－-傳統寫法-v-s-箭頭函式"><a href="#一般函式-－-傳統寫法-v-s-箭頭函式" class="headerlink" title="一般函式　－　傳統寫法 v.s 箭頭函式"></a>一般函式　－　傳統寫法 v.s 箭頭函式</h2><p>ex: (傳統寫法)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var callSomeone &#x3D; function(somebody)&#123;</span><br><span class="line">    return somebody + &#39;該吃飯囉&#39;;</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#39;小明&#39;);</span><br></pre></td></tr></table></figure>
+          <h1 id="箭頭函式-v-s-傳統函式"><a href="#箭頭函式-v-s-傳統函式" class="headerlink" title="箭頭函式 v.s 傳統函式"></a>箭頭函式 v.s 傳統函式</h1><h2 id="一般函式-－-傳統寫法-v-s-箭頭函式"><a href="#一般函式-－-傳統寫法-v-s-箭頭函式" class="headerlink" title="一般函式　－　傳統寫法 v.s 箭頭函式"></a>一般函式　－　傳統寫法 v.s 箭頭函式</h2><p>ex: (傳統寫法)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var callSomeone &#x3D; function(somebody)&#123;</span><br><span class="line">    return somebody + &#39;該吃飯囉&#39;;</span><br><span class="line">&#125;</span><br><span class="line">console.log(callSomeone(&#39;小明&#39;)); &#x2F;&#x2F; 小明該吃飯囉</span><br></pre></td></tr></table></figure>
 
 <p>改寫成 箭頭函式<br>ex: (箭頭函式)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var callSomeone &#x3D; (somebody)&#x3D;&gt;&#123;</span><br><span class="line">    return somebody + &#39;該吃飯囉&#39;;</span><br><span class="line">&#125;</span><br><span class="line">console.log(&#39;小明&#39;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var callSomeone &#x3D; (somebody) &#x3D;&gt; &#123;</span><br><span class="line">  return somebody + &#39;該吃飯了&#39;</span><br><span class="line">&#125;</span><br><span class="line">console.log(callSomeone(&#39;小花&#39;)) &#x2F;&#x2F; 小花該吃飯囉</span><br></pre></td></tr></table></figure>
 
 <h3 id="箭頭函式-只有一行內容"><a href="#箭頭函式-只有一行內容" class="headerlink" title="箭頭函式 - 只有一行內容"></a>箭頭函式 - 只有一行內容</h3><p>像上面的範例，若箭頭函式中只有一行的話，你可以省略花括號　和　<code>return</code>。<br>ex:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var callSomeone &#x3D; (somebody) &#x3D;&gt; somebody + &#39;該吃飯囉&#39;;</span><br></pre></td></tr></table></figure>
