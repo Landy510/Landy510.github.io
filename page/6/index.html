@@ -619,7 +619,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-30 15:05:58" itemprop="dateModified" datetime="2021-01-30T15:05:58+08:00">2021-01-30</time>
+                <time title="修改時間：2021-04-29 12:23:42" itemprop="dateModified" datetime="2021-04-29T12:23:42+08:00">2021-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -642,14 +642,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>#　Vue Cli 所產生的資料夾結構說明</p>
-<h2 id="在VScode的環境下使用Vue"><a href="#在VScode的環境下使用Vue" class="headerlink" title="在VScode的環境下使用Vue"></a>在VScode的環境下使用Vue</h2><p>你先用vscode打開那個vue專案檔，接著，在你的編譯器中輸入ctrl+<code>(反斜線)， 這時候，會跳出來可以輸入指令的區塊，接著，你就輸入</code>npm run dev<code>，就會跳出</code>http:\localhost:8080<code>的提示訊息，接著，你就又能在瀏覽器中輸入</code>http:\localhost:8080`，然後，打開專案囉~</p>
-<p>接下來是vue cli產生的檔案介紹</p>
+          <h1 id="Vue-Cli-所產生的資料夾結構說明"><a href="#Vue-Cli-所產生的資料夾結構說明" class="headerlink" title="Vue Cli 所產生的資料夾結構說明"></a>Vue Cli 所產生的資料夾結構說明</h1><h2 id="在VScode的環境下使用Vue"><a href="#在VScode的環境下使用Vue" class="headerlink" title="在VScode的環境下使用Vue"></a>在VScode的環境下使用Vue</h2><p>你先用vscode打開那個vue專案檔，接著，在你的編譯器中輸入 ctrl + 反斜線 (在鍵盤左上角數字鍵1左邊的那個按鍵)，<br>這時候，會跳出來可以輸入指令的區塊，輸入<code>npm run dev</code>之後，應該會跳出<code>http:\\localhost:8080</code>的提示訊息，接著，直接在瀏覽器中輸入<code>http:\\localhost:8080</code>，就可以在網頁上開啟你的專案了。</p>
+<p><strong>接下來是vue cli產生的檔案介紹</strong></p>
 <h3 id="README-md"><a href="#README-md" class="headerlink" title="README.md"></a>README.md</h3><p>這個檔案裡面，有提供一些vue cli可以用的指令<br><code>npm install</code> 就是安裝相關的套件。<br><code>npm run dev</code>　運行開發中的環境<br><code>npm run bulid</code> 運行正式版的環境</p>
-<p>當我們執行<code>npm run build</code>，它會運行build/build.js　的檔案，將所有的網頁內容打包壓縮。<br>當我們輸入這個指令之後，專案檔會產生出一個dist的資料夾。<br>那在這個生成的dist資料夾中，會有一個index.html，這個html一定要在HTTP的server下才能運行，將它直接打開是沒有辦法運行的喔。</p>
-<h4 id="小插曲-index-html中引入css和js-報MIME-type錯誤問題"><a href="#小插曲-index-html中引入css和js-報MIME-type錯誤問題" class="headerlink" title="小插曲 - index.html中引入css和js 報MIME type錯誤問題"></a>小插曲 - index.html中引入css和js 報MIME type錯誤問題</h4><p>當我用嘗試用<code>Go live</code>來將dist資料夾中的index.html在瀏覽器中開啟，<br>但是，卻出現以下的錯誤log<br>!()[image/Vue_cli_webpack_error.png]<br>這個問題主要是因為讀不到專案檔裡面的樣式檔導致的，<br>所以，你看以上的圖片中它是說該錯誤是發生在index.html檔案中，<br>所以，你就去dist資料夾中的index.html中，該改它引入的路徑<br>原本預設的路徑是</p>
+<p>當我們執行<code>npm run build</code>，它會運行 build/build.js 的檔案，將所有的網頁內容打包壓縮。<br>當我們輸入這個指令之後，專案檔會產生出一個 dist 的資料夾。<br>那在這個 dist 資料夾中，會有一個 index.html，這個 html 一定要在 HTTP 的 server 下才能運行，直接打開它是沒有辦法運行的喔，要用像是 live server 這種套件，打開它才行。</p>
+<h4 id="小插曲-index-html-引入的-css-和-js-報-MIME-type-的錯誤"><a href="#小插曲-index-html-引入的-css-和-js-報-MIME-type-的錯誤" class="headerlink" title="小插曲 - index.html 引入的 css 和 js 報 MIME type 的錯誤"></a>小插曲 - index.html 引入的 css 和 js 報 MIME type 的錯誤</h4><p>當我用嘗試用<code>Go live</code>來將dist資料夾中的index.html在瀏覽器中開啟，<br>但是，卻出現以下的錯誤log<br><img src="/image/Vue_cli_webpack_error.png"><br>這個問題主要是因為讀不到專案檔裡面的樣式檔導致的，<br>所以，你看以上的圖片中它是說該錯誤是發生在index.html檔案中，<br>所以，你就去dist資料夾中的index.html中，該改它引入的路徑<br>原本預設的路徑是</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;&#x2F;static&#x2F;js&#x2F;manifest.2ae2e69a05c33dfc65f8.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;&#x2F;static&#x2F;js&#x2F;vendor.0aad2172a75b8ed4f46c.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;&#x2F;static&#x2F;js&#x2F;app.2f2e5edd9af2c59aa514.js&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-<p>你可以看到<code>src</code>的最前面都有一個反斜線<code>\</code>，<br>你就將這個反斜線都去掉</p>
+<p>你可以看到<code>src</code>的最前面都有一個反斜線<code>/</code>，<br>你就將這個反斜線都去掉</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;static&#x2F;js&#x2F;manifest.2ae2e69a05c33dfc65f8.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;static&#x2F;js&#x2F;vendor.0aad2172a75b8ed4f46c.js&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;text&#x2F;javascript src&#x3D;static&#x2F;js&#x2F;app.2f2e5edd9af2c59aa514.js&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
 <p>改完之後，就能正常的在VSCode中的live Server中，正確的在瀏覽器中，打開dist資料夾中的index.html檔案囉。</p>
           <!--noindex-->
