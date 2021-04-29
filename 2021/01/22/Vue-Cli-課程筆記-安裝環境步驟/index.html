@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="什麼是 Vue Cli? 它是基於Webpack所建置的開發工具 透過Vue Cli 我們就可以輕鬆的使用各種第三方元件(像是BS4. Vue Router…) 可以運行Sass, Babel 等編譯工具 便於開發SPA的網頁工具 靠簡單設定，就能搭建開發時常用環境  什麼是SPA?它是由前端所模擬的路由 在SPA的概念下，頁面跟頁面之間的切換，只會更動部分元件，並不會造成整個頁面的重整，所以，可">
+  <meta name="description" content="什麼是 Vue Cli? 它是基於 Webpack 所建置的開發工具 透過 Vue Cli 我們就可以輕鬆的使用各種第三方元件(像是BS4, Vue Router…) 可以運行 Sass, Babel 等編譯工具 便於開發 SPA 的網頁工具 靠簡單設定，就能搭建開發時常用環境  什麼是SPA?它是由前端所模擬的路由 在SPA的概念下，頁面跟頁面之間的切換，只會更動部分元件，並不會造成整個頁面的重">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue_Cli_課程筆記">
 <meta property="og:url" content="http://example.com/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E7%92%B0%E5%A2%83%E6%AD%A5%E9%A9%9F/index.html">
 <meta property="og:site_name" content="Landy Blog">
-<meta property="og:description" content="什麼是 Vue Cli? 它是基於Webpack所建置的開發工具 透過Vue Cli 我們就可以輕鬆的使用各種第三方元件(像是BS4. Vue Router…) 可以運行Sass, Babel 等編譯工具 便於開發SPA的網頁工具 靠簡單設定，就能搭建開發時常用環境  什麼是SPA?它是由前端所模擬的路由 在SPA的概念下，頁面跟頁面之間的切換，只會更動部分元件，並不會造成整個頁面的重整，所以，可">
+<meta property="og:description" content="什麼是 Vue Cli? 它是基於 Webpack 所建置的開發工具 透過 Vue Cli 我們就可以輕鬆的使用各種第三方元件(像是BS4, Vue Router…) 可以運行 Sass, Babel 等編譯工具 便於開發 SPA 的網頁工具 靠簡單設定，就能搭建開發時常用環境  什麼是SPA?它是由前端所模擬的路由 在SPA的概念下，頁面跟頁面之間的切換，只會更動部分元件，並不會造成整個頁面的重">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="http://example.com/image/SPA_1.png">
 <meta property="og:image" content="http://example.com/image/SPA_2.png">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://example.com/image/Vue_cli_webpack_01.png">
 <meta property="og:image" content="http://example.com/image/Vue_cli_webpack_02.png">
 <meta property="article:published_time" content="2021-01-22T01:51:32.000Z">
-<meta property="article:modified_time" content="2021-04-28T04:41:00.231Z">
+<meta property="article:modified_time" content="2021-04-29T03:17:01.617Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-04-28 12:41:00" itemprop="dateModified" datetime="2021-04-28T12:41:00+08:00">2021-04-28</time>
+                <time title="修改時間：2021-04-29 11:17:01" itemprop="dateModified" datetime="2021-04-29T11:17:01+08:00">2021-04-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,33 +221,33 @@
 
       
         <h1 id="什麼是-Vue-Cli"><a href="#什麼是-Vue-Cli" class="headerlink" title="什麼是 Vue Cli?"></a>什麼是 Vue Cli?</h1><ol>
-<li>它是基於Webpack所建置的開發工具</li>
-<li>透過Vue Cli 我們就可以輕鬆的使用各種第三方元件(像是BS4. Vue Router…)</li>
-<li>可以運行Sass, Babel 等編譯工具</li>
-<li>便於開發SPA的網頁工具</li>
+<li>它是基於 Webpack 所建置的開發工具</li>
+<li>透過 Vue Cli 我們就可以輕鬆的使用各種第三方元件(像是BS4, Vue Router…)</li>
+<li>可以運行 Sass, Babel 等編譯工具</li>
+<li>便於開發 SPA 的網頁工具</li>
 <li>靠簡單設定，就能搭建開發時常用環境</li>
 </ol>
 <h2 id="什麼是SPA"><a href="#什麼是SPA" class="headerlink" title="什麼是SPA?"></a>什麼是SPA?</h2><p>它是由前端所模擬的路由<br><img src="/image/SPA_1.png" alt="user頁面"><br><img src="/image/SPA_2.png" alt="product頁面"></p>
 <p>在SPA的概念下，頁面跟頁面之間的切換，只會更動部分元件，並不會造成整個頁面的重整，<br>所以，可以讓使用者有更好的體驗。</p>
-<p>在SPA的概念底下，也就意味著前端網頁和後端的Web Server是分開的。<br>後端會提供API的接口，接著，前端會用Ajax來做串接。<br>而當網頁的頁面做切換的時候，前端就會透過API在從後端取得資料內容。</p>
+<p>在SPA的概念底下，也就意味著前端網頁和後端的Web Server是分開的。<br>後端會提供API的接口，接著，前端會用Ajax來做串接。<br>當前端透過 Ajax 接受到資料之後，再透過 JavaScript 來變換頁面上的內容。</p>
 <h3 id="Vue-Cli-的限制"><a href="#Vue-Cli-的限制" class="headerlink" title="Vue Cli 的限制"></a>Vue Cli 的限制</h3><p>它不便於開發非SPA的網頁，<br>若你需要開發非SPA的網頁的話，你就直接手動將Vue.js載入你的專案就可以解決這個問題。</p>
 <a id="more"></a>
 <h1 id="如何使用-Vue-Cli"><a href="#如何使用-Vue-Cli" class="headerlink" title="如何使用 Vue Cli"></a>如何使用 Vue Cli</h1><p>Step1. 你要先為你的電腦安裝Node.js的軟件。<br>Step2. 安裝gulp環境<br>gulp環境 有分為全域 和 local<br>而local就是專屬該專案的環境。</p>
 <ol>
 <li>我們先用命令提示字元這個工具，來移動到目標專案的目錄底下</li>
-<li>接著，我們要在這個專案底下，安裝global的gulp，<br>此時，我們要輸入<code>npm install gulp -g</code><br>而以上這段指令結尾接<code>-g</code>代表是安裝在全域環境下，<br>若沒有接這個<code>-</code>g的話，就代表只安裝在這個專案內。</li>
+<li>接著，我們要在這個專案底下，安裝global的gulp，<br>此時，我們要輸入<code>npm install gulp -g</code><br>而以上這段指令結尾接<code>-g</code>代表是安裝在全域環境下，<br>若沒有接這個<code>-g</code>的話，就代表只安裝在這個專案內。</li>
 </ol>
 <p>此時，安裝完成後，你的專案資料夾中應該不會出現任何檔案，因為，你是用全域的方式在安裝。<br>若你是用local的方式安裝的話，你的專案資料夾裡面就會出現一個叫node_modules的資料夾。</p>
 <p>經過以上的步驟，就完成在你的電腦中，安裝node.js以及安裝gulp的環境囉。</p>
-<p>step3. 在你的Vue的專案檔目錄中，接著輸入<code>node -v</code>指令，先確認你的node的版本是否有高過官方文件限定的node版本，若有就可以繼續往下下面的步驟。</p>
+<p>step3. 在你的Vue的專案檔目錄中，接著輸入<code>node -v</code>指令，先確認你的node的版本是否有高過 Vue 官方文件限定的node版本，若有就可以繼續往下下面的步驟。</p>
 <p>step4. 接著，在命令提示字元中輸入 <code>npm install -g vue-cli</code><br>然後，它就會開始安裝vue-cli的套件。</p>
 <p>step5. 安裝完成之後，你就輸入<code>vue</code>，接著，它就會跳出來，你可以用哪些<code>vue</code>的指令。<br>你就輸入<code>vue list</code>，<br>此時，會跳出來<code>vue</code>提供的幾種樣板可以使用，那課堂上是使用webpack這個樣板。<br><img src="/image/Vue_cli_webpack.png" alt="webpack模板"></p>
-<p>step6. 你就輸入<code>vue init webpack vuewebpack</code>的指令<br>在以上的指令最後一個vuewebpack是你想為專案資料夾取的名稱，你就自取吧。<br>接下來，會跳出幾個選項要你選擇，<br>其中，比較重要的是<br><code>Use ESLint to lint your code?</code><br>這個選項是表示，要在ESLint環境下，寫code嗎?<br>這邊先選no，因為，你對es6還不熟，如果你的語法有錯誤，這個專案是無法被運行的喔。<br>最後，它有說要不要自動執行<code>npm install</code>，這邊課堂上是直接建議用第三個選項，也就是自己安裝囉。</p>
-<h3 id="npm-install-安裝錯誤小插曲"><a href="#npm-install-安裝錯誤小插曲" class="headerlink" title="npm install 安裝錯誤小插曲"></a>npm install 安裝錯誤小插曲</h3><p>有關於一直無法成功運行vue環境的問題，<br>我直接全部專案刪掉，按照老師的步驟安裝，<br>但是，唯一不同的部分是選擇<code>npm install</code>的步驟，是要自己安裝還是要編譯器自動安裝，<br>我改用讓編譯器自動安裝之後，就可以運行vue了。</p>
-<p>會發生不能運行vue的主要原因，都是因為發生<code>&quot;Cannot find module webpack-cli/bin/config-yargs&quot;</code>錯誤，<br>這個發生原因主要是因為webpack的版本太高造成它跟webpack-dev-server 互相衝突，<br>但是，我把它刪掉在安裝比較舊的版本還是會出錯，乾~~~~~~~~~~`<br>所以，<br>最後我就讓編譯器自己執行<code>npm install</code>安裝環境，就Ok了。</p>
+<p>step6. 你就輸入<code>vue init webpack vuewebpack</code>的指令<br>在以上的指令最後一個vuewebpack是你想為專案資料夾取的名稱，你就自取吧。<br>接下來，會跳出幾個選項要你選擇，<br>其中，比較重要的是<br><code>Use ESLint to lint your code?</code><br>這個選項是表示，要在ESLint環境下，寫code嗎?<br>如果，你對 ES6 的規範還不熟的話，可以先選 no，不安裝 ESLint，不然，當你撰寫的內容不符合 ESLint 的規則時，你會不知道怎麼修改，在開發上會比較礙手礙腳。<br>最後，它有說要不要自動執行<code>npm install</code>，這邊課堂上是直接建議用第三個選項，也就是自己安裝囉。</p>
+<h3 id="npm-install-安裝錯誤小插曲"><a href="#npm-install-安裝錯誤小插曲" class="headerlink" title="npm install 安裝錯誤小插曲"></a>npm install 安裝錯誤小插曲</h3><p>有關於一直無法成功運行vue環境的問題，<br>我直接先將全部專案刪掉，按照課堂上的步驟安裝。<br>但是，唯一不同的部分是選擇<code>npm install</code>的步驟，是要自己安裝還是要編譯器自動安裝，<br>我改用讓編譯器自動安裝之後，就可以運行vue了。</p>
+<p>會發生不能運行vue的主要原因，都是因為發生<code>&quot;Cannot find module webpack-cli/bin/config-yargs&quot;</code>錯誤，<br>這個發生原因主要是因為webpack的版本太高造成它跟 webpack-dev-server 互相衝突，<br>但是，我把它刪掉在安裝比較舊的版本還是會出錯，乾~~~~~~~~~~`<br>所以，<br>最後我就讓編譯器自己執行<code>npm install</code>安裝環境，就Ok了。</p>
 <p>step7. 接下來你就依序輸入它上面的提示指令<br><img src="/image/Vue_cli_webpack_01.png"></p>
-<p>其中，第一個<code>cd vuewebpack</code>的vuewebpack是我的資料夾名稱喔，<br>就看你那次是取什麼資料夾名稱，就這邊會不一樣而已。<br>第二個，<code>npm install</code> 它會安裝，相關的套件。<br>最後，安裝完成後，你就輸入<code>npm run dev</code>，它就會開始運行了，<br>接著，你的命令提示字元會跳到以下的畫面，跳出<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a><br>接著，你就去你的瀏覽器輸入<a href="http://localhost:8080，就會跳出以下畫面，">http://localhost:8080，就會跳出以下畫面，</a><br><img src="/image/Vue_cli_webpack_02.png"><br>就代表你的vue cli套件安裝成功囉~~</p>
-<h2 id="當你離開Vue的專案的時候，下一次，要怎麼重新回去回到http-localhost-8080"><a href="#當你離開Vue的專案的時候，下一次，要怎麼重新回去回到http-localhost-8080" class="headerlink" title="當你離開Vue的專案的時候，下一次，要怎麼重新回去回到http:\localhost:8080?"></a>當你離開Vue的專案的時候，下一次，要怎麼重新回去回到http:\localhost:8080?</h2><p>首先，你用cmd進到你那個有安裝vue cli 的專案檔中，<br>接著，直接輸入<code>npm run dev</code>，此時，就又會跳出<code>http:\\localhost:8080</code>的提示訊息，接著，你就又能在瀏覽器中輸入<code>http:\\localhost:8080</code>，然後，就可以打開專案囉~</p>
+<p>第一步，移動到你的 Vue 專案資料夾中，<br>那這邊 <code>cd vuewebpack</code> 指令中的 vuewebpack 是我的資料夾名稱喔，<br>第二步，<code>npm install</code> 它會安裝，相關的套件。<br>最後，安裝完成後，你就輸入<code>npm run dev</code>，它就會開始運行了，<br>接著，你的命令提示字元會跳到以下的畫面，跳出<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a><br>接著，你就去你的瀏覽器輸入<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a> ，就會跳出以下畫面，<br><img src="/image/Vue_cli_webpack_02.png"><br>就代表你的vue cli套件安裝成功囉~~</p>
+<h2 id="當你離開Vue的專案的時候，下一次，要怎麼重新回去回到http-localhost-8080"><a href="#當你離開Vue的專案的時候，下一次，要怎麼重新回去回到http-localhost-8080" class="headerlink" title="當你離開Vue的專案的時候，下一次，要怎麼重新回去回到http:\localhost:8080?"></a>當你離開Vue的專案的時候，下一次，要怎麼重新回去回到http:\localhost:8080?</h2><p>首先，你用cmd進到你那個有安裝vue cli 的專案檔中，<br>接著，直接輸入<code>npm run dev</code>，此時，就又會跳出<code>http:\\localhost:8080</code>的提示訊息，接著，你在瀏覽器中輸入<code>http:\\localhost:8080</code>之後，就可以再瀏覽器上看到你的專案畫面囉。</p>
 
     </div>
 
