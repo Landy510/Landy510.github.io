@@ -27,11 +27,13 @@
 <meta property="og:site_name" content="Landy Blog">
 <meta property="og:description" content="這篇的內容式複習 Vue 中有一個很重要的功能，體現資料驅動畫面的概念，那就是 v-bind。首先， v-bind 可以用來綁定很多東西，在 Vue 的官方文件中就有提到，可以綁定 DOM 元素的屬性、class、樣式。 動態綁定屬性 以上這個範例，就利用v-bind的方式，來為這個a連結動態的綁定上 Vue 物件裡面的資料。 動態綁定 Class綁定 class 物件在 Vue 中，動態綁定 c">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="http://example.com/image/Vue_$vm0.png">
 <meta property="article:published_time" content="2021-05-19T04:17:46.000Z">
-<meta property="article:modified_time" content="2021-05-19T05:21:30.808Z">
+<meta property="article:modified_time" content="2021-05-19T05:29:09.381Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/Vue_$vm0.png">
 
 <link rel="canonical" href="http://example.com/2021/05/19/Vue-%E9%9D%9C%E6%85%8B%E5%B1%AC%E6%80%A7%E5%92%8C%E5%8B%95%E6%85%8B%E7%B6%81%E5%AE%9A%E7%9A%84%E5%84%AA%E5%85%88%E9%A0%86%E5%BA%8F/">
 
@@ -185,7 +187,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-05-19 12:17:46 / 修改時間：13:21:30" itemprop="dateCreated datePublished" datetime="2021-05-19T12:17:46+08:00">2021-05-19</time>
+              <time title="創建時間：2021-05-19 12:17:46 / 修改時間：13:29:09" itemprop="dateCreated datePublished" datetime="2021-05-19T12:17:46+08:00">2021-05-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -241,7 +243,7 @@
 
 <h1 id="Alex-宅幹嘛-眉眉角角"><a href="#Alex-宅幹嘛-眉眉角角" class="headerlink" title="Alex 宅幹嘛-眉眉角角"></a>Alex 宅幹嘛-眉眉角角</h1><h2 id="管理資料的概念"><a href="#管理資料的概念" class="headerlink" title="管理資料的概念"></a>管理資料的概念</h2><p>當有一組資料，會用物件的形式來管理該元素所需要的資料，像是 a 連結，它會需要連結網址 還有 它的 target 屬性…等等的屬性，會用一個物件來管理這個 a 連結。<br>當有很多組資料的時候，就會用一個陣列來統一管理這些資料。</p>
 <h2 id="IIFE-包裹-Vue-物件"><a href="#IIFE-包裹-Vue-物件" class="headerlink" title="IIFE 包裹 Vue 物件"></a>IIFE 包裹 Vue 物件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">;(function()&#123;</span><br><span class="line">  let vm &#x3D; new Vue(&#123;</span><br><span class="line">    el: &#39;#app&#39;,</span><br><span class="line">    data: &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
-<p>你會發現，你在瀏覽器的 Console中，無法直接調用 vm 這個 Vue 物件，原因是因為<strong>作用域</strong>的關係，我們用立即函式將這個 Vue 物件包起來，讓它變成區域物件，所以，你在全域的範圍無法直接調用到它。<br>那我們要怎麼調用它呢?<br>你去 Vue開發者頁面中，點擊<code>&lt;Root&gt;</code> ，你會發現一個<code>&lt;Root&gt; = $vm0</code>，那你就可以透過這個 $vm0 來調用這個區域 Vue 物件囉。</p>
+<p>你會發現，你在瀏覽器的 Console中，無法直接調用 vm 這個 Vue 物件，原因是因為<strong>作用域</strong>的關係，我們用立即函式將這個 Vue 物件包起來，讓它變成區域物件，所以，你在全域的範圍無法直接調用到它。<br>那我們要怎麼調用它呢?<br>你去 Vue開發者頁面中，點擊<code>&lt;Root&gt;</code> ，你會發現一個<code>&lt;Root&gt; = $vm0</code>，那你就可以透過這個 $vm0 來調用這個區域 Vue 物件囉。<br><img src="/image/Vue_$vm0.png"><br>比如，你有個 Vue 的成員屬性是 link，你就在網頁管理者頁面中的 console 中輸入 $vm0.link 你就可在網頁上看到這個成員屬性內容囉。</p>
 
     </div>
 
