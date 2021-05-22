@@ -155,6 +155,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/19/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%AD%86%E8%A8%981/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/19/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%AD%86%E8%A8%981/" class="post-title-link" itemprop="url">JS核心篇-第二章筆記1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-02-19 13:09:17" itemprop="dateCreated datePublished" datetime="2021-02-19T13:09:17+08:00">2021-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-02-24 10:00:49" itemprop="dateModified" datetime="2021-02-24T10:00:49+08:00">2021-02-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>接續<a href="/2021/02/19/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%AD%86%E8%A8%98/" title="上一篇">上一篇</a>還沒紀錄完的部分，繼續記錄。</p>
+<h1 id="JS「傳值」與「傳址」機制"><a href="#JS「傳值」與「傳址」機制" class="headerlink" title="JS「傳值」與「傳址」機制"></a>JS「傳值」與「傳址」機制</h1><h2 id="基本型別-和-物件型別-互相比較的不同"><a href="#基本型別-和-物件型別-互相比較的不同" class="headerlink" title="基本型別 和 物件型別 互相比較的不同"></a>基本型別 和 物件型別 互相比較的不同</h2><h3 id="基礎型別互相比較"><a href="#基礎型別互相比較" class="headerlink" title="基礎型別互相比較"></a>基礎型別互相比較</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---基本型別---</span><br><span class="line">var a &#x3D; 10;</span><br><span class="line">var b &#x3D; a;</span><br><span class="line">console.log(a &#x3D;&#x3D;&#x3D; b); &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+<p>在JS中，基本型別我們只看它們的「值」。</p>
+<h3 id="物件型別互相比較"><a href="#物件型別互相比較" class="headerlink" title="物件型別互相比較"></a>物件型別互相比較</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var num &#x3D; &#123;value:10&#125;;</span><br><span class="line">var num1 &#x3D; &#123;value:10&#125;;</span><br><span class="line">console.log(num &#x3D;&#x3D;&#x3D; num1); &#x2F;&#x2F;false</span><br></pre></td></tr></table></figure>
+<p>在JS中，物件型別我們將它們看成「實體」。<br>雖然，它們的成員屬性是相同的，但是，它們指向的位址是不同的，所以，它們彼此之間是不相同的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/02/19/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%AD%86%E8%A8%981/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/19/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%AD%86%E8%A8%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -948,90 +1033,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/11/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-Jason/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/11/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-Jason/" class="post-title-link" itemprop="url">JavaScript學徒篇-Jason</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-02-11 10:46:57" itemprop="dateCreated datePublished" datetime="2021-02-11T10:46:57+08:00">2021-02-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-02-13 15:31:11" itemprop="dateModified" datetime="2021-02-13T15:31:11+08:00">2021-02-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="JSON-VIEW-chrome-插件"><a href="#JSON-VIEW-chrome-插件" class="headerlink" title="JSON VIEW chrome 插件"></a>JSON VIEW chrome 插件</h1><p>那你到<a target="_blank" rel="noopener" href="https://data.kcg.gov.tw/dataset?res_format=JSON">高雄市政府開放資料網中</a> ，<br>你可以看到很多資料的格式，那這邊我們就會選JSON格式的資料來做使用。<br><img src="/image/json.png"></p>
-<h2 id="json-view"><a href="#json-view" class="headerlink" title="json view"></a>json view</h2><p>在課堂上有提供一個可以讓json資料易於<a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=zh-TW">閱讀的工具json view</a> ，安裝完之後，<br>這個擴充的功能，會自動地將這些json資料排列成易於閱讀的排版。</p>
-<h1 id="擷取-JSON-格式流程"><a href="#擷取-JSON-格式流程" class="headerlink" title="擷取 JSON 格式流程"></a>擷取 JSON 格式流程</h1><p>step1.<br>今天雖然你安裝的json view可以幫你將線上的json的資料排列的易於觀看，但是，這會導致資料不夠精準。<br>所以，當我們想要將這些json資料複製到我們本地端使用的話，還是建議用沒有使用json view排版的資料的狀態來下載下來。<br>你可以透過用無痕模式來達到這樣的效果。</p>
-<p>step2.<br>你就將複製下來的json內容，先存到一個靜態的陣列裡面，再用<code>console.log</code>看看你可不可以正確的存取到這個json內的資料囉。</p>
-<iframe src="https://codepen.io/RandyChen/embed/rNWVMbL?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>你可以看到，上面這個例子就是去接台中市開放的api資料，並用<code>console.log</code>把特定的屬性值印出來。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
   </nav>
 
 
@@ -1097,7 +1102,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
