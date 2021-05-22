@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="v-if這個 directive 的功能是，藉由判斷一個內容，來決定要不要將相對應的內容呈現在網頁上。如果今天你有兩個以上的元素的 v-if 是要判斷同一個元素的話，官方文件建議你用 template 將這些元素包起來，然後，在這個 template 上用 v-if 統一對同一個內容做判斷ex: 12&lt;div v-if&#x3D;&quot;isShow&quot;&gt;這一個區塊&lt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-v-if和v-show的應用與差別">
+<meta property="og:url" content="http://example.com/2021/05/22/Vue-v-if%E5%92%8Cv-show%E7%9A%84%E6%87%89%E7%94%A8%E8%88%87%E5%B7%AE%E5%88%A5/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="v-if這個 directive 的功能是，藉由判斷一個內容，來決定要不要將相對應的內容呈現在網頁上。如果今天你有兩個以上的元素的 v-if 是要判斷同一個元素的話，官方文件建議你用 template 將這些元素包起來，然後，在這個 template 上用 v-if 統一對同一個內容做判斷ex: 12&lt;div v-if&#x3D;&quot;isShow&quot;&gt;這一個區塊&lt;">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-05-22T02:06:58.000Z">
+<meta property="article:modified_time" content="2021-05-22T03:32:37.901Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2021/05/22/Vue-v-if%E5%92%8Cv-show%E7%9A%84%E6%87%89%E7%94%A8%E8%88%87%E5%B7%AE%E5%88%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Vue-v-if和v-show的應用與差別 | Landy Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/22/Vue-v-if%E5%92%8Cv-show%E7%9A%84%E6%87%89%E7%94%A8%E8%88%87%E5%B7%AE%E5%88%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue-v-if和v-show的應用與差別
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-05-22 10:06:58 / 修改時間：11:32:37" itemprop="dateCreated datePublished" datetime="2021-05-22T10:06:58+08:00">2021-05-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h1><p>這個 directive 的功能是，藉由判斷一個內容，來決定要不要將相對應的內容呈現在網頁上。<br>如果今天你有兩個以上的元素的 v-if 是要判斷同一個元素的話，官方文件建議你用 template 將這些元素包起來，然後，在這個 template 上用 v-if 統一對同一個內容做判斷<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div v-if&#x3D;&quot;isShow&quot;&gt;這一個區塊&lt;&#x2F;div&gt;</span><br><span class="line">&lt;span v-if&#x3D;&quot;isShow&quot;&gt;這一個span&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure>
+<p>可以用 template 改寫成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;template v-if&#x3D;&quot;isShow&quot;&gt;</span><br><span class="line">  &lt;div&gt;這一個區塊&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;span&gt;這一個span&lt;&#x2F;span&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+<p>以上範例就能統一去判斷 isShow 這個內容，而且 template 這個 tag 也不會出現在 DOM 上面。 </p>
+<a id="more"></a>
+<h2 id="v-if-和-key-搭配使用"><a href="#v-if-和-key-搭配使用" class="headerlink" title="v-if 和 key 搭配使用"></a>v-if 和 key 搭配使用</h2><p>我們可以用 v-if 和 key 的搭配使用，<font color=#FF0000>解決保留上一區塊資料的問題</font>。<br>當你多個區塊使用到 v-if 和 v-else 時，很有可能會發生上一個區塊的資料被保留到下一個區塊中。 會發生這種狀況是因為 Vue 很省資源，如果，你沒有特別的利用 key 來區分區塊間的不同，Vue 會認為這些區塊是同一個人，就會有可能造成上一區塊輸入的資料被保留到下一區塊的狀況，這個時候用 key 來區分它們就解決囉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;template v-if&#x3D;&quot;type &#x3D;&#x3D;&#x3D; &#39;A&#39;&quot;&gt;</span><br><span class="line">  &lt;div&gt;A Content&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;text&quot;&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;template v-else&gt;</span><br><span class="line">  &lt;div&gt;B Content&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;text&quot;&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+<p>改寫成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;template v-if&#x3D;&quot;type &#x3D;&#x3D;&#x3D; &#39;A&#39;&quot;&gt;</span><br><span class="line">  &lt;div&gt;A Content&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;text&quot; key&#x3D;&quot;aContent&quot;&gt;  &#x2F;&#x2F; 新綁定了一個 key 值</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;template v-else&gt;</span><br><span class="line">  &lt;div&gt;B Content&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;text&quot;&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+<p>我們特別在 A 區塊加入 key=”aContent” ，這樣就能讓 Vue 知道 A, B 區塊是不同人囉。<br>那你可以看到這邊的 key 不像在搭配 v-for 時的 key 前面需要加冒號 :key， 那是因為在 v-for 的情境下，key 需要綁定資料，所以，才會在前面加冒號。而這邊的話並不是綁定資料，所以，不需要在 key 前面加上冒號。 </p>
+<h1 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h1><p>功能跟 v-if 差不多，但是，機制不太一樣。 v-show 是將不需要呈現的目標元素的 display 設為 none ，而不是直接將它從 DOM 裡面拔掉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;span v-show&#x3D;&quot;isShow&quot;&gt;這是一段 span &lt;&#x2F;span&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="v-show-無法搭配-template-使用"><a href="#v-show-無法搭配-template-使用" class="headerlink" title="v-show 無法搭配 template 使用"></a>v-show 無法搭配 template 使用</h2><p><font color="#FF000">這真得很容易在 v-show 誤用喔</font>。<br>v-show 無法搭配 template 使用的原因是 template 不是一個實體的 tag ，但是 v-show 是去改一個實際的元素的 display 樣式，但因為 template 不是實體，所以，v-show 的效果會失效。 </p>
+<h1 id="Alex-宅幹嘛-眉眉角角"><a href="#Alex-宅幹嘛-眉眉角角" class="headerlink" title="Alex 宅幹嘛-眉眉角角"></a>Alex 宅幹嘛-眉眉角角</h1><h2 id="v-if-v-s-v-show-使用時機"><a href="#v-if-v-s-v-show-使用時機" class="headerlink" title="v-if v.s v-show 使用時機"></a>v-if v.s v-show 使用時機</h2><h3 id="元素經常變換的情境用-v-show"><a href="#元素經常變換的情境用-v-show" class="headerlink" title="元素經常變換的情境用 v-show"></a>元素經常變換的情境用 v-show</h3><p>如果某個元素會經常被抽換掉的話，建議不要用 v-if ，因為， v-if 的行為是直接將該元素的 DOM 進行抽換，那如果你頻繁抽換的話，會不太好。<br>可以考慮用 v-show，因為，v-show 是利用更改目標元素的 css 樣式的 display:none 來決定讓他要不要出現在畫面上。 </p>
+<iframe src="https://codepen.io/RandyChen/embed/vYxxKaE?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>以上這個範例，假設在用戶會頻繁的變換分頁的內容，那在這種情境下，我們就建議用 v-show 來判斷是否要讓該對應內容呈現在畫面上。就不用像 v-if 那樣頻繁抽換 DOM 的內容。</p>
+<h3 id="v-if-和-v-show-一開始的渲染時機"><a href="#v-if-和-v-show-一開始的渲染時機" class="headerlink" title="v-if 和 v-show 一開始的渲染時機"></a>v-if 和 v-show 一開始的渲染時機</h3><p>當你 v-if 判斷的值一開始為 false，那 v-if 是不會渲染這個元素的，直到該判斷值轉換成 true。<br>而 v-show 是不管它的判斷值的初始值是否為 true 或 false，它都一定會被渲染，如果是 false 的話，它就只是將目標元素的 display 改成 none 而已。<br>以上就是它們倆個一開始的渲染時機的差別。 </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/19/Vue-%E9%9D%9C%E6%85%8B%E5%B1%AC%E6%80%A7%E5%92%8C%E5%8B%95%E6%85%8B%E7%B6%81%E5%AE%9A%E7%9A%84%E5%84%AA%E5%85%88%E9%A0%86%E5%BA%8F/" rel="prev" title="Vue-靜態屬性和動態綁定的優先順序">
+      <i class="fa fa-chevron-left"></i> Vue-靜態屬性和動態綁定的優先順序
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#v-if"><span class="nav-number">1.</span> <span class="nav-text">v-if</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#v-if-%E5%92%8C-key-%E6%90%AD%E9%85%8D%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">v-if 和 key 搭配使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v-show"><span class="nav-number">2.</span> <span class="nav-text">v-show</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#v-show-%E7%84%A1%E6%B3%95%E6%90%AD%E9%85%8D-template-%E4%BD%BF%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">v-show 無法搭配 template 使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alex-%E5%AE%85%E5%B9%B9%E5%98%9B-%E7%9C%89%E7%9C%89%E8%A7%92%E8%A7%92"><span class="nav-number">3.</span> <span class="nav-text">Alex 宅幹嘛-眉眉角角</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#v-if-v-s-v-show-%E4%BD%BF%E7%94%A8%E6%99%82%E6%A9%9F"><span class="nav-number">3.1.</span> <span class="nav-text">v-if v.s v-show 使用時機</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E7%B6%93%E5%B8%B8%E8%AE%8A%E6%8F%9B%E7%9A%84%E6%83%85%E5%A2%83%E7%94%A8-v-show"><span class="nav-number">3.1.1.</span> <span class="nav-text">元素經常變換的情境用 v-show</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v-if-%E5%92%8C-v-show-%E4%B8%80%E9%96%8B%E5%A7%8B%E7%9A%84%E6%B8%B2%E6%9F%93%E6%99%82%E6%A9%9F"><span class="nav-number">3.1.2.</span> <span class="nav-text">v-if 和 v-show 一開始的渲染時機</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

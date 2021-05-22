@@ -155,6 +155,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/24/JS%E6%A0%B8%E5%BF%83%E7%AF%87-MVC%E6%9E%B6%E6%A7%8B%E5%92%8CSPA%E6%A6%82%E5%BF%B5%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/24/JS%E6%A0%B8%E5%BF%83%E7%AF%87-MVC%E6%9E%B6%E6%A7%8B%E5%92%8CSPA%E6%A6%82%E5%BF%B5%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">JS核心篇-MVC架構和SPA概念筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-03-24 10:56:13 / 修改時間：11:31:08" itemprop="dateCreated datePublished" datetime="2021-03-24T10:56:13+08:00">2021-03-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>這一篇是來筆記一下，我最近看到有關MVC和SPA的概念。<br>那大部分的內容都是看<a target="_blank" rel="noopener" href="https://hulitw.medium.com/introduction-mvc-spa-and-ssr-545c941669e9">Huli的這篇文章</a>所得來，並用我自己的話來整理這篇文章的內容。<br>說是整理也不對，因為，Huli這篇真的太神，已經超清楚了，但是，我還是希望用我自己的話來整理一下。</p>
+<h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><p>仿照huli在文章中常問的三個問題</p>
+<h2 id="MVC-這三個區塊分別在幹嘛"><a href="#MVC-這三個區塊分別在幹嘛" class="headerlink" title="MVC 這三個區塊分別在幹嘛?"></a>MVC 這三個區塊分別在幹嘛?</h2><p>這邊我只想用簡單的話來說明MVC在幹嘛。 因為，書上跟網路上的有些文章在介紹MVC的意思時，都講得有點太咬文嚼字了<del>(可能是我程度不夠吧，嘻嘻)</del>。<br><strong>M(Model)</strong>: 跟資料操作有關。即任何跟資料更改有相關的部分都歸它管。<br><strong>V(View)</strong>: 跟顯示畫面有關的內容都在這邊。<br><strong>C(Controller)</strong>: 將M和V連接起來的橋樑，我看網路上的文章說這部分好像都是用PHP語言來撰寫，也就是後端語言。<br>那MVC的出現就是要將分工分清楚，取用資料庫就在Model處理，寫HTML就在View處理，最後，在透過Controller從Model取來的資料塞入View中，在將View渲染完的HTML透過<br>Controller回傳給Server，Server再傳到瀏覽器中，就會看到渲染完的畫面囉。</p>
+<h2 id="MVC三個問題"><a href="#MVC三個問題" class="headerlink" title="MVC三個問題"></a>MVC三個問題</h2><p>在Huli的文章中常常會問以下三個問題<br>Q1. 為什麼要有MVC?<br>Ans: 將程式利用M, V, C三個區塊，將程式碼的職責切分乾淨，讓往後回來再看程式碼比較好管理，也比較看得懂。<br>Q2. 有MVC和沒有MVC有什麼差別?<br>Ans: 如果有，你的程式會區分成mvc的架構。如果沒有，那你的程式會所有東西都寫在一起沒有區分開來。<br>Q3. 什麼是MVC?<br>Ans: 它是一種程式架構。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/24/JS%E6%A0%B8%E5%BF%83%E7%AF%87-MVC%E6%9E%B6%E6%A7%8B%E5%92%8CSPA%E6%A6%82%E5%BF%B5%E7%AD%86%E8%A8%98/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/18/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%89%A9%E4%BB%B6-%E5%92%8C-%E5%8E%9F%E5%9E%8B%E7%B7%B4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -918,87 +996,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/19/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/19/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">JS核心篇-第二章筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2021-02-19 12:16:28 / 修改時間：13:08:42" itemprop="dateCreated datePublished" datetime="2021-02-19T12:16:28+08:00">2021-02-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="函式"><a href="#函式" class="headerlink" title="函式"></a>函式</h1><h2 id="函式簡介"><a href="#函式簡介" class="headerlink" title="函式簡介"></a>函式簡介</h2><p>當我們有一段程式碼需要重複使用的話，我們就會用一個函式包起來。<br>所以，每次要使用的話，我們就可以呼叫這個函式就可以囉，而且，也變得比較好維護。</p>
-<h2 id="定義函式的方式"><a href="#定義函式的方式" class="headerlink" title="定義函式的方式"></a>定義函式的方式</h2><p>a. 函式宣告</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">funtion triple(number)&#123;</span><br><span class="line">    return number*numbre*number</span><br><span class="line">&#125;</span><br><span class="line">console.log(triple(2)); &#x2F;&#x2F; 8</span><br></pre></td></tr></table></figure>
-<p>b. 函式運算式<br>利用變數來儲存函式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var triple &#x3D; function(number)&#123;</span><br><span class="line">    return number*numbre*number</span><br><span class="line">&#125;</span><br><span class="line">console.log(triple(2)); &#x2F;&#x2F; 8</span><br></pre></td></tr></table></figure>
-<p>c. 用<code>new Funtion</code>關鍵字建立函式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var triple &#x3D; new Funtion(&#39;number&#39;, &#39;return number*numbre*number&#39;)</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/19/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%AC%AC%E4%BA%8C%E7%AB%A0%E7%AD%86%E8%A8%98/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1068,7 +1065,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
