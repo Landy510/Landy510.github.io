@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="課程架構及流程說明前端負責的部分有前台和後台前台: 使用者使用的介面後台: 管理者使用的介面 那前端和後端之間的溝通是透過Ajax的方式，前端丟Request，然後，後端丟Response。 登入 Vue 課程 API 就會出現無法登入的問題我是利用課程裡面只允許六角Cookie的方式，來解決以上的問題。 註冊課程專屬練習 APIstep1.要先申請屬於自己的API路徑，避免自己的內容跟其他的學員">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-vue出一個電商網站1-接入後端api的方法">
+<meta property="og:url" content="https://landy510.github.io/2021/01/27/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%991-%E6%8E%A5%E5%85%A5%E5%BE%8C%E7%AB%AFapi%E7%9A%84%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="課程架構及流程說明前端負責的部分有前台和後台前台: 使用者使用的介面後台: 管理者使用的介面 那前端和後端之間的溝通是透過Ajax的方式，前端丟Request，然後，後端丟Response。 登入 Vue 課程 API 就會出現無法登入的問題我是利用課程裡面只允許六角Cookie的方式，來解決以上的問題。 註冊課程專屬練習 APIstep1.要先申請屬於自己的API路徑，避免自己的內容跟其他的學員">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/image/website_constructure.png">
+<meta property="og:image" content="https://landy510.github.io/image/backend_feedback.png">
+<meta property="og:image" content="https://landy510.github.io/image/dashboard_and_shopping.png">
+<meta property="og:image" content="https://landy510.github.io/image/file_path_command.png">
+<meta property="article:published_time" content="2021-01-27T02:36:04.000Z">
+<meta property="article:modified_time" content="2021-01-30T07:07:04.392Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/image/website_constructure.png">
+
+<link rel="canonical" href="https://landy510.github.io/2021/01/27/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%991-%E6%8E%A5%E5%85%A5%E5%BE%8C%E7%AB%AFapi%E7%9A%84%E6%96%B9%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Vue-vue出一個電商網站1-接入後端api的方法 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/27/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%991-%E6%8E%A5%E5%85%A5%E5%BE%8C%E7%AB%AFapi%E7%9A%84%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue-vue出一個電商網站1-接入後端api的方法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-27 10:36:04" itemprop="dateCreated datePublished" datetime="2021-01-27T10:36:04+08:00">2021-01-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-30 15:07:04" itemprop="dateModified" datetime="2021-01-30T15:07:04+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="課程架構及流程說明"><a href="#課程架構及流程說明" class="headerlink" title="課程架構及流程說明"></a>課程架構及流程說明</h1><p>前端負責的部分有<br>前台和後台<br>前台: 使用者使用的介面<br>後台: 管理者使用的介面<br><img src="/image/website_constructure.png" alt="前端和後端開發的部分"></p>
+<p>那前端和後端之間的溝通是透過Ajax的方式，<br>前端丟Request，然後，後端丟Response。</p>
+<h2 id="登入-Vue-課程-API-就會出現無法登入的問題"><a href="#登入-Vue-課程-API-就會出現無法登入的問題" class="headerlink" title="登入 Vue 課程 API 就會出現無法登入的問題"></a>登入 Vue 課程 API 就會出現無法登入的問題</h2><p>我是利用課程裡面只允許六角Cookie的方式，來解決以上的問題。</p>
+<h1 id="註冊課程專屬練習-API"><a href="#註冊課程專屬練習-API" class="headerlink" title="註冊課程專屬練習 API"></a>註冊課程專屬練習 API</h1><p>step1.<br>要先申請屬於自己的API路徑，避免自己的內容跟其他的學員的API內容互相干預到。<br><a target="_blank" rel="noopener" href="https://vue-course-api.hexschool.io/">六角申請api的頁面</a></p>
+<p>step2.<br>你要在登入的狀態，才能申請你的API路徑喔</p>
+<a id="more"></a>
+<h2 id="申請的API路徑"><a href="#申請的API路徑" class="headerlink" title="申請的API路徑"></a>申請的API路徑</h2><p>API路徑: 你的帳號去掉<code>@gamil.com</code>剩下的部分</p>
+<p>step3. 測試剛剛申請的API路徑<br>a. 你先輸入你剛剛申請的api路徑<br>b. 接著，你直接按下下方的測試 上傳產品資料(需要通過驗證) 按鈕<br>c. 如果，成功的話，畫面的右手邊會回傳由後端回傳的資訊。<br><img src="/image/backend_feedback.png" alt="六角後端回傳資訊"></p>
+<p>注意~~~ 到這個小節，如果你新增很多品項的話，是還沒有辦法刪除的喔，是後面的課程才會提到。</p>
+<p>另外，要特別注意，在六角提供驗證的以下畫面中，有分為dashboard和shopping頁面的部分<br><img src="/image/dashboard_and_shopping.png" alt="DashBord和shopping頁面的差別"><br>而DashBoard部分是需要驗證(即需要登入)後才能操作的，因為，這部分是後台才能操作的部分<br>而Shopping是不需要驗證的(即不需要登入)，就能直接操作的，因為，這個頁面是給使用者在使用的。</p>
+<h1 id="啟用一個-Vue-Cli-並且-引用帶入專屬-API"><a href="#啟用一個-Vue-Cli-並且-引用帶入專屬-API" class="headerlink" title="啟用一個 Vue Cli 並且 引用帶入專屬 API"></a>啟用一個 Vue Cli 並且 引用帶入專屬 API</h1><p>此小節在教導，要用先前申請好的api來取得資料。<br>step1. 安裝Ajax套件<br>先安裝Ajax套件，為的是要取得遠端的資料。<br>其實，就是安裝vue-axios的套件。<br>那你就按照你的<a href="/2021/01/22/Vue-Cli-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E5%AE%89%E8%A3%9D%E5%AE%8C%E6%88%90%E5%BE%8C%E7%94%A2%E7%94%9F%E7%9A%84%E5%90%84%E6%AA%94%E6%A1%88%E6%84%8F%E7%BE%A9/" title="這一篇筆記">這一篇筆記</a>中的vue-axios的安裝方式就ok了。</p>
+<p>step2. 接著，接後端的api網頁<br>你先到APP.vue元件檔中，加入<code>created</code>的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---App.vue元件檔---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  created()&#123;</span><br><span class="line">     this.$http.get(api).then((reponse) &#x3D;&gt;&#123;</span><br><span class="line">      console.log(reponse);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>step3. 查找後端的api網址<br>首先，你先到課堂上提供的<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D">以下連結</a>中，取得商品列表的內容中，<br>有一個<code>[API]: /api/:api_path/products?page=:page</code><br>那你就只要擷取<code>/api/:api_path/products</code>這個位址就可以了，後面的<code>?page=page</code>不用引用。</p>
+<h2 id="加入你申請的api網址"><a href="#加入你申請的api網址" class="headerlink" title="加入你申請的api網址"></a>加入你申請的api網址</h2><p>那你可以注意到這個網址中<code>/api/:api_path/products</code>中有一個<code>:api_path</code>的部分，那這個就是要取代成你在<br>六角申請的api網址的路徑，假設你申請的路徑是cat。</p>
+<p>所以，網址會變成<code>/api/cat/products</code></p>
+<h2 id="加入後端伺服器的網址"><a href="#加入後端伺服器的網址" class="headerlink" title="加入後端伺服器的網址"></a>加入後端伺服器的網址</h2><p>另外，這段網址前面還要再加上遠端伺服器的路徑。<br>那課堂上提供的後端官方路徑是<a target="_blank" rel="noopener" href="https://vue-course-api.hexschool.io,/">https://vue-course-api.hexschool.io，</a><br>所以，你要將你申請的api網址加上後端官方路徑，最終，api路徑會變成<br><a target="_blank" rel="noopener" href="https://vue-course-api.hexschool.io/api/cat/products">https://vue-course-api.hexschool.io/api/cat/products</a></p>
+<p>此時，你在<code>console.log</code>中就可以看到你用api取得的內容囉。</p>
+<h2 id="修改後端api路徑"><a href="#修改後端api路徑" class="headerlink" title="修改後端api路徑"></a>修改後端api路徑</h2><p>那因為，我們現在是將api路徑寫死，這樣當api的網站有做修改的時候，就會很麻煩。<br>所以，我們先去config資料夾中的dev.env.js檔案中，我們就先將<br>剛剛的api路徑先加到這個檔案中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---dev.env.js檔案---</span><br><span class="line">module.exports &#x3D; merge(prodEnv, &#123;</span><br><span class="line">  NODE_ENV: &#39;&quot;development&quot;&#39;,</span><br><span class="line">  APIPATH: &#39;&quot;https:&#x2F;&#x2F;vue-course-api.hexschool.io&quot;&#39;,</span><br><span class="line">  CUSTOMPATH: &#39;&quot;cat&quot;&#39;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>接著到，你的APP.vue元件檔中將這兩新增的環境變數加到你的api路徑中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  created()&#123;</span><br><span class="line">    const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;products&#96;;&#x2F;&#x2F;&#39;https:&#x2F;&#x2F;vue-course-api.hexschool.io&#x2F;api&#x2F;cat&#x2F;products&#39;;</span><br><span class="line">     this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        console.log(response)</span><br><span class="line">      &#125;)</span><br><span class="line">      </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>如果<code>console.log</code>上有抓到資料的話，就成功囉。</p>
+<h1 id="插件補充說明"><a href="#插件補充說明" class="headerlink" title="插件補充說明"></a>插件補充說明</h1><p>這個課程是針對VUE 3.0推出以後，如何安裝相對應的版本套件。<br>主要是在講萬一你的套件本版太新的話，有可能沒有支援較舊版本的vue.js。<br>那這個時候，就需要先將原先的套件先<code>uninstall</code>之後，再安裝較舊版本的套件，來解決這樣的問題囉。<br>那安裝指定版本的指令，以vue.axios為例<br><code>npm install--save vue-axios@2</code><br>如此，就能安裝較舊版本的vue-axios來解決以上提到的問題囉。</p>
+<h1 id="引用-Bootstrap-套件，並客製化樣式"><a href="#引用-Bootstrap-套件，並客製化樣式" class="headerlink" title="引用 Bootstrap 套件，並客製化樣式"></a>引用 Bootstrap 套件，並客製化樣式</h1><p>怎麼把bootstrap的樣式套入<br>step1.<br>輸入指令<code>npm install bootstrap</code>。<br>step2.<br>你去node_modules的資料夾中，應該就可以看到bootstrap資料夾。<br>接著，在這個資料夾中有一個scss檔，那就是我們要引入的就是bootstrap.scss檔案喔。<br>step3.<br>在App.vue元件檔檔案的內容引入bootstrap檔案，並使用scss的功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">---App.vue元件檔---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  created()&#123;</span><br><span class="line">    const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;products&#96;;&#x2F;&#x2F;&#39;https:&#x2F;&#x2F;vue-course-api.hexschool.io&#x2F;api&#x2F;stealing610&#x2F;products&#39;;</span><br><span class="line">     this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        console.log(response.data);</span><br><span class="line">      &#125;)</span><br><span class="line">      </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang&#x3D;&quot;scss&quot;&gt;</span><br><span class="line">  @import &quot;~bootstrap&#x2F;scss&#x2F;bootstrap&quot;;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到在App.vue檔案中的<code>style</code>有加入<code>lang=&quot;scss&quot;</code>，且在裡面引入了bootstrap.scss檔案。</p>
+<p>step4.<br>那除了要引用原本bootstrap.scss的樣式之外，我們也想要自己使用自製元件<br>我再新增一個檔案。<br>那我們在src資料夾中的assets資料夾，新增我們的檔案，並將它的檔名叫為all.scss。<br>此時，我們將App.vue元件檔引入bootstrap的部分改成引入我們的all.scss檔案。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---App.vue元件檔---</span><br><span class="line">&lt;style lang&#x3D;&quot;scss&quot;&gt;</span><br><span class="line">  &#x2F;&#x2F; @import &quot;~bootstrap&#x2F;scss&#x2F;bootstrap&quot;;</span><br><span class="line">  @import &quot;.&#x2F;assets&#x2F;all.scss&quot;;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>接著，在all.scss檔案中引入bootstrap.scss檔案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">---all.scss檔案---</span><br><span class="line">@import &quot;&#x2F;node_modules&#x2F;bootstrap&#x2F;scss&#x2F;bootstrap.scss&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>step5.<br>接下來，我們在src資料夾中的assets資料夾中，新增一個helpuer的資料夾。<br>接著，將原本在node_modules資料夾中的bootstrap資料夾中的scss檔案中的_variables.scss檔案，<br>複製到這個helper的資料夾中。</p>
+<p>step6.<br>在我們剛剛創的all.scss檔案中，再引入一些bootstrap的檔案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---all.scss---</span><br><span class="line">@import &quot;&#x2F;node_modules&#x2F;bootstrap&#x2F;scss&#x2F;functions&quot;;</span><br><span class="line">@import &quot;.&#x2F;helpuer&#x2F;variables&quot;;</span><br><span class="line">@import &quot;&#x2F;node_modules&#x2F;bootstrap&#x2F;scss&#x2F;bootstrap&quot;;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，我們多引入了bootstrap的scss檔案中的_function.scss檔案，<br>另外，還有引入我們新增的helpuer資料夾中的_variables.scss檔案。</p>
+<p>step7.<br>我們在App.vue元件檔中，新增一些bootstrap的樣式，來看有沒有正確載入bootstrap檔案。<br>若有正確呈現，就代表有正確引入bootstrap囉。<br>接著，我們在helpuer檔案中的variable.scss檔案，將primary的顏色替換成紫色。<br>看看你在元件中使用<code>&lt;button class=&quot;btn btn-primary&quot;&gt;按鈕&lt;/button&gt;</code>，看這個按鈕的顏色有沒有變成你剛剛<br>改成的紫色，若有的話，就代表你可以成功自訂義bootstrap的樣式囉。</p>
+<h3 id="小插曲-引入路徑的錯誤"><a href="#小插曲-引入路徑的錯誤" class="headerlink" title="小插曲-引入路徑的錯誤"></a>小插曲-引入路徑的錯誤</h3><p><img src="/image/file_path_command.png"><br>以上是課程的發問區提供的引入路徑指令，你就依照上面的指令來指定你要引入檔案的路徑吧。</p>
+<h2 id="helloworld-vue檔案中的scoped關鍵字"><a href="#helloworld-vue檔案中的scoped關鍵字" class="headerlink" title="helloworld.vue檔案中的scoped關鍵字"></a>helloworld.vue檔案中的scoped關鍵字</h2><p>在你的HelloWorld.vue元件檔中的<code>style</code>標籤中有加入<code>scoped</code> 關鍵字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">---HelloWorld.vue元件檔---</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">h1, h2 &#123;</span><br><span class="line">  font-weight: normal;</span><br><span class="line">&#125;</span><br><span class="line">ul &#123;</span><br><span class="line">  list-style-type: none;</span><br><span class="line">  padding: 0;</span><br><span class="line">&#125;</span><br><span class="line">li &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  margin: 0 10px;</span><br><span class="line">&#125;</span><br><span class="line">a &#123;</span><br><span class="line">  color: #42b983;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<p>它的作用是，在<code>scoped</code>範圍以內的內容，只會在該檔案中運行，也就是只會運作在HelloWorld.vue檔案中囉。<br>所以，當有你有一些樣式想要封裝在特定的元件中，你就可以用這種寫法囉。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/27/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%992-%E8%A3%BD%E4%BD%9C%E5%87%BA%E7%99%BB%E5%85%A5%E9%A0%81%E9%9D%A2/" rel="prev" title="Vue-vue出一個電商網站2-製作出登入頁面">
+      <i class="fa fa-chevron-left"></i> Vue-vue出一個電商網站2-製作出登入頁面
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/28/%E5%BC%95%E5%85%A5%E6%AA%94%E6%A1%88%E8%B7%AF%E5%BE%91%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" rel="next" title="引入檔案路徑常用指令">
+      引入檔案路徑常用指令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AA%B2%E7%A8%8B%E6%9E%B6%E6%A7%8B%E5%8F%8A%E6%B5%81%E7%A8%8B%E8%AA%AA%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">課程架構及流程說明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%99%BB%E5%85%A5-Vue-%E8%AA%B2%E7%A8%8B-API-%E5%B0%B1%E6%9C%83%E5%87%BA%E7%8F%BE%E7%84%A1%E6%B3%95%E7%99%BB%E5%85%A5%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="nav-number">1.1.</span> <span class="nav-text">登入 Vue 課程 API 就會出現無法登入的問題</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%BB%E5%86%8A%E8%AA%B2%E7%A8%8B%E5%B0%88%E5%B1%AC%E7%B7%B4%E7%BF%92-API"><span class="nav-number">2.</span> <span class="nav-text">註冊課程專屬練習 API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B3%E8%AB%8B%E7%9A%84API%E8%B7%AF%E5%BE%91"><span class="nav-number">2.1.</span> <span class="nav-text">申請的API路徑</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%95%9F%E7%94%A8%E4%B8%80%E5%80%8B-Vue-Cli-%E4%B8%A6%E4%B8%94-%E5%BC%95%E7%94%A8%E5%B8%B6%E5%85%A5%E5%B0%88%E5%B1%AC-API"><span class="nav-number">3.</span> <span class="nav-text">啟用一個 Vue Cli 並且 引用帶入專屬 API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5%E4%BD%A0%E7%94%B3%E8%AB%8B%E7%9A%84api%E7%B6%B2%E5%9D%80"><span class="nav-number">3.1.</span> <span class="nav-text">加入你申請的api網址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5%E5%BE%8C%E7%AB%AF%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%9A%84%E7%B6%B2%E5%9D%80"><span class="nav-number">3.2.</span> <span class="nav-text">加入後端伺服器的網址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%BE%8C%E7%AB%AFapi%E8%B7%AF%E5%BE%91"><span class="nav-number">3.3.</span> <span class="nav-text">修改後端api路徑</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E8%A3%9C%E5%85%85%E8%AA%AA%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">插件補充說明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E7%94%A8-Bootstrap-%E5%A5%97%E4%BB%B6%EF%BC%8C%E4%B8%A6%E5%AE%A2%E8%A3%BD%E5%8C%96%E6%A8%A3%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">引用 Bootstrap 套件，並客製化樣式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E6%8F%92%E6%9B%B2-%E5%BC%95%E5%85%A5%E8%B7%AF%E5%BE%91%E7%9A%84%E9%8C%AF%E8%AA%A4"><span class="nav-number">5.0.1.</span> <span class="nav-text">小插曲-引入路徑的錯誤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#helloworld-vue%E6%AA%94%E6%A1%88%E4%B8%AD%E7%9A%84scoped%E9%97%9C%E9%8D%B5%E5%AD%97"><span class="nav-number">5.1.</span> <span class="nav-text">helloworld.vue檔案中的scoped關鍵字</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

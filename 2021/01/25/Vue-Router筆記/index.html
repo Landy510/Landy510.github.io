@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="使用Vue Router 及配置路由文件以上範例，你可以看到它們都是停留在index的網址上，但是，會因為我們在#後面所接入的內容不同，來呈現不同元件的內容。像上面圖片是#&#x2F;user，所以，此時是呈現 user 元件。像下面圖片是#&#x2F;product，所以，此時是呈現 product 元件。 故本節是紀錄怎麼建立Vue Router Router會包含幾個檔案 首先，進入點包含它會注入src資料夾中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue Router筆記">
+<meta property="og:url" content="https://landy510.github.io/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="使用Vue Router 及配置路由文件以上範例，你可以看到它們都是停留在index的網址上，但是，會因為我們在#後面所接入的內容不同，來呈現不同元件的內容。像上面圖片是#&#x2F;user，所以，此時是呈現 user 元件。像下面圖片是#&#x2F;product，所以，此時是呈現 product 元件。 故本節是紀錄怎麼建立Vue Router Router會包含幾個檔案 首先，進入點包含它會注入src資料夾中">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/image/SPA_1.png">
+<meta property="og:image" content="https://landy510.github.io/image/SPA_2.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue_axios.png">
+<meta property="og:image" content="https://landy510.github.io/image/router_problem.png">
+<meta property="article:published_time" content="2021-01-25T01:43:09.000Z">
+<meta property="article:modified_time" content="2021-04-29T07:10:36.322Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/image/SPA_1.png">
+
+<link rel="canonical" href="https://landy510.github.io/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Vue Router筆記 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue Router筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-25 09:43:09" itemprop="dateCreated datePublished" datetime="2021-01-25T09:43:09+08:00">2021-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-04-29 15:10:36" itemprop="dateModified" datetime="2021-04-29T15:10:36+08:00">2021-04-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="使用Vue-Router-及配置路由文件"><a href="#使用Vue-Router-及配置路由文件" class="headerlink" title="使用Vue Router 及配置路由文件"></a>使用Vue Router 及配置路由文件</h1><p><img src="/image/SPA_1.png" alt="user頁面"><br><img src="/image/SPA_2.png" alt="product頁面"><br>以上範例，你可以看到它們都是停留在index的網址上，<br>但是，會因為我們在#後面所接入的內容不同，來呈現不同元件的內容。<br>像上面圖片是#/user，所以，此時是呈現 user 元件。<br>像下面圖片是#/product，所以，此時是呈現 product 元件。</p>
+<p>故本節是紀錄怎麼建立Vue Router</p>
+<p>Router會包含幾個檔案</p>
+<p>首先，進入點<br>包含它會注入src資料夾中的元件檔和其他的component檔案。</p>
+<p>第二，新增路由的配置檔案<br>這個配置檔案會決定在哪個路由中呈現哪個元件檔案。<br>那它執行的路徑會在router/index.js 中。</p>
+<p>第三，分頁內容</p>
+<p>Vue Components 就是一些元件的檔案，例如專案檔中的Hellowolrd.vue檔。</p>
+<p>接下來，介紹安裝vue 的router步驟<br>step1.<br>先輸入 <code>npm install vue-router --save</code> 指令</p>
+<p>step2.<br>在src資料夾中，新建一個叫router的資料夾<br>在router下再新增一個叫index.js的檔案，這個檔案就是要放整個路由的配置檔。</p>
+<p>step3.<br>在index.js檔案中輸入<br><code>import Vue from &#39;vue&#39;</code><br><code>import VueRouter from &#39;vue-router&#39;</code></p>
+<p>以上這兩行呢，是將官方提供的元件給引入進來。</p>
+<p>接下來，在這兩行之後就是引入我們自己的元件囉。<br><code>import Home from &#39;@/component/HelloWorld&#39;</code><br>引入在src資料夾中的HelloWorld元件檔，並將它命名為Home</p>
+<p>step4.<br>在你引入完官方元件 和你自己的元件檔之後，<br>就是要輸入啟用的指令，<br>那你就在同一個index.js檔案中，在引入程式碼的後方輸入<code>Vue.use(VueRouter)</code><br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import VueRouter from &#39;vue-router&#39;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 以上為官方提供的元件</span><br><span class="line">import Home from &#39;@&#x2F;component&#x2F;HelloWorld&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter)  &#x2F;&#x2F; 啟用指令</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>step5.<br>因為這個檔案，我們必須匯出給<code>entry</code>使用，<br>所以，我們要再加上以下的程式碼</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import VueRouter from &#39;vue-router&#39;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 以上為官方提供的元件</span><br><span class="line">import Home from &#39;@&#x2F;components&#x2F;HelloWorld&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter)</span><br><span class="line"></span><br><span class="line">export default new VueRouter(&#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>你可以看到我們在最下面，輸入了<code>export</code>的相關內容。</p>
+<p>step6.<br>在main.js檔案中，匯入你的router檔案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">---main.js檔案---</span><br><span class="line">&#x2F;&#x2F; The Vue build version to load with the &#96;import&#96; command</span><br><span class="line">&#x2F;&#x2F; (runtime-only or standalone) has been set in webpack.base.conf with an alias.</span><br><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import axios from &#39;axios&#39;</span><br><span class="line">import VueAxios from &#39;vue-axios&#39;</span><br><span class="line">import router from &#39;.&#x2F;router&#39;  &#x2F;&#x2F; 匯入router檔案</span><br><span class="line"></span><br><span class="line">Vue.use(VueAxios, axios)</span><br><span class="line">Vue.config.productionTip &#x3D; false</span><br><span class="line"></span><br><span class="line">&#x2F;* eslint-disable no-new *&#x2F;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: &#39;&lt;App&#x2F;&gt;&#39;,</span><br><span class="line">  router,                          &#x2F;&#x2F; 新增router屬性</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>你可以看到我們在main.js檔案中匯入了router檔案，<br>並在vue物件新增了一個router屬性</p>
+<p>step7.<br>運行<code>npm run dev</code> 來執行vue的環境吧<br>此時，你運行<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a><br>應該會發現你的網址後面新增了#，而這個#後面就是你的虛擬路由器</p>
+<p>step8.<br>接著，你就去index.js中的<code>export default new VueRouter</code>內容新增以下的內容<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;;</span><br><span class="line">import VueRouter from &#39;vue-router&#39;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 以上為官方提供的元件</span><br><span class="line">import Home from &#39;@&#x2F;components&#x2F;HelloWorld&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter);</span><br><span class="line"></span><br><span class="line">export default new VueRouter(&#123;</span><br><span class="line">    routes:[</span><br><span class="line">        &#123;</span><br><span class="line">            name:&#39;首頁&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">            path:&#39;&#x2F;&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">            component:Home , &#x2F;&#x2F;它所對應的原件</span><br><span class="line">        &#125;    </span><br><span class="line">    ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>step9.<br>接著你去App.vue檔案中的<code>template</code>部分，<br>新增以下的<code>&lt;router-view&gt;&lt;/router-view&gt;</code><br>並把原本的<code>&lt;Helloworld&gt;</code>元件的部分註解掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;img src&#x3D;&quot;.&#x2F;assets&#x2F;logo.png&quot;&gt;</span><br><span class="line">    &lt;!--&lt;HelloWorld&#x2F;&gt;--&gt;</span><br><span class="line">    &lt;router-view&gt;&lt;&#x2F;router-view&gt;</span><br><span class="line">    &lt;button class&#x3D;&quot;btn btn-danger&quot;&gt;按鈕&lt;&#x2F;button&gt;  </span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+
+<p>接著，你在畫面上應該是看不出來有啥差別，此時，你就打開vue開發者工具，<br>你去看App底下的HelloWolrd元件的標籤旁邊，應該就會跟著一個router-view的標籤喔。</p>
+<h2 id="接下來我們要新增另一個元件，"><a href="#接下來我們要新增另一個元件，" class="headerlink" title="接下來我們要新增另一個元件，"></a>接下來我們要新增另一個元件，</h2><p>step1.<br>接著，我們先偷懶在最外層的index.html引入bootstrap的CSS的CDN。</p>
+<p>step2.<br>我們在components資料夾中，新增一個pages的資料夾<br>在這個pages資料夾中新增一個pages.vue的元件檔</p>
+<p>step3.<br>我們去bootstrap中的<code>card</code>元件內容複製，並貼到pages.vue的<code>template</code>中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;card&quot; style&#x3D;&quot;width: 18rem;&quot;&gt;</span><br><span class="line">      &lt;img src&#x3D;&quot;&quot; class&#x3D;&quot;card-img-top&quot; alt&#x3D;&quot;...&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;card-body&quot;&gt;</span><br><span class="line">        &lt;h5 class&#x3D;&quot;card-title&quot;&gt;Card title&lt;&#x2F;h5&gt;</span><br><span class="line">        &lt;p class&#x3D;&quot;card-text&quot;&gt;Some quick example text to build on the card title and make up the bulk of the card&#39;s content.&lt;&#x2F;p&gt;</span><br><span class="line">        &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Go somewhere&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;pages&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>以上的內容你就可以看到，我們在pages中的<code>template</code>加入了<code>card</code>元件的內容。</p>
+<h3 id="注意，元件外面要再包一個div"><a href="#注意，元件外面要再包一個div" class="headerlink" title="注意，元件外面要再包一個div"></a>注意，元件外面要再包一個div</h3><p>老師建議，你在創任何元件的<code>template</code>的時候，它們的內容外面都要再包一層<code>div</code>，<br>是因為Vue 最外層的元素不能直接使用 vue 的指令。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div v-for&#x3D;&quot;...&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+<p>像上面這樣，如果你直接對最外層使用<code>v-for</code>指令的話，就會出錯喔。</p>
+<p>step4.<br>接著，你去index.js檔案裡面，新增引入pages元件的相關設定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;;</span><br><span class="line">import VueRouter from &#39;vue-router&#39;;</span><br><span class="line"></span><br><span class="line">import Home from &#39;@&#x2F;components&#x2F;HelloWorld&#39;</span><br><span class="line">import Page from &#39;@&#x2F;components&#x2F;pages&#x2F;pages&#39;  &#x2F;&#x2F; 引入pages.vue元件</span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter);</span><br><span class="line"></span><br><span class="line">export default new VueRouter(&#123;</span><br><span class="line">  routes:[</span><br><span class="line">    &#123;</span><br><span class="line">      name:&#39;首頁&#39;,</span><br><span class="line">      path:&#39;&#x2F;index&#39;, </span><br><span class="line">      component:Home , </span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; &#x2F;&#x2F; 新增pages元件的相關設定</span><br><span class="line">      name:&#39;分頁&#39;,</span><br><span class="line">      path:&#39;&#x2F;page&#39;, </span><br><span class="line">      component:Page ,</span><br><span class="line">    &#125;     </span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>step5.<br>接著，你將你的vue的網址的#號後面，加入Page<br>即:<br><a target="_blank" rel="noopener" href="http://localhost:8080/#/Page">http://localhost:8080/#/Page</a></p>
+<p>此時，你應該就可以看到在網頁上看到新增的 Page 元件的內容。</p>
+<h2 id="製作分頁的切換"><a href="#製作分頁的切換" class="headerlink" title="製作分頁的切換"></a>製作分頁的切換</h2><p>接下來要接分頁的切換<br>step1.<br>首先我們先為 App.vue 元件檔引入 bootstrap 的 <code>navbar</code> 內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">---App.vue 元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;!--navbar開始--&gt;</span><br><span class="line">    &lt;nav class&#x3D;&quot;navbar navbar-expand-lg navbar-light bg-light&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;container-fluid&quot;&gt;</span><br><span class="line">        &lt;a class&#x3D;&quot;navbar-brand&quot; href&#x3D;&quot;#&quot;&gt;Navbar&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;button class&#x3D;&quot;navbar-toggler&quot; type&#x3D;&quot;button&quot; data-bs-toggle&#x3D;&quot;collapse&quot; data-bs-target&#x3D;&quot;#navbarSupportedContent&quot; aria-controls&#x3D;&quot;navbarSupportedContent&quot; aria-expanded&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Toggle navigation&quot;&gt;</span><br><span class="line">          &lt;span class&#x3D;&quot;navbar-toggler-icon&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">        &lt;&#x2F;button&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;collapse navbar-collapse&quot; id&#x3D;&quot;navbarSupportedContent&quot;&gt;</span><br><span class="line">          &lt;ul class&#x3D;&quot;navbar-nav me-auto mb-2 mb-lg-0&quot;&gt;</span><br><span class="line">            &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">              &lt;a class&#x3D;&quot;nav-link active&quot; href&#x3D;&quot;#&quot;&gt;Home&lt;&#x2F;a&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">            &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">              &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;#&quot;&gt;Page&lt;&#x2F;a&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">          &lt;&#x2F;ul&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;nav&gt;</span><br><span class="line">    &lt;!--navbar結束--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;img src&#x3D;&quot;.&#x2F;assets&#x2F;logo.png&quot;&gt;</span><br><span class="line">    &lt;router-view&gt;&lt;&#x2F;router-view&gt;</span><br><span class="line">    &lt;button class&#x3D;&quot;btn btn-danger&quot;&gt;按鈕&lt;&#x2F;button&gt;  </span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，我們在<code>template</code>中，加入了<code>navbar</code>樣式，此時，你刷新網頁後，<br>應該就會出現<code>navbar</code>的樣式了。</p>
+<p>step2.<br>接著，我們修改在App.vue的檔案中，連動到Home和Page的<code>a</code>標籤，將其改成<code>router-link</code>標籤，並在這些標籤內分別加入<code>to=&quot;/index&quot;和to=&quot;/Page&quot;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---APP.vue檔案---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;nav class&#x3D;&quot;navbar navbar-expand-lg navbar-light bg-light&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;container-fluid&quot;&gt;</span><br><span class="line">        &lt;a class&#x3D;&quot;navbar-brand&quot; href&#x3D;&quot;#&quot;&gt;Navbar&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;button class&#x3D;&quot;navbar-toggler&quot; type&#x3D;&quot;button&quot; data-bs-toggle&#x3D;&quot;collapse&quot; data-bs-target&#x3D;&quot;#navbarSupportedContent&quot; aria-controls&#x3D;&quot;navbarSupportedContent&quot; aria-expanded&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Toggle navigation&quot;&gt;</span><br><span class="line">          &lt;span class&#x3D;&quot;navbar-toggler-icon&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">        &lt;&#x2F;button&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;collapse navbar-collapse&quot; id&#x3D;&quot;navbarSupportedContent&quot;&gt;</span><br><span class="line">          &lt;ul class&#x3D;&quot;navbar-nav me-auto mb-2 mb-lg-0&quot;&gt;</span><br><span class="line">            &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">              &lt;router-link class&#x3D;&quot;nav-link active&quot; to&#x3D;&quot;&#x2F;index&quot;&gt;Home&lt;&#x2F;router-link&gt;  &#x2F;&#x2F; 轉換到 Home 的按鈕</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">            &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">              &lt;router-link class&#x3D;&quot;nav-link&quot; to&#x3D;&quot;&#x2F;Page&quot;&gt;Page&lt;&#x2F;router-link&gt;          &#x2F;&#x2F; 轉換到 Page 的按鈕</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">          &lt;&#x2F;ul&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;nav&gt;</span><br><span class="line"></span><br><span class="line">    &lt;img src&#x3D;&quot;.&#x2F;assets&#x2F;logo.png&quot;&gt;</span><br><span class="line">    &lt;router-view&gt;&lt;&#x2F;router-view&gt;</span><br><span class="line">    &lt;button class&#x3D;&quot;btn btn-danger&quot;&gt;按鈕&lt;&#x2F;button&gt;  </span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+<p>此時，你點擊 Home 和 Page 按鈕的時候，應該就跳轉到 Home 或 Page 的頁面囉，所以，在 index.js 中，各物件的 path 屬性，就是用在跳轉分頁路徑做使用。</p>
+<h3 id="除了to以外，還有其他跳轉頁面的方法"><a href="#除了to以外，還有其他跳轉頁面的方法" class="headerlink" title="除了to以外，還有其他跳轉頁面的方法"></a>除了to以外，還有其他跳轉頁面的方法</h3><p>就是使用在index.js中，你為那些元件檔所加入的<code>name</code>的屬性名稱。<br>所以，就將App.vue中的<code>navbar</code>做以下的修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;nav class&#x3D;&quot;navbar navbar-expand-lg navbar-light bg-light&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;container-fluid&quot;&gt;</span><br><span class="line">        &lt;a class&#x3D;&quot;navbar-brand&quot; href&#x3D;&quot;#&quot;&gt;Navbar&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;button class&#x3D;&quot;navbar-toggler&quot; type&#x3D;&quot;button&quot; data-bs-toggle&#x3D;&quot;collapse&quot; data-bs-target&#x3D;&quot;#navbarSupportedContent&quot; aria-controls&#x3D;&quot;navbarSupportedContent&quot; aria-expanded&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Toggle navigation&quot;&gt;</span><br><span class="line">          &lt;span class&#x3D;&quot;navbar-toggler-icon&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">        &lt;&#x2F;button&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;collapse navbar-collapse&quot; id&#x3D;&quot;navbarSupportedContent&quot;&gt;</span><br><span class="line">          &lt;ul class&#x3D;&quot;navbar-nav me-auto mb-2 mb-lg-0&quot;&gt;</span><br><span class="line">            &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">              &lt;router-link class&#x3D;&quot;nav-link active&quot; :to&#x3D;&quot;&#123;name:&#39;首頁&#39;&#125;&quot;&gt;Home&lt;&#x2F;router-link&gt;  &#x2F;&#x2F; 換成name的屬性名稱</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">            &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">              &lt;router-link class&#x3D;&quot;nav-link&quot; to&#x3D;&quot;&#x2F;Page&quot;&gt;Page&lt;&#x2F;router-link&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">          &lt;&#x2F;ul&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;nav&gt;</span><br><span class="line"></span><br><span class="line">    &lt;img src&#x3D;&quot;.&#x2F;assets&#x2F;logo.png&quot;&gt;</span><br><span class="line">    &lt;router-view&gt;&lt;&#x2F;router-view&gt;</span><br><span class="line">    &lt;button class&#x3D;&quot;btn btn-danger&quot;&gt;按鈕&lt;&#x2F;button&gt;  </span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，在首頁的<code>router-link</code>標籤部分，我們把<code>to</code>的屬性用<code>v-bind</code>去動態綁定<code>name</code>屬性，並將這個屬性名稱改成這個元件的<code>name</code>的名稱，如此，就可以跟原本的<code>to</code>達成一樣的切換頁面效果囉。</p>
+<h1 id="製作巢狀路由頁面"><a href="#製作巢狀路由頁面" class="headerlink" title="製作巢狀路由頁面"></a>製作巢狀路由頁面</h1><p>首先，我們在pages同一層的目錄中，分別建立三個元件檔child.vue, child2.vue, child3.vue<br>接著，你要特別注意一點，<br>在這三個元件檔child.vue, child2.vue, child3.vue中的card元件是不包含最外層的card。<br>那在pages檔案中，就只有保留最外層的.card的<code>div</code>，<br>因為，我們希望透過切換child.vue, child2.vue, child3.vue 來變換pages.vue中，.card裡面的內容。<br>所以，要改成像下面這樣<br>即:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">---child.vue檔案---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;img src&#x3D;&quot;&quot; class&#x3D;&quot;card-img-top&quot; alt&#x3D;&quot;...&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;card-body&quot;&gt;</span><br><span class="line">      &lt;h5 class&#x3D;&quot;card-title&quot;&gt;Card 1&lt;&#x2F;h5&gt;</span><br><span class="line">      &lt;p class&#x3D;&quot;card-text&quot;&gt;Some quick example text to build on the card title and make up the bulk of the card&#39;s content.&lt;&#x2F;p&gt;</span><br><span class="line">      &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Go somewhere&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---pages.vue檔案---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;card&quot; style&#x3D;&quot;width: 18rem;&quot;&gt;</span><br><span class="line">      &lt;router-view&gt;&lt;router-view&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，我們在pages的元件裡面，在想要替換內容的部分，加入<code>&lt;router-view&gt;&lt;/router-view&gt;</code>，藉此，透過router的方式，來變換card.vue, card2.vue, card3.vue的內容。</p>
+<p>step2.<br>我們回到index.js檔案中，<br>我們先將child.vue, child2.vue, child3.vue 這三個元件檔引入到index.js檔案裡面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import child_1 from &#39;@&#x2F;components&#x2F;pages&#x2F;child&#39; </span><br><span class="line">import child_2 from &#39;@&#x2F;components&#x2F;pages&#x2F;child2&#39; </span><br><span class="line">import child_3 from &#39;@&#x2F;components&#x2F;pages&#x2F;child3&#39; </span><br></pre></td></tr></table></figure>
+
+<p>step3.<br>在pages的元件內容中，加入<code>children</code>的屬性，並把child.vue, child2.vue, child3.vue的路徑相關設定塞進去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">export default new VueRouter(&#123;</span><br><span class="line">  routes:[</span><br><span class="line">    &#123;</span><br><span class="line">      name:&#39;首頁&#39;,</span><br><span class="line">      path:&#39;&#x2F;index&#39;,</span><br><span class="line">      component:Home</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      name:&#39;分頁&#39;,</span><br><span class="line">      path:&#39;&#x2F;page&#39;,</span><br><span class="line">      component:Page,</span><br><span class="line">      children:[  &#x2F;&#x2F; 插入巢狀路由內容</span><br><span class="line">        &#123;</span><br><span class="line">          name:&#39;child1&#39;,</span><br><span class="line">          path:&#39;&#39;,</span><br><span class="line">          component:child_1   </span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          name:&#39;child2&#39;,</span><br><span class="line">          path:&#39;child2&#39;,</span><br><span class="line">          component:child_2     </span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          name:&#39;child3&#39;,</span><br><span class="line">          path:&#39;child3&#39;,</span><br><span class="line">          component:child_3    </span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;     </span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>你可以看到，我們對Page又加了一個<code>children</code>屬性，並在裡面加了要引入的元件。<br>而你可以特別注意到，我們沒有對child1的<code>path</code>設值，這是因為，我們把它當為Page內容的預設值，也就是說Page元件<code>&lt;router-view&gt;</code>裡面的內容，預設會是card1的內容。</p>
+<p>step4.<br>製作切換card1, card2, card3的內容<br>首先，我們就到pages.vue檔案中，加入<code>&lt;router-link&gt;&lt;/router-link&gt;</code>的元件，並透過<code>to</code>的方式來切換它們之間的內容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;router-link to&#x3D;&quot;&#x2F;page&quot;&gt;卡片一&lt;&#x2F;router-link&gt;</span><br><span class="line">    &lt;router-link to&#x3D;&quot;&#x2F;page&#x2F;child2&quot;&gt;卡片二&lt;&#x2F;router-link&gt;</span><br><span class="line">    &lt;router-link to&#x3D;&quot;&#x2F;page&#x2F;child3&quot;&gt;卡片三&lt;&#x2F;router-link&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;card&quot; style&#x3D;&quot;width: 18rem;&quot;&gt;</span><br><span class="line">      &lt;router-view&gt;&lt;&#x2F;router-view&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;HelloWorld&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，我們新增了三個<code>router-link</code>，並在這些標籤裡面，加入了<code>to</code>屬性，也就是它要跑去哪個頁面的路徑。</p>
+<h2 id="注意，元件檔絕對路徑的引用"><a href="#注意，元件檔絕對路徑的引用" class="headerlink" title="注意，元件檔絕對路徑的引用"></a>注意，元件檔絕對路徑的引用</h2><p>你看上面<code>router-link</code>是直接用/page/child2 ，是用絕對路徑來引用元件檔。<br>不要用相對路徑來引入元件，即page/child2，這樣容易造成路徑檔案引用錯誤，要特別小心。</p>
+<h1 id="使用動態路由切換頁面-Ajax-結果"><a href="#使用動態路由切換頁面-Ajax-結果" class="headerlink" title="使用動態路由切換頁面 Ajax 結果"></a>使用動態路由切換頁面 Ajax 結果</h1><p>這個動態路由的功用就在於<br>透過動態路由來載入不同的內容，並將這些內容加到固定的版型中。</p>
+<h2 id="加入動態路由"><a href="#加入動態路由" class="headerlink" title="加入動態路由"></a>加入動態路由</h2><p>首先，我們先到index.js檔案中，對card3的元件內容的<code>path</code>屬性做調整</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">export default new VueRouter(&#123;</span><br><span class="line">  routes:[</span><br><span class="line">    &#123;</span><br><span class="line">      name:&#39;首頁&#39;,</span><br><span class="line">      path:&#39;&#x2F;index&#39;,</span><br><span class="line">      component:Home</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      name:&#39;分頁&#39;,</span><br><span class="line">      path:&#39;&#x2F;page&#39;,</span><br><span class="line">      component:Page,</span><br><span class="line">      children:[</span><br><span class="line">        &#123;</span><br><span class="line">          name:&#39;child1&#39;,</span><br><span class="line">          path:&#39;&#39;,</span><br><span class="line">          component:child_1 </span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          name:&#39;child2&#39;,</span><br><span class="line">          path:&#39;child2&#39;,</span><br><span class="line">          component:child_2     </span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          name:&#39;child3&#39;,</span><br><span class="line">          path:&#39;child&#x2F;:id&#39;,  &#x2F;&#x2F; 動態路由</span><br><span class="line">          component:child_3</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;     </span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>接著，你去按頁面上卡片三的按鈕，此時，頁面應該是會失效的。<br>那你就把原本的卡片三路徑<br><a target="_blank" rel="noopener" href="http://localhost:8080/#/page/child3">http://localhost:8080/#/page/child3</a><br>改成<br><a target="_blank" rel="noopener" href="http://localhost:8080/#/page/child/ffff">http://localhost:8080/#/page/child/ffff</a></p>
+<p>這個時候，頁面應該就會呈現 child3 的內容囉。</p>
+<h2 id="取得動態路由內容"><a href="#取得動態路由內容" class="headerlink" title="取得動態路由內容"></a>取得動態路由內容</h2><p>step1.<br>我們先取得我們剛剛修改的動態路由的<code>id</code>。<br>你先去child3.vue的元件檔中，新增<code>created</code>的hook，並透過<code>log</code>來看看它的<code>id</code>是什麼</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;HelloWorld&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">      return&#123;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  created:function()&#123;</span><br><span class="line">      console.log(this.$route.params.id);  &#x2F;&#x2F; 取得它的id內容</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>透過以上的語法，我們可以在 child3.vue 元件創建的時候，取得該元件路由中的 id 屬性值。</p>
+<h2 id="搭配vue-axios的功能"><a href="#搭配vue-axios的功能" class="headerlink" title="搭配vue.axios的功能"></a>搭配vue.axios的功能</h2><p>那為什麼要取得這個router的<code>id</code>呢，因為，要把它跟axios一起使用。<br>以下內容為 child3.vue 加入 axios 來取得 api 的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">---child3.vue元件檔---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;HelloWorld&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  created:function()&#123;</span><br><span class="line">    console.log(this.$route.params.id);</span><br><span class="line">    this.$http.get(&#39;https:&#x2F;&#x2F;randomuser.me&#x2F;api&#x2F;&#39;).then((response) &#x3D;&gt; &#123;</span><br><span class="line">      console.log(response)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>如此，就能取得api的結果。</p>
+<p>那在這個random產出api的網址中，有一個seeds的功能，它可以產出固定api的內容。<br>那我們就可以藉由動態路由的方式，來存取同一份資料囉。<br>修改一下 child3.vue 的內容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">---child3.vue元件檔---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;HelloWorld&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  created:function()&#123;</span><br><span class="line">    var id &#x3D; this.$route.params.id;</span><br><span class="line">    this.$http.get(&#96;https:&#x2F;&#x2F;randomuser.me&#x2F;api&#x2F;?seed&#x3D;$&#123;id&#125;&#96;).then((response) &#x3D;&gt; &#123;</span><br><span class="line">      console.log(response)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你用以上的寫法，就可以藉由<code>console.log</code>中的data裡面的內容，在每一次頁面刷新的時候，<br>都是相同的喔。<br><img src="/image/vue_axios.png" alt="data的內容"></p>
+<h1 id="命名路由，同一個路徑載入兩個頁面元件"><a href="#命名路由，同一個路徑載入兩個頁面元件" class="headerlink" title="命名路由，同一個路徑載入兩個頁面元件"></a>命名路由，同一個路徑載入兩個頁面元件</h1><p>假設在同一個畫面下，要執行兩個<code>router-view</code>。</p>
+<p>在App.vue檔案中，<br>我們在新增的.container的裡面跟外面分別加入<code>&lt;router-view&gt;&lt;/router-view&gt;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;nav class&#x3D;&quot;navbar navbar-expand-sm navbar-light bg-light&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;container-fluid&quot;&gt;</span><br><span class="line">        &lt;a class&#x3D;&quot;navbar-brand&quot; href&#x3D;&quot;#&quot;&gt;Navbar&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;button class&#x3D;&quot;navbar-toggler&quot; type&#x3D;&quot;button&quot; data-bs-toggle&#x3D;&quot;collapse&quot; data-bs-target&#x3D;&quot;#navbarSupportedContent&quot; aria-controls&#x3D;&quot;navbarSupportedContent&quot; aria-expanded&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Toggle navigation&quot;&gt;</span><br><span class="line">          &lt;span class&#x3D;&quot;navbar-toggler-icon&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">        &lt;&#x2F;button&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;collapse navbar-collapse&quot; id&#x3D;&quot;navbarSupportedContent&quot;&gt;</span><br><span class="line">          &lt;ul class&#x3D;&quot;navbar-nav me-auto mb-2 mb-lg-0&quot;&gt;</span><br><span class="line">            &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">              &lt;router-link class&#x3D;&quot;nav-link active&quot; :to&#x3D;&quot;&#123;name:&#39;首頁&#39;&#125;&quot;&gt;Home&lt;&#x2F;router-link&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">            &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">              &lt;router-link class&#x3D;&quot;nav-link&quot; to&#x3D;&quot;&#x2F;Page&quot;&gt;Page&lt;&#x2F;router-link&gt;</span><br><span class="line">            &lt;&#x2F;li&gt;</span><br><span class="line">          &lt;&#x2F;ul&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;nav&gt;</span><br><span class="line"></span><br><span class="line">    &lt;router-view name&#x3D;&quot;menu&quot;&gt;&lt;&#x2F;router-view&gt; &#x2F;&#x2F; 新增 router-view</span><br><span class="line">    &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">      &lt;router-view&gt;&lt;&#x2F;router-view&gt;           &#x2F;&#x2F; 新增 router-view</span><br><span class="line">    &lt;&#x2F;div&gt;  </span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到在.container裡面有一個<code>router-view</code>，它是吃預設的樣式。<br>外層也有一個<code>router-view</code>，我們特別為它的<code>name</code>屬性命名為menu。</p>
+<p>step2.<br>接著，我們在page.vue的同一層目錄中，新增另一個menu.vue的元件檔。<br>並且，我們將原本寫在App.vue的<code>router-link</code>內容，都移到menu.vue元件檔中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">---menu.vue元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;nav aria-label&#x3D;&quot;breadcrumb&quot;&gt;</span><br><span class="line">      &lt;ol class&#x3D;&quot;breadcrumb&quot;&gt;</span><br><span class="line">        &lt;li class&#x3D;&quot;breadcrumb-item&quot;&gt;</span><br><span class="line">          &lt;router-link to&#x3D;&quot;&#x2F;page&quot;&gt;卡片一&lt;&#x2F;router-link&gt;</span><br><span class="line">        &lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li class&#x3D;&quot;breadcrumb-item&quot;&gt;</span><br><span class="line">          &lt;router-link to&#x3D;&quot;&#x2F;page&#x2F;child2&quot;&gt;卡片二&lt;&#x2F;router-link&gt;</span><br><span class="line">        &lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li class&#x3D;&quot;breadcrumb-item active&quot; aria-current&#x3D;&quot;page&quot;&gt;</span><br><span class="line">          &lt;router-link to&#x3D;&quot;&#x2F;page&#x2F;child3&quot;&gt;卡片三&lt;&#x2F;router-link&gt;</span><br><span class="line">        &lt;&#x2F;li&gt;</span><br><span class="line">      &lt;&#x2F;ol&gt;</span><br><span class="line">    &lt;&#x2F;nav&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;menu&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，我們把那些<code>router-link</code>從page.vue檔案中，抓來menu.vue檔。<br>所以，此時，page.vue元件檔，只會剩下.card的部分。</p>
+<p>step3.<br>接著，我們到index.js檔案中，去匯入剛剛新增的menu.vue元件檔<br>並在routes使用<code>components</code>，來同時匯入Page和menu這兩個元件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;;</span><br><span class="line">import VueRouter from &#39;vue-router&#39;;</span><br><span class="line"></span><br><span class="line">import Home from &#39;@&#x2F;components&#x2F;HelloWorld&#39;</span><br><span class="line">import Page from &#39;@&#x2F;components&#x2F;pages&#x2F;pages&#39;</span><br><span class="line">import child_1 from &#39;@&#x2F;components&#x2F;pages&#x2F;child&#39; </span><br><span class="line">import child_2 from &#39;@&#x2F;components&#x2F;pages&#x2F;child2&#39; </span><br><span class="line">import child_3 from &#39;@&#x2F;components&#x2F;pages&#x2F;child3&#39; </span><br><span class="line">import Menu from &#39;@&#x2F;components&#x2F;pages&#x2F;menu&#39;    &#x2F;&#x2F; 匯入Menu元件</span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter);</span><br><span class="line"></span><br><span class="line">export default new VueRouter(&#123;</span><br><span class="line">  routes:[</span><br><span class="line">    &#123;</span><br><span class="line">      name:&#39;首頁&#39;,</span><br><span class="line">      path:&#39;&#x2F;index&#39;,</span><br><span class="line">      component:Home</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      name:&#39;分頁&#39;,</span><br><span class="line">      path:&#39;&#x2F;page&#39;,</span><br><span class="line">      &#x2F;&#x2F;component:Page, &#x2F;&#x2F; 原本只有引用 Page 元件</span><br><span class="line">      components:&#123;</span><br><span class="line">        default: Page,</span><br><span class="line">        menu: Menu,   &#x2F;&#x2F; 加入 Menu 元件</span><br><span class="line">      &#125;,</span><br><span class="line">      children:[</span><br><span class="line">        &#123;</span><br><span class="line">          name:&#39;child1&#39;,</span><br><span class="line">          path:&#39;&#39;,</span><br><span class="line">          component:child_1</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          name:&#39;child2&#39;,</span><br><span class="line">          path:&#39;child2&#39;,</span><br><span class="line">          component:child_2     </span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          name:&#39;child3&#39;,</span><br><span class="line">          path:&#39;child3&#39;,</span><br><span class="line">          component:child_3</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;     </span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>你可以看到<code>components</code>屬性是一個物件，然後它裡面有兩個屬性<br><code>default</code>的值是Page，也就是Page元件,<br>而menu的值是Menu，也就是我們剛剛製作的Menu元件囉，<br>那要注意一下，這個menu的屬性名稱，要跟你在App.vue元件中，<br>你為那個在.container外層的<code>router-view</code>所加入的<code>name</code>屬性的值menu一樣喔。</p>
+<p>經過以上的步驟，你應該就可以成功地在Page頁面上，同時呈現兩個不同的<code>router-view</code>元件囉。</p>
+<h3 id="修正小錯誤"><a href="#修正小錯誤" class="headerlink" title="修正小錯誤"></a>修正小錯誤</h3><p>以上的範例你可以知道，page元件的內容預設是吃到child1的內容，<br>但是，瀏覽器上會跳以下這個錯誤<br><img src="/image/router_problem.png" alt="瀏覽器小錯誤"></p>
+<p>它是說 page 分頁中，已經有預設的元件了，就是 child1 元件，會造成 child1 元件的內容不會被渲染出來。<br>所以，要移除 page 元件的name 的屬性內容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">---router資料夾中的index.js檔案---</span><br><span class="line">export default new VueRouter(&#123;</span><br><span class="line">  routes:[</span><br><span class="line">    &#123;</span><br><span class="line">      name:&#39;首頁&#39;,</span><br><span class="line">      path:&#39;&#x2F;index&#39;,</span><br><span class="line">      component:Home</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &#x2F;&#x2F;name:&#39;分頁&#39;,     &#x2F;&#x2F; 元件呈現名稱 -- 註解掉</span><br><span class="line">      path:&#39;&#x2F;page&#39;,</span><br><span class="line">      &#x2F;&#x2F;component:Page , &#x2F;&#x2F; 它所對應的原件</span><br><span class="line">      components:&#123;</span><br><span class="line">        default: Page,</span><br><span class="line">        menu: Menu,</span><br><span class="line">      &#125;,</span><br><span class="line">      children:[</span><br><span class="line">        &#123;</span><br><span class="line">          name:&#39;child1&#39;,</span><br><span class="line">          path:&#39;&#39;,</span><br><span class="line">          component:child_1   </span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          name:&#39;child2&#39;,</span><br><span class="line">          path:&#39;child2&#39;,</span><br><span class="line">          component:child_2 </span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          name:&#39;child3&#39;,</span><br><span class="line">          path:&#39;child3&#39;,</span><br><span class="line">          component:child_3  </span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;     </span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>你看，我們將 page 元件檔的 name:’分頁’的部分註解掉，之後，上面那個錯誤就不會再出現囉~~</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E6%93%8D%E6%8E%A7dom%E5%85%83%E7%B4%A0/" rel="prev" title="jQuery課程筆記-操控dom元素">
+      <i class="fa fa-chevron-left"></i> jQuery課程筆記-操控dom元素
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98-01/" rel="next" title="Vue Router筆記-01">
+      Vue Router筆記-01 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Vue-Router-%E5%8F%8A%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">使用Vue Router 及配置路由文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E4%B8%8B%E4%BE%86%E6%88%91%E5%80%91%E8%A6%81%E6%96%B0%E5%A2%9E%E5%8F%A6%E4%B8%80%E5%80%8B%E5%85%83%E4%BB%B6%EF%BC%8C"><span class="nav-number">1.1.</span> <span class="nav-text">接下來我們要新增另一個元件，</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%8C%E5%85%83%E4%BB%B6%E5%A4%96%E9%9D%A2%E8%A6%81%E5%86%8D%E5%8C%85%E4%B8%80%E5%80%8Bdiv"><span class="nav-number">1.1.1.</span> <span class="nav-text">注意，元件外面要再包一個div</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%BD%E4%BD%9C%E5%88%86%E9%A0%81%E7%9A%84%E5%88%87%E6%8F%9B"><span class="nav-number">1.2.</span> <span class="nav-text">製作分頁的切換</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%A4%E4%BA%86to%E4%BB%A5%E5%A4%96%EF%BC%8C%E9%82%84%E6%9C%89%E5%85%B6%E4%BB%96%E8%B7%B3%E8%BD%89%E9%A0%81%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.1.</span> <span class="nav-text">除了to以外，還有其他跳轉頁面的方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A3%BD%E4%BD%9C%E5%B7%A2%E7%8B%80%E8%B7%AF%E7%94%B1%E9%A0%81%E9%9D%A2"><span class="nav-number">2.</span> <span class="nav-text">製作巢狀路由頁面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%8C%E5%85%83%E4%BB%B6%E6%AA%94%E7%B5%95%E5%B0%8D%E8%B7%AF%E5%BE%91%E7%9A%84%E5%BC%95%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">注意，元件檔絕對路徑的引用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8B%95%E6%85%8B%E8%B7%AF%E7%94%B1%E5%88%87%E6%8F%9B%E9%A0%81%E9%9D%A2-Ajax-%E7%B5%90%E6%9E%9C"><span class="nav-number">3.</span> <span class="nav-text">使用動態路由切換頁面 Ajax 結果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5%E5%8B%95%E6%85%8B%E8%B7%AF%E7%94%B1"><span class="nav-number">3.1.</span> <span class="nav-text">加入動態路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%96%E5%BE%97%E5%8B%95%E6%85%8B%E8%B7%AF%E7%94%B1%E5%85%A7%E5%AE%B9"><span class="nav-number">3.2.</span> <span class="nav-text">取得動態路由內容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E9%85%8Dvue-axios%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">3.3.</span> <span class="nav-text">搭配vue.axios的功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1%EF%BC%8C%E5%90%8C%E4%B8%80%E5%80%8B%E8%B7%AF%E5%BE%91%E8%BC%89%E5%85%A5%E5%85%A9%E5%80%8B%E9%A0%81%E9%9D%A2%E5%85%83%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">命名路由，同一個路徑載入兩個頁面元件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%AD%A3%E5%B0%8F%E9%8C%AF%E8%AA%A4"><span class="nav-number">4.0.1.</span> <span class="nav-text">修正小錯誤</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

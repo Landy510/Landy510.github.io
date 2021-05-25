@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="這一篇是來筆記一下，我最近看到有關MVC和SPA的概念。那大部分的內容都是看Huli的這篇文章所得來，並用我自己的話來整理這篇文章的內容。說是整理也不對，因為，Huli這篇真的太神，已經超清楚了，但是，我還是希望用我自己的話來整理一下。 MVC仿照huli在文章中常問的三個問題 MVC 這三個區塊分別在幹嘛?這邊我只想用簡單的話來說明MVC在幹嘛。 因為，書上跟網路上的有些文章在介紹MVC的意思時">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS核心篇-MVC架構和SPA概念筆記">
+<meta property="og:url" content="https://landy510.github.io/2021/03/24/JS%E6%A0%B8%E5%BF%83%E7%AF%87-MVC%E6%9E%B6%E6%A7%8B%E5%92%8CSPA%E6%A6%82%E5%BF%B5%E7%AD%86%E8%A8%98/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="這一篇是來筆記一下，我最近看到有關MVC和SPA的概念。那大部分的內容都是看Huli的這篇文章所得來，並用我自己的話來整理這篇文章的內容。說是整理也不對，因為，Huli這篇真的太神，已經超清楚了，但是，我還是希望用我自己的話來整理一下。 MVC仿照huli在文章中常問的三個問題 MVC 這三個區塊分別在幹嘛?這邊我只想用簡單的話來說明MVC在幹嘛。 因為，書上跟網路上的有些文章在介紹MVC的意思時">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-03-24T02:56:13.000Z">
+<meta property="article:modified_time" content="2021-03-24T03:31:08.657Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2021/03/24/JS%E6%A0%B8%E5%BF%83%E7%AF%87-MVC%E6%9E%B6%E6%A7%8B%E5%92%8CSPA%E6%A6%82%E5%BF%B5%E7%AD%86%E8%A8%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>JS核心篇-MVC架構和SPA概念筆記 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/24/JS%E6%A0%B8%E5%BF%83%E7%AF%87-MVC%E6%9E%B6%E6%A7%8B%E5%92%8CSPA%E6%A6%82%E5%BF%B5%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JS核心篇-MVC架構和SPA概念筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-03-24 10:56:13 / 修改時間：11:31:08" itemprop="dateCreated datePublished" datetime="2021-03-24T10:56:13+08:00">2021-03-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>這一篇是來筆記一下，我最近看到有關MVC和SPA的概念。<br>那大部分的內容都是看<a target="_blank" rel="noopener" href="https://hulitw.medium.com/introduction-mvc-spa-and-ssr-545c941669e9">Huli的這篇文章</a>所得來，並用我自己的話來整理這篇文章的內容。<br>說是整理也不對，因為，Huli這篇真的太神，已經超清楚了，但是，我還是希望用我自己的話來整理一下。</p>
+<h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><p>仿照huli在文章中常問的三個問題</p>
+<h2 id="MVC-這三個區塊分別在幹嘛"><a href="#MVC-這三個區塊分別在幹嘛" class="headerlink" title="MVC 這三個區塊分別在幹嘛?"></a>MVC 這三個區塊分別在幹嘛?</h2><p>這邊我只想用簡單的話來說明MVC在幹嘛。 因為，書上跟網路上的有些文章在介紹MVC的意思時，都講得有點太咬文嚼字了<del>(可能是我程度不夠吧，嘻嘻)</del>。<br><strong>M(Model)</strong>: 跟資料操作有關。即任何跟資料更改有相關的部分都歸它管。<br><strong>V(View)</strong>: 跟顯示畫面有關的內容都在這邊。<br><strong>C(Controller)</strong>: 將M和V連接起來的橋樑，我看網路上的文章說這部分好像都是用PHP語言來撰寫，也就是後端語言。<br>那MVC的出現就是要將分工分清楚，取用資料庫就在Model處理，寫HTML就在View處理，最後，在透過Controller從Model取來的資料塞入View中，在將View渲染完的HTML透過<br>Controller回傳給Server，Server再傳到瀏覽器中，就會看到渲染完的畫面囉。</p>
+<h2 id="MVC三個問題"><a href="#MVC三個問題" class="headerlink" title="MVC三個問題"></a>MVC三個問題</h2><p>在Huli的文章中常常會問以下三個問題<br>Q1. 為什麼要有MVC?<br>Ans: 將程式利用M, V, C三個區塊，將程式碼的職責切分乾淨，讓往後回來再看程式碼比較好管理，也比較看得懂。<br>Q2. 有MVC和沒有MVC有什麼差別?<br>Ans: 如果有，你的程式會區分成mvc的架構。如果沒有，那你的程式會所有東西都寫在一起沒有區分開來。<br>Q3. 什麼是MVC?<br>Ans: 它是一種程式架構。</p>
+<a id="more"></a>
+
+<h1 id="SPA"><a href="#SPA" class="headerlink" title="SPA"></a>SPA</h1><p>其實，很多文章都有介紹MVC到SPA的演進歷史，但是，我個人其實都沒有太大的印象，不太能感同身受，像是網頁換頁的時候會整頁空白，我完全沒印象。 或者我是一個比較友善的使用者吧XDD</p>
+<h2 id="SPA三個問題"><a href="#SPA三個問題" class="headerlink" title="SPA三個問題"></a>SPA三個問題</h2><p>Q1. 為什麼要有SPA?<br>Ans: 改善使用者體驗<br>Q2. 有SPA和沒有SPA有什麼差別?<br>Ans: 有沒有換頁時的空白畫面。<br>Q3. 什麼是SPA?<br>Ans: 它是一種利用Ajax來達到不換頁的技術。</p>
+<h2 id="SPA來龍去脈"><a href="#SPA來龍去脈" class="headerlink" title="SPA來龍去脈"></a>SPA來龍去脈</h2><p><strong>Step1.</strong><br>首先，我們希望在刷新畫面內容的時候，能夠不換頁，就像是送出聊天室的留言的時候，能夠不換頁就看到我們留言的內容。<br>Solution:<br>我們透過Ajax的技術，來達成此效果。 也就是透過JavaScript一些非同步的功能，去跟Server取得資料，並在取得資料之後，透過JavaScript來渲染畫面。<br>如此，就可以達成不需要換頁，也可以看到更新後的內容。</p>
+<p><strong>Step2.</strong><br>第二，希望在跳轉到網站其他頁面的時候，都不會出現因為換頁，而產生瀏覽器完全空白的現象。<br>Solution:<br>就將跟後端的請求都改成Ajax的方式，取得資料後，再由JavaScript來渲染畫面，就可以達成這種效果囉。</p>
+<p><strong>SPA誕生</strong><br>經過以上這些步驟的修改後，會發現畫面根本就是在前端渲染完成的，那後端的View的功能根本就沒用了。<br>然後，在前端部分，我們根本就是在同一個檔案中，透過JavaScript來變換該檔案中不同的內容，而這樣的型式就是SPA。</p>
+<p>原本，Server需要根據不一樣的網路路徑來呼叫後端相對應的Controller，進而渲染出不一樣的View的內容。 接著，再回傳到畫面中呈現。<br>現在，有了SPA的概念之後，就要換前端來判斷現在是在哪一個網路路徑底下，進而渲染不一樣的畫面內容。</p>
+<h2 id="SPA-缺點"><a href="#SPA-缺點" class="headerlink" title="SPA 缺點"></a>SPA 缺點</h2><p>在SPA底下，原本的HTML內容是空空的，許多內容都是要透過JS來動態生成的，這樣會造成網頁的SEO很差。<br>所以，才會引進SSR的概念，而SSR就是Server Side Render，由後端來渲染第一次的畫面，<br>之後，就都由前端來渲染畫面。<br>這樣的話，不僅彌補了SPA原本的缺點，也讓使用者擁有SPA的暢快體驗~~</p>
+<p>參考文章</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://hulitw.medium.com/introduction-mvc-spa-and-ssr-545c941669e9">https://hulitw.medium.com/introduction-mvc-spa-and-ssr-545c941669e9</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/18/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%89%A9%E4%BB%B6-%E5%92%8C-%E5%8E%9F%E5%9E%8B%E7%B7%B4/" rel="prev" title="JS核心篇-物件 和 原型練">
+      <i class="fa fa-chevron-left"></i> JS核心篇-物件 和 原型練
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/30/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E5%B1%AC%E6%80%A7%E7%89%B9%E5%BE%B5/" rel="next" title="JS核心篇-屬性特徵">
+      JS核心篇-屬性特徵 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MVC"><span class="nav-number">1.</span> <span class="nav-text">MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC-%E9%80%99%E4%B8%89%E5%80%8B%E5%8D%80%E5%A1%8A%E5%88%86%E5%88%A5%E5%9C%A8%E5%B9%B9%E5%98%9B"><span class="nav-number">1.1.</span> <span class="nav-text">MVC 這三個區塊分別在幹嘛?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC%E4%B8%89%E5%80%8B%E5%95%8F%E9%A1%8C"><span class="nav-number">1.2.</span> <span class="nav-text">MVC三個問題</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SPA"><span class="nav-number">2.</span> <span class="nav-text">SPA</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SPA%E4%B8%89%E5%80%8B%E5%95%8F%E9%A1%8C"><span class="nav-number">2.1.</span> <span class="nav-text">SPA三個問題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPA%E4%BE%86%E9%BE%8D%E5%8E%BB%E8%84%88"><span class="nav-number">2.2.</span> <span class="nav-text">SPA來龍去脈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPA-%E7%BC%BA%E9%BB%9E"><span class="nav-number">2.3.</span> <span class="nav-text">SPA 缺點</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

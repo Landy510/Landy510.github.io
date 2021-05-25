@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="webpack的作用是?webpack管理的架構在專案檔裡面，有很多類型的檔案，像是.png, .jpg, .css, .scss, .vue, .js 等等之類的檔案類型，我們就可以靠webpack來統一管理它們。在webpack管理的專案檔裡面都會有一個檔案作為你的進入點，這個進入點檔案就是tree的root。接著，我們就在這個進入點檔案，透過import或require來引入我們需要的檔案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="認識webpack">
+<meta property="og:url" content="https://landy510.github.io/2021/04/13/%E8%AA%8D%E8%AD%98webpack/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="webpack的作用是?webpack管理的架構在專案檔裡面，有很多類型的檔案，像是.png, .jpg, .css, .scss, .vue, .js 等等之類的檔案類型，我們就可以靠webpack來統一管理它們。在webpack管理的專案檔裡面都會有一個檔案作為你的進入點，這個進入點檔案就是tree的root。接著，我們就在這個進入點檔案，透過import或require來引入我們需要的檔案。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-04-13T01:37:15.000Z">
+<meta property="article:modified_time" content="2021-04-13T03:45:12.058Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="專案部屬工具">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2021/04/13/%E8%AA%8D%E8%AD%98webpack/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>認識webpack | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/04/13/%E8%AA%8D%E8%AD%98webpack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          認識webpack
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-04-13 09:37:15 / 修改時間：11:45:12" itemprop="dateCreated datePublished" datetime="2021-04-13T09:37:15+08:00">2021-04-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%88%E6%A1%88%E9%83%A8%E5%B1%AC%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">專案部屬工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="webpack的作用是"><a href="#webpack的作用是" class="headerlink" title="webpack的作用是?"></a>webpack的作用是?</h1><h2 id="webpack管理的架構"><a href="#webpack管理的架構" class="headerlink" title="webpack管理的架構"></a>webpack管理的架構</h2><p>在專案檔裡面，有很多類型的檔案，像是.png, .jpg, .css, .scss, .vue, .js 等等之類的檔案類型，<br>我們就可以靠webpack來統一管理它們。<br>在webpack管理的專案檔裡面都會有一個檔案作為你的進入點，這個進入點檔案就是tree的root。接著，我們就在這個進入點檔案，透過<code>import</code>或<code>require</code>來引入我們需要的檔案。最後，我們執行webpack的編譯指令，webpack就會依循你在注入點檔案中引入的檔案，去對它們做編譯。</p>
+<h2 id="HMR-Hot-Module-Replacement"><a href="#HMR-Hot-Module-Replacement" class="headerlink" title="HMR (Hot Module Replacement)"></a>HMR (Hot Module Replacement)</h2><p>webpack這個功能，可以讓你在修改完專案檔的內容時，同時注入到你的網頁中，即時的看出你修改的內容是不是你要的效果。<br>那webpack中有一個套件叫做webpack-dev-server 就可以實現這樣的環境。<br>讓我們不用每次修改完，還要自己輸入指令重新編譯專案檔後，在自己到瀏覽器開啟專案檔的html檔案，看修改的內容是不是有達成我們要的效果。</p>
+<h2 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h2><p>在前面我們有講到webpack可以編譯像是css和scss這類型的檔案，就是透過像是style-loader, css-loader這些套件，來讓webpack可以編譯各式各樣不同類型的檔案。</p>
+<h2 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h2><p>在本文章中的專案，有使用到html-webpack-plugin這個plugin，來對現有的index.html連動產生相對應的html檔案到dist資料夾中。<br>而在dist這個webpack自動產生的html檔案，我們不需要自己手動寫需要引入那些js檔案喔，因為，webpack就已經會幫我們做得好好的了~~</p>
+<p><strong>參考文章</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://neighborhood999.github.io/webpack-tutorial-gitbook/Part1/AddMorePlugin.html">webpack使用介紹</a></li>
+<li><a target="_blank" rel="noopener" href="https://webpack.docschina.org/guides/hot-module-replacement/">HMR簡介</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B0%88%E6%A1%88%E9%83%A8%E5%B1%AC%E5%B7%A5%E5%85%B7/" rel="tag"># 專案部屬工具</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/06/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Promise/" rel="prev" title="JS核心篇-Promise">
+      <i class="fa fa-chevron-left"></i> JS核心篇-Promise
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/13/%E5%BB%BA%E7%AB%8Bwebpack%E7%92%B0%E5%A2%83%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%A9%9F%E7%B4%80%E9%8C%84/" rel="next" title="建立webpack環境操作步驟紀錄">
+      建立webpack環境操作步驟紀錄 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#webpack%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF"><span class="nav-number">1.</span> <span class="nav-text">webpack的作用是?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack%E7%AE%A1%E7%90%86%E7%9A%84%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.1.</span> <span class="nav-text">webpack管理的架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HMR-Hot-Module-Replacement"><span class="nav-number">1.2.</span> <span class="nav-text">HMR (Hot Module Replacement)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loader"><span class="nav-number">1.3.</span> <span class="nav-text">Loader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plugin"><span class="nav-number">1.4.</span> <span class="nav-text">plugin</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

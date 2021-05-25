@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="製作登入介面step1.我們在components資料夾中新增一個pages資料夾，並將我們要新增的元件檔都塞在這裡。接著，在裡面新增一個login.vue元件檔。 step2.在router資料夾中的index.js中，引入login元件檔,並為這個login元件新增一些屬性和路徑。 1234567891011121314151617181920212223---index.js檔案---imp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-vue出一個電商網站2-製作出登入頁面">
+<meta property="og:url" content="https://landy510.github.io/2021/01/27/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%992-%E8%A3%BD%E4%BD%9C%E5%87%BA%E7%99%BB%E5%85%A5%E9%A0%81%E9%9D%A2/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="製作登入介面step1.我們在components資料夾中新增一個pages資料夾，並將我們要新增的元件檔都塞在這裡。接著，在裡面新增一個login.vue元件檔。 step2.在router資料夾中的index.js中，引入login元件檔,並為這個login元件新增一些屬性和路徑。 1234567891011121314151617181920212223---index.js檔案---imp">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/image/bootstrap_login_css.png">
+<meta property="og:image" content="https://landy510.github.io/image/samsite_constructure.png">
+<meta property="og:image" content="https://landy510.github.io/image/cookies.png">
+<meta property="og:image" content="https://landy510.github.io/image/cookies1.png">
+<meta property="og:image" content="https://landy510.github.io/image/not_vue_component.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue_router_error.png">
+<meta property="article:published_time" content="2021-01-27T02:34:13.000Z">
+<meta property="article:modified_time" content="2021-05-01T04:37:58.488Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/image/bootstrap_login_css.png">
+
+<link rel="canonical" href="https://landy510.github.io/2021/01/27/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%992-%E8%A3%BD%E4%BD%9C%E5%87%BA%E7%99%BB%E5%85%A5%E9%A0%81%E9%9D%A2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Vue-vue出一個電商網站2-製作出登入頁面 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/27/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%992-%E8%A3%BD%E4%BD%9C%E5%87%BA%E7%99%BB%E5%85%A5%E9%A0%81%E9%9D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue-vue出一個電商網站2-製作出登入頁面
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-27 10:34:13" itemprop="dateCreated datePublished" datetime="2021-01-27T10:34:13+08:00">2021-01-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-05-01 12:37:58" itemprop="dateModified" datetime="2021-05-01T12:37:58+08:00">2021-05-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="製作登入介面"><a href="#製作登入介面" class="headerlink" title="製作登入介面"></a>製作登入介面</h1><p>step1.<br>我們在components資料夾中新增一個pages資料夾，並將我們要新增的元件檔都塞在這裡。<br>接著，在裡面新增一個login.vue元件檔。</p>
+<p>step2.<br>在router資料夾中的index.js中，引入login元件檔,並為這個login元件新增一些屬性和路徑。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">---index.js檔案---</span><br><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import Router from &#39;vue-router&#39;</span><br><span class="line">import HelloWorld from &#39;@&#x2F;components&#x2F;HelloWorld&#39;</span><br><span class="line">import Login from &#39;@&#x2F;components&#x2F;pages&#x2F;login&#39;      &#x2F;&#x2F; 引入login元件檔</span><br><span class="line"></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;&#39;,</span><br><span class="line">      name: &#39;HelloWorld&#39;,</span><br><span class="line">      component: HelloWorld</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#x2F;login,</span><br><span class="line">      name: &#39;Login&#39;,</span><br><span class="line">      component: Login</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>step3.<br>接下來，到 Bootstrap 提供的登入頁面的公版，<a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">官方登入公版</a>可以找到提供的公版。<br>打開這個連結之後，你可以直接對該頁面按右鍵查看原始碼。<br>接著，把login的html版型內容，直接貼到login.vue元件檔中。如此，應該可以看到一些登入內容呈現在畫面上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">---Login.vue 元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;form class&#x3D;&quot;form-signin&quot;&gt;</span><br><span class="line">      &lt;h1 class&#x3D;&quot;h3 mb-3 fw-normal&quot;&gt;請先登入&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;label for&#x3D;&quot;inputEmail&quot; class&#x3D;&quot;visually-hidden&quot;&gt;Email address&lt;&#x2F;label&gt;</span><br><span class="line">      &lt;input type&#x3D;&quot;email&quot; id&#x3D;&quot;inputEmail&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Email address&quot; required autofocus&gt;</span><br><span class="line">      &lt;label for&#x3D;&quot;inputPassword&quot; class&#x3D;&quot;visually-hidden&quot;&gt;Password&lt;&#x2F;label&gt;</span><br><span class="line">      &lt;input type&#x3D;&quot;password&quot; id&#x3D;&quot;inputPassword&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Password&quot; required&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;checkbox mb-3&quot;&gt;</span><br><span class="line">        &lt;label&gt;</span><br><span class="line">          &lt;input type&#x3D;&quot;checkbox&quot; value&#x3D;&quot;remember-me&quot;&gt; Remember me</span><br><span class="line">        &lt;&#x2F;label&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;button class&#x3D;&quot;w-100 btn btn-lg btn-primary&quot; type&#x3D;&quot;submit&quot;&gt;Sign in&lt;&#x2F;button&gt;</span><br><span class="line">      &lt;p class&#x3D;&quot;mt-5 mb-3 text-muted&quot;&gt;&amp;copy; 2017-2021&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+<p>step4.<br>但是，剛剛引入的畫面樣式是不正確的，所以，在剛剛的 Bootstrap 的公版的 HTML 原始碼內容，可以看到在 App 以下引入該login內容的專用css<br><img src="/image/bootstrap_login_css.png" alt="login的css樣式"><br>接著，把它的超連結打開，然後，把這個頁面中的css樣式，貼到login.vue元件中。<br>像下面這樣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;style scoped&gt;</span><br><span class="line">html,</span><br><span class="line">body &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">body &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  padding-top: 40px;</span><br><span class="line">  padding-bottom: 40px;</span><br><span class="line">  background-color: #f5f5f5;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.form-signin &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  max-width: 330px;</span><br><span class="line">  padding: 15px;</span><br><span class="line">  margin: auto;</span><br><span class="line">&#125;</span><br><span class="line">.form-signin .checkbox &#123;</span><br><span class="line">  font-weight: 400;</span><br><span class="line">&#125;</span><br><span class="line">.form-signin .form-control &#123;</span><br><span class="line">  position: relative;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">  height: auto;</span><br><span class="line">  padding: 10px;</span><br><span class="line">  font-size: 16px;</span><br><span class="line">&#125;</span><br><span class="line">.form-signin .form-control:focus &#123;</span><br><span class="line">  z-index: 2;</span><br><span class="line">&#125;</span><br><span class="line">.form-signin input[type&#x3D;&quot;email&quot;] &#123;</span><br><span class="line">  margin-bottom: -1px;</span><br><span class="line">  border-bottom-right-radius: 0;</span><br><span class="line">  border-bottom-left-radius: 0;</span><br><span class="line">&#125;</span><br><span class="line">.form-signin input[type&#x3D;&quot;password&quot;] &#123;</span><br><span class="line">  margin-bottom: 10px;</span><br><span class="line">  border-top-left-radius: 0;</span><br><span class="line">  border-top-right-radius: 0;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>step5.<br>到六角提供的登入api中<br><a target="_blank" rel="noopener" href="https://github.com/hexschool/vue-course-api-wiki/wiki/%E7%99%BB%E5%85%A5%E5%8F%8A%E9%A9%97%E8%AD%89">六角提供的登入api</a><br>接著，會看到相關 api的 連結 和 參數</p>
+<p>step6.<br>在login.vue元件檔為它的<code>data</code>新增回傳的內容，並在<code>input</code>欄位分別用<code>v-model</code>綁定連動user.username和user.password</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">---login.vue元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;form class&#x3D;&quot;form-signin&quot;&gt;</span><br><span class="line">      &lt;h1 class&#x3D;&quot;h3 mb-3 fw-normal&quot;&gt;請先登入&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;label for&#x3D;&quot;inputEmail&quot; class&#x3D;&quot;visually-hidden&quot;&gt;Email address&lt;&#x2F;label&gt;</span><br><span class="line">      &lt;input type&#x3D;&quot;email&quot; id&#x3D;&quot;inputEmail&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Email address&quot; v-model&#x3D;&quot;user.username&quot; required autofocus&gt;  &#x2F;&#x2F;綁定user.username</span><br><span class="line">      &lt;label for&#x3D;&quot;inputPassword&quot; class&#x3D;&quot;visually-hidden&quot;&gt;Password&lt;&#x2F;label&gt;</span><br><span class="line">      &lt;input type&#x3D;&quot;password&quot; id&#x3D;&quot;inputPassword&quot; v-model&#x3D;&quot;user.password&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Password&quot; required&gt;   &#x2F;&#x2F;綁定user.password</span><br><span class="line">      &lt;div class&#x3D;&quot;checkbox mb-3&quot;&gt;</span><br><span class="line">        &lt;label&gt;</span><br><span class="line">          &lt;input type&#x3D;&quot;checkbox&quot; value&#x3D;&quot;remember-me&quot;&gt; Remember me</span><br><span class="line">        &lt;&#x2F;label&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;button class&#x3D;&quot;w-100 btn btn-lg btn-primary&quot; type&#x3D;&quot;submit&quot;&gt;Sign in&lt;&#x2F;button&gt;</span><br><span class="line">      &lt;p class&#x3D;&quot;mt-5 mb-3 text-muted&quot;&gt;&amp;copy; 2017-2021&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;&#x2F;form&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;login&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      user:&#123;</span><br><span class="line">        username:&#39;&#39;,</span><br><span class="line">        password:&#39;&#39;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>setp7.<br>在login.vue元件中的<code>form</code>為它加入一個連動<code>submit</code>的事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">---login.vue元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;form class&#x3D;&quot;form-signin&quot; @submit.prevent&#x3D;&quot;signin&quot;&gt; &#x2F;&#x2F; 加入 submit 事件</span><br><span class="line">      &lt;h1 class&#x3D;&quot;h3 mb-3 fw-normal&quot;&gt;請先登入&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;label for&#x3D;&quot;inputEmail&quot; class&#x3D;&quot;visually-hidden&quot;&gt;Email address&lt;&#x2F;label&gt;</span><br><span class="line">      &lt;input type&#x3D;&quot;email&quot; id&#x3D;&quot;inputEmail&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Email address&quot; v-model&#x3D;&quot;user.username&quot; required autofocus&gt;</span><br><span class="line">      &lt;label for&#x3D;&quot;inputPassword&quot; class&#x3D;&quot;visually-hidden&quot;&gt;Password&lt;&#x2F;label&gt;</span><br><span class="line">      &lt;input type&#x3D;&quot;password&quot; id&#x3D;&quot;inputPassword&quot; v-model&#x3D;&quot;user.password&quot; class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Password&quot; required&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;checkbox mb-3&quot;&gt;</span><br><span class="line">        &lt;label&gt;</span><br><span class="line">          &lt;input type&#x3D;&quot;checkbox&quot; value&#x3D;&quot;remember-me&quot;&gt; Remember me</span><br><span class="line">        &lt;&#x2F;label&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;button class&#x3D;&quot;w-100 btn btn-lg btn-primary&quot; type&#x3D;&quot;submit&quot;&gt;Sign in&lt;&#x2F;button&gt;</span><br><span class="line">      &lt;p class&#x3D;&quot;mt-5 mb-3 text-muted&quot;&gt;&amp;copy; 2017-2021&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;&#x2F;form&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;login&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      user:&#123;</span><br><span class="line">        username:&#39;&#39;,</span><br><span class="line">        password:&#39;&#39;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line">    signin:function()&#123;</span><br><span class="line">      const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;signin&#96;;</span><br><span class="line">      const vm &#x3D; this;</span><br><span class="line">      this.$http.post(api, vm.user).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        if(response.data.success)&#123;</span><br><span class="line">          vm.$router.push(&#39;&#x2F;&#39;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>a.<br>你可以看到，我們在<code>form</code>標籤中加入了<code>submit</code>事件，並連動到signin方法。<br>要注意的是，我們在<code>submit</code>後面還有加入<code>prevent</code>的修飾符，用來去除原本的預設事件。<br>b.<br>然後，在signin的方法中，有一個api，那這個api其實就跟App.vue中的差不多，只不過是將後面的內容替換掉，只留下signin的路徑。<br>c.<br>在串接登入的api中，我們還有將username和password透過vm.user物件的方式，丟到伺服器端來驗證。<br>d.<br>然後，你要注意，這邊的axios的方法是用<code>post</code>不是用<code>get</code>，因為，我們是要將帳號密碼都丟到伺服器端。<br>e.<br>那在response的data屬性中，有一個<code>success</code>屬性，用來確認是否登入成功，<br>如果登入成功的話，我們會利用<code>vm.$router.push(&#39;/&#39;)</code>，來將頁面跳轉回首頁。</p>
+<h2 id="製作登出頁面"><a href="#製作登出頁面" class="headerlink" title="製作登出頁面"></a>製作登出頁面</h2><p>我們直接先在Helloworld.vue元件檔，做一個登出的小功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;hello&quot;&gt;</span><br><span class="line">    &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;h2&gt;Essential Links&lt;&#x2F;h2&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &lt;li&gt;</span><br><span class="line">        &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;vuejs.org&quot; target&#x3D;&quot;_blank&quot;&gt;Core Docs&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;</span><br><span class="line">        &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;forum.vuejs.org&quot; target&#x3D;&quot;_blank&quot;&gt;Forum&lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;</span><br><span class="line">        &lt;a</span><br><span class="line">          href&#x3D;&quot;https:&#x2F;&#x2F;chat.vuejs.org&quot;</span><br><span class="line">          target&#x3D;&quot;_blank&quot;</span><br><span class="line">        &gt;</span><br><span class="line">          Community Chat</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;</span><br><span class="line">        &lt;a</span><br><span class="line">          href&#x3D;&quot;https:&#x2F;&#x2F;twitter.com&#x2F;vuejs&quot;</span><br><span class="line">          target&#x3D;&quot;_blank&quot;</span><br><span class="line">        &gt;</span><br><span class="line">          Twitter</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">      &lt;br&gt;</span><br><span class="line">      &lt;li&gt;</span><br><span class="line">        &lt;a</span><br><span class="line">          href&#x3D;&quot;http:&#x2F;&#x2F;vuejs-templates.github.io&#x2F;webpack&#x2F;&quot;</span><br><span class="line">          target&#x3D;&quot;_blank&quot;</span><br><span class="line">        &gt;</span><br><span class="line">          Docs for This Template</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">    &lt;&#x2F;ul&gt;</span><br><span class="line">    &lt;h2&gt;Ecosystem&lt;&#x2F;h2&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &lt;li&gt;</span><br><span class="line">        &lt;a</span><br><span class="line">          href&#x3D;&quot;http:&#x2F;&#x2F;router.vuejs.org&#x2F;&quot;</span><br><span class="line">          target&#x3D;&quot;_blank&quot;</span><br><span class="line">        &gt;</span><br><span class="line">          vue-router</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;</span><br><span class="line">        &lt;a</span><br><span class="line">          href&#x3D;&quot;http:&#x2F;&#x2F;vuex.vuejs.org&#x2F;&quot;</span><br><span class="line">          target&#x3D;&quot;_blank&quot;</span><br><span class="line">        &gt;</span><br><span class="line">          vuex</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;</span><br><span class="line">        &lt;a</span><br><span class="line">          href&#x3D;&quot;http:&#x2F;&#x2F;vue-loader.vuejs.org&#x2F;&quot;</span><br><span class="line">          target&#x3D;&quot;_blank&quot;</span><br><span class="line">        &gt;</span><br><span class="line">          vue-loader</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;</span><br><span class="line">        &lt;a</span><br><span class="line">          href&#x3D;&quot;https:&#x2F;&#x2F;github.com&#x2F;vuejs&#x2F;awesome-vue&quot;</span><br><span class="line">          target&#x3D;&quot;_blank&quot;</span><br><span class="line">        &gt;</span><br><span class="line">          awesome-vue</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">    &lt;&#x2F;ul&gt;</span><br><span class="line">    &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-outline-danger text-danger&quot; @click.prevent&#x3D;&quot;signOut&quot;&gt;登出&lt;&#x2F;a&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;HelloWorld&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      msg: &#39;Welcome to Your Vue.js App&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line">    signOut:function()&#123;</span><br><span class="line">      const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;logout&#96;;</span><br><span class="line">      const vm &#x3D; this;</span><br><span class="line">      this.$http.post(api, vm.user).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        console.log(response.data);</span><br><span class="line">        if(response.data.success)&#123;</span><br><span class="line">          vm.$router.push(&#39;&#x2F;login&#39;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>a.<br>首先，我們要先將api的網址改成logout的api網址。<br>b.<br>你可以看到，我們新增了一個登出的按鈕，然後，連動到signOut的函式，並在成功登出後，跳轉回login頁面。</p>
+<h1 id="登入-API-補充說明-跨域"><a href="#登入-API-補充說明-跨域" class="headerlink" title="登入 API 補充說明 (跨域)"></a>登入 API 補充說明 (跨域)</h1><p>為了解決跨域的cookie存取問題，所以，課堂上的signin的api的網址有改。<br>你要修改的有兩部分</p>
+<ol>
+<li>signin裡面的api網址</li>
+<li>在main.js裡面加入<code>axios.defaults.withCredentials = true;</code>語法，來讓網址存取cookie。</li>
+</ol>
+<p>你改成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">---login.vue元件檔---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;login&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      user:&#123;</span><br><span class="line">        username:&#39;&#39;,</span><br><span class="line">        password:&#39;&#39;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line">    signin:function()&#123;</span><br><span class="line">      const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;admin&#x2F;signin&#96;;</span><br><span class="line">      const vm &#x3D; this;</span><br><span class="line">      this.$http.post(api, vm.user).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        console.log(response.data);</span><br><span class="line">        if(response.data.success)&#123;</span><br><span class="line">          vm.$router.push(&#39;&#x2F;&#39;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然後，在你的main.js檔案中，加入以下的語法<br><code>axios.defaults.withCredentials = true;</code><br>用來存取每次的cookie值。</p>
+<p>注意~~~~~~~~~<br>如果，你沒有按照Vue課程中的”課程補充範例程式碼”裡面，所說的要加入像<code>token</code>和<code>expired</code>的內容的話，你的頁面是不會有存取cookie的內容的喔。<br>所以，在singin的內容存取<code>token</code>和<code>cookie</code>的方法，你要去看課程”課程補充範例程式碼”的內容，才行。</p>
+<h1 id="課程補充範例程式碼-加入token和cookie的方法"><a href="#課程補充範例程式碼-加入token和cookie的方法" class="headerlink" title="課程補充範例程式碼-加入token和cookie的方法"></a>課程補充範例程式碼-加入token和cookie的方法</h1><p>因應Chrome大幅度的改版，導致影響原本的Cookies的運作，所以，此小節是來說明怎麼解決以上的狀況。</p>
+<h2 id="同源政策導致cookie傳遞的影響"><a href="#同源政策導致cookie傳遞的影響" class="headerlink" title="同源政策導致cookie傳遞的影響"></a>同源政策導致cookie傳遞的影響</h2><p>因為，同源政策的影響，讓原本後端要將cookie寫入到前端時，會被擋掉，<br>所以，導致，前端無法夾帶原本由後端塞入到前端的cookie來向後端索取相對應的資訊。</p>
+<h2 id="調整程式碼"><a href="#調整程式碼" class="headerlink" title="調整程式碼"></a>調整程式碼</h2><p>在MDN的官網上有提供如何讀出cookie和如何把cookie寫入的範例<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie#example_2_get_a_sample_cookie_named_test2">讀出cookie</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie#example_3_do_something_only_once">寫入cookie</a></p>
+<p>後端會新增傳送data，而這個data裡面有夾帶一個token。<br>接著，要由前端負責將這個token塞到cookie裡。</p>
+<p>再來，前端再將這個<code>token</code>塞入<code>cookie</code>，送回後端，來索取回應。<br><img src="/image/samsite_constructure.png" alt="調整後的前後端運作模式"></p>
+<p>step1.<br>接下來，我們先把原本在signin的方法中，轉址的程式碼註解掉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">---login.vue元件檔---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;login&#39;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      user:&#123;</span><br><span class="line">        username:&#39;&#39;,</span><br><span class="line">        password:&#39;&#39;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line">    signin:function()&#123;</span><br><span class="line">      const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;admin&#x2F;signin&#96;;</span><br><span class="line">      const vm &#x3D; this;</span><br><span class="line">      this.$http.post(api, vm.user).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        if(response.data.success)&#123;</span><br><span class="line">          const token &#x3D; response.data.token;</span><br><span class="line">          const expired &#x3D; response.data.expired;</span><br><span class="line">          console.log(token, expired);</span><br><span class="line">		      &#x2F;&#x2F;vm.$router.push(&#39;&#x2F;&#39;);    --- 註解</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>接下來，我們可以成功讀到由後端傳入的<code>token</code>資訊，接著，就將這些資訊寫到<code>cookie</code>中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">---login.vue元件檔---</span><br><span class="line">methods:&#123;</span><br><span class="line">    signin:function()&#123;</span><br><span class="line">      const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;admin&#x2F;signin&#96;;</span><br><span class="line">      const vm &#x3D; this;</span><br><span class="line">      this.$http.post(api, vm.user).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        if(response.data.success)&#123;</span><br><span class="line">          const token &#x3D; response.data.token;      &#x2F;&#x2F; 取得 token</span><br><span class="line">          const expired &#x3D; response.data.expired;  &#x2F;&#x2F; 取得 該 cookie 的有效期限</span><br><span class="line">          document.cookie &#x3D; &#96;hextoken&#x3D;$&#123;token&#125;; expires&#x3D;$&#123;new Date(expired)&#125;&#96;;</span><br><span class="line">          vm.$router.push(&#39;&#x2F;&#39;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>上面的例子中，加入寫入cookie的程式碼。<br>接著，在成功登入之後，打開網頁上儲存的cookies。<br><img src="/image/cookies.png" alt="網頁上的cookie"><br><img src="/image/cookies1.png" alt="網頁上的cookie2"></p>
+<p>可以看到，我們自訂義的hextoken值。<br>接著，把原本login.vue元件檔註解掉的轉址那行程式碼給回復到原本的樣子。</p>
+<p>step2.<br>接著，我們主動將cookie的內容往後端發送。<br>這部分要等到到製作DashBoard的時候，才會有實際的作用，就是用來將後台修改的資料，以管理者的身分，傳送到後端。</p>
+<h1 id="驗證登入及-Vue-Router-的配置"><a href="#驗證登入及-Vue-Router-的配置" class="headerlink" title="驗證登入及 Vue Router 的配置"></a>驗證登入及 Vue Router 的配置</h1><p>此小節在教導，怎麼阻止用戶，在沒有經過驗證下，直接通過修改網址就可以去到指定頁面的問題。</p>
+<h2 id="導航守衛"><a href="#導航守衛" class="headerlink" title="導航守衛"></a>導航守衛</h2><p>在<a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/guide/advanced/navigation-guards.html">vue的官方文件</a>中，有一個導航守衛的內容<br>說明了，當頁面有跳轉時，就會觸發<code>router.beforeEach</code>的方法。可以透過它來檢查用戶接下來要去的位址是否需要驗證，進而防止以上問題。</p>
+<p>step1.<br>首先，先將<code>router.beforeEach</code>的方法內容貼到main.js檔案中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">---main.js檔案---</span><br><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import axios from &#39;axios&#39;</span><br><span class="line">import VueAxios from &#39;vue-axios&#39;</span><br><span class="line"></span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import router from &#39;.&#x2F;router&#39;</span><br><span class="line">Vue.use(VueAxios, axios)</span><br><span class="line">Vue.config.productionTip &#x3D; false</span><br><span class="line"></span><br><span class="line">axios.defaults.withCredentials &#x3D; true;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  router,</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: &#39;&lt;App&#x2F;&gt;&#39;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">router.beforeEach((to, from, next) &#x3D;&gt; &#123;</span><br><span class="line">  console.log(to, from, next);</span><br><span class="line">  next();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>首先，我們先為這個<code>beforeEach</code>方法中加入<code>next()</code>方法，為的是讓我們在測試頁面跳轉的時候，不會被導航守衛擋下來。</p>
+<p>接著，可以透過<code>consoloe.log</code>看到<code>to</code>是指要往哪個頁面，<code>from</code>是指從哪個頁面來。<br>這個時候，可以看到<code>to</code>的物件裡面有一個<code>meta</code>值，它的值是空的。<br>那這個<code>meta</code>就是路由訊息，接著，我們就可以將這個<code>meta</code>加到 HelloWorld 元件檔。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">---index.js檔案---</span><br><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import Router from &#39;vue-router&#39;</span><br><span class="line">import HelloWorld from &#39;@&#x2F;components&#x2F;HelloWorld&#39;</span><br><span class="line">import Login from &#39;@&#x2F;components&#x2F;pages&#x2F;login&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;&#39;,</span><br><span class="line">      name: &#39;HelloWorld&#39;,</span><br><span class="line">      component: HelloWorld,</span><br><span class="line">      meta: &#123; requiresAuth: true &#125;  &#x2F;&#x2F; 加入meta屬性</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#39;&#x2F;login&#39;,</span><br><span class="line">      name: &#39;Login&#39;,</span><br><span class="line">      component: Login</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>step3.</p>
+<p>接著，我們在<code>beforeEach</code>加入判斷<code>requiresAuth</code>的部分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---main.js檔案---</span><br><span class="line">router.beforeEach((to, from, next) &#x3D;&gt; &#123;</span><br><span class="line">  console.log(&#39;to&#39;,to, &#39;from&#39;,from, &#39;next&#39;,next);</span><br><span class="line">  if(to.meta.requiresAuth)&#123;</span><br><span class="line">    console.log(&quot;這個網站需要驗證&quot;);</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>可以看到，假設該頁面需要具有<code>requiresAuth</code>這個屬性是<code>true</code>的話，我們就會做相對應的處理，<br>如果沒有，我們就會直接讓頁面直接跳轉到目標頁面中。</p>
+<h2 id="main-js不是vue的元件而造成this使用上的錯誤"><a href="#main-js不是vue的元件而造成this使用上的錯誤" class="headerlink" title="main.js不是vue的元件而造成this使用上的錯誤"></a>main.js不是vue的元件而造成this使用上的錯誤</h2><p>step4.<br>接著，我們在<code>to.meta.requiresAuth</code>的判斷式裡面再加入新對應的程式碼。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach((to, from, next) &#x3D;&gt; &#123;</span><br><span class="line">  if(to.meta.requiresAuth)&#123;</span><br><span class="line">    const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;user&#x2F;check&#96;;</span><br><span class="line">    this.$http.post(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">      if(response.data.success)&#123;</span><br><span class="line">        console.log(&quot;成功&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>a.<br>我們將api改成登入的帳號驗證的網址改成<code>/api/user/check</code>囉。<br>b.<br>這個時候，編譯器應該會報以下的錯誤<br><img src="/image/not_vue_component.png" alt="因為不是vue的元件"><br>會發生這種錯誤的原因是因為，我們將<code>beforeEach</code>的程式碼放在main.js檔案中，<br>而<code>beforeEach</code>的方法中有使用<code>this.$http.post</code>，但因為main.js並不是vue的元件檔，所以，使用<code>this</code>來調用<code>post</code>的方法會報錯。</p>
+<p>所以，要直接使用axios套件，故將<code>this</code>換成<code>axios</code>就可以使用囉。<br>即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---main.js檔案---</span><br><span class="line">router.beforeEach((to, from, next) &#x3D;&gt; &#123;</span><br><span class="line">  if(to.meta.requiresAuth)&#123;</span><br><span class="line">    const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;user&#x2F;check&#96;;</span><br><span class="line">    axios.$http.post(api).then((response) &#x3D;&gt; &#123;  &#x2F;&#x2F; 直接用 axios 來調用 post 方法</span><br><span class="line">        if(response.data.success)&#123;</span><br><span class="line">          console.log(&quot;成功&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    )</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>c.<br>接著，我們繼續在main.js檔案加入後續要處理的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach((to, from, next) &#x3D;&gt; &#123;</span><br><span class="line">  if(to.meta.requiresAuth)&#123;</span><br><span class="line">    const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;user&#x2F;check&#96;;</span><br><span class="line">    axios.post(api).then((reponse)&#x3D;&gt;&#123;</span><br><span class="line">      if(reponse.data.success)&#123;</span><br><span class="line">        next();</span><br><span class="line">      &#125; else&#123;</span><br><span class="line">        next(&#123;</span><br><span class="line">          path:&#39;&#x2F;login&#39;,</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>你可以看到，當<code>reponse.data.success</code>是<code>true</code>的時候，頁面就會跳轉到目標頁面。<br>那如果是失敗的話，就會跳回login頁面。</p>
+<h3 id="小問題，在路由後面隨意加東西"><a href="#小問題，在路由後面隨意加東西" class="headerlink" title="小問題，在路由後面隨意加東西"></a>小問題，在路由後面隨意加東西</h3><p>假設今天我們在<code>#</code>後面亂加一些內容，頁面會呈現空白的畫面，這種觀感不是很好。<br><img src="/image/vue_router_error.png" alt="在路由後面亂輸入內容"><br>此時，我們就在index.js中加入新的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#39;*&#39;,</span><br><span class="line">      redirect:&#39;login&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;&#39;,</span><br><span class="line">      name: &#39;HelloWorld&#39;,</span><br><span class="line">      component: HelloWorld,</span><br><span class="line">      meta: &#123; requiresAuth: true &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#39;&#x2F;login&#39;,</span><br><span class="line">      name: &#39;Login&#39;,</span><br><span class="line">      component: Login</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>上面的<code>path</code>是<code>*</code>的部分，就是在於若有人在<code>#</code>後面亂輸入內容，頁面會直接被重新導回login的頁面。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/26/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-jQ%E7%9A%84attr%E5%92%8C%E5%88%AA%E9%99%A4%E7%88%B6%E5%85%83%E7%B4%A0%E7%9A%84%E6%95%88%E6%9E%9C/" rel="prev" title="jQuery課程筆記-jQ的attr和刪除父元素的效果">
+      <i class="fa fa-chevron-left"></i> jQuery課程筆記-jQ的attr和刪除父元素的效果
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/27/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%991-%E6%8E%A5%E5%85%A5%E5%BE%8C%E7%AB%AFapi%E7%9A%84%E6%96%B9%E6%B3%95/" rel="next" title="Vue-vue出一個電商網站1-接入後端api的方法">
+      Vue-vue出一個電商網站1-接入後端api的方法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A3%BD%E4%BD%9C%E7%99%BB%E5%85%A5%E4%BB%8B%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">製作登入介面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A3%BD%E4%BD%9C%E7%99%BB%E5%87%BA%E9%A0%81%E9%9D%A2"><span class="nav-number">1.1.</span> <span class="nav-text">製作登出頁面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BB%E5%85%A5-API-%E8%A3%9C%E5%85%85%E8%AA%AA%E6%98%8E-%E8%B7%A8%E5%9F%9F"><span class="nav-number">2.</span> <span class="nav-text">登入 API 補充說明 (跨域)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AA%B2%E7%A8%8B%E8%A3%9C%E5%85%85%E7%AF%84%E4%BE%8B%E7%A8%8B%E5%BC%8F%E7%A2%BC-%E5%8A%A0%E5%85%A5token%E5%92%8Ccookie%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">課程補充範例程式碼-加入token和cookie的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E6%BA%90%E6%94%BF%E7%AD%96%E5%B0%8E%E8%87%B4cookie%E5%82%B3%E9%81%9E%E7%9A%84%E5%BD%B1%E9%9F%BF"><span class="nav-number">3.1.</span> <span class="nav-text">同源政策導致cookie傳遞的影響</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AA%BF%E6%95%B4%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">3.2.</span> <span class="nav-text">調整程式碼</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A9%97%E8%AD%89%E7%99%BB%E5%85%A5%E5%8F%8A-Vue-Router-%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">驗證登入及 Vue Router 的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8E%E8%88%AA%E5%AE%88%E8%A1%9B"><span class="nav-number">4.1.</span> <span class="nav-text">導航守衛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-js%E4%B8%8D%E6%98%AFvue%E7%9A%84%E5%85%83%E4%BB%B6%E8%80%8C%E9%80%A0%E6%88%90this%E4%BD%BF%E7%94%A8%E4%B8%8A%E7%9A%84%E9%8C%AF%E8%AA%A4"><span class="nav-number">4.2.</span> <span class="nav-text">main.js不是vue的元件而造成this使用上的錯誤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E5%95%8F%E9%A1%8C%EF%BC%8C%E5%9C%A8%E8%B7%AF%E7%94%B1%E5%BE%8C%E9%9D%A2%E9%9A%A8%E6%84%8F%E5%8A%A0%E6%9D%B1%E8%A5%BF"><span class="nav-number">4.2.1.</span> <span class="nav-text">小問題，在路由後面隨意加東西</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

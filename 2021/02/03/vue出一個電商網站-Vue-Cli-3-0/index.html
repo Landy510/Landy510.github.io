@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="安裝運行 Vue Cli 3.0vue3 和 vue2的差異最大的差異就在於vue3有介面可以直接點，不用在自己輸入command line來安裝或運行你的程式碼的環境了。 首先，如果你有先安裝過較舊的版本的vue-cli的話，你就要先把它們卸載掉。接著，再輸入指令npm install -g @vue&#x2F;cli來安裝3.0版本的vue-cli，安裝完成後，你可以透過vue --versoin來確認">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue出一個電商網站-Vue Cli 3.0">
+<meta property="og:url" content="https://landy510.github.io/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-Vue-Cli-3-0/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="安裝運行 Vue Cli 3.0vue3 和 vue2的差異最大的差異就在於vue3有介面可以直接點，不用在自己輸入command line來安裝或運行你的程式碼的環境了。 首先，如果你有先安裝過較舊的版本的vue-cli的話，你就要先把它們卸載掉。接著，再輸入指令npm install -g @vue&#x2F;cli來安裝3.0版本的vue-cli，安裝完成後，你可以透過vue --versoin來確認">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_feauture.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_1.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_ui.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_2.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_3.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_router.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_router1.png">
+<meta property="article:published_time" content="2021-02-03T02:27:36.000Z">
+<meta property="article:modified_time" content="2021-02-03T02:45:22.433Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/image/vue3_feauture.png">
+
+<link rel="canonical" href="https://landy510.github.io/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-Vue-Cli-3-0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>vue出一個電商網站-Vue Cli 3.0 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-Vue-Cli-3-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue出一個電商網站-Vue Cli 3.0
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-02-03 10:27:36 / 修改時間：10:45:22" itemprop="dateCreated datePublished" datetime="2021-02-03T10:27:36+08:00">2021-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="安裝運行-Vue-Cli-3-0"><a href="#安裝運行-Vue-Cli-3-0" class="headerlink" title="安裝運行 Vue Cli 3.0"></a>安裝運行 Vue Cli 3.0</h1><h2 id="vue3-和-vue2的差異"><a href="#vue3-和-vue2的差異" class="headerlink" title="vue3 和 vue2的差異"></a>vue3 和 vue2的差異</h2><p>最大的差異就在於vue3有介面可以直接點，不用在自己輸入command line來安裝或運行你的程式碼的環境了。</p>
+<p>首先，如果你有先安裝過較舊的版本的vue-cli的話，你就要先把它們卸載掉。<br>接著，再輸入指令<code>npm install -g @vue/cli</code>來安裝3.0版本的vue-cli，<br>安裝完成後，你可以透過<code>vue --versoin</code>來確認是否vue已經是第3.0版本以上囉。</p>
+<p>那在vue 3.0以上，就可以選擇用command或gui的方式，來創建你的專案喔。<br>那課程這邊會先用command line的方式來進行創建。</p>
+<a id="more"></a>
+<h2 id="使用command-line-創建一個專案。"><a href="#使用command-line-創建一個專案。" class="headerlink" title="使用command line - 創建一個專案。"></a>使用command line - 創建一個專案。</h2><p>step1.<br>先輸入<code>vue create 專案名稱</code><br>step2.<br>接著，你選擇手動安裝套件<br><img src="/image/vue3_feauture.png"><br>建議安裝以上圖中所提到的那三個套件。<br>step3.<br>然後，它會問vue.js的版本要安裝哪個版本的，<br>這邊先選擇2.x的版本。<br>step4.<br>css的預處理器的選擇，這邊先選擇Scss的項目。<br>step5.<br>有關ESLint的嚴格程度，這邊是先選擇Standard的程度，我建議是先不要安裝啦。<br>step6.<br>接著，以上選項都選完之後，就會開始安裝。</p>
+<p>安裝完之後，直接用cd進入你剛剛創的專案資料夾中。<br>step7.<br>然後，再輸入<code>npm run serve</code><br><img src="/image/vue3_1.png"><br>最後，成功運行之後，它就會跳出以上的畫面，上面的部分是本地端的網域。<br>下面那一個，若你想要分享給同網域的朋友的話，就可以選擇這一個網域。<br>那這邊先用本地端的網域囉。<br>這樣一來就可以運行第一個V3的專案囉。</p>
+<h1 id="資料夾結構說明"><a href="#資料夾結構說明" class="headerlink" title="資料夾結構說明"></a>資料夾結構說明</h1><p>首先，你可以vue3的專案資料夾中，<br>有關webpack的相關設定檔，都被存在node_modules的資料夾中的@vue資料夾的cli-service目錄底下，<br>但是，在這一版本的Vue專案，是不需要去動到這方面的設定檔案喔。</p>
+<p>第二<br>那src資料夾中的檔案，就是我們主要撰寫程式碼的地方囉，在這個資料夾裝的所有資料都會被編譯。<br>在main.js檔案中會引入vue檔案 和 App.vue檔案。<br>在vue3中的檔案，副檔名.vue是非必要的。<br>那在App.vue檔案中，你也可以看到它有引入了，HelloWorld.vue的元件檔。</p>
+<p>那如果你有像是其他頁面的css樣式的scss檔案的話或者圖片，就可以放到src資料夾中的assets資料夾中，<br>如此一來，這些檔案才會被編譯到喔。</p>
+<p>第三<br>如果你有一些不想要被編譯的檔案，你可以將它們放在public資料夾中。<br>那在public中有一個index.html檔案，這個檔案其實是會被編譯到的。<br>所以，我們在src引入的一些內容，都會被注入到這個檔案中。</p>
+<p>第四，<br>當你輸入指令<code>npm run build</code>，就會打包專案檔案中的資料，然後，生成一個dist的資料夾。<br>然後，裡面也有一個index.html檔案。<br>然後，在這個檔案裡面有引用vendor檔和app的js檔案。<br>那vendor檔案，它就是從外部載入的內容。<br>那app的js檔案，就是我們撰寫的頁面。</p>
+<p>第五，<br>如果要運行專案檔的正式版的話，就要對dist資料夾中的index.html檔使用live serve，就可以看到囉。</p>
+<h2 id="小插曲-Vue3的npm-run-build無法看到正式版的專案檔網頁內容。"><a href="#小插曲-Vue3的npm-run-build無法看到正式版的專案檔網頁內容。" class="headerlink" title="小插曲 - Vue3的npm run build無法看到正式版的專案檔網頁內容。"></a>小插曲 - Vue3的npm run build無法看到正式版的專案檔網頁內容。</h2><p>主要一樣是因為路徑引入錯誤的關係，所以，我參考了<a target="_blank" rel="noopener" href="https://jsy.tw/blog/1361/%E3%80%90%E7%AD%86%E8%A8%98%E3%80%91vue-build-%E4%B9%8B%E5%BE%8C-css-%E6%AA%94-mine-%E5%9E%8B%E6%85%8B%E4%B8%8D%E6%98%AF-text-css-%E7%9A%84%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%B3%95/">這篇</a> ，<br>新增了vue.config.js檔案，並在裡面加入了跟引入路徑有關的設定，就解決囉~~~</p>
+<h1 id="環境變數的設定-env-development-v-s-env-production"><a href="#環境變數的設定-env-development-v-s-env-production" class="headerlink" title="環境變數的設定 .env.development v.s .env.production"></a>環境變數的設定 .env.development v.s .env.production</h1><p>環境變數一樣有正式版和測試版的分別。<br>在課堂上有提供<a target="_blank" rel="noopener" href="https://cli.vuejs.org/zh/guide/mode-and-env.html#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">這一篇</a> ，環境變數的設定說明。</p>
+<p>step1.</p>
+<h2 id="環境變數-VUE-APP-變數名稱"><a href="#環境變數-VUE-APP-變數名稱" class="headerlink" title="環境變數 - VUE_APP_變數名稱"></a>環境變數 - VUE_APP_變數名稱</h2><p>我們在src資料夾中，新增一個檔名叫.env的檔案。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">---.env檔案---</span><br><span class="line">VUE_APP_API &#x3D; http:&#x2F;&#x2F;localhost:8080&#x2F;</span><br></pre></td></tr></table></figure>
+<p>要記得，你在vue3中宣告變數的話，變數名稱前面都要接<code>VUE_APP</code>，這樣vue的編譯才會吃得到這些變數。</p>
+<p>step2.<br>我們先在App.vue元件中，引入這個新增的環境變數看看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---App.vue---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    HelloWorld</span><br><span class="line">  &#125;,</span><br><span class="line">  created () &#123;</span><br><span class="line">    console.log(process.env.VUE_APP_API)  &#x2F;&#x2F; 使用VUE_APP_API變數</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到我們再調用這個全域的環境變數前面還要加上process.env喔。</p>
+<p>step3.<br>接下來，我們在來創個.env.development的檔案。<br>接著，我們在這個檔案裡面加入以下的名稱。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">---.env.development---</span><br><span class="line">VUE_APP_API&#x3D;https:&#x2F;&#x2F;www.google.com&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>接著，我們在package.json的檔案裡面有以下內容的部分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;serve&quot;: &quot;vue-cli-service serve --mode development&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;vue-cli-service build&quot;,</span><br><span class="line">    &quot;lint&quot;: &quot;vue-cli-service lint&quot;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<p>在serve的部分加上<code>--mode 環境變數檔案名稱</code>。<br>那這個時候，你再重新輸入一次<code>npm run dev</code>的指令，可以看到<code>console.log</code>的內容會吃到development的變數內容，你就可以用這種方式來替換環境變數要吃哪個檔案中的內容。<br>事實上，.env.development這個檔名是vue環境中會吃到的預設檔案，所以，當你有這個檔案的時候，你就不需要特別去加<code>--mode development</code>，專案自然就會吃到這個檔案中的環境變數了。</p>
+<h2 id="測試變數檔-end-development"><a href="#測試變數檔-end-development" class="headerlink" title="測試變數檔 .end.development"></a>測試變數檔 .end.development</h2><p>注意~~~在vue中因為.env.development檔案室預設的檔名，所以，它不用特別加入<code>--mode development</code>。<br>也就是說如果今天有兩個檔案，一個是.env另一個是.env.development，那.env.development檔案的權重<br>會高於.env的檔案。<br>所以，”serve”: “vue-cli-service serve”如果在有.env.development的情況下，它會直接吃到這個檔案的變數內容。</p>
+<p>step4.</p>
+<h2 id="正式變數檔-end-production"><a href="#正式變數檔-end-production" class="headerlink" title="正式變數檔 .end.production"></a>正式變數檔 .end.production</h2><p>在新增一個環境變數檔案.end.production。<br>那我們就是利用.end.production和.end.development 這兩個檔案來區分，一個是正式機在用的，<br>另外一個是測試機在用的。<br>那要特別注意喔，接下來你輸入<code>npm run build</code>它是直接吃到.end.production裡面的變數，<br>不需要再像step3中所說的，在serve的最後面加上<code>--mode 變數檔案</code>喔。</p>
+<p>課程名稱: 使用 GUI 介面創建專案<br>step1.<br>你只要先輸入指令vue ui。<br>此時，就會直接跳出vue創專案的介面。<br>上面有三個選項，Projects, Create, Import。<br>那這邊我們要直接使用Create功能來啟用一個新的vue專案。<br>step2.<br>那接著，你可以看到在CREATE介面裡面所適用的選項，都是你用command line在選擇的選項，<br>所以，其實大同小異，你叫按照你在command line的情境時，使用的設定就ok囉。<br>step3.<br><img src="/image/vue3_ui.png"><br>在vue 的ui介面中，可以看到這個列表，<br>插件選項，就代表我們在專案中所是用到比較特別的插件。<br>依賴，就代表我們在前端所使用的套件，像是jQ和Boorstrap。<br>設定，會依照你安裝的插件，而提供相對應的設定。<br>任務，你可以看到serve, build，他們其實就是代表npm run serve和npm run build的指令。<br>在serve的介面裡面，你直接點執行按鈕，它就會開始變義相關的環境，<br>接著，在在按下啟動app，就可以直接將專案運行起來囉。<br>那在serve介面裡面，有一個輸出的按鈕，你可以點下去，就可以看到原本在編譯器上的那些命令提示的內容。</p>
+<p>step4.<br>接著，你按下停止。<br>並按下停止鈕旁邊的變量齒輪，你就可以看到當下的環境是吃到哪一個變數檔的內容。<br><img src="/image/vue3_2.png"><br><img src="/image/vue3_3.png"></p>
+<h1 id="GUI-設定及-CLI-插件安裝說明"><a href="#GUI-設定及-CLI-插件安裝說明" class="headerlink" title="GUI 設定及 CLI 插件安裝說明"></a>GUI 設定及 CLI 插件安裝說明</h1><p>step1.</p>
+<h2 id="用vue-ui來新增vue-router"><a href="#用vue-ui來新增vue-router" class="headerlink" title="用vue ui來新增vue router"></a>用vue ui來新增vue router</h2><p>你直接點擊介面中的新增router即可新增。<br><img src="/image/vue3_router.png"></p>
+<p>step2.<br>接著，你安裝完之後，你可以看到妳的編譯器中的main.js檔案，變成main.ts，是因為你有引進typestring元件的緣故。<br>接著，你看main.ts檔案裡面，你可以看到它自動為你引入router的檔案，並新增了router屬性了。<br>第三，它也直接幫我們新增了router資料夾，裡面也新增好index.jsys檔案了。<br>第四，在App.vue檔案裡面，它也自動的為我們加入了<code>&lt;router-view&gt;</code>和<code>&lt;router-link&gt;</code>了。<br>step3.<br>接下來，我們就來看看運行起來的專案長什麼鬼樣子。<br>接下來，你可以看到運行首頁上，它直接幫我們新增了<code>&lt;router-link&gt;</code>的功能，<br>而且運行上也沒問題。<br><img src="/image/vue3_router1.png"><br>step4.</p>
+<h2 id="Base-URL-檔案間的相對路徑關係"><a href="#Base-URL-檔案間的相對路徑關係" class="headerlink" title="Base URL-檔案間的相對路徑關係"></a>Base URL-檔案間的相對路徑關係</h2><p>有關vue3檔案的設定部分。<br>在ui介面上有一個設定的選項，點下去之後，裡面的Vue Cli選項中有一個Base URL的項目。<br>它就是輸出檔案，之間相對路徑的關係。<br>那如果，你今天的跟目錄有換比如說<br>我們釋出的檔案不是在根目錄底下，<br>比如不是 <a href="http://landy510.github.io/">http://landy510.github.io</a> 底下，而是在<a href="http://landy510.github.io/Vue-testing">http://landy510.github.io/Vue-testing</a> 底下，<br>那這樣我們需要做一些調整，<br>此時，我們就要去更改Base URL的設定，把它改成/Vue-testing/<br>這樣子，就可以成功的在<a href="http://landy510.github.io/Vue-testing">http://landy510.github.io/Vue-testing</a> 底下運行囉。</p>
+<h1 id="CLI-2-0-專案搬移到-3-0-實際演練"><a href="#CLI-2-0-專案搬移到-3-0-實際演練" class="headerlink" title="CLI 2.0 專案搬移到 3.0 實際演練"></a>CLI 2.0 專案搬移到 3.0 實際演練</h1><p>step1.<br>首先，你先打開課程<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue_vuex__exercise/tree/918678b97393ca05b8ba7338b101364f9e32cf08">提供的專案</a> ，<br>它的package.jason檔案，先來看看他們都安裝了那些套件。<br>axios<br>bootstrap<br>jquery<br>popper.js<br>vue-axios<br>vue-loading-overlay<br>那以上這些就是我們需要額外再安裝的套件。<br>有兩種載入的方式，一個是vue ui或者直接用command line來安裝。<br>他們倆種結果都一樣，擇一即可。<br>所以，我選擇用command line輸入來安裝<br>直接輸入指令npm install –save axios bootstrap jquery popper vue-axios vue-loading-overlay<br>就可以直接把上面的套件直接一次安裝。</p>
+<p>step2<br>將以上安裝的這些檔案引入main.js檔案中，並在main.js檔案中啟用這些元件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---main.js---</span><br><span class="line">import axios from &#39;axios&#39;;</span><br><span class="line">import VueAxios from &#39;vue-axios&#39;;</span><br><span class="line">import Loading from &#39;vue-loading-overlay&#39;;</span><br><span class="line">import &#39;..&#x2F;..&#x2F;node_modules&#x2F;vue-loading-overlay&#x2F;dist&#x2F;vue-loading&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(VueAxios, axios);</span><br><span class="line">Vue.component(&#39;Loading&#39;, Loading);</span><br></pre></td></tr></table></figure>
+
+<p>step3.<br>將課程上提供的src中的App.vue的內容貼到你的App.vue中。<br>這個時候，會出現錯誤。<br>是因為，在App.vue中有環境變數APIPATH和CUSTOMPATH還沒有被定義。<br>所以，我們要再創一個.env.development的檔愛，裡面放這兩個環境變數</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">---.env.development---</span><br><span class="line">VUE_APP_APIPATH &#x3D;  https:&#x2F;&#x2F;vue-course-api.hexschool.io</span><br><span class="line">VUE_APP_CUSTOMPATH &#x3D; stealing610</span><br></pre></td></tr></table></figure>
+<p>step4.<br>接下來，在將原本在App.vue中的APIPATH 和 CUSTOMPATH分別取代成VUE_APP_APIPATH和VUE_APP_CUSTOMPATH。</p>
+<p>step5.<br>接下來去老師提供的Home.vue元件檔把裡面的內容覆蓋掉你原本的Home.vue元件檔中，此時，應該頁面上就有呈現正確取回來的內容囉。</p>
+<h2 id="vue3-0-import元件的方法"><a href="#vue3-0-import元件的方法" class="headerlink" title="vue3.0 import元件的方法"></a>vue3.0 import元件的方法</h2><p>在vue3.0專案中的router資料夾中的index.js檔案中，你可以看到它引入元件的寫法，不用在像以前那樣要定義該元件名稱在使用該變數，<br>才能使用該元件。 新版的vue可以直接用該元件檔所在的路徑直接引用，就可以使用它囉。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: &#39;&#x2F;about&#39;,</span><br><span class="line">    name: &#39;About&#39;,</span><br><span class="line">    component: () &#x3D;&gt; import(&#39;..&#x2F;views&#x2F;About.vue&#39;) &#x2F;&#x2F;直接引用該元件所在路徑即可</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="6-分鐘，使用-Vue-Cli-快速創建原型"><a href="#6-分鐘，使用-Vue-Cli-快速創建原型" class="headerlink" title="6 分鐘，使用 Vue Cli 快速創建原型"></a>6 分鐘，使用 Vue Cli 快速創建原型</h1><p>我們直接透過webpack來決定.vue檔案，來進行快速的開發。<br>這通常是用在一個小型的專案或雛型時會用到。<br>我們就用之前實作的todolist當作範例吧。<br>step1.<br>首先，先在編譯器裡面輸入<code>npm install -g @vue/cli-service-global</code><br>step2.<br>新創一個index.vue的元件檔。<br>step3.<br>接著，你將原本<code>&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</code>裡面的內容，除了最外層的<code>&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</code>之外，其他的都複製到index.vue元件檔中。<br>然後，<br>加入<code>&lt;script&gt;&lt;/script&gt;</code>，將原本包在vue元件中的內容，都丟到<code>export default</code>的花括號中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    export default&#123;</span><br><span class="line">        </span><br><span class="line">        data()&#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                Todos:[</span><br><span class="line">                    &#123;</span><br><span class="line">                        id:&#39;345&#39;,</span><br><span class="line">                        title: &#39;你好嗎&#39;,</span><br><span class="line">                        completed: false</span><br><span class="line">                    &#125;</span><br><span class="line">                ],</span><br><span class="line">                cocheObj:&#123;&#125;,</span><br><span class="line">                cocheTitle: &#39;&#39;,</span><br><span class="line">                newText:&#39;&#39;,</span><br><span class="line">                visibility: &#39;all&#39;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">  &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">    addTodo: function()&#123;</span><br><span class="line">      let newObj &#x3D; &#123;&#125;;</span><br><span class="line">      newObj.title &#x3D; this.newText;</span><br><span class="line">      newObj.id &#x3D; Math.floor(Date.now());</span><br><span class="line">      newObj.completed &#x3D; false;</span><br><span class="line">      this.Todos.push(newObj);</span><br><span class="line">      this.newText &#x3D; &#39;&#39;;</span><br><span class="line">    &#125;,</span><br><span class="line">    editTodo: function(item)&#123;</span><br><span class="line">      this.cocheObj &#x3D; item;</span><br><span class="line">      this.cocheTitle &#x3D; item.title;</span><br><span class="line">    &#125;,</span><br><span class="line">    cancelEdit: function()&#123;</span><br><span class="line">      this.cocheObj &#x3D; &#123;&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    DoneEdit: function(item)&#123;</span><br><span class="line">      item.title &#x3D; this.cocheTitle;</span><br><span class="line">      this.cocheObj &#x3D; &#123;&#125;;</span><br><span class="line">      this.cocheTitle &#x3D; &#39;&#39;;</span><br><span class="line">    &#125;,</span><br><span class="line">    removeTodo: function(item)&#123;</span><br><span class="line">      let newIndex &#x3D; this.Todos.findIndex((el)&#x3D;&gt;&#123;</span><br><span class="line">        return item.id &#x3D;&#x3D;&#x3D; el.id;</span><br><span class="line">      &#125;)</span><br><span class="line">      this.Todos.splice(newIndex, 1);</span><br><span class="line">    &#125;,</span><br><span class="line">    clearAll: function()&#123;</span><br><span class="line">      this.Todos.splice(0, this.Todos.length);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed:&#123;</span><br><span class="line">    filterTodo: function()&#123;</span><br><span class="line">      if(this.visibility &#x3D;&#x3D;&#x3D; &#39;all&#39;)&#123;</span><br><span class="line">        return this.Todos; </span><br><span class="line">      &#125; else if(this.visibility &#x3D;&#x3D;&#x3D; &#39;doing&#39;)&#123;</span><br><span class="line">        &#x2F;&#x2F; let filterArray &#x3D; [];</span><br><span class="line">        &#x2F;&#x2F; this.Todos.forEach((item)&#x3D;&gt;&#123;</span><br><span class="line">        &#x2F;&#x2F;   if(item.completed&#x3D;&#x3D;&#x3D;false)&#123;</span><br><span class="line">        &#x2F;&#x2F;     filterArray.push(item);</span><br><span class="line">           </span><br><span class="line">        &#x2F;&#x2F;   &#125;</span><br><span class="line">        &#x2F;&#x2F; &#125;)</span><br><span class="line">        let filterArray &#x3D; this.Todos.filter(function(item)&#123;</span><br><span class="line">            if(!item.completed)&#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        return filterArray;</span><br><span class="line">      &#125; else if(this.visibility &#x3D;&#x3D;&#x3D; &#39;finish&#39;)&#123;</span><br><span class="line">         let filterArray &#x3D; [];</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; this.Todos.forEach((item)&#x3D;&gt;&#123;</span><br><span class="line">        &#x2F;&#x2F;     if(item.completed&#x3D;&#x3D;&#x3D;true)&#123;</span><br><span class="line">        &#x2F;&#x2F;         filterArray.push(item);</span><br><span class="line">                </span><br><span class="line">        &#x2F;&#x2F;     &#125;</span><br><span class="line">        &#x2F;&#x2F; &#125;)</span><br><span class="line">        let tempArray &#x3D; this.Todos.filter(function(item)&#123;</span><br><span class="line">            if(item.completed)&#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        return tempArray;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    filterNotTodo: function()&#123;</span><br><span class="line">      let counter &#x3D; 0;</span><br><span class="line">      this.Todos.forEach((item)&#x3D;&gt;&#123;</span><br><span class="line">        if(item.completed &#x3D;&#x3D;&#x3D; false)&#123;</span><br><span class="line">          counter++;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">      return counter;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>step3.<br>接著一樣在index.vue元件檔中，加入<code>&lt;style&gt;&lt;/style&gt;</code>，裡面插入會使用到的css樣式，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">@import url(css&#x2F;all.css);</span><br><span class="line"></span><br><span class="line">.completed &#123;</span><br><span class="line">    text-decoration: line-through</span><br><span class="line">  &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<p>step5.<br>結束之後，就運行<code>npm serve index.vue</code>，然後用localhost:8080來看專案結果，應該就可以正常呈現內容囉。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89%E8%A3%9C%E5%85%85/" rel="prev" title="vue出一個電商網站-表單驗證補充">
+      <i class="fa fa-chevron-left"></i> vue出一個電商網站-表單驗證補充
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/11/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-%E6%8E%A7%E5%88%B6%E5%88%A4%E6%96%B7/" rel="next" title="JavaScript學徒篇-控制判斷">
+      JavaScript學徒篇-控制判斷 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D%E9%81%8B%E8%A1%8C-Vue-Cli-3-0"><span class="nav-number">1.</span> <span class="nav-text">安裝運行 Vue Cli 3.0</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue3-%E5%92%8C-vue2%E7%9A%84%E5%B7%AE%E7%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">vue3 和 vue2的差異</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8command-line-%E5%89%B5%E5%BB%BA%E4%B8%80%E5%80%8B%E5%B0%88%E6%A1%88%E3%80%82"><span class="nav-number">1.2.</span> <span class="nav-text">使用command line - 創建一個專案。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E5%A4%BE%E7%B5%90%E6%A7%8B%E8%AA%AA%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">資料夾結構說明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E6%8F%92%E6%9B%B2-Vue3%E7%9A%84npm-run-build%E7%84%A1%E6%B3%95%E7%9C%8B%E5%88%B0%E6%AD%A3%E5%BC%8F%E7%89%88%E7%9A%84%E5%B0%88%E6%A1%88%E6%AA%94%E7%B6%B2%E9%A0%81%E5%85%A7%E5%AE%B9%E3%80%82"><span class="nav-number">2.1.</span> <span class="nav-text">小插曲 - Vue3的npm run build無法看到正式版的專案檔網頁內容。</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E7%9A%84%E8%A8%AD%E5%AE%9A-env-development-v-s-env-production"><span class="nav-number">3.</span> <span class="nav-text">環境變數的設定 .env.development v.s .env.production</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8-VUE-APP-%E8%AE%8A%E6%95%B8%E5%90%8D%E7%A8%B1"><span class="nav-number">3.1.</span> <span class="nav-text">環境變數 - VUE_APP_變數名稱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%AC%E8%A9%A6%E8%AE%8A%E6%95%B8%E6%AA%94-end-development"><span class="nav-number">3.2.</span> <span class="nav-text">測試變數檔 .end.development</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%BC%8F%E8%AE%8A%E6%95%B8%E6%AA%94-end-production"><span class="nav-number">3.3.</span> <span class="nav-text">正式變數檔 .end.production</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GUI-%E8%A8%AD%E5%AE%9A%E5%8F%8A-CLI-%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%9D%E8%AA%AA%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">GUI 設定及 CLI 插件安裝說明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8vue-ui%E4%BE%86%E6%96%B0%E5%A2%9Evue-router"><span class="nav-number">4.1.</span> <span class="nav-text">用vue ui來新增vue router</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Base-URL-%E6%AA%94%E6%A1%88%E9%96%93%E7%9A%84%E7%9B%B8%E5%B0%8D%E8%B7%AF%E5%BE%91%E9%97%9C%E4%BF%82"><span class="nav-number">4.2.</span> <span class="nav-text">Base URL-檔案間的相對路徑關係</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CLI-2-0-%E5%B0%88%E6%A1%88%E6%90%AC%E7%A7%BB%E5%88%B0-3-0-%E5%AF%A6%E9%9A%9B%E6%BC%94%E7%B7%B4"><span class="nav-number">5.</span> <span class="nav-text">CLI 2.0 專案搬移到 3.0 實際演練</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue3-0-import%E5%85%83%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">5.1.</span> <span class="nav-text">vue3.0 import元件的方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E5%88%86%E9%90%98%EF%BC%8C%E4%BD%BF%E7%94%A8-Vue-Cli-%E5%BF%AB%E9%80%9F%E5%89%B5%E5%BB%BA%E5%8E%9F%E5%9E%8B"><span class="nav-number">6.</span> <span class="nav-text">6 分鐘，使用 Vue Cli 快速創建原型</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

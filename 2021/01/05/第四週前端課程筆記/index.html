@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，與background顏色漸變的動畫。   接下來介紹一下上面的動畫程式碼 @keyframes example在@keyframes的右邊名稱example就是你為這段動畫效果的命名。那這個名稱必須要跟，要做這段動畫效果的區塊中的css樣式中animation-name一樣。 animation-duration在要做這段動">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四週前端課程筆記">
+<meta property="og:url" content="https://landy510.github.io/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，與background顏色漸變的動畫。   接下來介紹一下上面的動畫程式碼 @keyframes example在@keyframes的右邊名稱example就是你為這段動畫效果的命名。那這個名稱必須要跟，要做這段動畫效果的區塊中的css樣式中animation-name一樣。 animation-duration在要做這段動">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/image/animation_duration.png">
+<meta property="article:published_time" content="2021-01-05T02:20:36.000Z">
+<meta property="article:modified_time" content="2021-01-30T07:16:17.639Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="前端體驗營切版">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/image/animation_duration.png">
+
+<link rel="canonical" href="https://landy510.github.io/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>第四週前端課程筆記 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第四週前端課程筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-05 10:20:36" itemprop="dateCreated datePublished" datetime="2021-01-05T10:20:36+08:00">2021-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-30 15:16:17" itemprop="dateModified" datetime="2021-01-30T15:16:17+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">前端體驗營切版</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，"><a href="#在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，" class="headerlink" title="在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，"></a>在css文件中，加入以下的程式碼，就可以對<code>div</code>區塊做出由左到右的移動，</h2><p>與<code>background</code>顏色漸變的動畫。</p>
+<iframe src="https://codepen.io/RandyChen/embed/vYXJMXQ?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>接下來介紹一下上面的動畫程式碼</p>
+<h3 id="keyframes-example"><a href="#keyframes-example" class="headerlink" title="@keyframes example"></a><code>@keyframes example</code></h3><p>在<code>@keyframes</code>的右邊名稱example就是你為這段動畫效果的命名。<br>那這個名稱必須要跟，要做這段動畫效果的區塊中的css樣式中<code>animation-name</code>一樣。</p>
+<h3 id="animation-duration"><a href="#animation-duration" class="headerlink" title="animation-duration"></a><code>animation-duration</code></h3><p>在要做這段動畫效果的區塊中的css樣式中的<code>animation-duration</code>的值，<br>是代表這段動畫總共要做多少時間。<br>像以上這段codepen的範例，就是設定4s，也就是這段動畫總共時間是4秒。<br><img src="/image/animation_duration.png"></p>
+<p>那在<code>@keyframe</code>中，有寫0%, 25%, 50%, 75%, 100%的內容，<br>就像上面這張圖畫的一樣，它會將<code>animation-duration</code>的時間，平均分到這些區間裡面，<br>所以，這邊的code總共有4段，所以，4s/4 = 1s。<br>也就是每一段動畫的執行時間是1秒。</p>
+<h3 id="animation-delay"><a href="#animation-delay" class="headerlink" title="animation-delay"></a><code>animation-delay</code></h3><p>這段程式碼表示這段動畫要延後<code>animation-delay</code>所設定的時間後，才會開始執行這段動畫。</p>
+<h3 id="animation-fill-mode"><a href="#animation-fill-mode" class="headerlink" title="animation-fill-mode"></a><code>animation-fill-mode</code></h3><p>這段程式碼以下三種選項可以寫:<br><code>forwards</code>: 代表動畫效果會停留到最後的效果，以上面的codepen為例，<code>div</code>會停留在最後的<br><code>background:pink;left:0px;top:-2000px;</code> 的位置。</p>
+<p><code>backwards</code>: 代表這段動畫執行完成後，執行這段動畫的區塊會回到這個區塊原本的狀態。<br>以上面的codepen為例，<code>div</code>會回到一開始的<code>background:pink;left:0px;top:0px;</code> 的位置。</p>
+<p><code>both</code>: 同時擁有<code>forwards</code>和<code>backwards</code>的效果。</p>
+<h3 id="animation-iteration-count"><a href="#animation-iteration-count" class="headerlink" title="animation-iteration-count"></a><code>animation-iteration-count</code></h3><p>這段程式碼表示你設計的這段動畫總共要執行多少次。<br>以上面的codepen為例，這段動畫總共會做2次。<br>如果你想要無限循環執行這段動畫的話，你就將這個屬性的值設為<code>Infinity</code>。</p>
+<a id="more"></a>
+
+<h2 id="transform效果"><a href="#transform效果" class="headerlink" title="transform效果"></a><code>transform</code>效果</h2><p><code>transform</code>所增加的css效果，並不會產生與其他元素有推擠的問題，是個好用的效果。</p>
+<iframe src="https://codepen.io/RandyChen/embed/jOMxVrR?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>你可以看到就算.box區塊旋轉了，也不會推擠到下面的按鈕的位置。</p>
+<h2 id="套件-animate-css"><a href="#套件-animate-css" class="headerlink" title="套件 animate.css"></a>套件 animate.css</h2><p>這個套件可以讓你的某些區塊有一些飛入或淡出的效果。<br>首先，你要先載入它們家提供的CDN檔案。<br>接著，在他們的官網裡面有個Utility classes的單元，說明了要怎麼使用他們家的效果。</p>
+<iframe src="https://codepen.io/RandyChen/embed/abmGBqJ?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上這個範例，就直接在這個標題的class中加入<code>animate__animated animate__bounce</code>，就可以讓這個標題<br>有彈跳的效果囉。</p>
+<h2 id="Aos-套件"><a href="#Aos-套件" class="headerlink" title="Aos 套件"></a>Aos 套件</h2><h3 id="你要先載入他們家的css和js檔案"><a href="#你要先載入他們家的css和js檔案" class="headerlink" title="你要先載入他們家的css和js檔案"></a>你要先載入他們家的css和js檔案</h3><p><a target="_blank" rel="noopener" href="https://michalsnik.github.io/aos/">AOS官網</a></p>
+<h3 id="另外，要在你的專案的scipt中加入以下這段，初始化AOS套件的程式碼"><a href="#另外，要在你的專案的scipt中加入以下這段，初始化AOS套件的程式碼" class="headerlink" title="另外，要在你的專案的scipt中加入以下這段，初始化AOS套件的程式碼"></a>另外，要在你的專案的scipt中加入以下這段，初始化AOS套件的程式碼</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    AOS.init(&#123;</span><br><span class="line">        &#x2F;&#x2F; Global settings:</span><br><span class="line">        disable: false, &#x2F;&#x2F; accepts following values: &#39;phone&#39;, &#39;tablet&#39;, &#39;mobile&#39;, boolean, expression or function</span><br><span class="line">        startEvent: &#39;DOMContentLoaded&#39;, &#x2F;&#x2F; name of the event dispatched on the document, that AOS should initialize on</span><br><span class="line">        initClassName: &#39;aos-init&#39;, &#x2F;&#x2F; class applied after initialization</span><br><span class="line">        animatedClassName: &#39;aos-animate&#39;, &#x2F;&#x2F; class applied on animation</span><br><span class="line">        useClassNames: false, &#x2F;&#x2F; if true, will add content of &#96;data-aos&#96; as classes on scroll</span><br><span class="line">        disableMutationObserver: false, &#x2F;&#x2F; disables automatic mutations&#39; detections (advanced)</span><br><span class="line">        debounceDelay: 50, &#x2F;&#x2F; the delay on debounce used while resizing window (advanced)</span><br><span class="line">        throttleDelay: 99, &#x2F;&#x2F; the delay on throttle used while scrolling the page (advanced)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; Settings that can be overridden on per-element basis, by &#96;data-aos-*&#96; attributes:</span><br><span class="line">        offset: 120, &#x2F;&#x2F; offset (in px) from the original trigger point</span><br><span class="line">        delay: 0, &#x2F;&#x2F; values from 0 to 3000, with step 50ms</span><br><span class="line">        duration: 400, &#x2F;&#x2F; values from 0 to 3000, with step 50ms</span><br><span class="line">        easing: &#39;ease&#39;, &#x2F;&#x2F; default easing for AOS animations</span><br><span class="line">        once: false, &#x2F;&#x2F; whether animation should happen only once - while scrolling down</span><br><span class="line">        mirror: false, &#x2F;&#x2F; whether elements should animate out while scrolling past them</span><br><span class="line">        anchorPlacement: &#39;top-bottom&#39;, &#x2F;&#x2F; defines which position of the element regarding to window should trigger the animation</span><br><span class="line">    &#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上面這段初始化的內容，是許多有關AOS元件的效果的設定。<br>像是<code>offset</code>就是，要決定當你的畫面距離該目標區塊的多少距離時，該AOS元件的相對應的動畫就會執行。</p>
+<h3 id="接著，你去他們家的官網上，找一個你想要的效果，然後，再仿照官網上的方式將"><a href="#接著，你去他們家的官網上，找一個你想要的效果，然後，再仿照官網上的方式將" class="headerlink" title="接著，你去他們家的官網上，找一個你想要的效果，然後，再仿照官網上的方式將"></a>接著，你去他們家的官網上，找一個你想要的效果，然後，再仿照官網上的方式將</h3><p>相關的內容貼到你的專案上面，就會有一樣的效果了。</p>
+<iframe src="https://codepen.io/RandyChen/embed/MWjGbzy?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>像這邊的例子，就是加入了<code>data-aos=&quot;fade-right&quot;</code>讓該<code>p</code>段落，有漸漸從左邊出現的效果。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/" rel="tag"># 前端體驗營切版</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/05/Bootstrap%E7%AD%86%E8%A8%98-02/" rel="prev" title="Bootstrap筆記-02">
+      <i class="fa fa-chevron-left"></i> Bootstrap筆記-02
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95/" rel="next" title="進階模板語法">
+      進階模板語法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8css%E6%96%87%E4%BB%B6%E4%B8%AD%EF%BC%8C%E5%8A%A0%E5%85%A5%E4%BB%A5%E4%B8%8B%E7%9A%84%E7%A8%8B%E5%BC%8F%E7%A2%BC%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E5%B0%8Ddiv%E5%8D%80%E5%A1%8A%E5%81%9A%E5%87%BA%E7%94%B1%E5%B7%A6%E5%88%B0%E5%8F%B3%E7%9A%84%E7%A7%BB%E5%8B%95%EF%BC%8C"><span class="nav-number">1.</span> <span class="nav-text">在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#keyframes-example"><span class="nav-number">1.1.</span> <span class="nav-text">@keyframes example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#animation-duration"><span class="nav-number">1.2.</span> <span class="nav-text">animation-duration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#animation-delay"><span class="nav-number">1.3.</span> <span class="nav-text">animation-delay</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#animation-fill-mode"><span class="nav-number">1.4.</span> <span class="nav-text">animation-fill-mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#animation-iteration-count"><span class="nav-number">1.5.</span> <span class="nav-text">animation-iteration-count</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transform%E6%95%88%E6%9E%9C"><span class="nav-number">2.</span> <span class="nav-text">transform效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%97%E4%BB%B6-animate-css"><span class="nav-number">3.</span> <span class="nav-text">套件 animate.css</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Aos-%E5%A5%97%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">Aos 套件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%A0%E8%A6%81%E5%85%88%E8%BC%89%E5%85%A5%E4%BB%96%E5%80%91%E5%AE%B6%E7%9A%84css%E5%92%8Cjs%E6%AA%94%E6%A1%88"><span class="nav-number">4.1.</span> <span class="nav-text">你要先載入他們家的css和js檔案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%A6%E5%A4%96%EF%BC%8C%E8%A6%81%E5%9C%A8%E4%BD%A0%E7%9A%84%E5%B0%88%E6%A1%88%E7%9A%84scipt%E4%B8%AD%E5%8A%A0%E5%85%A5%E4%BB%A5%E4%B8%8B%E9%80%99%E6%AE%B5%EF%BC%8C%E5%88%9D%E5%A7%8B%E5%8C%96AOS%E5%A5%97%E4%BB%B6%E7%9A%84%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">4.2.</span> <span class="nav-text">另外，要在你的專案的scipt中加入以下這段，初始化AOS套件的程式碼</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E8%91%97%EF%BC%8C%E4%BD%A0%E5%8E%BB%E4%BB%96%E5%80%91%E5%AE%B6%E7%9A%84%E5%AE%98%E7%B6%B2%E4%B8%8A%EF%BC%8C%E6%89%BE%E4%B8%80%E5%80%8B%E4%BD%A0%E6%83%B3%E8%A6%81%E7%9A%84%E6%95%88%E6%9E%9C%EF%BC%8C%E7%84%B6%E5%BE%8C%EF%BC%8C%E5%86%8D%E4%BB%BF%E7%85%A7%E5%AE%98%E7%B6%B2%E4%B8%8A%E7%9A%84%E6%96%B9%E5%BC%8F%E5%B0%87"><span class="nav-number">4.3.</span> <span class="nav-text">接著，你去他們家的官網上，找一個你想要的效果，然後，再仿照官網上的方式將</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

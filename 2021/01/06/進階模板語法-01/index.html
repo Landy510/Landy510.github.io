@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="接續著上一篇的進階模板語法的內容繼續記錄。 反轉陣列元素-透過key因為Vue在操作DOM元素的時候，是用快速置換的方式操作，導致有些元素不會被置換掉。所以，我們會透過將key的屬性，來綁定元素某些獨有的屬性，來讓各元素的整體DOM都可以被完整置換。ex: 12345678910111213141516171819202122232425262728293031323334---HTML---&amp;l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="進階模板語法-01">
+<meta property="og:url" content="https://landy510.github.io/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="接續著上一篇的進階模板語法的內容繼續記錄。 反轉陣列元素-透過key因為Vue在操作DOM元素的時候，是用快速置換的方式操作，導致有些元素不會被置換掉。所以，我們會透過將key的屬性，來綁定元素某些獨有的屬性，來讓各元素的整體DOM都可以被完整置換。ex: 12345678910111213141516171819202122232425262728293031323334---HTML---&amp;l">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-01-06T02:28:54.000Z">
+<meta property="article:modified_time" content="2021-04-26T07:56:39.145Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>進階模板語法-01 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          進階模板語法-01
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-06 10:28:54" itemprop="dateCreated datePublished" datetime="2021-01-06T10:28:54+08:00">2021-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-04-26 15:56:39" itemprop="dateModified" datetime="2021-04-26T15:56:39+08:00">2021-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>接續著上一篇的進階模板語法的內容繼續記錄。</p>
+<h2 id="反轉陣列元素-透過key"><a href="#反轉陣列元素-透過key" class="headerlink" title="反轉陣列元素-透過key"></a>反轉陣列元素-透過key</h2><p>因為Vue在操作DOM元素的時候，是用快速置換的方式操作，導致有些元素不會被置換掉。<br>所以，我們會透過將<code>key</code>的屬性，來綁定元素某些獨有的屬性，來讓各元素的整體DOM都可以被完整置換。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li v-for&#x3D;&quot;(item, key) in arrayData&quot; :key&#x3D;&quot;item.age&quot;&gt;</span><br><span class="line">      &#123;&#123; key &#125;&#125; - &#123;&#123; item.name &#125;&#125; &#123;&#123; item.age &#125;&#125; 歲 &lt;input type&#x3D;&quot;text&quot;&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">  &lt;&#x2F;ul&gt;</span><br><span class="line">  &lt;button class&#x3D;&quot;btn btn-outline-primary&quot; @click&#x3D;&quot;reverseArray&quot;&gt;反轉陣列&lt;&#x2F;button&gt;</span><br><span class="line">  </span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		arrayData:[</span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;漂亮阿姨&#39;,</span><br><span class="line">				age: 24</span><br><span class="line">			&#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;小明&#39;,</span><br><span class="line">				age: 10</span><br><span class="line">			&#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;力宏&#39;,</span><br><span class="line">				age: 35</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	methods: &#123;</span><br><span class="line">		reverseArray: function()&#123;</span><br><span class="line">			this.arrayData.reverse()</span><br><span class="line">			console.log(this.arrayData)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>可以看到以上這個範例，我們在<code>ul</code>的<code>li</code>透過<code>v-bind</code>綁上<code>key</code>這個屬性，<br>而要用item.age去作為<code>key</code>的值，是因為每個元素的age的值都不一樣，所以，可以代表各個的元素，<br>用這種方式就可以整體置換對應的DOM元素，而不是只有部分的DOM元素被置換。</p>
+<h2 id="filter-過濾"><a href="#filter-過濾" class="headerlink" title="filter 過濾"></a>filter 過濾</h2><iframe src="https://codepen.io/RandyChen/embed/poEVYrN?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上這個範例，<br>當你在<code>input</code>欄位輸入內容，並按下enter後，會觸發filterData函式，<br>此時，會先對dataArray使用filter，當<code>input</code>欄位輸入的內容跟dataArray裡面的元素的name的成員屬性有匹配的話，<br>就會把那個物件push進去filterArray陣列裡面。<br>最後，在<code>ul</code>的區塊中去遍歷filterArray陣列裡面的元素，並用該元素的age為索引，<br>來置換頁面上的DOM內容。</p>
+<a id="more"></a>
+<h2 id="無法運行"><a href="#無法運行" class="headerlink" title="無法運行"></a>無法運行</h2><h3 id="在Vue中，不要用將陣列的length直接指定為0的方法，"><a href="#在Vue中，不要用將陣列的length直接指定為0的方法，" class="headerlink" title="在Vue中，不要用將陣列的length直接指定為0的方法，"></a>在Vue中，不要用將陣列的<code>length</code>直接指定為0的方法，</h3><p>這樣雖然，陣列的內部會清空，但是，網頁上的DOM是沒有被清空的，還是，維持原樣。<br>ex: <code>array.length = 0  // 不要這樣操作</code></p>
+<h3 id="要操作Vue陣列內的元素，不能透過索引的方式來操作它"><a href="#要操作Vue陣列內的元素，不能透過索引的方式來操作它" class="headerlink" title="要操作Vue陣列內的元素，不能透過索引的方式來操作它"></a>要操作Vue陣列內的元素，不能透過索引的方式來操作它</h3><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;button class&#x3D;&quot;btn btn-outline-primary&quot; @click&#x3D;&quot;cantWork&quot;&gt;無法運行&lt;&#x2F;button&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li v-for&#x3D;&quot;(item, key) in arrayData&quot; :key&#x3D;&quot;item.age&quot;&gt;</span><br><span class="line">      &#123;&#123; key &#125;&#125; - &#123;&#123; item.name &#125;&#125; &#123;&#123; item.age &#125;&#125; 歲 &lt;input type&#x3D;&quot;text&quot;&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">&lt;&#x2F;ul&gt;</span><br><span class="line"></span><br><span class="line">--JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		arrayData:[</span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;漂亮阿姨&#39;,</span><br><span class="line">				age: 24</span><br><span class="line">			&#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;小明&#39;,</span><br><span class="line">				age: 16</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	methods: &#123;</span><br><span class="line">		cantWork: function()&#123;</span><br><span class="line">			this.arrayData[0] &#x3D; &#123;</span><br><span class="line">				name: &#39;賽亞人&#39;,</span><br><span class="line">				age: 100</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以上這個範例，直接更改arrayData的第一個元素內容，<br>雖然，該陣列的資料有被修改到，但是，網頁上的DOM內容是沒有被修改到的喔。</p>
+<h2 id="Vue-set-用來修正”無法運行”的問題"><a href="#Vue-set-用來修正”無法運行”的問題" class="headerlink" title="Vue.set - 用來修正”無法運行”的問題"></a>Vue.set - 用來修正”無法運行”的問題</h2><p>我們就可以透過Vue.set來修正在”無法運行”的這個章節中的問題。</p>
+<iframe src="https://codepen.io/RandyChen/embed/RwGydYz?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上用Vue.set的寫法，就可以更改陣列中的指定元素之外，也可以連帶更改網頁上的DOM元素內容嘞。</p>
+<h2 id="純數字迴圈"><a href="#純數字迴圈" class="headerlink" title="純數字迴圈"></a>純數字迴圈</h2><p>可以用<code>v-for</code>來呈現數字。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">	&lt;li v-for&#x3D;&quot;item in 10&quot;&gt;</span><br><span class="line">		&#123;&#123;item&#125;&#125;</span><br><span class="line">	&lt;&#x2F;li&gt;</span><br><span class="line">&lt;&#x2F;ul&gt;</span><br></pre></td></tr></table></figure>
+<p>以上的內容就會呈現1 - 10的數字</p>
+<h2 id="Template的運用"><a href="#Template的運用" class="headerlink" title="Template的運用"></a>Template的運用</h2><p>今天我們要一次將陣列的內容，輸入到兩個tr裡面時，我們就可以使用template的技巧<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;table class&#x3D;&quot;table&quot;&gt;</span><br><span class="line">    &lt;thead&gt;</span><br><span class="line">      &lt;tr&gt;</span><br><span class="line">        &lt;th&gt;姓名&lt;&#x2F;th&gt;</span><br><span class="line">        &lt;th&gt;分數&lt;&#x2F;th&gt;</span><br><span class="line">      &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;&#x2F;thead&gt;</span><br><span class="line">    &lt;tbody&gt;</span><br><span class="line">       &lt;template v-for&#x3D;&quot;(item, index) in arrayData&quot; :key&#x3D;&quot;index&quot;&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">          &lt;td&gt; &#123;&#123; item.name &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">          &lt;td&gt; &#123;&#123; item.age &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;&#x2F;tr&gt;</span><br><span class="line">      &lt;&#x2F;template&gt;</span><br><span class="line">    &lt;&#x2F;tbody&gt;</span><br><span class="line">  &lt;&#x2F;table&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		arrayData:[</span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;漂亮阿姨&#39;,</span><br><span class="line">				age: 24</span><br><span class="line">			&#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;小明&#39;,</span><br><span class="line">				age: 16</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以上這個範例，就可以看到兩個<code>tr</code>為一組，被包在<code>template</code>裡面。<br>而這個<code>template</code>是不會呈現在網頁上的喔，並分別在兩個tr裡面呈現元素的age值和name值。<br><code>template</code>的好處就是，如果想要重複重現元素的內容在不同區塊裡面的話，<br>我們就可以利用<code>template</code>把這些不同區塊包裹起來，並把<code>v-for</code>放在<code>template</code>標籤中，<br>去遍歷陣列，再將遍歷到的目標元素放在應該呈現的區塊中。</p>
+<h2 id="v-for和v-if"><a href="#v-for和v-if" class="headerlink" title="v-for和v-if"></a>v-for和v-if</h2><p>當<code>v-for</code>和<code>v-if</code>寫在一起的時候，會先執行<code>v-for</code>的內容，<br>接著，才執行<code>v-if</code>的語法。</p>
+<h2 id="v-for-與-元件"><a href="#v-for-與-元件" class="headerlink" title="v-for 與 元件"></a>v-for 與 元件</h2><p>注意!!<br>現在建議元件使用 <code>v-for</code>來遍歷陣列的時候，都要加上綁定個元素的<code>key</code>屬性<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;h4&gt;v-for 與 元件&lt;&#x2F;h4&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">	&lt;list-item :item&#x3D;&quot;item&quot; v-for&#x3D;&quot;(item, key) in arrayData&quot; :key&#x3D;&quot;item.age&quot;&gt;&lt;&#x2F;list-item&gt;</span><br><span class="line">&lt;&#x2F;ul&gt;</span><br><span class="line"></span><br><span class="line">--JavaScript---</span><br><span class="line">Vue.component(&#39;list-item&#39;, &#123;</span><br><span class="line">  template: &#96;</span><br><span class="line">    &lt;li&gt;</span><br><span class="line">      &#123;&#123; item.name &#125;&#125; &#123;&#123; item.age &#125;&#125; 歲</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">  &#96;,</span><br><span class="line">  props: [&#39;item&#39;]</span><br><span class="line">&#125;);</span><br><span class="line">var vue &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		arrayData:[</span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;漂亮阿姨&#39;,</span><br><span class="line">				age: 24</span><br><span class="line">			&#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;小明&#39;,</span><br><span class="line">				age: 16</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以上這個範例，就是裡用<code>v-for</code>來遍歷陣列元素，並將<code>key</code>屬性都綁定個元素的age屬性值，<br>最後，再將其內容渲染到，我們自訂義’list-item’元件上面。</p>
+<h2 id="v-if-和-v-else"><a href="#v-if-和-v-else" class="headerlink" title="v-if 和 v-else"></a>v-if 和 v-else</h2><p>當鄰近元件的<code>v-if</code>判斷條件不符合時，就會跑到<code>v-else</code>的內容裡面<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;alert alert-success&quot; v-if&#x3D;&quot;isSuccess&quot;&gt;成功!&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;alert alert-danger&quot; v-else&gt;失敗!&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;form-check&quot;&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;checkbox&quot; class&#x3D;&quot;form-check-input&quot; id&#x3D;&quot;isSuccess&quot; v-model&#x3D;&quot;isSuccess&quot;&gt;</span><br><span class="line">	&lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;isSuccess&quot;&gt;啟用元素狀態&lt;&#x2F;label&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>當點選<code>input</code>欄位的內容，就可以切換isSuccess的值，接著，在<code>div</code>區塊就會靠著<code>v-if</code>去判斷<br>isSuccess是否為<code>true</code>，若是<code>true</code>，就會呈現成功的區塊內容，若是<code>false</code>，就呈現<code>v-else</code>的內容，<br>也就是失敗的區塊內容。</p>
+<h2 id="使用-template-切換多數-DOM-呈現"><a href="#使用-template-切換多數-DOM-呈現" class="headerlink" title="使用 template 切換多數 DOM 呈現"></a>使用 template 切換多數 DOM 呈現</h2><p><code>template</code>標籤可以使用Vue指令，同時，<code>template</code>不會被呈現在網頁上<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">&lt;table class&#x3D;&quot;table&quot;&gt;</span><br><span class="line">	&lt;thead&gt;</span><br><span class="line">	  &lt;th&gt;編號&lt;&#x2F;th&gt;</span><br><span class="line">	  &lt;th&gt;姓名&lt;&#x2F;th&gt;</span><br><span class="line">	&lt;&#x2F;thead&gt;</span><br><span class="line">    &lt;template v-if&#x3D;&quot;showTemplate&quot;&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;1&lt;&#x2F;td&gt;</span><br><span class="line">            &lt;td&gt;安妮&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;&#x2F;tr&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;td&gt;2&lt;&#x2F;td&gt;</span><br><span class="line">            &lt;td&gt;小明&lt;&#x2F;td&gt;</span><br><span class="line">        &lt;&#x2F;tr&gt;</span><br><span class="line">    &lt;&#x2F;template&gt;  </span><br><span class="line">&lt;&#x2F;table&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;form-check&quot;&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;checkbox&quot; class&#x3D;&quot;form-check-input&quot; id&#x3D;&quot;showTemplate&quot; v-model&#x3D;&quot;showTemplate&quot;&gt;</span><br><span class="line">	&lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;showTemplate&quot;&gt;啟用元素狀態&lt;&#x2F;label&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">--JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el:&#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		showTemplate: false</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>利用<code>input</code>欄位，並透過<code>v-model</code>去綁定showTemplate的值。<br>接著，再將想要呈現的內容包在<code>template</code>標籤裡面，並用<code>v-if</code>去判定showTemplate值。<br>藉此，利用<code>input</code>欄位，來切換是否要呈現<code>template</code>裡面的內容。</p>
+<h2 id="v-else-if語法"><a href="#v-else-if語法" class="headerlink" title="v-else-if語法"></a>v-else-if語法</h2><p>其實方法跟<code>v-else</code>很像，只是<code>v-else-if</code>後面也要接判斷式<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class&#x3D;&quot;nav nav-tabs&quot;&gt;</span><br><span class="line">    &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">      &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;#&quot; @click.prevent&#x3D;&quot;link &#x3D; &#39;a&#39;&quot;&gt;標題一&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">    &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">      &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;#&quot; @click.prevent&#x3D;&quot;link &#x3D; &#39;b&#39;&quot;&gt;標題二&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">    &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">      &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;#&quot; @click.prevent&#x3D;&quot;link &#x3D; &#39;c&#39;&quot;&gt;標題三&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">&lt;&#x2F;ul&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;content&quot;&gt;</span><br><span class="line">	&lt;div v-if&#x3D;&quot;link &#x3D;&#x3D;&#x3D;&#39;a&#39;&quot;&gt;Ａ&lt;&#x2F;div&gt;</span><br><span class="line">	&lt;div v-else-if&#x3D;&quot;link &#x3D;&#x3D;&#x3D;&#39;b&#39;&quot;&gt;Ｂ&lt;&#x2F;div&gt;</span><br><span class="line">	&lt;div v-else-if&#x3D;&quot;link &#x3D;&#x3D;&#x3D;&#39;c&#39;&quot;&gt;Ｃ&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>以上範例，當你按下某個鈕會改變link的數值，接著，當該link值符合某個判斷式時，就會呈現<br>該分頁的內容。</p>
+<h2 id="KEY屬性"><a href="#KEY屬性" class="headerlink" title="KEY屬性"></a>KEY屬性</h2><p>要特別注意Vue裡面的<code>key</code>屬性的用法喔!!!<br>因為，Vue本身是會快速置換部分的DOM元件，這樣會導致有某些相對應的DOM元件沒有備置換到，<br>所以，我們也要利用<code>key</code>屬性來綁定相對應的DOM，這樣在置換的時候，才會全部都備置換成<br>相對應的元件。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;template v-if&#x3D;&quot;loginType &#x3D;&#x3D;&#x3D; &#39;username&#39;&quot;&gt;</span><br><span class="line">    &lt;label&gt;Username&lt;&#x2F;label&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Enter your username&quot; :key&#x3D;&quot;1&quot;&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;template v-else&gt;</span><br><span class="line">	&lt;label&gt;Email&lt;&#x2F;label&gt;</span><br><span class="line">	&lt;input class&#x3D;&quot;form-control&quot; placeholder&#x3D;&quot;Enter your email address&quot; :key&#x3D;&quot;2&quot;&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;button class&#x3D;&quot;btn btn-outline-primary mt-3&quot; @click&#x3D;&quot;toggleLoginType&quot;&gt;切換狀態&lt;&#x2F;button&gt;</span><br></pre></td></tr></table></figure>
+<p>以上這個範例，對兩個<code>input</code>欄位，分別綁上它們不同的<code>ke</code>y值，讓在做DOM元素切換的時候，<br>也會做相對應的<code>input</code>欄位切換。</p>
+<h2 id="v-if和v-show的差異"><a href="#v-if和v-show的差異" class="headerlink" title="v-if和v-show的差異"></a>v-if和v-show的差異</h2><p><code>v-show</code>的用法是將不符合判斷式內容的區塊以<code>display:none</code>的方式，讓這個區塊不顯現。<br><code>v-if</code>的用法，是將不符合判斷式的區塊，直接消除掉，只留下符合判斷式的區塊，也就是將原始碼中不符合判斷式的部分直接刪除掉。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;alert alert-success&quot; v-show&#x3D;&quot;isSuccess&quot;&gt;成功!&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;alert alert-danger&quot; v-show&#x3D;&quot;!isSuccess&quot;&gt;失敗!&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;form-check&quot;&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;checkbox&quot; class&#x3D;&quot;form-check-input&quot; id&#x3D;&quot;isSuccess2&quot; v-model&#x3D;&quot;isSuccess&quot;&gt;</span><br><span class="line">	&lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;isSuccess2&quot;&gt;啟用元素狀態&lt;&#x2F;label&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95/" rel="prev" title="進階模板語法">
+      <i class="fa fa-chevron-left"></i> 進階模板語法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-02/" rel="next" title="進階模板語法-02">
+      進階模板語法-02 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E8%BD%89%E9%99%A3%E5%88%97%E5%85%83%E7%B4%A0-%E9%80%8F%E9%81%8Ekey"><span class="nav-number">1.</span> <span class="nav-text">反轉陣列元素-透過key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filter-%E9%81%8E%E6%BF%BE"><span class="nav-number">2.</span> <span class="nav-text">filter 過濾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%84%A1%E6%B3%95%E9%81%8B%E8%A1%8C"><span class="nav-number">3.</span> <span class="nav-text">無法運行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8Vue%E4%B8%AD%EF%BC%8C%E4%B8%8D%E8%A6%81%E7%94%A8%E5%B0%87%E9%99%A3%E5%88%97%E7%9A%84length%E7%9B%B4%E6%8E%A5%E6%8C%87%E5%AE%9A%E7%82%BA0%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%8C"><span class="nav-number">3.1.</span> <span class="nav-text">在Vue中，不要用將陣列的length直接指定為0的方法，</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A6%81%E6%93%8D%E4%BD%9CVue%E9%99%A3%E5%88%97%E5%85%A7%E7%9A%84%E5%85%83%E7%B4%A0%EF%BC%8C%E4%B8%8D%E8%83%BD%E9%80%8F%E9%81%8E%E7%B4%A2%E5%BC%95%E7%9A%84%E6%96%B9%E5%BC%8F%E4%BE%86%E6%93%8D%E4%BD%9C%E5%AE%83"><span class="nav-number">3.2.</span> <span class="nav-text">要操作Vue陣列內的元素，不能透過索引的方式來操作它</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-set-%E7%94%A8%E4%BE%86%E4%BF%AE%E6%AD%A3%E2%80%9D%E7%84%A1%E6%B3%95%E9%81%8B%E8%A1%8C%E2%80%9D%E7%9A%84%E5%95%8F%E9%A1%8C"><span class="nav-number">4.</span> <span class="nav-text">Vue.set - 用來修正”無法運行”的問題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%94%E6%95%B8%E5%AD%97%E8%BF%B4%E5%9C%88"><span class="nav-number">5.</span> <span class="nav-text">純數字迴圈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Template%E7%9A%84%E9%81%8B%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">Template的運用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-for%E5%92%8Cv-if"><span class="nav-number">7.</span> <span class="nav-text">v-for和v-if</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-for-%E8%88%87-%E5%85%83%E4%BB%B6"><span class="nav-number">8.</span> <span class="nav-text">v-for 與 元件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-if-%E5%92%8C-v-else"><span class="nav-number">9.</span> <span class="nav-text">v-if 和 v-else</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-template-%E5%88%87%E6%8F%9B%E5%A4%9A%E6%95%B8-DOM-%E5%91%88%E7%8F%BE"><span class="nav-number">10.</span> <span class="nav-text">使用 template 切換多數 DOM 呈現</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-else-if%E8%AA%9E%E6%B3%95"><span class="nav-number">11.</span> <span class="nav-text">v-else-if語法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KEY%E5%B1%AC%E6%80%A7"><span class="nav-number">12.</span> <span class="nav-text">KEY屬性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-if%E5%92%8Cv-show%E7%9A%84%E5%B7%AE%E7%95%B0"><span class="nav-number">13.</span> <span class="nav-text">v-if和v-show的差異</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

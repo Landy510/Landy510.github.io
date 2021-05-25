@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="jQuery的選擇器寫法ex: 1234567891011121314---HTML---	&lt;div&gt;        &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-danger&quot;&gt;按鈕&lt;&#x2F;a&gt;    &lt;&#x2F;div&gt;		&lt;div class&#x3D;&amp;quot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JQ課程筆記-JQ環境設定">
+<meta property="og:url" content="https://landy510.github.io/2021/01/21/JQ%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-JQ%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="jQuery的選擇器寫法ex: 1234567891011121314---HTML---	&lt;div&gt;        &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-danger&quot;&gt;按鈕&lt;&#x2F;a&gt;    &lt;&#x2F;div&gt;		&lt;div class&#x3D;&amp;quot">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/image/jquery_download.png">
+<meta property="og:image" content="https://landy510.github.io/image/jquery_download_1.png">
+<meta property="og:image" content="https://landy510.github.io/image/JQ_CodePen.png">
+<meta property="og:image" content="https://landy510.github.io/image/JQ_CodePen_1.png">
+<meta property="og:image" content="https://landy510.github.io/image/VScode_JQ.png">
+<meta property="og:image" content="https://landy510.github.io/image/VScode_JQ_01.png">
+<meta property="article:published_time" content="2021-01-21T01:54:19.000Z">
+<meta property="article:modified_time" content="2021-01-30T07:25:57.184Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="jQuery">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/image/jquery_download.png">
+
+<link rel="canonical" href="https://landy510.github.io/2021/01/21/JQ%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-JQ%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>JQ課程筆記-JQ環境設定 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/21/JQ%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-JQ%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JQ課程筆記-JQ環境設定
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-21 09:54:19" itemprop="dateCreated datePublished" datetime="2021-01-21T09:54:19+08:00">2021-01-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-30 15:25:57" itemprop="dateModified" datetime="2021-01-30T15:25:57+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index"><span itemprop="name">jQuery</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="jQuery的選擇器寫法"><a href="#jQuery的選擇器寫法" class="headerlink" title="jQuery的選擇器寫法"></a>jQuery的選擇器寫法</h1><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">        &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;btn btn-danger&quot;&gt;按鈕&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;div class&#x3D;&quot;header&quot;&gt;</span><br><span class="line">		&lt;h1&gt;標題&lt;&#x2F;h1&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	$(&#39;a&#39;).hide();</span><br><span class="line">	$(&#39;.header&#39;).hide();</span><br><span class="line">	$(&#39;a&#39;).attr(&#39;href&#39;, &#39;http,:&#x2F;&#x2F;www.kimo.com.tw&#39;); &#x2F;&#x2F; 更改a標籤的href屬性</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>你可以看到jQ的dom選擇器就是<code>$(&#39;&#39;)</code>在這個單引號的中間，加入目標的HTML標籤 或 它的className。<br>選擇完後，在它的後面就再接jQ的內建方法 或者更改該元素的一些內建的屬性。</p>
+<a id="more"></a>
+<h1 id="下載jQuery檔案，並引入專案中"><a href="#下載jQuery檔案，並引入專案中" class="headerlink" title="下載jQuery檔案，並引入專案中"></a>下載jQuery檔案，並引入專案中</h1><p>進到jQ的官網的下載頁面<br><a target="_blank" rel="noopener" href="https://jquery.com/download/">jQuery官網</a></p>
+<p>你就可以看到以下的幾個下載選項，你就選擇compressed的那一個，這是有壓縮過的，檔案大小較小。<br><img src="/image/jquery_download.png" alt="jQ的js檔案網址"></p>
+<p>接著，你點下它的超連結後，你的網頁面會直接顯現下面的檔案內容，<br>這個時候，你朝這個頁面內容點滑鼠右鍵，然後按另存新檔，再將這個檔案存到你要的目錄中，中間過程都不需要更改副檔名喔，因為它都幫你設定好了。<br><img src="/image/jquery_download_1.png" alt="jQ的js檔案"></p>
+<p>下載完之後，你就要記得在你的專案檔的<code>&lt;head&gt;&lt;/head&gt;</code>裡面引入你下載完的jQ的js檔案囉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;script src&#x3D;&quot;JavaScript&#x2F;jquery-3.5.1.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">	&lt;script src&#x3D;&quot;JavaScript&#x2F;all.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="設定jQuery環境"><a href="#設定jQuery環境" class="headerlink" title="設定jQuery環境"></a>設定jQuery環境</h1><p>載入完成後，要在你自己的js檔案裡面加入jQ內容<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div class&#x3D;&quot;header&quot;&gt;</span><br><span class="line">	&lt;h1&gt;標題&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">	</span><br><span class="line">---JavaScript---</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">	$(&#39;h1&#39;).hide();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>你可以看到你必須先寫<code>$(document).ready(function()&#123;&#125;)</code><br>然後，才在你的function裡面撰寫你的程式碼。<br>而這行內容的用意是，當jQ確認瀏覽器完成掛載jQ的核心後，才執行裡面的內容。</p>
+<h2 id="jQuery-在Codepen-環境建立"><a href="#jQuery-在Codepen-環境建立" class="headerlink" title="jQuery 在Codepen 環境建立"></a>jQuery 在Codepen 環境建立</h2><p>首先，你在Codepen裡面的setting中，在js的部分要先在入JQ的核心檔案。<br><img src="/image/JQ_CodePen.png"><br>接著，你在CodePen的JS欄位裡面加上<code>$(document).ready(function()&#123;&#125;)</code><br><img src="/image/JQ_CodePen_1.png"><br>最後，就在這個function裡面加入你的程式碼內容囉。</p>
+<h2 id="VSCode-編譯器的-jQuery提示器"><a href="#VSCode-編譯器的-jQuery提示器" class="headerlink" title="VSCode 編譯器的 jQuery提示器"></a>VSCode 編譯器的 jQuery提示器</h2><p>首先，你先在你的VS編譯器中安裝jQuery Code Snippets<br><img src="/image/VScode_JQ.png"><br>接著，你在你的js檔案裡面輸入特定的關鍵字，就會跳出JQ的語法提示。<br><img src="/image/VScode_JQ_01.png"><br>像這邊就是輸入jqdoc就會跳出提示訊息，然後，你再點擊那個提示訊息，<br>就會直接出現以下的內容囉。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(document).ready(function () &#123;</span><br><span class="line">    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="jQuery-Code-Snippets的提示語法大全"><a href="#jQuery-Code-Snippets的提示語法大全" class="headerlink" title="jQuery Code Snippets的提示語法大全"></a>jQuery Code Snippets的提示語法大全</h3><p>那有關jQuery Code Snippets的提示語法<br>在以下這個超連結，都有說明喔<br><a target="_blank" rel="noopener" href="https://github.com/kspearrin/Visual-Studio-jQuery-Code-Snippets/wiki/Snippet-Listing">jQuery Code Snippets的提示語法網址</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/20/Vue%E5%B8%B8%E7%94%A8API/" rel="prev" title="Vue常用API">
+      <i class="fa fa-chevron-left"></i> Vue常用API
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/21/JQ%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-JQ%E9%81%B8%E6%93%87%E5%99%A8/" rel="next" title="JQ課程筆記-JQ選擇器">
+      JQ課程筆記-JQ選擇器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#jQuery%E7%9A%84%E9%81%B8%E6%93%87%E5%99%A8%E5%AF%AB%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">jQuery的選擇器寫法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BC%89jQuery%E6%AA%94%E6%A1%88%EF%BC%8C%E4%B8%A6%E5%BC%95%E5%85%A5%E5%B0%88%E6%A1%88%E4%B8%AD"><span class="nav-number">2.</span> <span class="nav-text">下載jQuery檔案，並引入專案中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9AjQuery%E7%92%B0%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">設定jQuery環境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jQuery-%E5%9C%A8Codepen-%E7%92%B0%E5%A2%83%E5%BB%BA%E7%AB%8B"><span class="nav-number">3.1.</span> <span class="nav-text">jQuery 在Codepen 環境建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VSCode-%E7%B7%A8%E8%AD%AF%E5%99%A8%E7%9A%84-jQuery%E6%8F%90%E7%A4%BA%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">VSCode 編譯器的 jQuery提示器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jQuery-Code-Snippets%E7%9A%84%E6%8F%90%E7%A4%BA%E8%AA%9E%E6%B3%95%E5%A4%A7%E5%85%A8"><span class="nav-number">3.2.1.</span> <span class="nav-text">jQuery Code Snippets的提示語法大全</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="這一篇的內容是紀錄gulp管理專案並跟bower混用的專案，這邊我先放上依據以下步驟，完成的專案連結那我們就開始吧~ gulp 操作步驟紀錄step1.首先，你的電腦要先安裝nodeJS。並輸入node -v 來檢查是否你的nodeJS有安裝完成。step2.在你的電腦全域環境中，安裝gulp (每台電腦只需要安裝一次)輸入指令 npm install gulp -g安裝完成之後，在編譯器中下gu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="建立gulp環境操作步驟紀錄">
+<meta property="og:url" content="https://landy510.github.io/2021/04/14/%E5%BB%BA%E7%AB%8Bgulp%E7%92%B0%E5%A2%83%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%A9%9F%E7%B4%80%E9%8C%84/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="這一篇的內容是紀錄gulp管理專案並跟bower混用的專案，這邊我先放上依據以下步驟，完成的專案連結那我們就開始吧~ gulp 操作步驟紀錄step1.首先，你的電腦要先安裝nodeJS。並輸入node -v 來檢查是否你的nodeJS有安裝完成。step2.在你的電腦全域環境中，安裝gulp (每台電腦只需要安裝一次)輸入指令 npm install gulp -g安裝完成之後，在編譯器中下gu">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-04-14T06:44:01.000Z">
+<meta property="article:modified_time" content="2021-04-14T06:44:43.755Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="專案部屬工具">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2021/04/14/%E5%BB%BA%E7%AB%8Bgulp%E7%92%B0%E5%A2%83%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%A9%9F%E7%B4%80%E9%8C%84/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>建立gulp環境操作步驟紀錄 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/04/14/%E5%BB%BA%E7%AB%8Bgulp%E7%92%B0%E5%A2%83%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%A9%9F%E7%B4%80%E9%8C%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          建立gulp環境操作步驟紀錄
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-04-14 14:44:01 / 修改時間：14:44:43" itemprop="dateCreated datePublished" datetime="2021-04-14T14:44:01+08:00">2021-04-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B0%88%E6%A1%88%E9%83%A8%E5%B1%AC%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">專案部屬工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>這一篇的內容是紀錄gulp管理專案並跟bower混用的專案，<br>這邊我先放上依據以下步驟，<a target="_blank" rel="noopener" href="https://github.com/Landy510/gulp_and_bower">完成的專案連結</a><br><strong>那我們就開始吧~</strong></p>
+<h1 id="gulp-操作步驟紀錄"><a href="#gulp-操作步驟紀錄" class="headerlink" title="gulp 操作步驟紀錄"></a>gulp 操作步驟紀錄</h1><p>step1.<br>首先，你的電腦要先安裝nodeJS。<br>並輸入node -v 來檢查是否你的nodeJS有安裝完成。<br>step2.<br>在你的電腦全域環境中，安裝gulp (每台電腦只需要安裝一次)<br>輸入指令 npm install gulp -g<br>安裝完成之後，在編譯器中下gulp -v來查看gulp的版本，<br>如果有跳出來相對應的版本的話，就代表安裝成功囉~<br>step3.<br>接著，輸入指令npm init，來初始化你的專案檔環境，當該指令執行結束，你的專案檔應該會出現一個<br>package.json的檔案，他可以用來記錄你這個專案檔使用那些相依套件和專案檔的自訂義的執行指令，<br>在未來，擬將你的專案檔給別人時，不需要將專案檔中的node_module資料夾給別人，因為，別人會輸入npm install，<br>接著，編譯器就會依照你專案檔中的package.json所紀錄的相依套件來做環境的安裝囉~<br>step4.<br>接著，輸入指令npm install ，來為你這個專案檔安裝套件的環境<br>step5.<br>安裝完成之後，你就輸入gulp指令，編譯完成後，你專案檔的網頁會直接跳出來。</p>
+<a id="more"></a>
+<p>step6.<br>首先，你要為你的專案檔安裝gulp套件。<br>注意，不要跟step2的那個步驟搞混囉，這一步是指在當下開啟的這個專案檔中安裝gulp套件。<br>輸入指令 npm install gulp –save。<br>安裝成功的話，就可以看到妳的package.json檔案中的dependencies多了紀錄gulp版本的內容。</p>
+<p>step7.<br>接下來我們會安裝gulp的相關套件。<br>首先，先安裝gulp concat，它可以用來將很多js檔案串接在一起。<br>你到<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/gulp-concat">gulp-concat網址</a> ，就可以找到怎麼安裝這個套件的方法囉。<br>你就輸入指令npm install –save gulp-concat，就可以安裝成功囉。</p>
+<p>那你會在gulp-concat的官網上看到他的安裝指令是npm install –save-dev gulp-concat<br>多了-dev這個部分，那這個部分是指將該套件先安裝到測試的環境下，若你輸入npm install –save-dev gulp-concat，<br>你會發現你的package.json多了以下的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;devDependencies&quot;: &#123;</span><br><span class="line">  &quot;gulp-concat&quot;: &quot;^2.6.1&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以看到它是devDependencies，代表是在測試環境下的套件，不過，我這邊就把-dev的部份去掉，直接安裝在實際執行環境下囉。</p>
+<h2 id="定義gulp任務"><a href="#定義gulp任務" class="headerlink" title="定義gulp任務"></a>定義gulp任務</h2><p>step8.<br>接下來，我們要創一個檔案叫gulpfile.js。<br>這個檔案專們寫下我們希望gulp套件來為我們做那些任務。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---gulpfile.js---</span><br><span class="line">var gulp &#x3D; require(&#39;gulp&#39;);  &#x2F;&#x2F; 引入gulp套件</span><br><span class="line">var concat &#x3D; require(&#39;gulp-concat&#39;); &#x2F;&#x2F; 引入gulp-concat套件</span><br><span class="line"></span><br><span class="line">gulp.task(&#39;concat&#39;, function() &#123;   &#x2F;&#x2F; 定義一個gulp任務叫concat</span><br><span class="line">  return gulp.src(&#39;.&#x2F;source&#x2F;js&#x2F;**&#x2F;*.js&#39;)  &#x2F;&#x2F; 代表資料來源在哪裡，這邊是代表在soruce資料夾中的js資料夾中的所有js檔案</span><br><span class="line">    .pipe(concat(&#39;all.js&#39;))               &#x2F;&#x2F; 將以上路徑中的js檔案，彙總到一個all.js檔案中</span><br><span class="line">    .pipe(gulp.dest(&#39;.&#x2F;public&#x2F;javascripts&#39;)) &#x2F;&#x2F; 代表上面那個匯總的all.js檔案，要輸出到哪裡，這邊指的就是要輸出到public資料夾裡的javascripts資料夾中</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>首先，在gulp定義任務的內容中，<br>他們彼此之間是用pipe來串接起來，那最後一個pipe，就是最終檔案要輸出的路徑。<br>第二，<br>寫完上面的規則後，我們先在創一個source資料夾，並在裡面再創一個js資料夾，接著，在js資料夾中創兩個js檔案，分別為a.js和b.js。<br>並在這兩個js檔案寫一些內容。 寫完之後，輸入指令 gulp concat，你就會發現出現了一個public資料夾，裏面包含了一個javascripts資料夾，在這個資料夾裡面有一個all.js檔案，<br>那這個all.js檔案的內容，就是將a.js和b.js的檔案內容合併在一起，是不是都跟我們在gulpfile.js中寫的規則一樣呢，很方便吧~~~</p>
+<h2 id="壓縮合併檔案"><a href="#壓縮合併檔案" class="headerlink" title="壓縮合併檔案"></a>壓縮合併檔案</h2><p>step9.<br>我們要下載一個gulp-uglyfly的套件，來將我們合併完成的all.js檔案壓縮，讓指體檔案變得更小。<br>你可以到<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/gulp-uglyfly">它的官網</a> 找到安裝的指令。<br>輸入指令 npm install –save gulp-uglyfly<br>接著，你到gulpfile.檔案中加入有關gulp-uglyfly的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var gulp &#x3D; require(&#39;gulp&#39;);  </span><br><span class="line">var concat &#x3D; require(&#39;gulp-concat&#39;); </span><br><span class="line">var uglyfly &#x3D; require(&#39;gulp-uglyfly&#39;); &#x2F;&#x2F; 引入gulp-uglyfly套件</span><br><span class="line"></span><br><span class="line">gulp.task(&#39;concat&#39;, function() &#123;</span><br><span class="line">  return gulp.src(&#39;.&#x2F;source&#x2F;js&#x2F;**&#x2F;*.js&#39;)  </span><br><span class="line">    .pipe(concat(&#39;all.js&#39;))</span><br><span class="line">    .pipe(uglyfly())  &#x2F;&#x2F; 利用uglyfly來將all.js壓縮</span><br><span class="line">    .pipe(gulp.dest(&#39;.&#x2F;public&#x2F;javascripts&#39;)) </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>你可以看到我們先引入gulp-uglyfly，接著，在concat任務裡面，在concat後面再pipe一個uglyfly的動作。<br>修改完之後，輸入gulp concat，你應該就可以看到在public資料夾中的all.js檔案內容都被擠到同一行裡面，這就是gulp-uglyfly得功勞喔~</p>
+<h2 id="安裝gulp-sass檔案"><a href="#安裝gulp-sass檔案" class="headerlink" title="安裝gulp sass檔案"></a>安裝gulp sass檔案</h2><p>你到<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/gulp-sass">它的官網</a> ，就可以看到相關安裝指令。<br>輸入指令 npm install node-sass gulp-sass –save<br>接著，修改一下，gulpfile.js的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---gulpfile.js---</span><br><span class="line">var sass &#x3D; require(&#39;gulp-sass&#39;); &#x2F;&#x2F; 引入gulp-sass套件</span><br><span class="line">sass.compiler &#x3D; require(&#39;node-sass&#39;);</span><br><span class="line"></span><br><span class="line">gulp.task(&#39;sass&#39;, function () &#123;   &#x2F;&#x2F; 定義任務</span><br><span class="line">  return gulp.src(&#39;.&#x2F;source&#x2F;scss&#x2F;**&#x2F;*.scss&#39;)  &#x2F;&#x2F; scss檔案來源</span><br><span class="line">    .pipe(sass().on(&#39;error&#39;, sass.logError))</span><br><span class="line">    .pipe(gulp.dest(&#39;.&#x2F;public&#x2F;scss&#39;));        &#x2F;&#x2F; 檔案輸出位置</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>以上的內容是直接複製官網上的內容，再修改路徑。<br>你輸入指令gulp sass，應該就可以在public資料夾中看到產出一個scss檔案，而且裡面有一個all.css的檔案了。</p>
+<h2 id="一次執行多個任務"><a href="#一次執行多個任務" class="headerlink" title="一次執行多個任務"></a>一次執行多個任務</h2><p>gulp允許你一次執行多個你已經定義的gulp<br>像上面的範例，我自訂義了兩個任務分別是sass和concat。<br>那我需要在gulpfile.js檔案裡面新增這一行程式碼</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">---gulpfile.js---</span><br><span class="line">gulp.task(&#39;concat&#39;, function() &#123;</span><br><span class="line">  return gulp.src(&#39;.&#x2F;source&#x2F;js&#x2F;**&#x2F;*.js&#39;)  &#x2F;&#x2F; 代表資料來源在哪裡</span><br><span class="line">    .pipe(concat(&#39;all.js&#39;))</span><br><span class="line">    .pipe(uglyfly())  &#x2F;&#x2F; 利用uglyfly來將all.js壓縮</span><br><span class="line">    .pipe(gulp.dest(&#39;.&#x2F;public&#x2F;javascripts&#39;)) &#x2F;&#x2F; 代表這個gulp最終要輸出的檔案要輸出到哪裡</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(&#39;sass&#39;, function () &#123;</span><br><span class="line">  return gulp.src(&#39;.&#x2F;source&#x2F;scss&#x2F;**&#x2F;*.scss&#39;)</span><br><span class="line">    .pipe(sass().on(&#39;error&#39;, sass.logError))</span><br><span class="line">    .pipe(gulp.dest(&#39;.&#x2F;public&#x2F;scss&#39;));</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">gulp.task(&#39;default&#39;, gulp.series([&#39;concat&#39;, &#39;sass&#39;]))  &#x2F;&#x2F; 新增這一行，執行concat和sass這兩個任務</span><br></pre></td></tr></table></figure>
+<p>當你新增完以上程式碼後，輸入指令gulp，你就可以一次執行concat和sass這兩個任務囉。<br>若你有3個或以上的任務想要一次執行，做法就以此類推囉~</p>
+<h2 id="加入index-html"><a href="#加入index-html" class="headerlink" title="加入index.html"></a>加入index.html</h2><p>最後，你在public資料夾中，加入一個index.html檔案，並在這個檔案引入你用gulp產生出來的all.js和all.css，接著，在瀏覽器上看這個html檔案，應該就會呈現<br>你撰寫的內容和加入的樣式囉。</p>
+<h1 id="Bower加入jquery"><a href="#Bower加入jquery" class="headerlink" title="Bower加入jquery"></a>Bower加入jquery</h1><p>引入bower在gulp專案的原因是，<br>我們可以利用bower來管理套件，利用gulp來將bower中引入的套件的javascript合併。<br>step1.<br>你需要先為你的電腦的全域環境安裝bower，如果沒有安裝的話你是沒辦法在編譯器裡面使用bower指令的。<br>輸入指令npm install -g bower。<br>接著，輸入bower init，它會跳出一些要你輸入的資料，你不用管他們直接enter到底，接著，成功後，你會看到你的專案檔裡面出現一個bower.json檔案。<br>裡面的內容就是紀錄bower所管理的套件。</p>
+<p>step2.<br>接著，利用bower來安裝你想要安裝的套件。<br>那在這邊的話我們希望安裝jquery，所以，輸入指令bower install jquery。<br>輸入完之後，你會發現多一個bower_component的資料夾，在這個資料夾裡面有一個dist的資料夾，裡面就放了jquery所有的js檔案。</p>
+<p>step3.<br>利用bower安裝完jquery後，我們就利用gulp來將這個jquery引入到我們的專案中。<br>所以，我們要修改一下gulpfile.js檔案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var vendorJS &#x3D; [</span><br><span class="line">  &#39;bower_components&#x2F;jquery&#x2F;dist&#x2F;jquery.min.js&#39;  &#x2F;&#x2F; 代表jquery的js檔案的來源路徑</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">gulp.task(&#39;vendor&#39;, function() &#123;</span><br><span class="line">  return gulp.src(vendorJS)     &#x2F;&#x2F; 加到這裡</span><br><span class="line">    .pipe(concat(&#39;vendor.js&#39;))</span><br><span class="line">    .pipe(gulp.dest(&#39;.&#x2F;public&#x2F;javascripts&#39;)) </span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(&#39;default&#39;, gulp.series([&#39;concat&#39;, &#39;sass&#39;, &#39;vendor&#39;]))   &#x2F;&#x2F; 將vendoe任務也放到gulp中</span><br></pre></td></tr></table></figure>
+<p>這邊撰寫的內容在此說明一下，<br>你可以發現我們沒有新增require的內容，因為，jquery不是gulp的套件。<br>第二，我們先將jquery的js路徑放到一個陣列裡面，接著，再將這個陣列放到vendor這個task裡面。 用陣列撰寫的來源路徑的方式，可以在該陣列裡面寫入多個來源路徑，<br>最後，再將這個路徑陣列放到你的gulp的task的gulp.src中，gulp就會依循這些路徑來抓取來源檔案，並透過concat將其內容都匯整到你指定的檔案中，像這邊我就指定<br>要匯整到一個叫vendor.js的檔案。 </p>
+<p>第三，將該任務也放到gulp任務中，接著你執行指令gulp，你就可以看到你指定生成的資料夾裡面出現vendor.js檔案，裡面包含的就是jquery的js內容。<br>最後，你在你的public的資料夾中的index.html也引入這個生成的vendor.js，此時，你的專案檔就可以開始使用jquery的功能囉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---index.html---</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;.&#x2F;scss&#x2F;all.css&quot;&gt;</span><br><span class="line">  &lt;script src&#x3D;&quot;.&#x2F;javascripts&#x2F;vendor.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">  &lt;script src&#x3D;&quot;.&#x2F;javascripts&#x2F;all.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="gulp的watch任務"><a href="#gulp的watch任務" class="headerlink" title="gulp的watch任務"></a>gulp的watch任務</h2><p>watch的功能在於它能監控我們指定的資料夾，若該資料夾有變動的時候，就會做相對應的動作，不需要我們再手動下一次gulp的指令。<br>你就修改gulfile.js檔案中的指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---gulpfile.js---</span><br><span class="line">gulp.task(&#39;watch&#39;, function () &#123;   &#x2F;&#x2F; 監控任務</span><br><span class="line">  gulp.watch(&#39;.&#x2F;source&#x2F;js&#x2F;**&#x2F;*.js&#39;, gulp.series(&#39;concat&#39;))    &#x2F;&#x2F; 監控sorce資料夾中的所有js檔案</span><br><span class="line">  gulp.watch(&#39;.&#x2F;source&#x2F;scss&#x2F;**&#x2F;*.scss&#39;, gulp.series(&#39;sass&#39;))  &#x2F;&#x2F; 監控sorce資料夾中的所有sass檔案</span><br><span class="line">&#125;)</span><br><span class="line">gulp.task(&#39;default&#39;, gulp.series([&#39;concat&#39;, &#39;sass&#39;, &#39;vendor&#39;, &#39;watch&#39;]))   &#x2F;&#x2F; 記得，要將監控任務放到最後面，修改完之後才監控</span><br></pre></td></tr></table></figure>
+<p>加入以上的內容後，輸入指令gulp，我們直接修改js檔案 或 scss檔案就會因為watch的gulp任務，可以直接渲染到網頁上，不需要再輸入gulp指令囉。</p>
+<h1 id="利用gulp來將專案檔部屬到github-pages"><a href="#利用gulp來將專案檔部屬到github-pages" class="headerlink" title="利用gulp來將專案檔部屬到github_pages"></a>利用gulp來將專案檔部屬到github_pages</h1><p>step1.<br>首先，要先安裝gulp的gh-pages套件。<br>你去<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/gulp-gh-pages#usage">它的官網</a> 就可以看到怎麼安裝了。<br>輸入指令npm install –save gulp-gh-pages，<br>安裝完之後，去修改gulpfile.js的指令內容，新增可以直接部屬到github_pages上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---gulpfile.js---</span><br><span class="line">var ghPages &#x3D; require(&#39;gulp-gh-pages&#39;);  &#x2F;&#x2F; 引入gulp-gh-pages套件</span><br><span class="line"></span><br><span class="line">gulp.task(&#39;deploy&#39;, function() &#123;   &#x2F;&#x2F; 定義部屬github_pages的任務</span><br><span class="line">  return gulp.src(&#39;.&#x2F;public&#x2F;**&#x2F;*&#39;)  &#x2F;&#x2F; 來源檔案是public資料夾內的所有檔案</span><br><span class="line">    .pipe(ghPages());  &#x2F;&#x2F; 執行部屬動作</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>step2.<br>定義完部屬的指令之後，你要先為你的專案檔建立git環境。<br>所以，<br>第一，輸入git init，為你的專案檔建立git環境。<br>第二，新增一個.gitignore檔案，這個檔案內容是定義你不想要將那些檔案或資料夾部屬到github上面<br>我裡面是寫</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---.gitignore---</span><br><span class="line">.vscode</span><br><span class="line">node_modules</span><br><span class="line">public</span><br><span class="line">bower_components</span><br><span class="line">.tmp</span><br></pre></td></tr></table></figure>
+<p>第三，輸入指令 git add .<br>第四，輸入指令 git commit -m “修改的提示訊息”<br>第五，輸入指令 git remote add origin “git_repo_網址”<br>如此，就已經完成將你的專案部屬到相對應的git repo中。<br>第六，將該專案檔中的public檔案部屬到github_pages中，所以，你輸入指令gulp deploy，如此，就可以將public資料部屬到github_pages中，可以在相對應的網址直接<br>在網頁上看到你的專案檔成果囉~~</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B0%88%E6%A1%88%E9%83%A8%E5%B1%AC%E5%B7%A5%E5%85%B7/" rel="tag"># 專案部屬工具</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/14/gulp%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9/" rel="prev" title="gulp基本介紹">
+      <i class="fa fa-chevron-left"></i> gulp基本介紹
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/15/%E5%81%BD%E9%A1%9E%E8%88%87%E5%81%BD%E5%85%83%E7%B4%A0/" rel="next" title="偽類與偽元素">
+      偽類與偽元素 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gulp-%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%A9%9F%E7%B4%80%E9%8C%84"><span class="nav-number">1.</span> <span class="nav-text">gulp 操作步驟紀錄</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E7%BE%A9gulp%E4%BB%BB%E5%8B%99"><span class="nav-number">1.1.</span> <span class="nav-text">定義gulp任務</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A3%93%E7%B8%AE%E5%90%88%E4%BD%B5%E6%AA%94%E6%A1%88"><span class="nav-number">1.2.</span> <span class="nav-text">壓縮合併檔案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9Dgulp-sass%E6%AA%94%E6%A1%88"><span class="nav-number">1.3.</span> <span class="nav-text">安裝gulp sass檔案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%AC%A1%E5%9F%B7%E8%A1%8C%E5%A4%9A%E5%80%8B%E4%BB%BB%E5%8B%99"><span class="nav-number">1.4.</span> <span class="nav-text">一次執行多個任務</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5index-html"><span class="nav-number">1.5.</span> <span class="nav-text">加入index.html</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bower%E5%8A%A0%E5%85%A5jquery"><span class="nav-number">2.</span> <span class="nav-text">Bower加入jquery</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp%E7%9A%84watch%E4%BB%BB%E5%8B%99"><span class="nav-number">2.1.</span> <span class="nav-text">gulp的watch任務</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A9%E7%94%A8gulp%E4%BE%86%E5%B0%87%E5%B0%88%E6%A1%88%E6%AA%94%E9%83%A8%E5%B1%AC%E5%88%B0github-pages"><span class="nav-number">3.</span> <span class="nav-text">利用gulp來將專案檔部屬到github_pages</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

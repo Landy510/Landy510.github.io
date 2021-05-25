@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="下載github到電腦中首先，先上網下載github到你的電腦中。git下載官網 接著，下載完並安裝完後，在你的我的開始列表中，會出現一個Git資料夾，裡面會有一個Git Bash，點擊它。接著，輸入git version如果有出現相對應的git版本號的話，就代表安裝成功囉。 Windows - 命令提示字元教學移動路徑 cd移動到上一層 cd ..展開列表 ls開新資料夾 mkdir你就在目標目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="github課程筆記-Git 環境安裝">
+<meta property="og:url" content="https://landy510.github.io/2021/01/28/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git-%E7%92%B0%E5%A2%83%E5%AE%89%E8%A3%9D/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="下載github到電腦中首先，先上網下載github到你的電腦中。git下載官網 接著，下載完並安裝完後，在你的我的開始列表中，會出現一個Git資料夾，裡面會有一個Git Bash，點擊它。接著，輸入git version如果有出現相對應的git版本號的話，就代表安裝成功囉。 Windows - 命令提示字元教學移動路徑 cd移動到上一層 cd ..展開列表 ls開新資料夾 mkdir你就在目標目">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/image/git_flow.png">
+<meta property="og:image" content="https://landy510.github.io/image/git_master.png">
+<meta property="og:image" content="https://landy510.github.io/image/git_add.png">
+<meta property="og:image" content="https://landy510.github.io/image/github_search.png">
+<meta property="og:image" content="https://landy510.github.io/image/github_search1.png">
+<meta property="og:image" content="https://landy510.github.io/image/github_update.png">
+<meta property="og:image" content="https://landy510.github.io/image/github_Issue.png">
+<meta property="article:published_time" content="2021-01-28T02:02:48.000Z">
+<meta property="article:modified_time" content="2021-01-28T02:23:27.584Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Github">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/image/git_flow.png">
+
+<link rel="canonical" href="https://landy510.github.io/2021/01/28/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git-%E7%92%B0%E5%A2%83%E5%AE%89%E8%A3%9D/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>github課程筆記-Git 環境安裝 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/28/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git-%E7%92%B0%E5%A2%83%E5%AE%89%E8%A3%9D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          github課程筆記-Git 環境安裝
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-01-28 10:02:48 / 修改時間：10:23:27" itemprop="dateCreated datePublished" datetime="2021-01-28T10:02:48+08:00">2021-01-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="下載github到電腦中"><a href="#下載github到電腦中" class="headerlink" title="下載github到電腦中"></a>下載github到電腦中</h1><p>首先，先上網下載github到你的電腦中。<br><a target="_blank" rel="noopener" href="https://git-scm.com/">git下載官網</a></p>
+<p>接著，下載完並安裝完後，在你的我的開始列表中，<br>會出現一個Git資料夾，裡面會有一個Git Bash，點擊它。<br>接著，輸入<code>git version</code>如果有出現相對應的git版本號的話，就代表安裝成功囉。</p>
+<h1 id="Windows-命令提示字元教學"><a href="#Windows-命令提示字元教學" class="headerlink" title="Windows - 命令提示字元教學"></a>Windows - 命令提示字元教學</h1><h2 id="移動路徑-cd"><a href="#移動路徑-cd" class="headerlink" title="移動路徑 cd"></a>移動路徑 cd</h2><h2 id="移動到上一層-cd"><a href="#移動到上一層-cd" class="headerlink" title="移動到上一層 cd .."></a>移動到上一層 cd ..</h2><h2 id="展開列表-ls"><a href="#展開列表-ls" class="headerlink" title="展開列表 ls"></a>展開列表 ls</h2><h2 id="開新資料夾-mkdir"><a href="#開新資料夾-mkdir" class="headerlink" title="開新資料夾 mkdir"></a>開新資料夾 mkdir</h2><p>你就在目標目錄下，輸入<code>mkdir 資料夾名稱</code>，就可以在這個目錄底下新增這個資料夾囉。</p>
+<h2 id="新增檔案-touch"><a href="#新增檔案-touch" class="headerlink" title="新增檔案 touch"></a>新增檔案 touch</h2><p>你就在目標目錄下，輸入<code>touch 資料名稱</code>，就可以在這個目錄底下新增這個檔案囉。</p>
+<h1 id="Git-環境設定"><a href="#Git-環境設定" class="headerlink" title="Git 環境設定"></a>Git 環境設定</h1><h2 id="輸入user-name和user-email"><a href="#輸入user-name和user-email" class="headerlink" title="輸入user.name和user.email"></a>輸入user.name和user.email</h2><p>接著輸入作者的email和名稱<br>你直接在git bash中輸入以下兩段，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.eamil &quot;xxx@gmail.com&quot;</span><br><span class="line">git config --global user.name &quot;xxxx&quot;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="git-config-–list-檢查是否輸入正確"><a href="#git-config-–list-檢查是否輸入正確" class="headerlink" title="git config –list 檢查是否輸入正確"></a>git config –list 檢查是否輸入正確</h2><p>接著，檢查你以上的內容有沒有輸入成功<br>你就在<code>git bash</code>中輸入<code>git config --list</code><br>接著，你就可以在跳出來的列表中，看到你剛剛輸入的user.name和user.email的內容囉。</p>
+<h1 id="git-init-安裝數據庫"><a href="#git-init-安裝數據庫" class="headerlink" title="git init - 安裝數據庫"></a>git init - 安裝數據庫</h1><p><img src="/image/git_flow.png" alt="git的操作流程"></p>
+<p>step1. 先開啟本地數據庫<br>也就是，在你想要的目錄底下新增一個資料夾，來當本地端的數據庫。</p>
+<p>step2.<br>接著，用<code>git bash</code>移動到你剛剛新增的那個資料夾中，<br>並輸入<code>git init</code>，輸入完之後，git會為你這個資料夾建立好一個git的環境，<br>那在這個資料夾中應該會新增一個.git的資料夾，它是用來幫你把你想要上傳的資料，<br>轉成git相對應的格式之後，再上傳，所以，這個.git的資料夾不要刪掉喔。</p>
+<p>此時，<code>git init</code>如果執行成功的話，你的<code>git bash</code>就會出現master的字樣。<br><img src="/image/git_master.png" alt="git master字樣"></p>
+<h1 id="基礎指令教學流程"><a href="#基礎指令教學流程" class="headerlink" title="基礎指令教學流程"></a>基礎指令教學流程</h1><h2 id="加入索引-git-add"><a href="#加入索引-git-add" class="headerlink" title="加入索引 git add ."></a>加入索引 git add .</h2><h2 id="檢查更新狀況-git-status"><a href="#檢查更新狀況-git-status" class="headerlink" title="檢查更新狀況 git status"></a>檢查更新狀況 git status</h2><h2 id="提交更新-git-commit-m-‘修改紀錄’"><a href="#提交更新-git-commit-m-‘修改紀錄’" class="headerlink" title="提交更新 git commit -m ‘修改紀錄’"></a>提交更新 git commit -m ‘修改紀錄’</h2><h2 id="查詢紀錄-git-log"><a href="#查詢紀錄-git-log" class="headerlink" title="查詢紀錄 git log"></a>查詢紀錄 git log</h2><p>step1.<br>現在你在本地數據庫中，將要引入的檔案都引入到你的本地數據庫中，<br>現在你就要將這些檔案加入索引，此時，你就輸入<code>git add .</code></p>
+<p>step2.<br>你輸入<code>git status</code>，這個時候，你可以看到在這個本地端資料夾中的檔案，<br>被加到索引中了。<br><img src="/image/git_add.png" alt="加到索引中"><br>那你可以看到以上這張圖，綠色字的是代表已經被加入索引中了，而紅色字是代表還沒有被加到索引中的。<br>那你就可以直接輸入<code>git add all.js</code>將這個all.js加入到索引中，<br>接著，再輸入<code>git status</code>，此時，應該就可以看到所有檔案都加到索引中囉。</p>
+<p>step3.<br>接下來，我們就要提交更新，<br>此時，就輸入<code>git commit -m &quot;更新內容&quot;</code></p>
+<p>step4.<br>這個時候，你輸入<code>git status</code>，它應該會顯示沒有東西可以更新，這是因為你在上一步驟已經<br>提交了新的版本囉。<br>如果，在這一個階段，你又有修改一些檔案，並新增某些檔案的內容的話。<br>那你就要在你完成這些修改後，在git Bash中輸入<code>git add .</code><br>接著，再輸入一次<code>git commit -m &quot;更新內容2&quot;</code>，<br>最後，你在用<code>git status</code>來看看在索引中還有沒有需要更新的，如果沒有的話，<br>就代表你第二次更新的內容，也成功的被提交上去囉。</p>
+<p>step5.<br>輸入<code>git log</code>，這個時候你應該可以在介面上看到你之前<code>commit</code>的內容紀錄。</p>
+<h1 id="gitignore-忽略檔案"><a href="#gitignore-忽略檔案" class="headerlink" title="gitignore - 忽略檔案"></a>gitignore - 忽略檔案</h1><p>若你今天有一些檔案，不想要進入版控的話，就需要用到<code>.gitignore</code>這個檔案囉。</p>
+<h2 id="使用-gitignore來忽略檔案"><a href="#使用-gitignore來忽略檔案" class="headerlink" title="使用.gitignore來忽略檔案"></a>使用.gitignore來忽略檔案</h2><p>step1.<br>首先，你先移動到本地數據庫的底下，並在<code>git Bash</code>輸入<code>touch .gitignore</code>，在本地端數據庫的資料夾中，<br>新增一個<code>.gitignore</code>的隱藏檔案。</p>
+<p>step2.<br>將這個新增的<code>.gitignore</code>的檔案打開。</p>
+<h3 id="指定檔案不進版控-指定檔案"><a href="#指定檔案不進版控-指定檔案" class="headerlink" title="指定檔案不進版控 - 指定檔案"></a>指定檔案不進版控 - 指定檔案</h3><p>如果你今天希望某個檔案不要進入版本控制，那你就直接在.gitignore裡面直接輸入那個檔案的名稱。<br>比如，我不希望index3.html這個檔案進入版控，那你就直接在.gitignore輸入index3.html，<br>這樣一來index3.html就不會進到版控範圍了。</p>
+<h3 id="特定副檔名的檔案不要進入-副檔名"><a href="#特定副檔名的檔案不要進入-副檔名" class="headerlink" title="特定副檔名的檔案不要進入 - *副檔名"></a>特定副檔名的檔案不要進入 - *副檔名</h3><p>如果，我今天希望html的檔案類別都不要進入版控的話，那你就在.gitignore中輸入<code>*.html</code>，<br>這樣一來，後面新增的html的檔案，就都不會進入版控範圍囉。</p>
+<h3 id="指定資料夾不要被追蹤-資料夾名稱"><a href="#指定資料夾不要被追蹤-資料夾名稱" class="headerlink" title="指定資料夾不要被追蹤 - 資料夾名稱/"></a>指定資料夾不要被追蹤 - 資料夾名稱/</h3><p>如果，你今天不希望特定的資料夾被追蹤的話，那你就在.gitignore中輸入 資料夾名稱/<br>像是，<code>css/</code> ，這樣一來css這個資料夾內的內容都不會進到版控範圍了。</p>
+<p>那課堂上有提供<a target="_blank" rel="noopener" href="https://github.com/github/gitignore">.gitignore網址</a> ， 說明在哪種語言下，它的專案檔都會忽略哪種類型的檔案。</p>
+<h1 id="工作狀態還原技巧分享"><a href="#工作狀態還原技巧分享" class="headerlink" title="工作狀態還原技巧分享"></a>工作狀態還原技巧分享</h1><h2 id="git-reset-HEAD-取消索引"><a href="#git-reset-HEAD-取消索引" class="headerlink" title="git reset HEAD - 取消索引"></a>git reset HEAD - 取消索引</h2><p>假使你今天已經輸入完成<code>git add .</code>，但這個時候，你發現有一些檔案不需要加入到索引中，<br>那這個時候你可以輸入<code>git reset HEAD</code>，此時，剛剛所有加入到索引中的檔案，都會被返回到沒有加入索引的狀態。</p>
+<h3 id="git-reset-HEAD-指定檔案-指定取消索引的檔案"><a href="#git-reset-HEAD-指定檔案-指定取消索引的檔案" class="headerlink" title="git reset HEAD 指定檔案 - 指定取消索引的檔案"></a>git reset HEAD 指定檔案 - 指定取消索引的檔案</h3><p>這個時候，你就輸入<code>git reset HEAD 指定檔案名稱</code><br>比如: <code>git reset HEAD all.js</code>，這樣一來all.js檔案就會被取消提交到索引了。</p>
+<h2 id="git-checkout-還原檔案"><a href="#git-checkout-還原檔案" class="headerlink" title="git checkout 還原檔案"></a>git checkout 還原檔案</h2><p>如果，你在寫某個檔案，寫壞了，那你想要還原到你先前還沒修改的狀態的話，<br>這個時候，你就可以在git Bash中，輸入<code>git checkout 還原檔案</code><br>即: <code>git checkout index.html</code><br>當你輸入以上指令的時候，index.html這個檔案，會被還原到上一次提交的狀態。<br>但你要記住，是那些已經被提交到索引中的檔案，才能吃得到這個指令的效力喔，<br>如果是從來沒有進到過索引的話是沒用的。</p>
+<h2 id="git-reset-–hard-還原工作目錄與索引"><a href="#git-reset-–hard-還原工作目錄與索引" class="headerlink" title="git reset –hard 還原工作目錄與索引"></a>git reset –hard 還原工作目錄與索引</h2><p>當你輸入這個指令的時候，<br>git會將你的專案中所有修改的內容，都還原到上一次提交的狀態。<br>除此之外，你專案的目錄會被還原到上一次提交的狀態，也就是說，你在上一次提交後，<br>在專案中新增的檔案，都會被刪掉，還原成上一次提交的狀態。</p>
+<h1 id="git-push-推送數據庫到-Github"><a href="#git-push-推送數據庫到-Github" class="headerlink" title="git push - 推送數據庫到 Github"></a>git push - 推送數據庫到 Github</h1><p>step1.<br>到你的github帳號中，選取new repository選項。<br>接著，為這個repository命名，接著，按下create repository，就新增完成囉。</p>
+<p>step2.<br>將這個新增的repository的網址複製起來，接著，先用git Bash移動到你的<br>本地數據庫。</p>
+<p>step3.<br>輸入<code>git clone &quot;repository網址&quot;</code>，<br>接著，就把遠端的數據庫拉到本地數據庫中囉。</p>
+<p>此時，你應該可以在你的本地數據庫資中，看到新增的github 數據庫。</p>
+<p>step4.<br>你就利用命令提示字元，進入這個新增的github數據庫，<br>接著，你將你想要推到github上面的檔案都複製到這個資料夾中。<br>再來，輸入<code>git add .</code>。<br>再來，輸入<code>git commit -m &quot;更新資訊&quot;</code>。<br>再來，輸入<code>git push</code>。</p>
+<p>經過以上的步驟，你應該可以在github的目標repository中看到你剛剛<br>在本地數據庫中push上去的檔案囉。</p>
+<h1 id="從-Github-找出實用插件流程"><a href="#從-Github-找出實用插件流程" class="headerlink" title="從 Github 找出實用插件流程"></a>從 Github 找出實用插件流程</h1><p>這堂課是教我們怎麼在github上尋找我們想要用的插件。<br>因為，很多時候，你在google上搜尋到的插件很多時候，都已經沒有再更新了，<br>可能跟不上瀏覽器的更新。<br>所以，透過在github上的尋找可以找到比較有在維護的插件。<br>step1.<br>在github的搜尋框中，輸入插件的關鍵字，<br>這邊就輸入slider<br><img src="/image/github_search.png" alt="github_搜尋"></p>
+<p>step2.<br>接著，你選擇左邊的Repositories，接著，在右邊的Sort選項，你就選擇Most Star。<br>這個時候，就會跑出最多人給星星的套件。<br><img src="/image/github_search1.png" alt="github_moststar"></p>
+<p>step3.<br>接著，你仔細看最多星星的那些套件的資訊欄，有提供他們什麼時候還有做過更新。<br>那老師是抓半年內都有在更新的話，就還算ok。<br><img src="/image/github_update.png" alt="github_updata"></p>
+<h2 id="套件Github中的Issues"><a href="#套件Github中的Issues" class="headerlink" title="套件Github中的Issues"></a>套件Github中的Issues</h2><p>在套件的github頁面中，有issue選項，這裡面的內容都是，這個套件有遇到過什麼問題的討論。<br>那你可以在Issue裡面的搜尋框裡面，搜尋關鍵字，看這個套件會不會有你擔心的點上有bug。<br>比如，該套件會不會支援IE瀏覽器之類的東西。<br><img src="/image/github_Issue.png" alt="issue"></p>
+<h2 id="BitBucket-可提供私密的線上儲存空間"><a href="#BitBucket-可提供私密的線上儲存空間" class="headerlink" title="BitBucket 可提供私密的線上儲存空間"></a>BitBucket 可提供私密的線上儲存空間</h2><p>在課堂上老師有說到一個線上存取空間BitBucket，它可以提供不對外公開的儲存空間。<br>但是，它有一定限定的上限。<br>然後，Github, Bitbucket 都是 Git 儲存庫的平台，Git 指令都是通用的喔。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Github/" rel="tag"># Github</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/28/%E5%BC%95%E5%85%A5%E6%AA%94%E6%A1%88%E8%B7%AF%E5%BE%91%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" rel="prev" title="引入檔案路徑常用指令">
+      <i class="fa fa-chevron-left"></i> 引入檔案路徑常用指令
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/29/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E6%92%B0%E5%AF%ABDashBoard/" rel="next" title="Vue-vue出一個電商網站-撰寫DashBoard">
+      Vue-vue出一個電商網站-撰寫DashBoard <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BC%89github%E5%88%B0%E9%9B%BB%E8%85%A6%E4%B8%AD"><span class="nav-number">1.</span> <span class="nav-text">下載github到電腦中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Windows-%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E5%AD%97%E5%85%83%E6%95%99%E5%AD%B8"><span class="nav-number">2.</span> <span class="nav-text">Windows - 命令提示字元教學</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8B%95%E8%B7%AF%E5%BE%91-cd"><span class="nav-number">2.1.</span> <span class="nav-text">移動路徑 cd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8B%95%E5%88%B0%E4%B8%8A%E4%B8%80%E5%B1%A4-cd"><span class="nav-number">2.2.</span> <span class="nav-text">移動到上一層 cd ..</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%95%E9%96%8B%E5%88%97%E8%A1%A8-ls"><span class="nav-number">2.3.</span> <span class="nav-text">展開列表 ls</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%96%8B%E6%96%B0%E8%B3%87%E6%96%99%E5%A4%BE-mkdir"><span class="nav-number">2.4.</span> <span class="nav-text">開新資料夾 mkdir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E6%AA%94%E6%A1%88-touch"><span class="nav-number">2.5.</span> <span class="nav-text">新增檔案 touch</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A"><span class="nav-number">3.</span> <span class="nav-text">Git 環境設定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BC%B8%E5%85%A5user-name%E5%92%8Cuser-email"><span class="nav-number">3.1.</span> <span class="nav-text">輸入user.name和user.email</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-config-%E2%80%93list-%E6%AA%A2%E6%9F%A5%E6%98%AF%E5%90%A6%E8%BC%B8%E5%85%A5%E6%AD%A3%E7%A2%BA"><span class="nav-number">3.2.</span> <span class="nav-text">git config –list 檢查是否輸入正確</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-init-%E5%AE%89%E8%A3%9D%E6%95%B8%E6%93%9A%E5%BA%AB"><span class="nav-number">4.</span> <span class="nav-text">git init - 安裝數據庫</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A4%8E%E6%8C%87%E4%BB%A4%E6%95%99%E5%AD%B8%E6%B5%81%E7%A8%8B"><span class="nav-number">5.</span> <span class="nav-text">基礎指令教學流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5%E7%B4%A2%E5%BC%95-git-add"><span class="nav-number">5.1.</span> <span class="nav-text">加入索引 git add .</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AA%A2%E6%9F%A5%E6%9B%B4%E6%96%B0%E7%8B%80%E6%B3%81-git-status"><span class="nav-number">5.2.</span> <span class="nav-text">檢查更新狀況 git status</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E6%9B%B4%E6%96%B0-git-commit-m-%E2%80%98%E4%BF%AE%E6%94%B9%E7%B4%80%E9%8C%84%E2%80%99"><span class="nav-number">5.3.</span> <span class="nav-text">提交更新 git commit -m ‘修改紀錄’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E8%A9%A2%E7%B4%80%E9%8C%84-git-log"><span class="nav-number">5.4.</span> <span class="nav-text">查詢紀錄 git log</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gitignore-%E5%BF%BD%E7%95%A5%E6%AA%94%E6%A1%88"><span class="nav-number">6.</span> <span class="nav-text">gitignore - 忽略檔案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-gitignore%E4%BE%86%E5%BF%BD%E7%95%A5%E6%AA%94%E6%A1%88"><span class="nav-number">6.1.</span> <span class="nav-text">使用.gitignore來忽略檔案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%AA%94%E6%A1%88%E4%B8%8D%E9%80%B2%E7%89%88%E6%8E%A7-%E6%8C%87%E5%AE%9A%E6%AA%94%E6%A1%88"><span class="nav-number">6.1.1.</span> <span class="nav-text">指定檔案不進版控 - 指定檔案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%AE%9A%E5%89%AF%E6%AA%94%E5%90%8D%E7%9A%84%E6%AA%94%E6%A1%88%E4%B8%8D%E8%A6%81%E9%80%B2%E5%85%A5-%E5%89%AF%E6%AA%94%E5%90%8D"><span class="nav-number">6.1.2.</span> <span class="nav-text">特定副檔名的檔案不要進入 - *副檔名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E8%B3%87%E6%96%99%E5%A4%BE%E4%B8%8D%E8%A6%81%E8%A2%AB%E8%BF%BD%E8%B9%A4-%E8%B3%87%E6%96%99%E5%A4%BE%E5%90%8D%E7%A8%B1"><span class="nav-number">6.1.3.</span> <span class="nav-text">指定資料夾不要被追蹤 - 資料夾名稱&#x2F;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E7%8B%80%E6%85%8B%E9%82%84%E5%8E%9F%E6%8A%80%E5%B7%A7%E5%88%86%E4%BA%AB"><span class="nav-number">7.</span> <span class="nav-text">工作狀態還原技巧分享</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-reset-HEAD-%E5%8F%96%E6%B6%88%E7%B4%A2%E5%BC%95"><span class="nav-number">7.1.</span> <span class="nav-text">git reset HEAD - 取消索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-reset-HEAD-%E6%8C%87%E5%AE%9A%E6%AA%94%E6%A1%88-%E6%8C%87%E5%AE%9A%E5%8F%96%E6%B6%88%E7%B4%A2%E5%BC%95%E7%9A%84%E6%AA%94%E6%A1%88"><span class="nav-number">7.1.1.</span> <span class="nav-text">git reset HEAD 指定檔案 - 指定取消索引的檔案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-checkout-%E9%82%84%E5%8E%9F%E6%AA%94%E6%A1%88"><span class="nav-number">7.2.</span> <span class="nav-text">git checkout 還原檔案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-reset-%E2%80%93hard-%E9%82%84%E5%8E%9F%E5%B7%A5%E4%BD%9C%E7%9B%AE%E9%8C%84%E8%88%87%E7%B4%A2%E5%BC%95"><span class="nav-number">7.3.</span> <span class="nav-text">git reset –hard 還原工作目錄與索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-push-%E6%8E%A8%E9%80%81%E6%95%B8%E6%93%9A%E5%BA%AB%E5%88%B0-Github"><span class="nav-number">8.</span> <span class="nav-text">git push - 推送數據庫到 Github</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%9E-Github-%E6%89%BE%E5%87%BA%E5%AF%A6%E7%94%A8%E6%8F%92%E4%BB%B6%E6%B5%81%E7%A8%8B"><span class="nav-number">9.</span> <span class="nav-text">從 Github 找出實用插件流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A5%97%E4%BB%B6Github%E4%B8%AD%E7%9A%84Issues"><span class="nav-number">9.1.</span> <span class="nav-text">套件Github中的Issues</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BitBucket-%E5%8F%AF%E6%8F%90%E4%BE%9B%E7%A7%81%E5%AF%86%E7%9A%84%E7%B7%9A%E4%B8%8A%E5%84%B2%E5%AD%98%E7%A9%BA%E9%96%93"><span class="nav-number">9.2.</span> <span class="nav-text">BitBucket 可提供私密的線上儲存空間</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

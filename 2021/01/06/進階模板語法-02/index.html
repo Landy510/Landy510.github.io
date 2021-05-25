@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="接續著上一篇的進階模板語法-01的內容繼續記錄。 Computed與WatchComputed過濾陣列內容之前的章節是利用按下一個鈕，觸發methods裡面的一個function進而來過濾陣列，並將過濾完的結果呈現在畫面上。那這邊的話，我們希望使用者輸入完內容後，就會自動的將過濾完且符合搜尋內容的條件給呈現在畫面上。那這樣的話，我們就需要用到computed來達成，不需要額外操作(像是:按下ent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="進階模板語法-02">
+<meta property="og:url" content="https://landy510.github.io/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-02/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="接續著上一篇的進階模板語法-01的內容繼續記錄。 Computed與WatchComputed過濾陣列內容之前的章節是利用按下一個鈕，觸發methods裡面的一個function進而來過濾陣列，並將過濾完的結果呈現在畫面上。那這邊的話，我們希望使用者輸入完內容後，就會自動的將過濾完且符合搜尋內容的條件給呈現在畫面上。那這樣的話，我們就需要用到computed來達成，不需要額外操作(像是:按下ent">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-01-06T03:21:12.000Z">
+<meta property="article:modified_time" content="2021-04-26T08:26:26.254Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>進階模板語法-02 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          進階模板語法-02
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-06 11:21:12" itemprop="dateCreated datePublished" datetime="2021-01-06T11:21:12+08:00">2021-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-04-26 16:26:26" itemprop="dateModified" datetime="2021-04-26T16:26:26+08:00">2021-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>接續著上一篇的進階模板語法-01的內容繼續記錄。</p>
+<h2 id="Computed與Watch"><a href="#Computed與Watch" class="headerlink" title="Computed與Watch"></a>Computed與Watch</h2><h3 id="Computed過濾陣列內容"><a href="#Computed過濾陣列內容" class="headerlink" title="Computed過濾陣列內容"></a>Computed過濾陣列內容</h3><p>之前的章節是利用按下一個鈕，觸發methods裡面的一個function進而來過濾陣列，並將過濾完的結果<br>呈現在畫面上。<br>那這邊的話，我們希望使用者輸入完內容後，就會自動的將過濾完且符合搜尋內容的條件給呈現在畫面上。<br>那這樣的話，我們就需要用到computed來達成，不需要額外操作(像是:按下enter)才達成這種效果。</p>
+<iframe src="https://codepen.io/RandyChen/embed/rNMvbNK?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>上面這個例子，當我們在<code>input</code>欄位裡面輸入搜尋值，此時，filterText會變動，<br>也就會連動到<code>computed</code>中的filterData，並在filterData裡面做判斷，若輸入的搜尋內容<br>有符合arrayData的內容的話，就回傳該元素值到filterData中，進而在畫面呈現filterData，<br>但以上這個例子，在資料量大的話會有效能上的議題。</p>
+<h2 id="使用-Computed-來呈現時間格式。"><a href="#使用-Computed-來呈現時間格式。" class="headerlink" title="使用 Computed 來呈現時間格式。"></a>使用 Computed 來呈現時間格式。</h2><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;p&gt;&#123;&#123;formatTime&#125;&#125;&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el:&#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		newDate:0</span><br><span class="line">	&#125;,</span><br><span class="line">	computed:&#123;</span><br><span class="line">		formatTime: function()&#123;</span><br><span class="line">			this.newDate &#x3D; new Date();</span><br><span class="line">			var dates &#x3D; this.newDate;</span><br><span class="line">			var year &#x3D; dates.getFullYear();</span><br><span class="line">			var month &#x3D; dates.getMonth() + 1;</span><br><span class="line">			var date &#x3D; dates.getDate();</span><br><span class="line">			var hours &#x3D; dates.getHours();</span><br><span class="line">			var minutes &#x3D; dates.getMinutes();</span><br><span class="line">			var seconds &#x3D; dates.getSeconds();</span><br><span class="line">			return &#96;$&#123;year&#125;&#x2F;$&#123;month&#125;&#x2F;$&#123;date&#125; $&#123;hours&#125;:$&#123;minutes&#125;:$&#123;seconds&#125;&#96;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以上用<code>computed</code>的方式，就能即時的呈現當下的時間囉~</p>
+<h2 id="Watch"><a href="#Watch" class="headerlink" title="Watch"></a>Watch</h2><p>當特定的變數變化的時候，會去執行特定的function</p>
+<iframe src="https://codepen.io/RandyChen/embed/PoGegzG?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上這個範例，就是利用<code>watch</code>去監聽trigger是否有變動，若有，就去執行相對應的function。<br>也就是當1秒後，trigger的值會被切回去<code>false</code>，也就是把rotate的效果給拿掉。</p>
+<h2 id="表單細節操作"><a href="#表單細節操作" class="headerlink" title="表單細節操作"></a>表單細節操作</h2><p>透過<code>v-for</code>來製作<code>selected</code>裡面的資料<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;select name&#x3D;&quot;&quot; id&#x3D;&quot;&quot; class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;selected2&quot;&gt;</span><br><span class="line">		&lt;option disabled value&#x3D;&quot;&quot;&gt;請選擇&lt;&#x2F;option&gt;</span><br><span class="line">		&lt;option :value&#x3D;&quot;item&quot; v-for&#x3D;&quot;item in selecData&quot;&gt;&#123;&#123;item&#125;&#125;&lt;&#x2F;option&gt;</span><br><span class="line">	&lt;&#x2F;select&gt;</span><br><span class="line">	&lt;p&gt;小明喜歡的女生是 &#123;&#123; selected2 &#125;&#125;。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">--JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el:&#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		selectData:[&#39;阿明&#39;, &#39;力宏&#39;, &#39;漂亮阿姨&#39;],</span><br><span class="line">		selected2:&#39;&#39;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以上的範例，就會動態的將selectData陣列裡面的元素渲染進<code>option</code>裡面。<br>但要特別記得，每個<code>option</code>的<code>value</code>屬性都是動態的被加入的，所以，前面要記得加<code>v-bind</code>。<br>另外，當點選某個<code>option</code>的時候，該<code>option</code>的<code>value</code>會被塞到<code>selected2</code>裡面，<br>所以，最終在<code>p</code>段落裡面就會成現selected2的值，也就是你選取的<code>option</code>的<code>value</code>囉~</p>
+<h2 id="多選"><a href="#多選" class="headerlink" title="多選"></a>多選</h2><p>只要在<code>select</code>的HTML標籤中，加入<code>multiple</code>就可以有多選的功能囉<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;select name&#x3D;&quot;&quot; id&#x3D;&quot;&quot; class&#x3D;&quot;form-control&quot; multiple v-model&#x3D;&quot;selected2&quot;&gt;  &#x2F;&#x2F; 加入multiple</span><br><span class="line">		&lt;option disabled value&#x3D;&quot;&quot;&gt;請選擇&lt;&#x2F;option&gt;</span><br><span class="line">		&lt;option :value&#x3D;&quot;item&quot; v-for&#x3D;&quot;item in selecData&quot;&gt;&#123;&#123;item&#125;&#125;&lt;&#x2F;option&gt;</span><br><span class="line">	&lt;&#x2F;select&gt;</span><br><span class="line">	&lt;p&gt;小明喜歡的女生是 &#123;&#123; selected2 &#125;&#125;。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>當你在<code>select</code>中加入<code>multiple</code>時，你在點選該欄位中的<code>option</code>時，記得按下Ctrl鍵來複選，<br>此時，selected2裡的內容，就是你複選完的結果囉。</p>
+<a id="more"></a>
+<h2 id="複選框"><a href="#複選框" class="headerlink" title="複選框"></a>複選框</h2><p>在<code>checkbox</code>的標籤上加上<br><code>true-value=&quot;xxx&quot;</code> 另外 <code>false-value=&quot;ooo&quot;</code>，<br>如此，就能在點選或不點選該<code>checkbox</code>時，得到相對應的值了。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;form-check&quot;&gt;</span><br><span class="line">		&lt;input type&#x3D;&quot;checkbox&quot; class&#x3D;&quot;form-check-input&quot; id&#x3D;&quot;sex&quot; v-model&#x3D;&quot;sex&quot; true-value&#x3D;&quot;男生&quot; false-value&#x3D;&quot;女生&quot;&gt;</span><br><span class="line">		&lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;sex&quot;&gt;&#123;&#123; sex &#125;&#125;&lt;&#x2F;label&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		sex: &#39;男生&#39;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>以上這個範例，<code>input</code>欄位是利用<code>v-model</code>來綁定sex成員屬性值，當我們點選該<code>input</code>欄位值，sex會被塞入<code>true-value</code>也就是男生，若沒有點選該<code>input</code>欄位的話，sex會被塞入<code>false-value</code>也就是女生。</p>
+<h2 id="修飾符"><a href="#修飾符" class="headerlink" title="修飾符"></a>修飾符</h2><h3 id="v-model-lazy"><a href="#v-model-lazy" class="headerlink" title="v-model.lazy"></a>v-model.lazy</h3><p>當我們輸入內容時，必須要等到我們將focus移出該輸入欄位中，該內容才會被輸入到被<code>v-model</code>綁定的變數中。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">	&#123;&#123; lazyMsg &#125;&#125;</span><br><span class="line">&lt;&#x2F;p&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; v-model.lazy&#x3D;&quot;lazyMsg&quot;&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		lazyMsg:&#39;&#39;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="語法-v-model-number"><a href="#語法-v-model-number" class="headerlink" title="語法 v-model.number"></a>語法 v-model.number</h3><p>將v-model綁定的內容轉成數字型別<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;pre&gt;&#123;&#123; age &#125;&#125;&lt;&#x2F;pre&gt;</span><br><span class="line"> &lt;input type&#x3D;&quot;number&quot; class&#x3D;&quot;form-control&quot; v-model.number&#x3D;&quot;age&quot;&gt;</span><br><span class="line"> </span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		age: &#39;&#39;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;) </span><br></pre></td></tr></table></figure>
+<p>可以看到在<code>v-model</code>的後面有個<code>number</code>的修飾符，用來將輸入進去的age內容，轉成數字型別。</p>
+<h3 id="語法-v-model-trim"><a href="#語法-v-model-trim" class="headerlink" title="語法 v-model.trim"></a>語法 v-model.trim</h3><p>將字串中的前後方多餘的空白刪除掉<br>像是: var str=”    這是   字串   “;<br>被trim過後，就會變成<br>var str=”這是   字串”;</p>
+<p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; trimMsg &#125;&#125;緊黏的文字</span><br><span class="line">  &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; v-model.trim&#x3D;&quot;trimMsg&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="v-on事件綁定"><a href="#v-on事件綁定" class="headerlink" title="v-on事件綁定"></a>v-on事件綁定</h2><p>將v-on觸發的事件，帶入參數<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">   &lt;ul&gt;</span><br><span class="line">    &lt;li v-for&#x3D;&quot;item in arrayData&quot; class&#x3D;&quot;my-2&quot;&gt;</span><br><span class="line">      &#123;&#123; item.name &#125;&#125; 有 &#123;&#123; item.cash &#125;&#125; 元 </span><br><span class="line">      &lt;button class&#x3D;&quot;btn btn-sm btn-outline-primary&quot; @click&#x3D;&quot;storeMoney(item)&quot;&gt;儲值&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">  &lt;&#x2F;ul&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		arrayData:[</span><br><span class="line">		  &#123;</span><br><span class="line">			name: &#39;小明&#39;,</span><br><span class="line">			cash: 500</span><br><span class="line">		  &#125;,</span><br><span class="line">		  &#123;</span><br><span class="line">			name: &#39;漂亮阿姨&#39;,</span><br><span class="line">			cash: 1000</span><br><span class="line">		  &#125;,</span><br><span class="line">		  &#123;</span><br><span class="line">			name: &#39;力宏&#39;,</span><br><span class="line">			cash: 6000</span><br><span class="line">		  &#125;</span><br><span class="line">		</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	methods:&#123;</span><br><span class="line">		storeMoney: function(item)&#123;</span><br><span class="line">			item.cash +&#x3D; 500;</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>當我們點擊儲值按鈕就會觸發storeMoney函式，並為對應到的元素的cash加上500。</p>
+<h2 id="DOM元素的事件修飾符"><a href="#DOM元素的事件修飾符" class="headerlink" title="DOM元素的事件修飾符"></a>DOM元素的事件修飾符</h2><h3 id="語法-click-stop-””"><a href="#語法-click-stop-””" class="headerlink" title="語法 @click.stop=””"></a>語法 @click.stop=””</h3><p>在事件監聽中，此語法是用來阻止事件冒泡<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;p-3 bg-primary&quot; @click&#x3D;&quot;trigger(&#39;div&#39;)&quot;&gt;</span><br><span class="line">		&lt;span class&#x3D;&quot;box&quot; @click.stop&#x3D;&quot;trigger(&#39;box&#39;)&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">	</span><br><span class="line">	&#125;,</span><br><span class="line">	methods:&#123;</span><br><span class="line">		trigger: function(name) &#123;</span><br><span class="line">			console.log(name, &#39;此事件被觸發了&#39;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以上這個範例，我們在內層元素.box的click後面加上修飾符<code>stop</code>，就可以防止.box的冒泡事件被觸發囉。</p>
+<h3 id="語法-click-capture-””"><a href="#語法-click-capture-””" class="headerlink" title="語法 @click.capture=””"></a>語法 @click.capture=””</h3><p>在事件監聽中，此語法是用來觸發捕獲事件<br>注意，這個語法是用來”觸發”捕獲事件的喔，不是阻止喔!!<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;p-3 bg-primary&quot; @click.capture&#x3D;&quot;trigger(&#39;div&#39;)&quot;&gt;</span><br><span class="line">    &lt;span class&#x3D;&quot;box d-flex align-items-center justify-content-center&quot; @click.capture&#x3D;&quot;trigger(&#39;box&#39;)&quot;&gt;</span><br><span class="line">      &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot; @click.capture&#x3D;&quot;trigger(&#39;button&#39;)&quot;&gt;按我&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;&#x2F;span&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">	</span><br><span class="line">	&#125;,</span><br><span class="line">	methods:&#123;</span><br><span class="line">		trigger: function(name) &#123;</span><br><span class="line">			console.log(name, &#39;此事件被觸發了&#39;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>我們在click的後面加上了capture的修飾符，當我們點擊畫面中的按鈕的時候，可以看到被觸發的順序是從<br>最外層的div -&gt; box -&gt; button 依序被觸發。</p>
+<h3 id="語法-click-self-””"><a href="#語法-click-self-””" class="headerlink" title="語法 @click.self=””"></a>語法 @click.self=””</h3><p>在事件監聽中，只會觸發被點擊的那個元件的事件，沒有冒泡跟捕獲的問題<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;p-3 bg-primary&quot; @click.self&#x3D;&quot;trigger(&#39;div&#39;)&quot;&gt;</span><br><span class="line">    &lt;span class&#x3D;&quot;box d-flex align-items-center justify-content-center&quot; @click.self&#x3D;&quot;trigger(&#39;box&#39;)&quot;&gt;</span><br><span class="line">      &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot; @click.self&#x3D;&quot;trigger(&#39;button&#39;)&quot;&gt;按我&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;&#x2F;span&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">	</span><br><span class="line">	&#125;,</span><br><span class="line">	methods:&#123;</span><br><span class="line">		trigger: function(name) &#123;</span><br><span class="line">			console.log(name, &#39;此事件被觸發了&#39;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以上範例，當我們點擊什麼元件，就只會出現該元件相對應的log。</p>
+<h3 id="語法-click-once-””"><a href="#語法-click-once-””" class="headerlink" title="語法 @click.once=””"></a>語法 @click.once=””</h3><p>在事件監聽中，代表該監聽事件只會被觸發一次<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;p-3 bg-primary&quot; @click.once&#x3D;&quot;trigger(&#39;div&#39;)&quot;&gt;</span><br><span class="line">    &lt;span class&#x3D;&quot;box d-flex align-items-center justify-content-center&quot; @click.once&#x3D;&quot;trigger(&#39;box&#39;)&quot;&gt;</span><br><span class="line">      &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot; @click.once&#x3D;&quot;trigger(&#39;button&#39;)&quot;&gt;按我&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;&#x2F;span&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">	</span><br><span class="line">	&#125;,</span><br><span class="line">	methods:&#123;</span><br><span class="line">		trigger: function(name) &#123;</span><br><span class="line">			console.log(name, &#39;此事件被觸發了&#39;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以上例子，在你點擊任意元件第二次，都不會在觸發<code>v-on</code>綁定的是trigger事件囉。</p>
+<h2 id="按鍵修飾符"><a href="#按鍵修飾符" class="headerlink" title="按鍵修飾符"></a>按鍵修飾符</h2><p>即我們按下某個按鍵時，會觸發特定事件。</p>
+<ol>
+<li>{keyCode | keyAlias} - 當事件是從特定鍵觸發時才觸發回調。</li>
+<li>別名修飾 - .enter, .tab, .delete, .esc, .space, .up, .down, .left, .right</li>
+<li>修飾符來實現僅在按下相應按鍵時才觸發鼠標或鍵盤事件的監聽器 - .ctrl, .alt, .shift, .meta</li>
+</ol>
+<p>ex: keyCode</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;text&quot; @keyup.13&#x3D;&quot;trigger(13)&quot;&gt;  &#x2F;&#x2F; 當按下keyCode為13的鍵(就是enter鍵)，會觸發trigger</span><br></pre></td></tr></table></figure>
+
+<p>ex: 別名修飾</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;text&quot; @keyup.space&#x3D;&quot;trigger(&#39;space&#39;)&quot;&gt; &#x2F;&#x2F; 當按下空白鍵會觸發trigger</span><br></pre></td></tr></table></figure>
+
+<p>ex: 相應按鍵</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;text&quot; @keyup.shift.enter&#x3D;&quot;trigger(&#39;shift + Enter&#39;)&quot;&gt; &#x2F;&#x2F; 當你按下shift鍵加上enter鍵，才會觸發trigger事件</span><br></pre></td></tr></table></figure>
+
+<h2 id="滑鼠修飾符"><a href="#滑鼠修飾符" class="headerlink" title="滑鼠修飾符"></a>滑鼠修飾符</h2><iframe src="https://codepen.io/RandyChen/embed/gOwzyog?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>上面這個範例，就是你對該方框用滑鼠左鍵去點擊，就會觸發trigger的函式內容。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/" rel="prev" title="進階模板語法-01">
+      <i class="fa fa-chevron-left"></i> 進階模板語法-01
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/07/scss%E7%AD%86%E8%A8%98/" rel="next" title="scss筆記">
+      scss筆記 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Computed%E8%88%87Watch"><span class="nav-number">1.</span> <span class="nav-text">Computed與Watch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Computed%E9%81%8E%E6%BF%BE%E9%99%A3%E5%88%97%E5%85%A7%E5%AE%B9"><span class="nav-number">1.1.</span> <span class="nav-text">Computed過濾陣列內容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Computed-%E4%BE%86%E5%91%88%E7%8F%BE%E6%99%82%E9%96%93%E6%A0%BC%E5%BC%8F%E3%80%82"><span class="nav-number">2.</span> <span class="nav-text">使用 Computed 來呈現時間格式。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Watch"><span class="nav-number">3.</span> <span class="nav-text">Watch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E5%96%AE%E7%B4%B0%E7%AF%80%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">表單細節操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E9%81%B8"><span class="nav-number">5.</span> <span class="nav-text">多選</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A4%87%E9%81%B8%E6%A1%86"><span class="nav-number">6.</span> <span class="nav-text">複選框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E9%A3%BE%E7%AC%A6"><span class="nav-number">7.</span> <span class="nav-text">修飾符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#v-model-lazy"><span class="nav-number">7.1.</span> <span class="nav-text">v-model.lazy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%9E%E6%B3%95-v-model-number"><span class="nav-number">7.2.</span> <span class="nav-text">語法 v-model.number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%9E%E6%B3%95-v-model-trim"><span class="nav-number">7.3.</span> <span class="nav-text">語法 v-model.trim</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v-on%E4%BA%8B%E4%BB%B6%E7%B6%81%E5%AE%9A"><span class="nav-number">8.</span> <span class="nav-text">v-on事件綁定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM%E5%85%83%E7%B4%A0%E7%9A%84%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A3%BE%E7%AC%A6"><span class="nav-number">9.</span> <span class="nav-text">DOM元素的事件修飾符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%9E%E6%B3%95-click-stop-%E2%80%9D%E2%80%9D"><span class="nav-number">9.1.</span> <span class="nav-text">語法 @click.stop&#x3D;””</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%9E%E6%B3%95-click-capture-%E2%80%9D%E2%80%9D"><span class="nav-number">9.2.</span> <span class="nav-text">語法 @click.capture&#x3D;””</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%9E%E6%B3%95-click-self-%E2%80%9D%E2%80%9D"><span class="nav-number">9.3.</span> <span class="nav-text">語法 @click.self&#x3D;””</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AA%9E%E6%B3%95-click-once-%E2%80%9D%E2%80%9D"><span class="nav-number">9.4.</span> <span class="nav-text">語法 @click.once&#x3D;””</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%89%E9%8D%B5%E4%BF%AE%E9%A3%BE%E7%AC%A6"><span class="nav-number">10.</span> <span class="nav-text">按鍵修飾符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BB%91%E9%BC%A0%E4%BF%AE%E9%A3%BE%E7%AC%A6"><span class="nav-number">11.</span> <span class="nav-text">滑鼠修飾符</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="什麼是VueX在一般的Vue中，同層級的元件之間，我們可以利用eventbus來做同層級的溝通，但是，eventbus僅止於做簡單的溝通而已。若我們想利用全域變數來讓同層級的Vue元件做構通，就又會失去Vue雙向綁定的特性。所以，我們將所有的同階層 或 父子層的元件都丟到VueX，由VueX來做管理，此時，我們就可以透過VueX來做到同階層的互相溝通，還有，父子層的上下溝通，同時，又不失去VueX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue課程筆記-VueX">
+<meta property="og:url" content="https://landy510.github.io/2021/03/12/Vue%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-VueX/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="什麼是VueX在一般的Vue中，同層級的元件之間，我們可以利用eventbus來做同層級的溝通，但是，eventbus僅止於做簡單的溝通而已。若我們想利用全域變數來讓同層級的Vue元件做構通，就又會失去Vue雙向綁定的特性。所以，我們將所有的同階層 或 父子層的元件都丟到VueX，由VueX來做管理，此時，我們就可以透過VueX來做到同階層的互相溝通，還有，父子層的上下溝通，同時，又不失去VueX">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-03-12T01:35:26.000Z">
+<meta property="article:modified_time" content="2021-03-12T02:53:09.394Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2021/03/12/Vue%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-VueX/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Vue課程筆記-VueX | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/12/Vue%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-VueX/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue課程筆記-VueX
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-03-12 09:35:26 / 修改時間：10:53:09" itemprop="dateCreated datePublished" datetime="2021-03-12T09:35:26+08:00">2021-03-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="什麼是VueX"><a href="#什麼是VueX" class="headerlink" title="什麼是VueX"></a>什麼是VueX</h1><p>在一般的Vue中，同層級的元件之間，我們可以利用eventbus來做同層級的溝通，<br>但是，eventbus僅止於做簡單的溝通而已。<br>若我們想利用全域變數來讓同層級的Vue元件做構通，就又會失去Vue雙向綁定的特性。<br>所以，我們將所有的同階層 或 父子層的元件都丟到VueX，由VueX來做管理，<br>此時，我們就可以透過VueX來做到同階層的互相溝通，還有，父子層的上下溝通，<br>同時，又不失去VueX雙向綁定的特性。</p>
+<h2 id="VueX-重要的成員屬性"><a href="#VueX-重要的成員屬性" class="headerlink" title="VueX - 重要的成員屬性"></a>VueX - 重要的成員屬性</h2><p><strong>state</strong>: 儲存資料狀態<br><strong>actions</strong>: 如同先前提過的<code>methods</code>，進行非同步與取得資料，但是，特別注意，在這一個功能中並<font color=#FF0000>不會改變資料的狀態</font>。<br><strong>getter</strong>: 如同<code>computed</code>，在資料呈現之前會做一些過濾的動作，就會在這個功能中做處理。<br><strong>mutations</strong>: 改變資料內容的方法，而在此功能中，<font color=#FF0000>不會處理一些非同步的行為喔</font>，即像是將遠端的api取進來這種事情就不會在這邊做。</p>
+<a id="more"></a>
+<h3 id="小插曲-有關如何開啟課堂上提供的課程vueX檔案"><a href="#小插曲-有關如何開啟課堂上提供的課程vueX檔案" class="headerlink" title="小插曲-有關如何開啟課堂上提供的課程vueX檔案"></a>小插曲-有關如何開啟課堂上提供的課程vueX檔案</h3><p>首先，輸入<code>npm install</code>，先將node_modules這個資料夾安裝完成，<br>接著，安裝完成後，就輸入<code>npm start</code>，此時，編譯器應該就會跳你可以開啟的網頁的網址local:8080之類的東西。<br>有關這個<code>npm start</code>的啟動Vue專案指令，你可以直接去package.json的檔案中，<br>看一下script部分有哪些指令，像課堂上的專案中就有以下的指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;dev&quot;: &quot;webpack-dev-server --inline --progress --config build&#x2F;webpack.dev.conf.js&quot;,</span><br><span class="line">    &quot;start&quot;: &quot;npm run dev&quot;,</span><br><span class="line">    &quot;lint&quot;: &quot;eslint --ext .js,.vue src&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;node build&#x2F;build.js&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以看到<code>npm start</code>等同於<code>npm run dev</code>的指令，你就選擇要輸入<code>npm start</code>或<code>npm run dev</code>都可以打開專案檔囉。<br>也因為課堂上的專案檔是用Vue2寫的，所以，沒有指令<code>npm run serve</code>是很正常的喔。</p>
+<h1 id="新增一個-Store-管理網站資料狀態"><a href="#新增一個-Store-管理網站資料狀態" class="headerlink" title="新增一個 Store 管理網站資料狀態"></a>新增一個 Store 管理網站資料狀態</h1><p>在我實作的專案檔中，當我在商品頁面按下加入購物車，Navbar的購物車資訊是不會跟著連動作增減的，所以，這邊握們要利用VueX來達到它們可以彼此連動的效果。</p>
+<p>在這邊呢，我們先拿loading這個特效入手，將判斷是否啟用這個效果的判斷條件加入到VueX中。</p>
+<p>step1，先輸入指令<code>npm install vuex --save</code> 來安裝VueX的套件<br>step2，啟用VueX<br>我們先到main.js中，寫入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import Vuex from &#39;vuex&#39;</span><br><span class="line">Vue.use(Vuex);</span><br></pre></td></tr></table></figure>
+<p>以此來啟用Vuex套件。</p>
+<p>step3<br>我們在src資料夾中，新增一個store資料夾，並在這個資料夾中新增一個index.js的檔案，<br>這個檔案就是用來彙整所有VueX的行為。<br>接著，你就在這個store資料夾中的index.js檔案裡輸入以下的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;;</span><br><span class="line">import VueX from &#39;vuex&#39;;</span><br><span class="line"></span><br><span class="line">Vue.use(VueX);</span><br><span class="line">export default new VueX.Store(&#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>就是在這個js檔案中啟用VueX和Vue元件。</p>
+<p>step4.<br>我們要在main.js中，引入這個store資料夾底下的index.js檔案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import store from &#39;.&#x2F;store&#39;  &#x2F;&#x2F; 引入store檔案</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  router,</span><br><span class="line">  store,  &#x2F;&#x2F; 新增store這個成員屬性</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: &#39;&lt;App&#x2F;&gt;&#39;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>step5.<br>先到store資料夾中的index.js檔案中，<br>加入state屬性，並新增一個isLoading成員屬性，並設定它為<code>false</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---index.js---</span><br><span class="line">export default new VueX.Store(&#123;</span><br><span class="line">	state:&#123;</span><br><span class="line">		isLoading: true,</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>step6.<br>接著，你到App.vue中將原本有關isLoading成員屬性的程式碼內容給註解掉，但是，不要連HTML中的isLoading內容都註解喔，那邊的不用註解。<br>然後，新增一個<code>computed</code>，接著，在裡面新增一個isLoading屬性，並讓他吃到store變數的isLoading變數，如此，你應該就可以看到你的<br>網頁頁面一直有loading的圈圈再轉囉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">---App.vue---</span><br><span class="line">---HTML---</span><br><span class="line">&lt;Loading :active.sync&#x3D;&quot;isLoading&quot;&gt;&lt;&#x2F;Loading&gt;  &#x2F;&#x2F; 吃到isLoading的回傳值</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      cart: &#123;</span><br><span class="line">        carts: [],</span><br><span class="line">      &#125;,</span><br><span class="line">      &#x2F;&#x2F; isLoading: false,   &#x2F;&#x2F; 註解掉有關isLoading的部分</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    isLoading() &#123;</span><br><span class="line">      return this.$store.state.isLoading;  &#x2F;&#x2F; 新增isLoading，並讓它吃到store中的isLoading值</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>記得，看到成功的呈現結果後，要把index.js中的isLoading的值，改回<code>false</code>喔，不然你的頁面會一直處在轉圈圈的狀態。</p>
+<p>step7.<br>接著，你到Home.vue元件檔中，先將HTML文件中的isLoading元件的部分刪掉，因為，現在這個元件要統一由App.vue外層元件來呈現。<br>再來，就在Home.vue中將原先使用isLoading的部分，全部改成去更改store資料夾中的index.js的isLoading的資料狀態，藉此，來決定是否要呈現Loading的效果囉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">---Home.vue---</span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;Home&#39;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      products: [],</span><br><span class="line">      searchText: &#39;&#39;,</span><br><span class="line">      categories: [],</span><br><span class="line">      &#x2F;&#x2F; isLoading: false, &#x2F;&#x2F; 將原本的isLoading的內容註解掉</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getProducts() &#123;</span><br><span class="line">      const vm &#x3D; this;</span><br><span class="line">      const url &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;products&#x2F;all&#96;;</span><br><span class="line">      &#x2F;&#x2F; vm.isLoading &#x3D; true;  &#x2F;&#x2F; 將原本的isLoading的內容註解掉</span><br><span class="line">      this.$store.state.isLoading &#x3D; true;  &#x2F;&#x2F; 切換store資料夾中的isLoading的屬性切換</span><br><span class="line">      this.$http.get(url).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        vm.products &#x3D; response.data.products;</span><br><span class="line">        console.log(&#39;取得產品列表:&#39;, response);</span><br><span class="line">        vm.getUnique();</span><br><span class="line">        &#x2F;&#x2F; vm.isLoading &#x3D; false; &#x2F;&#x2F; 將原本的isLoading的內容註解掉</span><br><span class="line">        this.$store.state.isLoading &#x3D; false;  &#x2F;&#x2F; 切換store資料夾中的isLoading的屬性切換</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line">    this.getProducts();</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>藉由以上的方式就完成將isLoading交由VueX來管理，並指讓外層元件App.vue來呈現Loading的效果囉~</p>
+<h1 id="actions-及-mutations-改變資料狀態"><a href="#actions-及-mutations-改變資料狀態" class="headerlink" title="actions 及 mutations 改變資料狀態"></a>actions 及 mutations 改變資料狀態</h1><p>在這個地方，我們會利用<code>actions</code> 及 <code>mutations</code>來切換isLoading的資料狀態。<br>就不是像上一堂課程中直接修改<code>this.$store.state.isLoading</code> 的內容。<br>step1.<br>所以，我們就在store資料夾中的index.js檔案中新增<code>actions</code> 及 <code>mutations</code>的內容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---index.js---</span><br><span class="line">export default new VueX.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    isLoading: false,</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    updateLoading(context, status) &#123;</span><br><span class="line">      context.commit(&#39;LOADING&#39;, status);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    LOADING(state, status) &#123;</span><br><span class="line">      state.isLoading &#x3D; status;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>上面可以看到，我們在<code>actions</code>中，新增了一個updateLoading函式來取得isLoading資料。<br>並在updateLoading函式中，呼叫<code>mutations</code>中的LOADING函式，藉此修改state的isLoading屬性值。<br>從這邊我們就可以看到在<code>action</code>s中，我們只能接收資料內容。<br>在<code>mutations</code>中，我們可以修改資料的狀態。</p>
+<p>那在<code>actions</code>裡面的函式有<code>context</code>這個參數，在<a target="_blank" rel="noopener" href="https://vuex.vuejs.org/zh/api/#actions">VueX的官方網站</a>，有介紹，<br>它是一個參數，可以取得VueX中的許多參數值，所以，看到我們藉由它的<code>commit</code>成員來呼叫到LOADING函式，利用它來做<code>actions</code>和<code>mutations</code> 之間的橋樑。</p>
+<p>step2.<br>接著，我們就修改Home.vue元件檔中原本<code>this.$store.state.isLoading</code>的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">---Home.vue---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getProducts() &#123;</span><br><span class="line">      const vm &#x3D; this;</span><br><span class="line">      const url &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;products&#x2F;all&#96;;</span><br><span class="line">      vm.$store.dispatch(&#39;updateLoading&#39;, true);  &#x2F;&#x2F; 加入這一行來呼叫index.js中的updateLoading函式，並帶入參數true</span><br><span class="line">      this.$http.get(url).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        vm.products &#x3D; response.data.products;</span><br><span class="line">        console.log(&#39;取得產品列表:&#39;, response);</span><br><span class="line">        vm.getUnique();</span><br><span class="line">        vm.$store.dispatch(&#39;updateLoading&#39;, false);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>上面這邊的內容，我們就可以看到我們在Home.vue中，呼叫了index.js的updateLoading函式，並帶入參數<code>true</code>，藉此能更改isLoading的參數值。</p>
+<h1 id="Vuex-的嚴謹模式"><a href="#Vuex-的嚴謹模式" class="headerlink" title="Vuex 的嚴謹模式"></a>Vuex 的嚴謹模式</h1><p>在VueX的檔案中加入<code>strict: true</code>這段程式碼，就可以讓你的VueX檔案呈現嚴謹模式，為的是來提醒你在VueX中哪邊有寫錯，或者更改了那些不應該更改的內容囉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">export default new VueX.Store(&#123;</span><br><span class="line">  strict: true,  &#x2F;&#x2F; 加入VueX的嚴謹模式</span><br><span class="line">  state: &#123;</span><br><span class="line">    isLoading: false,</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    updateLoading(context, status) &#123;</span><br><span class="line">      context.commit(&#39;LOADING&#39;, status);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    LOADING(state, status) &#123;</span><br><span class="line">      state.isLoading &#x3D; status;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用-Actions-取得遠端資料"><a href="#使用-Actions-取得遠端資料" class="headerlink" title="使用 Actions 取得遠端資料"></a>使用 Actions 取得遠端資料</h1><p>此課程教導將原先在Home元件中，取得購物車資料的程式碼，移到VueX中，交由VueX來執行這些取得資訊的動作。<br>step1.<br>在store資料夾中的index.js檔案中，新增以下內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">---index.js---</span><br><span class="line">import Vue from &#39;vue&#39;;</span><br><span class="line">import VueX from &#39;vuex&#39;;</span><br><span class="line">import axios from &#39;axios&#39;;  &#x2F;&#x2F; 引入axios元件，因為index.js不是Vue元件，需要直接使用axios來取用遠端資料</span><br><span class="line"></span><br><span class="line">Vue.use(VueX);</span><br><span class="line">export default new VueX.Store(&#123;</span><br><span class="line">  strict: true,</span><br><span class="line">  state: &#123;</span><br><span class="line">    isLoading: false,</span><br><span class="line">    products: [],   &#x2F;&#x2F; 新增products陣列</span><br><span class="line">    categories: [], &#x2F;&#x2F; 新增categories陣列</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    updateLoading(context, status) &#123;</span><br><span class="line">      context.commit(&#39;LOADING&#39;, status);</span><br><span class="line">    &#125;,</span><br><span class="line">    getProducts(context) &#123;</span><br><span class="line">      const url &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;products&#x2F;all&#96;;</span><br><span class="line">      context.commit(&#39;LOADING&#39;, true);</span><br><span class="line">      axios.get(url).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        console.log(&#39;取得產品列表:&#39;, response);</span><br><span class="line">        context.commit(&#39;PRODUCTS&#39;, response.data.products);   &#x2F;&#x2F; 呼叫mutations中的PRODUCTS函式</span><br><span class="line">        context.commit(&#39;CATEGORIES&#39;, response.data.products); &#x2F;&#x2F; 呼叫mutations中的CATEGORIES函式</span><br><span class="line">        context.commit(&#39;LOADING&#39;, false);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    LOADING(state, status) &#123;</span><br><span class="line">      state.isLoading &#x3D; status;</span><br><span class="line">    &#125;,</span><br><span class="line">    PRODUCTS(state, payload) &#123;  &#x2F;&#x2F; 將products陣列塞入從遠端取得的資料</span><br><span class="line">      state.products &#x3D; payload;</span><br><span class="line">    &#125;,</span><br><span class="line">    CATEGORIES(state, payload) &#123;  &#x2F;&#x2F; 將遠端取的的資料的分類儲存到categories中</span><br><span class="line">      const categories &#x3D; new Set();</span><br><span class="line">      payload.forEach((item) &#x3D;&gt; &#123;</span><br><span class="line">        categories.add(item.category);</span><br><span class="line">      &#125;);</span><br><span class="line">      state.categories &#x3D; Array.from(categories);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>以上，我們可以看到我們在index.js檔案中，新增了products 和 categories陣列，用來儲存從遠端取得資料的內容。<br>那我們新增了PRODUCTS 和 CATEGORIES這兩個<code>mutations</code>的方法，用來儲存products 和 categories的資料內容。</p>
+<p>step2.<br>接著，我們要修改Home.vue檔案，直接在這個檔案中呼叫index.js的getProducts函式，取得資料，並利用<code>computed</code>來即時更新頁面中的內容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">---Home.vue---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;Home&#39;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      searchText: &#39;&#39;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    categories() &#123;</span><br><span class="line">      return this.$store.state.categories;  &#x2F;&#x2F; 回傳sotre元件中的categories內容</span><br><span class="line">    &#125;,</span><br><span class="line">    products() &#123;</span><br><span class="line">      return this.$store.state.products;    &#x2F;&#x2F; 回傳sotre元件中的products內容</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getProducts() &#123;</span><br><span class="line">      this.$store.dispatch(&#39;getProducts&#39;);   &#x2F;&#x2F; 呼叫index.js檔案中的getProducts方法，來取得遠端資料</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>以上這個步驟，我們就可以透過vuex取得遠端資料後，接著，在元件檔中呼叫vuex取得遠端資料的方法。最後，當VueX元件中的資料有變動時，我們就在元件檔中利用<code>computed</code>來即時更新頁面上的內容。</p>
+<h1 id="Payload-傳遞物件參數"><a href="#Payload-傳遞物件參數" class="headerlink" title="Payload 傳遞物件參數"></a>Payload 傳遞物件參數</h1><p>這個小節是在教導將取得、刪除、加入購物車的內容通通移植到VueX中，去操作。<br>step1.<br>首先，先將取得購物車的內容移到VueX中。<br>在App.vue元件檔中，我們先將整個getCart的內容移到index.js的<code>actions</code>中。<br>並在index.js中，新增cart的成員屬性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">---index.js---</span><br><span class="line">state: &#123;</span><br><span class="line">    isLoading: false,</span><br><span class="line">    products: [],</span><br><span class="line">    categories: [],</span><br><span class="line">    cart: &#123;  &#x2F;&#x2F; 新增cart屬性</span><br><span class="line">      carts: [],</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br><span class="line">actions: &#123;</span><br><span class="line">    getCart(context) &#123;  &#x2F;&#x2F; 新增取得購物車內容的屬性</span><br><span class="line">      const vm &#x3D; this;</span><br><span class="line">      context.commit(&#39;LOADING&#39;, true);</span><br><span class="line">      const url &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;cart&#96;;</span><br><span class="line">      axios.get(url).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        if (response.data.data.carts) &#123;</span><br><span class="line">          vm.cart &#x3D; response.data.data;</span><br><span class="line">        &#125;</span><br><span class="line">        context.commit(&#39;LOADING&#39;, false);</span><br><span class="line">        context.commit(&#39;CART&#39;, vm.cart);   &#x2F;&#x2F; 呼叫mutations中的CART函式，來將資料塞入成員屬性中</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">mutations: &#123;</span><br><span class="line">  LOADING(state, status) &#123;</span><br><span class="line">    state.isLoading &#x3D; status;</span><br><span class="line">  &#125;,</span><br><span class="line">  CART(state, payload) &#123;  &#x2F;&#x2F; 在mutations中新增CART方法，將資料塞入cart中</span><br><span class="line">    state.cart &#x3D; payload;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>**注意~~~~**以上這個範例，你可以看到只有單純切換布林值的話，該mutations的函式(LOADING函式)參數是用status帶入，而你是要傳一筆大資料的話，mutations中的函式(CART函式)是用payload來當參數傳入。</p>
+<h2 id="傳遞參數到actions中，只能傳遞一個參數"><a href="#傳遞參數到actions中，只能傳遞一個參數" class="headerlink" title="傳遞參數到actions中，只能傳遞一個參數"></a>傳遞參數到actions中，只能傳遞一個參數</h2><p>當我們要傳遞多個參數的時候，我們可以用物件將這些參數包裹起來，再將這個物件傳到<code>actions</code>中。<br>如此，這樣就可以解決只能傳遞一個參數的限制囉。<br>我們在index.js檔案中，加入購物車 和 刪除購物車中商品的功能<br>step1. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">---index.js---</span><br><span class="line">export default new VueX.Store(&#123;</span><br><span class="line">  actions: &#123;</span><br><span class="line">    removeCart(context, id) &#123;</span><br><span class="line">	  const url &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;cart&#x2F;$&#123;id&#125;&#96;;</span><br><span class="line">	  context.commit(&#39;LOADING&#39;, true);</span><br><span class="line">	  axios.delete(url).then((response) &#x3D;&gt; &#123;</span><br><span class="line">      context.commit(&#39;LOADING&#39;, false);</span><br><span class="line">      context.dispatch(&#39;getCart&#39;);</span><br><span class="line">      console.log(&#39;刪除購物車項目&#39;, response);</span><br><span class="line">	  &#125;);</span><br><span class="line">	&#125;,</span><br><span class="line">	addtoCart(context, &#123; id, qty &#125;) &#123;</span><br><span class="line">	  const url &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;cart&#96;;</span><br><span class="line">	  context.commit(&#39;LOADING&#39;, true);</span><br><span class="line">	  const item &#x3D; &#123;</span><br><span class="line">      product_id: id,</span><br><span class="line">      qty,</span><br><span class="line">	  &#125;;</span><br><span class="line">	  axios.post(url, &#123; data: item &#125;).then((response) &#x3D;&gt; &#123;</span><br><span class="line">		context.commit(&#39;LOADING&#39;, false);</span><br><span class="line">		context.dispatch(&#39;getCart&#39;);</span><br><span class="line">		console.log(&#39;加入購物車:&#39;, response);</span><br><span class="line">	  &#125;);</span><br><span class="line">	&#125;,  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">---Home.vue---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    addtoCart(id, qty &#x3D; 1) &#123;</span><br><span class="line">      this.$store.dispatch(&#39;addtoCart&#39;, &#123; id, qty &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">---App.vue---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getCart() &#123;</span><br><span class="line">      this.$store.dispatch(&#39;getCart&#39;);</span><br><span class="line">    &#125;,</span><br><span class="line">    removeCart(id) &#123;</span><br><span class="line">      this.$store.dispatch(&#39;removeCart&#39;, id);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    isLoading() &#123;</span><br><span class="line">      return this.$store.state.isLoading;</span><br><span class="line">    &#125;,</span><br><span class="line">    cart() &#123;</span><br><span class="line">      console.log(&#39;購物車&#39;, this.$store.state.cart);</span><br><span class="line">      return this.$store.state.cart;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line">    this.getCart();</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>首先，你可以看到，我們在index.js檔案中的addtoCart函式，就是用包裹物件的方式，將多個資料傳遞進去。<br>另外，我們在App.vue這個最外層的元件檔，執行取得購物車 和 刪除購物車的功能，<br>並利用computed來回船當下購物車的資料狀態。<br>第三，我們在Home.vue中有新增一個addtoCart的加入購物車的函式。<br>整體的運作過程就是，當我們在Home.vue中將商品加入購物車，此時，在VueX中會更改state.cart的內容，<br>而在App.vue中，就有利用computed來連動VueX中的state的cart資料。<br>經過以上的這種運作模式，就實現了跨父子元件階層來存取相同資料的運作囉。</p>
+<h1 id="Vuex-中的-getters-及-mapGetters-mapActions"><a href="#Vuex-中的-getters-及-mapGetters-mapActions" class="headerlink" title="Vuex 中的 getters 及 mapGetters, mapActions"></a>Vuex 中的 getters 及 mapGetters, mapActions</h1><p>前面有說到在VueX中的<code>getters</code>的功用就如同<code>computed</code>的功能一般。<br>所以，這邊我們把想要呈現在畫面上的<code>computed</code>內容，搬到VueX的<code>getters</code>裡面。<br>Step1.<br>我們在index.js檔案中，加入<code>getters</code>的屬性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---index.js---</span><br><span class="line">export default new VueX.Store(&#123;</span><br><span class="line">  getters: &#123;</span><br><span class="line">    categories(state) &#123;</span><br><span class="line">      return state.categories;</span><br><span class="line">    &#125;,</span><br><span class="line">    products(state) &#123;</span><br><span class="line">      return state.products;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>接著，你把原本在Home.vue中的<code>computed</code>回傳categories 和 products的部分刪掉。<br>Step2.<br>那我們要怎麼將在index.js中的categories 和 products呈現在畫面中呢?<br>我們就在Home.vue中引入VueX的<code>mapGetters</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">---Home.vue---</span><br><span class="line">---HTML---</span><br><span class="line">&lt;!-- 左側選單 (List group) --&gt;</span><br><span class="line">&lt;div class&#x3D;&quot;list-group sticky-top&quot;&gt;</span><br><span class="line">  &lt;a class&#x3D;&quot;list-group-item list-group-item-action&quot;</span><br><span class="line">    href&#x3D;&quot;#&quot; @click.prevent&#x3D;&quot;searchText &#x3D; item&quot;</span><br><span class="line">    :class&#x3D;&quot;&#123; &#39;active&#39;: item &#x3D;&#x3D;&#x3D; searchText&#125;&quot;</span><br><span class="line">    v-for&#x3D;&quot;item in categories&quot; :key&#x3D;&quot;item&quot;&gt;    &#x2F;&#x2F; 吃到categories的資料</span><br><span class="line">    &lt;i class&#x3D;&quot;fa fa-street-view&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">    &#123;&#123; item &#125;&#125;</span><br><span class="line">  &lt;&#x2F;a&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;list-group-item list-group-item-action&quot;</span><br><span class="line">    @click.prevent&#x3D;&quot;searchText &#x3D; &#39;&#39;&quot;</span><br><span class="line">    :class&#x3D;&quot;&#123; &#39;active&#39;: searchText &#x3D;&#x3D;&#x3D; &#39;&#39;&#125;&quot;&gt;</span><br><span class="line">    全部顯示</span><br><span class="line">  &lt;&#x2F;a&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import &#123; mapGetters &#125; from &#39;vuex&#39;;   &#x2F;&#x2F; 這邊是用解構的方式將VueX的mapGetters取出來</span><br><span class="line"></span><br><span class="line">computed: &#123;</span><br><span class="line">	...mapGetters([&#39;categories&#39;, &#39;products&#39;]),</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>用以上的方法我們就可以利用<code>mapGetters</code>的方式將VueX中的categories和products這兩個資料內容取出來，並利用<code>computed</code>的方式，將這兩個資料呈現在Home.vue的話中。<br>而Home.vue的html文件部分，加入categories 和 products就可以吃到這兩個資料了。<br>這邊的資料存取方式，是利用了解構特性中，當資料名稱和成員屬性名稱相同的時候，<br>就可以只寫成員屬性名稱即可。</p>
+<p>step3.<br>我們也可以利用<code>mapActions</code>將VueX中的某些<code>actions</code>裡的函式也帶進來。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---Home.vue---</span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import &#123; mapGetters, mapActions &#125; from &#39;vuex&#39;;  &#x2F;&#x2F; 將mapActions也從vuex中取出來</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    addtoCart(id, qty &#x3D; 1) &#123;</span><br><span class="line">      this.$store.dispatch(&#39;addtoCart&#39;, &#123; id, qty &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    ...mapActions([&#39;getProducts&#39;]),  &#x2F;&#x2F; 將getProducts取出來</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>以上，我們也就利用了<code>mapActions</code>來調用在vuex中的getProducts函式。</p>
+<h2 id="沒有引入要傳遞的函式才能用mapActions"><a href="#沒有引入要傳遞的函式才能用mapActions" class="headerlink" title="沒有引入要傳遞的函式才能用mapActions"></a>沒有引入要傳遞的函式才能用mapActions</h2><p>以上範例你可以看到在Home.vue元件檔中得addtoCarts函式我們是沒有對它使用<code>mapActions</code>的，<br>原因是addtoCart需要傳遞參數到index.js中，所以，這類型要傳遞參數的函式我們不會對它使用<code>mapActions</code>喔~~</p>
+<h1 id="模組化資料運用"><a href="#模組化資料運用" class="headerlink" title="模組化資料運用"></a>模組化資料運用</h1><p>在這課堂上的課程內容，主要有兩種行為，一種是跟產品(Products)有關，另一種是跟購物車有關(Carts)，所以，在這邊我們會利用Vuex的模組化管理將專案檔的內容拆分成為這兩大類。<br>那在專案檔中的VueX，產品和購物車的內容原本是攪和在一起的，那課堂上是只有將產品部分模組化。<br>step1.<br>這邊我們在store資料夾中，新增一個products.js檔案。<br>然後把原本index.js檔案中的內容貼到products.js檔案中，並且只留下跟產品相關的內容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">---product.js---</span><br><span class="line">import axios from &#39;axios&#39;;  &#x2F;&#x2F; 引入axios</span><br><span class="line">export default &#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    products: [],</span><br><span class="line">    categories: [],</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    getProducts(context) &#123;</span><br><span class="line">      const url &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;products&#x2F;all&#96;;</span><br><span class="line">      context.commit(&#39;LOADING&#39;, true);</span><br><span class="line">      axios.get(url).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        console.log(&#39;取得產品列表:&#39;, response);</span><br><span class="line">        context.commit(&#39;PRODUCTS&#39;, response.data.products);</span><br><span class="line">        context.commit(&#39;CATEGORIES&#39;, response.data.products);</span><br><span class="line">        context.commit(&#39;LOADING&#39;, false);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    PRODUCTS(state, payload) &#123;</span><br><span class="line">      state.products &#x3D; payload;</span><br><span class="line">    &#125;,</span><br><span class="line">    CATEGORIES(state, payload) &#123;</span><br><span class="line">      const categories &#x3D; new Set();</span><br><span class="line">      payload.forEach((item) &#x3D;&gt; &#123;</span><br><span class="line">        categories.add(item.category);</span><br><span class="line">      &#125;);</span><br><span class="line">      state.categories &#x3D; Array.from(categories);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    categories(state) &#123;</span><br><span class="line">      return state.categories;</span><br><span class="line">    &#125;,</span><br><span class="line">    products(state) &#123;</span><br><span class="line">      return state.products;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>step2.<br>回到store資料夾中的index.js檔案，我們把跟產品相關的內容刪掉，因為，要區分開來<br>然後，在index.js中，將剛剛的product.js給引入進來，並且將它加到modules的屬性中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">---index.js---</span><br><span class="line">import Vue from &#39;vue&#39;;</span><br><span class="line">import VueX from &#39;vuex&#39;;</span><br><span class="line">import axios from &#39;axios&#39;;</span><br><span class="line">import productModule from &#39;.&#x2F;product&#39;; &#x2F;&#x2F; 引入product.js並將它命名為productModule變數</span><br><span class="line"></span><br><span class="line">Vue.use(VueX);</span><br><span class="line">export default new VueX.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line">    productModule, 將該變數加入到modules中</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="模組中的區域變數和全域變數"><a href="#模組中的區域變數和全域變數" class="headerlink" title="模組中的區域變數和全域變數"></a>模組中的區域變數和全域變數</h2><p>先介紹一下，在模組中的state是屬於區域變數，<br>而<code>actions</code>, <code>mutations</code>, <code>getters</code> 都是屬於全域變數。<br>而這也是為什麼我們可以直接在本專案中的Home.vue元件檔，直接使用store資料夾中的index.js模組中的<code>actions</code>, <code>mutations</code>, <code>getters</code>的原因，因為它們都是全域變數。<br>但是，這樣有一個風險，如果在同一層的資料夾中，也就是在store資料夾中，萬一有其他的模組的函式的取名跟index.js的函式一樣，這樣會造成外部元件在調用這些函式時，造成衝突。<br>也因為有這樣的衝突狀況，所以，我們會將模組中的變數設定成區域變數，如此一來，就不會有相衝突的問題囉。</p>
+<p>step3.<br>在Home.vue取用product.js模組中的products資料。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">---Home.vue---</span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import &#123; mapGetters, mapActions &#125; from &#39;vuex&#39;;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    addtoCart(id, qty &#x3D; 1) &#123;</span><br><span class="line">      console.log(this.$store.state.productModule.products);  &#x2F;&#x2F; 提取productModule中的products資料內容</span><br><span class="line">      this.$store.dispatch(&#39;addtoCart&#39;, &#123; id, qty &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    ...mapActions([&#39;getProducts&#39;]),</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到我們取用了productModule中的products資料。</p>
+<h2 id="語法namespaced-true，從全域變數改成區域變數"><a href="#語法namespaced-true，從全域變數改成區域變數" class="headerlink" title="語法namespaced:true，從全域變數改成區域變數"></a>語法namespaced:true，從全域變數改成區域變數</h2><p>step4.<br>我們想要將product.js模組中的<code>actions</code>, <code>mutations</code>, <code>getters</code>從原本的全域變數改成區域變數，來跟外部模組的變數做區分。<br>首先，在product.js中加入<code>namespaced:true</code>　將<code>actions</code>, <code>mutations</code>, <code>getters</code>都改為區域變數。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">---product.js---</span><br><span class="line">export default &#123;</span><br><span class="line">  namespaced: true,  &#x2F;&#x2F; 將actions, mutations, getter都改為區域變數。</span><br><span class="line">  state: &#123;</span><br><span class="line">    products: [],</span><br><span class="line">    categories: [],</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    getProducts(context) &#123;</span><br><span class="line">      const url &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;products&#x2F;all&#96;;</span><br><span class="line">      context.commit(&#39;LOADING&#39;, true);</span><br><span class="line">      axios.get(url).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        console.log(&#39;取得產品列表:&#39;, response);</span><br><span class="line">        context.commit(&#39;PRODUCTS&#39;, response.data.products);</span><br><span class="line">        context.commit(&#39;CATEGORIES&#39;, response.data.products);</span><br><span class="line">        context.commit(&#39;LOADING&#39;, false);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    PRODUCTS(state, payload) &#123;</span><br><span class="line">      state.products &#x3D; payload;</span><br><span class="line">    &#125;,</span><br><span class="line">    CATEGORIES(state, payload) &#123;</span><br><span class="line">      const categories &#x3D; new Set();</span><br><span class="line">      payload.forEach((item) &#x3D;&gt; &#123;</span><br><span class="line">        categories.add(item.category);</span><br><span class="line">      &#125;);</span><br><span class="line">      state.categories &#x3D; Array.from(categories);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    categories(state) &#123;</span><br><span class="line">      return state.categories;</span><br><span class="line">    &#125;,</span><br><span class="line">    products(state) &#123;</span><br><span class="line">      return state.products;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>接著，你要到Home.vue元件檔中，改變引入product.js模組函式的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">---Home.vue---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import &#123; mapGetters, mapActions &#125; from &#39;vuex&#39;;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  computed: &#123;</span><br><span class="line">    filterData() &#123;</span><br><span class="line">      const vm &#x3D; this;</span><br><span class="line">      if (vm.searchText) &#123;</span><br><span class="line">        return vm.products.filter((item) &#x3D;&gt; &#123;</span><br><span class="line">          console.log(item.category.toLowerCase());</span><br><span class="line">          const data &#x3D; item.category.toLowerCase().includes(vm.searchText.toLowerCase());</span><br><span class="line">          return data;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">      return this.products;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...mapGetters(&#39;productModule&#39;, [&#39;categories&#39;, &#39;products&#39;]),   &#x2F;&#x2F; 在引入內容的前面要加入這些變數所處在的模組變數名稱</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    addtoCart(id, qty &#x3D; 1) &#123;</span><br><span class="line">      console.log(this.$store.state.productModule.products);</span><br><span class="line">      this.$store.dispatch(&#39;addtoCart&#39;, &#123; id, qty &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    ...mapActions(&#39;productModule&#39;, [&#39;getProducts&#39;]),   &#x2F;&#x2F; 在引入內容的前面要加入這些變數所處在的模組變數名稱</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>利用以上這兩個操作，就能將product.js模組中的<code>actions</code>, <code>mutations</code>, <code>getters</code>都改為區域變數，並在Home.vue中調用這些已經變成區域變數的內容。</p>
+<p>step5.<br>那這個時候，你的網頁應該會跳出有關LOADING　這個變數的錯誤。<br>這個原因是，在product.js中，我們有使用LOADING　這個變數，但是，它並不知道LOADING是一個global的LOADING，<br>它以為那是它自己的LOADING變數，而這也就是會跳LOADING是未知變數錯誤的原因喔~<br>所以，我們要改變一下在product.js模組中，使用LOADING的寫法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---product.js---</span><br><span class="line">export default &#123;</span><br><span class="line">  namespaced: true,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    getProducts(context) &#123;</span><br><span class="line">      const url &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;products&#x2F;all&#96;;</span><br><span class="line">      context.commit(&#39;LOADING&#39;, true, &#123; root: true &#125;);   &#x2F;&#x2F; 在LOADING　後面加上了&#123; root: true &#125;來讓product.js模組知道這是一個global的LOADING變數</span><br><span class="line">      axios.get(url).then((response) &#x3D;&gt; &#123;</span><br><span class="line">        console.log(&#39;取得產品列表:&#39;, response);</span><br><span class="line">        context.commit(&#39;PRODUCTS&#39;, response.data.products);</span><br><span class="line">        context.commit(&#39;CATEGORIES&#39;, response.data.products);</span><br><span class="line">        context.commit(&#39;LOADING&#39;, false, &#123; root: true &#125;);　　&#x2F;&#x2F; 在LOADING　後面加上了&#123; root: true &#125;來讓product.js模組知道這是一個global的LOADING變數</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>經由以上的修改之後，你的網頁就不會再跳出相關的錯誤囉~~</p>
+<h1 id="VueX小結論"><a href="#VueX小結論" class="headerlink" title="VueX小結論"></a>VueX小結論</h1><p>以上這些操作步驟就是利用VueX來管理專案檔，並讓通用變數可以跨階層被取用的方法囉~<br>那回到最一開始講的，購物車資料連動的效果。<br>其原因來自，Home.vue這個子元件是直接去修改VueX中的cart購物車資料，而App.vue是取用VueX中的cart資料，來呈現在畫面上。<br>所以，由上面的操作流程可以知道，父子元件都是對VueX中的同一個成員屬性的內容去操作，那當然就會有連動的效果囉。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/11/js%E6%A0%B8%E5%BF%83%E7%AF%87-%E4%BD%9C%E7%94%A8%E9%8D%8A%E5%92%8C%E9%96%89%E5%8C%85/" rel="prev" title="js核心篇-作用鍊和閉包">
+      <i class="fa fa-chevron-left"></i> js核心篇-作用鍊和閉包
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/16/JS%E6%A0%B8%E5%BF%83%E7%AF%87-this%E5%88%B0%E5%BA%95%E6%98%AF%E8%AA%B0/" rel="next" title="JS核心篇-this到底是誰">
+      JS核心篇-this到底是誰 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AFVueX"><span class="nav-number">1.</span> <span class="nav-text">什麼是VueX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VueX-%E9%87%8D%E8%A6%81%E7%9A%84%E6%88%90%E5%93%A1%E5%B1%AC%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">VueX - 重要的成員屬性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E6%8F%92%E6%9B%B2-%E6%9C%89%E9%97%9C%E5%A6%82%E4%BD%95%E9%96%8B%E5%95%9F%E8%AA%B2%E5%A0%82%E4%B8%8A%E6%8F%90%E4%BE%9B%E7%9A%84%E8%AA%B2%E7%A8%8BvueX%E6%AA%94%E6%A1%88"><span class="nav-number">1.1.1.</span> <span class="nav-text">小插曲-有關如何開啟課堂上提供的課程vueX檔案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E4%B8%80%E5%80%8B-Store-%E7%AE%A1%E7%90%86%E7%B6%B2%E7%AB%99%E8%B3%87%E6%96%99%E7%8B%80%E6%85%8B"><span class="nav-number">2.</span> <span class="nav-text">新增一個 Store 管理網站資料狀態</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#actions-%E5%8F%8A-mutations-%E6%94%B9%E8%AE%8A%E8%B3%87%E6%96%99%E7%8B%80%E6%85%8B"><span class="nav-number">3.</span> <span class="nav-text">actions 及 mutations 改變資料狀態</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vuex-%E7%9A%84%E5%9A%B4%E8%AC%B9%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">Vuex 的嚴謹模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Actions-%E5%8F%96%E5%BE%97%E9%81%A0%E7%AB%AF%E8%B3%87%E6%96%99"><span class="nav-number">5.</span> <span class="nav-text">使用 Actions 取得遠端資料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Payload-%E5%82%B3%E9%81%9E%E7%89%A9%E4%BB%B6%E5%8F%83%E6%95%B8"><span class="nav-number">6.</span> <span class="nav-text">Payload 傳遞物件參數</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%82%B3%E9%81%9E%E5%8F%83%E6%95%B8%E5%88%B0actions%E4%B8%AD%EF%BC%8C%E5%8F%AA%E8%83%BD%E5%82%B3%E9%81%9E%E4%B8%80%E5%80%8B%E5%8F%83%E6%95%B8"><span class="nav-number">6.1.</span> <span class="nav-text">傳遞參數到actions中，只能傳遞一個參數</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vuex-%E4%B8%AD%E7%9A%84-getters-%E5%8F%8A-mapGetters-mapActions"><span class="nav-number">7.</span> <span class="nav-text">Vuex 中的 getters 及 mapGetters, mapActions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B2%92%E6%9C%89%E5%BC%95%E5%85%A5%E8%A6%81%E5%82%B3%E9%81%9E%E7%9A%84%E5%87%BD%E5%BC%8F%E6%89%8D%E8%83%BD%E7%94%A8mapActions"><span class="nav-number">7.1.</span> <span class="nav-text">沒有引入要傳遞的函式才能用mapActions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E7%B5%84%E5%8C%96%E8%B3%87%E6%96%99%E9%81%8B%E7%94%A8"><span class="nav-number">8.</span> <span class="nav-text">模組化資料運用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E7%B5%84%E4%B8%AD%E7%9A%84%E5%8D%80%E5%9F%9F%E8%AE%8A%E6%95%B8%E5%92%8C%E5%85%A8%E5%9F%9F%E8%AE%8A%E6%95%B8"><span class="nav-number">8.1.</span> <span class="nav-text">模組中的區域變數和全域變數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AA%9E%E6%B3%95namespaced-true%EF%BC%8C%E5%BE%9E%E5%85%A8%E5%9F%9F%E8%AE%8A%E6%95%B8%E6%94%B9%E6%88%90%E5%8D%80%E5%9F%9F%E8%AE%8A%E6%95%B8"><span class="nav-number">8.2.</span> <span class="nav-text">語法namespaced:true，從全域變數改成區域變數</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VueX%E5%B0%8F%E7%B5%90%E8%AB%96"><span class="nav-number">9.</span> <span class="nav-text">VueX小結論</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

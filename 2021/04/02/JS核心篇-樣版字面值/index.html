@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="樣板字面值（Template literals）基本介紹我們希望在HTML中插入內容，那插入的內容有字串和變數混合在一起，我們可以用樣板字面值來達成這種效果。  上面這個範例，你可以看到我們在變數insertContent使用樣板字面值，將我們想要插入的HTML格式寫在裡面，並利用$&amp;#123;&amp;#125;來將想要合併的變數也一起並在裡面。那因為我們用樣板字面值來合併時，我們不需要利用傳統的&#x2F;來合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS核心篇-樣版字面值">
+<meta property="og:url" content="https://landy510.github.io/2021/04/02/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E6%A8%A3%E7%89%88%E5%AD%97%E9%9D%A2%E5%80%BC/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="樣板字面值（Template literals）基本介紹我們希望在HTML中插入內容，那插入的內容有字串和變數混合在一起，我們可以用樣板字面值來達成這種效果。  上面這個範例，你可以看到我們在變數insertContent使用樣板字面值，將我們想要插入的HTML格式寫在裡面，並利用$&amp;#123;&amp;#125;來將想要合併的變數也一起並在裡面。那因為我們用樣板字面值來合併時，我們不需要利用傳統的&#x2F;來合">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-04-02T10:01:37.000Z">
+<meta property="article:modified_time" content="2021-04-02T10:18:04.469Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2021/04/02/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E6%A8%A3%E7%89%88%E5%AD%97%E9%9D%A2%E5%80%BC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>JS核心篇-樣版字面值 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/04/02/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E6%A8%A3%E7%89%88%E5%AD%97%E9%9D%A2%E5%80%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JS核心篇-樣版字面值
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-04-02 18:01:37 / 修改時間：18:18:04" itemprop="dateCreated datePublished" datetime="2021-04-02T18:01:37+08:00">2021-04-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="樣板字面值（Template-literals）基本介紹"><a href="#樣板字面值（Template-literals）基本介紹" class="headerlink" title="樣板字面值（Template literals）基本介紹"></a>樣板字面值（Template literals）基本介紹</h1><p>我們希望在HTML中插入內容，那插入的內容有<strong>字串</strong>和<strong>變數</strong>混合在一起，<br>我們可以用樣板字面值來達成這種效果。</p>
+<iframe src="https://codepen.io/RandyChen/embed/qBRawEG?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>上面這個範例，你可以看到我們在變數insertContent使用樣板字面值，將我們想要插入的HTML格式寫在裡面，並利用<code>$&#123;&#125;</code>來將想要合併的變數也一起並在裡面。<br>那因為我們用樣板字面值來合併時，我們不需要利用傳統的<code>/</code>來合併字串斷行時的部分。<br>最後再用<code>innerHTML</code>來插入這個合併完的字串內容。</p>
+<h1 id="巢狀結構"><a href="#巢狀結構" class="headerlink" title="巢狀結構"></a>巢狀結構</h1><h2 id="加入表達式"><a href="#加入表達式" class="headerlink" title="加入表達式"></a>加入表達式</h2><p>樣板字面值除了可以加入變數以外，還可以加入表達式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const person &#x3D; &#123;</span><br><span class="line">	name: &#39;小明&#39;,</span><br><span class="line">&#125;</span><br><span class="line">const sentence &#x3D; &#96;我的名字是$&#123; person.name &#125;，我總共有$&#123; person.cash || 1000 &#125;元&#96;</span><br></pre></td></tr></table></figure>
+<p>上面這個範例，你可以看到最後面那個表達式，若person.cash沒有值則回傳1000這個值。</p>
+<a id="more"></a>
+<h2 id="加入立即函式"><a href="#加入立即函式" class="headerlink" title="加入立即函式"></a>加入立即函式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const person &#x3D; &#123;</span><br><span class="line">  name: &#39;小明&#39;,</span><br><span class="line">  cash: 1000  </span><br><span class="line">&#125;</span><br><span class="line">const sentence &#x3D; &#96;我的名字是$&#123; person.name &#125;，我總共有$&#123; (function(x) &#123;return x*2&#125;)(person.cash) &#125;元&#96;</span><br><span class="line">console.log(sentence)</span><br></pre></td></tr></table></figure>
+<p>以上這個範例，你可以看到我們還可以在樣板字面值中加入立即函式，然後，回傳執行完的內容，然後加入到樣板字面值中。</p>
+<h2 id="巢狀結構-1"><a href="#巢狀結構-1" class="headerlink" title="巢狀結構"></a>巢狀結構</h2><p>樣板字面值中，再加入樣板字面值，就是巢狀結構。<br>ex1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const person &#x3D; &#123;</span><br><span class="line">	name: &#39;小明&#39;,</span><br><span class="line">	cash: 1000</span><br><span class="line">&#125;</span><br><span class="line">const sentence &#x3D; &#96;我的名字是$&#123; person.name &#125;，$&#123; &#96;我總共有 $&#123; person.cash &#125;&#96; &#125;元&#96; </span><br></pre></td></tr></table></figure>
+
+<p>ex2:<br>這個例子我們就利用樣巢狀的樣板字面值，來組合HTML的結構。</p>
+<iframe src="https://codepen.io/RandyChen/embed/xxgEeab?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>上面這個範例，我們就利用樣板字面值的巢狀結構，來組合HTML的內容。<br>內層是加入表達式，利用陣列的<code>map</code>方法，將people的內容組合出來，並回傳成一個陣列，組合成HTML的內容。<br>那你可以看到我們在陣列的<code>map</code>方法後面還接著一個<code>join(&#39;&#39;)</code>的方法，它是用來將陣列內容連接起來，合併成一個字串，<br>並將陣列裡面的逗號給篩選掉。</p>
+<h1 id="標籤樣板字面值"><a href="#標籤樣板字面值" class="headerlink" title="標籤樣板字面值"></a>標籤樣板字面值</h1><p>這是樣板字面值的進階用法。<br>標籤樣板字面值的使用就是<strong>直接在函式後面加上模版字符串</strong>，如果這個傳入的樣板字面值裡面沒有加入<code>$&#123;&#125;</code>的話，它就是純粹傳入參數而已。</p>
+<h2 id="沒有加入-的標籤樣板字面值"><a href="#沒有加入-的標籤樣板字面值" class="headerlink" title="沒有加入${}的標籤樣板字面值"></a>沒有加入${}的標籤樣板字面值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log &#96;123&#96;   &#x2F;&#x2F; 標籤樣板字面值用法</span><br><span class="line">console.log(&#39;123&#39;)  &#x2F;&#x2F; 上面的效果，就等同於這一行這樣</span><br></pre></td></tr></table></figure>
+
+<h2 id="傳入有-的標籤樣板字面值"><a href="#傳入有-的標籤樣板字面值" class="headerlink" title="傳入有${}的標籤樣板字面值"></a>傳入有${}的標籤樣板字面值</h2><p>在程式中會將<code>$&#123;&#125;</code>當作<strong>切割的錨點</strong>，並將切割完的字串部分，全部存成一個陣列中，那<code>$&#123;&#125;</code>的部分，就當成各別的參數傳入函式中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function test(string, argu1, argu2) &#123;</span><br><span class="line">  console.log(string)</span><br><span class="line">  console.log(argu1, argu2)</span><br><span class="line">&#125;</span><br><span class="line">let myname &#x3D; &#39;ming&#39;</span><br><span class="line">let familyName &#x3D; &#39;chung&#39;</span><br><span class="line">test &#96;&lt;span&gt;你好$&#123; myname &#125;大俠$&#123; familyName &#125;&lt;&#x2F;span&gt;&#96;</span><br></pre></td></tr></table></figure>
+<p>那上面這個範例裡面的標籤字面值的功能<br>test <code>你好$&#123; myname &#125;大俠$&#123; familyName &#125;</code>  的作用是等同於下面這樣的傳統寫法<br>test([‘你好’, ‘大俠’], myname, familyName)<br>你可以看到以<code>$&#123;&#125;</code>為切割點，將這些剩下來的字串存成同一個陣列中，而<code>$&#123;&#125;</code>就各別當作參數傳入函式中。<br>故切割的字串陣列會長這樣[‘<span>你好’, ‘大俠’, ‘</span>‘]，那傳入的參數argu1和argu2分別為myname和familyName。<br>那上面這個範例有兩個<code>$&#123;&#125;</code>，所以，會有兩個參數argu1, argu2。<br>如果，你有三個<code>$&#123;&#125;</code>的話，就會有三個參數argu1, argu2, argu3，以此類推。</p>
+<h2 id="使用其餘參數切分參數"><a href="#使用其餘參數切分參數" class="headerlink" title="使用其餘參數切分參數"></a>使用其餘參數切分參數</h2><p>那我們知道，在函式中都會有一個<code>arguments</code>的物件，它儲存了傳入的所有參數。<br>而像上面的範例<code>arguments</code>儲存的是{[‘<span>你好’, ‘大俠’, ‘</span>‘], “ming”, “chung”}。<br>那如果我們想要將被組合的字串陣列 和 傳入的參數分開使用的話，我們就可以用其餘參數來將傳入的參數儲存起來，跟被組合的陣列切分開來。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function test(string, ...argu) &#123;</span><br><span class="line">  console.log(string)  &#x2F;&#x2F; [&#39;&lt;span&gt;你好&#39;, &#39;大俠&#39;, &#39;&lt;&#x2F;span&gt;&#39;]</span><br><span class="line">  console.log(argu)    &#x2F;&#x2F; [&#39;ming&#39;, &#39;chung&#39;]</span><br><span class="line">&#125;</span><br><span class="line">let myname &#x3D; &#39;ming&#39;</span><br><span class="line">let familyName &#x3D; &#39;chung&#39;</span><br><span class="line">test &#96;&lt;span&gt;你好$&#123; myname &#125;大俠$&#123; familyName &#125;&lt;&#x2F;span&gt;&#96;</span><br></pre></td></tr></table></figure>
+
+<h2 id="標籤樣板字面值的好處"><a href="#標籤樣板字面值的好處" class="headerlink" title="標籤樣板字面值的好處"></a>標籤樣板字面值的好處</h2><p>那在一般專案裡面，我們會利用樣板字面值合併變數並將這個變數跟HTML標籤合併在一起，最後，在將合併結果渲染到畫面上。<br>那在這個合併的變數裡面，如果有人惡意攻擊，在裡面加入了不知名的html並且去load不知名的網站內容，或甚至將網站內的會員資訊給竊取出來就會很麻煩。<br>那這個時候，我們就可以利用標籤樣板字面值，來防止這種攻擊。</p>
+<iframe src="https://codepen.io/RandyChen/embed/RwKpYyb?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>在上面這範例，可以看到在變數messageName裡面，被塞入了不需要的HTML標籤，而且在這個html標籤裡面還去onload了外部的資料，這就會是讓人家可以攻擊的漏洞。<br>所以，在這邊我們要加入標籤樣板字面值功能，來阻止這樣的攻擊。</p>
+<iframe src="https://codepen.io/RandyChen/embed/WNRGBme?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>你可以看到上面這個範例，若使用者在傳入的資訊中傳入一些有的沒的的HTML標籤，它就會變成一行純字串，而不會有其他任何的效果。</p>
+<p>參考文章:</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://pjchender.blogspot.com/2017/01/javascript-es6-template-literalstagged.html">標籤樣板字面值文章</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/02/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%AE%AD%E9%A0%AD%E5%87%BD%E5%BC%8F/" rel="prev" title="JS核心篇-箭頭函式">
+      <i class="fa fa-chevron-left"></i> JS核心篇-箭頭函式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/06/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Promise/" rel="next" title="JS核心篇-Promise">
+      JS核心篇-Promise <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A3%E6%9D%BF%E5%AD%97%E9%9D%A2%E5%80%BC%EF%BC%88Template-literals%EF%BC%89%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.</span> <span class="nav-text">樣板字面值（Template literals）基本介紹</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A2%E7%8B%80%E7%B5%90%E6%A7%8B"><span class="nav-number">2.</span> <span class="nav-text">巢狀結構</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5%E8%A1%A8%E9%81%94%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">加入表達式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5%E7%AB%8B%E5%8D%B3%E5%87%BD%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">加入立即函式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A2%E7%8B%80%E7%B5%90%E6%A7%8B-1"><span class="nav-number">2.3.</span> <span class="nav-text">巢狀結構</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%99%E7%B1%A4%E6%A8%A3%E6%9D%BF%E5%AD%97%E9%9D%A2%E5%80%BC"><span class="nav-number">3.</span> <span class="nav-text">標籤樣板字面值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B2%92%E6%9C%89%E5%8A%A0%E5%85%A5-%E7%9A%84%E6%A8%99%E7%B1%A4%E6%A8%A3%E6%9D%BF%E5%AD%97%E9%9D%A2%E5%80%BC"><span class="nav-number">3.1.</span> <span class="nav-text">沒有加入${}的標籤樣板字面值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%82%B3%E5%85%A5%E6%9C%89-%E7%9A%84%E6%A8%99%E7%B1%A4%E6%A8%A3%E6%9D%BF%E5%AD%97%E9%9D%A2%E5%80%BC"><span class="nav-number">3.2.</span> <span class="nav-text">傳入有${}的標籤樣板字面值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%85%B6%E9%A4%98%E5%8F%83%E6%95%B8%E5%88%87%E5%88%86%E5%8F%83%E6%95%B8"><span class="nav-number">3.3.</span> <span class="nav-text">使用其餘參數切分參數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%99%E7%B1%A4%E6%A8%A3%E6%9D%BF%E5%AD%97%E9%9D%A2%E5%80%BC%E7%9A%84%E5%A5%BD%E8%99%95"><span class="nav-number">3.4.</span> <span class="nav-text">標籤樣板字面值的好處</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
