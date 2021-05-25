@@ -17,25 +17,25 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="什麼是 localStorage ？它可以將網頁中的資料儲存在本地端中。也就是說它可以將用戶的瀏覽資料存在本地端的瀏覽器中。 localStorage的重要特性目前瀏覽器中都會把localStorage的值型別限定為string型別因為，以上這個特性，導致我們在存取資料到localStorage或取出資料時，需要做一些轉換。 以上這張圖的流程，簡易的說明了在localStorage資料的傳遞轉換的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript學徒篇- localStorage資料儲存">
-<meta property="og:url" content="http://example.com/2021/02/13/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-localStorage%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98/index.html">
+<meta property="og:url" content="https://landy510.github.io/2021/02/13/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-localStorage%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98/index.html">
 <meta property="og:site_name" content="Landy Blog">
 <meta property="og:description" content="什麼是 localStorage ？它可以將網頁中的資料儲存在本地端中。也就是說它可以將用戶的瀏覽資料存在本地端的瀏覽器中。 localStorage的重要特性目前瀏覽器中都會把localStorage的值型別限定為string型別因為，以上這個特性，導致我們在存取資料到localStorage或取出資料時，需要做一些轉換。 以上這張圖的流程，簡易的說明了在localStorage資料的傳遞轉換的">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="http://example.com/image/localstorage.png">
+<meta property="og:image" content="https://landy510.github.io/image/localstorage.png">
 <meta property="article:published_time" content="2021-02-13T07:18:25.000Z">
 <meta property="article:modified_time" content="2021-02-13T07:21:30.841Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/image/localstorage.png">
+<meta name="twitter:image" content="https://landy510.github.io/image/localstorage.png">
 
-<link rel="canonical" href="http://example.com/2021/02/13/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-localStorage%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98/">
+<link rel="canonical" href="https://landy510.github.io/2021/02/13/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-localStorage%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98/">
 
 
 <script id="page-configurations">
@@ -172,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/13/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-localStorage%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98/">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/13/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-localStorage%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

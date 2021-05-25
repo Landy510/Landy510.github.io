@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="接續上一篇，Vue-js元件沒有記錄完的內容。 props使用上的注意事項本單元要講解主要有以下三部分  單向數據流 物件傳參考特性 及 尚未宣告的變數 如何維持元件的生命週期  單向數據流ex: 12345678910111213141516171819202122232425262728---HTML---&lt;div id&#x3D;&quot;app&quot;&gt;  &lt;h2&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue-js元件-01">
-<meta property="og:url" content="http://example.com/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/index.html">
+<meta property="og:url" content="https://landy510.github.io/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/index.html">
 <meta property="og:site_name" content="Landy Blog">
 <meta property="og:description" content="接續上一篇，Vue-js元件沒有記錄完的內容。 props使用上的注意事項本單元要講解主要有以下三部分  單向數據流 物件傳參考特性 及 尚未宣告的變數 如何維持元件的生命週期  單向數據流ex: 12345678910111213141516171819202122232425262728---HTML---&lt;div id&#x3D;&quot;app&quot;&gt;  &lt;h2&amp;">
 <meta property="og:locale" content="zh_TW">
@@ -33,7 +33,7 @@
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/">
+<link rel="canonical" href="https://landy510.github.io/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/">
 
 
 <script id="page-configurations">
@@ -170,7 +170,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

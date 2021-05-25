@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="在我的 Vue 專案中，有用到 Fileters的成員屬性。那這個 Filters 裡面有撰寫千分號的功能，目的是為每一個數值都加上千分號，讓使用者的閱讀上有更好的體驗。那本篇就是用來解析一下專案中的千分號函式，每一個部分各代表什麼功能，好讓之後要用的時候，不會用太多時間來回想XDD 千分號函式本體這邊先放上一個千分號的簡易範例，它有用到 Vue 來做撰寫。   Number.prototype.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="replace-用在千分號的方法介紹">
-<meta property="og:url" content="http://example.com/2021/04/22/replace-%E7%94%A8%E5%9C%A8%E5%8D%83%E5%88%86%E8%99%9F%E7%9A%84%E6%96%B9%E6%B3%95%E4%BB%8B%E7%B4%B9/index.html">
+<meta property="og:url" content="https://landy510.github.io/2021/04/22/replace-%E7%94%A8%E5%9C%A8%E5%8D%83%E5%88%86%E8%99%9F%E7%9A%84%E6%96%B9%E6%B3%95%E4%BB%8B%E7%B4%B9/index.html">
 <meta property="og:site_name" content="Landy Blog">
 <meta property="og:description" content="在我的 Vue 專案中，有用到 Fileters的成員屬性。那這個 Filters 裡面有撰寫千分號的功能，目的是為每一個數值都加上千分號，讓使用者的閱讀上有更好的體驗。那本篇就是用來解析一下專案中的千分號函式，每一個部分各代表什麼功能，好讓之後要用的時候，不會用太多時間來回想XDD 千分號函式本體這邊先放上一個千分號的簡易範例，它有用到 Vue 來做撰寫。   Number.prototype.">
 <meta property="og:locale" content="zh_TW">
@@ -33,7 +33,7 @@
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/04/22/replace-%E7%94%A8%E5%9C%A8%E5%8D%83%E5%88%86%E8%99%9F%E7%9A%84%E6%96%B9%E6%B3%95%E4%BB%8B%E7%B4%B9/">
+<link rel="canonical" href="https://landy510.github.io/2021/04/22/replace-%E7%94%A8%E5%9C%A8%E5%8D%83%E5%88%86%E8%99%9F%E7%9A%84%E6%96%B9%E6%B3%95%E4%BB%8B%E7%B4%B9/">
 
 
 <script id="page-configurations">
@@ -170,7 +170,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/22/replace-%E7%94%A8%E5%9C%A8%E5%8D%83%E5%88%86%E8%99%9F%E7%9A%84%E6%96%B9%E6%B3%95%E4%BB%8B%E7%B4%B9/">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/04/22/replace-%E7%94%A8%E5%9C%A8%E5%8D%83%E5%88%86%E8%99%9F%E7%9A%84%E6%96%B9%E6%B3%95%E4%BB%8B%E7%B4%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

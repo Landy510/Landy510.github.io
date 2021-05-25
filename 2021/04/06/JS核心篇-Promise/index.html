@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="為什麼需要Promise?我們需要Promise的原因是需要解決以下幾種問題:1. 回呼地獄當我們需要安排很多個非同步函式的操作順序時，必須在一個函式執行結束之後，再呼叫其他的非同步函式繼續執行下去，這樣會導致程式碼很亂，而且不容易管理。2. 寫法不一致在許多的非同步套件的寫法都不太一樣，這樣的話就會導致程式碼的整體寫法不夠一致。3. 無法同時執行在JS的程式碼中，我們無法保證每一個非同步函式都是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS核心篇-Promise">
-<meta property="og:url" content="http://example.com/2021/04/06/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Promise/index.html">
+<meta property="og:url" content="https://landy510.github.io/2021/04/06/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Promise/index.html">
 <meta property="og:site_name" content="Landy Blog">
 <meta property="og:description" content="為什麼需要Promise?我們需要Promise的原因是需要解決以下幾種問題:1. 回呼地獄當我們需要安排很多個非同步函式的操作順序時，必須在一個函式執行結束之後，再呼叫其他的非同步函式繼續執行下去，這樣會導致程式碼很亂，而且不容易管理。2. 寫法不一致在許多的非同步套件的寫法都不太一樣，這樣的話就會導致程式碼的整體寫法不夠一致。3. 無法同時執行在JS的程式碼中，我們無法保證每一個非同步函式都是">
 <meta property="og:locale" content="zh_TW">
@@ -33,7 +33,7 @@
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/04/06/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Promise/">
+<link rel="canonical" href="https://landy510.github.io/2021/04/06/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Promise/">
 
 
 <script id="page-configurations">
@@ -170,7 +170,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/06/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Promise/">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/04/06/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Promise/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

@@ -17,31 +17,31 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="安裝運行 Vue Cli 3.0vue3 和 vue2的差異最大的差異就在於vue3有介面可以直接點，不用在自己輸入command line來安裝或運行你的程式碼的環境了。 首先，如果你有先安裝過較舊的版本的vue-cli的話，你就要先把它們卸載掉。接著，再輸入指令npm install -g @vue&#x2F;cli來安裝3.0版本的vue-cli，安裝完成後，你可以透過vue --versoin來確認">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue出一個電商網站-Vue Cli 3.0">
-<meta property="og:url" content="http://example.com/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-Vue-Cli-3-0/index.html">
+<meta property="og:url" content="https://landy510.github.io/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-Vue-Cli-3-0/index.html">
 <meta property="og:site_name" content="Landy Blog">
 <meta property="og:description" content="安裝運行 Vue Cli 3.0vue3 和 vue2的差異最大的差異就在於vue3有介面可以直接點，不用在自己輸入command line來安裝或運行你的程式碼的環境了。 首先，如果你有先安裝過較舊的版本的vue-cli的話，你就要先把它們卸載掉。接著，再輸入指令npm install -g @vue&#x2F;cli來安裝3.0版本的vue-cli，安裝完成後，你可以透過vue --versoin來確認">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="http://example.com/image/vue3_feauture.png">
-<meta property="og:image" content="http://example.com/image/vue3_1.png">
-<meta property="og:image" content="http://example.com/image/vue3_ui.png">
-<meta property="og:image" content="http://example.com/image/vue3_2.png">
-<meta property="og:image" content="http://example.com/image/vue3_3.png">
-<meta property="og:image" content="http://example.com/image/vue3_router.png">
-<meta property="og:image" content="http://example.com/image/vue3_router1.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_feauture.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_1.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_ui.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_2.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_3.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_router.png">
+<meta property="og:image" content="https://landy510.github.io/image/vue3_router1.png">
 <meta property="article:published_time" content="2021-02-03T02:27:36.000Z">
 <meta property="article:modified_time" content="2021-02-03T02:45:22.433Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/image/vue3_feauture.png">
+<meta name="twitter:image" content="https://landy510.github.io/image/vue3_feauture.png">
 
-<link rel="canonical" href="http://example.com/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-Vue-Cli-3-0/">
+<link rel="canonical" href="https://landy510.github.io/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-Vue-Cli-3-0/">
 
 
 <script id="page-configurations">
@@ -178,7 +178,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-Vue-Cli-3-0/">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/03/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-Vue-Cli-3-0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -260,7 +260,7 @@
 <h1 id="GUI-設定及-CLI-插件安裝說明"><a href="#GUI-設定及-CLI-插件安裝說明" class="headerlink" title="GUI 設定及 CLI 插件安裝說明"></a>GUI 設定及 CLI 插件安裝說明</h1><p>step1.</p>
 <h2 id="用vue-ui來新增vue-router"><a href="#用vue-ui來新增vue-router" class="headerlink" title="用vue ui來新增vue router"></a>用vue ui來新增vue router</h2><p>你直接點擊介面中的新增router即可新增。<br><img src="/image/vue3_router.png"></p>
 <p>step2.<br>接著，你安裝完之後，你可以看到妳的編譯器中的main.js檔案，變成main.ts，是因為你有引進typestring元件的緣故。<br>接著，你看main.ts檔案裡面，你可以看到它自動為你引入router的檔案，並新增了router屬性了。<br>第三，它也直接幫我們新增了router資料夾，裡面也新增好index.jsys檔案了。<br>第四，在App.vue檔案裡面，它也自動的為我們加入了<code>&lt;router-view&gt;</code>和<code>&lt;router-link&gt;</code>了。<br>step3.<br>接下來，我們就來看看運行起來的專案長什麼鬼樣子。<br>接下來，你可以看到運行首頁上，它直接幫我們新增了<code>&lt;router-link&gt;</code>的功能，<br>而且運行上也沒問題。<br><img src="/image/vue3_router1.png"><br>step4.</p>
-<h2 id="Base-URL-檔案間的相對路徑關係"><a href="#Base-URL-檔案間的相對路徑關係" class="headerlink" title="Base URL-檔案間的相對路徑關係"></a>Base URL-檔案間的相對路徑關係</h2><p>有關vue3檔案的設定部分。<br>在ui介面上有一個設定的選項，點下去之後，裡面的Vue Cli選項中有一個Base URL的項目。<br>它就是輸出檔案，之間相對路徑的關係。<br>那如果，你今天的跟目錄有換比如說<br>我們釋出的檔案不是在根目錄底下，<br>比如不是 <a target="_blank" rel="noopener" href="http://landy510.github.io/">http://landy510.github.io</a> 底下，而是在<a target="_blank" rel="noopener" href="http://landy510.github.io/Vue-testing">http://landy510.github.io/Vue-testing</a> 底下，<br>那這樣我們需要做一些調整，<br>此時，我們就要去更改Base URL的設定，把它改成/Vue-testing/<br>這樣子，就可以成功的在<a target="_blank" rel="noopener" href="http://landy510.github.io/Vue-testing">http://landy510.github.io/Vue-testing</a> 底下運行囉。</p>
+<h2 id="Base-URL-檔案間的相對路徑關係"><a href="#Base-URL-檔案間的相對路徑關係" class="headerlink" title="Base URL-檔案間的相對路徑關係"></a>Base URL-檔案間的相對路徑關係</h2><p>有關vue3檔案的設定部分。<br>在ui介面上有一個設定的選項，點下去之後，裡面的Vue Cli選項中有一個Base URL的項目。<br>它就是輸出檔案，之間相對路徑的關係。<br>那如果，你今天的跟目錄有換比如說<br>我們釋出的檔案不是在根目錄底下，<br>比如不是 <a href="http://landy510.github.io/">http://landy510.github.io</a> 底下，而是在<a href="http://landy510.github.io/Vue-testing">http://landy510.github.io/Vue-testing</a> 底下，<br>那這樣我們需要做一些調整，<br>此時，我們就要去更改Base URL的設定，把它改成/Vue-testing/<br>這樣子，就可以成功的在<a href="http://landy510.github.io/Vue-testing">http://landy510.github.io/Vue-testing</a> 底下運行囉。</p>
 <h1 id="CLI-2-0-專案搬移到-3-0-實際演練"><a href="#CLI-2-0-專案搬移到-3-0-實際演練" class="headerlink" title="CLI 2.0 專案搬移到 3.0 實際演練"></a>CLI 2.0 專案搬移到 3.0 實際演練</h1><p>step1.<br>首先，你先打開課程<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue_vuex__exercise/tree/918678b97393ca05b8ba7338b101364f9e32cf08">提供的專案</a> ，<br>它的package.jason檔案，先來看看他們都安裝了那些套件。<br>axios<br>bootstrap<br>jquery<br>popper.js<br>vue-axios<br>vue-loading-overlay<br>那以上這些就是我們需要額外再安裝的套件。<br>有兩種載入的方式，一個是vue ui或者直接用command line來安裝。<br>他們倆種結果都一樣，擇一即可。<br>所以，我選擇用command line輸入來安裝<br>直接輸入指令npm install –save axios bootstrap jquery popper vue-axios vue-loading-overlay<br>就可以直接把上面的套件直接一次安裝。</p>
 <p>step2<br>將以上安裝的這些檔案引入main.js檔案中，並在main.js檔案中啟用這些元件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---main.js---</span><br><span class="line">import axios from &#39;axios&#39;;</span><br><span class="line">import VueAxios from &#39;vue-axios&#39;;</span><br><span class="line">import Loading from &#39;vue-loading-overlay&#39;;</span><br><span class="line">import &#39;..&#x2F;..&#x2F;node_modules&#x2F;vue-loading-overlay&#x2F;dist&#x2F;vue-loading&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(VueAxios, axios);</span><br><span class="line">Vue.component(&#39;Loading&#39;, Loading);</span><br></pre></td></tr></table></figure>

@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="JS是以什麼為基礎的物件導向的語言呢?JS不同於其他物件導向的程式語言，像C++是以「類別」為基礎的物件導向的程式語言。而JS是以「原型」為基礎的物件導向程式語言。 JS創建物件的方法以下記錄幾種JS裡面創建新物件的方法Way1. 用new關鍵字 12const obj &#x3D; new Object()obj.name &#x3D; &#39;物件&#39;  Way2. 物件實字創建 12">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS核心篇-物件 和 原型練">
-<meta property="og:url" content="http://example.com/2021/03/18/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%89%A9%E4%BB%B6-%E5%92%8C-%E5%8E%9F%E5%9E%8B%E7%B7%B4/index.html">
+<meta property="og:url" content="https://landy510.github.io/2021/03/18/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%89%A9%E4%BB%B6-%E5%92%8C-%E5%8E%9F%E5%9E%8B%E7%B7%B4/index.html">
 <meta property="og:site_name" content="Landy Blog">
 <meta property="og:description" content="JS是以什麼為基礎的物件導向的語言呢?JS不同於其他物件導向的程式語言，像C++是以「類別」為基礎的物件導向的程式語言。而JS是以「原型」為基礎的物件導向程式語言。 JS創建物件的方法以下記錄幾種JS裡面創建新物件的方法Way1. 用new關鍵字 12const obj &#x3D; new Object()obj.name &#x3D; &#39;物件&#39;  Way2. 物件實字創建 12">
 <meta property="og:locale" content="zh_TW">
@@ -33,7 +33,7 @@
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/03/18/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%89%A9%E4%BB%B6-%E5%92%8C-%E5%8E%9F%E5%9E%8B%E7%B7%B4/">
+<link rel="canonical" href="https://landy510.github.io/2021/03/18/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%89%A9%E4%BB%B6-%E5%92%8C-%E5%8E%9F%E5%9E%8B%E7%B7%B4/">
 
 
 <script id="page-configurations">
@@ -170,7 +170,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/18/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%89%A9%E4%BB%B6-%E5%92%8C-%E5%8E%9F%E5%9E%8B%E7%B7%B4/">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/18/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%89%A9%E4%BB%B6-%E5%92%8C-%E5%8E%9F%E5%9E%8B%E7%B7%B4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

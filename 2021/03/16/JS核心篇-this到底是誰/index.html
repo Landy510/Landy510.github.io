@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="this是指向誰在撰寫前端的專案的時候，時常會遇到 this 指向誰的問題。所以這邊，就用將書中和網路上的文章讀到的內容，整理並記錄下來。 this什麼時候被決定在我自己寫的上一篇有提到作用域的部分。在JavaScript中的function的作用域是靜態作用域，也就是代表在function定義的當下，就被定義了。而Javascript中的this，就是動態的，這代表什麼，就是function被呼">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS核心篇-this到底是誰">
-<meta property="og:url" content="http://example.com/2021/03/16/JS%E6%A0%B8%E5%BF%83%E7%AF%87-this%E5%88%B0%E5%BA%95%E6%98%AF%E8%AA%B0/index.html">
+<meta property="og:url" content="https://landy510.github.io/2021/03/16/JS%E6%A0%B8%E5%BF%83%E7%AF%87-this%E5%88%B0%E5%BA%95%E6%98%AF%E8%AA%B0/index.html">
 <meta property="og:site_name" content="Landy Blog">
 <meta property="og:description" content="this是指向誰在撰寫前端的專案的時候，時常會遇到 this 指向誰的問題。所以這邊，就用將書中和網路上的文章讀到的內容，整理並記錄下來。 this什麼時候被決定在我自己寫的上一篇有提到作用域的部分。在JavaScript中的function的作用域是靜態作用域，也就是代表在function定義的當下，就被定義了。而Javascript中的this，就是動態的，這代表什麼，就是function被呼">
 <meta property="og:locale" content="zh_TW">
@@ -33,7 +33,7 @@
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/03/16/JS%E6%A0%B8%E5%BF%83%E7%AF%87-this%E5%88%B0%E5%BA%95%E6%98%AF%E8%AA%B0/">
+<link rel="canonical" href="https://landy510.github.io/2021/03/16/JS%E6%A0%B8%E5%BF%83%E7%AF%87-this%E5%88%B0%E5%BA%95%E6%98%AF%E8%AA%B0/">
 
 
 <script id="page-configurations">
@@ -170,7 +170,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/16/JS%E6%A0%B8%E5%BF%83%E7%AF%87-this%E5%88%B0%E5%BA%95%E6%98%AF%E8%AA%B0/">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/16/JS%E6%A0%B8%E5%BF%83%E7%AF%87-this%E5%88%B0%E5%BA%95%E6%98%AF%E8%AA%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
