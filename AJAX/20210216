@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="什麼是 AJAX？AJAX可以達到不需要重新刷新頁面，而達到跟後端取得相對應資料的效果。 課程名稱: 透過 XMLHttpRequest 物件跨瀏覽器撈資料第一，我們會先創建一個XMLHttpRequest的物件，並利用這個物件去跟伺服器做互動。 第二，當XMLHttpRequest的物件創立成功時，我們會利用open這個函式來決定我們是要從伺服器端撈資料過來 或是 丟資料到伺服器端即 12var">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AJAX課程筆記-1">
+<meta property="og:url" content="https://landy510.github.io/AJAX/20210216">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="什麼是 AJAX？AJAX可以達到不需要重新刷新頁面，而達到跟後端取得相對應資料的效果。 課程名稱: 透過 XMLHttpRequest 物件跨瀏覽器撈資料第一，我們會先創建一個XMLHttpRequest的物件，並利用這個物件去跟伺服器做互動。 第二，當XMLHttpRequest的物件創立成功時，我們會利用open這個函式來決定我們是要從伺服器端撈資料過來 或是 丟資料到伺服器端即 12var">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-02-16T08:50:12.000Z">
+<meta property="article:modified_time" content="2021-02-16T08:54:56.473Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="AJAX">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/AJAX/20210216">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>AJAX課程筆記-1 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/AJAX/20210216">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AJAX課程筆記-1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-02-16 16:50:12 / 修改時間：16:54:56" itemprop="dateCreated datePublished" datetime="2021-02-16T16:50:12+08:00">2021-02-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AJAX/" itemprop="url" rel="index"><span itemprop="name">AJAX</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="什麼是-AJAX？"><a href="#什麼是-AJAX？" class="headerlink" title="什麼是 AJAX？"></a>什麼是 AJAX？</h1><p>AJAX可以達到不需要重新刷新頁面，而達到跟後端取得相對應資料的效果。</p>
+<p>課程名稱: 透過 XMLHttpRequest 物件跨瀏覽器撈資料<br>第一，<br>我們會先創建一個XMLHttpRequest的物件，並利用這個物件去跟伺服器做互動。</p>
+<p>第二，<br>當XMLHttpRequest的物件創立成功時，我們會利用open這個函式來決定我們是要從伺服器端撈資料過來 或是 丟資料到伺服器端<br>即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var ptr &#x3D; new XMLHttpRequest();</span><br><span class="line">ptr.open(&#39;get&#39;, &#39;你要擷取資料的網址&#39;, true);</span><br></pre></td></tr></table></figure>
+<p>上面的第二行程式碼，open的三個參數代表的意義分別為<br>格式: 最常用的是<code>get</code> (從伺服器端拿資料回來)、<code>post</code>(從本地端丟資料到伺服器端)<br>網址: 將資料源的網址放到這個欄位裡面<br>同步 或 非同步: 當此引數為<code>true</code>(非同步) 而 當此引數為<code>false</code>(同步)</p>
+<p>第三，<br>我們可以利用XMLHttpRequest物件回傳的readyState的值，來判斷本地端和伺服器端彼此之間的關係<br>當readyState = 0，代表XMLHttpRequest物件還沒有完成初始化，還沒有連結到你要撈的資料<br>當readyState = 1，你用了open()，但你還沒有把資料傳過去<br>當readyState = 2，偵測到你有用send()<br>當readyState = 3，loading<br>當readyState = 4，你撈到資料了，數據已經完全接收</p>
+<p>第四，<br>利用XMLHttpRequest物件的send函式<br><code>ptr.send(null);</code></p>
+<p>以上這行在send裡面放入null的原因是因為，我並沒有要送資料到資料端，所以，放null，<br>而當你使用完send函式之後，你看ptr回傳的readyState的值應該會是回傳4，代表已經撈到資料了，<br>接著，你再看responseText這個屬性值，應該就有把資料端的資料讀近來了。<br>而為什麼readyState會直接從1跳到4呢，是因為這次的練習範例的內容很少，<br>所以，讀取資料端的速度很快，其實是有經過2 和 3的過程，只是太快了，你看不到，所以，才會有這種錯覺~~</p>
+<h1 id="AJAX-非同步觀念-上"><a href="#AJAX-非同步觀念-上" class="headerlink" title="AJAX 非同步觀念 (上)"></a>AJAX 非同步觀念 (上)</h1><p>這邊講解XMLHttpRequest物件的open函式的第三個引數的用意<br>若</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ptr.open(&#39;get&#39;, &#39;你要擷取資料的網址&#39;, true);</span><br><span class="line">ptr.send(null);</span><br><span class="line">console.log(ptr.responseText);</span><br></pre></td></tr></table></figure>
+<p>若你在open的第三個引數放入true，你會發現在<code>console.log(ptr.responseText)</code> 出現的內容式空的，<br>若你今天把true改成false時，此時<code>console.log(ptr.responseText)</code>就有資料源的內容。<br>而以上這個現象就是Ajax同步與非同步的體現<br>當第三個引數等於<code>true</code>時，代表非同步，不會等資料傳回來，就讓程式繼續往下跑，等到回傳才會自動回傳<br>當第三個引數等於<code>false</code>時，代表同步，它等資料傳回來，才讓程式繼續往下跑</p>
+<h1 id="AJAX-非同步觀念-下"><a href="#AJAX-非同步觀念-下" class="headerlink" title="AJAX 非同步觀念 (下)"></a>AJAX 非同步觀念 (下)</h1><p>這個小節在講解，當你的AJAX是在非同步的狀態下，要怎在資料回傳的時候，將資料或取出來<br>例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var ptr &#x3D; new XMLHttpRequest();</span><br><span class="line">ptr.open(&#39;get&#39;,&#39;資料源網址&#39;,true);</span><br><span class="line">ptr.send(null);</span><br><span class="line"></span><br><span class="line">ptr.onload &#x3D; function()&#123;</span><br><span class="line">   console.log(ptr.responseText);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上這個onload事件，就是用在當AJAX非同步時，當資料回傳時，就可以把資料源的資料擷取回來。</p>
+<h1 id="HTTP狀態碼"><a href="#HTTP狀態碼" class="headerlink" title="HTTP狀態碼"></a>HTTP狀態碼</h1><p>這小節是在說明你可以利用XMLHttpRequest物件回傳的status屬性值，來判斷你是否有正確地將資料源的資料擷取回來。<br>當status 是200，代表你是從正確的資料源拮取資料<br>當status 是404，代表你是從錯誤的資料源拮取資料<br>例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var ptr &#x3D; new XMLHttpRequest();</span><br><span class="line">ptr.open(&#39;get&#39;,&#39;資料源網址&#39;,true);</span><br><span class="line">ptr.send(null);</span><br><span class="line"></span><br><span class="line">ptr.onload &#x3D; function()&#123;</span><br><span class="line">   if(ptr.status &#x3D;&#x3D; 200)&#123;</span><br><span class="line">      console.log(ptr.responseText);</span><br><span class="line">   &#125;else &#123;</span><br><span class="line">      console.log(&quot;資料錯誤!!&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以看到在ptr的onload事件裡面，你可以利用status的屬性值來寫保護，當回傳是200時，才去截取資料源的資料，若不是就顯示資料錯誤的提示訊息。<br>另外，onload事件是代表加載完成後立即發生，以上面的範例為例，代表當ptr物件加載完成後，才會觸發後面function的內容。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AJAX/" rel="tag"># AJAX</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/JavaScript/20210213" rel="prev" title="JavaScript學徒篇- localStorage資料儲存">
+      <i class="fa fa-chevron-left"></i> JavaScript學徒篇- localStorage資料儲存
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/AJAX/20210216" rel="next" title="AJAX課程筆記-2">
+      AJAX課程筆記-2 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-AJAX%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什麼是 AJAX？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AJAX-%E9%9D%9E%E5%90%8C%E6%AD%A5%E8%A7%80%E5%BF%B5-%E4%B8%8A"><span class="nav-number">2.</span> <span class="nav-text">AJAX 非同步觀念 (上)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AJAX-%E9%9D%9E%E5%90%8C%E6%AD%A5%E8%A7%80%E5%BF%B5-%E4%B8%8B"><span class="nav-number">3.</span> <span class="nav-text">AJAX 非同步觀念 (下)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP%E7%8B%80%E6%85%8B%E7%A2%BC"><span class="nav-number">4.</span> <span class="nav-text">HTTP狀態碼</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="套用 Bootstrap Dashboard 版型step1.首先，你可以先去Bootstrap的公版的網站 中，選取Dashboard的主題，來當作我們的Dashboard的版型。 step2.接著，你點開Dashboard的主題，然後對這個網頁點擊右鍵查看原始碼，為的是要將這個Dashboard的html程式碼抓下來。 step3.去你的專案檔中的assets資料夾目錄底下，新增一個_Dash">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-vue出一個電商網站-撰寫DashBoard">
+<meta property="og:url" content="https://landy510.github.io/Vue/20210129">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="套用 Bootstrap Dashboard 版型step1.首先，你可以先去Bootstrap的公版的網站 中，選取Dashboard的主題，來當作我們的Dashboard的版型。 step2.接著，你點開Dashboard的主題，然後對這個網頁點擊右鍵查看原始碼，為的是要將這個Dashboard的html程式碼抓下來。 step3.去你的專案檔中的assets資料夾目錄底下，新增一個_Dash">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/image/requset_header.png">
+<meta property="og:image" content="https://landy510.github.io/image/uploadfile.png">
+<meta property="og:image" content="https://landy510.github.io/image/Content-type.png">
+<meta property="og:image" content="https://landy510.github.io/image/imgUrl_setter.png">
+<meta property="article:published_time" content="2021-01-29T01:34:16.000Z">
+<meta property="article:modified_time" content="2021-01-30T07:06:59.357Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/image/requset_header.png">
+
+<link rel="canonical" href="https://landy510.github.io/Vue/20210129">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Vue-vue出一個電商網站-撰寫DashBoard | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/Vue/20210129">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue-vue出一個電商網站-撰寫DashBoard
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-29 09:34:16" itemprop="dateCreated datePublished" datetime="2021-01-29T09:34:16+08:00">2021-01-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-30 15:06:59" itemprop="dateModified" datetime="2021-01-30T15:06:59+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="套用-Bootstrap-Dashboard-版型"><a href="#套用-Bootstrap-Dashboard-版型" class="headerlink" title="套用 Bootstrap Dashboard 版型"></a>套用 Bootstrap Dashboard 版型</h1><p>step1.<br>首先，你可以先去<a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/5.0/examples/">Bootstrap的公版的網站</a> 中，選取Dashboard的主題，來當作我們的Dashboard的版型。</p>
+<p>step2.<br>接著，你點開Dashboard的主題，然後對這個網頁點擊右鍵查看原始碼，為的是要將這個Dashboard的html程式碼抓下來。</p>
+<p>step3.<br>去你的專案檔中的assets資料夾目錄底下，新增一個_Dashboard.scss檔案，<br>接著，去你剛剛在察看Dashboard原始碼的頁面中，找尋dashboard.css這個關鍵字，<br>並把這個超連結打開，裡面的內容就是這個Dashboard所用到的css樣式。</p>
+<p>step4.<br>將你剛剛開的dashboard.css裡面的內容，複製起來貼到你的_Dashboard.scss檔案中。<br>接著，在all.scss檔案中將這個_Dashboard.scss檔案給<code>import</code>進來。</p>
+<p>step5.<br>去components資料夾底下，新增一個DashBoard.vue的元件檔<br>並將dashboard公版內的html內容加入到你的DashBoard.vue的元件檔中。<br>記得，在公版的<code>script</code>部分的內容是不需要複製的喔，因為，我們只有要用html的內容部份。</p>
+<a id="more"></a>
+<p>step6.<br>在index.js檔案中匯入剛剛新增的DashBoard.vue元件，並為它添加路徑的那些屬性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">---index.js檔案---</span><br><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import Router from &#39;vue-router&#39;</span><br><span class="line">import HelloWorld from &#39;@&#x2F;components&#x2F;HelloWorld&#39;</span><br><span class="line">import DashBoard from &#39;@&#x2F;components&#x2F;DashBoard&#39;  &#x2F;&#x2F; 引入DashBoard元件</span><br><span class="line">import Login from &#39;@&#x2F;components&#x2F;pages&#x2F;login&#39;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#39;*&#39;,</span><br><span class="line">      redirect:&#39;login&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;&#39;,</span><br><span class="line">      name: &#39;HelloWorld&#39;,</span><br><span class="line">      component: HelloWorld,</span><br><span class="line">      meta: &#123; requiresAuth: true &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#39;&#x2F;login&#39;,</span><br><span class="line">      name: &#39;Login&#39;,</span><br><span class="line">      component: Login</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;admin&#39;,    &#x2F;&#x2F; DashBoard的路徑這些屬性</span><br><span class="line">      name: &#39;HelloWorld&#39;,</span><br><span class="line">      component: DashBoard,</span><br><span class="line">      meta: &#123; requiresAuth: true &#125;  &#x2F;&#x2F; 它是需要被驗證的</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>step7.<br>這個時候，我們會將DashBoard元件檔中，原本含有的sidebar和navbar的元件內容，先拆解成兩個元件檔。<br>所以，你要在components資料夾中新增兩個元件檔分別為sidebar.vue 和 navbar.vue<br>然後，將原本的內容分別拆解到這兩個元件檔中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">---navbar.vue元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;header class&#x3D;&quot;navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow&quot;&gt;</span><br><span class="line">            &lt;a class&#x3D;&quot;navbar-brand col-md-3 col-lg-2 me-0 px-3&quot; href&#x3D;&quot;#&quot;&gt;Company name&lt;&#x2F;a&gt;</span><br><span class="line">            &lt;button class&#x3D;&quot;navbar-toggler position-absolute d-md-none collapsed&quot; type&#x3D;&quot;button&quot; data-bs-toggle&#x3D;&quot;collapse&quot; data-bs-target&#x3D;&quot;#sidebarMenu&quot; aria-controls&#x3D;&quot;sidebarMenu&quot; aria-expanded&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Toggle navigation&quot;&gt;</span><br><span class="line">                &lt;span class&#x3D;&quot;navbar-toggler-icon&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">            &lt;&#x2F;button&gt;</span><br><span class="line">            &lt;input class&#x3D;&quot;form-control form-control-dark w-100&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Search&quot; aria-label&#x3D;&quot;Search&quot;&gt;</span><br><span class="line">            &lt;ul class&#x3D;&quot;navbar-nav px-3&quot;&gt;</span><br><span class="line">                &lt;li class&#x3D;&quot;nav-item text-nowrap&quot;&gt;</span><br><span class="line">                &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;#&quot;&gt;Sign out&lt;&#x2F;a&gt;</span><br><span class="line">                &lt;&#x2F;li&gt;</span><br><span class="line">            &lt;&#x2F;ul&gt;</span><br><span class="line">        &lt;&#x2F;header&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  </span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+
+<p>step8.<br>將原本在dashboard.vue中的<code>main</code>標籤裡面的內容都刪掉，因為，我們要加入自己的內容。<br>接著在，DashBoard.vue中引入，navbar和sidebar元件。<br>並將這兩個元件塞回原本在DashBoard的html的位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">---DashBoard.vue元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;navbar&#x2F;&gt;  &#x2F;&#x2F;  塞入navbar元件</span><br><span class="line">        &lt;div class&#x3D;&quot;container-fluid&quot;&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">            &lt;sidebar&gt;&lt;&#x2F;sidebar&gt;  &#x2F;&#x2F;  塞入sidebar元件</span><br><span class="line"></span><br><span class="line">            &lt;main class&#x3D;&quot;col-md-9 ml-sm-auto col-lg-10 px-md-4&quot;&gt;</span><br><span class="line">                </span><br><span class="line">            &lt;&#x2F;main&gt;</span><br><span class="line">            &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import sidebar from &#39;.&#x2F;sidebar&#39;;</span><br><span class="line">import navbar from &#39;.&#x2F;navbar&#39;;</span><br><span class="line">  export default&#123;</span><br><span class="line">    components:&#123;</span><br><span class="line">      sidebar,</span><br><span class="line">      navbar</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>你可以看到在<code>template</code>部分，我們加入sidebar和navbar的標籤的方式不同，其實，它們的效果是一樣的，<br>只是寫法不一樣而已~~</p>
+<p>step9.<br>現在要加入塞在DashBoard.vue中的內容。<br>我們先在pages資料夾中，新增一個Products.vue的元件檔。<br>然後裡面的內容先隨便亂塞，只讓它先可以呈現在畫面中即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---Products.vue元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">		123</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+
+<p>step10.<br>我們到DashBoard.vue元件檔的<code>main</code>標籤裡面新增一個<code>router-view</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">---DashBoard.vue元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;navbar&#x2F;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;container-fluid&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">      &lt;sidebar&gt;&lt;&#x2F;sidebar&gt;</span><br><span class="line"></span><br><span class="line">      &lt;main class&#x3D;&quot;col-md-9 ml-sm-auto col-lg-10 px-md-4&quot;&gt;</span><br><span class="line">        &lt;router-view&gt;&lt;&#x2F;router-view&gt;</span><br><span class="line">      &lt;&#x2F;main&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import sidebar from &#39;.&#x2F;sidebar&#39;;</span><br><span class="line">import navbar from &#39;.&#x2F;navbar&#39;;</span><br><span class="line">  export default&#123;</span><br><span class="line">    components:&#123;</span><br><span class="line">      sidebar,</span><br><span class="line">      navbar</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+
+<p>注意~~~~~~~~~~~~<br>目前，這個時候<code>router-view</code>是巢狀的，<br>一個是在App.vue裡面，那另一個就是在DashBoard.vue裡面。</p>
+<p>所以，我們現在要製作的巢狀的router<br>所以，我們先在到router資料夾中index.js中，來為DashBoard元件製作巢狀的router</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">---DashBoard.vue元件檔---</span><br><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import Router from &#39;vue-router&#39;</span><br><span class="line">import HelloWorld from &#39;@&#x2F;components&#x2F;HelloWorld&#39;</span><br><span class="line">import DashBoard from &#39;@&#x2F;components&#x2F;DashBoard&#39;</span><br><span class="line">import Login from &#39;@&#x2F;components&#x2F;pages&#x2F;login&#39;</span><br><span class="line">import Products from &#39;@&#x2F;components&#x2F;pages&#x2F;Products&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#39;*&#39;,</span><br><span class="line">      redirect:&#39;login&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;&#39;,</span><br><span class="line">      name: &#39;HelloWorld&#39;,</span><br><span class="line">      component: HelloWorld,</span><br><span class="line">      meta: &#123; requiresAuth: true &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#39;&#x2F;login&#39;,</span><br><span class="line">      name: &#39;Login&#39;,</span><br><span class="line">      component: Login</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;admin&#39;,</span><br><span class="line">      name: &#39;HelloWorld&#39;,</span><br><span class="line">      component: DashBoard,</span><br><span class="line">      meta: &#123; requiresAuth: true &#125;,</span><br><span class="line">      children:[</span><br><span class="line">        &#123;</span><br><span class="line">          path:&#39;products&#39;,</span><br><span class="line">          name: &#39;Products&#39;,</span><br><span class="line">          component: Products,</span><br><span class="line">          meta: &#123; requiresAuth: true &#125;,  &#x2F;&#x2F; Products頁面也需要驗證才能進來</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>你可以看到我們為DashBoard加入了巢狀的router囉，並且要在登入的狀態才能進入<br>這個products的頁面喔。</p>
+<h1 id="製作產品列表"><a href="#製作產品列表" class="headerlink" title="製作產品列表"></a>製作產品列表</h1><p>step1.<br>首先，我們先修改原本login的登入頁面，原本login成功後，會直接進到首頁，但是這不是我們想要的，<br>我們是希望它能跳轉到products的頁面。<br>所以，我們要修改一下，router資料夾中index.js的檔案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">---index.js---</span><br><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import Router from &#39;vue-router&#39;</span><br><span class="line">&#x2F;&#x2F;import HelloWorld from &#39;@&#x2F;components&#x2F;HelloWorld&#39;</span><br><span class="line">import DashBoard from &#39;@&#x2F;components&#x2F;DashBoard&#39;</span><br><span class="line">import Login from &#39;@&#x2F;components&#x2F;pages&#x2F;login&#39;</span><br><span class="line">import Products from &#39;@&#x2F;components&#x2F;pages&#x2F;Products&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#39;*&#39;,</span><br><span class="line">      redirect:&#39;login&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#39;&#x2F;login&#39;,</span><br><span class="line">      name: &#39;Login&#39;,</span><br><span class="line">      component: Login</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;admin&#39;,</span><br><span class="line">      name: &#39;HelloWorld&#39;,</span><br><span class="line">      component: DashBoard,</span><br><span class="line">      meta: &#123; requiresAuth: true &#125;,</span><br><span class="line">      children:[</span><br><span class="line">        &#123;</span><br><span class="line">          path:&#39;products&#39;,</span><br><span class="line">          name: &#39;Products&#39;,</span><br><span class="line">          component: Products,</span><br><span class="line">          meta: &#123; requiresAuth: true &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>先把原本的Helloworld的元件拿掉。<br>接著，到login.vue元件檔中，修改login成功後，會跳轉的頁面路徑</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">---login.vue元件檔</span><br><span class="line">methods:&#123;</span><br><span class="line">	signin:function()&#123;</span><br><span class="line">	  const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;admin&#x2F;signin&#96;;</span><br><span class="line">	  const vm &#x3D; this;</span><br><span class="line">	  this.$http.post(api, vm.user).then((response) &#x3D;&gt; &#123;</span><br><span class="line">		console.log(response.data);</span><br><span class="line">		if(response.data.success)&#123;</span><br><span class="line">		  </span><br><span class="line">		  const token &#x3D; response.data.token;</span><br><span class="line">		  const expired &#x3D; response.data.expired;</span><br><span class="line">		  console.log(token, expired);</span><br><span class="line">		  document.cookie &#x3D; &#96;hextoken&#x3D;$&#123;token&#125;; expires&#x3D;$&#123;new Date(expired)&#125;&#96;;</span><br><span class="line">		  vm.$router.push(&#39;&#x2F;admin&#x2F;products&#39;);   &#x2F;&#x2F; 修改成直接跳轉到products的頁面</span><br><span class="line">		&#125;</span><br><span class="line">	  &#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>step2.<br>接下來要取得遠端資料。<br>你就先在Products.vue元件檔中，新增取得資料的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">---Porduct.vue元件檔---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default&#123;</span><br><span class="line">        data()&#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                products:[],</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            getProducts()&#123;</span><br><span class="line">                const vm &#x3D; this;</span><br><span class="line">                const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;admin&#x2F;products&#x2F;all&#96;; </span><br><span class="line">                this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">                    console.log(response.data);</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        created()&#123;</span><br><span class="line">            this.getProducts()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，我們還有再為Products元件新增<code>created</code>的hook，在該此元件被建立的時候，來取得資訊。</p>
+<p>step3.<br>接著你打開log應該就可以看到，有取回資料了，但是，現在是取到兩份相同的資料，<br>原因是再App.vue中，也有取得後端資料的程式碼，那部分就可以刪掉了，只要留<br>Products.vue元件檔這部分就可以了。</p>
+<!--DashBoard部分開始-->
+<p>step4.<br>接下來，要將取出來的<code>token</code>往後端發送。<br>所以，我們要將這段程式碼加入到DashBoard.vue元件中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---DashBoard.vue元件檔---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import sidebar from &#39;.&#x2F;sidebar&#39;;</span><br><span class="line">import navbar from &#39;.&#x2F;navbar&#39;;</span><br><span class="line">  export default&#123;</span><br><span class="line">    components:&#123;</span><br><span class="line">      sidebar,</span><br><span class="line">      navbar</span><br><span class="line">    &#125;,</span><br><span class="line">    created()&#123;</span><br><span class="line">      const myCookie &#x3D; document.cookie.replace(&#x2F;(?:(?:^|.*;\s*)hextoken\s*&#x3D;\s*([^;]*).*$)|^.*$&#x2F;, &#39;$1&#39;);</span><br><span class="line">      console.log(myCookie,&#39;myCookie&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到我們為DahBoard的元件中加入了mycookie把cookie的值塞進去，那中間有一個hextoken，那個就是你在login<br>自訂義的cookie名稱。<br>接下來，重新刷新頁面，應該就可以在<code>console.log</code>看到你的mycookie的值囉。</p>
+<p>step5.<br>接著，在<a target="_blank" rel="noopener" href="https://github.com/axios/axios#custom-instance-defaults">vue axios的github</a>中，<br>有提供<code>instance.defaults.headers.common[&#39;Authorization&#39;] = AUTH_TOKEN;</code><br>這段程式碼。<br>它是代表，我之後加入的請求，都會預設加入這個欄位。<br>把mycookie往後端送。<br>接下來我們將<code>defaults.headers.common[&#39;Authorization&#39;] = AUTH_TOKEN;</code>的內容加到DashBoard中。<br>記得，不用把上面哪程式碼中的<code>instance</code>的部分也貼進來。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---DashBoard.vue元件檔---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import sidebar from &#39;.&#x2F;sidebar&#39;;</span><br><span class="line">import navbar from &#39;.&#x2F;navbar&#39;;</span><br><span class="line">  export default&#123;</span><br><span class="line">    components:&#123;</span><br><span class="line">      sidebar,</span><br><span class="line">      navbar</span><br><span class="line">    &#125;,</span><br><span class="line">    created()&#123;</span><br><span class="line">      const myCookie &#x3D; document.cookie.replace(&#x2F;(?:(?:^|.*;\s*)hextoken\s*&#x3D;\s*([^;]*).*$)|^.*$&#x2F;, &#39;$1&#39;);</span><br><span class="line">      this.$http.defaults.headers.common.Authorization &#x3D; myCookie;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>加入以上的內容之後，應該就可以看到在後台頁面成功的回傳從伺服器端回傳的內容囉。<br>你可以打開開發者介面，然後，在NetWork的頁面中的All選項，裡面有一個websocket。<br>你可以看到一個Request Header的部分，裡面的Cookie的值，就是你從前端傳到後端的內容。<br><img src="/image/requset_header.png" alt="request header"></p>
+<p>step6.<br>首先，我們要先去六角提供的後台中，取得<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E5%8F%96%E5%BE%97%E5%95%86%E5%93%81%E5%88%97%E8%A1%A8">商品列表部分</a>，<br>看我們可以取得什麼回傳的資訊，<br>然後，在因應這些資訊去你的products的<code>table</code>欄位裡面，去新增相對應的<code>tr</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">---producs.vue元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;text-right mt-4&quot;&gt;</span><br><span class="line">            &lt;button class&#x3D;&quot;btn btn-primary&quot;&gt;建立新的產品&lt;&#x2F;button&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;table class&#x3D;&quot;table mt-4&quot;&gt;</span><br><span class="line">            &lt;thead&gt;</span><br><span class="line">                &lt;th width&#x3D;&quot;120&quot;&gt;分類&lt;&#x2F;th&gt;</span><br><span class="line">                &lt;th&gt;產品名稱&lt;&#x2F;th&gt;</span><br><span class="line">                &lt;th width&#x3D;&quot;120&quot;&gt;原價&lt;&#x2F;th&gt;</span><br><span class="line">                &lt;th width&#x3D;&quot;120&quot;&gt;售價&lt;&#x2F;th&gt;</span><br><span class="line">                &lt;th width&#x3D;&quot;100&quot;&gt;是否啟用&lt;&#x2F;th&gt;</span><br><span class="line">                &lt;th width&#x3D;&quot;80&quot;&gt;編輯&lt;&#x2F;th&gt;</span><br><span class="line">            &lt;&#x2F;thead&gt;</span><br><span class="line">            &lt;tbody&gt;</span><br><span class="line">                &lt;tr v-for&#x3D;&quot;(item, key) in products&quot; :key&#x3D;&quot;key&quot;&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123;item.category&#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123;item.title&#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">                    &lt;td class&#x3D;&quot;text-right&quot;&gt;</span><br><span class="line">                    &#123;&#123;item.origin_price&#125;&#125;</span><br><span class="line">                    &lt;&#x2F;td&gt;</span><br><span class="line">                    &lt;td class&#x3D;&quot;text-right&quot;&gt;</span><br><span class="line">                    &#123;&#123;item.price&#125;&#125;</span><br><span class="line">                    &lt;&#x2F;td&gt;</span><br><span class="line">                    &lt;td&gt;</span><br><span class="line">                        &lt;span v-if&#x3D;&quot;item.is_enabled&quot; class&#x3D;&quot;text-success&quot;&gt;啟用&lt;&#x2F;span&gt;</span><br><span class="line">                        &lt;span&gt;未啟用&lt;&#x2F;span&gt;</span><br><span class="line">                    &lt;&#x2F;td&gt;</span><br><span class="line">                    &lt;td&gt;</span><br><span class="line">                        &lt;button class&#x3D;&quot;btn btn-outline-primary btn-sm&quot;&gt;編輯&lt;&#x2F;button&gt;</span><br><span class="line">                    &lt;&#x2F;td&gt;</span><br><span class="line">                &lt;&#x2F;tr&gt;</span><br><span class="line">            &lt;&#x2F;tbody&gt;</span><br><span class="line">        &lt;&#x2F;table&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+<p>以上就是，我們從後端部分取得資料後，將裡面的資料貼到前台的畫面中。<br>另外，你可以注意到，在<code>thead</code>中，我們有對某些<code>th</code>直接設定<code>width</code>的數值，那剩下的沒有被設定的部分，<br>瀏覽器會直接自動分配給它。<br>注意~~~ 價錢都要靠右喔。</p>
+<h1 id="Vue-中運用-Bootstrap-及-jQuery"><a href="#Vue-中運用-Bootstrap-及-jQuery" class="headerlink" title="Vue 中運用 Bootstrap 及 jQuery"></a>Vue 中運用 Bootstrap 及 jQuery</h1><p>step1.<br>這邊我們要製作的內容，是bootstrap中提供的<code>Modal</code>的互動效果，所以，我們需要安裝bootstrap的js的部分。<br>首先，先去main.js檔案中引入bootstrap</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---main.js檔案---</span><br><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import axios from &#39;axios&#39;</span><br><span class="line">import VueAxios from &#39;vue-axios&#39;</span><br><span class="line">import &#39;bootstrap&#39;     &#x2F;&#x2F; 引入bootstrap的檔案</span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import router from &#39;.&#x2F;router&#39;</span><br></pre></td></tr></table></figure>
+<p>但是，這個時候，你編譯完成後編譯器應該會跳錯，要求你要安裝jQ和popper，<br>因為，bootstrap.js是有用到這兩個套件的。<br>你就輸入提示指令<code>npm install --save jquery popper.js</code><br>安裝完之後，再重新運行vue環境，此時，應該就不會再跳錯囉。</p>
+<p>step2.<br>接下來將bootstrap的<code>modal</code>的元件加到products.vue中囉。<br>那因為，我們希望在完整的接收完後端的資料之後，才將Modal完整的秀出來。<br>所以，這邊我們會搭配vue的方式，來開啟<code>modal</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">---products.vue元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; @click&#x3D;&quot;openModal&quot;&gt;</span><br><span class="line">                建立新產品</span><br><span class="line">    &lt;&#x2F;button&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default&#123;</span><br><span class="line">        methods:&#123;</span><br><span class="line">            ---筆記省略以上的內容---</span><br><span class="line">            openModal()&#123;</span><br><span class="line">                $(&#39;#productModal&#39;).modal(&#39;show&#39;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        created()&#123;</span><br><span class="line">            this.getProducts()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，我們在products.vue中新增了openModal方法，藉此透過按下建立新產品按鈕來跳出Modal。</p>
+<p>step3.<br>但是，這個時候你按下建立新產品的按鈕時，Modal不會跳出來，你打開開發者介面，<br>會發現<code>$is not defined</code>的錯誤。<br>雖然，我們在main.js引入bootstrap時，有安裝了jQ了，但是，這個jQ只是這個bootstrap的相依套件，<br>跟products.vue元件一點干係都沒有，所以，我們需要在products.vue檔案中，<br>再引入一次jQ的檔案。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">---products.vue元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; @click&#x3D;&quot;openModal&quot;&gt;</span><br><span class="line">                建立新產品</span><br><span class="line">    &lt;&#x2F;button&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	import $ from &#39;jquery&#39;  &#x2F;&#x2F; 把$從jquery引入進來</span><br><span class="line">    export default&#123;</span><br><span class="line">        methods:&#123;</span><br><span class="line">            ---省略以上的內容---</span><br><span class="line">            openModal()&#123;</span><br><span class="line">                $(&#39;#productModal&#39;).modal(&#39;show&#39;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        created()&#123;</span><br><span class="line">            this.getProducts()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到我們從jquery檔案中引入了<code>$</code>，此時，你再按下建立新產品的按鈕，就可以成功執行Modal囉~~<br>那我們透過這種方式觸發Modal的話，就可以自己決定要在Ajax完成讀取後，才觸發這個Modal囉~~</p>
+<h1 id="產品的新增修改"><a href="#產品的新增修改" class="headerlink" title="產品的新增修改"></a>產品的新增修改</h1><p>step1.<br>這邊老師提供了<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue-course-api-wiki/wiki/%E8%AA%B2%E7%A8%8B%E9%83%A8%E5%88%86%E6%A8%A1%E6%9D%BF#%E7%94%A2%E5%93%81%E7%9A%84%E6%96%B0%E5%A2%9E%E4%BF%AE%E6%94%B9">Modal內的模板</a> ，你只要直接把它套入建立新產品按鈕觸發的Modal的內容，就ok囉，不用自己再打一遍。</p>
+<p>step2.<br>我們在product.vue元件檔中，新增一個tempProduct的物件，並將這個物件的屬性綁定到我們剛剛在Modal<br>裡面新增的form內的各欄位中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">---product.vue 元件檔---</span><br><span class="line">&lt;div class&#x3D;&quot;modal fade&quot; id&#x3D;&quot;productModal&quot; tabindex&#x3D;&quot;-1&quot; role&#x3D;&quot;dialog&quot; aria-labelledby&#x3D;&quot;exampleModalLabel&quot; aria-hidden&#x3D;&quot;true&quot;&gt;</span><br><span class="line">            &lt;div class&#x3D;&quot;modal-dialog modal-lg&quot; role&#x3D;&quot;document&quot;&gt;</span><br><span class="line">                &lt;div class&#x3D;&quot;modal-content border-0&quot;&gt;</span><br><span class="line">                &lt;div class&#x3D;&quot;modal-header bg-dark text-white&quot;&gt;</span><br><span class="line">                    ----筆記這邊省略不寫---</span><br><span class="line">                &lt;&#x2F;div&gt;</span><br><span class="line">                &lt;div class&#x3D;&quot;modal-body&quot;&gt;</span><br><span class="line">                    &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">                    &lt;div class&#x3D;&quot;col-sm-4&quot;&gt;</span><br><span class="line">                        ----筆記這邊省略不寫---</span><br><span class="line">                    &lt;&#x2F;div&gt;</span><br><span class="line">                    &lt;div class&#x3D;&quot;col-sm-8&quot;&gt;</span><br><span class="line">                        ----筆記這邊省略不寫---</span><br><span class="line">						</span><br><span class="line">                        &lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">                            &lt;label for&#x3D;&quot;content&quot;&gt;說明內容&lt;&#x2F;label&gt;</span><br><span class="line">                            &lt;textarea type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;content&quot;</span><br><span class="line">                                placeholder&#x3D;&quot;請輸入產品說明內容&quot; v-model&#x3D;&quot;tempProduct.content&quot;&gt;&lt;&#x2F;textarea&gt;</span><br><span class="line">                        &lt;&#x2F;div&gt;</span><br><span class="line">                        &lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">                            &lt;div class&#x3D;&quot;form-check&quot;&gt;</span><br><span class="line">                                &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot;</span><br><span class="line">                                id&#x3D;&quot;is_enabled&quot; v-model&#x3D;&quot;tempProduct.is_enabled&quot; :true-value&#x3D;&quot;1&quot; :false-value&#x3D;&quot;0&quot;&gt;</span><br><span class="line">                                &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;is_enabled&quot;&gt;</span><br><span class="line">                                是否啟用</span><br><span class="line">                                &lt;&#x2F;label&gt;</span><br><span class="line">                            &lt;&#x2F;div&gt;</span><br><span class="line">                        &lt;&#x2F;div&gt;</span><br><span class="line">                    &lt;&#x2F;div&gt;</span><br><span class="line">                    &lt;&#x2F;div&gt;</span><br><span class="line">                &lt;&#x2F;div&gt;</span><br><span class="line">                &lt;div class&#x3D;&quot;modal-footer&quot;&gt;</span><br><span class="line">                    &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-outline-secondary&quot; data-dismiss&#x3D;&quot;modal&quot;&gt;取消&lt;&#x2F;button&gt;</span><br><span class="line">                    &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; @click&#x3D;&quot;updateproduct&quot;&gt;確認&lt;&#x2F;button&gt;</span><br><span class="line">                &lt;&#x2F;div&gt;</span><br><span class="line">                &lt;&#x2F;div&gt;</span><br><span class="line">            &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">		</span><br><span class="line">		&lt;script&gt;</span><br><span class="line">			import $ from &#39;jquery&#39;;</span><br><span class="line">			export default&#123;</span><br><span class="line">				data()&#123;</span><br><span class="line">					return &#123;</span><br><span class="line">						products:[],</span><br><span class="line">						tempProduct:&#123;&#125;  &#x2F;&#x2F; 新增tempProduct物件</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;,</span><br><span class="line">				methods:&#123;</span><br><span class="line">					getProducts()&#123;</span><br><span class="line">						const vm &#x3D; this;</span><br><span class="line">						const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;admin&#x2F;products&#x2F;all&#96;;</span><br><span class="line">						this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">							console.log(response.data);</span><br><span class="line">							vm.products &#x3D; response.data.products;</span><br><span class="line">						&#125;)</span><br><span class="line">					&#125;,</span><br><span class="line">					openModal()&#123;</span><br><span class="line">						$(&#39;#productModal&#39;).modal(&#39;show&#39;);</span><br><span class="line">					&#125;,</span><br><span class="line">					updateproduct()&#123;</span><br><span class="line">						const vm &#x3D; this;</span><br><span class="line">						const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;admin&#x2F;product&#96;;</span><br><span class="line">						this.$http.post(api, &#123;data: vm.tempProduct&#125;).then((response) &#x3D;&gt; &#123;</span><br><span class="line">							console.log(response.data);</span><br><span class="line">						&#125;)</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;,</span><br><span class="line">				created()&#123;</span><br><span class="line">					this.getProducts()</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>a. 以上你可以看到我們在各個<code>input</code>欄位上面綁定了tempProduct的各屬性。<br>而要特別注意的是是否啟用的欄位，除了用<code>v-model</code>去綁定tempProduct的屬性之外，我們還特別用<br><code>v-bind</code>去綁定<code>true-value</code>和<code>false-value</code>各代表什麼值喔。<br>b. 你可以看到確認按鈕會綁定一個方法叫做updateproduct</p>
+<p>step3.<br>上面有提到確認按鈕有綁定updateproduct的方法，那在課堂上有提供<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E5%95%86%E5%93%81%E5%BB%BA%E7%AB%8B">商品建立的api</a><br>，那這邊要特別注意的是api的路徑要改一下，而且它的<code>vue.axios</code>的方法是用<code>post</code>喔。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">---product.vue元件檔---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">methods:&#123;</span><br><span class="line">	getProducts()&#123;</span><br><span class="line">		const vm &#x3D; this;</span><br><span class="line">		const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;admin&#x2F;products&#x2F;all&#96;;</span><br><span class="line">		this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">			console.log(response.data);</span><br><span class="line">			vm.products &#x3D; response.data.products;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;,</span><br><span class="line">	openModal()&#123;</span><br><span class="line">		$(&#39;#productModal&#39;).modal(&#39;show&#39;);</span><br><span class="line">	&#125;,</span><br><span class="line">	updateproduct()&#123;</span><br><span class="line">		const vm &#x3D; this;</span><br><span class="line">		const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;admin&#x2F;product&#96;;</span><br><span class="line">		this.$http.post(api, &#123;data: vm.tempProduct&#125;).then((response) &#x3D;&gt; &#123;</span><br><span class="line">			console.log(response.data);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="傳給後端的資料格式"><a href="#傳給後端的資料格式" class="headerlink" title="傳給後端的資料格式"></a>傳給後端的資料格式</h2><p>以上的範例中你要注意一下，在<code>vue.axios</code>中的<code>post</code>，我們不只有傳送api，我們還傳送了tempProduct物件過去，<br>那為什麼在tempProduct前面還要再加入data屬性呢，那是因為api取得資料的格式的原因。<br>在商品建立的api的參數欄位中，它的內容是這樣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[參數]:</span><br><span class="line">&#123;</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">	&quot;title&quot;: &quot;[賣]動物園造型衣服3&quot;,</span><br><span class="line">	&quot;category&quot;: &quot;衣服2&quot;,</span><br><span class="line">	&quot;origin_price&quot;: 100,</span><br><span class="line">	&quot;price&quot;: 300,</span><br><span class="line">	&quot;unit&quot;: &quot;個&quot;,</span><br><span class="line">	&quot;image&quot;: &quot;test.testtest&quot;,</span><br><span class="line">	&quot;description&quot;: &quot;Sit down please 名設計師設計&quot;,</span><br><span class="line">	&quot;content&quot;: &quot;這是內容&quot;,</span><br><span class="line">	&quot;is_enabled&quot;: 1,</span><br><span class="line">	&quot;imageUrl&quot;: &lt;&lt;firebase storage url&gt;&gt;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，是最外層有一個物件，然後，它有一個data的屬性，然後，在data裡面才是各個資料的值。<br>這就是為什麼我們要用這種方式傳遞的原因喔。</p>
+<p>step4.<br>此時，當你按下建立新產品的按鈕時，你在跳出來的Modal中的標題中，先輸入”新增產品”，接著，按下確認。<br>此時，你看開發者頁面中的<code>console</code>中，應該會印出已建立產品的內容。<br>接著，重新刷新頁面，你應該就可以看到畫面上有新增你剛剛新增的產品項目囉。</p>
+<p>step5.<br>然後，我們在updateproduct這個方法中，再新增一些處理的流程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">---product.vue元件檔---</span><br><span class="line">methods:&#123;</span><br><span class="line">	updateproduct()&#123;</span><br><span class="line">		const vm &#x3D; this;</span><br><span class="line">		const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;admin&#x2F;product&#96;;</span><br><span class="line">		this.$http.post(api, &#123;data: vm.tempProduct&#125;).then((response) &#x3D;&gt; &#123;</span><br><span class="line">			console.log(response.data);</span><br><span class="line">			if(response.data.success)&#123;</span><br><span class="line">				$(&#39;#productModal&#39;).modal(&#39;hide&#39;);</span><br><span class="line">				vm.getProducts();</span><br><span class="line">				</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				$(&#39;#productModal&#39;).modal(&#39;hide&#39;);</span><br><span class="line">				vm.getProducts();</span><br><span class="line">				console.log(&#39;新增產品失敗&#39;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上加入的內容，就是若建立成功的話就將該modal關掉。<br>若建立失敗，就將該modal關掉，並印出新增產品失敗。</p>
+<p>step6.<br>現在，要加入編輯資料的功能。<br>所以，我們先用一個isNew的屬性來判斷該資料是否是新的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">---product.vue元件檔---</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;text-right mt-4&quot;&gt;</span><br><span class="line">    &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; @click&#x3D;&quot;openModal(true)&quot;&gt;</span><br><span class="line">      建立新產品</span><br><span class="line">    &lt;&#x2F;button&gt;</span><br><span class="line">    </span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">		</span><br><span class="line">  &lt;td&gt;</span><br><span class="line">    &lt;button class&#x3D;&quot;btn btn-outline-primary btn-sm&quot; @click&#x3D;&quot;openModal(false, item)&quot;&gt;編輯&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;button class&#x3D;&quot;btn btn-outline-danger btn-sm&quot; @click&#x3D;&quot;openDelModal(item)&quot;&gt;刪除&lt;&#x2F;button&gt;</span><br><span class="line">  &lt;&#x2F;td&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	data()&#123;</span><br><span class="line">		return &#123;</span><br><span class="line">			products:[],</span><br><span class="line">			tempProduct:&#123;&#125;,</span><br><span class="line">			isNew: false</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	methods:&#123;</span><br><span class="line">		openModal(isNew, item)&#123;</span><br><span class="line">			if(isNew)&#123;</span><br><span class="line">				this.tempProduct &#x3D; &#123;&#125;;</span><br><span class="line">				this.isNew &#x3D; true;</span><br><span class="line">			&#125; else&#123;</span><br><span class="line">				this.tempProduct &#x3D; Object.assign(&#123;&#125;, item);</span><br><span class="line">				this.isNew &#x3D; false;</span><br><span class="line">			&#125; </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>a.你可以看到，我們修改了openModal的方法內容，並新增了一個isNew的屬性。<br>那這邊要特別注意的是，因為，js傳遞物件是傳參考的特性，所以，<br>這邊再做將tempProcut的物件與item參數的內容作傳遞的時候，我們用了Object.assign的方式，<br>讓只有將item的內容存到tempProduct中，沒有連item的參考都傳過去。<br>b. 另外，你就可以看到建立新產品 和 編輯這兩個按鈕，在他們綁定的openModal的方法，並丟引入<code>true</code>或<code>false</code>的參數，<br>藉此來判斷該品項是舊的資料 或是 新的資料。</p>
+<p>那因為，我們這邊做的是修改資料，所以，我們也需要稍微修改一下updateproduct方法內的內容，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">---product.vue元件檔---</span><br><span class="line">methods:&#123;</span><br><span class="line">	updateproduct()&#123;</span><br><span class="line">		const vm &#x3D; this;</span><br><span class="line">		let api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;admin&#x2F;product&#96;;</span><br><span class="line">		let httpMethod &#x3D; &#39;post&#39;;</span><br><span class="line">		if(!vm.isNew)&#123;</span><br><span class="line">			api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;admin&#x2F;product&#x2F;$&#123;vm.tempProduct.id&#125;&#96;;</span><br><span class="line">			httpMethod &#x3D; &#39;put&#39;;</span><br><span class="line">		&#125;</span><br><span class="line">		this.$http[httpMethod](api, &#123;data: vm.tempProduct&#125;).then((response) &#x3D;&gt; &#123;</span><br><span class="line">			console.log(response.data);</span><br><span class="line">			if(response.data.success)&#123;</span><br><span class="line">				$(&#39;#productModal&#39;).modal(&#39;hide&#39;);</span><br><span class="line">				vm.getProducts();</span><br><span class="line">				</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				$(&#39;#productModal&#39;).modal(&#39;hide&#39;);</span><br><span class="line">				vm.getProducts();</span><br><span class="line">				console.log(&#39;新增產品失敗&#39;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>a.<br>首先，我們將宣告api的方式從原本的<code>const</code>改為<code>let</code>，因為它會被修改到。<br>b.<br>接著，當該物件的isNew旗標是<code>false</code>的時候，代表該產品不是新的，就代表我們要編輯它，那編輯它的api是不一樣的，最後結尾要加上該產品的id。<br>c.<br>我們先宣告了一個httpMethod的變數，因為，有<code>put</code>和<code>post</code>兩種方法，如果，isNew = false，則httpMethod = ‘put’，<br>並將最後<code>this.$http[httpMethod]</code> 改成這種形式，來吃到<code>put</code>或<code>post</code>的方法，來決定跟後端的api互動的方式。</p>
+<h1 id="串接上傳檔案-API"><a href="#串接上傳檔案-API" class="headerlink" title="串接上傳檔案 API"></a>串接上傳檔案 API</h1><p>特別注意，上傳這個行為跟之前的行為不太一樣，<br>因為，上傳的時候，是需要使用<code>formData</code>來上傳的。<br>以下這個<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue-course-api-wiki/wiki/%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8F%B0-%5B%E9%9C%80%E9%A9%97%E8%AD%89%5D#%E4%B8%8A%E5%82%B3%E5%9C%96%E7%89%87">連結</a> 就有示範。</p>
+<p>step1.<br>首先，你現在之前加的productModal的Modal中的html中的上傳圖片的<code>input</code>欄位裡面新增綁定事件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;label for&#x3D;&quot;customFile&quot;&gt;或 上傳圖片</span><br><span class="line">	&lt;i class&#x3D;&quot;fas fa-spinner fa-spin&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">&lt;&#x2F;label&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;file&quot; id&#x3D;&quot;customFile&quot; class&#x3D;&quot;form-control&quot; ref&#x3D;&quot;files&quot; @change&#x3D;&quot;uploadFile&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">methods:&#123;</span><br><span class="line">	uploadFile()&#123;</span><br><span class="line">		console.log(this);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>先綁定當該欄位有變動的時候，就會觸發uploadFile方法。</p>
+<p>你可以看到我們故意先將uploadFile裡面先放入<code>console.log</code>看看當你將圖片拉進該欄位的時候，會出現什麼內容。<br>當你將圖片拉進去之後，你要去找該物件的<code>$refs-&gt;files-&gt;files</code>陣列中的第一個元素。<br><img src="/image/uploadfile.png" alt="上傳圖片的屬性"></p>
+<p>step2.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">	uploadFile()&#123;</span><br><span class="line">		console.log(this);</span><br><span class="line">		const uploadFile &#x3D; this.$refs.files.files[0];</span><br><span class="line">		const vm &#x3D; this;</span><br><span class="line">		const formData &#x3D; new FormData(); </span><br><span class="line">		formData.append(&#39;file-to-upload&#39;, uploadFile);</span><br><span class="line">		const url &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;admin&#x2F;upload&#96;;</span><br><span class="line">		this.$http.post(url, formData, &#123;</span><br><span class="line">			headers:&#123;</span><br><span class="line">				&#39;Content-Type&#39;: &#39;multipart&#x2F;form-data&#39;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;).then((response)&#x3D;&gt;&#123;</span><br><span class="line">			console.log(response.data);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>a.<br>首先，因為上傳需要用<code>FormData</code>的方式上傳，所以，這邊先<code>new</code>了一個<code>FormData</code>的物件。<br>b.<br>接著，我們用<code>append</code>方法來為<code>key</code>值<code>&#39;file-to-upload&#39;</code>塞入uploadFile的值，也就是我們傳上去的圖片檔案。<br>c.<br>我們將六角提供的上傳檔案的api存到<code>url</code>變數當中。<br>d.<br>接著，用<code>vue.axios</code>的<code>post</code>方式將圖片上傳上去。<br>其中，它的第三個引數，有特別新增一個<code>headers</code>屬性，<br>那這個屬性是<code>Content-type </code>表頭資訊 (header) 用於定義 資料格式 (data format)，<br>用來告知後端傳過來是甚麼資料格式。<br>那有關<code>Content-type</code>要怎麼設定的詳細內容，你可以看課程”串接上傳檔案 API”參考這位同學中的發問<br><img src="/image/Content-type.png" alt="有關header的發問"><br>e.<br>那你可以看到這邊<code>console.log</code>回來的有一個這張圖片的路徑，那接下來我們就要把這個取得的路徑，<br>塞到tempProduct的圖片中囉。</p>
+<p>step3.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">	uploadFile()&#123;</span><br><span class="line">		console.log(this);</span><br><span class="line">		const uploadFile &#x3D; this.$refs.files.files[0];</span><br><span class="line">		const vm &#x3D; this;</span><br><span class="line">		const formData &#x3D; new FormData(); </span><br><span class="line">		formData.append(&#39;file-to-upload&#39;, uploadFile);</span><br><span class="line">		const url &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;admin&#x2F;upload&#96;;</span><br><span class="line">		this.$http.post(url, formData, &#123;</span><br><span class="line">			headers:&#123;</span><br><span class="line">				&#39;Content-Type&#39;: &#39;multipart&#x2F;form-data&#39;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;).then((response)&#x3D;&gt;&#123;</span><br><span class="line">			console.log(response.data);</span><br><span class="line">			if(response.data.success)&#123;</span><br><span class="line">				vm.tempProduct.imageUrl &#x3D; response.data.imageUrl;</span><br><span class="line">				console.log(vm.tempProduct);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以看到我們將response.data的imageUrl塞給tempProduct的imageUrl，<br>這個時候，你去查看vm.tempProduct會發現它的title和id屬性，都有<code>getter</code>和<code>setter</code>的屬性，<br>唯獨只有imgUrl沒有，導致imageUrl沒有呈現在畫面上，無法做雙向綁定。<br><img src="/image/imgUrl_setter.png" alt="imgUrl沒有setter"></p>
+<h2 id="為imageUrl加上setter"><a href="#為imageUrl加上setter" class="headerlink" title="為imageUrl加上setter"></a>為imageUrl加上setter</h2><p>所以，我們要直接為imageUrl增加一個<code>setter</code>方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">	uploadFile()&#123;</span><br><span class="line">		console.log(this);</span><br><span class="line">		const uploadFile &#x3D; this.$refs.files.files[0];</span><br><span class="line">		const vm &#x3D; this;</span><br><span class="line">		const formData &#x3D; new FormData(); </span><br><span class="line">		formData.append(&#39;file-to-upload&#39;, uploadFile);</span><br><span class="line">		const url &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;admin&#x2F;upload&#96;;</span><br><span class="line">		this.$http.post(url, formData, &#123;</span><br><span class="line">			headers:&#123;</span><br><span class="line">				&#39;Content-Type&#39;: &#39;multipart&#x2F;form-data&#39;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;).then((response)&#x3D;&gt;&#123;</span><br><span class="line">			console.log(response.data);</span><br><span class="line">			if(response.data.success)&#123;</span><br><span class="line">				&#x2F;&#x2F; vm.tempProduct.imageUrl &#x3D; response.data.imageUrl;</span><br><span class="line">				&#x2F;&#x2F; console.log(vm.tempProduct);</span><br><span class="line">				vm.$set(vm.tempProduct, &#39;imageUrl&#39;, response.data.imageUrl)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你看到我們新增了一個<code>setter</code>的方法給imageUrl屬性值。<br>並把上面那兩行給槓掉，如此一來當你為某個商品編輯的時候，上傳圖片，就可以順利的上傳圖片囉。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/uncategorized/20210128" rel="prev" title="github課程筆記-Git 環境安裝">
+      <i class="fa fa-chevron-left"></i> github課程筆記-Git 環境安裝
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Vue/20210129" rel="next" title="Vue-vue出一個電商網站-撰寫DashBoard-02">
+      Vue-vue出一個電商網站-撰寫DashBoard-02 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A5%97%E7%94%A8-Bootstrap-Dashboard-%E7%89%88%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">套用 Bootstrap Dashboard 版型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A3%BD%E4%BD%9C%E7%94%A2%E5%93%81%E5%88%97%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">製作產品列表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-%E4%B8%AD%E9%81%8B%E7%94%A8-Bootstrap-%E5%8F%8A-jQuery"><span class="nav-number">3.</span> <span class="nav-text">Vue 中運用 Bootstrap 及 jQuery</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A2%E5%93%81%E7%9A%84%E6%96%B0%E5%A2%9E%E4%BF%AE%E6%94%B9"><span class="nav-number">4.</span> <span class="nav-text">產品的新增修改</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%82%B3%E7%B5%A6%E5%BE%8C%E7%AB%AF%E7%9A%84%E8%B3%87%E6%96%99%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">傳給後端的資料格式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%B2%E6%8E%A5%E4%B8%8A%E5%82%B3%E6%AA%94%E6%A1%88-API"><span class="nav-number">5.</span> <span class="nav-text">串接上傳檔案 API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BAimageUrl%E5%8A%A0%E4%B8%8Asetter"><span class="nav-number">5.1.</span> <span class="nav-text">為imageUrl加上setter</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

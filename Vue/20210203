@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="表單驗證補充在課程中原本是用第二版的vee-validate，那在第二版是透過vue的指令和html的屬性來驗證。課堂上有提供安裝與指令步驟 。那新版的vee-validate有很大的不同，就是新版是用元件的方式來進行驗證。step1.先輸入指令npm uninstall vee-validate，將vee-validate給卸載。step2.接著輸入npm install vee-validat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue出一個電商網站-表單驗證補充">
+<meta property="og:url" content="https://landy510.github.io/Vue/20210203">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="表單驗證補充在課程中原本是用第二版的vee-validate，那在第二版是透過vue的指令和html的屬性來驗證。課堂上有提供安裝與指令步驟 。那新版的vee-validate有很大的不同，就是新版是用元件的方式來進行驗證。step1.先輸入指令npm uninstall vee-validate，將vee-validate給卸載。step2.接著輸入npm install vee-validat">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-02-03T02:06:46.000Z">
+<meta property="article:modified_time" content="2021-02-03T02:26:28.642Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/Vue/20210203">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>vue出一個電商網站-表單驗證補充 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/Vue/20210203">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue出一個電商網站-表單驗證補充
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-02-03 10:06:46 / 修改時間：10:26:28" itemprop="dateCreated datePublished" datetime="2021-02-03T10:06:46+08:00">2021-02-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="表單驗證補充"><a href="#表單驗證補充" class="headerlink" title="表單驗證補充"></a>表單驗證補充</h1><p>在課程中原本是用第二版的vee-validate，<br>那在第二版是透過vue的指令和html的屬性來驗證。<br>課堂上有提供<a target="_blank" rel="noopener" href="https://courses.hexschool.com/courses/vue/lectures/26741635">安裝與指令步驟</a> 。<br>那新版的vee-validate有很大的不同，就是新版是用元件的方式來進行驗證。<br>step1.<br>先輸入指令<code>npm uninstall vee-validate</code>，將vee-validate給卸載。<br>step2.<br>接著輸入<code>npm install vee-validate --save</code>，來安裝新版的vee-validate套件。<br>step3.<br>接著，你運行vue的環境，此時，會跳出一些錯誤，我們先不管它。<br>step4.<br>接下來，到main.js檔案中做一些調整。<br>我們先將原本引入vee-validate的內容給刪掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">---main.js---</span><br><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import axios from &#39;axios&#39;</span><br><span class="line">import VueAxios from &#39;vue-axios&#39;</span><br><span class="line">import Loading from &#39;vue-loading-overlay&#39;;  &#x2F;&#x2F; 引入overlay元件</span><br><span class="line">import &#39;vue-loading-overlay&#x2F;dist&#x2F;vue-loading.css&#39;;  &#x2F;&#x2F; 引入overlay元件</span><br><span class="line">import &#39;bootstrap&#39;</span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import router from &#39;.&#x2F;router&#39;</span><br><span class="line">import &#39;.&#x2F;bus&#39;</span><br><span class="line">import currencyFilter from &#39;.&#x2F;filters&#x2F;currency&#39;</span><br><span class="line">&#x2F;&#x2F;import VeeValidate from &#39;vee-validate&#39;;    &#x2F;&#x2F; 原本的vee-validate內容拿掉</span><br><span class="line">&#x2F;&#x2F;import zhTWValidate from &#39;vee-validate&#x2F;dist&#x2F;locale&#x2F;zh_TW&#39;  &#x2F;&#x2F; 原本的vee-validate內容拿掉</span><br><span class="line">import zhTW from &#39;vee-validate&#x2F;dist&#x2F;locale&#x2F;zh_TW&#39;</span><br><span class="line">import VueI18n from &#39;vue-i18n&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(VueAxios, axios)</span><br><span class="line">&#x2F;&#x2F;Vue.use(VeeValidate);   &#x2F;&#x2F; 原本的vee-validate內容拿掉</span><br><span class="line">&#x2F;&#x2F;VeeValidate.Validator.localize(&#39;zh_TW&#39;, zhTWValidate);   &#x2F;&#x2F; 原本的vee-validate內容拿掉</span><br><span class="line">Vue.config.productionTip &#x3D; false</span><br><span class="line">Vue.component(&#39;Loading&#39;, Loading);  &#x2F;&#x2F; 啟用overlay元件</span><br><span class="line">Vue.filter(&#39;currency&#39;, currencyFilter);  &#x2F;&#x2F; 啟用fiter元件</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Vue.use(VeeValidate, &#123;</span><br><span class="line">&#x2F;&#x2F;   events: &#39;input|blur&#39;, &#x2F;&#x2F;這是為了讓使用者離開該欄位時觸發驗證</span><br><span class="line">&#x2F;&#x2F;   i18n,</span><br><span class="line">&#x2F;&#x2F;   dictionary: &#123;</span><br><span class="line">&#x2F;&#x2F;     zhTW</span><br><span class="line">&#x2F;&#x2F;   &#125;</span><br><span class="line">&#x2F;&#x2F; &#125;)</span><br></pre></td></tr></table></figure>
+<p>你可以看到，我們把引入檔案和創建vee-validate元件的內容給註解掉了。<br>它們是屬於舊版的驗證。</p>
+<a id="more"></a>
+
+<p>step5.<br>那因為新版是使用元件的方式來驗證，所以，我們要將這些元件給導入進來。<br>接著，我們在main.js中引入以下的程式碼，還有元件的規則都貼進來</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">---main.js---</span><br><span class="line">&lt;!--引入元件--&gt;</span><br><span class="line">import &#123; ValidationObserver, ValidationProvider, extend, localize, configure &#125; from &#39;vee-validate&#39;;</span><br><span class="line">import TW from &#39;vee-validate&#x2F;dist&#x2F;locale&#x2F;zh_TW.json&#39;</span><br><span class="line">import * as rules from &#39;vee-validate&#x2F;dist&#x2F;rules&#39;;</span><br><span class="line">&lt;!--引入元件--&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--元件規則--&gt;</span><br><span class="line">Object.keys(rules).forEach((rule) &#x3D;&gt; &#123;</span><br><span class="line">  extend(rule, rules[rule]);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">localize(&#39;zh_TW&#39;, TW);</span><br><span class="line"></span><br><span class="line">Vue.component(&#39;ValidationObserver&#39;, ValidationObserver)</span><br><span class="line">Vue.component(&#39;ValidationProvider&#39;, ValidationProvider)</span><br><span class="line"></span><br><span class="line">configure(&#123;</span><br><span class="line">  classes: &#123;</span><br><span class="line">    valid: &#39;is-valid&#39;,</span><br><span class="line">    invalid: &#39;is-invalid&#39;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">&lt;!--元件規則--&gt;</span><br></pre></td></tr></table></figure>
+<p>那小小解釋一下，引入的內容分別代表什麼意思<br>引入元件部分<br>第一行中，ValidationObserver是代表驗證的元件，ValidationProvider是input驗證元件。<br>extend是代表擴充功能，localize代表語系的設定。<br>第二行，是直接將繁體中文引入的檔案。<br>第三行，是比較大的不同。在新版的vee-validate中都是用規則化的驗證。</p>
+<p>元件規則部分<br>在Object.keys的內容，是代表說我們先把rules規則先導出來，並加到extend的擴充功能裡面。<br>如此一來，才能運用這些規則。</p>
+<p>在<code>localize(&#39;zh_TW&#39;, TW)</code>的部分，就套件繁體中文功能的部分。<br>在<code>Vue.component(&#39;ValidationObserver&#39;, ValidationObserver)</code>的部分，就代表<code>input</code>單一欄位驗證功能的部分。<br>在<code>Vue.component(&#39;ValidationProvider&#39;, ValidationProvider)</code>的部分，是代表整體<code>form</code>表單的驗證功能部分。</p>
+<p>在configure中，就是className的設定檔。</p>
+<p>step6.<br>接著，回到訂購表單頁面中。<br>我們將email欄位的驗證部分改為新版的vee-validate的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;validation-provider rules&#x3D;&quot;required|email&quot; v-slot&#x3D;&quot;&#123; errors, classes &#125;&quot;&gt;</span><br><span class="line">	&lt;!-- 輸入框 --&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">		&lt;label for&#x3D;&quot;email&quot;&gt;Email&lt;&#x2F;label&gt;</span><br><span class="line">		&lt;input id&#x3D;&quot;email&quot; type&#x3D;&quot;email&quot; name&#x3D;&quot;email&quot; </span><br><span class="line">			class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;form.user.email&quot; :class&#x3D;&quot;classes&quot;&gt;</span><br><span class="line">		&lt;!-- 錯誤訊息 --&gt;</span><br><span class="line">		&lt;span class&#x3D;&quot;invalid-feedback&quot;&gt;&#123;&#123; errors[0] &#125;&#125;&lt;&#x2F;span&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">	</span><br><span class="line">&lt;&#x2F;validation-provider&gt;</span><br></pre></td></tr></table></figure>
+<p>a.你可以看到我們先用validation-provider元件將那些要驗證的內容給包起來。<br>b. 在<code>input</code>的欄位中，記得要加入<code>v-model</code>的綁定效果喔。<br>接下來，介紹一下裡面的功能<br>c.在<code>validation-provider</code>標籤中，rules是代表它是吃什麼規則的，<code>rules=&quot;required|email&quot;</code>，代表該input欄位是必填的，<br>然後，後面是跟著它是吃什麼規則的方法，這邊是吃email，而email是vee-validate本身就有提供的規則，所以，不用自己自訂義。<br>d. <code>v-slot=&quot;&#123;errors&#125;&quot;</code>，是可以把外部的錯誤資訊導入到validation-provider標籤內，供裡面的元件使用，<br>你可以看到在<code>&lt;span&gt;&#123;&#123; errors[0] &#125;&#125;&lt;/span&gt; </code>裡面用的errors就是從取外部娶進來的資料。</p>
+<p>加上以上的內容後，email欄位的驗證效果就可以正常運作囉~~~</p>
+<p>step7.<br>接著，我們要為剛剛修改的email驗證方式增加className，我們可以透過<code>v-slot</code>來增加。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;validation-provider rules&#x3D;&quot;required|email&quot; v-slot&#x3D;&quot;&#123; errors, classes &#125;&quot;&gt;</span><br><span class="line">	&lt;!-- 輸入框 --&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">		&lt;label for&#x3D;&quot;email&quot;&gt;Email&lt;&#x2F;label&gt;</span><br><span class="line">		&lt;input id&#x3D;&quot;email&quot; type&#x3D;&quot;email&quot; name&#x3D;&quot;email&quot; </span><br><span class="line">			class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;form.user.email&quot; :class&#x3D;&quot;classes&quot;&gt;</span><br><span class="line">		&lt;!-- 錯誤訊息 --&gt;</span><br><span class="line">		&lt;span class&#x3D;&quot;invalid-feedback&quot;&gt;&#123;&#123; errors[0] &#125;&#125;&lt;&#x2F;span&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">	</span><br><span class="line">&lt;&#x2F;validation-provider&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到我們在<code>v-slot</code>中加入了classes並在input欄位中透過<code>v-bind</code>來動態的綁定這個classes，<br>那這個classes的內容，就是我們在main.js檔中定義的configure裡面的內容喔。<br>另外，我們也為最後的<code>span</code>套上了bootstrap的invalid-feedback的樣式，來讓它的內容呈現紅色的字樣。</p>
+<p>step8.<br>為整體的表單做驗證。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;validation-observer  class&#x3D;&quot;col-md-6&quot; v-slot&#x3D;&quot;&#123; invalid &#125;&quot;&gt;</span><br><span class="line">	&lt;form&gt;</span><br><span class="line">		&lt;validation-provider rules&#x3D;&quot;required|email&quot; v-slot&#x3D;&quot;&#123; errors, classes &#125;&quot;&gt;</span><br><span class="line">			&lt;!-- 輸入框 --&gt;</span><br><span class="line">			&lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">				&lt;label for&#x3D;&quot;email&quot;&gt;Email&lt;&#x2F;label&gt;</span><br><span class="line">				&lt;input id&#x3D;&quot;email&quot; type&#x3D;&quot;email&quot; name&#x3D;&quot;email&quot; </span><br><span class="line">					class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;form.user.email&quot; :class&#x3D;&quot;classes&quot;&gt;</span><br><span class="line">				&lt;!-- 錯誤訊息 --&gt;</span><br><span class="line">				&lt;span class&#x3D;&quot;invalid-feedback&quot;&gt;&#123;&#123; errors[0] &#125;&#125;&lt;&#x2F;span&gt;</span><br><span class="line">			&lt;&#x2F;div&gt;</span><br><span class="line">			</span><br><span class="line">		&lt;&#x2F;validation-provider&gt;</span><br><span class="line">		&lt;div class&#x3D;&quot;text-right&quot;&gt;</span><br><span class="line">			&lt;button class&#x3D;&quot;btn btn-danger&quot; type&#x3D;&quot;submit&quot; @click.prevent&#x3D;&quot;createOrder&quot; :disabled&#x3D;&quot;invalid&quot;&gt;送出訂單&lt;&#x2F;button&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">	&lt;&#x2F;form&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;validation-observer&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到，我們直接用validation-observer標籤把form表單給包起來，並且在validation-observer的標籤上有一個<code>v-slot</code>可以將invalid的<br>值往內傳。<br>所以，我們透過invalid來跟送出訂單的按鈕的<code>disabled</code>屬性作綁定，如果表單內的格式有誤，這個按鈕式沒有辦法被按下去的。</p>
+<p>按照以上的方式，我們就可以順利的使用新版的vee-validate的驗證功能囉~~</p>
+<p>step9.<br>另外，有關送出表單到後端api的內容也要修改一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">&lt;validation-observer  class&#x3D;&quot;col-md-6&quot; v-slot&#x3D;&quot;&#123; invalid, handleSubmit  &#125;&quot;&gt;</span><br><span class="line">	&lt;form @submit.prevent&#x3D;&quot;handleSubmit(submitForm)&quot;&gt;</span><br><span class="line">		&lt;validation-provider rules&#x3D;&quot;required&quot; v-slot&#x3D;&quot;&#123; errors, classes &#125;&quot;&gt;</span><br><span class="line">			&lt;!-- 輸入框 --&gt;</span><br><span class="line">			&lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">				&lt;label for&#x3D;&quot;useraddress&quot;&gt;收件人地址&lt;&#x2F;label&gt;</span><br><span class="line">				&lt;input id&#x3D;&quot;useraddress&quot; type&#x3D;&quot;text&quot; name&#x3D;&quot;地址&quot; </span><br><span class="line">					class&#x3D;&quot;form-control&quot; v-model&#x3D;&quot;form.user.address&quot; :class&#x3D;&quot;classes&quot; placeholder&#x3D;&quot;請輸入地址&quot; &gt;</span><br><span class="line">				&lt;!-- 錯誤訊息 --&gt;</span><br><span class="line">				&lt;span class&#x3D;&quot;invalid-feedback&quot;&gt;&#123;&#123; errors[0] &#125;&#125;&lt;&#x2F;span&gt;</span><br><span class="line">			&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;&#x2F;validation-provider&gt;</span><br><span class="line"></span><br><span class="line">		&lt;validation-provider v-slot&#x3D;&quot;&#123; errors, classes &#125;&quot;&gt;</span><br><span class="line">			&lt;!-- 輸入框 --&gt;</span><br><span class="line">			&lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">				&lt;label for&#x3D;&quot;comment&quot;&gt;留言&lt;&#x2F;label&gt;</span><br><span class="line">				&lt;textarea name&#x3D;&quot;&quot; id&#x3D;&quot;comment&quot; class&#x3D;&quot;form-control&quot; cols&#x3D;&quot;30&quot; rows&#x3D;&quot;10&quot; v-model&#x3D;&quot;form.message&quot;&gt;&lt;&#x2F;textarea&gt;</span><br><span class="line">			&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;&#x2F;validation-provider&gt;</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		&lt;div class&#x3D;&quot;text-right&quot;&gt;</span><br><span class="line">			&lt;button class&#x3D;&quot;btn btn-danger&quot; :disabled&#x3D;&quot;invalid&quot;&gt;送出訂單&lt;&#x2F;button&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">	</span><br><span class="line">		</span><br><span class="line">	&lt;&#x2F;form&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;validation-observer&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	methods:&#123;</span><br><span class="line">		submitForm() &#123;</span><br><span class="line">			const vm &#x3D; this; </span><br><span class="line">			const order &#x3D; vm.form;</span><br><span class="line">			const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;order&#96;;</span><br><span class="line">			vm.isLoading &#x3D; true;</span><br><span class="line">			this.$http.post(api,&#123;data:order&#125;).then((response) &#x3D;&gt; &#123;  </span><br><span class="line">				console.log(&#39;訂單已建立&#39;, response);</span><br><span class="line">			&#125;)</span><br><span class="line">			console.log(&#39;送出表單&#39;);</span><br><span class="line">			vm.isLoading &#x3D; false;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到在validation-observer標籤上是綁定了handleSubmit事件。<br>在內層的<code>form</code>標籤上<code>@submit.prevent=&quot;handleSubmit(submitForm)&quot;</code>綁定了這個submitForm事件。<br>那接著，你再到js中寫入submitForm事件，去傳入新增的表單內容到後端中，如此，就是一個完整的表單功能囉。</p>
+<h1 id="結帳頁面製作"><a href="#結帳頁面製作" class="headerlink" title="結帳頁面製作"></a>結帳頁面製作</h1><p>step1.<br>首先，先新增一個付款完成後，跳頁的頁面。<br>我們直接在pages的資料夾中，新增一個CustomerCheckOut.vue的元件檔。<br>那在課堂上有提供<a target="_blank" rel="noopener" href="https://github.com/hexschool/vue-course-api-wiki/wiki/%E5%AE%A2%E6%88%B6%E8%B3%BC%E7%89%A9-%5B%E5%85%8D%E9%A9%97%E8%AD%89%5D#%E5%8F%96%E5%BE%97%E6%9F%90%E4%B8%80%E7%AD%86%E8%A8%82%E5%96%AE">取得訂單列表的api</a> 。<br>所以，我們到index.js檔案中，新增這個元件的名稱和路徑</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">---index.js--</span><br><span class="line">import CustomerCheckOut from &#39;@&#x2F;components&#x2F;pages&#x2F;CustomerCheckOut&#39; &#x2F;&#x2F; 引入customer_CheckOut元件</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">      path: &#39;&#x2F;&#39;,</span><br><span class="line">      name: &#39;DashBoard&#39;,</span><br><span class="line">      component: DashBoard,</span><br><span class="line">      children:[</span><br><span class="line">        &#123;</span><br><span class="line">          path:&#39;customer_order&#39;,</span><br><span class="line">          name: &#39;CustomerOrder&#39;,</span><br><span class="line">          component: CustomerOrder,</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          path:&#39;customer_CheckOut&#x2F;:orderId&#39;,   &#x2F;&#x2F; 新增這個customer_CheckOut的元件和路徑</span><br><span class="line">          name: &#39;CustomerCheckOut&#39;,</span><br><span class="line">          component: CustomerCheckOut,</span><br><span class="line">        &#125;,</span><br><span class="line">      ]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>以上，我們就引入了customer_CheckOut這個元件的名稱和路徑。<br>那你要注意一下，取得某一筆訂單的路徑後面要接上這個訂單的id喔。</p>
+<p>step2.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">	submitForm() &#123;</span><br><span class="line">		const vm &#x3D; this; </span><br><span class="line">		const order &#x3D; vm.form;</span><br><span class="line">		const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;order&#96;;</span><br><span class="line">		vm.isLoading &#x3D; true;</span><br><span class="line">		this.$http.post(api,&#123;data:order&#125;).then((response) &#x3D;&gt; &#123;  </span><br><span class="line">			console.log(&#39;response&#39;, response);</span><br><span class="line">			 console.log(&#39;response1&#39;, response.data.success);</span><br><span class="line">			if(response.data.success)&#123;</span><br><span class="line">				console.log(&#39;訂單已建立&#39;);</span><br><span class="line">				vm.$router.push(&#96;&#x2F;customer_CheckOut&#x2F;$&#123;response.data.orderId&#125;&#96;);  &#x2F;&#x2F; 跳轉頁面</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">		vm.isLoading &#x3D; false;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在我們成功送出訂單之後，會直接用<code>push</code>的方式來跳轉到取得訂單頁面。</p>
+<p>step3.<br>接下來，撰寫customer_CheckOut的頁面囉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---customer_CheckOut.vue---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default&#123;</span><br><span class="line">        data()&#123;</span><br><span class="line">           return&#123;</span><br><span class="line">               orderId:&#39;&#39;,</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        created()&#123;</span><br><span class="line">            this.orderId &#x3D; this.$route.params.orderId;  &#x2F;&#x2F; 取得該router的id</span><br><span class="line">            console.log(this.orderId);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>這邊你要特別注意，在<code>this.$route.params.orderId</code>的orderId的變數名稱。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---index.js---</span><br><span class="line">&#123;</span><br><span class="line">  path:&#39;customer_CheckOut&#x2F;:orderId&#39;,  &#x2F;&#x2F;都要叫orderId</span><br><span class="line">  name: &#39;CustomerCheckOut&#39;,</span><br><span class="line">  component: CustomerCheckOut,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>這邊你要特別注意，在<code>this.$route.params.orderId</code>的orderId的變數名稱要跟你在index.js檔案裡面orderId變數名稱一樣，<br>不然，編譯器會找不到orderId</p>
+<p>step4.<br>接著，將公版的訂單列表格式貼近來之後，將後端的訂單內容取進來，並放進去。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    export default&#123;</span><br><span class="line">        data()&#123;</span><br><span class="line">           return&#123;</span><br><span class="line">               orderId:&#39;&#39;,</span><br><span class="line">               order:&#123;</span><br><span class="line">                   user:&#123;</span><br><span class="line">                       email:&#39;&#39;</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods:&#123;</span><br><span class="line">            getList()&#123;</span><br><span class="line">                const vm &#x3D; this;</span><br><span class="line">                const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;order&#x2F;$&#123;vm.orderId&#125;&#96;;</span><br><span class="line">                </span><br><span class="line">                this.$http.get(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">                    vm.order &#x3D; response.data.order;  </span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        created()&#123;</span><br><span class="line">            this.orderId &#x3D; this.$route.params.orderId;</span><br><span class="line">            console.log(this.orderId);</span><br><span class="line">            this.getList();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>以上的內容你就可以看到我們將後端的data.order裡面的資料取進來放在order物件中，<br>並再將這個order物件裡面的內容呈現在訂單列表裡面囉，</p>
+<p>step5.<br>訂單列表中的確定付款去的按鈕。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;form class&#x3D;&quot;col-md-6&quot; @submit.prevent&#x3D;&quot;payOrder&quot;&gt;</span><br><span class="line">	&lt;table class&#x3D;&quot;table&quot;&gt;</span><br><span class="line">		&lt;thead&gt;</span><br><span class="line">			&lt;th&gt;品名&lt;&#x2F;th&gt;</span><br><span class="line">			&lt;th&gt;數量&lt;&#x2F;th&gt;</span><br><span class="line">			&lt;th&gt;單價&lt;&#x2F;th&gt;</span><br><span class="line">		&lt;&#x2F;thead&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&lt;&#x2F;table&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;text-right&quot; v-if&#x3D;&quot;order.is_paid &#x3D;&#x3D;&#x3D; false&quot;&gt;</span><br><span class="line">	&lt;button class&#x3D;&quot;btn btn-danger&quot;&gt;確認付款去&lt;&#x2F;button&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	methods:&#123;</span><br><span class="line">		payOrder()&#123;</span><br><span class="line">			const vm &#x3D; this;</span><br><span class="line">			const api &#x3D; &#96;$&#123;process.env.APIPATH&#125;&#x2F;api&#x2F;$&#123;process.env.CUSTOMPATH&#125;&#x2F;pay&#x2F;$&#123;vm.orderId&#125;&#96;;</span><br><span class="line">			vm.isLoading &#x3D; true;</span><br><span class="line">			this.$http.post(api).then((response) &#x3D;&gt; &#123;</span><br><span class="line">			   vm.getList(); </span><br><span class="line">			   vm.isLoading &#x3D; false;</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以看到我們為提交表單新增了一個payOrder的方法，並在提交完成後重新讀取一次該表單的內容，<br>此時，在付款狀態欄位的內容就可以被刷新囉。</p>
+<p>以上就完成付款的功能囉。</p>
+<h1 id="最終作業說明"><a href="#最終作業說明" class="headerlink" title="最終作業說明"></a>最終作業說明</h1><p>目前我們專案都是用<code>npm run dev</code>的方式來運行專案，但是，我們不可能直接將這種形式的檔案給別人看。<br>所以，我們一定要編譯完成後，上傳到正式的伺服器上給別人。<br>那在dev.env.js檔案中的內容，記得也要加到正式版的prod.env.js中喔。<br>等到你加完之後，就可以輸入<code>npm run build</code>。<br>接著，你就要用live server的方式來開啟dist資料夾中的index.html檔案囉。</p>
+<h2 id="小插曲-npm-run-build沒有辦法呈現頁面"><a href="#小插曲-npm-run-build沒有辦法呈現頁面" class="headerlink" title="小插曲- npm run build沒有辦法呈現頁面"></a>小插曲- npm run build沒有辦法呈現頁面</h2><p>當我用live server打開dist資料夾中的index.html後，沒有畫面，<br>打開console.log後，看到MIME的相關錯誤的訊息。<br>那我就將在config資料夾中的index.js檔案中的build屬性中的assetsPublicPath從’/‘改成’./‘，<br>就可以成功讀取到相關的檔案，也就不會再出現無法呈現頁面的狀態囉。</p>
+<p>分享另一個小地方，<br>如果我們釋出的檔案不是在跟目錄底下，<br>比如不是在 <a href="http://landy510.github.io/">http://landy510.github.io</a> 底下，而是在<a href="http://landy510.github.io/Vue-testing%E5%BA%95%E4%B8%8B%EF%BC%8C">http://landy510.github.io/Vue-testing底下，</a><br>那這樣我們需要做一些調整，<br>此時，我們要去config資料夾底下的index.js中的<br>build屬性中的assetsPublicPath的屬性值從’./‘ 改成’/Vue-testing/‘ 如此就能在Vue-testing底下做運行囉。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Vue/20210201" rel="prev" title="vue出一個電商網站-課程筆記3">
+      <i class="fa fa-chevron-left"></i> vue出一個電商網站-課程筆記3
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Vue/20210203" rel="next" title="vue出一個電商網站-Vue Cli 3.0">
+      vue出一個電商網站-Vue Cli 3.0 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89%E8%A3%9C%E5%85%85"><span class="nav-number">1.</span> <span class="nav-text">表單驗證補充</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E5%B8%B3%E9%A0%81%E9%9D%A2%E8%A3%BD%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">結帳頁面製作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E7%B5%82%E4%BD%9C%E6%A5%AD%E8%AA%AA%E6%98%8E"><span class="nav-number">3.</span> <span class="nav-text">最終作業說明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E6%8F%92%E6%9B%B2-npm-run-build%E6%B2%92%E6%9C%89%E8%BE%A6%E6%B3%95%E5%91%88%E7%8F%BE%E9%A0%81%E9%9D%A2"><span class="nav-number">3.1.</span> <span class="nav-text">小插曲- npm run build沒有辦法呈現頁面</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

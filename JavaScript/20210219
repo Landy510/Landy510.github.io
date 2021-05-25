@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="函式函式簡介當我們有一段程式碼需要重複使用的話，我們就會用一個函式包起來。所以，每次要使用的話，我們就可以呼叫這個函式就可以囉，而且，也變得比較好維護。 定義函式的方式a. 函式宣告 1234funtion triple(number)&amp;#123;    return number*numbre*number&amp;#125;console.log(triple(2)); &#x2F;&#x2F; 8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS核心篇-第二章筆記">
+<meta property="og:url" content="https://landy510.github.io/JavaScript/20210219">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="函式函式簡介當我們有一段程式碼需要重複使用的話，我們就會用一個函式包起來。所以，每次要使用的話，我們就可以呼叫這個函式就可以囉，而且，也變得比較好維護。 定義函式的方式a. 函式宣告 1234funtion triple(number)&amp;#123;    return number*numbre*number&amp;#125;console.log(triple(2)); &#x2F;&#x2F; 8">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-02-19T04:16:28.000Z">
+<meta property="article:modified_time" content="2021-02-19T05:08:42.380Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/JavaScript/20210219">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>JS核心篇-第二章筆記 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/JavaScript/20210219">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JS核心篇-第二章筆記
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-02-19 12:16:28 / 修改時間：13:08:42" itemprop="dateCreated datePublished" datetime="2021-02-19T12:16:28+08:00">2021-02-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="函式"><a href="#函式" class="headerlink" title="函式"></a>函式</h1><h2 id="函式簡介"><a href="#函式簡介" class="headerlink" title="函式簡介"></a>函式簡介</h2><p>當我們有一段程式碼需要重複使用的話，我們就會用一個函式包起來。<br>所以，每次要使用的話，我們就可以呼叫這個函式就可以囉，而且，也變得比較好維護。</p>
+<h2 id="定義函式的方式"><a href="#定義函式的方式" class="headerlink" title="定義函式的方式"></a>定義函式的方式</h2><p>a. 函式宣告</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">funtion triple(number)&#123;</span><br><span class="line">    return number*numbre*number</span><br><span class="line">&#125;</span><br><span class="line">console.log(triple(2)); &#x2F;&#x2F; 8</span><br></pre></td></tr></table></figure>
+<p>b. 函式運算式<br>利用變數來儲存函式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var triple &#x3D; function(number)&#123;</span><br><span class="line">    return number*numbre*number</span><br><span class="line">&#125;</span><br><span class="line">console.log(triple(2)); &#x2F;&#x2F; 8</span><br></pre></td></tr></table></figure>
+<p>c. 用<code>new Funtion</code>關鍵字建立函式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var triple &#x3D; new Funtion(&#39;number&#39;, &#39;return number*numbre*number&#39;)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><font color=#FF0000>因為JS最小變數切割範圍是Function，所以，以下就帶入全域變數和區域變數的介紹</font>    </p>
+<h1 id="變數範圍"><a href="#變數範圍" class="headerlink" title="變數範圍"></a>變數範圍</h1><h2 id="變數範圍差異"><a href="#變數範圍差異" class="headerlink" title="變數範圍差異"></a>變數範圍差異</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var num &#x3D; 1;</span><br><span class="line">function triple(y)&#123;</span><br><span class="line">    var num &#x3D; 100;</span><br><span class="line">    return num + y;</span><br><span class="line">&#125;</span><br><span class="line">console.log(triple(50));  &#x2F;&#x2F; 150</span><br><span class="line">console.log(num);  &#x2F;&#x2F; 1</span><br></pre></td></tr></table></figure>
+<p>第一，講一下，結果是150的部分<br>這邊可以看到triple函式內有一個跟外面num變數一樣名稱的變數，但是，因為JS的變數最小範圍是FUNCTION，所以，在triple函式的num跟<br>外面的num其實是不同的人，所以，當參數傳入50後，當下的num是100，所以，最終計算的結果會是150。<br>第二，講一下，結果是1的部分<br>也因為JS的最小變數範圍是FUNCTION的關係，外層是取用不到triple函式內的變數的，所以，造成最終那個<code>console.log(num)</code>的結果是1。</p>
+<h2 id="沒有用var宣告的變數"><a href="#沒有用var宣告的變數" class="headerlink" title="沒有用var宣告的變數"></a>沒有用var宣告的變數</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var num &#x3D; 1;</span><br><span class="line">function triple(y)&#123;</span><br><span class="line">    num &#x3D; 100;</span><br><span class="line">    return num + y;</span><br><span class="line">&#125;</span><br><span class="line">console.log(triple(50));  &#x2F;&#x2F; 150</span><br><span class="line">console.log(num);  &#x2F;&#x2F; 100</span><br></pre></td></tr></table></figure>
+<p>雖然說在JS中，最小的變數範圍是function，但是，那是在有用var宣告的情況下。<br>而以上這個範例在triple中的num並沒有用var做宣告，所以，他會向外層查找，此時，他會找到外層第一航宣告的num，<br>並將他的直改成100，這也就是為什麼最後的<code>console.log(num)</code>會是100的原因囉。<br>要特別小心這種狀況，不要誤用了。</p>
+<h1 id="Hoisting-提升"><a href="#Hoisting-提升" class="headerlink" title="Hoisting(提升)"></a>Hoisting(提升)</h1><h2 id="變數的Hoisting特性"><a href="#變數的Hoisting特性" class="headerlink" title="變數的Hoisting特性"></a>變數的Hoisting特性</h2><p>當我們利用var來宣告變數的時候，宣告部分會被提升到該變數區域的最上面，而該變數的定義部分會來在原地。<br>Q. 什麼叫做該變數區域的最上面?<br>當該變數是全域變數，它的宣告部分就會被提升到全域範圍的最上層。<br>若該變數是區域變數，也就是在某個函式中宣告該變數的話，該變數的宣告部分，就會被提升到該函式內的最上層。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function triple(y)&#123;</span><br><span class="line">    console.log(num);  &#x2F;&#x2F; undefined</span><br><span class="line">    var num &#x3D; 100;</span><br><span class="line"></span><br><span class="line">    return num + y;</span><br><span class="line">&#125;</span><br><span class="line">console.log(triple(50)); &#x2F;&#x2F; 150</span><br></pre></td></tr></table></figure>
+<p>這邊就拆解一下上面的範例，為什麼會是<code>undefined</code>的結果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function triple(y)&#123;</span><br><span class="line">    var num;</span><br><span class="line">    console.log(num);  &#x2F;&#x2F; undefined</span><br><span class="line">    num &#x3D; 100;</span><br><span class="line"></span><br><span class="line">    return num + y;</span><br><span class="line">&#125;</span><br><span class="line">console.log(triple(50)); &#x2F;&#x2F; 150</span><br></pre></td></tr></table></figure>
+<p>這樣就看的出來了吧! 因為宣告部分被提升了，且此時並未被賦值，所以，在下一行要調用該值時，就會是<code>undefined</code>了。</p>
+<h2 id="let-const-和-var宣告的差別"><a href="#let-const-和-var宣告的差別" class="headerlink" title="let/const 和 var宣告的差別"></a>let/const 和 var宣告的差別</h2><p>它們的差別在於<br><code>var</code>宣告有Hoisting的特性。<br><code>let/const</code>宣告沒有Hoisting的特性。<br>也因為<code>let/const</code>沒有提升的特性，也就造成了，它們有死區的特性。</p>
+<h2 id="function的Hoisting特性-不同宣告方式的差異"><a href="#function的Hoisting特性-不同宣告方式的差異" class="headerlink" title="function的Hoisting特性 - 不同宣告方式的差異"></a>function的Hoisting特性 - 不同宣告方式的差異</h2><p>若使用函式宣告的方式，該函式是有提升的特性的。<br>若使用函式運算式的宣告方式，該函式是沒有提升特性，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---函式宣告---</span><br><span class="line">console.log(triple(2)) &#x2F;&#x2F; 8</span><br><span class="line">function triple(num)&#123;</span><br><span class="line">    return num*num*num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">---函式運算式宣告---</span><br><span class="line">console.log(triple(2)) &#x2F;&#x2F; TypeError: triple is not a funtion</span><br><span class="line">var triple &#x3D; function (num)&#123;  </span><br><span class="line">    return num*num*num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/AJAX/20210217" rel="prev" title="Leaflet和OpenSourceMap-Vue寫法">
+      <i class="fa fa-chevron-left"></i> Leaflet和OpenSourceMap-Vue寫法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/JavaScript/20210219" rel="next" title="JS核心篇-第二章筆記1">
+      JS核心篇-第二章筆記1 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">函式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E5%BC%8F%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">函式簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E7%BE%A9%E5%87%BD%E5%BC%8F%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">定義函式的方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%8A%E6%95%B8%E7%AF%84%E5%9C%8D"><span class="nav-number">2.</span> <span class="nav-text">變數範圍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%8A%E6%95%B8%E7%AF%84%E5%9C%8D%E5%B7%AE%E7%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">變數範圍差異</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B2%92%E6%9C%89%E7%94%A8var%E5%AE%A3%E5%91%8A%E7%9A%84%E8%AE%8A%E6%95%B8"><span class="nav-number">2.2.</span> <span class="nav-text">沒有用var宣告的變數</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hoisting-%E6%8F%90%E5%8D%87"><span class="nav-number">3.</span> <span class="nav-text">Hoisting(提升)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%8A%E6%95%B8%E7%9A%84Hoisting%E7%89%B9%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">變數的Hoisting特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#let-const-%E5%92%8C-var%E5%AE%A3%E5%91%8A%E7%9A%84%E5%B7%AE%E5%88%A5"><span class="nav-number">3.2.</span> <span class="nav-text">let&#x2F;const 和 var宣告的差別</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#function%E7%9A%84Hoisting%E7%89%B9%E6%80%A7-%E4%B8%8D%E5%90%8C%E5%AE%A3%E5%91%8A%E6%96%B9%E5%BC%8F%E7%9A%84%E5%B7%AE%E7%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">function的Hoisting特性 - 不同宣告方式的差異</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
