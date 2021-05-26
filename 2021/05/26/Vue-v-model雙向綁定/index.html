@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Vue 的 v-model 雙向綁定應用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-v-model雙向綁定">
+<meta property="og:url" content="https://landy510.github.io/2021/05/26/Vue-v-model%E9%9B%99%E5%90%91%E7%B6%81%E5%AE%9A/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="Vue 的 v-model 雙向綁定應用">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-05-26T01:53:10.000Z">
+<meta property="article:modified_time" content="2021-05-26T02:17:24.609Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2021/05/26/Vue-v-model%E9%9B%99%E5%90%91%E7%B6%81%E5%AE%9A/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Vue-v-model雙向綁定 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/05/26/Vue-v-model%E9%9B%99%E5%90%91%E7%B6%81%E5%AE%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue-v-model雙向綁定
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-05-26 09:53:10 / 修改時間：10:17:24" itemprop="dateCreated datePublished" datetime="2021-05-26T09:53:10+08:00">2021-05-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">Vue 的 v-model 雙向綁定應用</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="v-model-雙向綁定"><a href="#v-model-雙向綁定" class="headerlink" title="v-model 雙向綁定"></a>v-model 雙向綁定</h1><p>可以用在 form 表單的 input 欄位, textarea 欄位, 和 select 欄位。</p>
+<h2 id="input-欄位"><a href="#input-欄位" class="headerlink" title="input 欄位"></a>input 欄位</h2><p>直接對此 input 欄位加入 v-model 來綁定相對應的資料</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;text&quot;&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">data: &#123;</span><br><span class="line">  text: &#39;Landy&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="checkbox-欄位-複選"><a href="#checkbox-欄位-複選" class="headerlink" title="checkbox 欄位 - 複選"></a>checkbox 欄位 - 複選</h2><p>checkbox 是複選的選項，也是利用 v-model 相對應的資料<br>所以，checkbox 的功能，時常會綁定一個陣列資料，當你勾選該選項時， Vue 會將該選項的資料塞入綁定的陣列中。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;input type&#x3D;&quot;checkbox&quot; v-model&#x3D;&quot;dishes&quot; value&#x3D;&quot;A&quot;&gt;豬</span><br><span class="line">&lt;input type&#x3D;&quot;checkbox&quot; v-model&#x3D;&quot;dishes&quot; value&#x3D;&quot;B&quot;&gt;雞</span><br><span class="line">&lt;input type&#x3D;&quot;checkbox&quot; v-model&#x3D;&quot;dishes&quot; value&#x3D;&quot;C&quot;&gt;牛</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">data: &#123;</span><br><span class="line">  dishes: []</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上的範例，當你勾選 checkbox 中的任一選項，Vue 就會將該選項丟進陣列中，並且丟入選項的順序會跟你選擇的順序一樣，也就是若你先勾 B ，它就會先將B 推入陣列中，這在我們想要判斷使用者的選擇優先序是很有幫助的。 </p>
+<h2 id="radiobox-欄位-單選"><a href="#radiobox-欄位-單選" class="headerlink" title="radiobox 欄位 - 單選"></a>radiobox 欄位 - 單選</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;p&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;radio&quot; v-model&#x3D;&quot;option&quot; value&#x3D;&quot;A&quot;&gt;A</span><br><span class="line">  &lt;input type&#x3D;&quot;radio&quot; v-model&#x3D;&quot;option&quot; value&#x3D;&quot;B&quot;&gt;B</span><br><span class="line">  &lt;input type&#x3D;&quot;radio&quot; v-model&#x3D;&quot;option&quot; value&#x3D;&quot;C&quot;&gt;C</span><br><span class="line">&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">data: &#123;</span><br><span class="line">  option: &#39;A&#39; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="selected-欄位"><a href="#selected-欄位" class="headerlink" title="selected 欄位"></a>selected 欄位</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;select v-model&#x3D;&quot;selected&quot;&gt;</span><br><span class="line">  &lt;option disabled value&#x3D;&quot;&quot;&gt;Please select one&lt;&#x2F;option&gt;</span><br><span class="line">  &lt;option value&#x3D;&quot;A&quot;&gt;A&lt;&#x2F;option&gt;</span><br><span class="line">  &lt;option value&#x3D;&quot;B&quot;&gt;B&lt;&#x2F;option&gt;</span><br><span class="line">  &lt;option value&#x3D;&quot;C&quot;&gt;C&lt;&#x2F;option&gt;</span><br><span class="line">&lt;&#x2F;select&gt;</span><br><span class="line">&lt;span&gt;Selected: &#123;&#123; selected &#125;&#125;&lt;&#x2F;span&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">data: &#123;</span><br><span class="line">  selected: &quot;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上這個範例中，我們在第一個選項加入了 disabled 的屬性，在一開始，selected 欄位的初始值就是這個 Please select one 的選項，但是，當你選擇其他選項之後，這個 Please select one 的選項就不能再被選擇了喔。</p>
+<h2 id="lazy-修飾符"><a href="#lazy-修飾符" class="headerlink" title="lazy 修飾符"></a>lazy 修飾符</h2><p>當有某個元素會高頻地被觸發時，你就可以對該元素使用 lazy 的修飾符。那 lazy 可以用在以下的情境，當使用者輸入他的帳號之後，我們會監聽這個輸入欄位的內容，並在使用者輸入完之後，並且焦點離開該輸入欄位之後，打一個 API 到後端去，檢驗是否該帳號已經被註冊過了。</p>
+<iframe src="https://codepen.io/RandyChen/embed/LYWLmgP?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>當我們在第一個 input 欄位中，輸入完資料後，焦點離開此 input 欄位，才會觸發相對應的事件，這就是 lazy 修飾符的功用。 </p>
+<h1 id="Alex-宅幹嘛-眉眉角角"><a href="#Alex-宅幹嘛-眉眉角角" class="headerlink" title="Alex 宅幹嘛 - 眉眉角角"></a>Alex 宅幹嘛 - 眉眉角角</h1><h2 id="input-欄位輸入法的雷"><a href="#input-欄位輸入法的雷" class="headerlink" title="input 欄位輸入法的雷"></a>input 欄位輸入法的雷</h2><p>在 input 欄位中，若輸入中文時，當使用者完成選字後，會按下 enter 鍵，此時會有一個問題。如果你為這個表單所寫的觸發發送表單事件的按鈕也是 enter 事件的時候，就會導致使用者在選完字後按下 enter 鍵，直接連帶將此表單也送出去。<br>所以，當使用者在輸入時，應該要用 input 事件來監聽才對，若使用者在輸入完成內容後，按下 enter 按鍵，此時，不應該會觸發發送表單的功能。 </p>
+<h2 id="Form-的-value-預設都是字串型別"><a href="#Form-的-value-預設都是字串型別" class="headerlink" title="Form 的 value 預設都是字串型別"></a>Form 的 value 預設都是字串型別</h2><p>像是 Form 表中的 radiobox 的 value 的值，預設是字串型別。所以，若你很在意form 表出來的資料的型別的話，記得為綁定這些資料的 v-model 再加上轉型的修飾符。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;radio&quot; value&#x3D;&quot;0&quot; v-model.number&#x3D;&quot;gender&quot;&gt;女</span><br><span class="line">  &lt;input type&#x3D;&quot;radio&quot; value&#x3D;&quot;1&quot; v-model.number&#x3D;&quot;gender&quot;&gt;男</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">data: &#123;</span><br><span class="line">  gender: 0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上的範例，若你沒有在 v-model 後面加上 number 的修飾符的話，在你點選 radiobox 的選項時，該 value 的資料，會自動被轉型成字串型別，就算你綁定資料的初始型別是數字型別。<br>以上這種情境要注意一下~</p>
+<h2 id="selected-選單要不要用-disabled"><a href="#selected-選單要不要用-disabled" class="headerlink" title="selected 選單要不要用 disabled"></a>selected 選單要不要用 disabled</h2><p>當你的表單是必填時，建議你對預設選項使用 disabled ，因為，當使用者選了其中一個選項之後，那個原本有加入 disabled 的選項，就不能再被選擇了。<br>若你的表單是選填，就不建議你對表單中的選項使用 disabled。 </p>
+<h2 id="div-區塊元素，可以觸發-blur-事件"><a href="#div-區塊元素，可以觸發-blur-事件" class="headerlink" title="div 區塊元素，可以觸發 blur 事件"></a>div 區塊元素，可以觸發 blur 事件</h2><p>對 div 區塊搭配 tabindex 屬性，就可以透過 tab 鍵來選取到該 div 區塊，並在該 div 失去焦點後，就會觸發 blur 事件了。 </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/22/Vue-v-for%E7%94%A8%E6%B3%95%E5%8F%8A%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9/" rel="prev" title="Vue-v-for用法及注意的地方">
+      <i class="fa fa-chevron-left"></i> Vue-v-for用法及注意的地方
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#v-model-%E9%9B%99%E5%90%91%E7%B6%81%E5%AE%9A"><span class="nav-number">1.</span> <span class="nav-text">v-model 雙向綁定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#input-%E6%AC%84%E4%BD%8D"><span class="nav-number">1.1.</span> <span class="nav-text">input 欄位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#checkbox-%E6%AC%84%E4%BD%8D-%E8%A4%87%E9%81%B8"><span class="nav-number">1.2.</span> <span class="nav-text">checkbox 欄位 - 複選</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#radiobox-%E6%AC%84%E4%BD%8D-%E5%96%AE%E9%81%B8"><span class="nav-number">1.3.</span> <span class="nav-text">radiobox 欄位 - 單選</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selected-%E6%AC%84%E4%BD%8D"><span class="nav-number">1.4.</span> <span class="nav-text">selected 欄位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lazy-%E4%BF%AE%E9%A3%BE%E7%AC%A6"><span class="nav-number">1.5.</span> <span class="nav-text">lazy 修飾符</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alex-%E5%AE%85%E5%B9%B9%E5%98%9B-%E7%9C%89%E7%9C%89%E8%A7%92%E8%A7%92"><span class="nav-number">2.</span> <span class="nav-text">Alex 宅幹嘛 - 眉眉角角</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#input-%E6%AC%84%E4%BD%8D%E8%BC%B8%E5%85%A5%E6%B3%95%E7%9A%84%E9%9B%B7"><span class="nav-number">2.1.</span> <span class="nav-text">input 欄位輸入法的雷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Form-%E7%9A%84-value-%E9%A0%90%E8%A8%AD%E9%83%BD%E6%98%AF%E5%AD%97%E4%B8%B2%E5%9E%8B%E5%88%A5"><span class="nav-number">2.2.</span> <span class="nav-text">Form 的 value 預設都是字串型別</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#selected-%E9%81%B8%E5%96%AE%E8%A6%81%E4%B8%8D%E8%A6%81%E7%94%A8-disabled"><span class="nav-number">2.3.</span> <span class="nav-text">selected 選單要不要用 disabled</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#div-%E5%8D%80%E5%A1%8A%E5%85%83%E7%B4%A0%EF%BC%8C%E5%8F%AF%E4%BB%A5%E8%A7%B8%E7%99%BC-blur-%E4%BA%8B%E4%BB%B6"><span class="nav-number">2.4.</span> <span class="nav-text">div 區塊元素，可以觸發 blur 事件</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

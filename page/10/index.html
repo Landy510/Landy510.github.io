@@ -164,6 +164,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">第四週前端課程筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-05 10:20:36" itemprop="dateCreated datePublished" datetime="2021-01-05T10:20:36+08:00">2021-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-30 15:16:17" itemprop="dateModified" datetime="2021-01-30T15:16:17+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">前端體驗營切版</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，"><a href="#在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，" class="headerlink" title="在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，"></a>在css文件中，加入以下的程式碼，就可以對<code>div</code>區塊做出由左到右的移動，</h2><p>與<code>background</code>顏色漸變的動畫。</p>
+<iframe src="https://codepen.io/RandyChen/embed/vYXJMXQ?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>接下來介紹一下上面的動畫程式碼</p>
+<h3 id="keyframes-example"><a href="#keyframes-example" class="headerlink" title="@keyframes example"></a><code>@keyframes example</code></h3><p>在<code>@keyframes</code>的右邊名稱example就是你為這段動畫效果的命名。<br>那這個名稱必須要跟，要做這段動畫效果的區塊中的css樣式中<code>animation-name</code>一樣。</p>
+<h3 id="animation-duration"><a href="#animation-duration" class="headerlink" title="animation-duration"></a><code>animation-duration</code></h3><p>在要做這段動畫效果的區塊中的css樣式中的<code>animation-duration</code>的值，<br>是代表這段動畫總共要做多少時間。<br>像以上這段codepen的範例，就是設定4s，也就是這段動畫總共時間是4秒。<br><img src="/image/animation_duration.png"></p>
+<p>那在<code>@keyframe</code>中，有寫0%, 25%, 50%, 75%, 100%的內容，<br>就像上面這張圖畫的一樣，它會將<code>animation-duration</code>的時間，平均分到這些區間裡面，<br>所以，這邊的code總共有4段，所以，4s/4 = 1s。<br>也就是每一段動畫的執行時間是1秒。</p>
+<h3 id="animation-delay"><a href="#animation-delay" class="headerlink" title="animation-delay"></a><code>animation-delay</code></h3><p>這段程式碼表示這段動畫要延後<code>animation-delay</code>所設定的時間後，才會開始執行這段動畫。</p>
+<h3 id="animation-fill-mode"><a href="#animation-fill-mode" class="headerlink" title="animation-fill-mode"></a><code>animation-fill-mode</code></h3><p>這段程式碼以下三種選項可以寫:<br><code>forwards</code>: 代表動畫效果會停留到最後的效果，以上面的codepen為例，<code>div</code>會停留在最後的<br><code>background:pink;left:0px;top:-2000px;</code> 的位置。</p>
+<p><code>backwards</code>: 代表這段動畫執行完成後，執行這段動畫的區塊會回到這個區塊原本的狀態。<br>以上面的codepen為例，<code>div</code>會回到一開始的<code>background:pink;left:0px;top:0px;</code> 的位置。</p>
+<p><code>both</code>: 同時擁有<code>forwards</code>和<code>backwards</code>的效果。</p>
+<h3 id="animation-iteration-count"><a href="#animation-iteration-count" class="headerlink" title="animation-iteration-count"></a><code>animation-iteration-count</code></h3><p>這段程式碼表示你設計的這段動畫總共要執行多少次。<br>以上面的codepen為例，這段動畫總共會做2次。<br>如果你想要無限循環執行這段動畫的話，你就將這個屬性的值設為<code>Infinity</code>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/05/Bootstrap%E7%AD%86%E8%A8%98-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -958,108 +1050,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2020/12/14/%E7%AC%AC%E4%B8%80%E9%80%B1%E5%89%8D%E7%AB%AF%E4%BD%9C%E6%A5%AD%E8%88%87%E8%AA%B2%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/14/%E7%AC%AC%E4%B8%80%E9%80%B1%E5%89%8D%E7%AB%AF%E4%BD%9C%E6%A5%AD%E8%88%87%E8%AA%B2%E7%A8%8B/" class="post-title-link" itemprop="url">第一週前端作業與課程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2020-12-14 16:08:22" itemprop="dateCreated datePublished" datetime="2020-12-14T16:08:22+08:00">2020-12-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-30 15:16:06" itemprop="dateModified" datetime="2021-01-30T15:16:06+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">前端體驗營切版</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="在第一週上的課程-和-作業中遇到的重點與問題-紀錄"><a href="#在第一週上的課程-和-作業中遇到的重點與問題-紀錄" class="headerlink" title="在第一週上的課程 和 作業中遇到的重點與問題 紀錄"></a>在第一週上的課程 和 作業中遇到的重點與問題 紀錄</h1><h2 id="第一週課程"><a href="#第一週課程" class="headerlink" title="第一週課程"></a>第一週課程</h2><ol>
-<li><p>html內容的快速寫法</p>
-<p> <code>h2.title&#123;學歷&#125;&gt;span&#123;EDUCATION&#125;</code></p>
-<p> 上面這個寫法，在你按下tab鍵後，就會變成下面的html內文</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2 class&#x3D;&quot;title&quot;&gt;</span><br><span class="line">    學歷</span><br><span class="line">    &lt;span&gt;EDUCATION&lt;&#x2F;span&gt;</span><br><span class="line">&lt;&#x2F;h2&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>有關<code>line-height</code>屬性的特性<br> 假設在html文件中有一個p段落</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p&#123;</span><br><span class="line">    font-size: 12px;</span><br><span class="line">    line-height: 24px</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 上面這段程式碼的內容，呈現的畫面就會像下面這樣。<br> <img src="/image/line_height.png"></p>
-<p> 所以，如果這個p段落，是包裹在某個父容器裡面，那在計算這個父容器的高度時，<br> 就必須要連p段落的<code>line-height</code>，也算進去。</p>
-</li>
-<li><p><code>&lt;img&gt;</code>元素的天生bug<br> <code>&lt;img&gt;</code>元素有個天生的bug，就是在<code>&lt;img&gt;</code>的下方會多一個<code>2px</code>左右的留白。</p>
-<p> <img src="/image/img_bug.png"></p>
-<p> 那要消除這個<code>&lt;img&gt;</code>的bug，就只要將它的<code>display</code>屬性改成<code>block</code>，就ok了~</p>
-</li>
-<li><p>父類別使用<code>display:flex</code>，讓子元素的高度被拉長填滿父元素，造成子元素的圖片長寬比不正確的問題<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---html文件---</span><br><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">  &lt;img class&#x3D;&quot;image&quot; src&#x3D;&quot;https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2020&#x2F;12&#x2F;22&#x2F;xPVBgS.jpg&quot; alt&#x3D;&quot;&quot;&gt;    </span><br><span class="line">  &lt;p&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, provident. Quis porro obcaecati rerum consequuntur accusantium ab error qui exercitationem.&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---css文件---</span><br><span class="line">.image&#123;</span><br><span class="line">  width: 300px;</span><br><span class="line">&#125;</span><br><span class="line">.container&#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  height: 600px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面這個例子，你就會看到在.container的父元素裡面的子元素img的圖片高度會完全填滿父元素的高度，進而造成該圖片的比例很怪，<br>解法是 在這個img的外面再套一個div，這樣就可以看到img的圖片回到正常的長寬比了。而css的樣式，是不需要做任何修改的囉~</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">---html文件---</span><br><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">  &lt;div&gt;   &#x2F;&#x2F; 新增這個div包在img外面</span><br><span class="line">    &lt;img class&#x3D;&quot;image&quot; src&#x3D;&quot;https:&#x2F;&#x2F;upload.cc&#x2F;i1&#x2F;2020&#x2F;12&#x2F;22&#x2F;xPVBgS.jpg&quot; alt&#x3D;&quot;&quot;&gt;    </span><br><span class="line">  &lt;&#x2F;div&gt; </span><br><span class="line">  &lt;p&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, provident. Quis porro obcaecati rerum consequuntur accusantium ab error qui exercitationem.&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---css文件---</span><br><span class="line">.image&#123;</span><br><span class="line">  width: 300px;</span><br><span class="line">&#125;</span><br><span class="line">.container&#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  height: 600px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/12/14/%E7%AC%AC%E4%B8%80%E9%80%B1%E5%89%8D%E7%AB%AF%E4%BD%9C%E6%A5%AD%E8%88%87%E8%AA%B2%E7%A8%8B/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1129,7 +1119,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
