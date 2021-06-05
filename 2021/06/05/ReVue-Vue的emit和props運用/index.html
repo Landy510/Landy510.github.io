@@ -28,7 +28,7 @@
 <meta property="og:description" content="Vue 元件 emit 和 props 傳輸概念">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-06-05T08:24:48.000Z">
-<meta property="article:modified_time" content="2021-06-05T08:37:02.929Z">
+<meta property="article:modified_time" content="2021-06-05T08:44:58.504Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
@@ -194,7 +194,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2021-06-05 16:24:48 / 修改時間：16:37:02" itemprop="dateCreated datePublished" datetime="2021-06-05T16:24:48+08:00">2021-06-05</time>
+              <time title="創建時間：2021-06-05 16:24:48 / 修改時間：16:44:58" itemprop="dateCreated datePublished" datetime="2021-06-05T16:24:48+08:00">2021-06-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -218,7 +218,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><strong>Components Basics</strong><br>在這個單元是 Alex 課程中，有關介紹 Vue 的元件的使用概念。尤其像是要不要由元件來更改外部資料的概念。</p>
+        <p><strong>Components Basics</strong><br>在我的部落格中 <a href="/2021/01/11/Vuejs%E5%85%83%E4%BB%B602-emit%E4%BA%8B%E4%BB%B6/" title="介紹emit文章">介紹emit文章</a> 和 <a href="/2021/01/11/Vue-js%E5%85%83%E4%BB%B6-01/" title="介紹props文章">介紹props文章</a> 都是介紹基礎的 emit 和 props 的運用。<br>那在這個單元是 Alex 課程介紹 Vue 的元件的使用概念。尤其像是要不要由元件來更改外部資料的概念。</p>
 <h1 id="Vue-物件"><a href="#Vue-物件" class="headerlink" title="Vue 物件"></a>Vue 物件</h1><p>元件是一個可以被重複利用的 Vue 物件，他們擁有自己的 data, computed, watch, methods 和 lifecycle hooks。</p>
 <h2 id="Vue-元件-data-回傳-function"><a href="#Vue-元件-data-回傳-function" class="headerlink" title="Vue 元件 data 回傳 function"></a>Vue 元件 data 回傳 function</h2><p>在 Vue 自創的元件中，你會發現data 都是透過 function 來回傳一個物件。<br>這樣設計的原因是 closure 的概念，因為，這樣的話元件和元件之間的 data 就不會互相干擾囉。<br>跟最外層的 new Vue 的 data 寫法不太一樣，不要改混囉。</p>
 <h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><p>可以透過 props 來將外層的資料傳到元件內部，但是，有單向資料的特性。也就是我們無法直接透過元件來修改由外層傳進來的資料。</p>
