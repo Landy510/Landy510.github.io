@@ -164,6 +164,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">Vue Router筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-25 09:43:09" itemprop="dateCreated datePublished" datetime="2021-01-25T09:43:09+08:00">2021-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-04-29 15:10:36" itemprop="dateModified" datetime="2021-04-29T15:10:36+08:00">2021-04-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="使用Vue-Router-及配置路由文件"><a href="#使用Vue-Router-及配置路由文件" class="headerlink" title="使用Vue Router 及配置路由文件"></a>使用Vue Router 及配置路由文件</h1><p><img src="/image/SPA_1.png" alt="user頁面"><br><img src="/image/SPA_2.png" alt="product頁面"><br>以上範例，你可以看到它們都是停留在index的網址上，<br>但是，會因為我們在#後面所接入的內容不同，來呈現不同元件的內容。<br>像上面圖片是#/user，所以，此時是呈現 user 元件。<br>像下面圖片是#/product，所以，此時是呈現 product 元件。</p>
+<p>故本節是紀錄怎麼建立Vue Router</p>
+<p>Router會包含幾個檔案</p>
+<p>首先，進入點<br>包含它會注入src資料夾中的元件檔和其他的component檔案。</p>
+<p>第二，新增路由的配置檔案<br>這個配置檔案會決定在哪個路由中呈現哪個元件檔案。<br>那它執行的路徑會在router/index.js 中。</p>
+<p>第三，分頁內容</p>
+<p>Vue Components 就是一些元件的檔案，例如專案檔中的Hellowolrd.vue檔。</p>
+<p>接下來，介紹安裝vue 的router步驟<br>step1.<br>先輸入 <code>npm install vue-router --save</code> 指令</p>
+<p>step2.<br>在src資料夾中，新建一個叫router的資料夾<br>在router下再新增一個叫index.js的檔案，這個檔案就是要放整個路由的配置檔。</p>
+<p>step3.<br>在index.js檔案中輸入<br><code>import Vue from &#39;vue&#39;</code><br><code>import VueRouter from &#39;vue-router&#39;</code></p>
+<p>以上這兩行呢，是將官方提供的元件給引入進來。</p>
+<p>接下來，在這兩行之後就是引入我們自己的元件囉。<br><code>import Home from &#39;@/component/HelloWorld&#39;</code><br>引入在src資料夾中的HelloWorld元件檔，並將它命名為Home</p>
+<p>step4.<br>在你引入完官方元件 和你自己的元件檔之後，<br>就是要輸入啟用的指令，<br>那你就在同一個index.js檔案中，在引入程式碼的後方輸入<code>Vue.use(VueRouter)</code><br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import VueRouter from &#39;vue-router&#39;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 以上為官方提供的元件</span><br><span class="line">import Home from &#39;@&#x2F;component&#x2F;HelloWorld&#39;</span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter)  &#x2F;&#x2F; 啟用指令</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E6%93%8D%E6%8E%A7dom%E5%85%83%E7%B4%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -943,83 +1037,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/19/%E9%83%A8%E5%B1%AC%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99%E5%88%B0Github-Pages%E9%81%87%E5%88%B0%E7%9A%84%E5%95%8F%E9%A1%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/19/%E9%83%A8%E5%B1%AC%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99%E5%88%B0Github-Pages%E9%81%87%E5%88%B0%E7%9A%84%E5%95%8F%E9%A1%8C/" class="post-title-link" itemprop="url">部屬靜態網站到Github Pages遇到的問題</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-01-19 10:55:06" itemprop="dateCreated datePublished" datetime="2021-01-19T10:55:06+08:00">2021-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-28 16:34:40" itemprop="dateModified" datetime="2021-01-28T16:34:40+08:00">2021-01-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>看一下github_pages來部屬靜態網頁</p>
-<h1 id="Github-Pages沒有顯示出我專案的問題"><a href="#Github-Pages沒有顯示出我專案的問題" class="headerlink" title="Github Pages沒有顯示出我專案的問題?"></a>Github Pages沒有顯示出我專案的問題?</h1><p>Ans:<br>我找到原因了，<br>首先我是在這篇文章的問答區找到以下的答案的<br><a target="_blank" rel="noopener" href="https://github.community/t/pages-user-site-not-published/10280/21">https://github.community/t/pages-user-site-not-published/10280/21</a><br>你搜尋一個叫wwyc的回答者的回答就有了。</p>
-<p>用我原本的方式部屬上去是沒問題的，但是，你在你的那個repository的settings裡面，<br>有一個GitHub Pages<br>然後，在GitHub Pages裡面有一個選項Theme Chooser，<br><img src="/image/Github_pages_changeTheme.png" alt="GitHub Pages改變主題"><br>你要點Change Theme，任選一個主題，並儲存你選擇的主題後，<br>再次點擊你的Github Pages連結後，就可以顯示出你的網站囉。</p>
-<h1 id="Github-pages顯示出來的網站並沒有吃到bootstrap的效果"><a href="#Github-pages顯示出來的網站並沒有吃到bootstrap的效果" class="headerlink" title="Github pages顯示出來的網站並沒有吃到bootstrap的效果?"></a>Github pages顯示出來的網站並沒有吃到bootstrap的效果?</h1><p>step1. 首先，它會跳出跟symlink相關的錯誤，<br>因為，檔名的副檔名是<code>.md</code>結尾的檔案是<code>symlink</code>檔案，代表它是一個虛擬的檔案，無法被實際引入。<br>那在bootstrap的docs資料夾裡面全部都是這類的檔案，你可以直接將這個docs資料夾直接刪除掉，<br>因為這裡面的md檔案都只是說明檔。</p>
-<p>step2. 接著，它會說bootstrap的檔案中有一個index.html(注意~~這個不是你寫的那個，這是bootstrap自己內建的)，<br>然後，他會說這個index.html檔案不存在<code>_include</code>的路徑裡面，你就直接把這個index.html檔案剪下，移到<br>bootstrap的<code>_include</code>的資料夾裡面就ok了。</p>
-<p>step3. 經過以上兩個步驟的處理，<br>你應該可以在你的github pages頁面上看到沒有bootstrap css樣式的奇怪網站XDD，<br>這時，你先對Github pages部屬出來的網站，打開它的開發者介面，<br>應該會發現Console有一堆Error發生，大部分都是讀不到相關檔案。</p>
-<p>那大部分，它會讀不到檔案，是因為路徑不對<br>再你自己再撰寫專案的時候，本地端的路徑，是這樣<br><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/css/all.css&quot;&gt;</code><br>你的<code>href</code>前面，有一個反斜線<code>/</code>，那多這個反斜線會導致github pages讀不到那個檔案，<br>所以，你只要將該反斜線拿掉就可以了。<br>就變成以下這樣<br><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;css/css/all.css&quot;&gt;</code></p>
-<p>經過以上這些步驟，github pages就可以讀到你的css樣式，應該就可以正確在githubpages裡面，看到正確渲染的成果囉~~~</p>
-<h1 id="在Github-Pages上的banner的背景圖片，Github一直讀不到它"><a href="#在Github-Pages上的banner的背景圖片，Github一直讀不到它" class="headerlink" title="在Github Pages上的banner的背景圖片，Github一直讀不到它?"></a>在Github Pages上的banner的背景圖片，Github一直讀不到它?</h1><p>Ans:<br>首先，我把原本圖片的檔名改成全部小寫，也沒有任何的底線之類的東西。<br>即:<br><code>Banner_Background.jpg</code> 改成<code>bannerbackground.jpg</code>。<br>第二，我本來是透過class的樣式來引入<code>background-img</code>的樣式。<br>我就直接用inline-style的方式來引入這個<code>background-img</code>的樣式，<br>像下面這樣，為這個區塊的inline-style直接加入<code>background-image</code>樣式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;banner&quot; data-aos&#x3D;&quot;fade-right&quot; style&#x3D;&quot;background-image: url(&#39;img&#x2F;bannerbackground.jpg&#39;);&quot;&gt;</span><br><span class="line">    &lt;h2 class&#x3D;&quot;banner-solgan&quot;&gt;</span><br><span class="line">        想長肉--</span><br><span class="line">        &lt;br&gt;</span><br><span class="line">        &lt;span&gt;就是現在&lt;&#x2F;span&gt;</span><br><span class="line">    &lt;&#x2F;h2&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-
-<p>就可以成功在Github Pages裡面呈現這張照片囉~~~</p>
-<h1 id="選擇要部屬哪一個分支的網頁"><a href="#選擇要部屬哪一個分支的網頁" class="headerlink" title="選擇要部屬哪一個分支的網頁"></a>選擇要部屬哪一個分支的網頁</h1><p>在Settings這個頁面中的，會有一個Github Pages的主題，<br>然後，會有一個Source的選項，接著你就可以選擇你要在github pages中渲染出的網頁是哪一個分支的。<br><img src="/image/githubpages.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1089,7 +1106,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">104</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
