@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄當輸入網址到瀏覽器中，中間的 資料傳輸 和 網頁解析 分別經歷了那些過程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="六角網路計概課程">
+<meta property="og:url" content="https://landy510.github.io/2021/06/07/%E5%85%AD%E8%A7%92%E8%A8%88%E6%A6%82%E8%AA%B2%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄當輸入網址到瀏覽器中，中間的 資料傳輸 和 網頁解析 分別經歷了那些過程">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/image/webrequest.png">
+<meta property="og:image" content="https://landy510.github.io/image/webPerformance.png">
+<meta property="article:published_time" content="2021-06-07T01:04:15.000Z">
+<meta property="article:modified_time" content="2021-06-07T14:09:08.115Z">
+<meta property="article:author" content="Landy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/image/webrequest.png">
+
+<link rel="canonical" href="https://landy510.github.io/2021/06/07/%E5%85%AD%E8%A7%92%E8%A8%88%E6%A6%82%E8%AA%B2%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>六角網路計概課程 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/06/07/%E5%85%AD%E8%A7%92%E8%A8%88%E6%A6%82%E8%AA%B2%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          六角網路計概課程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-06-07 09:04:15 / 修改時間：22:09:08" itemprop="dateCreated datePublished" datetime="2021-06-07T09:04:15+08:00">2021-06-07</time>
+            </span>
+
+          
+            <div class="post-description">紀錄當輸入網址到瀏覽器中，中間的 資料傳輸 和 網頁解析 分別經歷了那些過程</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="當在瀏覽器輸入一個網址時的流程"><a href="#當在瀏覽器輸入一個網址時的流程" class="headerlink" title="當在瀏覽器輸入一個網址時的流程"></a>當在瀏覽器輸入一個網址時的流程</h1><p>這個小節主要是在說明當我們輸入一個網址到瀏覽器中，它會經過 資料傳輸的步驟之後，再接著執行網頁解析的步驟。<br>以下就是這兩個步驟的詳細經過過程。</p>
+<h2 id="資料傳輸"><a href="#資料傳輸" class="headerlink" title="資料傳輸"></a>資料傳輸</h2><p>以下會說明，當你輸入一個網址時，瀏覽器會和伺服器之間，先做什麼協定，並在什麼時機點傳輸資料。<br>舉例:<br>你輸入 <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/users/20083608/ironman/3780?page=2">https://ithelp.ithome.com.tw/users/20083608/ironman/3780?page=2</a> 這個網址後，你點開發者模式，點 Network 選項，然後選擇Doc 選項，代表你只要看 documet 的內容，<br>然後，你的選單裡面只會剩下一個 documet 的內容，你點他，然後，點他的 Timing 選項，你就可以依序看到<br>DNS Lookup -&gt; initial connection -&gt; SSL -&gt; Requert sent -&gt; Waiting -&gt; Content Download<br><img src="/image/webrequest.png" alt="輸入ip後會經過的請求過程圖"></p>
+<p>DNS Lookup<br>代表瀏覽器在解析你的網址 IP</p>
+<p>initial connection<br>建立交握</p>
+<p>SSL<br>建立 SSL 交握</p>
+<p>Requert sent<br>發送請求</p>
+<p>Wating<br>等待資源下載</p>
+<p>Content Download<br>資源下載完畢</p>
+<p>接著，會回傳 200 狀態碼給瀏覽器，代表資料傳輸成功。</p>
+<p>最後，瀏覽器才會去接析這些下載完成的檔案。</p>
+<p>所以，綜合以上的步驟，我們就用下方幾個步驟來描述當你輸入網址時，中間會發生什麼事<br>瀏覽器進行網址 DNS 的解析，並獲得網址對應 IP -&gt; 進行 TCP 交握 -&gt; 進行 SSL 交握 -&gt; 發出網路請求 -&gt; 獲得 html respone ，並顯示回傳碼 200 -&gt; 解析 HTML 並顯示在瀏覽器上</p>
+<p><font color=#FF0000>記得!!網頁一定會先下載該網頁的 HTML 文本</font>。不然，瀏覽器根本沒有內容可以解析。也就不知道你的網頁要長什麼樣子了。</p>
+<h2 id="網頁解析"><a href="#網頁解析" class="headerlink" title="網頁解析"></a>網頁解析</h2><p>經過上面的介紹之後，我們可以知道，最終我們會先取得目標網站的 HTML 文本，接著，這邊的步驟就是介紹，瀏覽器會如何解析獲得的 HTML 文本。<br>首先瀏覽器會由上到下去解析 HTML 文本的內容，接著，若在解析的過程碰到像是請求 CSS 檔案的話，就會發出 CSS 檔案的請求，等到 CSS 檔案下載完畢之後，就會去解析這個 CSS 檔案，CSS 檔案解析完成之後，瀏覽器會先做 layout 的動作，這個動作就是先將網頁上的各個 DOM 元素的尺寸 或 布局先放到網頁上。等到 layout 這個步驟完成之後，才會將這些 DOM 元素的內容畫上去，最後，會將各層元素都合併在一起，完成網頁內容的渲染。</p>
+<h3 id="開發者模式-performance"><a href="#開發者模式-performance" class="headerlink" title="開發者模式 performance"></a>開發者模式 performance</h3><p>那以上這些網頁解析的順序你可以透過網頁開發者模式的一個 Performance 的選項看到解析 HTML 文本和 發出各種檔案請求的順序。<br>首先，你先到一個網頁中，點它的網頁開發者模式的一個 Performance 的選項。<br>第二，按下開發者使用介面中，左上角的圓形圖案，將它按成紅色的，代表開始紀錄網頁請求過程，接著，重新整理一次你的頁面，如此，你應該就可以看到這個 performance 選項中出現網頁傳輸和解析的過程囉。<br><img src="/image/webPerformance.png" alt="performance記錄過程"></p>
+<p><strong>瀏覽器是一個區塊一個區塊在解析 HTML 文本的</strong><br>由上面的開發者頁面中 performance 中，我們可以看到 parse HTML 的部分，瀏覽器會一區塊、一區塊的解析 HTML 文本，它不是直接從第 1 行直接一路解析到文本的最底部。</p>
+<p><strong>看出誰拖慢網頁效能</strong><br>我們可以由上面這個 performance 的內容，看出各種資源的下載總共花了多少時間，藉此得知那些資源的下載有可能拖慢整體的網頁速度 或者 也可以知道是載入 js 檔案中，哪一個函式導致網頁效能變慢的。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/05/ReVue-Vue%E7%9A%84emit%E5%92%8Cprops%E9%81%8B%E7%94%A8/" rel="prev" title="ReVue-Vue的emit和props運用">
+      <i class="fa fa-chevron-left"></i> ReVue-Vue的emit和props運用
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%95%B6%E5%9C%A8%E7%80%8F%E8%A6%BD%E5%99%A8%E8%BC%B8%E5%85%A5%E4%B8%80%E5%80%8B%E7%B6%B2%E5%9D%80%E6%99%82%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">當在瀏覽器輸入一個網址時的流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E5%82%B3%E8%BC%B8"><span class="nav-number">1.1.</span> <span class="nav-text">資料傳輸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E9%A0%81%E8%A7%A3%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">網頁解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%96%8B%E7%99%BC%E8%80%85%E6%A8%A1%E5%BC%8F-performance"><span class="nav-number">1.2.1.</span> <span class="nav-text">開發者模式 performance</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -164,6 +164,86 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/11/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F-Promise%E7%89%A9%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/11/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F-Promise%E7%89%A9%E4%BB%B6/" class="post-title-link" itemprop="url">JS核心-函式-Promise物件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-03-11 10:38:31 / 修改時間：14:39:26" itemprop="dateCreated datePublished" datetime="2021-03-11T10:38:31+08:00">2021-03-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>繼<a href="/2021/03/09/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F/" title="上一篇">上一篇</a>，介紹了js中的函式與非同步環境會造成的callback Hell的前因後果，最終需要Promise來解決這個問題的過程後，此篇要記錄怎麼使用Promise物件。</p>
+<h1 id="Promise物件"><a href="#Promise物件" class="headerlink" title="Promise物件"></a>Promise物件</h1><p>Promise物件包含兩個東西，一個叫<code>reslove</code> 另一個叫<code>reject</code>。<br>當該Promise執行成功的話，就會去呼叫<code>reslove</code>，失敗的話，就會去執行<code>reject</code>的內容。</p>
+<h2 id="Promise物件創建的方法"><a href="#Promise物件創建的方法" class="headerlink" title="Promise物件創建的方法"></a>Promise物件創建的方法</h2><p>書中有提供兩種，其實意思差不多<br><strong>函式運算式用new來創建</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const FirstPromise &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  resolve(某個資料);</span><br><span class="line">  reject(&#39;Promise failure&#39;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>函式回傳new Promise物件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function FirstPromise() &#123;</span><br><span class="line">  return new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    resolve(某個資料);</span><br><span class="line">    reject(&#39;Promise failure&#39;);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/11/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F-Promise%E7%89%A9%E4%BB%B6/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/09/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -913,91 +993,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/13/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-localStorage%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/13/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-localStorage%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98/" class="post-title-link" itemprop="url">JavaScript學徒篇- localStorage資料儲存</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2021-02-13 15:18:25 / 修改時間：15:21:30" itemprop="dateCreated datePublished" datetime="2021-02-13T15:18:25+08:00">2021-02-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="什麼是-localStorage-？"><a href="#什麼是-localStorage-？" class="headerlink" title="什麼是 localStorage ？"></a>什麼是 localStorage ？</h1><p>它可以將網頁中的資料儲存在本地端中。<br>也就是說它可以將用戶的瀏覽資料存在本地端的瀏覽器中。</p>
-<h2 id="localStorage的重要特性"><a href="#localStorage的重要特性" class="headerlink" title="localStorage的重要特性"></a>localStorage的重要特性</h2><p>目前瀏覽器中都會把localStorage的值型別限定為<code>string</code>型別<br>因為，以上這個特性，導致我們在存取資料到localStorage或取出資料時，需要做一些轉換。<br><img src="/image/localstorage.png"></p>
-<p>以上這張圖的流程，簡易的說明了在localStorage資料的傳遞轉換的過程，以下是程式碼實現的內容</p>
-<iframe src="https://codepen.io/RandyChen/embed/ExNjWoK?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>以上，這幾行程式碼就是先將陣列形式的原始資料轉成<code>string</code>型別。<br>接著，將這個轉換成<code>string</code>型別的原始資料，存入localStorage中。<br>再來，用<code>getItem</code>將這個<code>string</code>型別的原始資料取出來。<br>最後，再將這個<code>string</code>型別的資列轉回陣列形式。<br>最終，我們就可以用取用JSON格式資料的方式來取用內部的資料囉~~~</p>
-<p>那你可以用開發者介面中的Application選項中，有一個localStorage的選項，你點開應該就可以看到你在這個網站上儲存的localStorage的資料囉~~<br>reference:<br><a target="_blank" rel="noopener" href="https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/232745/">程式前沿文章</a></p>
-<h1 id="data-透過-dataset-讀取自訂資料"><a href="#data-透過-dataset-讀取自訂資料" class="headerlink" title="data-* - 透過 dataset 讀取自訂資料"></a>data-* - 透過 dataset 讀取自訂資料</h1><iframe src="https://codepen.io/RandyChen/embed/oNYXZMe?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>你可以看到，我們為<code>li</code>標籤裡面新增了<code>data-*</code>之類的標籤，<br>並在js中利用<code>dataset.data</code>標籤名稱，來取得相關的<code>data-*</code>內的值。</p>
-<p>另外，<code>data-*</code>和<code>for</code>迴圈的運用</p>
-<iframe src="https://codepen.io/RandyChen/embed/poNJeqo?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>你可以看到我們用<code>for</code>迴圈的方式，來動態產生<code>li</code>的內容。 接著，透過<code>dataset</code>來擷取<code>data-whatever</code>的內容囉。</p>
-<h1 id="splice-刪除-array-資料"><a href="#splice-刪除-array-資料" class="headerlink" title="splice - 刪除 array 資料"></a>splice - 刪除 array 資料</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var myFish &#x3D; [&#39;angel&#39;, &#39;clown&#39;, &#39;drum&#39;, &#39;mandarin&#39;, &#39;sturgeon&#39;];</span><br><span class="line">var removed &#x3D; myFish.splice(3, 1);</span><br><span class="line">console.log(myFish);  [&#39;angel&#39;, &#39;clown&#39;, &#39;drum&#39;, &#39;sturgeon&#39;]</span><br></pre></td></tr></table></figure>
-<p>上面這個範例就是從索引3開始，然後，刪除一個元素。</p>
-<h1 id="localStorage作業"><a href="#localStorage作業" class="headerlink" title="localStorage作業"></a>localStorage作業</h1><p>這邊的作業是結合了localStorage功能的todolist。<br>所以，我的作業是下面這樣。</p>
-<iframe src="https://codepen.io/RandyChen/embed/XWNbRQE?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1067,7 +1062,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

@@ -164,6 +164,92 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98-01/" class="post-title-link" itemprop="url">Vue Router筆記-01</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-25 10:15:12" itemprop="dateCreated datePublished" datetime="2021-01-25T10:15:12+08:00">2021-01-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-05-01 12:05:21" itemprop="dateModified" datetime="2021-05-01T12:05:21+08:00">2021-05-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Vue-Router-參數設定"><a href="#Vue-Router-參數設定" class="headerlink" title="Vue Router 參數設定"></a>Vue Router 參數設定</h1><p>在vue的官方文件中，有針對router的設定做了詳細的介紹，<br>像是你在router資料夾中的index.js檔中，你為各元件所設定的<code>name</code>, <code>path</code>這些屬性都是在<br>這份文件中有介紹到。</p>
+<h2 id="router-mode-可選值"><a href="#router-mode-可選值" class="headerlink" title="router mode 可選值"></a>router mode 可選值</h2><p>在課堂上有特別講到router的<code>mode</code>屬性<br><a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/api/#mode">官方文件的Router的mode介紹</a></p>
+<h3 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h3><p>這個屬性有三個值可以使用，那我們一般是用預設值<code>hash</code>，<br>也就是你的網址中路由前面會出現一個<code>#</code>號</p>
+<h3 id="history-不建議使用"><a href="#history-不建議使用" class="headerlink" title="history - 不建議使用"></a>history - 不建議使用</h3><p>那如果你設定<code>history</code>的話</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">---router資料夾中的index.js檔案---</span><br><span class="line">export default new VueRouter(&#123;</span><br><span class="line">    mode:&#39;history&#39;,  &#x2F;&#x2F; 改成history模式</span><br><span class="line">    routes:[</span><br><span class="line">        &#123;</span><br><span class="line">            name:&#39;首頁&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">            path:&#39;&#x2F;index&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">            component:Home , &#x2F;&#x2F;它所對應的原件</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &#x2F;&#x2F;name:&#39;分頁&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">            path:&#39;&#x2F;page&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">            &#x2F;&#x2F;component:Page , &#x2F;&#x2F;它所對應的原件</span><br><span class="line">            components:&#123;</span><br><span class="line">                default: Page,</span><br><span class="line">                menu: Menu,</span><br><span class="line">            &#125;,</span><br><span class="line">            children:[</span><br><span class="line">                &#123;</span><br><span class="line">                    name:&#39;child1&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">                    path:&#39;&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">                    component:child_1 , &#x2F;&#x2F;它所對應的原件    </span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    name:&#39;child2&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">                    path:&#39;child2&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">                    component:child_2 , &#x2F;&#x2F;它所對應的原件      </span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                    name:&#39;child3&#39;,&#x2F;&#x2F;元件呈現名稱</span><br><span class="line">                    path:&#39;child3&#39;, &#x2F;&#x2F;對應虛擬的路徑</span><br><span class="line">                    component:child_3 , &#x2F;&#x2F;它所對應的原件      </span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;     </span><br><span class="line">    ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>你會發現你的網址在做路由切換的時候，<code>#</code>號不見了，<br><img src="/image/router_mode_history.png" alt="沒有#號的網址"><br>你要特別注意，當沒有<code>#</code>號的時候，它是使用後方的路由，不是只有使用前端的路由，<br>因此，當我們用<code>history</code>模式的時候，必須要前後端一起搭配，<br>所以，因為目前課堂上的專案只有使用前端路由，所以，不建議你在目前的專案上使用這種路由設定，除非之後有前後端一起搭配。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98-01/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -943,100 +1029,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/19/Bootstrap%E4%BD%9C%E5%93%81%E9%9B%86-%E6%8A%80%E5%B7%A7%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/19/Bootstrap%E4%BD%9C%E5%93%81%E9%9B%86-%E6%8A%80%E5%B7%A7%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">Bootstrap作品集_技巧筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-01-19 17:58:26" itemprop="dateCreated datePublished" datetime="2021-01-19T17:58:26+08:00">2021-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-30 15:10:05" itemprop="dateModified" datetime="2021-01-30T15:10:05+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bootstrap/" itemprop="url" rel="index"><span itemprop="name">Bootstrap</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>這邊記錄一下，我的Bootstrap作品集中有用到的技巧，不然都忘到爆XDD<br><a href="https://landy510.github.io/new_Bootstrap_portfolio/">Bootstrap作品集</a></p>
-<h1 id="紀錄在index-html頁面中，使用的當滑入時，照片會從模糊變成清楚"><a href="#紀錄在index-html頁面中，使用的當滑入時，照片會從模糊變成清楚" class="headerlink" title="紀錄在index.html頁面中，使用的當滑入時，照片會從模糊變成清楚"></a>紀錄在index.html頁面中，使用的當滑入時，照片會從模糊變成清楚</h1><iframe src="https://codepen.io/RandyChen/embed/wvzOwzZ?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>你可以看到，這邊的範例，總由四個部分所組成</p>
-<ol>
-<li>最外面的區塊 content</li>
-<li>蓋在區塊上的薄膜 cover</li>
-<li>區塊中的文字 text</li>
-<li>區塊中的圖片 content_img</li>
-</ol>
-<h2 id="第一區塊-content"><a href="#第一區塊-content" class="headerlink" title="第一區塊 content"></a>第一區塊 content</h2><p>首先，我們最外面的區域我是故意用a連結使用，用意是模擬，<br>如果今天要點及這個區塊來連動其他頁面的時候，就需要a連結。</p>
-<p>在這個a連結裡面我們先設定好它的寬度和高度。<br>接著，還為它設入<code>overflow:hidden</code>的特性，這個特性後面會說明為什麼要它。</p>
-<h2 id="第二區塊-cover"><a href="#第二區塊-cover" class="headerlink" title="第二區塊 cover"></a>第二區塊 cover</h2><p>第一<br>這個區域是蓋在整體區塊上方的薄膜。<br>我們利用定位的效果加入position:absolute, top:0, right:0, bottom:0, left:0。<br>為得是要讓這個區塊能夠完全展開覆蓋住父元素.content。</p>
-<p>第二，我們為它加z-index:1，因為，它要蓋在上方，並在文字下方，所以，設為1是ok的。<br>第三，加入filter:blur(5px);，讓它產生模糊的效果。<br>第四，我們為它加入transform:translateY(-400px)，為得是要讓它的區塊先位在整體區塊的-400px位置，<br>並在你滑入的時候，transform:translateY(0px)，會改成0px，所以，就有從上方往下方移入的效果。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/19/Bootstrap%E4%BD%9C%E5%93%81%E9%9B%86-%E6%8A%80%E5%B7%A7%E7%AD%86%E8%A8%98/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1106,7 +1098,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
