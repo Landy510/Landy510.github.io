@@ -164,6 +164,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">JavaScript ES6 課程筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-18 09:14:59" itemprop="dateCreated datePublished" datetime="2021-01-18T09:14:59+08:00">2021-01-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-04-27 16:30:40" itemprop="dateModified" datetime="2021-04-27T16:30:40+08:00">2021-04-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="使用let-與-const-宣告變數"><a href="#使用let-與-const-宣告變數" class="headerlink" title="使用let 與 const 宣告變數"></a>使用let 與 const 宣告變數</h1><p>ex: (var 宣告)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(mom); &#x2F;&#x2F; undefined</span><br><span class="line">var mom &#x3D; &#39;老媽&#39;;</span><br><span class="line">(function()&#123;</span><br><span class="line">    console.log(mom); &#x2F;&#x2F; 老媽</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>ex: (let 宣告)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(mom);  &#x2F;&#x2F; &quot;ReferenceError: Cannot access &#39;ming&#39; before initialization&quot;</span><br><span class="line">let mom &#x3D; &#39;老媽&#39;;</span><br><span class="line">(function()&#123;</span><br><span class="line">    console.log(mom); &#x2F;&#x2F; 老媽</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>以上這兩個宣告方法的差異可以看出來，用<code>let</code>宣告是沒有Hoisting的特性，<br>所以，導致在<code>let</code>定義變數之前，就取用該變數的話，會跳出在初始化該變數之前無法調用該變數的錯誤，<br>而<code>var</code>宣告是有Hoisting的特性，<br>所以，在<code>var</code>定義變數之前，就取用該變數的話，只會跳出<code>undefined</code>的值。</p>
+<h2 id="var-與-let-作用域的不同"><a href="#var-與-let-作用域的不同" class="headerlink" title="var 與 let 作用域的不同"></a>var 與 let 作用域的不同</h2><p><code>var</code>的作用域是function scope<br><code>let</code>的作用域是block</p>
+<p>ex: (var 作用域)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function varMing() &#123;</span><br><span class="line">    var ming &#x3D; &#39;小明&#39;;</span><br><span class="line">    if(true)&#123;</span><br><span class="line">        var ming &#x3D; &#39;傑哥&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(ming); &#x2F;&#x2F; 傑哥</span><br><span class="line">&#125;</span><br><span class="line">varMing()</span><br></pre></td></tr></table></figure>
+<p>以上範例可以看到，<code>if</code>判斷式的範圍跟外層的<code>var ming = &#39;小明&#39;</code>作用域範圍是相同的，<br>因為，它們都是存在同一個function scope裡面(即函式varMing裡面)，不要被<code>if</code>判斷式的花括號給誤導了，<br>所以，再重新定義一次變數ming是會影響最後變數ming的數值。</p>
+<p>ex:(let 作用域)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function varMing()&#123;</span><br><span class="line">    let ming &#x3D; &#39;小明&#39;;</span><br><span class="line">    if(true)&#123;</span><br><span class="line">        let ming &#x3D; &#39;傑哥&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(ming); &#x2F;&#x2F; 小明</span><br><span class="line">&#125;</span><br><span class="line">varMing()</span><br></pre></td></tr></table></figure>
+<p>以上這個範例可以看到，最終結果是小明，<br>原因是<code>let</code>的作用域是用block來區分，所以，<code>if</code>判斷式中的作用域跟外層的作用域是分開的，<br>所以，我們在<code>if</code>中再次對ming變數做定義，是不會影響到外層變數ming的值的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/11/Vuejs%E5%85%83%E4%BB%B603-%E5%85%83%E4%BB%B6%E6%8F%92%E6%A7%BD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -970,93 +1064,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/07/scss%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/07/scss%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">scss筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-01-07 10:40:32" itemprop="dateCreated datePublished" datetime="2021-01-07T10:40:32+08:00">2021-01-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-30 15:12:27" itemprop="dateModified" datetime="2021-01-30T15:12:27+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/scss/" itemprop="url" rel="index"><span itemprop="name">scss</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="在VSCode的編譯器中安裝live-sass"><a href="#在VSCode的編譯器中安裝live-sass" class="headerlink" title="在VSCode的編譯器中安裝live sass"></a>在VSCode的編譯器中安裝live sass</h2><p><img src="/image/live_sass.png"><br>我是在我的vscode的編譯器裡面安裝這個live sass的擴充軟體。<br>接著，你新增一個檔案，其檔名叫做all.scss。<br>再來你對這個all.scss檔案按下編譯器右下角的一個按鈕”Watch Sass”，<br><img src="/image/live_sass_watch.png"><br>按下去之後，你應該會看到跟all.scss檔案相同目錄下，會自動產出一個all.css檔案。<br><img src="/image/live_sass_all_css.png"><br>之後，你只要在all.scss檔案裡面新增或修改任何css樣式，只要你按下存檔，<br>live sass就會將你修改的css樣式內容，同步更新到all.css檔案裡面。</p>
-<p>注意~~~~但是，你的專案檔要引入的css檔案是all.css喔，不是all.scss檔案喔!!</p>
-<h2 id="修改live-sass軟體產出all-css檔案的路徑"><a href="#修改live-sass軟體產出all-css檔案的路徑" class="headerlink" title="修改live sass軟體產出all.css檔案的路徑"></a>修改live sass軟體產出all.css檔案的路徑</h2><p>live sass這個軟件，它預設產出的all.css檔案的路徑，會跟all.scss檔案在相同目錄下。<br>但是，你想要分隔管理all.css檔案和all.scss檔案的話，就需要修改live sass軟件預設的產出all.css檔案路徑。</p>
-<p><img src="/image/live_scss_step1.png"><br><img src="/image/live_scss_step2.png"><br>接著，上圖中的step1的紅框中，有”使用者”和”工作區”兩個選項，<br>這兩個選項的意思是<br>“使用者”:代表你接下來的設定，會是全域的設定，即每個專案都會被這個設定影響到。<br>“工作區”:代表只有你現在使用的這個專案檔，會被你這個設定影響到。</p>
-<p>我這邊只希望只有修改正在使用的專案它的live sass的產出all.css的路徑，所以，我會選擇”工作區”這個選項。<br><img src="/image/live_scss_step3.png"><br>當你按下上一張圖中的step2按下的鈕時，就會跳出這張圖中的settings.json檔案。<br>接著，你就把圖中的code貼進去這個settings.json檔案中。</p>
-<p>這段code你可以在live sass的軟件的官方文件就可以找到囉。</p>
-<p>那這段code有三個項目，<br>第一個format項目    -&gt; 代表產出的檔案格式是壓縮檔<br>第二個extension項目 -&gt; 代表產出的檔案的檔名<br>第三個savePath項目  -&gt; 代表產出的all.css檔案路徑設定<br>那你就可以在第三個savePath項目就可以設定你這個專案產出的all.css要產出在哪裡囉。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/07/scss%E7%AD%86%E8%A8%98/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1126,7 +1133,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-count">106</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

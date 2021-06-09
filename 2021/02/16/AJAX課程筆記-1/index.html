@@ -20,18 +20,20 @@
     var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="什麼是 AJAX？AJAX可以達到不需要重新刷新頁面，而達到跟後端取得相對應資料的效果。 課程名稱: 透過 XMLHttpRequest 物件跨瀏覽器撈資料第一，我們會先創建一個XMLHttpRequest的物件，並利用這個物件去跟伺服器做互動。 第二，當XMLHttpRequest的物件創立成功時，我們會利用open這個函式來決定我們是要從伺服器端撈資料過來 或是 丟資料到伺服器端即 12var">
+  <meta name="description" content="網路請求的過程在我們了解 Ajax 之前，我們先了解一下，發送網路請求中間會發生什麼事? 什麼是網路請求當我們在 chrome 上輸入一個 IP ，並按下 enter ，此時我們已經發送一個請求改目標端的伺服器，當目標端的伺服器確認我們的身分沒問題後，它會去他們自己家的資料庫取出資料，並吐給我們，此時，我們這端的瀏覽器就可以拿到對方吐回來的資料囉。以上的這個請求和傳輸的過程就是發送一個網路請求會經">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AJAX課程筆記-1">
 <meta property="og:url" content="https://landy510.github.io/2021/02/16/AJAX%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-1/index.html">
 <meta property="og:site_name" content="Landy Blog">
-<meta property="og:description" content="什麼是 AJAX？AJAX可以達到不需要重新刷新頁面，而達到跟後端取得相對應資料的效果。 課程名稱: 透過 XMLHttpRequest 物件跨瀏覽器撈資料第一，我們會先創建一個XMLHttpRequest的物件，並利用這個物件去跟伺服器做互動。 第二，當XMLHttpRequest的物件創立成功時，我們會利用open這個函式來決定我們是要從伺服器端撈資料過來 或是 丟資料到伺服器端即 12var">
+<meta property="og:description" content="網路請求的過程在我們了解 Ajax 之前，我們先了解一下，發送網路請求中間會發生什麼事? 什麼是網路請求當我們在 chrome 上輸入一個 IP ，並按下 enter ，此時我們已經發送一個請求改目標端的伺服器，當目標端的伺服器確認我們的身分沒問題後，它會去他們自己家的資料庫取出資料，並吐給我們，此時，我們這端的瀏覽器就可以拿到對方吐回來的資料囉。以上的這個請求和傳輸的過程就是發送一個網路請求會經">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/image/Ajax_transfer.png">
 <meta property="article:published_time" content="2021-02-16T08:50:12.000Z">
-<meta property="article:modified_time" content="2021-02-16T08:54:56.473Z">
+<meta property="article:modified_time" content="2021-06-09T14:24:16.753Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="AJAX">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/image/Ajax_transfer.png">
 
 <link rel="canonical" href="https://landy510.github.io/2021/02/16/AJAX%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-1/">
 
@@ -192,10 +194,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2021-02-16 16:50:12 / 修改時間：16:54:56" itemprop="dateCreated datePublished" datetime="2021-02-16T16:50:12+08:00">2021-02-16</time>
+              <time title="創建時間：2021-02-16 16:50:12" itemprop="dateCreated datePublished" datetime="2021-02-16T16:50:12+08:00">2021-02-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-06-09 22:24:16" itemprop="dateModified" datetime="2021-06-09T22:24:16+08:00">2021-06-09</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -217,7 +225,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="什麼是-AJAX？"><a href="#什麼是-AJAX？" class="headerlink" title="什麼是 AJAX？"></a>什麼是 AJAX？</h1><p>AJAX可以達到不需要重新刷新頁面，而達到跟後端取得相對應資料的效果。</p>
+        <h1 id="網路請求的過程"><a href="#網路請求的過程" class="headerlink" title="網路請求的過程"></a>網路請求的過程</h1><p>在我們了解 Ajax 之前，我們先了解一下，發送網路請求中間會發生什麼事?</p>
+<h2 id="什麼是網路請求"><a href="#什麼是網路請求" class="headerlink" title="什麼是網路請求"></a>什麼是網路請求</h2><p>當我們在 chrome 上輸入一個 IP ，並按下 enter ，此時我們已經發送一個請求改目標端的伺服器，當目標端的伺服器確認我們的身分沒問題後，<br>它會去他們自己家的資料庫取出資料，並吐給我們，此時，我們這端的瀏覽器就可以拿到對方吐回來的資料囉。<br>以上的這個請求和傳輸的過程就是發送一個網路請求會經過的過程。</p>
+<h2 id="網頁請求過程"><a href="#網頁請求過程" class="headerlink" title="網頁請求過程"></a>網頁請求過程</h2><p>上面我們介紹了網路請求的過程。那經過網路請求，我們會先獲得該目標網站的 HTML 文本檔，接著，瀏覽器會去解析這個 HTML 文本的內容，<br>若在解析的過程中，遇到需要向外獲取像是 CSS, img, js 這類的檔案，瀏覽器就會對目標資料庫發出請求，而這種透過解析網站的 HTML 文本<br>所發出的請求，我們就可以稱為網頁請求。<br><img src="/image/Ajax_transfer.png" alt="瀏覽器和伺服器之間的傳輸圖"></p>
+<h2 id="瀏覽器-request-Header"><a href="#瀏覽器-request-Header" class="headerlink" title="瀏覽器 request Header"></a>瀏覽器 request Header</h2><p>當瀏覽器發送請求時，會夾帶一些瀏覽器本身的資訊，像是它是屬於哪一種伺服器、它的 IP 是多少等等的資訊。那放這些內容的地方通常都會在 request header 中，<br>找得到。</p>
+<h2 id="伺服器-response-Header"><a href="#伺服器-response-Header" class="headerlink" title="伺服器 response Header"></a>伺服器 response Header</h2><p>那在伺服器回傳給瀏覽器的資料夾，會有 response Header，那它會夾帶著這個回傳的資料是什麼格式(像是 text/html)，讓瀏覽器可以因應這個格式，去做相對應的呈現。<br>另外，回傳的資料會放在 response 裡面，像是回傳的 html 文本內容，就會被放在 response 裡面。<br>記得，response header 和 response 它們回傳的不一樣的喔。</p>
+<p>以上的內容就是瀏覽器發送請求給伺服器，然後，在他們之間會傳送什麼樣的文件的內容。<br>那接下來我們就來介紹 Ajax 在幹嘛吧。</p>
+<h1 id="什麼是-AJAX？"><a href="#什麼是-AJAX？" class="headerlink" title="什麼是 AJAX？"></a>什麼是 AJAX？</h1><p>AJAX可以達到不需要重新刷新頁面，而達到跟後端取得相對應資料的效果。</p>
 <p>課程名稱: 透過 XMLHttpRequest 物件跨瀏覽器撈資料<br>第一，<br>我們會先創建一個XMLHttpRequest的物件，並利用這個物件去跟伺服器做互動。</p>
 <p>第二，<br>當XMLHttpRequest的物件創立成功時，我們會利用open這個函式來決定我們是要從伺服器端撈資料過來 或是 丟資料到伺服器端<br>即</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var ptr &#x3D; new XMLHttpRequest();</span><br><span class="line">ptr.open(&#39;get&#39;, &#39;你要擷取資料的網址&#39;, true);</span><br></pre></td></tr></table></figure>
@@ -317,7 +331,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-AJAX%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什麼是 AJAX？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AJAX-%E9%9D%9E%E5%90%8C%E6%AD%A5%E8%A7%80%E5%BF%B5-%E4%B8%8A"><span class="nav-number">2.</span> <span class="nav-text">AJAX 非同步觀念 (上)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AJAX-%E9%9D%9E%E5%90%8C%E6%AD%A5%E8%A7%80%E5%BF%B5-%E4%B8%8B"><span class="nav-number">3.</span> <span class="nav-text">AJAX 非同步觀念 (下)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP%E7%8B%80%E6%85%8B%E7%A2%BC"><span class="nav-number">4.</span> <span class="nav-text">HTTP狀態碼</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B6%B2%E8%B7%AF%E8%AB%8B%E6%B1%82%E7%9A%84%E9%81%8E%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">網路請求的過程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E7%B6%B2%E8%B7%AF%E8%AB%8B%E6%B1%82"><span class="nav-number">1.1.</span> <span class="nav-text">什麼是網路請求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B6%B2%E9%A0%81%E8%AB%8B%E6%B1%82%E9%81%8E%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">網頁請求過程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%80%8F%E8%A6%BD%E5%99%A8-request-Header"><span class="nav-number">1.3.</span> <span class="nav-text">瀏覽器 request Header</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%BA%E6%9C%8D%E5%99%A8-response-Header"><span class="nav-number">1.4.</span> <span class="nav-text">伺服器 response Header</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-AJAX%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">什麼是 AJAX？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AJAX-%E9%9D%9E%E5%90%8C%E6%AD%A5%E8%A7%80%E5%BF%B5-%E4%B8%8A"><span class="nav-number">3.</span> <span class="nav-text">AJAX 非同步觀念 (上)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AJAX-%E9%9D%9E%E5%90%8C%E6%AD%A5%E8%A7%80%E5%BF%B5-%E4%B8%8B"><span class="nav-number">4.</span> <span class="nav-text">AJAX 非同步觀念 (下)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP%E7%8B%80%E6%85%8B%E7%A2%BC"><span class="nav-number">5.</span> <span class="nav-text">HTTP狀態碼</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -331,7 +345,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-count">106</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

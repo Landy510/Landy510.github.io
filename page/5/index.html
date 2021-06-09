@@ -164,6 +164,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/16/AJAX%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/16/AJAX%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-1/" class="post-title-link" itemprop="url">AJAX課程筆記-1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-02-16 16:50:12" itemprop="dateCreated datePublished" datetime="2021-02-16T16:50:12+08:00">2021-02-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-06-09 22:24:16" itemprop="dateModified" datetime="2021-06-09T22:24:16+08:00">2021-06-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AJAX/" itemprop="url" rel="index"><span itemprop="name">AJAX</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="網路請求的過程"><a href="#網路請求的過程" class="headerlink" title="網路請求的過程"></a>網路請求的過程</h1><p>在我們了解 Ajax 之前，我們先了解一下，發送網路請求中間會發生什麼事?</p>
+<h2 id="什麼是網路請求"><a href="#什麼是網路請求" class="headerlink" title="什麼是網路請求"></a>什麼是網路請求</h2><p>當我們在 chrome 上輸入一個 IP ，並按下 enter ，此時我們已經發送一個請求改目標端的伺服器，當目標端的伺服器確認我們的身分沒問題後，<br>它會去他們自己家的資料庫取出資料，並吐給我們，此時，我們這端的瀏覽器就可以拿到對方吐回來的資料囉。<br>以上的這個請求和傳輸的過程就是發送一個網路請求會經過的過程。</p>
+<h2 id="網頁請求過程"><a href="#網頁請求過程" class="headerlink" title="網頁請求過程"></a>網頁請求過程</h2><p>上面我們介紹了網路請求的過程。那經過網路請求，我們會先獲得該目標網站的 HTML 文本檔，接著，瀏覽器會去解析這個 HTML 文本的內容，<br>若在解析的過程中，遇到需要向外獲取像是 CSS, img, js 這類的檔案，瀏覽器就會對目標資料庫發出請求，而這種透過解析網站的 HTML 文本<br>所發出的請求，我們就可以稱為網頁請求。<br><img src="/image/Ajax_transfer.png" alt="瀏覽器和伺服器之間的傳輸圖"></p>
+<h2 id="瀏覽器-request-Header"><a href="#瀏覽器-request-Header" class="headerlink" title="瀏覽器 request Header"></a>瀏覽器 request Header</h2><p>當瀏覽器發送請求時，會夾帶一些瀏覽器本身的資訊，像是它是屬於哪一種伺服器、它的 IP 是多少等等的資訊。那放這些內容的地方通常都會在 request header 中，<br>找得到。</p>
+<h2 id="伺服器-response-Header"><a href="#伺服器-response-Header" class="headerlink" title="伺服器 response Header"></a>伺服器 response Header</h2><p>那在伺服器回傳給瀏覽器的資料夾，會有 response Header，那它會夾帶著這個回傳的資料是什麼格式(像是 text/html)，讓瀏覽器可以因應這個格式，去做相對應的呈現。<br>另外，回傳的資料會放在 response 裡面，像是回傳的 html 文本內容，就會被放在 response 裡面。<br>記得，response header 和 response 它們回傳的不一樣的喔。</p>
+<p>以上的內容就是瀏覽器發送請求給伺服器，然後，在他們之間會傳送什麼樣的文件的內容。<br>那接下來我們就來介紹 Ajax 在幹嘛吧。</p>
+<h1 id="什麼是-AJAX？"><a href="#什麼是-AJAX？" class="headerlink" title="什麼是 AJAX？"></a>什麼是 AJAX？</h1><p>AJAX可以達到不需要重新刷新頁面，而達到跟後端取得相對應資料的效果。</p>
+<p>課程名稱: 透過 XMLHttpRequest 物件跨瀏覽器撈資料<br>第一，<br>我們會先創建一個XMLHttpRequest的物件，並利用這個物件去跟伺服器做互動。</p>
+<p>第二，<br>當XMLHttpRequest的物件創立成功時，我們會利用open這個函式來決定我們是要從伺服器端撈資料過來 或是 丟資料到伺服器端<br>即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var ptr &#x3D; new XMLHttpRequest();</span><br><span class="line">ptr.open(&#39;get&#39;, &#39;你要擷取資料的網址&#39;, true);</span><br></pre></td></tr></table></figure>
+<p>上面的第二行程式碼，open的三個參數代表的意義分別為<br>格式: 最常用的是<code>get</code> (從伺服器端拿資料回來)、<code>post</code>(從本地端丟資料到伺服器端)<br>網址: 將資料源的網址放到這個欄位裡面<br>同步 或 非同步: 當此引數為<code>true</code>(非同步) 而 當此引數為<code>false</code>(同步)</p>
+<p>第三，<br>我們可以利用XMLHttpRequest物件回傳的readyState的值，來判斷本地端和伺服器端彼此之間的關係<br>當readyState = 0，代表XMLHttpRequest物件還沒有完成初始化，還沒有連結到你要撈的資料<br>當readyState = 1，你用了open()，但你還沒有把資料傳過去<br>當readyState = 2，偵測到你有用send()<br>當readyState = 3，loading<br>當readyState = 4，你撈到資料了，數據已經完全接收</p>
+<p>第四，<br>利用XMLHttpRequest物件的send函式<br><code>ptr.send(null);</code></p>
+<p>以上這行在send裡面放入null的原因是因為，我並沒有要送資料到資料端，所以，放null，<br>而當你使用完send函式之後，你看ptr回傳的readyState的值應該會是回傳4，代表已經撈到資料了，<br>接著，你再看responseText這個屬性值，應該就有把資料端的資料讀近來了。<br>而為什麼readyState會直接從1跳到4呢，是因為這次的練習範例的內容很少，<br>所以，讀取資料端的速度很快，其實是有經過2 和 3的過程，只是太快了，你看不到，所以，才會有這種錯覺~~</p>
+<h1 id="AJAX-非同步觀念-上"><a href="#AJAX-非同步觀念-上" class="headerlink" title="AJAX 非同步觀念 (上)"></a>AJAX 非同步觀念 (上)</h1><p>這邊講解XMLHttpRequest物件的open函式的第三個引數的用意<br>若</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ptr.open(&#39;get&#39;, &#39;你要擷取資料的網址&#39;, true);</span><br><span class="line">ptr.send(null);</span><br><span class="line">console.log(ptr.responseText);</span><br></pre></td></tr></table></figure>
+<p>若你在open的第三個引數放入true，你會發現在<code>console.log(ptr.responseText)</code> 出現的內容式空的，<br>若你今天把true改成false時，此時<code>console.log(ptr.responseText)</code>就有資料源的內容。<br>而以上這個現象就是Ajax同步與非同步的體現<br>當第三個引數等於<code>true</code>時，代表非同步，不會等資料傳回來，就讓程式繼續往下跑，等到回傳才會自動回傳<br>當第三個引數等於<code>false</code>時，代表同步，它等資料傳回來，才讓程式繼續往下跑</p>
+<h1 id="AJAX-非同步觀念-下"><a href="#AJAX-非同步觀念-下" class="headerlink" title="AJAX 非同步觀念 (下)"></a>AJAX 非同步觀念 (下)</h1><p>這個小節在講解，當你的AJAX是在非同步的狀態下，要怎在資料回傳的時候，將資料或取出來<br>例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var ptr &#x3D; new XMLHttpRequest();</span><br><span class="line">ptr.open(&#39;get&#39;,&#39;資料源網址&#39;,true);</span><br><span class="line">ptr.send(null);</span><br><span class="line"></span><br><span class="line">ptr.onload &#x3D; function()&#123;</span><br><span class="line">   console.log(ptr.responseText);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上這個onload事件，就是用在當AJAX非同步時，當資料回傳時，就可以把資料源的資料擷取回來。</p>
+<h1 id="HTTP狀態碼"><a href="#HTTP狀態碼" class="headerlink" title="HTTP狀態碼"></a>HTTP狀態碼</h1><p>這小節是在說明你可以利用XMLHttpRequest物件回傳的status屬性值，來判斷你是否有正確地將資料源的資料擷取回來。<br>當status 是200，代表你是從正確的資料源拮取資料<br>當status 是404，代表你是從錯誤的資料源拮取資料<br>例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var ptr &#x3D; new XMLHttpRequest();</span><br><span class="line">ptr.open(&#39;get&#39;,&#39;資料源網址&#39;,true);</span><br><span class="line">ptr.send(null);</span><br><span class="line"></span><br><span class="line">ptr.onload &#x3D; function()&#123;</span><br><span class="line">   if(ptr.status &#x3D;&#x3D; 200)&#123;</span><br><span class="line">      console.log(ptr.responseText);</span><br><span class="line">   &#125;else &#123;</span><br><span class="line">      console.log(&quot;資料錯誤!!&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以看到在ptr的onload事件裡面，你可以利用status的屬性值來寫保護，當回傳是200時，才去截取資料源的資料，若不是就顯示資料錯誤的提示訊息。<br>另外，onload事件是代表加載完成後立即發生，以上面的範例為例，代表當ptr物件加載完成後，才會觸發後面function的內容。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/13/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-localStorage%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -945,84 +1041,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/01/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-shopping%E9%A0%81%E9%9D%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/01/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-shopping%E9%A0%81%E9%9D%A2/" class="post-title-link" itemprop="url">vue出一個電商網站-shopping頁面</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2021-02-01 10:28:43 / 修改時間：11:00:15" itemprop="dateCreated datePublished" datetime="2021-02-01T10:28:43+08:00">2021-02-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>這邊紀錄的內容是專門撰寫有關使用者在使用的shopping的頁面，<br>跟之前紀錄的管理者在使用的狀態是不一樣的喔~~</p>
-<h1 id="Dashboard-新增模擬購物頁面-新增卡片式產品列表"><a href="#Dashboard-新增模擬購物頁面-新增卡片式產品列表" class="headerlink" title="Dashboard 新增模擬購物頁面 - 新增卡片式產品列表"></a>Dashboard 新增模擬購物頁面 - 新增卡片式產品列表</h1><p>step1.<br>首先，先在pages資料夾中，新建一個CustomerOrder的元件檔。<br>step2.<br>在index.js中引入這個CustomerOrder元件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">---index.js檔案---</span><br><span class="line">import CustomerOrder from &#39;@&#x2F;components&#x2F;pages&#x2F;CustomerOrder&#39;  &#x2F;&#x2F; 引入CustomerOrder元件</span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line">export default new Router(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#39;*&#39;,</span><br><span class="line">      redirect:&#39;login&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path:&#39;&#x2F;login&#39;,</span><br><span class="line">      name: &#39;Login&#39;,</span><br><span class="line">      component: Login</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;admin&#39;,</span><br><span class="line">      name: &#39;HelloWorld&#39;,</span><br><span class="line">      component: DashBoard,</span><br><span class="line">      meta: &#123; requiresAuth: true &#125;,</span><br><span class="line">      children:[</span><br><span class="line">        &#123;</span><br><span class="line">          path:&#39;products&#39;,</span><br><span class="line">          name: &#39;Products&#39;,</span><br><span class="line">          component: Products,</span><br><span class="line">          meta: &#123; requiresAuth: true &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          path:&#39;order&#39;,</span><br><span class="line">          name: &#39;order&#39;,</span><br><span class="line">          component: Order,</span><br><span class="line">          meta: &#123; requiresAuth: true &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          path:&#39;coupon&#39;,</span><br><span class="line">          name: &#39;coupon&#39;,</span><br><span class="line">          component: Coupon,</span><br><span class="line">          meta: &#123; requiresAuth: true &#125;,</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;  &#x2F;&#x2F; 引入 CustomerOrder的路徑</span><br><span class="line">      path: &#39;&#x2F;&#39;,</span><br><span class="line">      name: &#39;HelloWorld&#39;,</span><br><span class="line">      component: DashBoard,</span><br><span class="line">      children:[</span><br><span class="line">        &#123;</span><br><span class="line">          path:&#39;customer_order&#39;,</span><br><span class="line">          name: &#39;CustomerOrder&#39;,</span><br><span class="line">          component: CustomerOrder,</span><br><span class="line">        &#125;,</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>這邊要注意一下CustomerOrder的路徑，它就不是掛在admin後面，是直接首頁的後面，<br>而且這個頁面也不需要驗證就可以登入進去，因為，它是使用者在用的頁面。<br>不過，要特別注意的是，它也是屬於DahBoard的巢狀router之一喔。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/01/vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-shopping%E9%A0%81%E9%9D%A2/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1092,7 +1110,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-count">106</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
