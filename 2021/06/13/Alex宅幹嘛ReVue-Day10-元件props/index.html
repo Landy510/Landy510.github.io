@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Alex宅幹嘛ReVue-Day10 介紹元件props">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Alex宅幹嘛ReVue-Day10-元件props">
+<meta property="og:url" content="https://landy510.github.io/2021/06/13/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day10-%E5%85%83%E4%BB%B6props/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="Alex宅幹嘛ReVue-Day10 介紹元件props">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-06-13T09:12:44.000Z">
+<meta property="article:modified_time" content="2021-06-13T09:21:44.604Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2021/06/13/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day10-%E5%85%83%E4%BB%B6props/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Alex宅幹嘛ReVue-Day10-元件props | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/06/13/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day10-%E5%85%83%E4%BB%B6props/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Alex宅幹嘛ReVue-Day10-元件props
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-06-13 17:12:44 / 修改時間：17:21:44" itemprop="dateCreated datePublished" datetime="2021-06-13T17:12:44+08:00">2021-06-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">Alex宅幹嘛ReVue-Day10 介紹元件props</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>這個單元在說明 props 的特性</p>
+<h1 id="Passing-a-Boolean"><a href="#Passing-a-Boolean" class="headerlink" title="Passing a Boolean"></a>Passing a Boolean</h1><p>當某個元件的 props 限定傳入的值的型別是布林型別。 那我們直接將該 props 放在該元件的標籤中不用傳入任何值，它預設傳入的值會是 true 。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;basic-component :basic-name&#x3D;&quot;name&quot; active&gt;&lt;&#x2F;basic-component&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template:&#96;&lt;div&gt;&#123;&#123; basicName &#125;&#125;&lt;&#x2F;div&gt;&#96;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    basicName: String,</span><br><span class="line">    active: Boolean,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(&#39;basic-component&#39;, BasicComponent)</span><br></pre></td></tr></table></figure>
+<p>你可以看到 active 這個 props 我們沒有為它設入任何值，他預設會傳入 true 。</p>
+<a id="more"></a>
+<h1 id="當要綁定很多屬性時，使用-v-bind"><a href="#當要綁定很多屬性時，使用-v-bind" class="headerlink" title="當要綁定很多屬性時，使用 v-bind"></a>當要綁定很多屬性時，使用 v-bind</h1><p>當我們在某一個元件標籤上要傳入很多屬性時，我們可以將這些屬性都加到某一個物件中，並用 v-bind 來達成一樣的效果。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;basic-component v-bind&#x3D;&quot;basicBind&quot;&gt;&lt;&#x2F;basic-component&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template:&#96;&lt;div&gt;&#123;&#123; basicName &#125;&#125;&lt;&#x2F;div&gt;&#96;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    basicName: String,</span><br><span class="line">    active: Boolean,</span><br><span class="line">    &#39;is-active&#39;: Boolean</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(&#39;basic-component&#39;, BasicComponent)</span><br><span class="line"></span><br><span class="line">new Vue (&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    name: &#39;Landy&#39;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    basicBind () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        &#39;basic-name&#39;: this.name,</span><br><span class="line">        active: true,</span><br><span class="line">        &#39;is-active&#39;: true</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>你可以看到以上的範例，我們直接用 basicBind 將我們要傳入的屬性包起來，並用 v-bind 來將這個物件內容傳進來。 就等同於我們一個屬性一個屬性綁定的效果是一樣的。 </p>
+<h1 id="Vue-元件的-props-定義寫法"><a href="#Vue-元件的-props-定義寫法" class="headerlink" title="Vue 元件的 props 定義寫法"></a>Vue 元件的 props 定義寫法</h1><p>Alex 大大是比較常使用最完整的寫法<br>props 自身其實有以下幾種屬性，分別為<br>type: 傳入資料型別<br>required: 是否為必填，若 true 則必填，若 false 則非必填<br>default: 預設內容<br>validator: 藉由傳進來的值，判斷是否符合內容，藉此來回傳 true 或 false </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;div&gt;&lt;&#x2F;div&gt;&#96;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    propC: &#123;</span><br><span class="line">      type: String,</span><br><span class="line">      default: &#39;default&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    propC: &#123;</span><br><span class="line">      type: String,</span><br><span class="line">      required: true</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(&#39;basic-component&#39;, BasicComponent)</span><br></pre></td></tr></table></figure>
+
+<h2 id="props-的-validator-屬性"><a href="#props-的-validator-屬性" class="headerlink" title="props 的 validator 屬性"></a>props 的 validator 屬性</h2><p>這個屬性上面有講過，可以判斷傳進來的值，是否符合內容。<br>這種功能可以將使用者輸入的內容控制在自己可以預期的狀態內容，若輸入預期外的內容，就可以發現了。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;basic-component basic-name&#x3D;&quot;danger&quot;&gt;&lt;&#x2F;basic-component </span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template:&#96;&lt;div&gt;&#123;&#123; basicName &#125;&#125;&lt;&#x2F;div&gt;&#96;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    basicName: &#123;</span><br><span class="line">      type: String,</span><br><span class="line">      default: &#39;XXX&#39;,</span><br><span class="line">      validator: function (value) &#123;</span><br><span class="line">        return [&#39;success&#39;, &#39;danger&#39;].indexOf(value) !&#x3D;&#x3D; -1</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(&#39;basic-component&#39;, BasicComponent)</span><br></pre></td></tr></table></figure>
+<p>上面這個範例我們直接傳入字串 danger，就會符合 validator 的陣列內容，並回傳 true。</p>
+<h1 id="Non-Prop-Attributes"><a href="#Non-Prop-Attributes" class="headerlink" title="Non-Prop Attributes"></a>Non-Prop Attributes</h1><p>這種 attribute 被寫在 Vue 元件上，但沒有被定義在這個 Vue 的 props 中。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;input-component checked&gt;&lt;&#x2F;input-component&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const InputComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;label&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;checkbox&quot;&gt;</span><br><span class="line">  &lt;&#x2F;label&gt;&#96;</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(&#39;input-component&#39;, InputComponent)</span><br></pre></td></tr></table></figure>
+<p>以上這個範例中的 checked 屬性就沒有被定義在元件 input-component 的 props 中，但我們還是將他加在 input-component 上，此時，這個屬性會自動的被加在這個這個元件的 template 中的第一層 DOM 上，<br>以上面這個範例為例，第一層 DOM 是 label ，所以，該 checked 的屬性會直接被加在 label 但這不是我們要的效果，我們希望它加在內層的 input 元素上，所以，這時候我們就要引入 inheritAttrs: false 和 $attrs 的功用了。</p>
+<h2 id="移除繼承元件屬性的效果"><a href="#移除繼承元件屬性的效果" class="headerlink" title="移除繼承元件屬性的效果"></a>移除繼承元件屬性的效果</h2><p>我們利用 inheritAttrs: false 和 $attrs 的功用來達到移除繼承元件屬性的效果。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;input-component checked&#x3D;&quot;checked&quot;&gt;&lt;&#x2F;input-component&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const InputComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;label&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;checkbox&quot; v-bind&#x3D;&quot;$attrs&quot;&gt;</span><br><span class="line">  &lt;&#x2F;label&gt;&#96;,</span><br><span class="line">  inheritAttrs: false</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(&#39;input-component&#39;, InputComponent)</span><br></pre></td></tr></table></figure>
+<p>可以看到我們加上了 inheritAttrs: false 在該元件的定義中，並把 v-bind = “$attrs” 加在想繼承該元件屬性的 input 元素上。<br>另外，也要注意我們在元件上的 checked 就有為它再賦值 checked ，而不是只有單純寫一個 checked 在上面而已。<br>經過以上的處理我們就能將 checked=”checked” 的效果傳到 input 元素中了，不然，在你將自動繼承的。功能關掉的時候， Vue 會預設將元件上所加的屬性值設為空值。</p>
+<h2 id="Replacing-Merging-with-Existing-Attributes"><a href="#Replacing-Merging-with-Existing-Attributes" class="headerlink" title="Replacing/Merging with Existing Attributes"></a>Replacing/Merging with Existing Attributes</h2><h3 id="class-的合併情況"><a href="#class-的合併情況" class="headerlink" title="class 的合併情況"></a>class 的合併情況</h3><p>在使用手冊上有說 Vue 會將加在 component 上的 class 和在該 component 中的 元素的 class 合併在一起。</p>
+<h3 id="style-的合併情況"><a href="#style-的合併情況" class="headerlink" title="style 的合併情況"></a>style 的合併情況</h3><p>那 style 的部分也是會合併在一起，但是要特別注意的是，如果你的 component 上的 style 和 template 中的第一層 DOM 的 style 有相同的 css 樣式的時候，template 內的 style 會被 component 上的樣式給覆蓋掉喔。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;basic-component basic-name&#x3D;&quot;danger&quot; style&#x3D;&quot;background-color: blue;&quot;&gt;&lt;&#x2F;basic-component&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template:&#96;&lt;div style&#x3D;&quot;background-color: red;&quot;&gt;</span><br><span class="line">	  &lt;div&gt;</span><br><span class="line">		&#123;&#123; basicName &#125;&#125;  </span><br><span class="line">	  &lt;&#x2F;div&gt;</span><br><span class="line">	&lt;&#x2F;div&gt;&#96;</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(&#39;basic-component&#39;, BasicComponent)</span><br></pre></td></tr></table></figure>
+<p>上面這個範例中，在 component 上的 background-color: blue 會覆蓋掉第一層 DOM 的 background-color: red 。</p>
+<h1 id="Alex-宅幹嘛-眉眉角角"><a href="#Alex-宅幹嘛-眉眉角角" class="headerlink" title="Alex 宅幹嘛 - 眉眉角角"></a>Alex 宅幹嘛 - 眉眉角角</h1><h2 id="props-自動轉成字串型別"><a href="#props-自動轉成字串型別" class="headerlink" title="props 自動轉成字串型別"></a>props 自動轉成字串型別</h2><p>如果沒有將 v-bind 加到元件的 props 的話，傳入的資料型別會自動被轉為字串型別<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;basic-component basic-name&#x3D;&quot;Landy&quot;&gt;&lt;&#x2F;&gt;basic-component </span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;div&gt;&#123;&#123;  basicName &#125;&#125;&lt;&#x2F;div&gt;&#96;,</span><br><span class="line">  props: [&#39;basicName&#39;]</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(&#39;basic-component&#39;, BasicComponent)</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以上這個範例  basicName 的 props 部分直接傳入 Landy，因為它沒有被用 v-bind 做綁定，所以這筆 Landy 資料會直接被轉為字串型別。 </p>
+<h2 id="限定傳入的-props-資料型別"><a href="#限定傳入的-props-資料型別" class="headerlink" title="限定傳入的 props 資料型別"></a>限定傳入的 props 資料型別</h2><p>限定傳入的 props 資料型別，卻沒有為該 props 用 v-bind 綁定<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;basic-component basic-name&#x3D;&quot;Landy&quot;&gt;&lt;&#x2F;basic-component&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template:&#96;&lt;div&gt;&#123;&#123; basicName  &#125;&#125;&lt;&#x2F;div&gt;&#96;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    basicName: Number</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Vue.component(&#39;basic-component&#39;, BasicComponent)</span><br></pre></td></tr></table></figure>
+<p>你可以看到以上的範例，我們限制 BasicComponent 的  basicName 傳入的資料型別要為 Number，但我們卻沒有為這個 props 加上 v-bind ，此時，你的瀏覽器就會報錯囉。<br>也就是說，若你今天希望傳入的資料型別改變可能改成數字型別、陣列 或 物件型別，那你就一定要為該 props 加上 v-bind 喔。<br>這個傳入資料的小細節要特別注意優~ </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/13/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day10-%E5%85%83%E4%BB%B6%E5%8D%80%E5%9F%9F%E8%A8%BB%E5%86%8A%E5%92%8C%E5%85%A8%E5%9F%9F%E8%A8%BB%E5%86%8A/" rel="prev" title="Alex宅幹嘛ReVue-Day10-元件區域註冊和全域註冊">
+      <i class="fa fa-chevron-left"></i> Alex宅幹嘛ReVue-Day10-元件區域註冊和全域註冊
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Passing-a-Boolean"><span class="nav-number">1.</span> <span class="nav-text">Passing a Boolean</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%95%B6%E8%A6%81%E7%B6%81%E5%AE%9A%E5%BE%88%E5%A4%9A%E5%B1%AC%E6%80%A7%E6%99%82%EF%BC%8C%E4%BD%BF%E7%94%A8-v-bind"><span class="nav-number">2.</span> <span class="nav-text">當要綁定很多屬性時，使用 v-bind</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-%E5%85%83%E4%BB%B6%E7%9A%84-props-%E5%AE%9A%E7%BE%A9%E5%AF%AB%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">Vue 元件的 props 定義寫法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#props-%E7%9A%84-validator-%E5%B1%AC%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">props 的 validator 屬性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Non-Prop-Attributes"><span class="nav-number">4.</span> <span class="nav-text">Non-Prop Attributes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E7%B9%BC%E6%89%BF%E5%85%83%E4%BB%B6%E5%B1%AC%E6%80%A7%E7%9A%84%E6%95%88%E6%9E%9C"><span class="nav-number">4.1.</span> <span class="nav-text">移除繼承元件屬性的效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Replacing-Merging-with-Existing-Attributes"><span class="nav-number">4.2.</span> <span class="nav-text">Replacing&#x2F;Merging with Existing Attributes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#class-%E7%9A%84%E5%90%88%E4%BD%B5%E6%83%85%E6%B3%81"><span class="nav-number">4.2.1.</span> <span class="nav-text">class 的合併情況</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#style-%E7%9A%84%E5%90%88%E4%BD%B5%E6%83%85%E6%B3%81"><span class="nav-number">4.2.2.</span> <span class="nav-text">style 的合併情況</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alex-%E5%AE%85%E5%B9%B9%E5%98%9B-%E7%9C%89%E7%9C%89%E8%A7%92%E8%A7%92"><span class="nav-number">5.</span> <span class="nav-text">Alex 宅幹嘛 - 眉眉角角</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#props-%E8%87%AA%E5%8B%95%E8%BD%89%E6%88%90%E5%AD%97%E4%B8%B2%E5%9E%8B%E5%88%A5"><span class="nav-number">5.1.</span> <span class="nav-text">props 自動轉成字串型別</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%90%E5%AE%9A%E5%82%B3%E5%85%A5%E7%9A%84-props-%E8%B3%87%E6%96%99%E5%9E%8B%E5%88%A5"><span class="nav-number">5.2.</span> <span class="nav-text">限定傳入的 props 資料型別</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

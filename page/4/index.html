@@ -164,6 +164,166 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/16/JS%E6%A0%B8%E5%BF%83%E7%AF%87-this%E5%88%B0%E5%BA%95%E6%98%AF%E8%AA%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/16/JS%E6%A0%B8%E5%BF%83%E7%AF%87-this%E5%88%B0%E5%BA%95%E6%98%AF%E8%AA%B0/" class="post-title-link" itemprop="url">JS核心篇-this到底是誰</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-03-16 11:54:26" itemprop="dateCreated datePublished" datetime="2021-03-16T11:54:26+08:00">2021-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-05-03 11:40:36" itemprop="dateModified" datetime="2021-05-03T11:40:36+08:00">2021-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="this是指向誰"><a href="#this是指向誰" class="headerlink" title="this是指向誰"></a>this是指向誰</h1><p>在撰寫前端的專案的時候，時常會遇到 this 指向誰的問題。<br>所以這邊，就用將書中和網路上的文章讀到的內容，整理並記錄下來。</p>
+<h2 id="this什麼時候被決定"><a href="#this什麼時候被決定" class="headerlink" title="this什麼時候被決定"></a>this什麼時候被決定</h2><p>在我自己寫的<a href="/2021/03/11/js%E6%A0%B8%E5%BF%83%E7%AF%87-%E4%BD%9C%E7%94%A8%E9%8D%8A%E5%92%8C%E9%96%89%E5%8C%85/" title="上一篇">上一篇</a>有提到作用域的部分。<br>在JavaScript中的function的作用域是靜態作用域，也就是代表在function定義的當下，就被定義了。<br>而Javascript中的this，就是動態的，這代表什麼，就是function被呼叫的當下，相對應的this才被定義。<br>在大部分的情況下，this代表的就是呼叫function的物件。<br>來個範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const getGender &#x3D; function() &#123;</span><br><span class="line">  console.log(this.gender)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const ming &#x3D; &#123;</span><br><span class="line">  gender: &#39;male&#39;,</span><br><span class="line">  getGender: getGender</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const tina &#x3D; &#123;</span><br><span class="line">  gender: &#39;female&#39;,</span><br><span class="line">  getGender: getGender</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ming.getGender() &#x2F;&#x2F; male</span><br><span class="line">tina.getGender() &#x2F;&#x2F; female</span><br></pre></td></tr></table></figure>
+<p>上面這個範例，就可以很好的體現什麼叫做，this代表呼叫的function的物件這個概念。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/16/JS%E6%A0%B8%E5%BF%83%E7%AF%87-this%E5%88%B0%E5%BA%95%E6%98%AF%E8%AA%B0/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/12/Vue%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-VueX/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/12/Vue%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-VueX/" class="post-title-link" itemprop="url">Vue課程筆記-VueX</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-03-12 09:35:26 / 修改時間：10:53:09" itemprop="dateCreated datePublished" datetime="2021-03-12T09:35:26+08:00">2021-03-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="什麼是VueX"><a href="#什麼是VueX" class="headerlink" title="什麼是VueX"></a>什麼是VueX</h1><p>在一般的Vue中，同層級的元件之間，我們可以利用eventbus來做同層級的溝通，<br>但是，eventbus僅止於做簡單的溝通而已。<br>若我們想利用全域變數來讓同層級的Vue元件做構通，就又會失去Vue雙向綁定的特性。<br>所以，我們將所有的同階層 或 父子層的元件都丟到VueX，由VueX來做管理，<br>此時，我們就可以透過VueX來做到同階層的互相溝通，還有，父子層的上下溝通，<br>同時，又不失去VueX雙向綁定的特性。</p>
+<h2 id="VueX-重要的成員屬性"><a href="#VueX-重要的成員屬性" class="headerlink" title="VueX - 重要的成員屬性"></a>VueX - 重要的成員屬性</h2><p><strong>state</strong>: 儲存資料狀態<br><strong>actions</strong>: 如同先前提過的<code>methods</code>，進行非同步與取得資料，但是，特別注意，在這一個功能中並<font color=#FF0000>不會改變資料的狀態</font>。<br><strong>getter</strong>: 如同<code>computed</code>，在資料呈現之前會做一些過濾的動作，就會在這個功能中做處理。<br><strong>mutations</strong>: 改變資料內容的方法，而在此功能中，<font color=#FF0000>不會處理一些非同步的行為喔</font>，即像是將遠端的api取進來這種事情就不會在這邊做。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/12/Vue%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-VueX/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/11/js%E6%A0%B8%E5%BF%83%E7%AF%87-%E4%BD%9C%E7%94%A8%E9%8D%8A%E5%92%8C%E9%96%89%E5%8C%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -844,163 +1004,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/17/Leaflet%E5%92%8COpenSourceMap-JS%E5%AF%AB%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/17/Leaflet%E5%92%8COpenSourceMap-JS%E5%AF%AB%E6%B3%95/" class="post-title-link" itemprop="url">Leaflet和OpenSourceMap-JS寫法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2021-02-17 10:49:50 / 修改時間：11:20:09" itemprop="dateCreated datePublished" datetime="2021-02-17T10:49:50+08:00">2021-02-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AJAX/" itemprop="url" rel="index"><span itemprop="name">AJAX</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="AJAX-與函式應用教學"><a href="#AJAX-與函式應用教學" class="headerlink" title="AJAX 與函式應用教學"></a>AJAX 與函式應用教學</h1><p>這個章節主要是教怎麼用XML物件來將口罩地圖的opendata載入下來，接著，再對載入的資料做相對應的處理。<br>注意!!!!!!!!!!<br>其中一個特別需要注意的技巧，是載入loading圖片的作法。<br>老師的作法是<br>當資料庫的資料還再載入的時候，顯示loading的圖片，如果，資料源載入完成後，就不用再顯示loading的圖片了。<br>那切換要不要再放loading圖片的程式碼，你就放在XML物件的onload的函式裡面，因為，onload的函式就是當資料源的資料有完整載入完成後，才會觸發的event，所以，放在裡面是不錯的選擇。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/17/Leaflet%E5%92%8COpenSourceMap-JS%E5%AF%AB%E6%B3%95/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/16/AJAX%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/16/AJAX%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-2/" class="post-title-link" itemprop="url">AJAX課程筆記-2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2021-02-16 16:55:38 / 修改時間：16:56:37" itemprop="dateCreated datePublished" datetime="2021-02-16T16:55:38+08:00">2021-02-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AJAX/" itemprop="url" rel="index"><span itemprop="name">AJAX</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="什麼是-Cross-Origin-Resource-Sharing-CORS-？"><a href="#什麼是-Cross-Origin-Resource-Sharing-CORS-？" class="headerlink" title="什麼是 Cross-Origin Resource Sharing (CORS)？"></a>什麼是 Cross-Origin Resource Sharing (CORS)？</h1><p>這個章節在說當你想要擷取線上的開放資料，會遇到CORS的問題。<br>如果資料源的CORS沒有開放，代表該資料源不支持跨網域的功能，即你無法從你的本機端跟該opendata做互動，即做資料的傳輸與擷取。</p>
-<p>你可以利用<br><a target="_blank" rel="noopener" href="http://www.test-cors.org/#?client_method=GET&client_credentials=false&server_url=http%3A%2F%2Fopendata2.epa.gov.tw%2FUV%2FUV.json&server_enable=true&server_status=200&server_credentials=false&server_tabs=remote">這個連結</a><br>這個連結，將你的opendata的連結丟到這個測試網站中的Remote URL<br>的欄位裡面，接著按Send Request按鈕，<br>你可以看XHR status的數字，<br>如果是200代表該opendata 有支援跨網域的功能，<br>如果是0代表該opendata 沒有支援跨網域的功能。</p>
-<h1 id="傳統表單輸入介紹"><a href="#傳統表單輸入介紹" class="headerlink" title="傳統表單輸入介紹"></a>傳統表單輸入介紹</h1><p>這個章節在教有關AJAX的POST技巧，即我們將像帳號或密碼丟到伺服器端做驗證的動作。<br>例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action&#x3D;&quot;index.html&quot;&gt;</span><br><span class="line">   &lt;label for&#x3D;&quot;inputEmail&quot;&gt;帳號&lt;&#x2F;label&gt;</span><br><span class="line">   &lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;account&quot; id&#x3D;&quot;inputEmail&quot;&gt;</span><br><span class="line">   &lt;br&gt;</span><br><span class="line">   &lt;label for&#x3D;&quot;password&quot;&gt;密碼&lt;&#x2F;label&gt;</span><br><span class="line">   &lt;input type&#x3D;&quot;password&quot; name&#x3D;&quot;password&quot; id&#x3D;&quot;password&quot;&gt;</span><br><span class="line">   &lt;br&gt;</span><br><span class="line">   &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;送出&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
-<p>你可以看到以上的form的action屬性值是確定表單資料提交的方向，如果不寫則提交當前頁面，而這邊的範例的話，<br>是直接放當前頁面因為我們沒有要提交該表單。<br>當你提交了此表單之後，你看你的瀏覽器上放網址中的內容<br>file:///D:/hexschool/Javascript_lecture/Ajax_practice/index.html?account=you%40gmail.com&amp;password=123</p>
-<p>你可以看到index.html? 代表你的當前頁面，而在問號後面接的就是這個表單提交的參數，分別是<br>account 就是你輸入的帳號內容<br>password就是放你輸入的密碼</p>
-<h1 id="AJAX-POST-以form表單格式傳送-提供-API-練習"><a href="#AJAX-POST-以form表單格式傳送-提供-API-練習" class="headerlink" title="AJAX POST - 以form表單格式傳送 (提供 API 練習)"></a>AJAX POST - 以form表單格式傳送 (提供 API 練習)</h1><p>這個小節是示範，怎麼將資料丟到伺服器端，並從伺服器端回傳的內容，判斷是否該資料是傳送成功或失敗。<br>例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var xhr &#x3D; new XMLHttpRequest();</span><br><span class="line">xhr.open(&#39;post&#39;,&#39;伺服器端的網址&#39;, true);</span><br><span class="line">xhr.setRequestHeader(&#39;Content-type&#39;,&#39;application&#x2F;x-www-form-urlencoded&#39;);</span><br><span class="line">xhr.send(&#39;email&#x3D;abcd@gmail.com&amp;password&#x3D;123456&#39;);</span><br></pre></td></tr></table></figure>
-<p>以上的程式範例就是將資料post到伺服器端的語法，要特別注意這一行新的指令，<br>即setRequestHeader這一行的指令就是post API的格式，這個是一般表單輸入的格式。</p>
-<p>另外，在xhr的send函式裡面要送哪些訊息，你要先去看你的伺服器端能夠接收那些資料，像這個例題，它能接受的就是email和password的資料。<br>若以上的操作都成功的話，你再呼叫一次xhr這個物件，readyState應該會回傳4，而在responseText欄位裡面應該就會出現註冊成功的字串內容溜~</p>
-<h1 id="從-Chrome-開發人員工具檢視-AJAX-POST"><a href="#從-Chrome-開發人員工具檢視-AJAX-POST" class="headerlink" title="從 Chrome 開發人員工具檢視 AJAX POST"></a>從 Chrome 開發人員工具檢視 AJAX POST</h1><p>你可以利用你的瀏覽器的開發者視窗中的網路這個選項中，<br>有回應跟請求，可以看到用戶端丟了什麼訊息給伺服器端，<br>而伺服器端又回應了什麼樣的訊息給客戶端。</p>
-<h1 id="AJAX-以JSON格式傳遞"><a href="#AJAX-以JSON格式傳遞" class="headerlink" title="AJAX - 以JSON格式傳遞"></a>AJAX - 以JSON格式傳遞</h1><p>本小節是在教導如何改用JSON格式把資料傳送給伺服器端做驗證，其實，跟上面的傳統表單傳送的寫法差不多，一點點差異而已<br>例:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var account &#x3D; &#123;</span><br><span class="line">   email: &#39;jaredleto@gmail.com&#39;,</span><br><span class="line">   password: &#39;12313&#39;</span><br><span class="line">&#125;</span><br><span class="line">var xhr &#x3D; new XMLHttpRequest();</span><br><span class="line">xhr.open(&#39;post,&#39;https:&#x2F;&#x2F;hexschool-tutorial.herokuapp.com&#x2F;api&#x2F;signup&#39;,true);</span><br><span class="line">xhr.setRequestHeader(&#39;content-type&#39;,&#39;application&#x2F;json&#39;);</span><br><span class="line">var data &#x3D; JSON.stringify(account);</span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
-<p>以上的範例你可以看到在創XMLHttpRequest物件的方式一模一樣，<br>不同的部分是setRequestHeader有更動內容改成application/json，就代表我們要上傳json的格式資料給伺服器端。<br>而我們要傳入物件account的內容，故我們在上傳此物件時，並須把先它轉成JSON的字串格式給伺服器端，才能將它上傳。</p>
-<p>由此總結在上傳一般表單格式 和 上傳JSON格式的內容給伺服器不一樣的地方為setRequestHeader的內容<br>和 上傳之前是否需要把上傳內容做json的字串轉換。<br>注意~!!在寫json的時候，你要注意json的拚法喔，因為，你會一直寫成<br>JASON 這是不對的，應該是JSON才對，沒有A啦，不要把它跟頂級超市的JASONS搞混了==</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1070,7 +1073,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">106</span>
+          <span class="site-state-item-count">108</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

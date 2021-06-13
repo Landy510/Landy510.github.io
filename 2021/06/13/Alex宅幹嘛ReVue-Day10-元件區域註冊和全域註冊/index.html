@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Alex宅幹嘛ReVue-Day10 元件區域註冊和全域註冊">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Alex宅幹嘛ReVue-Day10-元件區域註冊和全域註冊">
+<meta property="og:url" content="https://landy510.github.io/2021/06/13/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day10-%E5%85%83%E4%BB%B6%E5%8D%80%E5%9F%9F%E8%A8%BB%E5%86%8A%E5%92%8C%E5%85%A8%E5%9F%9F%E8%A8%BB%E5%86%8A/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="Alex宅幹嘛ReVue-Day10 元件區域註冊和全域註冊">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-06-13T09:09:21.000Z">
+<meta property="article:modified_time" content="2021-06-13T09:21:49.785Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2021/06/13/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day10-%E5%85%83%E4%BB%B6%E5%8D%80%E5%9F%9F%E8%A8%BB%E5%86%8A%E5%92%8C%E5%85%A8%E5%9F%9F%E8%A8%BB%E5%86%8A/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Alex宅幹嘛ReVue-Day10-元件區域註冊和全域註冊 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/06/13/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day10-%E5%85%83%E4%BB%B6%E5%8D%80%E5%9F%9F%E8%A8%BB%E5%86%8A%E5%92%8C%E5%85%A8%E5%9F%9F%E8%A8%BB%E5%86%8A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Alex宅幹嘛ReVue-Day10-元件區域註冊和全域註冊
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-06-13 17:09:21 / 修改時間：17:21:49" itemprop="dateCreated datePublished" datetime="2021-06-13T17:09:21+08:00">2021-06-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">Alex宅幹嘛ReVue-Day10 元件區域註冊和全域註冊</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在這個單元主要是介紹 Vue 元件在區域註冊和全域註冊上要怎麼使用 </p>
+<h1 id="引用其他-Vue-元件的-Vue-元件"><a href="#引用其他-Vue-元件的-Vue-元件" class="headerlink" title="引用其他 Vue 元件的 Vue 元件"></a>引用其他 Vue 元件的 Vue 元件</h1><p>Vue的字元件可以被其他的子元件給引入使用的<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;adv-component&gt;&lt;&#x2F;adv-component&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;div&gt;Landy&lt;&#x2F;div&gt;&#96;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const AdvanceComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;basic-component&gt;&lt;&#x2F;basic-component&gt;&#96;   &#x2F;&#x2F; 引用別的子元件 </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Vue.component(&#39;basic-component&#39;, BasicComponent)   &#x2F;&#x2F; 全域註冊的元件 </span><br><span class="line">Vue.component(&#39;adv-component&#39;, AdvanceComponent)</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="Vue-的-components-屬性"><a href="#Vue-的-components-屬性" class="headerlink" title="Vue 的 components 屬性"></a>Vue 的 components 屬性</h1><p>當某些 Vue 的元件用區域變數來註冊。<br>那我們可以在某些要引入這些元件的 Vue 物件中加入  components 屬性，來將這些元件給納進來坐使用。 </p>
+<p>另外你要考慮，如果，妳的某些模組在特定的頁面下才會使用的話，那你就要考慮使用區域註冊的方式來註冊這些元件，不然，你每一個元件都用<br>全域註冊的話，會導致你最後的專案檔會很大一包。</p>
+<p>ex:</p>
+<pre><code>---HTML---
+&lt;div id=&quot;app&quot;&gt;
+  &lt;adv-component&gt;&lt;/adv-component&gt;
+&lt;/div&gt;
+
+---JavaScript---
+const BasicComponent =&#123;
+  template: `&lt;div&gt;Landy&lt;/div&gt;`
+&#125;
+
+const AdvComponent =&#123;
+  template: `&lt;basic-component&gt;&lt;/basic-component&gt;`,
+  components: &#123;
+    &#39;basic-component&#39;: BasicComponent,
+  &#125;
+&#125;
+
+new Vue(&#123;
+  el: &#39;#app&#39;,
+  components: &#123;
+    &#39;adv-component&#39;:  AdvComponent,
+  &#125;
+&#125;)</code></pre>
+<p>以上這個範例你就可以看到我們想在元件  AdvComponent 使用區域元件  BasicComponent， 那我們就需要將該元件加入到自己的 components，達到在該元件中執行區域註冊的效果。<br>另外，BasicComponent 在  AdvComponent 中的 key 值是 basic-component 。<br>接著，我們在 new Vue 物件中引入  AdvComponent，故要將它用 compoents 加進來，達到在 new Vue 中區域註冊的效果。<br>另外，我們在  new Vue 中為 AdvComponent 取的 key 值是 adv-component，故在new Vue 的 HTML 範圍中使用它的時候就加入 <adv-component></adv-component> 標籤就可以使用囉。 </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/09/HTTP%E7%8B%80%E6%85%8B%E7%A2%BC/" rel="prev" title="HTTP狀態碼">
+      <i class="fa fa-chevron-left"></i> HTTP狀態碼
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/13/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day10-%E5%85%83%E4%BB%B6props/" rel="next" title="Alex宅幹嘛ReVue-Day10-元件props">
+      Alex宅幹嘛ReVue-Day10-元件props <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E5%85%B6%E4%BB%96-Vue-%E5%85%83%E4%BB%B6%E7%9A%84-Vue-%E5%85%83%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">引用其他 Vue 元件的 Vue 元件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-%E7%9A%84-components-%E5%B1%AC%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">Vue 的 components 屬性</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
