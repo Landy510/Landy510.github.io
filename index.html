@@ -164,6 +164,110 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/06/17/axios%E5%A5%97%E4%BB%B6%E7%B6%B2%E8%B7%AF%E8%AB%8B%E6%B1%82%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%B4%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/17/axios%E5%A5%97%E4%BB%B6%E7%B6%B2%E8%B7%AF%E8%AB%8B%E6%B1%82%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%B4%B9/" class="post-title-link" itemprop="url">axios套件網路請求使用介紹</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-06-17 23:51:04 / 修改時間：23:53:15" itemprop="dateCreated datePublished" datetime="2021-06-17T23:51:04+08:00">2021-06-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AJAX/" itemprop="url" rel="index"><span itemprop="name">AJAX</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="各種發出網路請求的-JS-寫法種類介紹"><a href="#各種發出網路請求的-JS-寫法種類介紹" class="headerlink" title="各種發出網路請求的 JS 寫法種類介紹"></a>各種發出網路請求的 JS 寫法種類介紹</h1><p>JS 的原生語法有以下兩種方式可以發送網路請求</p>
+<ol>
+<li>XMLHttpRequest</li>
+<li>Fetch</li>
+</ol>
+<p>套件，需要額外載入 JS</p>
+<ol>
+<li>axios</li>
+</ol>
+<p>axios 的 code 相對於原生 JS 發出網路請求的程式碼內容少，很精簡的程式碼就可以達到相同效果了，它連 Promise 的語法也寫進去了。 </p>
+<h2 id="開始練習"><a href="#開始練習" class="headerlink" title="開始練習!!"></a>開始練習!!</h2><p>我們先為我們的專案檔載入 axios 的 js 檔案。<br>那我們要怎麼確認有沒有載入成功呢，首先在瀏覽器打開我們的專案檔，打開開發者介面中的 Network 選項，看看 axios 的 js 檔案的回傳狀態碼是不是 200 。<br>是 200 的話就代表，該檔案有載入成功喔。<br>接著，在 js 檔案的部分寫入 console.log(axios) ，若你的 console 有出現相對應的內容的話，就代表該 axios 的功能可以被正確啟用囉。<br>接著，來用 axios 來接外部的資料吧<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">axios.get(&#39;https:&#x2F;&#x2F;datacenter.taichung.gov.tw&#x2F;swagger&#x2F;OpenData&#x2F;8f477165-6874-4856-b60d-38029958e723&#39;)</span><br><span class="line">  .then(function (response) &#123;</span><br><span class="line">    console.log(response)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<p>以上就完成去接由目標網站回傳的資料，資料內容會存在 response 這個參數中。 </p>
+<h2 id="非同步事件"><a href="#非同步事件" class="headerlink" title="非同步事件"></a>非同步事件</h2><p>上面展示的網路請求我們知道它是非同步事件，那如果我們希望在資料讀取完成後，要將讀回來的值渲染我們的網頁的話，怎麼辦呢。<br>我們可以直接將渲染的程式碼寫在那個網路請求完成的 function 裡面，又或者我們可以將渲染的內容包成一個函式，等到所需的值回傳後，再去呼叫渲染的函式，將資料渲染上網頁。 </p>
+<h2 id="HTTP-請求方法"><a href="#HTTP-請求方法" class="headerlink" title="HTTP 請求方法"></a>HTTP 請求方法</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Methods">這篇文章</a> 有放了 HTTP 的請求方法，可以看看。<br>其中 POST 這個方法就是將本地端的資料傳送到伺服器中，接著，伺服器會對該資料做一些判斷，例如該帳號是否存在，接著，再將判斷的結果回傳給瀏覽器。 </p>
+<h2 id="四種常見的-POST-請求-content-type-介紹"><a href="#四種常見的-POST-請求-content-type-介紹" class="headerlink" title="四種常見的 POST 請求 content-type 介紹"></a>四種常見的 POST 請求 content-type 介紹</h2><ol>
+<li>application/x-www-form-urlencoded</li>
+<li>application/json</li>
+<li>multipart/form-data</li>
+<li>text/plain</li>
+</ol>
+<p>第一種方法，就是提交一個 form 表單到目標網址中<br>ex:</p>
+<pre><code>&lt;form action=&quot;指定的網址&quot;&gt;
+  &lt;label for=&quot;account&quot;&gt;帳號 
+  &lt;input type=&quot;text&quot; id=&quot;account&quot;&gt;
+
+  &lt;label for=&quot;password&quot;&gt;密碼 
+  &lt;input type=&quot;password&quot; id=&quot;password&quot;&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;送出&quot;&gt;
+&lt;/form&gt;</code></pre>
+<p>這種方法，當我們按下 form 表單裡面的 type=”submit” 按鈕，按下之後，它會將 form 表單傳到 form 標籤的 action 裡面的目標網址中。<br>以上這就是 application/x-www-form-urlencoded 的格式。 </p>
+<p>第二種方法，就是提交一個 json 格式的資料到目標網址中<br>像是<br>{<br>  name: ‘老黃’,<br>  age: 60<br>}<br>那 axios 的預設格是就是  application/json 這種格式，但我們也還是可以去指定 axios 傳遞資料的格式喔。 </p>
+<p>第三種方法，就是提交一個檔案的時後會用到，比如我們要傳一個圖片檔或音檔…，我們就要使用這種格式。 </p>
+<p>第四種方法，就是提交一個記事本格式的資料給目標網站，這種格式是比較少。 </p>
+<h2 id="由開發者模式觀察post的行為"><a href="#由開發者模式觀察post的行為" class="headerlink" title="由開發者模式觀察post的行為"></a>由開發者模式觀察post的行為</h2><p>我們在網頁中的開發者介面中的 Network 的選項，點選 xhr 的分類，應該就可以看到你的程式碼中發送網路請求的相關內容。<br>接著你在這些 xhr 的 Headers 內容裡面可以看到 Request Headers 的項目，裡面放有 Content-Type 的格式是什麼，你的瀏覽器是什麼。<br>還有 Request Payload 的項目，裡面放的就是該 xhr 請求要傳送給目標網址的資料內容。<br><img src="/image/xhr_Headers.png"> </p>
+<h2 id="axios-作業練習"><a href="#axios-作業練習" class="headerlink" title="axios 作業練習"></a>axios 作業練習</h2><iframe src="https://codepen.io/RandyChen/embed/JjWxgyb?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>以上這個範例，就是將以上的內容集結而成的範例。 </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/06/14/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day11-%E5%AE%A2%E8%A3%BD%E5%8C%96%E5%85%83%E4%BB%B6%E7%9A%84props%E7%94%A8%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -826,83 +930,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/05/22/Vue-v-for%E7%94%A8%E6%B3%95%E5%8F%8A%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/22/Vue-v-for%E7%94%A8%E6%B3%95%E5%8F%8A%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9/" class="post-title-link" itemprop="url">Vue-v-for用法及注意的地方</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2021-05-22 12:08:01 / 修改時間：12:11:55" itemprop="dateCreated datePublished" datetime="2021-05-22T12:08:01+08:00">2021-05-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h1><p>這邊的功能就是利用 v-for 來遍歷一個陣列或者一個物件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;h1 v-for&#x3D;&quot;(user,index) in userDataArray&quot;&gt; &#123;&#123; user.name &#125;&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">  &lt;h1 v-for&#x3D;&quot;(value,key) in userDataObj&quot;&gt; &#123;&#123; key &#125;&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">  &lt;span v-for&#x3D;&quot;num in 10&quot;&gt; &#123;&#123; key &#125;&#125;&lt;&#x2F;span&gt;  &#x2F;&#x2F; 呈現 1 - 10 的內容 </span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">let vm &#x3D; new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    userDataArray: [</span><br><span class="line">    &#123;</span><br><span class="line">      name: &#39;Landy&#39;,</span><br><span class="line">      gender: &#39;male&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      name: &#39;Sara&#39;,</span><br><span class="line">      gender: &#39;female&#39;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  userDataObj: &#123;</span><br><span class="line">    Landy: &#39;male&#39;,</span><br><span class="line">    Sara: &#39;female&#39;</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>以上兩種方式，都可以達到將裡面的內容透過 v-for 呈現在畫面上，不過要注意一下，物件那邊的寫法，key 會呈現該屬性名稱 而 value 會呈現該 key 所夾帶的值。<br>另外，我們也可以用 v-for 單純去遍歷一個數字</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div v-for&#x3D;&quot;num in 10&quot;&gt; &#123;&#123; num &#125;&#125; &lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>以上範例就會從 1 到 10 顯示出來，記得這個部分數字會從 1 開始算喔。 </p>
-<h1 id="Alex-宅幹嘛-眉眉角角"><a href="#Alex-宅幹嘛-眉眉角角" class="headerlink" title="Alex 宅幹嘛-眉眉角角"></a>Alex 宅幹嘛-眉眉角角</h1><h2 id="v-for-不要搭配-v-if-來使用"><a href="#v-for-不要搭配-v-if-來使用" class="headerlink" title="v-for 不要搭配 v-if 來使用"></a>v-for 不要搭配 v-if 來使用</h2><p>因為，在 Vue 中，v-for 的優先度是高於 v-if 的，這就代表，v-for 會先將目標陣列中的元素全部先渲染出來，然後，才會再執行你的 v-if 判斷內容。<br>而 v-if 就會將不滿足判斷式的內容給抽離掉，這樣就會浪費掉之前 v-for 渲染出來的元素的資源，所以，才不建議這樣用。<br>那比較好的方式可以 v-for 搭配 v-show，因為，v-show 只是為不滿足判斷式的元素，去更改其 display 的樣式，這樣比較不會浪費資源。<br>另外，你也可以先用 computed 過濾掉原始不要的資料，最後，再透過 v-for 去渲染出 computed 過濾後的結果。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
   </nav>
 
 
@@ -968,7 +999,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-count">111</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
