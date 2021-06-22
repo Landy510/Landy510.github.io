@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://landy510.github.io/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day12/</loc>
+    
+    <lastmod>2021-06-22</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://landy510.github.io/2021/06/17/axios%E5%A5%97%E4%BB%B6%E7%B6%B2%E8%B7%AF%E8%AB%8B%E6%B1%82%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%B4%B9/</loc>
     
     <lastmod>2021-06-17</lastmod>
@@ -928,85 +935,85 @@
 
   <url>
     <loc>https://landy510.github.io/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://landy510.github.io/tags/AJAX/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <loc>https://landy510.github.io/tags/Vue/</loc>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/Vue/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <loc>https://landy510.github.io/tags/AJAX/</loc>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/tags/Bootstrap/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/tags/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/tags/jQuery/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/tags/JavaScript/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/tags/%E9%87%8D%E6%96%B0%E8%AA%8D%E8%AD%98JavaScript/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/tags/008%E9%87%8D%E6%96%B0%E8%AA%8D%E8%AD%98JavaScript%E7%AD%86%E8%A8%98/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/tags/Github/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/tags/%E5%B0%88%E6%A1%88%E9%83%A8%E5%B1%AC%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/tags/scss/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1014,57 +1021,57 @@
 
   
   <url>
-    <loc>https://landy510.github.io/categories/AJAX/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <loc>https://landy510.github.io/categories/Vue/</loc>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://landy510.github.io/categories/Vue/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <loc>https://landy510.github.io/categories/AJAX/</loc>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/categories/Bootstrap/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/categories/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/categories/jQuery/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/categories/JavaScript/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/categories/%E5%B0%88%E6%A1%88%E9%83%A8%E5%B1%AC%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://landy510.github.io/categories/scss/</loc>
-    <lastmod>2021-06-17</lastmod>
+    <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

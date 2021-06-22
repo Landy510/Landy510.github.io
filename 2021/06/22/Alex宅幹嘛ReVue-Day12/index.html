@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Alex宅幹嘛ReVue-Day12 紀錄在透過 slot 屬性來使用替換指定元件內的內容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Alex宅幹嘛ReVue-Day12">
+<meta property="og:url" content="https://landy510.github.io/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day12/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="Alex宅幹嘛ReVue-Day12 紀錄在透過 slot 屬性來使用替換指定元件內的內容">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-06-22T14:31:32.000Z">
+<meta property="article:modified_time" content="2021-06-22T14:40:03.695Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day12/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Alex宅幹嘛ReVue-Day12 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Alex宅幹嘛ReVue-Day12
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-06-22 22:31:32 / 修改時間：22:40:03" itemprop="dateCreated datePublished" datetime="2021-06-22T22:31:32+08:00">2021-06-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">Alex宅幹嘛ReVue-Day12 紀錄在透過 slot 屬性來使用替換指定元件內的內容</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在我<a href="/2021/01/11/Vuejs%E5%85%83%E4%BB%B603-%E5%85%83%E4%BB%B6%E6%8F%92%E6%A7%BD/" title="之前的文章">之前的文章</a> 中，有紀錄了基本的元件插槽應用。<br>那在這邊就介紹更多進階的插槽使用情境。</p>
+<h1 id="Slot-簡介"><a href="#Slot-簡介" class="headerlink" title="Slot 簡介"></a>Slot 簡介</h1><p>我們可以在自訂的元件的 template 中塞入 <slot> 的標籤，在這個標籤內部可以塞入你想加入這個元件的內容，就算是 HTML 標籤的內容也可以。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;basic-component :title&#x3D;&quot;title&quot;&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;#&quot;&gt;World&lt;&#x2F;a&gt;</span><br><span class="line">&lt;&#x2F;basic-component&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;div&gt;</span><br><span class="line">	&#123;&#123; title &#125;&#125;</span><br><span class="line">	&lt;slot&gt;&lt;&#x2F;slot&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;&#96;,</span><br><span class="line">  props: &#123;</span><br><span class="line">	title: &#123;</span><br><span class="line">	  type: String,</span><br><span class="line">	  requier: true</span><br><span class="line">	&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(&#39;basic-component&#39;, BasicComponent)</span><br></pre></td></tr></table></figure>
+<p>以上這個範例，我們在 HTML 文本部分的元件中，加入了 a 標籤的內容，那這個 a 標籤的內容就會取代 basic-component 元件的 template 中的 <slot> 標籤。</p>
+<h2 id="Compilation-Scope"><a href="#Compilation-Scope" class="headerlink" title="Compilation Scope"></a>Compilation Scope</h2><p>這部分是在說明 <slot> 的作用域。<br>在元件中的 slot 可以取用與其所屬元件相同作用域的其他物件的屬性。但它不能調用其所屬元件的屬性。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;basic-component :title&#x3D;&quot;title&quot;&gt;</span><br><span class="line">	&#123;&#123; msg &#125;&#125;</span><br><span class="line">  &lt;&#x2F;basic-component&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;div&gt;</span><br><span class="line">	&#123;&#123; title &#125;&#125;</span><br><span class="line">	&lt;slot&gt;&lt;&#x2F;slot&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;&#96;,</span><br><span class="line">  props: &#123;</span><br><span class="line">	title: &#123;</span><br><span class="line">	  type: String,</span><br><span class="line">	  requier: true</span><br><span class="line">	&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    msg: &#39;product&#39;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(&#39;basic-component&#39;, BasicComponent)</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el:&#39;#app&#39;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    msg: &#39;book&#39;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上面這個範例你可以看到在 Vue 元件中有一個 msg 的屬性，而在 basic-component 中也有一個 msg 的屬性，那按照我面在上面的說明，slot 只能取用與其所屬元件相同作用域的屬性，<br>所以，它的結果會調用到 Vue 元件的 msg 屬性，所以，最終呈現的結果會是 book。 而其所屬元件 basic-component 的 msg 的屬性是取用不到的喔。<br>以上是 slot 的作用域特性要特別注意。</p>
+<p>記得不要將上面這種情境和下面這種情境搞混囉<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;basic-component :title&#x3D;&quot;title&quot;&gt;</span><br><span class="line">	Save</span><br><span class="line">  &lt;&#x2F;basic-component&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;div&gt;</span><br><span class="line">	&#123;&#123; title &#125;&#125;</span><br><span class="line">	&lt;slot&gt; &#123;&#123; msg &#125;&#125; &lt;&#x2F;slot&gt;  &#x2F;&#x2F; 這會調用到 basic-component 自己的 msg 屬性</span><br><span class="line">  &lt;&#x2F;div&gt;&#96;,</span><br><span class="line">  props: &#123;</span><br><span class="line">	title: &#123;</span><br><span class="line">	  type: String,</span><br><span class="line">	  requier: true</span><br><span class="line">	&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    msg: &#39;product&#39;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(&#39;basic-component&#39;, BasicComponent)</span><br></pre></td></tr></table></figure>
+<p>你可以看到這邊這個範例，調用 msg 屬性，是寫在 basic-component 的 template 內部，所以，它會調用到 basic-component 自身的 msg，<br>而在上面那個例子 msg 是寫在 HTML 文本裡面，所以只能調用跟其所屬元件相同作用域的 Vue 元件的 msg 屬性。<br>這兩種作用域不要搞混了。 一個是父元件作用域，一個是子元件自己的作用域。</p>
+<h2 id="Fallback-Content"><a href="#Fallback-Content" class="headerlink" title="Fallback Content"></a>Fallback Content</h2><p>這個部分是在說明 slot 預設值的設定。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;basic-component&gt;&lt;&#x2F;basic-component&gt;</span><br><span class="line">      </span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;div&gt;</span><br><span class="line">	&#123;&#123; title &#125;&#125;</span><br><span class="line">	&lt;slot&gt;&#123;&#123; msg &#125;&#125;&lt;&#x2F;slot&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;&#96;,</span><br><span class="line">  props: &#123;</span><br><span class="line">	title: &#123;</span><br><span class="line">	  type: String,</span><br><span class="line">	  requier: true</span><br><span class="line">	&#125;,</span><br><span class="line">	msg: &#123;</span><br><span class="line">	  type: String,</span><br><span class="line">	  default: &#39;submit&#39;</span><br><span class="line">	&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Vue.component(&#39;basic-component&#39;, BasicComponent)</span><br></pre></td></tr></table></figure>
+<p>以上的範例你可以看到在 <basic-component></basic-component> 我們沒有加入任何東西，如果此時你在該元件的 slot 標籤中有放入內容的話，則這個內容就會被當作預設內容呈現在畫面中，<br>所以，上面這個範例 slot 會呈現 BasicComponent 自己的成員屬性 msg 的內容。 反之，若在 <basic-component></basic-component> 中有放入內容的話， slot 的預設內容就會被取代掉。</p>
+<h2 id="Name-Slots"><a href="#Name-Slots" class="headerlink" title="Name Slots"></a>Name Slots</h2><p>這邊是在介紹有為 slot 取名的時候，要怎麼使用它們。<br>在 Fallback Content 的部分，我們並沒有為 slot 取名，所以，我們無法達成將特定內容塞到相對的 slot 中的效果。而利用為 slot 取名就可以達成這種效果囉。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;basic-component&gt;</span><br><span class="line">  &lt;template v-slot:header&gt;Header&lt;&#x2F;template&gt;</span><br><span class="line">  &lt;template&gt;My name is Landy&lt;&#x2F;template&gt;</span><br><span class="line">  &lt;template v-slot:footer&gt;Footer&lt;&#x2F;template&gt;</span><br><span class="line">&lt;&#x2F;basic-component&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">	&lt;header&gt;</span><br><span class="line">	  &lt;slot name&#x3D;&quot;header&quot;&gt;This is Header&lt;&#x2F;slot&gt;</span><br><span class="line">	&lt;&#x2F;header&gt;</span><br><span class="line">	&lt;main&gt;</span><br><span class="line">	  &lt;slot&gt;This is main&lt;&#x2F;slot&gt;</span><br><span class="line">	&lt;&#x2F;main&gt;</span><br><span class="line">	&lt;footer&gt;</span><br><span class="line">	  &lt;slot name&#x3D;&quot;footer&quot;&gt;footer&lt;&#x2F;slot&gt;  </span><br><span class="line">	&lt;&#x2F;footer&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;&#96;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以看到以上的範例，我們有為兩個 slot 分別取名為 header 和 footer，所以，在 parent-component 的狀態下，我們在 template 標籤中加入 v-slot: 後面加入相對應的 slot 名稱後，<br>我們就可以將特定的內容塞到相對應的 slot 中囉。<br>而在 main 標籤裡面的 slot 我們就沒有為它特別命名，而在 Vue 的官方文件有提到，這類的 slot 名稱會預設為 default，所以，在 parent-component 的狀態下，那些沒有用 v-slot: 來決定<br>其內容要塞到哪一個 slot 的內容，就會自動被塞到這種沒有被命名的slot 中囉。</p>
+<h3 id="沒有放在指定-slot-中的內容"><a href="#沒有放在指定-slot-中的內容" class="headerlink" title="沒有放在指定 slot 中的內容"></a>沒有放在指定 slot 中的內容</h3><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;basic-component&gt;</span><br><span class="line">  Landy</span><br><span class="line">  &lt;template v-slot:header&gt;Header&lt;&#x2F;template&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;div&gt;Thsi is DIV&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;#&quot;&gt;This is a tag&lt;&#x2F;a&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;template v-slot:footer&gt;Footer&lt;&#x2F;template&gt;</span><br><span class="line">&lt;&#x2F;basic-component&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">	&lt;header&gt;</span><br><span class="line">	  &lt;slot name&#x3D;&quot;header&quot;&gt;This is Header&lt;&#x2F;slot&gt;</span><br><span class="line">	&lt;&#x2F;header&gt;</span><br><span class="line">	&lt;main&gt;</span><br><span class="line">	  &lt;slot&gt;This is main&lt;&#x2F;slot&gt;</span><br><span class="line">	&lt;&#x2F;main&gt;</span><br><span class="line">	&lt;footer&gt;</span><br><span class="line">	  &lt;slot name&#x3D;&quot;footer&quot;&gt;footer&lt;&#x2F;slot&gt;  </span><br><span class="line">	&lt;&#x2F;footer&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;&#96;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以看到上面範例中，在 parent-component 中，有一些內容都沒有被 template 包起來，那這種內容會跑到哪裡去呢?<br>答案是這些內容都會統一被塞到預設的 slot 中，也就是會被塞到沒有被命名的 slot 中，且呈現順序會是由上到下排列。</p>
+<h3 id="沒有預設-slot-的內容"><a href="#沒有預設-slot-的內容" class="headerlink" title="沒有預設 slot 的內容"></a>沒有預設 slot 的內容</h3><p>今天我們在變換一下上面的範例，如果我們連預設的 slot 的沒有的話，那這些內容沒有被指定放入特定 slot 會跑到哪裡去呢?<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;basic-component&gt;</span><br><span class="line">  Landy</span><br><span class="line">  &lt;template v-slot:header&gt;Header&lt;&#x2F;template&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;div&gt;Thsi is DIV&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;#&quot;&gt;This is a tag&lt;&#x2F;a&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;template v-slot:footer&gt;Footer&lt;&#x2F;template&gt;</span><br><span class="line">&lt;&#x2F;basic-component&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">	&lt;header&gt;</span><br><span class="line">	  &lt;slot name&#x3D;&quot;header&quot;&gt;This is Header&lt;&#x2F;slot&gt;</span><br><span class="line">	&lt;&#x2F;header&gt;</span><br><span class="line">	&lt;main&gt;</span><br><span class="line">	  Main</span><br><span class="line">	&lt;&#x2F;main&gt;</span><br><span class="line">	&lt;footer&gt;</span><br><span class="line">	  &lt;slot name&#x3D;&quot;footer&quot;&gt;footer&lt;&#x2F;slot&gt;  </span><br><span class="line">	&lt;&#x2F;footer&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;&#96;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>答案會是，在 parent-component 這些沒有被指定放入特定 slot 的內容會直接被移除掉，所以，此範例由上到下呈現的內容會是<br>Header<br>Main<br>Footer</p>
+<h3 id="如果有加入v-slot-default呢"><a href="#如果有加入v-slot-default呢" class="headerlink" title="如果有加入v-slot:default呢"></a>如果有加入v-slot:default呢</h3><p>如果今天在 parent-component 中，有一個 template 搭配 v-slot:default 的話，那上面範例中那些沒有被指定的內容還會出現嗎?<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;basic-component&gt;</span><br><span class="line">  &lt;a href&#x3D;&quot;#&quot;&gt;a tag&lt;&#x2F;a&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;template v-slot:header&gt;Header&lt;&#x2F;template&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;template v-slot:default&gt;</span><br><span class="line">    &lt;p&gt;This is default content&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;&#x2F;template&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;template v-slot:footer&gt;Footer&lt;&#x2F;template&gt;</span><br><span class="line">&lt;&#x2F;basic-component&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">	&lt;header&gt;</span><br><span class="line">	  &lt;slot name&#x3D;&quot;header&quot;&gt;This is Header&lt;&#x2F;slot&gt;</span><br><span class="line">	&lt;&#x2F;header&gt;</span><br><span class="line">	&lt;main&gt;</span><br><span class="line">	  &lt;slot&gt;This is Main&lt;&#x2F;slot&gt;</span><br><span class="line">	&lt;&#x2F;main&gt;</span><br><span class="line">	&lt;footer&gt;</span><br><span class="line">	  &lt;slot name&#x3D;&quot;footer&quot;&gt;footer&lt;&#x2F;slot&gt;  </span><br><span class="line">	&lt;&#x2F;footer&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;&#96;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上的範例結果是，只會留下 v-slot:default 中的內容塞入 default slot，所以，在 parent-component 中的那個沒有被指定塞入特定 slot 的 a 連結內容，就會直接被移除掉囉。</p>
+<h1 id="Scoped-Slot"><a href="#Scoped-Slot" class="headerlink" title="Scoped Slot"></a>Scoped Slot</h1><p>在 slot 有提供一種方法來讓父層作用域可以調用到子層作用域的資料。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;basic-component&gt;</span><br><span class="line">  &lt;template v-slot:header&gt;Header&lt;&#x2F;template&gt;</span><br><span class="line">  &lt;template v-slot:default&#x3D;&quot;slotProps&quot;&gt;&#123;&#123; slotProps.user.first &#125;&#125;&lt;&#x2F;template&gt;</span><br><span class="line">&lt;&#x2F;basic-component&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">	&lt;header&gt;</span><br><span class="line">	  &lt;slot name&#x3D;&quot;header&quot;&gt;This is Header&lt;&#x2F;slot&gt;</span><br><span class="line">	&lt;&#x2F;header&gt;</span><br><span class="line">	&lt;main&gt;</span><br><span class="line">	  &lt;slot v-bind:user&#x3D;&quot;UserData&quot;&gt;&#123;&#123; UserData.last &#125;&#125;&lt;&#x2F;slot&gt;</span><br><span class="line">	&lt;&#x2F;main&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;&#96;,</span><br><span class="line">  data () &#123;</span><br><span class="line">	return &#123;</span><br><span class="line">	  UserData: &#123;</span><br><span class="line">		first: &#39;Landy&#39;,</span><br><span class="line">		last: &#39;Chen&#39;</span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在以上範例中，我們在子層的預設 slot 中，利用 v-bind 去綁定一個我們自訂義的屬性 user，而此屬性綁定的子層資料為 UserData。<br>此時，在父層部分，你可以看到，在 v-slot:default 的 parent-component 中，有額外再綁一個我們自訂義的參數叫 slotProps，而透過這個參數<br>我們就可以去調用我們在預設 slot 中傳出來的 user 屬性，接著再透過這個 user 屬性去使用子層的 UserData 的資料。</p>
+<h1 id="Scoped-Slot-傳入-JS-表達式"><a href="#Scoped-Slot-傳入-JS-表達式" class="headerlink" title="Scoped Slot 傳入 JS 表達式"></a>Scoped Slot 傳入 JS 表達式</h1><p>上面的範例我們有看到怎麼使用 v-bind 來將子層資料傳出去給父層使用。<br>那在 Vue 中還有提供一個更簡便的方式來讓父層取用子曾傳出來的資料，就是用 ES6 的語法將綁定的資料傳出來，並用再父層額外命名一個 props 的名稱了。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;basic-component&gt;</span><br><span class="line">  &lt;template v-slot:header&#x3D;&quot;&#123; data &#125;&quot;&gt;&#123;&#123; data.first &#125;&#125;&lt;&#x2F;template&gt;</span><br><span class="line">  &lt;template&gt;Main&lt;&#x2F;template&gt;</span><br><span class="line">&lt;&#x2F;basic-component&gt;</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D;&#x3D;JavaScript---</span><br><span class="line">const BasicComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">	&lt;header&gt;</span><br><span class="line">	  &lt;slot name&#x3D;&quot;header&quot; v-bind:data&#x3D;&quot;UserData&quot;&gt;&#123;&#123; UserData.last &#125;&#125;&lt;&#x2F;slot&gt;</span><br><span class="line">	&lt;&#x2F;header&gt;</span><br><span class="line">	&lt;main&gt;</span><br><span class="line">	  &lt;slot&gt;This is Main&lt;&#x2F;slot&gt;</span><br><span class="line">	&lt;&#x2F;main&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;&#96;,</span><br><span class="line">  data () &#123;</span><br><span class="line">	return &#123;</span><br><span class="line">	  UserData: &#123;</span><br><span class="line">		first: &#39;Landy&#39;,</span><br><span class="line">		last: &#39;Chen&#39;</span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以看到在 parent-component 中我們用了v-slot:header=”{ data }” 的 es6 的語法，直接將我們在子層定義的傳出資料的 data 內容，直接取出來，<br>就可以直接取用裡面的內容囉。 可以讓程式碼看起來比較簡潔。</p>
+<h1 id="Dynamic-Slot-Names"><a href="#Dynamic-Slot-Names" class="headerlink" title="Dynamic Slot Names"></a>Dynamic Slot Names</h1><p>Vue 有提供動態切換 slot 名稱的功能。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;basic-component&gt;</span><br><span class="line">  &lt;template v-slot:header&gt;Header&lt;&#x2F;template&gt;</span><br><span class="line">  &lt;template v-slot:[DynamicSlot]&gt; 5555 &lt;&#x2F;template&gt;</span><br><span class="line">&lt;&#x2F;basic-component&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">const BasicComponent &#x3D;&#123;</span><br><span class="line">  template: &#96;</span><br><span class="line">    &lt;header&gt;</span><br><span class="line">	  &lt;slot name&#x3D;&quot;header&quot;&gt;This is Header &lt;&#x2F;slot&gt;</span><br><span class="line">	&lt;&#x2F;header&gt;</span><br><span class="line">	&lt;main&gt;</span><br><span class="line">	  &lt;slot&gt;This is Main &lt;&#x2F;slot&gt;</span><br><span class="line">	&lt;&#x2F;main&gt;</span><br><span class="line">  &#96;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Vue.component(&#39;basic-component&#39;, BasicComponent)</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    DynamicSlot: &#39;default&#39;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>你可以看到以上範例，我們在 basic-component 上的其中一個 template 綁上了 DynamicSlot ，那這個資料是由 Vue 物件來決定它的內容的，而這邊是把它設為 default ，所以<br>，在該 template 的內容，會被插入到 basic-component 的 template 中的預設 slot 中，也就是 This is Main 會被 5555 給取代掉。<br>那今天若把 DynamicSlot 改成 header 的話，你會發現原本在 basic-component 預計要塞入的 Header 內容，會直接被 5555 搶先取代掉了。<br>由以上這種表現可以知道， v-slot 綁定的動態 slot 的優先序比原本元件中的靜態 slot 還要高。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/17/axios%E5%A5%97%E4%BB%B6%E7%B6%B2%E8%B7%AF%E8%AB%8B%E6%B1%82%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%B4%B9/" rel="prev" title="axios套件網路請求使用介紹">
+      <i class="fa fa-chevron-left"></i> axios套件網路請求使用介紹
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Slot-%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Slot 簡介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Compilation-Scope"><span class="nav-number">1.1.</span> <span class="nav-text">Compilation Scope</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fallback-Content"><span class="nav-number">1.2.</span> <span class="nav-text">Fallback Content</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Name-Slots"><span class="nav-number">1.3.</span> <span class="nav-text">Name Slots</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%92%E6%9C%89%E6%94%BE%E5%9C%A8%E6%8C%87%E5%AE%9A-slot-%E4%B8%AD%E7%9A%84%E5%85%A7%E5%AE%B9"><span class="nav-number">1.3.1.</span> <span class="nav-text">沒有放在指定 slot 中的內容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%92%E6%9C%89%E9%A0%90%E8%A8%AD-slot-%E7%9A%84%E5%85%A7%E5%AE%B9"><span class="nav-number">1.3.2.</span> <span class="nav-text">沒有預設 slot 的內容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%9C%89%E5%8A%A0%E5%85%A5v-slot-default%E5%91%A2"><span class="nav-number">1.3.3.</span> <span class="nav-text">如果有加入v-slot:default呢</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scoped-Slot"><span class="nav-number">2.</span> <span class="nav-text">Scoped Slot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scoped-Slot-%E5%82%B3%E5%85%A5-JS-%E8%A1%A8%E9%81%94%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">Scoped Slot 傳入 JS 表達式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dynamic-Slot-Names"><span class="nav-number">4.</span> <span class="nav-text">Dynamic Slot Names</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">112</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
