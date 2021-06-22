@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://landy510.github.io/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day13-State-Transition/</loc>
+    
+    <lastmod>2021-06-22</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://landy510.github.io/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day13-Transition/</loc>
+    
+    <lastmod>2021-06-22</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://landy510.github.io/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day12/</loc>
     
     <lastmod>2021-06-22</lastmod>
@@ -942,14 +956,14 @@
 
   
   <url>
-    <loc>https://landy510.github.io/tags/Vue/</loc>
+    <loc>https://landy510.github.io/tags/AJAX/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/AJAX/</loc>
+    <loc>https://landy510.github.io/tags/Vue/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -970,14 +984,14 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/jQuery/</loc>
+    <loc>https://landy510.github.io/tags/JavaScript/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/JavaScript/</loc>
+    <loc>https://landy510.github.io/tags/jQuery/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1021,14 +1035,14 @@
 
   
   <url>
-    <loc>https://landy510.github.io/categories/Vue/</loc>
+    <loc>https://landy510.github.io/categories/AJAX/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://landy510.github.io/categories/AJAX/</loc>
+    <loc>https://landy510.github.io/categories/Vue/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1049,14 +1063,14 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/categories/jQuery/</loc>
+    <loc>https://landy510.github.io/categories/JavaScript/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://landy510.github.io/categories/JavaScript/</loc>
+    <loc>https://landy510.github.io/categories/jQuery/</loc>
     <lastmod>2021-06-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
