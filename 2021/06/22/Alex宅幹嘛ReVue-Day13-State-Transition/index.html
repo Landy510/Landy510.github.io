@@ -28,7 +28,7 @@
 <meta property="og:description" content="Alex宅幹嘛ReVue-Day13 紀錄 Vue 中 transition 的 State_Transition 的內容，可以實現網頁中數字跑動的動畫效果">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-06-22T14:48:03.000Z">
-<meta property="article:modified_time" content="2021-06-22T14:49:24.292Z">
+<meta property="article:modified_time" content="2021-06-26T03:58:07.688Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
@@ -192,10 +192,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2021-06-22 22:48:03 / 修改時間：22:49:24" itemprop="dateCreated datePublished" datetime="2021-06-22T22:48:03+08:00">2021-06-22</time>
+              <time title="創建時間：2021-06-22 22:48:03" itemprop="dateCreated datePublished" datetime="2021-06-22T22:48:03+08:00">2021-06-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-06-26 11:58:07" itemprop="dateModified" datetime="2021-06-26T11:58:07+08:00">2021-06-26</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -220,7 +226,7 @@
       
         <p>接續<a href="/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day13-Transition/" title="上一篇">上一篇</a> 還沒做完的筆記在這邊接續下來做。<br>這邊的話，主要是紀錄 Vue 的 transition 的 State_Transition 的內容。</p>
 <h1 id="State-Transition"><a href="#State-Transition" class="headerlink" title="State_Transition"></a>State_Transition</h1><p>在上一篇的 Enter/Leave &amp; List Transitions 部分，主要是在教我們怎麼加入進退場的動畫。<br>在這邊主要是要介紹，引入一些第三放的套件，並加上 Vue 本身的功能，來為我們自己的資料加上動畫的方法。</p>
-<p>##　Animating State with Watchers<br>通常會有兩種是值，一個是我們的原始數值，另一個是用來跑畫面效果的數值。<br>那我們在改的是原始數值，在呈現的是另一個數值，這種實作的概念要記得。</p>
+<h2 id="Animating-State-with-Watchers"><a href="#Animating-State-with-Watchers" class="headerlink" title="Animating State with Watchers"></a>Animating State with Watchers</h2><p>通常會有兩種是值，一個是我們的原始數值，另一個是用來跑畫面效果的數值。<br>那我們在改的是原始數值，在呈現的是另一個數值，這種實作的概念要記得。</p>
 <h1 id="Organizing-Transitions-into-Components"><a href="#Organizing-Transitions-into-Components" class="headerlink" title="Organizing Transitions into Components"></a>Organizing Transitions into Components</h1><p>這個 Vue 所寫的套件，Alex 大大蠻推薦的，用來呈現數字跑動的效果。<br>但要小心的是，這個套件是和 tween.js 相依的。</p>
 <iframe src="https://codepen.io/RandyChen/embed/BaWedLR?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
 <p>你可以看到以上這個範例，我們畫面呈現的資料是 tweeningValue 而實記載更改的數字就是利用元件的 props 的 value 來接進來，並藉由 tween 套件來更新畫面上的數值。<br>這個 Vue 物件是一個很推薦效果喔。</p>
@@ -247,7 +253,10 @@
     <a href="/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day13-Transition/" rel="prev" title="Alex宅幹嘛ReVue-Day13_Transition">
       <i class="fa fa-chevron-left"></i> Alex宅幹嘛ReVue-Day13_Transition
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day14%E7%AD%86%E8%A8%98-Directive/" rel="next" title="Alex宅幹嘛_ReVue_Day14筆記_Directive">
+      Alex宅幹嘛_ReVue_Day14筆記_Directive <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -306,7 +315,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#State-Transition"><span class="nav-number">1.</span> <span class="nav-text">State_Transition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Organizing-Transitions-into-Components"><span class="nav-number">2.</span> <span class="nav-text">Organizing Transitions into Components</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alex%E5%AE%85%E5%B9%B9%E5%98%9B-%E7%9C%89%E7%9C%89%E8%A7%92%E8%A7%92"><span class="nav-number">3.</span> <span class="nav-text">Alex宅幹嘛-眉眉角角</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%88%E7%8F%BE%E5%8B%95%E7%95%AB%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">3.1.</span> <span class="nav-text">呈現動畫的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%96%A6%E7%9A%84-library"><span class="nav-number">3.2.</span> <span class="nav-text">推薦的 library</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#State-Transition"><span class="nav-number">1.</span> <span class="nav-text">State_Transition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Animating-State-with-Watchers"><span class="nav-number">1.1.</span> <span class="nav-text">Animating State with Watchers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Organizing-Transitions-into-Components"><span class="nav-number">2.</span> <span class="nav-text">Organizing Transitions into Components</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alex%E5%AE%85%E5%B9%B9%E5%98%9B-%E7%9C%89%E7%9C%89%E8%A7%92%E8%A7%92"><span class="nav-number">3.</span> <span class="nav-text">Alex宅幹嘛-眉眉角角</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%88%E7%8F%BE%E5%8B%95%E7%95%AB%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">3.1.</span> <span class="nav-text">呈現動畫的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%96%A6%E7%9A%84-library"><span class="nav-number">3.2.</span> <span class="nav-text">推薦的 library</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -320,7 +329,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-count">116</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

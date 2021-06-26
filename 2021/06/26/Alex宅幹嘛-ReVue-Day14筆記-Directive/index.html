@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Alex宅幹嘛ReVue-Day14 紀錄 Vue 中自訂義 Directive 的方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Alex宅幹嘛_ReVue_Day14筆記_Directive">
+<meta property="og:url" content="https://landy510.github.io/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day14%E7%AD%86%E8%A8%98-Directive/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="Alex宅幹嘛ReVue-Day14 紀錄 Vue 中自訂義 Directive 的方法">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-06-26T04:03:34.000Z">
+<meta property="article:modified_time" content="2021-06-26T04:21:29.092Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day14%E7%AD%86%E8%A8%98-Directive/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Alex宅幹嘛_ReVue_Day14筆記_Directive | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day14%E7%AD%86%E8%A8%98-Directive/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Alex宅幹嘛_ReVue_Day14筆記_Directive
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-06-26 12:03:34 / 修改時間：12:21:29" itemprop="dateCreated datePublished" datetime="2021-06-26T12:03:34+08:00">2021-06-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">Alex宅幹嘛ReVue-Day14 紀錄 Vue 中自訂義 Directive 的方法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Custom-Directives"><a href="#Custom-Directives" class="headerlink" title="Custom Directives"></a>Custom Directives</h1><p>這個部分要講自製 directive 的內容。<br>在自製 directive有以下幾個 hook 可以使用，分別為 bind, inserted, update, componentUpdated, unbind</p>
+<iframe src="https://codepen.io/RandyChen/embed/jOBjYRK?defaultTab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>以上這個範例可以看到我們自製了一個 directive 叫做 focus，然後，會在目標元素被掛到 DOM 上的時候，加入這個自製 directive 的效果。<br>另外，要特別注意的是自製 directive 要加在我們自製元件的 template 中喔，不要加到 HTML 文本裡面，會沒有效果。<br>那加入的內容有前綴詞是 v- ，它的後面就是加上我們自訂義的 directive 名稱，所以這邊的自製 directive 會是 v-directive。</p>
+<h2 id="全局註冊-v-s-局部註冊"><a href="#全局註冊-v-s-局部註冊" class="headerlink" title="全局註冊 v.s 局部註冊"></a>全局註冊 v.s 局部註冊</h2><p>全局註冊的方式，就是直接呼叫 Vue.directive 在物件外層註冊。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(&#39;focus&#39;, &#123;</span><br><span class="line">  inserted: function (el) &#123;</span><br><span class="line">    el.focus()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>局部註冊:在元件內部註冊自訂義的 directive 的話，可以將其定義內容加到指定元件的 directives 屬性中。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">directives: &#123;</span><br><span class="line">  focus: &#123;</span><br><span class="line">    inserted: function (el) &#123;</span><br><span class="line">      el.focus()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Hook-Function"><a href="#Hook-Function" class="headerlink" title="Hook Function"></a>Hook Function</h2><p>這邊稍微介紹一下，自訂的 directive 所擁有的 hook 有哪些</p>
+<ol>
+<li>bind: 只會被呼叫一次。它的被呼叫時機為，當自製的 directive 被綁定到指定元件上時，會被呼叫。這個 hook 可以用來初始化一個被綁定元件。</li>
+<li>inserted: 當被綁定元件插入父元件中時，此 hook 會被呼叫。</li>
+<li>update: 所在元件更新時會發動，有可能比其所在元件所擁有的子元件更新前發動。</li>
+<li>componentUpdated: 所在元件更新，且該元件所擁有的全部子元件也更新後發動。</li>
+<li>unbind: 當此 directive 解綁時會發動。<iframe src="https://codepen.io/RandyChen/embed/jOBjYRK?defaultTab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+</li>
+</ol>
+<p>以上這個範例，我們可以看到當元件被插入 DOM 時，會觸發 bind 和 inserted 這兩個 Hook，當更改 input 中的內容時，會更新所在元件的 message 資料，此時，會觸發 update 和 componentUpdated 這兩個 hook。</p>
+<h2 id="function-shorhand"><a href="#function-shorhand" class="headerlink" title="function shorhand"></a>function shorhand</h2><p>在上面的範例，可以看到我們的 directive 再創的時候，是用物件形式寫法來做定義的內容。<br>而官方文件也有提供一個 function 的寫法，若用 function 的寫法來定義的話，該 directive 會預設含有 bind 和 update 這兩個 hook。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(&#39;focus&#39;, function () &#123;</span><br><span class="line">  &#x2F;&#x2F; 定義內容</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="Directive-Hook-Arguments"><a href="#Directive-Hook-Arguments" class="headerlink" title="Directive Hook Arguments"></a>Directive Hook Arguments</h2><p>在我們自訂義的 directive 所擁有的 hook 會帶入以下的參數</p>
+<table>
+<thead>
+<tr>
+<th>參數</th>
+<th>內容</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>el</td>
+<td>可以取得 directive 所在的元件，可用來操縱所在元件的 DOM</td>
+<td></td>
+</tr>
+<tr>
+<td>binding</td>
+<td>它是一個物件，它包含了以下的屬性</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>name</td>
+<td>可以取得此沒有加上 v- 這個前綴詞的 directive 名稱</td>
+</tr>
+<tr>
+<td></td>
+<td>value</td>
+<td>傳給 directive 的值，可以被這個屬性取得</td>
+</tr>
+<tr>
+<td></td>
+<td>oldValue</td>
+<td>可以取得 value 的上一個舊值，只能在 update 和 componentUpdated 這兩個 hook 被取得。不管 value 有沒有被更改內容，此屬性的值都能被取得</td>
+</tr>
+<tr>
+<td></td>
+<td>expression</td>
+<td>取得傳給 directive 的字串，注意是字串型別喔!!</td>
+</tr>
+<tr>
+<td></td>
+<td>arg</td>
+<td>取得傳給 directive 的參數</td>
+</tr>
+<tr>
+<td></td>
+<td>modifiers</td>
+<td>是一個具有修飾符的物件</td>
+</tr>
+<tr>
+<td>vnode</td>
+<td>由 Vue 編譯器所創出來的虛擬節點</td>
+<td></td>
+</tr>
+<tr>
+<td>oldVnode</td>
+<td>前一個虛擬節點，只能在 update 和 componentUpdated 這兩個 hook 被取得</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="modifier-feature"><a href="#modifier-feature" class="headerlink" title="modifier feature"></a>modifier feature</h3><p>其中，modifiers 的引用方式比較特別一點，所以，在這邊紀錄一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(&#39;focus&#39;, function(el, binding) &#123;</span><br><span class="line">  console.log(binding)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">const myComponent &#x3D; &#123;</span><br><span class="line">  template: &#96;&lt;p&gt;&lt;input type&#x3D;&quot;text&quot; v-focus:landy.test1.test2 &#x2F;&gt;&lt;&#x2F;p&gt;&#96;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面這個內容你可以看到我們在定義 myComponent 元件的 template 部分綁上自訂義的 v-focus，然後，後面接著 landy.test1.test2，那我們可以在<br>它的 console 中的 binding 屬性中的 arg 屬性看到其內容為 landy ，而 modifiers 屬性裡面會是一個物件，裡面包裹著兩個屬性分別為 test1 和 test2，然後，它們的值皆為 true。<br>可以看出來，先用冒號指定 arg 的對象，接著，才在這個 arg 後面使用 modifiers。</p>
+<h3 id="Dynamic-Directive-Arguments"><a href="#Dynamic-Directive-Arguments" class="headerlink" title="Dynamic Directive Arguments"></a>Dynamic Directive Arguments</h3><p>在官方文件有講到，我們可以動態的變換傳入 directive 的 arg。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">---HTML&#x3D;&#x3D;&#x3D;</span><br><span class="line">&lt;p&gt;&lt;input type&#x3D;&quot;text&quot; v-demo:[direction]&#x3D;&quot;200&quot; &#x2F;&gt;&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  data: &#123;</span><br><span class="line">    direction: &#39;left&#39;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>可以看到我們用中括號把要傳入的 arg 內容包起來，那其 arg 的內容，可以由外部動態的更動，而 directive 可以利用 binding 的 arg 屬性來調用到這個傳入的 arg 內容。</p>
+<h2 id="Object-Literals"><a href="#Object-Literals" class="headerlink" title="Object Literals"></a>Object Literals</h2><p>direction 也可以接由外部傳進來的物件，接近來之後，我們再透過 direction 的 binding 的 value 內容來調用傳入的物件內容。  </p>
+<h1 id="Alex-宅幹嘛-眉眉角角"><a href="#Alex-宅幹嘛-眉眉角角" class="headerlink" title="Alex 宅幹嘛 - 眉眉角角"></a>Alex 宅幹嘛 - 眉眉角角</h1><h2 id="Alex-提供的directive-範例"><a href="#Alex-提供的directive-範例" class="headerlink" title="Alex 提供的directive 範例"></a>Alex 提供的directive 範例</h2><p>Alex 在課堂上提到一個它利用 directive 的功能來做的一個有關 grid system 展示的範例，因為，這個範例我蠻喜歡的，所以，紀錄一下</p>
+<iframe src="https://codepen.io/RandyChen/embed/ZEegavp?defaultTab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上這個範例，我們先去偵聽 Vue 物件的 resize 事件，接著，在每一次觸發 resize 事件的時候，都會去更動到 Vue 物件中的 width 屬性值。<br>此時，我們利用我們自訂義的 v-width 這個 directive 來將 Vue 物件的 width 屬性值接進來，每當觸發 resize 就會去更動 v-width 所在元件的 directive 的 value 和 oldValue 值，<br>這個時候就會連帶的跑到 v-width 的 directive 定義的 function 裡面，去即時取得當下元件的寬度，顯示到畫面上，代表現在的格線區塊的寬度為多少，可以很好的展示給客戶看。</p>
+<h3 id="Directive-心法"><a href="#Directive-心法" class="headerlink" title="Directive 心法"></a>Directive 心法</h3><p>注意~~~~~~~~~~~<br>以上這個範例， Alex 大大有傳遞一個觀念，我們可以偵聽較少元件的事件，並搭配 directive 的功用當其 binding 的數值因為偵聽事件觸發而變動，連帶的就會去觸發各 directive 所在的元件的 directive 定義的內容，以此機制去更動所在元件的內容。<br>用上面這種手法，我們就不需要每一個元件都要綁定屬於它自己的偵聽事件，當觸發多個偵聽事件時，可能因為多線程的緣故，而造成瀏覽器不可預知的錯誤，所以，可以想一下要怎麼利用 directive 這個工具喔~~</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day13-State-Transition/" rel="prev" title="Alex宅幹嘛ReVue-Day13_State_Transition">
+      <i class="fa fa-chevron-left"></i> Alex宅幹嘛ReVue-Day13_State_Transition
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day14%E7%AD%86%E8%A8%98-Mixin/" rel="next" title="Alex宅幹嘛_ReVue_Day14筆記_Mixin">
+      Alex宅幹嘛_ReVue_Day14筆記_Mixin <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Custom-Directives"><span class="nav-number">1.</span> <span class="nav-text">Custom Directives</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E8%A8%BB%E5%86%8A-v-s-%E5%B1%80%E9%83%A8%E8%A8%BB%E5%86%8A"><span class="nav-number">1.1.</span> <span class="nav-text">全局註冊 v.s 局部註冊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hook-Function"><span class="nav-number">1.2.</span> <span class="nav-text">Hook Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#function-shorhand"><span class="nav-number">1.3.</span> <span class="nav-text">function shorhand</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Directive-Hook-Arguments"><span class="nav-number">1.4.</span> <span class="nav-text">Directive Hook Arguments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#modifier-feature"><span class="nav-number">1.4.1.</span> <span class="nav-text">modifier feature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dynamic-Directive-Arguments"><span class="nav-number">1.4.2.</span> <span class="nav-text">Dynamic Directive Arguments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-Literals"><span class="nav-number">1.5.</span> <span class="nav-text">Object Literals</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alex-%E5%AE%85%E5%B9%B9%E5%98%9B-%E7%9C%89%E7%9C%89%E8%A7%92%E8%A7%92"><span class="nav-number">2.</span> <span class="nav-text">Alex 宅幹嘛 - 眉眉角角</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Alex-%E6%8F%90%E4%BE%9B%E7%9A%84directive-%E7%AF%84%E4%BE%8B"><span class="nav-number">2.1.</span> <span class="nav-text">Alex 提供的directive 範例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Directive-%E5%BF%83%E6%B3%95"><span class="nav-number">2.1.1.</span> <span class="nav-text">Directive 心法</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">116</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

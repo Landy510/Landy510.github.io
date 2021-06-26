@@ -28,7 +28,7 @@
 <meta property="og:description" content="Alex宅幹嘛ReVue-Day13 紀錄 Vue 中實作 DOM 過場動畫的方法">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-06-22T14:42:27.000Z">
-<meta property="article:modified_time" content="2021-06-22T14:45:35.389Z">
+<meta property="article:modified_time" content="2021-06-26T04:01:42.012Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
@@ -192,10 +192,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
-              
 
-              <time title="創建時間：2021-06-22 22:42:27 / 修改時間：22:45:35" itemprop="dateCreated datePublished" datetime="2021-06-22T22:42:27+08:00">2021-06-22</time>
+              <time title="創建時間：2021-06-22 22:42:27" itemprop="dateCreated datePublished" datetime="2021-06-22T22:42:27+08:00">2021-06-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-06-26 12:01:42" itemprop="dateModified" datetime="2021-06-26T12:01:42+08:00">2021-06-26</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -230,7 +236,7 @@
 <h2 id="Transitioning-Between-Elements"><a href="#Transitioning-Between-Elements" class="headerlink" title="Transitioning Between Elements"></a>Transitioning Between Elements</h2><p>在 transition 標籤中，要加入兩個以上的 tag 的時候，可以用 v-if 和 v-else 來切換元素執行你加入的動畫效果。<br>ex:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;transition name&#x3D;&#39;fade&#39;&gt;</span><br><span class="line">  &lt;p v-if&#x3D;&quot;show&quot;&gt;Hello world&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;div v-else&gt;Hello Landy!!!&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;transition&gt;</span><br></pre></td></tr></table></figure>
 <p>可以看到以上範例在 transition 標籤中，有兩個 DOM 元素，他們之間就是用 v-if 和 v-else 來切換元素執行我所加入的 fade 動畫效果</p>
-<p>注意~~~~~~~~~~<br>當 transition 中，有相同 tag 名稱的 DOM 元素的時候，記得為他們分別加上專屬的 key 屬性，不然， Vue 編譯器，不會去執行你加入的動畫效果喔。<br>ex:</p>
+<h2 id="相同標籤要加入key達成切換不同DOM"><a href="#相同標籤要加入key達成切換不同DOM" class="headerlink" title="相同標籤要加入key達成切換不同DOM"></a>相同標籤要加入key達成切換不同DOM</h2><p>注意~~~~~~~~~~<br>當 transition 中，有相同 tag 名稱的 DOM 元素的時候，記得為他們分別加上專屬的 key 屬性，不然， Vue 編譯器，不會去執行你加入的動畫效果喔。<br>ex:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;transition name&#x3D;&#39;fade&#39;&gt;</span><br><span class="line">  &lt;p v-if&#x3D;&quot;show&quot; key&#x3D;&quot;a&quot;&gt;Hello world&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;p v-else key&#x3D;&quot;b&quot;&gt;Hello world&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;transition&gt;</span><br></pre></td></tr></table></figure>
 
 <h1 id="Transition-Modes"><a href="#Transition-Modes" class="headerlink" title="Transition Modes"></a>Transition Modes</h1><p>在 transition 中還有提供一個 mode 屬性，它的值有兩種選擇一個是 in-out 另一個是 out-in 。<br>in-out: 此效果會讓新元素先進場，等它的效果完全結束之後，才讓舊有元素退場。<br>out-in: 此效果會讓舊元素先退場，等它的效果完全退場之後，才讓新元素進場。</p>
@@ -330,7 +336,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Enter-Leave-amp-List-Transitions"><span class="nav-number">1.</span> <span class="nav-text">Enter&#x2F;Leave &amp; List Transitions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transition"><span class="nav-number">1.1.</span> <span class="nav-text">Transition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#animation"><span class="nav-number">1.2.</span> <span class="nav-text">animation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Custom-Transition-Classes"><span class="nav-number">1.3.</span> <span class="nav-text">Custom Transition Classes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transitioning-Between-Elements"><span class="nav-number">1.4.</span> <span class="nav-text">Transitioning Between Elements</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transition-Modes"><span class="nav-number">2.</span> <span class="nav-text">Transition Modes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transition-between-Components"><span class="nav-number">3.</span> <span class="nav-text">Transition between Components</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#List-Transitions"><span class="nav-number">4.</span> <span class="nav-text">List Transitions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dynamic-Transitions"><span class="nav-number">5.</span> <span class="nav-text">Dynamic Transitions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alex-%E5%AE%85%E5%B9%B9%E5%98%9B-%E7%9C%89%E7%9C%89%E8%A7%92%E8%A7%92"><span class="nav-number">6.</span> <span class="nav-text">Alex 宅幹嘛-眉眉角角</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Alex-%E6%8E%A8%E8%96%A6%E5%87%BD%E5%BC%8F%E5%BA%AB"><span class="nav-number">6.1.</span> <span class="nav-text">Alex 推薦函式庫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8-transition-%E4%B8%AD%E7%9A%84-display-%E5%B1%AC%E6%80%A7"><span class="nav-number">6.2.</span> <span class="nav-text">在 transition 中的 display 屬性</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Enter-Leave-amp-List-Transitions"><span class="nav-number">1.</span> <span class="nav-text">Enter&#x2F;Leave &amp; List Transitions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transition"><span class="nav-number">1.1.</span> <span class="nav-text">Transition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#animation"><span class="nav-number">1.2.</span> <span class="nav-text">animation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Custom-Transition-Classes"><span class="nav-number">1.3.</span> <span class="nav-text">Custom Transition Classes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transitioning-Between-Elements"><span class="nav-number">1.4.</span> <span class="nav-text">Transitioning Between Elements</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%90%8C%E6%A8%99%E7%B1%A4%E8%A6%81%E5%8A%A0%E5%85%A5key%E9%81%94%E6%88%90%E5%88%87%E6%8F%9B%E4%B8%8D%E5%90%8CDOM"><span class="nav-number">1.5.</span> <span class="nav-text">相同標籤要加入key達成切換不同DOM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transition-Modes"><span class="nav-number">2.</span> <span class="nav-text">Transition Modes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transition-between-Components"><span class="nav-number">3.</span> <span class="nav-text">Transition between Components</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#List-Transitions"><span class="nav-number">4.</span> <span class="nav-text">List Transitions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dynamic-Transitions"><span class="nav-number">5.</span> <span class="nav-text">Dynamic Transitions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alex-%E5%AE%85%E5%B9%B9%E5%98%9B-%E7%9C%89%E7%9C%89%E8%A7%92%E8%A7%92"><span class="nav-number">6.</span> <span class="nav-text">Alex 宅幹嘛-眉眉角角</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Alex-%E6%8E%A8%E8%96%A6%E5%87%BD%E5%BC%8F%E5%BA%AB"><span class="nav-number">6.1.</span> <span class="nav-text">Alex 推薦函式庫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8-transition-%E4%B8%AD%E7%9A%84-display-%E5%B1%AC%E6%80%A7"><span class="nav-number">6.2.</span> <span class="nav-text">在 transition 中的 display 屬性</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -344,7 +350,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-count">116</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
