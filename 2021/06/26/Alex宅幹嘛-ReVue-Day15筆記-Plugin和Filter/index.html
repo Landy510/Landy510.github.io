@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="這是第一篇練習怎麼在Hexo po文的文章優~">
+  <meta name="description" content="紀錄 Vue 中 Plugin 和 Filter 的用法，其中 Plugin 用於將常用內容包裹在一起來給 Vue 物件做全域使用，而 Mixin 功能差不多，只不過使用的範圍比 Plugin 還要小，可以給部分元件做使用。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第一篇Hexo po文練習-20201201">
-<meta property="og:url" content="https://landy510.github.io/2020/12/01/article-title/index.html">
+<meta property="og:title" content="Alex宅幹嘛_ReVue_Day15筆記_Plugin和Filter">
+<meta property="og:url" content="https://landy510.github.io/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day15%E7%AD%86%E8%A8%98-Plugin%E5%92%8CFilter/index.html">
 <meta property="og:site_name" content="Landy Blog">
-<meta property="og:description" content="這是第一篇練習怎麼在Hexo po文的文章優~">
+<meta property="og:description" content="紀錄 Vue 中 Plugin 和 Filter 的用法，其中 Plugin 用於將常用內容包裹在一起來給 Vue 物件做全域使用，而 Mixin 功能差不多，只不過使用的範圍比 Plugin 還要小，可以給部分元件做使用。">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-12-01T13:06:50.000Z">
-<meta property="article:modified_time" content="2020-12-01T14:12:38.729Z">
+<meta property="article:published_time" content="2021-06-26T04:34:46.000Z">
+<meta property="article:modified_time" content="2021-06-26T04:45:14.124Z">
 <meta property="article:author" content="Landy">
-<meta property="article:tag" content="008重新認識JavaScript筆記">
+<meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://landy510.github.io/2020/12/01/article-title/">
+<link rel="canonical" href="https://landy510.github.io/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day15%E7%AD%86%E8%A8%98-Plugin%E5%92%8CFilter/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>第一篇Hexo po文練習-20201201 | Landy Blog</title>
+  <title>Alex宅幹嘛_ReVue_Day15筆記_Plugin和Filter | Landy Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
     <script>
@@ -170,7 +170,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2020/12/01/article-title/">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day15%E7%AD%86%E8%A8%98-Plugin%E5%92%8CFilter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -183,7 +183,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          第一篇Hexo po文練習-20201201
+          Alex宅幹嘛_ReVue_Day15筆記_Plugin和Filter
         </h1>
 
         <div class="post-meta">
@@ -194,10 +194,20 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2020-12-01 21:06:50 / 修改時間：22:12:38" itemprop="dateCreated datePublished" datetime="2020-12-01T21:06:50+08:00">2020-12-01</time>
+              <time title="創建時間：2021-06-26 12:34:46 / 修改時間：12:45:14" itemprop="dateCreated datePublished" datetime="2021-06-26T12:34:46+08:00">2021-06-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
             </span>
 
           
+            <div class="post-description">紀錄 Vue 中 Plugin 和 Filter 的用法，其中 Plugin 用於將常用內容包裹在一起來給 Vue 物件做全域使用，而 Mixin 功能差不多，只不過使用的範圍比 Plugin 還要小，可以給部分元件做使用。</div>
 
         </div>
       </header>
@@ -208,7 +218,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>這是第一篇練習怎麼在Hexo po文的文章優~</p>
+        <h1 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h1><p>它是用來增加全域性的方法給 Vue 使用的功能。<br>通常會將常用的方法之類的東西包在 plugin 裡面，再一包一次塞給 Vue 用。</p>
+<h2 id="Using-a-Plugin"><a href="#Using-a-Plugin" class="headerlink" title="Using a Plugin"></a>Using a Plugin</h2><p>當我們要引入一個外掛的 plugin 的時候，我們要記得用 Vue.use() 來引入這個套件，才能在專案中使用這個套件。那也要記得，要在 new Vue 之前使用 Vue.use()。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vue.use(MyPlugin)</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  &#x2F;&#x2F;... options</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="使用-Vue-use-的時機"><a href="#使用-Vue-use-的時機" class="headerlink" title="使用 Vue.use() 的時機"></a>使用 Vue.use() 的時機</h3><p>有一些由官方所提供的 plugin 像是 vue-router，就會自動的被加入 Vue.use() 來引入他們，不需要我們在自己寫上去，但要記得，這種情況，必須在你的 Vue 是一個全域變數的情況下喔。<br>所以，像是我們在一個小檔案中，並沒有用 vue-cli 這種套件管理的狀態下，通常在我們引入 vue-router 的 cdn 之後，就會自動地為我們加上 Vue.use() 了。<br>但是，在模組化的環境下(像是有使用 vue-cli 管理套件來將專案切割成各種模組的情況) ，就算我們引入以上這種官方的套件，也是必須要加入 Vue.use() 來引入它們。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var Vue &#x3D; require(&#39;vue&#39;)</span><br><span class="line">var VueRouter &#x3D; require(&#39;vue-router&#39;)</span><br><span class="line"></span><br><span class="line">Vue.use(VueRouter)   &#x2F;&#x2F; 要使用 Vue.use() 來引入</span><br></pre></td></tr></table></figure>
+
+<h2 id="Writing-a-Plugin"><a href="#Writing-a-Plugin" class="headerlink" title="Writing a Plugin"></a>Writing a Plugin</h2><p>任一個 plugin 都應要有一個 install function。這個 install function 會在 Vue 物件的建構式中被當作第一個參數呼叫。<br>我們可以在這個 install function 中寫入我們希望在這個 plugin 定義的內容。</p>
+<iframe src="https://codepen.io/RandyChen/embed/ZEKzYGK?defaultTab=result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>以上這個範例，就是加入一個自訂義的 plugin 然後裡面包了一個方法，可以調用 Vue 物件的 show 成員屬性的值。</p>
+<h1 id="Filters"><a href="#Filters" class="headerlink" title="Filters"></a>Filters</h1><p>它會被用來處理文字的內容。<br>filters 可以被在以下兩種地方:<br>一個是 mustache interpolations，也就是 template 裡面，像 <code>&#123;&#123; price | currency &#125;&#125;</code> 這樣子。<br>另一個可以用在 v-bind 的表達式，像<code>&lt;div v-bind:id=&quot;rawId | upperCase&quot;&gt;&lt;/div&gt;</code>中。</p>
+<iframe src="https://codepen.io/RandyChen/embed/BaRByZo?defaultTab=result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
 
     </div>
 
@@ -218,7 +240,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/008%E9%87%8D%E6%96%B0%E8%AA%8D%E8%AD%98JavaScript%E7%AD%86%E8%A8%98/" rel="tag"># 008重新認識JavaScript筆記</a>
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
           </div>
 
         
@@ -226,11 +248,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/12/14/%E7%AC%AC%E4%B8%80%E9%80%B1%E5%89%8D%E7%AB%AF%E4%BD%9C%E6%A5%AD%E8%88%87%E8%AA%B2%E7%A8%8B/" rel="next" title="第一週前端作業與課程">
-      第一週前端作業與課程 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day14%E7%AD%86%E8%A8%98-Mixin/" rel="prev" title="Alex宅幹嘛_ReVue_Day14筆記_Mixin">
+      <i class="fa fa-chevron-left"></i> Alex宅幹嘛_ReVue_Day14筆記_Mixin
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -289,6 +311,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Plugins"><span class="nav-number">1.</span> <span class="nav-text">Plugins</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Using-a-Plugin"><span class="nav-number">1.1.</span> <span class="nav-text">Using a Plugin</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Vue-use-%E7%9A%84%E6%99%82%E6%A9%9F"><span class="nav-number">1.1.1.</span> <span class="nav-text">使用 Vue.use() 的時機</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Writing-a-Plugin"><span class="nav-number">1.2.</span> <span class="nav-text">Writing a Plugin</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Filters"><span class="nav-number">2.</span> <span class="nav-text">Filters</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
