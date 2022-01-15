@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://landy510.github.io/2022/01/15/Angular-%E5%85%B1%E7%94%A8%E5%85%83%E4%BB%B6-%E5%BD%88%E7%AA%97-3/</loc>
+    
+    <lastmod>2022-01-15</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://landy510.github.io/2022/01/15/Angular-%E5%85%B1%E7%94%A8%E5%85%83%E4%BB%B6-%E5%BD%88%E7%AA%97-2/</loc>
     
     <lastmod>2022-01-15</lastmod>
@@ -1012,13 +1019,6 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/Bootstrap/</loc>
-    <lastmod>2022-01-15</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://landy510.github.io/tags/Angular/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>daily</changefreq>
@@ -1027,6 +1027,13 @@
   
   <url>
     <loc>https://landy510.github.io/tags/Angular-custom-modal/</loc>
+    <lastmod>2022-01-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://landy510.github.io/tags/Bootstrap/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1105,14 +1112,14 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/categories/Bootstrap/</loc>
+    <loc>https://landy510.github.io/categories/Angular/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://landy510.github.io/categories/Angular/</loc>
+    <loc>https://landy510.github.io/categories/Bootstrap/</loc>
     <lastmod>2022-01-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

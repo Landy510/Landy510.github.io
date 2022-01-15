@@ -164,6 +164,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/05/22/Vue-v-if%E5%92%8Cv-show%E7%9A%84%E6%87%89%E7%94%A8%E8%88%87%E5%B7%AE%E5%88%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/22/Vue-v-if%E5%92%8Cv-show%E7%9A%84%E6%87%89%E7%94%A8%E8%88%87%E5%B7%AE%E5%88%A5/" class="post-title-link" itemprop="url">Vue-v-if和v-show的應用與差別</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-05-22 10:06:58 / 修改時間：12:03:26" itemprop="dateCreated datePublished" datetime="2021-05-22T10:06:58+08:00">2021-05-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h1><p>這個 directive 的功能是，藉由判斷一個內容，來決定要不要將相對應的內容呈現在網頁上。<br>如果今天你有兩個以上的元素的 v-if 是要判斷同一個元素的話，官方文件建議你用 template 將這些元素包起來，然後，在這個 template 上用 v-if 統一對同一個內容做判斷<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div v-if&#x3D;&quot;isShow&quot;&gt;這一個區塊&lt;&#x2F;div&gt;</span><br><span class="line">&lt;span v-if&#x3D;&quot;isShow&quot;&gt;這一個span&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure>
+<p>可以用 template 改寫成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;template v-if&#x3D;&quot;isShow&quot;&gt;</span><br><span class="line">  &lt;div&gt;這一個區塊&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;span&gt;這一個span&lt;&#x2F;span&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br></pre></td></tr></table></figure>
+<p>以上範例就能統一去判斷 isShow 這個內容，而且 template 這個 tag 也不會出現在 DOM 上面。 </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/22/Vue-v-if%E5%92%8Cv-show%E7%9A%84%E6%87%89%E7%94%A8%E8%88%87%E5%B7%AE%E5%88%A5/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/05/19/Vue-%E9%9D%9C%E6%85%8B%E5%B1%AC%E6%80%A7%E5%92%8C%E5%8B%95%E6%85%8B%E7%B6%81%E5%AE%9A%E7%9A%84%E5%84%AA%E5%85%88%E9%A0%86%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -873,82 +952,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/04/14/%E5%BB%BA%E7%AB%8Bgulp%E7%92%B0%E5%A2%83%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%A9%9F%E7%B4%80%E9%8C%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/14/%E5%BB%BA%E7%AB%8Bgulp%E7%92%B0%E5%A2%83%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%A9%9F%E7%B4%80%E9%8C%84/" class="post-title-link" itemprop="url">建立gulp環境操作步驟紀錄</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2021-04-14 14:44:01 / 修改時間：14:44:43" itemprop="dateCreated datePublished" datetime="2021-04-14T14:44:01+08:00">2021-04-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B0%88%E6%A1%88%E9%83%A8%E5%B1%AC%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">專案部屬工具</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>這一篇的內容是紀錄gulp管理專案並跟bower混用的專案，<br>這邊我先放上依據以下步驟，<a target="_blank" rel="noopener" href="https://github.com/Landy510/gulp_and_bower">完成的專案連結</a><br><strong>那我們就開始吧~</strong></p>
-<h1 id="gulp-操作步驟紀錄"><a href="#gulp-操作步驟紀錄" class="headerlink" title="gulp 操作步驟紀錄"></a>gulp 操作步驟紀錄</h1><p>step1.<br>首先，你的電腦要先安裝nodeJS。<br>並輸入node -v 來檢查是否你的nodeJS有安裝完成。<br>step2.<br>在你的電腦全域環境中，安裝gulp (每台電腦只需要安裝一次)<br>輸入指令 npm install gulp -g<br>安裝完成之後，在編譯器中下gulp -v來查看gulp的版本，<br>如果有跳出來相對應的版本的話，就代表安裝成功囉~<br>step3.<br>接著，輸入指令npm init，來初始化你的專案檔環境，當該指令執行結束，你的專案檔應該會出現一個<br>package.json的檔案，他可以用來記錄你這個專案檔使用那些相依套件和專案檔的自訂義的執行指令，<br>在未來，擬將你的專案檔給別人時，不需要將專案檔中的node_module資料夾給別人，因為，別人會輸入npm install，<br>接著，編譯器就會依照你專案檔中的package.json所紀錄的相依套件來做環境的安裝囉~<br>step4.<br>接著，輸入指令npm install ，來為你這個專案檔安裝套件的環境<br>step5.<br>安裝完成之後，你就輸入gulp指令，編譯完成後，你專案檔的網頁會直接跳出來。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/14/%E5%BB%BA%E7%AB%8Bgulp%E7%92%B0%E5%A2%83%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%A9%9F%E7%B4%80%E9%8C%84/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1018,7 +1021,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">119</span>
+          <span class="site-state-item-count">120</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
