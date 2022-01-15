@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄如何在 Angular 中，製作彈窗共用組件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular Custom Modal - 共用元件實作 - 彈窗 - 1">
+<meta property="og:url" content="https://landy510.github.io/2022/01/13/Angular-%E5%85%B1%E7%94%A8%E5%85%83%E4%BB%B6-%E5%BD%88%E7%AA%97/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄如何在 Angular 中，製作彈窗共用組件">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://upload.cc/i1/2022/01/13/R4pEZi.jpg">
+<meta property="og:image" content="https://upload.cc/i1/2022/01/15/lh2wXv.png">
+<meta property="og:image" content="https://upload.cc/i1/2022/01/15/R9Dl0K.png">
+<meta property="article:published_time" content="2022-01-13T14:02:07.000Z">
+<meta property="article:modified_time" content="2022-01-15T03:55:03.683Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Angular">
+<meta property="article:tag" content="Angular custom modal">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload.cc/i1/2022/01/13/R4pEZi.jpg">
+
+<link rel="canonical" href="https://landy510.github.io/2022/01/13/Angular-%E5%85%B1%E7%94%A8%E5%85%83%E4%BB%B6-%E5%BD%88%E7%AA%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Angular Custom Modal - 共用元件實作 - 彈窗 - 1 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2022/01/13/Angular-%E5%85%B1%E7%94%A8%E5%85%83%E4%BB%B6-%E5%BD%88%E7%AA%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Angular Custom Modal - 共用元件實作 - 彈窗 - 1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2022-01-13 22:02:07" itemprop="dateCreated datePublished" datetime="2022-01-13T22:02:07+08:00">2022-01-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2022-01-15 11:55:03" itemprop="dateModified" datetime="2022-01-15T11:55:03+08:00">2022-01-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular/" itemprop="url" rel="index"><span itemprop="name">Angular</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄如何在 Angular 中，製作彈窗共用組件</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h1><ol>
+<li>製作出一個可以讓其他人都可以共通使用的彈窗共用元件。 (singleton service 的區分)</li>
+<li>引用此彈窗元件的地方，可以自訂義彈窗中的內容。(<code>ng-content</code> 應用)</li>
+</ol>
+<h2 id="範例專案整體架構"><a href="#範例專案整體架構" class="headerlink" title="範例專案整體架構"></a>範例專案整體架構</h2><p>在這篇文章中，我使用的範例專案架構主要有兩個頁面，分別為 index 和 test 頁面，並在這兩個頁面都使用彈窗元件，並在各自頁面中的彈窗元件中塞入各自的內容。</p>
+<blockquote>
+<p>這邊我就先不詳細說明怎麼創出 index 和 test 元件，並用路由在彼此頁面之間做切換，因為，本篇主要是著重在紀錄如何實作出彈窗共用元件。</p>
+</blockquote>
+<h2 id="實現元件共用的方法"><a href="#實現元件共用的方法" class="headerlink" title="實現元件共用的方法"></a>實現元件共用的方法</h2><p>實作方法如下:<br><strong>Step1. 先創出彈窗元件所需要的檔案</strong><br><code>ng g c modal</code><br>以上指令會在專案中創出一個叫做 modal 的元件</p>
+<p><code>ng g service modal</code><br>以上指令會在剛剛的 modal 元件資料夾中創出一個叫 modal.service.ts 的檔案。<br>我們會在這個 service 檔案裡面寫入操縱此 modal 的方法。</p>
+<p><code>ng g module modal</code><br>以上指令會在剛剛的 modal 元件資料夾中創出一個叫 modal.module.ts 的檔案。<br>我們會在這個 module ，宣告(declaration) 彈窗元件，最後，再由這個 module 輸出(export) 彈窗元件，讓其他地方皆可調用彈窗元件。</p>
+<p>經過以上三個指令，modal 元件資料夾裡面的內容會長的像這樣<br><img src="https://upload.cc/i1/2022/01/13/R4pEZi.jpg" alt="資料夾結構"></p>
+<p><strong>Step2. 實作 modal 出現與遮罩的效果</strong><br>要達成這部分的效果，都是在 modal 的 class 中加減 show 這個 className，來達成切換 modal 是否出現的效果。<br>在這邊我們就會透過 service 來達到加減 show 這個 className 的效果。<br>那在這邊我們就不得不提到 singleton service 的概念囉。</p>
+<h3 id="Singleton-Service"><a href="#Singleton-Service" class="headerlink" title="Singleton Service"></a>Singleton Service</h3><p>當我們直接利用 AngularCLI 的 <code>ng g service modal</code> 指令創出來的 modal.service.ts 檔案中，你可以注意看一下檔案的最上方有有關 @Injectable 的內容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Injectable &#125; from &#39;@angular&#x2F;core&#39;;</span><br><span class="line"></span><br><span class="line">@Injectable(&#123;</span><br><span class="line">   providedIn: &#39;root&#39;</span><br><span class="line">&#125;)</span><br><span class="line">export class ModalService &#123;</span><br><span class="line">  constructor() &#123; &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有看到 <code>@Injectable</code> 中的 <code>providedIn</code> 屬性是 <code>root</code> ，這代表這個 service 會直接注入到 app 的底層，整個專案裡面只會有一個這個 service，這就叫做 singleton service。<br><img src="https://upload.cc/i1/2022/01/15/lh2wXv.png" alt="singleTonService"><br>但是，我們現在想要達成的共用元件的 service 並不是 singleton service。<br>我們希望每一個 modal 元件，都有屬於自己的 service。這代表如果今天有三個 modal 元件，我們就會分別為這三個 modal 元件注入 modal.service，所以，整個專案就只會有這三個<br>modal 元件擁有 modal.service。<br><img src="https://upload.cc/i1/2022/01/15/R9Dl0K.png" alt="singleTonService"><br>好，那知道了，我們想要達成的 service 模式，那就要改寫一下，modal.service.ts 和 modal.component.ts 的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; --- modal.service.ts --- &#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F; import &#123; Injectable &#125; from &#39;@angular&#x2F;core&#39;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; @Injectable(&#123;</span><br><span class="line">&#x2F;&#x2F;   providedIn: &#39;root&#39;</span><br><span class="line">&#x2F;&#x2F; &#125;)</span><br><span class="line">export class ModalService &#123;</span><br><span class="line">  constructor() &#123; &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到我們先把 modal.service.ts 裡面有關 @Injectable 和 provideIn:’root’ 的部分註解掉，讓它不再是 singleton service。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; --- modal.component.ts --- &#x2F;&#x2F;</span><br><span class="line">import &#123; ModalService &#125; from &#39;.&#x2F;modal.service&#39;;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: &#39;app-modal&#39;,</span><br><span class="line">  templateUrl: &#39;.&#x2F;modal.component.html&#39;,</span><br><span class="line">  styleUrls: [&#39;.&#x2F;modal.component.scss&#39;],</span><br><span class="line">  providers: [ModalService]  &#x2F;&#x2F; -- 注入 ModalService</span><br><span class="line">&#125;)</span><br><span class="line">export class ModalComponent implements OnInit &#123;</span><br><span class="line"></span><br><span class="line">  constructor(public modalService: ModalService) &#123; &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>我們在 modal 元件中注入 ModalService，並利用 <code>providers</code> 屬性，來將 ModalService 注入到 modal 元件裡面。<br>接著，在 modal 元件的 <code>constructor</code> 中，寫入 <code>public modalService: ModalService</code>，讓 modal 元件擁有一份 modalService 的實例，如此一來，我們就可以在 modal 元件裡面調用 modal.service 的方法，來達成切換 modal 元件的 class 內容。</p>
+<h3 id="利用-service-切換元件-class-內容"><a href="#利用-service-切換元件-class-內容" class="headerlink" title="利用 service 切換元件 class 內容"></a>利用 service 切換元件 class 內容</h3><p>接下來，我們就要在 modal.service 加入切換 modal 元件的方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; --- modal.service.ts --- &#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F; import &#123; Injectable &#125; from &#39;@angular&#x2F;core&#39;;</span><br><span class="line"></span><br><span class="line">import &#123; Subject &#125; from &quot;rxjs&quot;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; @Injectable(&#123;</span><br><span class="line">&#x2F;&#x2F;   providedIn: &#39;root&#39;</span><br><span class="line">&#x2F;&#x2F; &#125;)</span><br><span class="line">export class ModalService &#123;</span><br><span class="line">  show &#x3D; new Subject&lt;boolean&gt;();</span><br><span class="line"></span><br><span class="line">  constructor() &#123; &#125;</span><br><span class="line"></span><br><span class="line">  open(): void &#123;</span><br><span class="line">    this.show.next(true);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  close(): void &#123;</span><br><span class="line">    this.show.next(false);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上的範例，我們定義了一個 subject 物件叫做 show，然後，定義了兩個函式 open 和 close，用來發送這個 subject 的值，分別發送 <code>true</code> 和 <code>false</code>。我們會利用 show 的 <code>true</code> 或 <code>false</code> 來切換 modal 元件的 class 內容。</p>
+<h3 id="modal-元件切換-class-內容"><a href="#modal-元件切換-class-內容" class="headerlink" title="modal 元件切換 class 內容"></a>modal 元件切換 class 內容</h3><p>接下來，我們就要在 modal 元件裡面利用 modal.service 來切換 modal 元件的 class 內容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; --- modal.component.ts --- &#x2F;&#x2F;</span><br><span class="line">import &#123; ModalService &#125; from &#39;.&#x2F;modal.service&#39;;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: &#39;app-modal&#39;,</span><br><span class="line">  templateUrl: &#39;.&#x2F;modal.component.html&#39;,</span><br><span class="line">  styleUrls: [&#39;.&#x2F;modal.component.scss&#39;],</span><br><span class="line">  providers: [ModalService]  &#x2F;&#x2F; -- 注入 ModalService</span><br><span class="line">&#125;)</span><br><span class="line">export class ModalComponent implements OnInit &#123;</span><br><span class="line"></span><br><span class="line">  constructor(public modalService: ModalService) &#123; &#125;</span><br><span class="line">  </span><br><span class="line">  close(): void &#123;</span><br><span class="line">    this.modalService.close();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  open(): void &#123;</span><br><span class="line">    this.modalService.open();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  get show(): void &#123;</span><br><span class="line">    return modalService.show;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; --- modal.component.html --- &#x2F;&#x2F;</span><br><span class="line">&lt;div class&#x3D;&quot;modal&quot; [class.show]&#x3D;&quot;show | async&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;modal-body&gt;</span><br><span class="line">    &lt;ng-content&gt;&lt;&#x2F;ng-content&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">      &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;close()&quot;&gt;關閉&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;&#x2F;p&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在 modal.component.ts 有定義 close 和 open 的函式，來切換它所有有的 modalService 的 show 的值。最後，再利用 get show 來接收 modalService.show 當前的值。<br>在 modal.component.html 中，我們在 <code>class=&quot;modal&quot;</code> 的那一個標籤中加入了當 show 的值為 <code>true</code> 的時候，就為 class 加入 show。而後面的有一個 <code>async</code> 的 pipe ，是因為 show 是 <code>subject</code> 型別，要用 <code>async</code> 的方式來接它的值。</p>
+<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>本篇文章內容，只有先介紹怎麼實現在 Angular 中，製作 modal 共用元件的概念。<br>主要有提到以下概念</p>
+<ol>
+<li>不使用 singleton service 的方式來將 service 注入到 modal 元件，好讓每一個 modal 元件都有專屬的 modal.service。</li>
+<li>在 modal 元件中定義 open 和 close 函式來切換來自 modalService 的 show 變數值，並透過 [class.show] 來接 show 的值，進而達到在 modal 的 class 中加減 show 的效果。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+              <a href="/tags/Angular-custom-modal/" rel="tag"># Angular custom modal</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day15%E7%AD%86%E8%A8%98-Plugin%E5%92%8CFilter/" rel="prev" title="Alex宅幹嘛_ReVue_Day15筆記_Plugin和Filter">
+      <i class="fa fa-chevron-left"></i> Alex宅幹嘛_ReVue_Day15筆記_Plugin和Filter
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E7%9B%AE%E6%A8%99"><span class="nav-number">1.</span> <span class="nav-text">學習目標</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B%E5%B0%88%E6%A1%88%E6%95%B4%E9%AB%94%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.1.</span> <span class="nav-text">範例專案整體架構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%A6%E7%8F%BE%E5%85%83%E4%BB%B6%E5%85%B1%E7%94%A8%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">實現元件共用的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Singleton-Service"><span class="nav-number">1.2.1.</span> <span class="nav-text">Singleton Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8-service-%E5%88%87%E6%8F%9B%E5%85%83%E4%BB%B6-class-%E5%85%A7%E5%AE%B9"><span class="nav-number">1.2.2.</span> <span class="nav-text">利用 service 切換元件 class 內容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modal-%E5%85%83%E4%BB%B6%E5%88%87%E6%8F%9B-class-%E5%85%A7%E5%AE%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">modal 元件切換 class 內容</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B5%90%E8%AB%96"><span class="nav-number">2.</span> <span class="nav-text">結論</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">118</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
