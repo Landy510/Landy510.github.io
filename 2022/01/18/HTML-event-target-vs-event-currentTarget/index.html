@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄 event.target 和 event.currentTarget 的差異">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML - event.target vs. event.currentTarget">
+<meta property="og:url" content="https://landy510.github.io/2022/01/18/HTML-event-target-vs-event-currentTarget/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄 event.target 和 event.currentTarget 的差異">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://upload.cc/i1/2022/01/18/vbhQyO.png">
+<meta property="og:image" content="https://upload.cc/i1/2022/01/18/6tCimQ.jpg">
+<meta property="article:published_time" content="2022-01-18T09:11:31.000Z">
+<meta property="article:modified_time" content="2022-01-18T10:17:38.475Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="target">
+<meta property="article:tag" content="currentTarget">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload.cc/i1/2022/01/18/vbhQyO.png">
+
+<link rel="canonical" href="https://landy510.github.io/2022/01/18/HTML-event-target-vs-event-currentTarget/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>HTML - event.target vs. event.currentTarget | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2022/01/18/HTML-event-target-vs-event-currentTarget/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTML - event.target vs. event.currentTarget
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-01-18 17:11:31 / 修改時間：18:17:38" itemprop="dateCreated datePublished" datetime="2022-01-18T17:11:31+08:00">2022-01-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTML/" itemprop="url" rel="index"><span itemprop="name">HTML</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄 event.target 和 event.currentTarget 的差異</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h1><ol>
+<li>了解 <code>event.target</code> 和 <code>event.currentTarget</code> 的差異。</li>
+<li>用樹狀資料夾的情境，使用 <code>event.currentTarget</code> 來達成。</li>
+</ol>
+<h1 id="target-和-currentTarget-在幹麻"><a href="#target-和-currentTarget-在幹麻" class="headerlink" title="target 和 currentTarget 在幹麻"></a>target 和 currentTarget 在幹麻</h1><h2 id="定義"><a href="#定義" class="headerlink" title="定義"></a>定義</h2><p>首先，先來看看 MDN 對於這兩個功能的定義是什麼</p>
+<blockquote>
+<p>The read-only <code>target</code> property of the <code>Event</code> interface is a reference to the object onto which the event was dispatched.</p>
+</blockquote>
+<blockquote>
+<p>The <code>currentTarget</code> read-only property of the <code>Event</code> interface identifies the current target for the event, as the event traverses the DOM</p>
+</blockquote>
+<p>但是，我比較喜歡<a target="_blank" rel="noopener" href="https://simplernerd.com/js-click-parent/">這一篇文章</a>對 <code>target</code> 和 <code>currentTarget</code> 的解讀，我覺得比較好懂:</p>
+<blockquote>
+<p><code>event.target</code> : refers to the element that triggered the event (即: 使用者互動的那個元素)</p>
+</blockquote>
+<blockquote>
+<p><code>event.currentTarget</code>: refers to the element that the event is attached to</p>
+</blockquote>
+<p>由上面的定義我們可以看出來 <code>event.target</code> 專指觸發該事件的元素 <strong>(notice: 它不一定是有綁定該觸發事件的元素喔)</strong> 。<br>而 <code>event.currentTarget</code> 是指有綁定該觸發事件的元素，這句話有點難理解，讓我再講清楚一點。<br>當我們點擊子元素的時候，會觸發擷取 (capture) 和冒泡 (bubbling) 事件，這邊我們只先看冒泡事件，冒泡事件觸發的順序會由最內層，也就是從觸發事件的目標元素一路跑到最外層的 document，而這一路上若有任何元素綁定了跟目標元素相同的觸發事件的時候，此時，<code>event.currentTarget</code> 會變成這個元素，而 <code>event.target</code> 是不會變喔，還是保持原本觸發的目標元素。</p>
+<p>用一張圖來具現化一下上面的觸發流程<br><img src="https://upload.cc/i1/2022/01/18/vbhQyO.png" alt="Bubbling Event"></p>
+<p>假設今天我們分別在 child, father2, father3 綁上 click 的監聽事件。</p>
+<p>當使用者點擊最內層的 child，隨著 bubbling 的方向向外層傳遞，沿路當碰到也有綁定 click 的監聽事件的 father2 和 father3 ，currentTarget 就會從 child → father2 → father3 這樣子。</p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>以下的範例就是加入了 <code>currentTarget</code> 這個功能到資料夾的開闔效果中<br><a target="_blank" rel="noopener" href="https://stackblitz.com/edit/web-platform-fhqmqv?file=index.html">Demo</a></p>
+<p>資料夾的樹狀畫面是長得像這樣<br><img src="https://upload.cc/i1/2022/01/18/6tCimQ.jpg" alt="FileCombination"></p>
+<p>在以上的範例中的 js 檔案裡面的 processClassList 函式長得像這樣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const folderLevel1El &#x3D; document.querySelector(&#39;.folder-level-name&#39;);</span><br><span class="line">folderLevel1El.addEventListener(&#39;click&#39;, function (evt) &#123;</span><br><span class="line">  return processClassList(evt);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">function processClassList(evt) &#123;</span><br><span class="line">  evt.stopPropagation();</span><br><span class="line">  if (!evt.currentTarget.parentElement.classList.contains(&#39;is-open&#39;)) &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="currentTarget-使用情境"><a href="#currentTarget-使用情境" class="headerlink" title="currentTarget 使用情境"></a>currentTarget 使用情境</h2><p>上面的程式碼中，我們為 class 是 folder-level-name 的 DOM 綁定了一個 click 監聽事件，並觸發 processClassList 函式。<br>在這個函式我們是使用了 currentTarget ，代表會取得綁定該 click 事件的元素，也就是 folder-level-name。<br>若我們點擊了 folder-level-name 的子元素，childEl-1 或 childEl-2，此時，就會觸發 folder-level-name 的 click 事件。而我們就可以在 processClassList 使用 currentTarget 來取得 folder-level-name 元素，並為它的父元素來加上 is-open 的 class 內容，以此達成開闔資料夾的效果。<br>但如果你把 target 改成 currentTarget 的話，當你點擊 childEl-1 就會取得 childEl-1 若點擊 childEl-2 就會取得 childEl-2 這個元素，就要特別注意，你要為哪一個 DOM 加上 is-open 來達成資料夾的開闔效果囉。</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><ol>
+<li><p><code>event.target</code> 是代表觸發事件的目標元素，它在冒泡事件的傳遞過程中是不會改變的。<br><code>event.currentTarget</code> 是代表觸發的事件所綁定的元素，它在冒泡事件的傳遞過程中是有可能改變的喔，只要路途中有其他元素也有綁定相同的觸發事件。</p>
+</li>
+<li><p>可以運用 <code>event.currentTarget</code> 在資料夾樹狀情境中，來達到為父元素新增或刪除某些 class，進而達成資料夾開闔的效果。</p>
+</li>
+</ol>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/10086427/what-is-the-exact-difference-between-currenttarget-property-and-target-property">https://stackoverflow.com/questions/10086427/what-is-the-exact-difference-between-currenttarget-property-and-target-property</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/currentTarget">currentTarget Definition</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/target">target Definition</a></li>
+<li><a target="_blank" rel="noopener" href="https://simplernerd.com/js-click-parent/">elaborate the difference between target and currentTarget</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+              <a href="/tags/target/" rel="tag"># target</a>
+              <a href="/tags/currentTarget/" rel="tag"># currentTarget</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/15/Angular-%E5%85%B1%E7%94%A8%E5%85%83%E4%BB%B6-%E5%BD%88%E7%AA%97-3/" rel="prev" title="Angular Custom Modal -共用元件實作 - 彈窗 - 3">
+      <i class="fa fa-chevron-left"></i> Angular Custom Modal -共用元件實作 - 彈窗 - 3
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E7%9B%AE%E6%A8%99"><span class="nav-number">1.</span> <span class="nav-text">學習目標</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#target-%E5%92%8C-currentTarget-%E5%9C%A8%E5%B9%B9%E9%BA%BB"><span class="nav-number">2.</span> <span class="nav-text">target 和 currentTarget 在幹麻</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E7%BE%A9"><span class="nav-number">2.1.</span> <span class="nav-text">定義</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#currentTarget-%E4%BD%BF%E7%94%A8%E6%83%85%E5%A2%83"><span class="nav-number">3.1.</span> <span class="nav-text">currentTarget 使用情境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-number">4.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
