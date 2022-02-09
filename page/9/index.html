@@ -164,6 +164,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E6%93%8D%E6%8E%A7dom%E5%85%83%E7%B4%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-%E6%93%8D%E6%8E%A7dom%E5%85%83%E7%B4%A0/" class="post-title-link" itemprop="url">jQuery課程筆記-操控dom元素</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-23 17:14:17" itemprop="dateCreated datePublished" datetime="2021-01-23T17:14:17+08:00">2021-01-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-30 15:14:33" itemprop="dateModified" datetime="2021-01-30T15:14:33+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index"><span itemprop="name">jQuery</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="this-教你如何操作本身元素"><a href="#this-教你如何操作本身元素" class="headerlink" title="this - 教你如何操作本身元素"></a>this - 教你如何操作本身元素</h1><p><code>this</code> 指的是觸發該事件的元素<br>所以，我們利用<code>this</code>來指定觸發該事件的元素，並利用<code>this</code>來做一些操作。</p>
+<iframe src="https://codepen.io/RandyChen/embed/YzGMZOp?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<h1 id="parent-找到父階層元素"><a href="#parent-找到父階層元素" class="headerlink" title="parent() - 找到父階層元素"></a>parent() - 找到父階層元素</h1><p>利用<code>parent()</code>語法，來找到父元素，並為父元素修改它的css樣式。</p>
+<iframe src="https://codepen.io/RandyChen/embed/gOwyWWj?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>在以上的範例中，當按下<code>a</code>連結按鈕，就利用<code>parent</code>去找到它的外層父元素，也就是<code>li</code>，故我們就可以直接為<code>li</code>修改它的CSS樣式囉。</p>
+<h1 id="siblings-同層元素"><a href="#siblings-同層元素" class="headerlink" title="siblings() - 同層元素"></a>siblings() - 同層元素</h1><p>利用語法<code>siblings()</code>來找到同一層中的其他元素，並為它們修改CSS樣式</p>
+<iframe src="https://codepen.io/RandyChen/embed/PoGgmaX?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>你可以看到以上範例的JS檔案中，在我們按下<code>a</code>連結按鈕後，會先用<code>parent()</code>去找它的父元素，也就是<code>li</code>。<br>接著，找到父元素後，會接著執行<code>toggleClass(&#39;active&#39;)</code>，再來，會執行<code>sibilings()</code>，去找其他同層的<code>li</code>，並執行<code>removeClass</code>，<br>來消除它們的<code>bg-warning text-white</code>的className。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-CSS-jQuery%E5%90%84%E5%BC%8F%E5%90%84%E6%A8%A3%E7%9A%84%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -936,80 +1020,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/19/bootstrap-%E4%BD%9C%E5%93%81%E9%9B%86dropdown%E5%95%8F%E9%A1%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/19/bootstrap-%E4%BD%9C%E5%93%81%E9%9B%86dropdown%E5%95%8F%E9%A1%8C/" class="post-title-link" itemprop="url">bootstrap_作品集dropdown問題</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-01-19 10:53:10" itemprop="dateCreated datePublished" datetime="2021-01-19T10:53:10+08:00">2021-01-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-30 15:09:07" itemprop="dateModified" datetime="2021-01-30T15:09:07+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bootstrap/" itemprop="url" rel="index"><span itemprop="name">Bootstrap</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>你要記得在bootstrap中的dropdown之間，<br>他是用區塊和區塊做區隔的，他並沒有用<code>data-traget</code> 和 <code>id</code>的關係，<br>去搭建觸發元件與被觸發區塊之間的關係。<br>所以，當<code>.dropdown</code>包著一組觸發元件和被觸發<code>dropdown-menu</code>，<br>當你又想要在另一個地方用另外一組dropdown的功能的時候，<br>你要再創一個.dropdown區塊，並將觸發元件和觸發區塊包在這個新的.dropdown區塊中，<br>如此一來，他們就不會互相干擾了。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1079,7 +1089,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">122</span>
+          <span class="site-state-item-count">123</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -1092,7 +1102,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

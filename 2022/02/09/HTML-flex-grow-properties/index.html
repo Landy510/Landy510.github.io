@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="記錄 flex-grow 的屬性用法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML - flex-grow properties">
+<meta property="og:url" content="https://landy510.github.io/2022/02/09/HTML-flex-grow-properties/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="記錄 flex-grow 的屬性用法">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/2022/02/09/HTML-flex-grow-properties/direction-column.png">
+<meta property="og:image" content="https://landy510.github.io/2022/02/09/HTML-flex-grow-properties/direction-row.png">
+<meta property="article:published_time" content="2022-02-09T15:15:49.000Z">
+<meta property="article:modified_time" content="2022-02-09T15:38:09.316Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="HTML">
+<meta property="article:tag" content="flex-grow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/2022/02/09/HTML-flex-grow-properties/direction-column.png">
+
+<link rel="canonical" href="https://landy510.github.io/2022/02/09/HTML-flex-grow-properties/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>HTML - flex-grow properties | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2022/02/09/HTML-flex-grow-properties/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTML - flex-grow properties
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-02-09 23:15:49 / 修改時間：23:38:09" itemprop="dateCreated datePublished" datetime="2022-02-09T23:15:49+08:00">2022-02-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTML/" itemprop="url" rel="index"><span itemprop="name">HTML</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">記錄 flex-grow 的屬性用法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="學習目標"><a href="#學習目標" class="headerlink" title="學習目標"></a>學習目標</h1><ol>
+<li>學習 <code>flex-grow</code> 屬性.</li>
+</ol>
+<h1 id="flex-frow-屬性"><a href="#flex-frow-屬性" class="headerlink" title="flex-frow 屬性"></a>flex-frow 屬性</h1><p><code>flex-grow</code> 的定義是，當要分配父層的剩餘空間時，會依照其子元素的 flex-grow 屬性的數值來決定這些子元素會各分配到多少的剩餘空間，並且，會依照 flex-grow 屬性的大小來決定該子元素會是其他子元素的幾倍大 (<a target="_blank" rel="noopener" href="https://css-tricks.com/flex-grow-is-weird/#aa-explanation">這一篇</a>對於 flex-grow 的定義講得蠻清楚的)。</p>
+<p>我這邊講的幾倍大，可能有人會有疑問，所以，是長跟寬同時成倍數放大嗎?</p>
+<p>其實不是，要看此元素所待的父元素的 <code>flex-direction</code> 是 <code>row</code> ，還是 <code>column</code> ，如果是 row 的話，則是<strong>寬度</strong>比剩餘元素還大上幾倍，若是 column ，則為<strong>高度</strong>比剩餘元素大上幾倍。</p>
+<p>我畫張圖可能會比好理解我以上的文字的意思<br><img src="direction-column.png" alt="direction column"><br>以上的圖片為當父層的 flex-direction 為 column 的時候，flex-grow 影響的是高度的倍數</p>
+<p><img src="direction-row.png" alt="direction row"><br>以上的圖片為當父層的 flex-direction 為 row 的時候，flex-grow 影響的是寬度的倍數</p>
+<h2 id="什麼是-flexible-元素"><a href="#什麼是-flexible-元素" class="headerlink" title="什麼是 flexible 元素?"></a>什麼是 flexible 元素?</h2><p>在 <a target="_blank" rel="noopener" href="https://www.w3schools.com/cssref/css3_pr_flex-grow.asp">W3School</a> 對 flex-grow 的描述中，有特別說了一下這段話</p>
+<blockquote>
+<p><strong>Note</strong>: If the element is not a flexible item, the flex-grow property has no effect.<br>以上這段話的中文意思為: 如果指定元素不是 flexible 元素，則 <code>flex-grow</code> 對它是沒有作用的。</p>
+</blockquote>
+<p><strong>Question:</strong> 那什麼叫做 flexible 元素呢?<br><strong>Ans:</strong> 代表此元素的父層是含有 <code>display: flex</code> 的屬性。<br><strong>Ex:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.father &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  .child &#123;  </span><br><span class="line">    flex-grow: 1;</span><br><span class="line">      .grand-son &#123;</span><br><span class="line">        flex-grow: 1;  &#x2F;&#x2F; 這行是沒有作用的</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">.test &#123;</span><br><span class="line">  flex-grow: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的範例中，child 這個元素就是一個 flexible 的元素，因為，它的父層 father 是具有 display: flex 的屬性，而 test 就是一個獨立的元素沒有具有 display: flex 的屬性的父層，所以，flex-grow: 1 對它是沒有作用的。<br>那注意到 grand-son 也有加入 flex-grow 的屬性，但是，是沒有作用的喔，因為它的父層元素是 child 但它並沒有 display: flex 的屬性，所以，會沒有作用。</p>
+<h1 id="usage-of-flex-grow-property"><a href="#usage-of-flex-grow-property" class="headerlink" title="usage of flex-grow property"></a>usage of flex-grow property</h1><p>筆者經手的專案中，蠻常使用 flex-grow 的屬性，來做某個區塊的上下部分切割。</p>
+<iframe src="https://codepen.io/RandyChen/embed/vYWLMpv?default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上這個範例，整體的 DOM 布局為最外層的父層有 <code>display: flex</code> 屬性，它有兩個同階層的子層，分別為 child-1 和 child-2。</p>
+<p>我對位在下方的 child-2 元素加上了 <code>flex-grow: 1</code> 的屬性，而上方的 child-1 元素還是保持 <code>flex-grow: 0</code> 的預設值，這代表了，child-1 不會配有任何的剩餘空間，而只會配給 child-2 的那一份。這也就代表了，剩餘空間將被 child-2 所佔有。</p>
+<p>如此，我們就能透過 flex-grow 來處理要分配多少空間給特定的子元素了。</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><ol>
+<li>要處在具有 display:flex 屬性的父元素底下的子元素，對其設定 flex-grow 才有效用。</li>
+<li>flex-grow 用來決定父層的剩餘空間要分配給多少空間給子元素。</li>
+</ol>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-flexbox-1/#valdef-flex-flex-grow">the definition of flex-grow</a></li>
+<li><a target="_blank" rel="noopener" href="https://css-tricks.com/flex-grow-is-weird/#aa-explanation">elaborate the meaning of flex-grow in a more comprehensive way</a></li>
+<li><a target="_blank" rel="noopener" href="http://zhoon.github.io/css3/2014/08/23/flex.html">demonstrate how to use flex-grow</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+              <a href="/tags/flex-grow/" rel="tag"># flex-grow</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/09/HTML-getBoundingClientRect-%E7%9A%84%E7%94%A8%E6%B3%95/" rel="prev" title="HTML-getBoundingClientRect 的用法">
+      <i class="fa fa-chevron-left"></i> HTML-getBoundingClientRect 的用法
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E7%9B%AE%E6%A8%99"><span class="nav-number">1.</span> <span class="nav-text">學習目標</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flex-frow-%E5%B1%AC%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">flex-frow 屬性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-flexible-%E5%85%83%E7%B4%A0"><span class="nav-number">2.1.</span> <span class="nav-text">什麼是 flexible 元素?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#usage-of-flex-grow-property"><span class="nav-number">3.</span> <span class="nav-text">usage of flex-grow property</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-number">4.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

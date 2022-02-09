@@ -164,6 +164,86 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/04/22/replace-%E7%94%A8%E5%9C%A8%E5%8D%83%E5%88%86%E8%99%9F%E7%9A%84%E6%96%B9%E6%B3%95%E4%BB%8B%E7%B4%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/22/replace-%E7%94%A8%E5%9C%A8%E5%8D%83%E5%88%86%E8%99%9F%E7%9A%84%E6%96%B9%E6%B3%95%E4%BB%8B%E7%B4%B9/" class="post-title-link" itemprop="url">replace-用在千分號的方法介紹</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-04-22 11:05:16 / 修改時間：11:35:54" itemprop="dateCreated datePublished" datetime="2021-04-22T11:05:16+08:00">2021-04-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在我的 Vue 專案中，有用到 Fileters的成員屬性。<br>那這個 Filters 裡面有撰寫千分號的功能，目的是為每一個數值都加上千分號，讓使用者的閱讀上有更好的體驗。<br>那本篇就是用來解析一下專案中的千分號函式，每一個部分各代表什麼功能，好讓之後要用的時候，不會用太多時間來回想XDD</p>
+<h1 id="千分號函式本體"><a href="#千分號函式本體" class="headerlink" title="千分號函式本體"></a>千分號函式本體</h1><p>這邊先放上一個千分號的簡易範例，它有用到 Vue 來做撰寫。</p>
+<iframe src="https://codepen.io/RandyChen/embed/KKaromX?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<h2 id="Number-prototype-toFixed-n"><a href="#Number-prototype-toFixed-n" class="headerlink" title="Number.prototype.toFixed(n)"></a>Number.prototype.toFixed(n)</h2><p>代表要保留該數字的小數點後第 n 位 ，若 n 為 0 的話，就代表小數點後面的數值都不要。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let num &#x3D; 123.45</span><br><span class="line">console.log(num.toFixed(0))  &#x2F;&#x2F; 123 ，會把小數點後面的內容全部刪掉</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/22/replace-%E7%94%A8%E5%9C%A8%E5%8D%83%E5%88%86%E8%99%9F%E7%9A%84%E6%96%B9%E6%B3%95%E4%BB%8B%E7%B4%B9/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/04/15/%E8%AA%9E%E6%84%8F%E5%8C%96%E6%A8%99%E7%B1%A4%E7%AD%86%E8%A8%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -872,84 +952,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/30/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Hoisting%E6%A6%82%E5%BF%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/30/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Hoisting%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">JS核心篇-Hoisting概念</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2021-03-30 10:22:34 / 修改時間：10:31:06" itemprop="dateCreated datePublished" datetime="2021-03-30T10:22:34+08:00">2021-03-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本篇是用來記錄一下有關Hoisting不太熟悉的部分。</p>
-<h1 id="函式傳入參數以及一般變數宣告同時出現時的提升優先順序"><a href="#函式傳入參數以及一般變數宣告同時出現時的提升優先順序" class="headerlink" title="函式傳入參數以及一般變數宣告同時出現時的提升優先順序"></a>函式傳入參數以及一般變數宣告同時出現時的提升優先順序</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function test (a) &#123;</span><br><span class="line">	console.log(a)</span><br><span class="line">	var a &#x3D; 12</span><br><span class="line">&#125;</span><br><span class="line">test(10)</span><br></pre></td></tr></table></figure>
-<p>本題的答案會是10。<br>那我們就進行以下的拆解，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function test (a) &#123;</span><br><span class="line">	var a &#x3D; 10;  &#x2F;&#x2F; 它就是你呼叫時，傳入的參數</span><br><span class="line">	var a;</span><br><span class="line">	console.log(a);</span><br><span class="line">	a &#x3D; 12;</span><br><span class="line">&#125;</span><br><span class="line">test(10);</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/30/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Hoisting%E6%A6%82%E5%BF%B5/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1019,7 +1021,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">122</span>
+          <span class="site-state-item-count">123</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -1032,7 +1034,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
