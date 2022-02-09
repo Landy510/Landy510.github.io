@@ -1068,13 +1068,6 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/</loc>
-    <lastmod>2022-02-09</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://landy510.github.io/tags/HTML/</loc>
     <lastmod>2022-02-09</lastmod>
     <changefreq>daily</changefreq>
@@ -1097,6 +1090,13 @@
   
   <url>
     <loc>https://landy510.github.io/tags/flex-grow/</loc>
+    <lastmod>2022-02-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://landy510.github.io/tags/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/</loc>
     <lastmod>2022-02-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1196,14 +1196,14 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/categories/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/</loc>
+    <loc>https://landy510.github.io/categories/HTML/</loc>
     <lastmod>2022-02-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://landy510.github.io/categories/HTML/</loc>
+    <loc>https://landy510.github.io/categories/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/</loc>
     <lastmod>2022-02-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
