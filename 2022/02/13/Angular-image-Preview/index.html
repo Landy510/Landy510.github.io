@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄如何在 Angular 製作圖片預覽的功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular - image Preview">
+<meta property="og:url" content="https://landy510.github.io/2022/02/13/Angular-image-Preview/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄如何在 Angular 製作圖片預覽的功能">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/2022/02/13/Angular-image-Preview/HTML-input.png">
+<meta property="og:image" content="https://landy510.github.io/2022/02/13/Angular-image-Preview/changeEventListener.jpg">
+<meta property="og:image" content="https://landy510.github.io/2022/02/13/Angular-image-Preview/imagePreviewProcess.jpg">
+<meta property="article:published_time" content="2022-02-13T10:28:55.000Z">
+<meta property="article:modified_time" content="2022-02-13T10:52:53.048Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Angular">
+<meta property="article:tag" content="image Preview">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/2022/02/13/Angular-image-Preview/HTML-input.png">
+
+<link rel="canonical" href="https://landy510.github.io/2022/02/13/Angular-image-Preview/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Angular - image Preview | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2022/02/13/Angular-image-Preview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Angular - image Preview
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-02-13 18:28:55 / 修改時間：18:52:53" itemprop="dateCreated datePublished" datetime="2022-02-13T18:28:55+08:00">2022-02-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular/" itemprop="url" rel="index"><span itemprop="name">Angular</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄如何在 Angular 製作圖片預覽的功能</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Learning-Objectives"><a href="#Learning-Objectives" class="headerlink" title="Learning Objectives"></a>Learning Objectives</h1><ol>
+<li>完成圖片預覽的功能</li>
+<li>將要上傳的圖片存入 json-server 中，並呈現出來</li>
+</ol>
+<h1 id="怎麼在瀏覽器中上傳檔案"><a href="#怎麼在瀏覽器中上傳檔案" class="headerlink" title="怎麼在瀏覽器中上傳檔案"></a>怎麼在瀏覽器中上傳檔案</h1><p>首先，先了解在純 HTML 的狀況下，我們要怎麼做到上傳檔案這件事。</p>
+<p>要在瀏覽器做到這件事，就需要用到 <code>input</code> 這個 HTML 元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;file&quot; onchange&#x3D;&quot;console.log(event.target.value)&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>以上程式碼可以達到以下的效果<br><img src="HTML-input.png" alt="HTML input 上傳檔案"><br>我們就可以透過以上的 Choose File 按鈕，來選擇我們想要上傳的檔案，並透過它觸發的函式，進而將檔案傳到後端。</p>
+<h2 id="怎麼不太常在網頁上看到原生的-input-元素來上傳檔案"><a href="#怎麼不太常在網頁上看到原生的-input-元素來上傳檔案" class="headerlink" title="怎麼不太常在網頁上看到原生的 input 元素來上傳檔案?"></a>怎麼不太常在網頁上看到原生的 input 元素來上傳檔案?</h2><p>這是因為，這個原生的上傳功能的樣式很難被調整，甚至連 Choose File 這個按鈕的文字內容也沒有辦法被修改，這就是為什麼我們很少在日常的網站上看到這種原汁原味的原生上傳元件。<br>所以，我們會將實際上傳檔案的 input 元素隱藏，並用我們自製的 dom 來呈現我們想要的樣式。</p>
+<h2 id="如何得知上傳檔案的資訊呢"><a href="#如何得知上傳檔案的資訊呢" class="headerlink" title="如何得知上傳檔案的資訊呢?"></a>如何得知上傳檔案的資訊呢?</h2><p>那我們要怎麼知道使用者上傳的檔案的大小或者是什麼樣類型的檔案。<br>這時，我們可以利用 <code>event.target.files</code> 這個屬性值的內容，來得知以上的資訊。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; --- view --- &#x2F;&#x2F;</span><br><span class="line">&lt;input type&#x3D;&quot;file&quot; id&#x3D;&quot;file&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; --- javascript --- &#x2F;&#x2F;</span><br><span class="line">const el &#x3D; document.getElementById(&#39;file&#39;)</span><br><span class="line">el.addEventListener(&#39;change&#39;, (event)&#x3D;&gt;&#123;</span><br><span class="line">   console.log(event.target.files)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>最終這個監聽 change 事件的 console.log 會呈現以下的結果<br><img src="changeEventListener.jpg" alt="change 事件監聽"><br>會呈現剛剛上傳的檔案內容。</p>
+<h2 id="如何達到圖片預覽的功能"><a href="#如何達到圖片預覽的功能" class="headerlink" title="如何達到圖片預覽的功能?"></a>如何達到圖片預覽的功能?</h2><p>上面的內容，我們得知了如何使用 input 來取得使用者上傳的檔案內容。</p>
+<p>接下來，我們要完成 image-preview 的功能，也就是還沒將圖片上傳至後端之前，先讓圖片預覽在畫面中，讓使用者確認是否是他想上傳的圖片。</p>
+<p>圖片預覽的功能主要是用 <code>FileReader</code> 達成，用它讀取到使用者從本機端上傳的檔案的路徑，接著再透過 <code>FileReader</code> 中的功能產出一個 url ，並將其設給畫面上的 img 元素的 src 屬性，來將圖片渲染再畫面上。</p>
+<p>接下來，以下就是程式碼的內容，而筆者是用 Angular 的框架來達成的，所以，以下的語法是 Angular 框架下的寫法</p>
+<p>寫法大概像下面這樣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; --- file.component.html --- &#x2F;&#x2F;</span><br><span class="line">&lt;input type&#x3D;&quot;file&quot; adcept&#x3D;&quot;image&#x2F;*&quot; (change)&#x3D;&quot;onFileSelected($event)&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;img [src]&#x3D;&quot;filePath&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; --- file.component.ts --- &#x2F;&#x2F;</span><br><span class="line">export class FileComponent implements OnInit &#123;</span><br><span class="line"></span><br><span class="line">	filePath &#x3D; &#39;&#39;;</span><br><span class="line"></span><br><span class="line">  onFileSelected(event:any): void &#123;</span><br><span class="line">    const file:File &#x3D; event.target.files[0];</span><br><span class="line">    if(file) &#123;</span><br><span class="line">      const reader &#x3D; new FileReader();</span><br><span class="line">      reader.onload &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">        this.filePath &#x3D; reader.result as string</span><br><span class="line">      &#125;</span><br><span class="line">      reader.readAsDataURL(file);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上的範例，筆者只有特別列出達成 image-preview 功能的部分，詳細的程式碼都記錄在最後的 soruceCode 裡。</p>
+<p>首先，來解釋一下畫面的部分</p>
+<p>有一個 input 欄位，限定只能上傳圖片類型的檔案，並綁定了一個 change 事件，若有上傳檔案有變，就會觸發 change 事件綁定的 onFileSelected 事件。</p>
+<p>而最終獲得要預覽的圖片的圖片路徑，就會被存到變數 filePath 中，而 <code>img</code> 元素的 <code>src</code> 屬性會吃這個變數的內容，最終，就可以把圖片渲染到畫面上囉。</p>
+<p>第二，解釋一下邏輯的部分</p>
+<p>onFileSelected 函式會傳入 event 的參數，我們可以透過它的 event.target.file[0] 來取得傳入的檔案，並將它塞入變數 file 。</p>
+<p>接著，我們宣告一個 FileReader 物件，並將它存入 reader 變數裡面。</p>
+<p>這邊我用到幾個 FileReader 的功能</p>
+<p><code>onload</code> 它是一個非同步的函式，當上傳的圖片讀取完成之後，會觸發這個函式</p>
+<p><code>readAsDataURL</code> 這個方法專門用來讀取 Blob 或 File 型別的檔案，也就是透過它來讀取我們利用 input 上傳的檔案。當上傳的檔案讀取完成之後，FileReader 的物件的 result 屬性就會擁有 data: URL 的內容，而這個 data: URL 的資料是透過 base64 將上傳檔案的資料作編碼的字串。</p>
+<p>這邊我用一張流程圖來具現化上面 FileReader 從讀取到上傳資料到可以將圖片呈現到畫面上的流程<br><img src="imagePreviewProcess.jpg" alt="圖片預覽功能流程"><br>經過以上的兩大步驟，我們就可以達成圖片預覽的功能囉。</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><ol>
+<li>understand how to upload file in browser.</li>
+<li>understand how to realize image-preview function.</li>
+</ol>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://remotestack.io/show-image-preview-before-uploading-in-angular/">show image preview before uploading in Angular</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.angular-university.io/angular-file-upload/">Angular Image Preview tutorial</a></li>
+</ol>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/Landy510/Angular-image-Preview">SourceCode</a></li>
+</ol>
+<h1 id="The-Problems-that-I’ve-been-through"><a href="#The-Problems-that-I’ve-been-through" class="headerlink" title="The Problems that I’ve been through"></a>The Problems that I’ve been through</h1><ol>
+<li>當發出 post request 後，會自動 reload 頁面?</li>
+</ol>
+<p>Ans: 可以從<a target="_blank" rel="noopener" href="https://www.reddit.com/r/Angular2/comments/kqrec6/http_calls_to_jsonserver_refreshes_my_page/">這一篇文章</a>  的 <strong><a target="_blank" rel="noopener" href="https://www.reddit.com/user/sceptomaniac/">sceptomaniac</a></strong> 的回答可以解決這個問題，把你的 json-server 用來儲存資料的 json 跟你的專案檔案分開放在不一樣的地方，因為，筆者本來把 json-server 這個資料庫的 json 檔案放在 Angular 專案中的 assets 資料夾裡面，但是，每當筆者一發出 post 就會為這個 json 資料庫新增檔案，而 Angular 一發現專案內有檔案有更動，就會重新編譯整個專案，也就造成了重新 reload browser 的問題囉</p>
+<ol start="2">
+<li>table 裡面的 td 欄位的 text-overflow: ellipsis 的效果出不來?</li>
+</ol>
+<p>Ans: 根據<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/9789723/css-text-overflow-in-a-table-cell">這一篇文章</a>提供的回答，要在 table cell 呈現 text-overflow 的效果，除了要在包含呈現內容的容器加上以下三種效果外</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">table tobdy td &#123;</span><br><span class="line">	overflow: hidden;</span><br><span class="line">  text-overflow: ellipsis;</span><br><span class="line">  white-space: nowrap;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>還要在 td 中加上 max-width 的設定，才能出現 text-overflow 的效果喔。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+              <a href="/tags/image-Preview/" rel="tag"># image Preview</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/09/HTML-flex-grow-properties/" rel="prev" title="HTML - flex-grow properties">
+      <i class="fa fa-chevron-left"></i> HTML - flex-grow properties
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-Objectives"><span class="nav-number">1.</span> <span class="nav-text">Learning Objectives</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%8E%E9%BA%BC%E5%9C%A8%E7%80%8F%E8%A6%BD%E5%99%A8%E4%B8%AD%E4%B8%8A%E5%82%B3%E6%AA%94%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">怎麼在瀏覽器中上傳檔案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%8E%E9%BA%BC%E4%B8%8D%E5%A4%AA%E5%B8%B8%E5%9C%A8%E7%B6%B2%E9%A0%81%E4%B8%8A%E7%9C%8B%E5%88%B0%E5%8E%9F%E7%94%9F%E7%9A%84-input-%E5%85%83%E7%B4%A0%E4%BE%86%E4%B8%8A%E5%82%B3%E6%AA%94%E6%A1%88"><span class="nav-number">2.1.</span> <span class="nav-text">怎麼不太常在網頁上看到原生的 input 元素來上傳檔案?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%BE%97%E7%9F%A5%E4%B8%8A%E5%82%B3%E6%AA%94%E6%A1%88%E7%9A%84%E8%B3%87%E8%A8%8A%E5%91%A2"><span class="nav-number">2.2.</span> <span class="nav-text">如何得知上傳檔案的資訊呢?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%81%94%E5%88%B0%E5%9C%96%E7%89%87%E9%A0%90%E8%A6%BD%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">2.3.</span> <span class="nav-text">如何達到圖片預覽的功能?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-number">3.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">5.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Problems-that-I%E2%80%99ve-been-through"><span class="nav-number">6.</span> <span class="nav-text">The Problems that I’ve been through</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">124</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

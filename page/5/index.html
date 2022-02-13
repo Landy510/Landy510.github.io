@@ -164,6 +164,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/04/02/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%AE%AD%E9%A0%AD%E5%87%BD%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/02/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%AE%AD%E9%A0%AD%E5%87%BD%E5%BC%8F/" class="post-title-link" itemprop="url">JS核心篇-箭頭函式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-04-02 17:42:44 / 修改時間：17:59:20" itemprop="dateCreated datePublished" datetime="2021-04-02T17:42:44+08:00">2021-04-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="箭頭函式簡寫寫法"><a href="#箭頭函式簡寫寫法" class="headerlink" title="箭頭函式簡寫寫法"></a>箭頭函式簡寫寫法</h1><p>原本的函式內容是像下面這樣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const test &#x3D; function (someone) &#123;</span><br><span class="line">	return &#39;我是&#39; + someone</span><br><span class="line">&#125;</span><br><span class="line">test(&#39;小明&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>step1. 將function取代成箭頭</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const test &#x3D; (someone) &#x3D;&gt; &#123;</span><br><span class="line">	return &#39;我是&#39; + someone</span><br><span class="line">&#125;</span><br><span class="line">test(&#39;小明&#39;)</span><br></pre></td></tr></table></figure>
+<p>step2. 箭頭函式的內容是一表達式<br>這是什麼意思呢，就是代表箭頭函式裡面<strong>只有要回傳東西沒有其他內容了</strong>。<br>那這樣的話，我們就可以縮寫成下面這樣，把<code>return</code>拿掉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const test &#x3D; (someone) &#x3D;&gt; &#39;我是&#39; + someone</span><br><span class="line">test(&#39;小明&#39;)</span><br></pre></td></tr></table></figure>
+<p>step3. 若箭頭函式的參數只有一個<br>若箭頭函式的參數只有一個，我們就可以省略參數旁邊的括號，但要注意喔!!<br>只有在參數只有一個的時候才能這樣操作，若它是沒有參數 或參數是兩個以上的時候，<br>是不能省略小括號的。<br>所以，上面的例子可以改寫成這樣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const test &#x3D; someone &#x3D;&gt; &#39;我是&#39; + someone</span><br><span class="line">test(&#39;小明&#39;)</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/02/JS%E6%A0%B8%E5%BF%83%E7%AF%87-%E7%AE%AD%E9%A0%AD%E5%87%BD%E5%BC%8F/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/30/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Hoisting%E6%A6%82%E5%BF%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -887,99 +970,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/09/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/09/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F/" class="post-title-link" itemprop="url">JS核心-函式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-03-09 14:51:12" itemprop="dateCreated datePublished" datetime="2021-03-09T14:51:12+08:00">2021-03-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-03-11 15:02:58" itemprop="dateModified" datetime="2021-03-11T15:02:58+08:00">2021-03-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="函式"><a href="#函式" class="headerlink" title="函式"></a>函式</h1><p>函式是一個物件，所以，它也可以擁有自己的屬性。<br>它可以被存放在變數、陣列中。</p>
-<h2 id="函式運算式-有括號和沒括號的差別"><a href="#函式運算式-有括號和沒括號的差別" class="headerlink" title="函式運算式-有括號和沒括號的差別"></a>函式運算式-有括號和沒括號的差別</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function inner() &#123;</span><br><span class="line">  return &#39;Hello&#39;;</span><br><span class="line">&#125;</span><br><span class="line">let a &#x3D; inner;  &#x2F;&#x2F; 沒有加括號</span><br><span class="line">let b &#x3D; inner(); &#x2F;&#x2F; 有加括號</span><br><span class="line">console.log(a, b);</span><br><span class="line">console.log(a());</span><br></pre></td></tr></table></figure>
-<p>從console.log的結果a是直接印出整個inner函式內容，而b是印出inner回傳的內容’hello’。<br>那最後那一行，a()就可以執行inner函式，故會回傳內容’hello’。<br>要小心它們之間的不同喔~~~~</p>
-<h1 id="ES6箭頭函式"><a href="#ES6箭頭函式" class="headerlink" title="ES6箭頭函式"></a>ES6箭頭函式</h1><p>這種函式有以下的特性:<br>．<code>this</code>變數的強制綁定<br>．簡短的撰寫方式</p>
-<p>接下來，筆記一下箭頭函式可以簡寫的一些特性:</p>
-<h2 id="可以忽略return的特性"><a href="#可以忽略return的特性" class="headerlink" title="可以忽略return的特性"></a>可以忽略return的特性</h2><p>原本的函式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const plus &#x3D; function(numA, numB) &#123;</span><br><span class="line">  return numA + numB;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>像上面這個範例，只有需要return計算的結果的話，除了箭頭函式的內容以外，我們還可以把return忽略。<br>所以，就會變成下面這樣:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const plus &#x3D; (numA, numB) &#x3D;&gt; numA + numB;</span><br></pre></td></tr></table></figure>
-
-<h2 id="若箭頭函式中的括號中沒有參數是不行忽略的括號的"><a href="#若箭頭函式中的括號中沒有參數是不行忽略的括號的" class="headerlink" title="若箭頭函式中的括號中沒有參數是不行忽略的括號的"></a>若箭頭函式中的括號中沒有參數是不行忽略的括號的</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const sayhello &#x3D; () &#x3D;&gt; console.log(&#39;hello&#39;);</span><br><span class="line">sayhello();</span><br></pre></td></tr></table></figure>
-
-<h2 id="若箭頭函式中的括號只有一個參數的話，可以忽略括號"><a href="#若箭頭函式中的括號只有一個參數的話，可以忽略括號" class="headerlink" title="若箭頭函式中的括號只有一個參數的話，可以忽略括號"></a>若箭頭函式中的括號只有一個參數的話，可以忽略括號</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const sayhello(msg) &#x3D;&gt; console.log(msg);</span><br><span class="line">sayhello(&#39;hello&#39;);</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/09/JS%E6%A0%B8%E5%BF%83-%E5%87%BD%E5%BC%8F/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1049,7 +1039,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-count">124</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -1062,7 +1052,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
