@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://landy510.github.io/2022/03/20/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%9C%96%E6%96%87%E6%BB%BF%E7%89%88%E5%8D%80%E5%A1%8A/%E4%BF%AE%E6%AD%A3%E5%BE%8C%E7%9A%84%E7%89%88%E5%9E%8B.png">
 <meta property="og:image" content="https://landy510.github.io/2022/03/20/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%9C%96%E6%96%87%E6%BB%BF%E7%89%88%E5%8D%80%E5%A1%8A/linear-gradient.png">
 <meta property="article:published_time" content="2022-03-20T14:07:40.000Z">
-<meta property="article:modified_time" content="2022-03-20T14:40:12.321Z">
+<meta property="article:modified_time" content="2022-03-20T15:28:18.425Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="CSS">
 <meta property="article:tag" content="CSS background">
@@ -199,7 +199,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2022-03-20 22:07:40 / 修改時間：22:40:12" itemprop="dateCreated datePublished" datetime="2022-03-20T22:07:40+08:00">2022-03-20</time>
+              <time title="創建時間：2022-03-20 22:07:40 / 修改時間：23:28:18" itemprop="dateCreated datePublished" datetime="2022-03-20T22:07:40+08:00">2022-03-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,7 +240,7 @@
 <h2 id="3-如何呈現背景圖佔滿剩餘另外一半的效果"><a href="#3-如何呈現背景圖佔滿剩餘另外一半的效果" class="headerlink" title="3. 如何呈現背景圖佔滿剩餘另外一半的效果"></a>3. 如何呈現背景圖佔滿剩餘另外一半的效果</h2><p>上面第二點有講到了，如何達成斜的分隔線一半是 #7bf 而另外一半是空白無色的效果。</p>
 <p>那這邊的話，是要剖析將空白無色的那一半用圖片來填滿。<br>其實， <strong>background 可以設定多層的 background</strong> ，只是彼此之間要用逗號 <code>,</code> 分開。<br>那我們就來將背景圖的部分加入進去吧</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.banner &#123;</span><br><span class="line">	background: </span><br><span class="line">		linear-gradient(115deg, #7bf 50%, transparent 50%) center center &#x2F; 100% 100%,</span><br><span class="line">		url(&#39;https:&#x2F;&#x2F;picsum.photos&#x2F;1200&#x2F;600?random&#x3D;10&#39;) right center &#x2F; auto 100%;  &#x2F;&#x2F; 加了一張背景圖</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>那一樣來剖析一下，加入的那一行屬性在幹嘛，<br>首先，<code>url(&#39;https://picsum.photos/1200/600?random=10&#39;)</code> 這是 <code>background-image</code> 的屬性值<br>剩下的 <code>right center / auto 100%</code>，分別是 <code>background-position</code> 和 <code>background-size</code> 的屬性值了<br>拆解來看就等於 <code>background-position:right center</code> 代表背景要水平居右，垂直居中<br><code>background-size : auto 100%</code> 代表背景的寬度會填滿父層的寬度，剩下的 100%，就是代表高度等於父層的高度。</p>
+<p>那一樣來剖析一下，加入的那一行屬性在幹嘛，<br>首先，<code>url(&#39;https://picsum.photos/1200/600?random=10&#39;)</code> 這是 <code>background-image</code> 的屬性值<br>剩下的 <code>right center / auto 100%</code>，分別是 <code>background-position</code> 和 <code>background-size</code> 的屬性值了<br>拆解來看就等於 <code>background-position:right center</code> 代表背景要水平居右，垂直居中<br><code>background-size : auto 100%</code> 代表背景的寬度會是圖片自己本身的寬度，剩下的 100%，就是代表背景圖片高度等於父層的高度。</p>
 <h1 id="Final-Result"><a href="#Final-Result" class="headerlink" title="Final Result"></a>Final Result</h1><p><a target="_blank" rel="noopener" href="https://stackblitz.com/edit/web-platform-qzrpqs?file=styles.css">練習連結</a></p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
 <li><p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10248148">金魚之Background-image</a></p>
@@ -276,7 +276,10 @@
     <a href="/2022/02/13/Angular-image-Preview/" rel="prev" title="Angular - image Preview">
       <i class="fa fa-chevron-left"></i> Angular - image Preview
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/20/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E4%BA%92%E5%8B%95%E5%9C%96%E6%96%87%E5%8D%A1%E7%89%87/" rel="next" title="CSS-金魚系列切版-互動圖文卡片">
+      CSS-金魚系列切版-互動圖文卡片 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -349,7 +352,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">126</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
