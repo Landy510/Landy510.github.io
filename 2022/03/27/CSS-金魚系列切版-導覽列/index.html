@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄 金魚系列切版-導覽列 學習過程- 1. 修改原生的 input 輸入欄位和按鈕的樣式 2. 選項底線往左右邊長的效果 3. a 連結使用 transform-translateY 沒有效果的原因">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS-金魚系列切版-導覽列">
+<meta property="og:url" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄 金魚系列切版-導覽列 學習過程- 1. 修改原生的 input 輸入欄位和按鈕的樣式 2. 選項底線往左右邊長的效果 3. a 連結使用 transform-translateY 沒有效果的原因">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/final_result.png">
+<meta property="og:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/searchArea.png">
+<meta property="og:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/searchArea-original.png">
+<meta property="og:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/searchArea-1.png">
+<meta property="og:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/searchArea-2.png">
+<meta property="og:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/searchArea_result.png">
+<meta property="og:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/option_hover.gif">
+<meta property="og:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/pseudoElement-1.png">
+<meta property="og:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/pseudoElement-2.png">
+<meta property="article:published_time" content="2022-03-27T03:38:34.000Z">
+<meta property="article:modified_time" content="2022-03-27T04:12:38.688Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="CSS non-replaced inline element">
+<meta property="article:tag" content="CSS non transformable elements">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/final_result.png">
+
+<link rel="canonical" href="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>CSS-金魚系列切版-導覽列 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS-金魚系列切版-導覽列
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-03-27 11:38:34 / 修改時間：12:12:38" itemprop="dateCreated datePublished" datetime="2022-03-27T11:38:34+08:00">2022-03-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄 金魚系列切版-導覽列 學習過程- 1. 修改原生的 input 輸入欄位和按鈕的樣式 2. 選項底線往左右邊長的效果 3. a 連結使用 transform-translateY 沒有效果的原因</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="final_result.png" alt="練習最終結果畫面"></p>
+<h1 id="Source-Url"><a href="#Source-Url" class="headerlink" title="Source Url"></a>Source Url</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=7BydlKueTgY&list=PLqivELodHt3hxeuLX8PYaI8u1GcDaBoJo&index=8">教學連結</a></p>
+<h1 id="學習點"><a href="#學習點" class="headerlink" title="學習點"></a>學習點</h1><h2 id="1-修改原生-input-和按鈕的樣式"><a href="#1-修改原生-input-和按鈕的樣式" class="headerlink" title="1. 修改原生 input 和按鈕的樣式"></a>1. 修改原生 input 和按鈕的樣式</h2><p>課堂上提供的樣板呈現的搜尋欄位整體是長的像下面這樣<br><img src="searchArea.png" alt="搜尋欄位樣板"><br>如果，沒有加入任何 css 樣式修改，單純原生 input 輸入欄位加上 button 按鈕樣式的話，HTML 的寫法如下，<br>要注意一下，按鈕裡面的放大鏡是 Font Awesome 提供的圖示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">  &lt;form class&#x3D;&quot;header-search&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;search&quot;&gt;</span><br><span class="line">    &lt;button type&#x3D;&quot;button&quot;&gt;</span><br><span class="line">      &lt;i class&#x3D;&quot;fa fa-search&quot; aria-hidden&#x3D;&quot;true&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">    &lt;&#x2F;button&gt;</span><br><span class="line">  &lt;&#x2F;form&gt;  </span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>畫面會長的像下面這樣<br><img src="searchArea-original.png" alt="搜尋欄位原生長的樣子"><br>接下來就來修改它們吧。<br>第一，我們先把背景的 .container 的背景色加上一些色彩，不然，我們等等改 input 和 button 的樣式，會看不太清楚</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">	width: 300px;</span><br><span class="line">	padding: 10px;</span><br><span class="line">	background-image: linear-gradient(0deg, #fe70d8, #3713c1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二，我們讓 input 欄位和 button 緊緊的合併在一起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.header-search &#123;</span><br><span class="line">	display: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目前的畫面會長的像下面這樣<br><img src="searchArea-1.png" alt="修正後的畫面-1"><br>第三，會看到上面呈現的畫面，input 欄位和 button 之間，有黑色線在它們之間，我們想要把它們消除掉，所以，加入以下內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.header-search input, button &#123;</span><br><span class="line">	border: none;  &#x2F;&#x2F; 把 border 消除掉</span><br><span class="line">	padding: 5px 10px;</span><br><span class="line">	background-color: #fff; &#x2F;&#x2F; 將 input 和 button 原生的背景色改成白色</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>經過以上的樣式，畫面會變成這樣<br><img src="searchArea-2.png" alt="修正後的畫面-2"><br>第四，接著就是要分別處理圓角的效果，所以，對 input 欄位和 button 分別加入圓角的 css 樣式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.header-search input &#123;</span><br><span class="line">	border-radius: 200px 0 0 200px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.header-search button &#123;</span><br><span class="line">	border-radius: 0 200px 200px 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>畫面就會變成這樣囉<br><img src="searchArea_result.png" alt="完成後的搜尋欄位畫面"><br>第五，但是，當點擊 input 欄位的時候，會有原生的外框線被加上去，這是我們不想要的，所以，加入以下的語法就可以取消該外框線的效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.header-search input:focus &#123;</span><br><span class="line">  outline: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>經過以上幾步驟後，就達成樣板提供的搜尋欄位的樣式囉~</p>
+<h2 id="2-導覽列選項-hover-效果"><a href="#2-導覽列選項-hover-效果" class="headerlink" title="2.導覽列選項 hover 效果"></a>2.導覽列選項 hover 效果</h2><p>我們想要導覽列選項有以下動畫的 hover 的效果<br><img src="option_hover.gif" alt="導覽列滑動效果"><br>分析一下，以上動畫效果總共有兩種，一種是<strong>選項的底下會從中間長出來到兩端</strong>，第二種<strong>選項會往上移一點</strong></p>
+<h3 id="效果一-選項的底下會從中間長出來到兩端"><a href="#效果一-選項的底下會從中間長出來到兩端" class="headerlink" title="效果一: 選項的底下會從中間長出來到兩端"></a>效果一: 選項的底下會從中間長出來到兩端</h3><p>那我們就先來研究這個效果吧。<br>我們會用偽元素 <code>:after</code> 來達成。<br>第一，先來寫基本的偽元素樣式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.main-header .main-nav a &#123;</span><br><span class="line">  text-decoration: none;</span><br><span class="line">  color: #fff;</span><br><span class="line">  padding: 5px 1em;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.main-header .main-nav a:after &#123;</span><br><span class="line">  content: &#39;&#39;;</span><br><span class="line">  height: 0;</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: 0;</span><br><span class="line">  right: 0;</span><br><span class="line">  border-bottom: 1px solid #fff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>經過以上的 css 內容，會發現畫面長成這樣<br><img src="pseudoElement-1.png" alt="偽元素初始設定問題"><br>會發現，有一條貫穿整個版面水平方向的白線在選項上方，<br>會長的像這樣的原因是，當我們對偽元素使用 <code>position: absolute</code> 時，它會變成浮動的脫離原本父層寬度，再加上有設定 <code>left: 0</code> 和 <code>right:0</code> 會讓它撐滿整個寬度，這就是它為什麼變成貫穿整個版面水平方向的白線的原因。</p>
+<p>接下來，我們就要來解決這個問題，其實我們只要對偽元素的父層 .main-header .main-nav a 加上 <code>position: relative</code>，告訴偽元素它的位置是相對於 .main-header .main-nav a 做設定的。接著，在對偽元素加上 <code>bottom: -5px</code> ，就可以讓它位在選項的下方囉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.main-header .main-nav a &#123;</span><br><span class="line">  text-decoration: none;</span><br><span class="line">  color: #fff;</span><br><span class="line">  padding: 5px 1em;</span><br><span class="line">  position: relative;  &#x2F;&#x2F; 加上這一行</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.main-header .main-nav a:after &#123;</span><br><span class="line">  content: &#39;&#39;;</span><br><span class="line">  height: 0;</span><br><span class="line">  position: absolute;  &#x2F;&#x2F; 加上這一行</span><br><span class="line">  left: 0;</span><br><span class="line">  right: 0;</span><br><span class="line">  bottom: -5px;</span><br><span class="line">  border-bottom: 1px solid #fff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>加上這兩行之後，就可以達到下面的效果囉<br><img src="pseudoElement-2.png" alt="偽元素初步效果"></p>
+<p>第二，為它加上左右長大的效果<br>我們來修改一下偽元素的 css 內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.main-header .main-nav a:after &#123;</span><br><span class="line">  content: &#39;&#39;;</span><br><span class="line">  height: 0;</span><br><span class="line">  position: absolute;  </span><br><span class="line">  left: 50%;  &#x2F;&#x2F; 改這一行</span><br><span class="line">  right: 50%; &#x2F;&#x2F; 改這一行</span><br><span class="line">	bottom: -5px;</span><br><span class="line">  border-bottom: 1px solid #fff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面改的這兩行的效果有點像是將偽元素收攏成位在正中間的一個點。<br>接著，在 hover 到選項上的時候，再將偽元素向左右撐滿，所以，加入以下的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">.main-header .main-nav a:after &#123;</span><br><span class="line">  content: &#39;&#39;;</span><br><span class="line">  height: 0;</span><br><span class="line">  position: absolute;  </span><br><span class="line">  left: 50%;</span><br><span class="line">  right: 50%;</span><br><span class="line">	bottom: -5px;</span><br><span class="line">  border-bottom: 1px solid #fff;</span><br><span class="line">	transition: .25s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.main-header .main-nav a:hover:after &#123;</span><br><span class="line">	left: 0;  &#x2F;&#x2F; 將偽元素向左撐滿</span><br><span class="line">	right: 0; &#x2F;&#x2F; 將偽元素向右撐滿</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>經過以上的操作，第一個效果就完成囉~</p>
+<h3 id="效果二-選項往上滑動"><a href="#效果二-選項往上滑動" class="headerlink" title="效果二: 選項往上滑動"></a>效果二: 選項往上滑動</h3><p>這個效果比較單純的，其實，只要對選項加入 <code>transform: translateY</code> 的設定就可以達成囉。<br>程式碼如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">main-header .main-nav a &#123;</span><br><span class="line">	transform: translateY(0px);  &#x2F;&#x2F; 設定一開始的起點</span><br><span class="line">	transition: .5s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main-header .main-nav a:hover &#123;</span><br><span class="line">	transform: translateY(-5px); &#x2F;&#x2F; 設定要滑動到的位置</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="⭐-無法觸發-transform-translateY-效果"><a href="#⭐-無法觸發-transform-translateY-效果" class="headerlink" title="⭐ 無法觸發 transform: translateY() 效果"></a>⭐ 無法觸發 transform: translateY() 效果</h4><p>但是，加入以上的內容之後，會發現 hover 過去選項並沒有往上滑動的效果。<br>主要是因為選項們都是 a 連結，而 a 連結是 inline 元素，詳細一點說它是 <strong>non-replaced inline element，是無法使用 transform 效果的</strong> (可參考<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/14883250/css-transform-doesnt-work-on-inline-elements">文章一</a>、<a target="_blank" rel="noopener" href="https://drafts.csswg.org/css-transforms/#transformable-element">文章二</a>)。<br>所以，我們只要將 a 連結的 display 屬性改成 inline-block 就解決囉。</p>
+<h1 id="Final-Result"><a href="#Final-Result" class="headerlink" title="Final Result"></a>Final Result</h1><p><a target="_blank" rel="noopener" href="https://stackblitz.com/edit/web-platform-e3u8jt?file=styles.css">練習連結</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/14883250/css-transform-doesnt-work-on-inline-elements">transformable element description-1</a></li>
+<li><a target="_blank" rel="noopener" href="https://drafts.csswg.org/css-transforms/#transformable-element">transformable element description-2</a></li>
+<li><a target="_blank" rel="noopener" href="https://dbaron.org/css/2000/01/dibm#:~:text=In%20general%2C%20non%2Dreplaced%20elements,is%20outside%20of%20the%20document.">transformable element description - easy to understand</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10225759">替換元素(replaced element) 解釋</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/CSS-non-replaced-inline-element/" rel="tag"># CSS non-replaced inline element</a>
+              <a href="/tags/CSS-non-transformable-elements/" rel="tag"># CSS non transformable elements</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E7%B6%B2%E9%A0%81%E9%A0%81%E5%B0%BE%E7%89%88%E5%A1%8A/" rel="prev" title="CSS-金魚系列切版-網頁頁尾版塊">
+      <i class="fa fa-chevron-left"></i> CSS-金魚系列切版-網頁頁尾版塊
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Source-Url"><span class="nav-number">1.</span> <span class="nav-text">Source Url</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E9%BB%9E"><span class="nav-number">2.</span> <span class="nav-text">學習點</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BF%AE%E6%94%B9%E5%8E%9F%E7%94%9F-input-%E5%92%8C%E6%8C%89%E9%88%95%E7%9A%84%E6%A8%A3%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">1. 修改原生 input 和按鈕的樣式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%B0%8E%E8%A6%BD%E5%88%97%E9%81%B8%E9%A0%85-hover-%E6%95%88%E6%9E%9C"><span class="nav-number">2.2.</span> <span class="nav-text">2.導覽列選項 hover 效果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%E4%B8%80-%E9%81%B8%E9%A0%85%E7%9A%84%E5%BA%95%E4%B8%8B%E6%9C%83%E5%BE%9E%E4%B8%AD%E9%96%93%E9%95%B7%E5%87%BA%E4%BE%86%E5%88%B0%E5%85%A9%E7%AB%AF"><span class="nav-number">2.2.1.</span> <span class="nav-text">效果一: 選項的底下會從中間長出來到兩端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%88%E6%9E%9C%E4%BA%8C-%E9%81%B8%E9%A0%85%E5%BE%80%E4%B8%8A%E6%BB%91%E5%8B%95"><span class="nav-number">2.2.2.</span> <span class="nav-text">效果二: 選項往上滑動</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%AD%90-%E7%84%A1%E6%B3%95%E8%A7%B8%E7%99%BC-transform-translateY-%E6%95%88%E6%9E%9C"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">⭐ 無法觸發 transform: translateY() 效果</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Final-Result"><span class="nav-number">3.</span> <span class="nav-text">Final Result</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
