@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄 金魚系列切版-網頁頁尾版塊 學習過程- 1. 著作版權 C 怎麼做出來的 2. 用 flex-grow 讓子元素都有同等的寬度 3. 將原生的 input 欄位和送出按鈕併在一起的效果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS-金魚系列切版-網頁頁尾版塊">
+<meta property="og:url" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E7%B6%B2%E9%A0%81%E9%A0%81%E5%B0%BE%E7%89%88%E5%A1%8A/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄 金魚系列切版-網頁頁尾版塊 學習過程- 1. 著作版權 C 怎麼做出來的 2. 用 flex-grow 讓子元素都有同等的寬度 3. 將原生的 input 欄位和送出按鈕併在一起的效果">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E7%B6%B2%E9%A0%81%E9%A0%81%E5%B0%BE%E7%89%88%E5%A1%8A/copyright_icon.jpg">
+<meta property="og:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E7%B6%B2%E9%A0%81%E9%A0%81%E5%B0%BE%E7%89%88%E5%A1%8A/input_combination.png">
+<meta property="og:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E7%B6%B2%E9%A0%81%E9%A0%81%E5%B0%BE%E7%89%88%E5%A1%8A/input_combination-1.png">
+<meta property="og:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E7%B6%B2%E9%A0%81%E9%A0%81%E5%B0%BE%E7%89%88%E5%A1%8A/input_combination-2.png">
+<meta property="article:published_time" content="2022-03-27T02:34:27.000Z">
+<meta property="article:modified_time" content="2022-03-27T03:20:10.609Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="CSS background">
+<meta property="article:tag" content="CSS flex-shrink">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E7%B6%B2%E9%A0%81%E9%A0%81%E5%B0%BE%E7%89%88%E5%A1%8A/copyright_icon.jpg">
+
+<link rel="canonical" href="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E7%B6%B2%E9%A0%81%E9%A0%81%E5%B0%BE%E7%89%88%E5%A1%8A/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>CSS-金魚系列切版-網頁頁尾版塊 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E7%B6%B2%E9%A0%81%E9%A0%81%E5%B0%BE%E7%89%88%E5%A1%8A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSS-金魚系列切版-網頁頁尾版塊
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-03-27 10:34:27 / 修改時間：11:20:10" itemprop="dateCreated datePublished" datetime="2022-03-27T10:34:27+08:00">2022-03-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄 金魚系列切版-網頁頁尾版塊 學習過程- 1. 著作版權 C 怎麼做出來的 2. 用 flex-grow 讓子元素都有同等的寬度 3. 將原生的 input 欄位和送出按鈕併在一起的效果</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Source-Url"><a href="#Source-Url" class="headerlink" title="Source Url"></a>Source Url</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Y02yl_QQNv0&list=PLqivELodHt3hxeuLX8PYaI8u1GcDaBoJo&index=7">教學連結</a></p>
+<h1 id="學習點"><a href="#學習點" class="headerlink" title="學習點"></a>學習點</h1><h2 id="1-著作版權-C-怎麼做出來的"><a href="#1-著作版權-C-怎麼做出來的" class="headerlink" title="1. 著作版權 C 怎麼做出來的"></a>1. 著作版權 C 怎麼做出來的</h2><p><img src="copyright_icon.jpg" alt="著作版權icon"><br>只要寫入 <code>&amp;copy;</code> 就可以產出這個著作版權 c 的符號囉，注意，那個分號 <code>;</code> 也要寫進去。<br>所以，要達成上面的內容的話，只要寫入這段程式碼<br><code>Copyright &amp;copy; 2022 跟著金魚大師一起切這個畫面</code> 就完成囉。</p>
+<h2 id="2-讓各個文字區塊都分配到一樣的寬度-flex-grow"><a href="#2-讓各個文字區塊都分配到一樣的寬度-flex-grow" class="headerlink" title="2. 讓各個文字區塊都分配到一樣的寬度 - flex-grow"></a>2. 讓各個文字區塊都分配到一樣的寬度 - <code>flex-grow</code></h2><p>課堂上的手法不是用手動設死每個文字區塊的 <code>width</code> 屬性值，而是利用 <code>flex-grow</code> 的屬性來達成。<br>首先，先將每一個文字區塊寬度設為 0px，接著，再對這些文字區塊設 <code>flex-grow: 1</code>，這就代表了，每一個文字區塊都會分到一份父層剩餘空白區塊的空間，也就是這樣子每一個文字區塊的寬度就都達到一樣寬度的效果囉。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.main-footer .container &#123;</span><br><span class="line">  display: flex;  &#x2F;&#x2F; 父層必須要有 display: flex 的屬性</span><br><span class="line">  width: 1200px;</span><br><span class="line">  margin: auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.footer-item &#123;</span><br><span class="line">  width: 0;  &#x2F;&#x2F; 寬度設為 0</span><br><span class="line">  flex-grow: 1; &#x2F;&#x2F; 用它達到分配同等寬度的效果</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這邊直接寫一個小範例，會比較容易看出來 <code>flex-grow: 1</code> 搭配 <code>width: 0px</code> 的效果</p>
+<iframe src="https://codepen.io/landy510/embed/OJzpGLz?default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+<p>在上面的範例中，你可以試試看把 <code>flex-grow: 1</code> 和 <code>width: 0px</code> 從子層的 CSS style 裡面拿掉，會發現這兩個區塊就不再是相同的寬度囉。<br>很好用的技巧~</p>
+<h2 id="3-將原生的-input-輸入欄位和送出表單欄位併在一起的效果"><a href="#3-將原生的-input-輸入欄位和送出表單欄位併在一起的效果" class="headerlink" title="3. 將原生的 input 輸入欄位和送出表單欄位併在一起的效果"></a>3. 將原生的 input 輸入欄位和送出表單欄位併在一起的效果</h2><p>原生的 input 欄位(<code>&lt;input type=&#39;text&#39; /&gt;</code>)和 送出的按鈕(<code>&lt;input type=&#39;submit&#39; value=&#39;送出&#39;/&gt;</code>)，在它們父層下 <code>display: flex</code> 將它們併在同一列，畫面會長的像下面這樣<br><img src="input_combination.png" alt="input欄位併在一起"><br>會發現它們之間會有小小的間隔，這個是原生的 border 造成的，所以，我們要將它們的 border 設定取消並讓它們大塊一點，那就要加入以下的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.footer-subs form input[type&#x3D;&quot;text&quot;],</span><br><span class="line">.footer-subs form input[type&#x3D;&quot;submit&quot;] &#123;</span><br><span class="line">	border: none;</span><br><span class="line">	padding: 5px 10px</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>經過以上的設定後，畫面會長的像下面這樣<br><img src="input_combination-1.png" alt="input欄位修正後結果"><br>是不是看起來比較美觀呢!<br>但是! 我們不滿足，你可以發現填寫欄位和按鈕整體的寬度並沒有填滿整個父層寬度，這樣也有點不美觀，所以，我們對這個 input 填寫欄位加上 <code>flex-grow:1</code> 的屬性之後，讓父層剩餘的父層寬度空間都給 input 填寫欄位，如此，就可以達到下面的效果囉。<br><img src="input_combination-2.png" alt="input欄位修正後結果"></p>
+<h2 id="4-讓訂閱電子報區塊的-form-置中"><a href="#4-讓訂閱電子報區塊的-form-置中" class="headerlink" title="4. 讓訂閱電子報區塊的 form 置中"></a>4. 讓訂閱電子報區塊的 form 置中</h2><p>我們將父層 .footer-subs 加入以下設定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.footer-subs &#123;</span><br><span class="line">	display: flex;</span><br><span class="line">	flex-direction: column;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>這時候，footer-subs 內的子元素排版看起來都沒有變化。<br>最後，我們對裡面的 form 使用 <code>margin: auto 0</code> 這行的效果就可以讓 form 垂直置中囉。</p>
+<h1 id="Final-Result"><a href="#Final-Result" class="headerlink" title="Final Result"></a>Final Result</h1><p><a target="_blank" rel="noopener" href="https://stackblitz.com/edit/web-platform-nyjtcu?file=styles.css">練習連結</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/CSS-background/" rel="tag"># CSS background</a>
+              <a href="/tags/CSS-flex-shrink/" rel="tag"># CSS flex-shrink</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-NO001-NO005%E5%88%87%E7%89%88%E6%8A%80%E5%B7%A7%E5%8E%9F%E7%90%86%E5%BD%99%E6%95%B4/" rel="prev" title="CSS-金魚系列切版-NO001- NO005切版技巧原理彙整">
+      <i class="fa fa-chevron-left"></i> CSS-金魚系列切版-NO001- NO005切版技巧原理彙整
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Source-Url"><span class="nav-number">1.</span> <span class="nav-text">Source Url</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E9%BB%9E"><span class="nav-number">2.</span> <span class="nav-text">學習點</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%91%97%E4%BD%9C%E7%89%88%E6%AC%8A-C-%E6%80%8E%E9%BA%BC%E5%81%9A%E5%87%BA%E4%BE%86%E7%9A%84"><span class="nav-number">2.1.</span> <span class="nav-text">1. 著作版權 C 怎麼做出來的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%AE%93%E5%90%84%E5%80%8B%E6%96%87%E5%AD%97%E5%8D%80%E5%A1%8A%E9%83%BD%E5%88%86%E9%85%8D%E5%88%B0%E4%B8%80%E6%A8%A3%E7%9A%84%E5%AF%AC%E5%BA%A6-flex-grow"><span class="nav-number">2.2.</span> <span class="nav-text">2. 讓各個文字區塊都分配到一樣的寬度 - flex-grow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%B0%87%E5%8E%9F%E7%94%9F%E7%9A%84-input-%E8%BC%B8%E5%85%A5%E6%AC%84%E4%BD%8D%E5%92%8C%E9%80%81%E5%87%BA%E8%A1%A8%E5%96%AE%E6%AC%84%E4%BD%8D%E4%BD%B5%E5%9C%A8%E4%B8%80%E8%B5%B7%E7%9A%84%E6%95%88%E6%9E%9C"><span class="nav-number">2.3.</span> <span class="nav-text">3. 將原生的 input 輸入欄位和送出表單欄位併在一起的效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%AE%93%E8%A8%82%E9%96%B1%E9%9B%BB%E5%AD%90%E5%A0%B1%E5%8D%80%E5%A1%8A%E7%9A%84-form-%E7%BD%AE%E4%B8%AD"><span class="nav-number">2.4.</span> <span class="nav-text">4. 讓訂閱電子報區塊的 form 置中</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Final-Result"><span class="nav-number">3.</span> <span class="nav-text">Final Result</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">131</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
