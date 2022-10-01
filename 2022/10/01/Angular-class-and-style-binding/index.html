@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄如何在 Angular 中，動態地位目標元素綁定指定 class 或 style - 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular-class and style binding">
+<meta property="og:url" content="https://landy510.github.io/2022/10/01/Angular-class-and-style-binding/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄如何在 Angular 中，動態地位目標元素綁定指定 class 或 style - 1">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://upload.cc/i1/2022/10/01/2KdGlf.png">
+<meta property="article:published_time" content="2022-10-01T02:11:27.000Z">
+<meta property="article:modified_time" content="2022-10-01T03:43:11.237Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Angular">
+<meta property="article:tag" content="Angular class binding">
+<meta property="article:tag" content="Angular style binding">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload.cc/i1/2022/10/01/2KdGlf.png">
+
+<link rel="canonical" href="https://landy510.github.io/2022/10/01/Angular-class-and-style-binding/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Angular-class and style binding | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2022/10/01/Angular-class-and-style-binding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Angular-class and style binding
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-10-01 10:11:27 / 修改時間：11:43:11" itemprop="dateCreated datePublished" datetime="2022-10-01T10:11:27+08:00">2022-10-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular/" itemprop="url" rel="index"><span itemprop="name">Angular</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄如何在 Angular 中，動態地位目標元素綁定指定 class 或 style - 1</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h1><p>在各家框架中，使用程式來增減目標元素的 class 和 style 的內容，這是非常常用的技巧，在 Angular 也不例外，所以，這一篇特此紀錄一些 Angular 增減目標元素 class 和 style 的方法。</p>
+<h1 id="本文目錄"><a href="#本文目錄" class="headerlink" title="本文目錄"></a>本文目錄</h1><p>這系列的文章會記錄以下的內容</p>
+<ol>
+<li>如何動態 binding 目標元素的 class</li>
+<li>如何動態 binding 目標元素的 style</li>
+<li>在 Angular 中判定目標元素應該以哪一個 style 為準的優先序</li>
+</ol>
+<h2 id="學習點"><a href="#學習點" class="headerlink" title="學習點"></a>學習點</h2><p>首先，先記錄為目標元素動態增減 class 的方法。</p>
+<h3 id="綁定單一個-css-class"><a href="#綁定單一個-css-class" class="headerlink" title="綁定單一個 css class"></a>綁定單一個 css class</h3><p>直接上一段程式碼<br><code>&lt;div [class.sale]=&quot;onSale&quot;&gt;...&lt;/div&gt;</code><br>上面這一段程式碼的效果為，<br>當 onSale 的值為 <code>true</code> 的時候，會為這個 div 元素的 class 加入 sale 這個 className，<br>反之，當 onSale 為 <code>false</code> 則會把 class 裡的 sale 刪掉。</p>
+<h3 id="綁定多個-css-class"><a href="#綁定多個-css-class" class="headerlink" title="綁定多個 css class"></a>綁定多個 css class</h3><p>直接上一段程式碼<br><code>&lt;div [class]=&quot;classExpression&quot;&gt;&lt;/div&gt;</code><br>這個 <code>classExpression</code> 可以是以下幾種格式的其中一種:</p>
+<ol>
+<li><strong>一段字串，並將想要加入的 class 之間以空白格隔開</strong><br>範例程式碼<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--- app.component.ts ---</span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: &#39;my-app&#39;,</span><br><span class="line">  template: &#96;</span><br><span class="line">    &lt;div [class]&#x3D;&quot;extraClass&quot;&gt;...&lt;&#x2F;div&gt;</span><br><span class="line">  &#96;</span><br><span class="line">&#125;)</span><br><span class="line">export class AppComponent &#123;</span><br><span class="line">  extraClass &#x3D; &#39;modal success&#39;; &#x2F;&#x2F; 這是一段字串，將想加入的 class Name 之間以空白格隔開</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>最終結果會長這樣<br><img src="https://upload.cc/i1/2022/10/01/2KdGlf.png" alt="multi-class-binding-picture"></p>
+<ol start="2">
+<li><strong>傳入一個物件，其成員屬性為想加入的 class - <font color=#FF0000>注意傳址的問題</font></strong><br>這個要傳入的物件所含有的成員屬性名稱，就是要被加入到目標元素的 class 內的 class 名稱，<br>而這些成員屬性會接 truthy 或 falsy 的值，已決定是否該 className 會被加入到目標元素的 class 中。</li>
+</ol>
+<p>範例程式碼</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">--- app.component.ts ---</span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: &#39;my-app&#39;,</span><br><span class="line">  template: &#96;</span><br><span class="line">    &lt;p [class]&#x3D;&quot;extraClass&quot;&gt;Test Class object&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;changeClass()&quot;&gt;Change&lt;&#x2F;button&gt;</span><br><span class="line">  &#96;</span><br><span class="line">&#125;)</span><br><span class="line">export class AppComponent &#123;</span><br><span class="line">  onSale &#x3D; true;</span><br><span class="line">  extraClass &#x3D; &#123;</span><br><span class="line">    modal: true,</span><br><span class="line">    success: false</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  changeClass(): void &#123;</span><br><span class="line">    this.extraClass.success &#x3D; !this.extraClass.success;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>上面這個範例會出現<font color="#f00">錯誤</font>!!!</strong><br>你會發現，當你按下按鈕之後，<code>p</code> 段落的 success 這個 className 並沒有隨著你按下按鈕，而被增減。</p>
+<p>這是因為你是傳入物件進去，當你按下按鈕，只是單純地去修改該物件裡的屬性值，該物件的位址並沒有不同，所以， Angular  是不會偵測到裡面的值有更動過的，所以，才會造成以上的問題。</p>
+<p>所以，要修改一下上面的範例程式碼內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">changeClass(): void &#123;</span><br><span class="line">  this.extraClass.success &#x3D; !this.extraClass.success;</span><br><span class="line">  this.extraClass &#x3D; &#123; ...this.extraClass &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我們重新創一個物件，並設給 extraClass，如此一來，就可以成功達成增減 success 這個 class 囉。</p>
+<ol start="3">
+<li><p><strong>傳入一個陣列</strong><br>這個方法就是傳入一個陣列，裡面的元素都是字串，它們的值就是要加入目標元素的 class。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span><br><span class="line">  selector: &#39;app-root&#39;,</span><br><span class="line">  template: &#96;</span><br><span class="line">    &lt;p [class]&#x3D;&quot;extraClass&gt;Test Class&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;spliceArr()&gt;Change&lt;&#x2F;button&gt;</span><br><span class="line">  &#96;</span><br><span class="line">&#125;)</span><br><span class="line">export class AppComponent &#123;</span><br><span class="line">  addClassArr &#x3D; [&#39;modal&#39;, &#39;success&#39;];</span><br><span class="line"></span><br><span class="line">  spliceArr(): void &#123;</span><br><span class="line">    this.addClassArr &#x3D; this.addClassArr.slice(1);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要注意的是，如果，你想要刪減目標元素的 class 的話，<br>一樣是要將增減後的全新的陣列設給原本的陣列，<br>不然，又會出現傳址機制，導致沒有被偵測到有改變的問題。</p>
+</li>
+<li><p><strong>ternary operators (三元運算式)</strong><br>可以加入 三元運算式 來決定是哪一種 class</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div [class]&#x3D;&quot;activated ? &#39;success&#39; : &#39;error&#39;&quot;&gt;ternary operators&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>當 activated 這個變數為 <code>true</code> 時，為該元素的 class 加入 success，反之，加入 error。</p>
+</li>
+</ol>
+<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><p><strong>Q1. <code>[ngClass]</code> 和 <code>[class]</code> 的差異? - 會把 host element 相同 className 刪掉的差異?</strong><br>Ans:<br>在 Angular 裡面，我們也會用 <code>ngClass</code> 來做到動態增減目標元素的 class 內容的效果。<br>但它和 <code>[class]</code> 方法差在，<code>[class]</code> 會在<strong>一開始</strong>就先把相同的 className 拔掉。<br>什麼意思呢? 看一下下面的範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">--- child.component.ts ---</span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: &#39;app-child&#39;,</span><br><span class="line">  template: &#96;&lt;div&gt;Child Template&lt;&#x2F;div&gt;&#96;</span><br><span class="line">  styles: [&#96;</span><br><span class="line">    :host(.modal) &#123;</span><br><span class="line">      color: red;</span><br><span class="line">    &#125;</span><br><span class="line">  &#96;]  </span><br><span class="line">&#125;)</span><br><span class="line">export class ChildComponent &#123;</span><br><span class="line">  @HostBinding(&#39;class.modal&#39;) modal &#x3D; truel</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">--- app.component.ts ---</span><br><span class="line">&lt;app-child [class.modal]&#x3D;&quot;false&quot;&gt;&lt;&#x2F;app-child&gt;</span><br></pre></td></tr></table></figure>
+<p>上面這段程式碼，可以看到 <code>[class.modal]=&quot;false&quot;</code> 是代表不為目標元素加入 modal 這個 class。<br>另外，範例中的 app-child 會因為 <code>@HostBinding(&#39;class.modal&#39;) modal = true</code> ，而有一個既有的 modal 在它的 class 中了，<br>但它會因為 <code>[class.modal]=&quot;false&quot;</code> 的效果，而導致一開始存在在 host element 中的 modal 這個 class 被刪掉。<br>這就是上面所說的 <code>[class]</code> 的寫法，會在一開始就先把既有的相同 className 的內容移除的的意思。</p>
+<p>那來看一下， [ngClass] 差在哪</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--- app.component.ts ---</span><br><span class="line">isActive &#x3D; false;</span><br><span class="line"></span><br><span class="line">--- app.component.html ---</span><br><span class="line">&lt;app-child [ngClass]&#x3D;&quot;&#123; &#39;modal&#39;: isActive &#125;&quot;&gt;&lt;&#x2F;app-child&gt;</span><br></pre></td></tr></table></figure>
+<p>改寫成用 ngClass 的方式，就算它這邊是判定不要加入 modal 這個 class，但是，它也不會一開始就先把 app-child 的 host element 的 class 中，既有的 modal 給刪掉。</p>
+<p>但是，後續如果你操縱 isActive 這個變數，當它先從原始值的 false 換成 true，再換成 false 的時候，這個時候，在 host element 裡的 modal class 還是會被移除掉喔。</p>
+<p>所以，可以看到 <code>[ngClass]</code> 和 <code>[class]</code> 的差異是在一開始是否會為指定元素的 class 內，相同的 className 移除與否的差別。</p>
+<p>那為什麼要知道這個東西的差別，有時候，我們可能會引入外部元件或第三方套件具有一些很常用的 class，那我們就很有可能使用 [class] 綁定在該指定元素上，而造成 class 被移除掉，進而造成該元件原本設計的 css style 不見了的問題。</p>
+<p>解決的辦法的話，除了小心命名 className 之外，或者就是直接使用 ngClass 來避免這種狀況囉。</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>上面記錄了四種 Angular 可以用來變換指定元素地 class 內容的方法，<br>要特別注意的是，如果，是傳入物件或陣列的話，會有<strong>傳址</strong>的問題需要特別處理一下。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://angular.io/guide/class-binding#class-and-style-binding">Angular Official Introduction of class binding</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+              <a href="/tags/Angular-class-binding/" rel="tag"># Angular class binding</a>
+              <a href="/tags/Angular-style-binding/" rel="tag"># Angular style binding</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/27/CSS-%E9%87%91%E9%AD%9A%E7%B3%BB%E5%88%97%E5%88%87%E7%89%88-%E5%B0%8E%E8%A6%BD%E5%88%97/" rel="prev" title="CSS-金魚系列切版-導覽列">
+      <i class="fa fa-chevron-left"></i> CSS-金魚系列切版-導覽列
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B5%B7%E6%BA%90"><span class="nav-number">1.</span> <span class="nav-text">起源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%9B%AE%E9%8C%84"><span class="nav-number">2.</span> <span class="nav-text">本文目錄</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E9%BB%9E"><span class="nav-number">2.1.</span> <span class="nav-text">學習點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B6%81%E5%AE%9A%E5%96%AE%E4%B8%80%E5%80%8B-css-class"><span class="nav-number">2.1.1.</span> <span class="nav-text">綁定單一個 css class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B6%81%E5%AE%9A%E5%A4%9A%E5%80%8B-css-class"><span class="nav-number">2.1.2.</span> <span class="nav-text">綁定多個 css class</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">2.2.</span> <span class="nav-text">Appendix</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-number">3.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
