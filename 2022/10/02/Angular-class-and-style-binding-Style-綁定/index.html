@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄如何在 Angular 中，動態地為目標元素綁定指定 class 或 style，並且比較它們之間的優先序 - Series 2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular-class-and-style-binding-Style 綁定 和 css style優先序">
+<meta property="og:url" content="https://landy510.github.io/2022/10/02/Angular-class-and-style-binding-Style-%E7%B6%81%E5%AE%9A/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄如何在 Angular 中，動態地為目標元素綁定指定 class 或 style，並且比較它們之間的優先序 - Series 2">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://upload.cc/i1/2022/10/02/9cEliI.png">
+<meta property="article:published_time" content="2022-10-02T12:17:00.000Z">
+<meta property="article:modified_time" content="2022-10-02T14:18:50.871Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Angular">
+<meta property="article:tag" content="Angular class binding">
+<meta property="article:tag" content="Angular style binding">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload.cc/i1/2022/10/02/9cEliI.png">
+
+<link rel="canonical" href="https://landy510.github.io/2022/10/02/Angular-class-and-style-binding-Style-%E7%B6%81%E5%AE%9A/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Angular-class-and-style-binding-Style 綁定 和 css style優先序 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2022/10/02/Angular-class-and-style-binding-Style-%E7%B6%81%E5%AE%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Angular-class-and-style-binding-Style 綁定 和 css style優先序
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-10-02 20:17:00 / 修改時間：22:18:50" itemprop="dateCreated datePublished" datetime="2022-10-02T20:17:00+08:00">2022-10-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular/" itemprop="url" rel="index"><span itemprop="name">Angular</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄如何在 Angular 中，動態地為目標元素綁定指定 class 或 style，並且比較它們之間的優先序 - Series 2</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h1><p>接續 <a href="/2022/10/01/Angular-class-and-style-binding/" title="動態綁定 class 系列">動態綁定 class 系列</a> 的文章。</p>
+<h2 id="學習點"><a href="#學習點" class="headerlink" title="學習點"></a>學習點</h2><p>記錄為目標元素動態增減 style 的方法。</p>
+<h3 id="綁定單一個-stlye"><a href="#綁定單一個-stlye" class="headerlink" title="綁定單一個 stlye"></a>綁定單一個 stlye</h3><p>綁定單一的 style 到指定元素上，其寫法為在要加入的 CSS 樣式前面加上 style 的前綴詞，再用 dot 將它們連在一起。</p>
+<p>另外，你也可以指定單位(e.g.: <code>px</code>, <code>em</code>)到要加入的 CSS style，但是，輸入的設定值就必須要是數字。</p>
+<p><code>&lt;p [style.color]=&quot;&#39;red&#39;&quot; [style.font-size.px]=&quot;&#39;40&#39;”&gt;paragraph&lt;/p&gt;</code></p>
+<p><strong>有 hyphen 的 css style 寫法</strong><br>另外，像是 <code>background-color</code> 這種 css style，你可以選擇用 hyphen 寫法，也可以用 camelCase 寫法</p>
+<p><code>&lt;div [style.background-color]=&quot;&#39;red&#39;&quot;&gt;background red&lt;div&gt;</code>  (hyphen)</p>
+<p>或者</p>
+<p><code>&lt;div [style.backgroundColor]=&quot;&#39;red&#39;&quot;&gt;background red&lt;div&gt;</code>  (camelCase)</p>
+<h3 id="綁定多個-style"><a href="#綁定多個-style" class="headerlink" title="綁定多個 style"></a>綁定多個 style</h3><p>同時綁定多個 style 到一個元素裡面，有以下兩種寫法</p>
+<p><strong>1. 綁定一個字串</strong><br>這個寫法，就是將你要加入的 style 直接都寫在這個字串裡面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span><br><span class="line">  selector: &#39;app-root&#39;,</span><br><span class="line">  template: &#96;&lt;div [style]&#x3D;&quot;styleStr&quot;&gt; a string style &lt;&#x2F;div&gt;&#96;</span><br><span class="line">&#125;)</span><br><span class="line">export class AppComponent &#123;</span><br><span class="line">  styleStr &#x3D; &#39;background-color: red; font-size: 40px;&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 綁定一個物件 - <font color=#f00>注意含有 hyphen 的 style 的成員屬性名稱設定方法</font></strong><br>這個物件的成員屬性名稱就是 style 的名稱，它的值就是該 style 的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;</span><br><span class="line">  selector: &#39;app-root&#39;,</span><br><span class="line">  template: &#96;&lt;div [stlye]&#x3D;&quot;styleObj&quot;&gt;a string style&lt;&#x2F;div&gt;&#96;</span><br><span class="line">&#125;)</span><br><span class="line">export class AppComponent &#123;</span><br><span class="line">  styleObj &#x3D; &#123;</span><br><span class="line">    &#39;background-color&#39;: &#39;red&#39;, &#x2F;&#x2F; 有 hyphen 的 style 的成員屬性要加單引號包起來</span><br><span class="line">    backgroundColor: &#39;red&#39;, &#x2F;&#x2F; 上面的屬性，也可以選擇用 camelCase 的寫法</span><br><span class="line">    border: &#39;2px solid #000&#39;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的範例，就是示範了當 style 的名稱有 hyphen 在裡面的話，其屬性名稱的撰寫方式，可以用 camelCase 或者 用單引號包起來 來做撰寫，而一般的 css style 的屬性名稱，就可以直接當作成員屬性的名稱。</p>
+<h1 id="Style-Precedence"><a href="#Style-Precedence" class="headerlink" title="Style Precedence"></a>Style Precedence</h1><p>當某個 html 元素上，有加入相同的 class 或者 相同的 style 的時候，Angular 會有它自有的規則來判斷哪一個方法加入的 class 或 style 的順位是最高的。</p>
+<p>判定的規則如下:<br><strong>1. 直接在 template 上面寫綁定，順位最高</strong><br>1-1 直接在 template 上，寫的 <strong>class 或 style 綁定指定的樣式</strong> 順位最高</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--- app.component.html --</span><br><span class="line">&lt;div [class.specific]&#x3D;&quot;hasFoo&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div [style.specific]&#x3D;&quot;color&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>1-2 直接在 template 上寫的 generic class or style 綁定順位比 1-1 低</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--- app.component.html ---</span><br><span class="line">&lt;div [class]&#x3D;&quot;classObj&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div [style]&#x3D;&quot;styleObj&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>1-3 直接在 template 上寫單純的 class 或 style 比上面 1-1 和 1-2 還低</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">--- app.component.html ---</span><br><span class="line">&lt;div class&#x3D;&quot;modal&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div style&#x3D;&quot;background-color: red;&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>把 1-1 ~ 1-3 的順位整合在同一元素，判斷一下是哪一個 style 會勝出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">--- app.component.html ---</span><br><span class="line">&lt;p</span><br><span class="line">  [style.background-color]&#x3D;&quot;&#39;#fa0&#39;&quot;</span><br><span class="line">  [style]&#x3D;&quot;styleObj&quot;</span><br><span class="line">  style&#x3D;&quot;background-color: blue;&quot;</span><br><span class="line">&gt; This is paragraph&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">--- app.component.scss ---</span><br><span class="line">.styleObj &#123;</span><br><span class="line">  background-color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>依照上面寫的規則，最後，<code>p</code>段落的背景色會是 <code>#fa0</code>。</p>
+<p><strong>2. 在 directive 寫的 host binding，順位第二高</strong><br>在 directive 裡，利用 <code>@HostBinding</code> 所綁定的 style 或 class 的順位會是第二高。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">--- button-decorator.directive.ts ---</span><br><span class="line">@Directive(&#123;</span><br><span class="line">  selector: &#39;[appButtonDecorator]&#39;</span><br><span class="line">&#125;)</span><br><span class="line">export class ButtonDecoratorDirective &#123;</span><br><span class="line">  @HostBinding(&#39;class.decoratorClass&#39;) hasValue &#x3D; true;</span><br><span class="line">  @HostBinding(&#39;style.color&#39;) color &#x3D; &#39;red&#39;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--- app.component.html ---</span><br><span class="line">&lt;button </span><br><span class="line">  type&#x3D;&quot;button&quot;</span><br><span class="line">  appButtonDecorator</span><br><span class="line">&gt;Change Button&lt;&#x2F;button&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 在 component 寫的 <code>@HostBinding</code>，順位最低</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">--- child.component.ts---</span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: &#39;child-comp&#39;,</span><br><span class="line">  templateUrl: &#39;.&#x2F;child.component.html&#39;,</span><br><span class="line">  styleUrls: [&#39;.&#x2F;child.component.css&#39;]</span><br><span class="line">&#125;)</span><br><span class="line">export class ChildComponent &#123;</span><br><span class="line">  @HostBinding(&#39;style&#39;) style &#x3D; &#39;color: red;&#39;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">--- app.component.html ---</span><br><span class="line">&lt;child-comp [style.color]&#x3D;&quot;blue&quot;&gt;This is a paragraph&lt;&#x2F;child-comp&gt;</span><br></pre></td></tr></table></figure>
+<p>以上範例的 <code>@HostBinding</code> 加入的 <code>color: red</code> 會被直接加在元素上的 <code>[class.color]=&quot;&#39;blue&#39;&quot;</code> 給蓋掉。</p>
+<p>以下，我把 class binding 和 style biding 的優先序整理成下面這張圖<br><img src="https://upload.cc/i1/2022/10/02/9cEliI.png" alt="style precedence"></p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><ol>
+<li>藉由這系列文章的規則歸納，我們就知道如何動態地為目標元素加入指定的 class 或 style，以此來變換該元素的樣式。</li>
+<li>得知用不同方法加入的 class 或 style 之間是有優先順序之分的。</li>
+</ol>
+<h1 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h1><p><strong>Style Precedence - includes component inline style</strong><br>以上這系列的文章，都是特別針對加諸在單一元素上的 style 優先序做紀錄，<br>在最後，我要把 @Component 自身的 inline style 的部分也納入 style Priority 的排序</p>
+<p>以下是納入 @Component inline style 的優先序，由高到低</p>
+<ol>
+<li><code>@Component.styles</code><br>這個是代表寫在 <code>@Component</code> 區塊的 styles 屬性裡的 css 樣式</li>
+<li><code>@Component.styleUrls</code><br>這個是代表寫在 <code>@Component</code> 區塊的 styleUrls 屬性裡，引用指定路徑的檔案的 css 樣式</li>
+<li>[class.specific] &amp;&amp; [style.specific]</li>
+<li>generic style: <code>[class]</code> &amp;&amp; <code>[style]</code></li>
+<li>inline style: <code>class</code> &amp;&amp; <code>style</code></li>
+<li>Directive style</li>
+<li>Component <code>@HostBinding</code> style</li>
+</ol>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://www.tektutorialshub.com/angular/angular-component-styles/">Angular Style Priority</a></li>
+<li><a target="_blank" rel="noopener" href="https://angular.io/guide/class-binding#class-and-style-binding">Angular Official Introduction of style binding</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+              <a href="/tags/Angular-class-binding/" rel="tag"># Angular class binding</a>
+              <a href="/tags/Angular-style-binding/" rel="tag"># Angular style binding</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/10/01/Angular-class-and-style-binding/" rel="prev" title="Angular-class and style binding">
+      <i class="fa fa-chevron-left"></i> Angular-class and style binding
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B5%B7%E6%BA%90"><span class="nav-number">1.</span> <span class="nav-text">起源</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E9%BB%9E"><span class="nav-number">1.1.</span> <span class="nav-text">學習點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B6%81%E5%AE%9A%E5%96%AE%E4%B8%80%E5%80%8B-stlye"><span class="nav-number">1.1.1.</span> <span class="nav-text">綁定單一個 stlye</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B6%81%E5%AE%9A%E5%A4%9A%E5%80%8B-style"><span class="nav-number">1.1.2.</span> <span class="nav-text">綁定多個 style</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Style-Precedence"><span class="nav-number">2.</span> <span class="nav-text">Style Precedence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-number">3.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Appendix"><span class="nav-number">4.</span> <span class="nav-text">Appendix</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

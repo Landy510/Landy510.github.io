@@ -164,6 +164,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/" class="post-title-link" itemprop="url">進階模板語法-01</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-06 10:28:54" itemprop="dateCreated datePublished" datetime="2021-01-06T10:28:54+08:00">2021-01-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-04-26 15:56:39" itemprop="dateModified" datetime="2021-04-26T15:56:39+08:00">2021-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>接續著上一篇的進階模板語法的內容繼續記錄。</p>
+<h2 id="反轉陣列元素-透過key"><a href="#反轉陣列元素-透過key" class="headerlink" title="反轉陣列元素-透過key"></a>反轉陣列元素-透過key</h2><p>因為Vue在操作DOM元素的時候，是用快速置換的方式操作，導致有些元素不會被置換掉。<br>所以，我們會透過將<code>key</code>的屬性，來綁定元素某些獨有的屬性，來讓各元素的整體DOM都可以被完整置換。<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li v-for&#x3D;&quot;(item, key) in arrayData&quot; :key&#x3D;&quot;item.age&quot;&gt;</span><br><span class="line">      &#123;&#123; key &#125;&#125; - &#123;&#123; item.name &#125;&#125; &#123;&#123; item.age &#125;&#125; 歲 &lt;input type&#x3D;&quot;text&quot;&gt;</span><br><span class="line">    &lt;&#x2F;li&gt;</span><br><span class="line">  &lt;&#x2F;ul&gt;</span><br><span class="line">  &lt;button class&#x3D;&quot;btn btn-outline-primary&quot; @click&#x3D;&quot;reverseArray&quot;&gt;反轉陣列&lt;&#x2F;button&gt;</span><br><span class="line">  </span><br><span class="line">---JavaScript---</span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">	el: &#39;#app&#39;,</span><br><span class="line">	data:&#123;</span><br><span class="line">		arrayData:[</span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;漂亮阿姨&#39;,</span><br><span class="line">				age: 24</span><br><span class="line">			&#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;小明&#39;,</span><br><span class="line">				age: 10</span><br><span class="line">			&#125;, </span><br><span class="line">			&#123;</span><br><span class="line">				name: &#39;力宏&#39;,</span><br><span class="line">				age: 35</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	methods: &#123;</span><br><span class="line">		reverseArray: function()&#123;</span><br><span class="line">			this.arrayData.reverse()</span><br><span class="line">			console.log(this.arrayData)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>可以看到以上這個範例，我們在<code>ul</code>的<code>li</code>透過<code>v-bind</code>綁上<code>key</code>這個屬性，<br>而要用item.age去作為<code>key</code>的值，是因為每個元素的age的值都不一樣，所以，可以代表各個的元素，<br>用這種方式就可以整體置換對應的DOM元素，而不是只有部分的DOM元素被置換。</p>
+<h2 id="filter-過濾"><a href="#filter-過濾" class="headerlink" title="filter 過濾"></a>filter 過濾</h2><iframe src="https://codepen.io/RandyChen/embed/poEVYrN?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上這個範例，<br>當你在<code>input</code>欄位輸入內容，並按下enter後，會觸發filterData函式，<br>此時，會先對dataArray使用filter，當<code>input</code>欄位輸入的內容跟dataArray裡面的元素的name的成員屬性有匹配的話，<br>就會把那個物件push進去filterArray陣列裡面。<br>最後，在<code>ul</code>的區塊中去遍歷filterArray陣列裡面的元素，並用該元素的age為索引，<br>來置換頁面上的DOM內容。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95-01/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/06/%E9%80%B2%E9%9A%8E%E6%A8%A1%E6%9D%BF%E8%AA%9E%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -949,99 +1036,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2020/12/29/Bootstrap%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/29/Bootstrap%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">Bootstrap筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2020-12-29 11:58:27" itemprop="dateCreated datePublished" datetime="2020-12-29T11:58:27+08:00">2020-12-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-30 15:10:20" itemprop="dateModified" datetime="2021-01-30T15:10:20+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bootstrap/" itemprop="url" rel="index"><span itemprop="name">Bootstrap</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Bootstrap-格線系統"><a href="#Bootstrap-格線系統" class="headerlink" title="Bootstrap 格線系統"></a>Bootstrap 格線系統</h1><ol>
-<li><p>首先，要使用bootstrap的話，一定要先引入它們家的css CDN。</p>
-</li>
-<li><p>Bootstrap是設計給行動優先的框架。所以，他們的斷點大部分都是使用<code>min-width</code>來設計。<br>所以，他們的格線系統是先從手機板型往PC往上寫。</p>
-</li>
-<li><p>Boostrap的格線系統<br><img src="/image/bootstrap_grid_system.png"></p>
-<p> 上圖，是Bootstrap整體區塊的架構。<br> 首先，在最外面一定要放一個.container，如果沒放.container的話，格線系統會變怪怪的。</p>
-<p> .container的下一層是 .row，要注意的是 .row的內層的第一層必須是 .col-。<br> 接著，你要撰寫的內容就要放在 .col-的區塊裡面。</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;col-md-3&quot;&gt;</span><br><span class="line">            &lt;h2&gt;菜單&lt;&#x2F;h2&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;col-md-9&quot;&gt;</span><br><span class="line">            &lt;h2&gt;表單&lt;&#x2F;h2&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p> 另外，Bootstrap的欄位總數預設是12欄。<br> 上面這個範例，3個欄位加上9個欄位是12欄位。</p>
-</li>
-<li><p>不要對.col- 和 .row 使用 <code>padding-right</code>, <code>padding-left</code>, <code>margin-right</code>, <code>margin-left</code>，<br>因為，Bootstrap的格線系統就是專門針對水平的樣式作處理的，如果自己加上這些水平方向的<br>推擠的話，會影響原本的布局。</p>
-</li>
-<li><p>雖然，上面一點說不要對格線系統使用水平推擠的功能。但是，你是可以對.row使用<br><code>margin-top</code> 和<code>margin-bottom</code>的上下推擠的功能。</p>
-</li>
-<li><p><code>.container-fluid</code> 可以用來當版型需要滿版的時候使用<br>另外，你也可以將.container放在.container-fluid裡面使用。</p>
-<iframe src="https://codepen.io/RandyChen/embed/NWRXyeb?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1111,7 +1105,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">133</span>
+          <span class="site-state-item-count">134</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
