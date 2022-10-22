@@ -164,6 +164,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/26/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-jQ%E6%8F%92%E5%85%A5%E5%A5%97%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/26/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-jQ%E6%8F%92%E5%85%A5%E5%A5%97%E4%BB%B6/" class="post-title-link" itemprop="url">jQuery課程筆記-jQ插入套件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-26 12:04:08" itemprop="dateCreated datePublished" datetime="2021-01-26T12:04:08+08:00">2021-01-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-30 15:14:44" itemprop="dateModified" datetime="2021-01-30T15:14:44+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jQuery/" itemprop="url" rel="index"><span itemprop="name">jQuery</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="使用-fontAwesome-動態加入連結-icon"><a href="#使用-fontAwesome-動態加入連結-icon" class="headerlink" title="使用 fontAwesome 動態加入連結 icon"></a>使用 fontAwesome 動態加入連結 icon</h1><h2 id="引入fontawesome的方式"><a href="#引入fontawesome的方式" class="headerlink" title="引入fontawesome的方式"></a>引入fontawesome的方式</h2><p>首先，<a target="_blank" rel="noopener" href="https://fontawesome.com/how-to-use/on-the-web/setup/hosting-font-awesome-yourself">官方網站</a>，有說明要怎麼引入這個fontawesome的檔案<br><img src="/image/fontawesome.png" alt="官方說明的地方"></p>
+<p>第二，<br>依據官方網站說的，你要引入fontAwesome資料夾中的css資料夾中的all.css檔案。<br>接著，你要將整個webfont資料夾引入你的專案中。<br>而且，all.css和webfont資料夾要放在同一個目錄中喔。<br><img src="/image/fontawesome1.png" alt="載圖一個目錄"></p>
+<p>第三，<br>加入jQ語法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;a href&#x3D;&quot;doc&#x2F;word.doc&quot;&gt;文件&lt;&#x2F;a&gt;</span><br><span class="line">&lt;a href&#x3D;&quot;doc&#x2F;word.zip&quot;&gt;文件&lt;&#x2F;a&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">$(document).ready(function () &#123;</span><br><span class="line">    $(&quot;a[href$&#x3D;&#39;.doc&#39;]&quot;).addClass(&#39;fab fa-adversal&#39;);</span><br><span class="line">    $(&quot;a[href$&#x3D;&#39;.zip&#39;]&quot;).addClass(&#39;far fa-address-card&#39;); </span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>以上這個範例，用了jQ中，<code>[name$=&quot;value&quot;]</code>的語法，<br>它的功用是它你的name裡面，有包含value裡面的關鍵字時，就觸發後方的事件。<br>所以，當<code>a</code>連結的<code>href</code>屬性中，含有.doc的關鍵字時，我們就為它的class加上<code>fab fa-adversal</code>，<br>若<code>a</code>連結的<code>href</code>屬性中，含有.zip的關鍵字時，我們就為它的class加上<code>far fa-address-card</code>。<br>以此，來達到呈現不同fontawesome的樣式，在不一樣的<code>a</code>連結中。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/26/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-jQ%E6%8F%92%E5%85%A5%E5%A5%97%E4%BB%B6/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/25/Vue-Router%E7%AD%86%E8%A8%98-01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -939,96 +1024,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/20/Vue%E5%B8%B8%E7%94%A8API-02/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/20/Vue%E5%B8%B8%E7%94%A8API-02/" class="post-title-link" itemprop="url">Vue常用API-02</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-01-20 11:17:19" itemprop="dateCreated datePublished" datetime="2021-01-20T11:17:19+08:00">2021-01-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-04-28 12:24:08" itemprop="dateModified" datetime="2021-04-28T12:24:08+08:00">2021-04-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p> 接續<a href="/2021/01/08/Vue-js%E5%85%83%E4%BB%B6/" title="上一篇">上一篇</a>內容。</p>
-<h1 id="Directive-開發自己的互動UI"><a href="#Directive-開發自己的互動UI" class="headerlink" title="Directive 開發自己的互動UI"></a>Directive 開發自己的互動UI</h1><p>Directive的功用為，Vue.js 提供自定義指令讓開發者直接從底層操作 DOM 物件。</p>
-<h2 id="Directive-有屬於它自己的生命周期。"><a href="#Directive-有屬於它自己的生命周期。" class="headerlink" title="Directive 有屬於它自己的生命周期。"></a>Directive 有屬於它自己的生命周期。</h2><p>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;text&quot; v-focus&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---Javascript---</span><br><span class="line">Vue.directive(&#39;focus&#39;, &#123;</span><br><span class="line">  &#x2F;&#x2F; 當綁定元素插入父元素後，會觸發 inserted hook 內的內容</span><br><span class="line">  inserted: function (el) &#123;</span><br><span class="line">    el.focus()  &#x2F;&#x2F; 聚焦元素</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">  el:&#39;#app&#39;,</span><br><span class="line">  data:&#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>以上這個範例，可以看出來<code>directive</code>有它自己的生命週期。<br><code>bind</code>: 只會執行一次，即該自訂義事件第一次跟被綁定元素綁定時會觸發這個hook的內容。<br><code>inserted</code>: 當被綁定元素，完成插入父元素之後，會觸發inerted hook 的內容。<br><code>update</code>: 綁定元素在模版更新時，會觸發<br>它不只有上面三種生命週期，可以直接去看官方看看其他生命週期介紹。<br><a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/custom-directive.html">官方文件</a></p>
-<h2 id="directive-的-Hook函式所能使用的參數"><a href="#directive-的-Hook函式所能使用的參數" class="headerlink" title="directive 的 Hook函式所能使用的參數"></a>directive 的 Hook函式所能使用的參數</h2><p>在官方文件中有提供，<code>directive</code>的Hook有一些參數可以直接使用<br><code>el</code>: 可以獲得被自訂義指令綁定的目標元素，且直接操縱這個被綁定的目標元素<br><code>binding</code>: 被綁定目標元素的特性，有以下幾個，我只簡列幾項</p>
-<ul>
-<li><code>name</code>: 沒有前綴詞<code>v-</code>的自訂義事件名稱，像上面範例的<code>v-focus</code>，去掉<code>v-</code>，它的自訂義事件的name屬性就是<code>focus</code>。<br>有關<code>binding</code>還有其他的參數可以使用，可以看一下官方文件。</li>
-</ul>
-<p>那以上這個範例，每次頁面刷新的時候，該<code>input</code>欄位就會藉由v-focus來觸發在<code>directive</code>中自訂義的focus內容，自動將畫面焦點移到這個<code>input</code>欄位中。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/20/Vue%E5%B8%B8%E7%94%A8API-02/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1098,7 +1093,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">135</span>
+          <span class="site-state-item-count">136</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

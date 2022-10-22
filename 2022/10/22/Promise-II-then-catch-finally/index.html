@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄 Promise 物件的 then, catch, finally 用法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise (II) - then, catch, finally">
+<meta property="og:url" content="https://landy510.github.io/2022/10/22/Promise-II-then-catch-finally/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄 Promise 物件的 then, catch, finally 用法">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-10-22T08:21:49.000Z">
+<meta property="article:modified_time" content="2022-10-22T08:33:00.602Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Promise">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2022/10/22/Promise-II-then-catch-finally/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Promise (II) - then, catch, finally | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2022/10/22/Promise-II-then-catch-finally/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Promise (II) - then, catch, finally
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-10-22 16:21:49 / 修改時間：16:33:00" itemprop="dateCreated datePublished" datetime="2022-10-22T16:21:49+08:00">2022-10-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄 Promise 物件的 then, catch, finally 用法</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="本文開始"><a href="#本文開始" class="headerlink" title="本文開始"></a>本文開始</h2><p>本文內容是跟著<a target="_blank" rel="noopener" href="https://javascript.info/promise-basics">這一篇教學內容</a>寫下的紀錄。</p>
+<p>在<a target="_blank" rel="noopener" href="https://www.notion.so/Promise-I-state-result-3ddc0a643f94458c89b4f7147fdcfc5a">上一篇文章</a>有提到，Promise 物件可以用來連結 <strong>索取資源部分的程式碼</strong> 和 <strong>在取得資源後，在利用這個資源做其他事的程式碼</strong> 這兩部分的功能。</p>
+<p>那這一篇就是說明後者，也就是怎麼在取得資料之後，利用 <code>Promise</code> 物件 <code>then</code> 或 <code>catch</code> 這兩個成員屬性做後續的處理。</p>
+<h2 id="then"><a href="#then" class="headerlink" title="then"></a><code>then</code></h2><p>先來上個小範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let promise &#x3D; new Promise(function(resolve, reject) &#123;</span><br><span class="line">  &#x2F;&#x2F; executor</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise.then(</span><br><span class="line">  function(result)&#123; &#x2F;* 處理執行成功後，回傳的結果 *&#x2F; &#125;,</span><br><span class="line">  function(error)&#123; &#x2F;* 處理執行失敗後，回傳的結果 *&#x2F; &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>可以看到 <code>then</code> 這個成員函式可以傳入兩個參數皆為 function，<br>第一個參數的函式，會在 Promise 物件執行結束，並呼叫 <code>resolve</code> function 回傳結果後被呼叫。</p>
+<p>第二個參數的函式，會在 Promise 物件執行結束，並呼叫 <code>reject</code> function 回傳結果後被呼叫。</p>
+<p>來上個範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const promise &#x3D; new Promise(function(resolve, reject)&#123;</span><br><span class="line">  setTimeout(() &#x3D;&gt; &#123;resolve(&#39;success&#39;)&#125;, 1000)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise.then(</span><br><span class="line">  result &#x3D;&gt; console.log(result),</span><br><span class="line">  error &#x3D;&gt; console.log(error),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>上面的範例，就是展示當 Promise 物件執行成功，並呼叫 resolve function 回傳結果後， then 的第一個參數 function 被呼叫的寫法。</p>
+<p>再來個範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const promise &#x3D; new Promise(function(resolve, reject)&#123;</span><br><span class="line">  setTimeout(() &#x3D;&gt; &#123; reject(&#39;failed&#39;) &#125;, 2000)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise.then(</span><br><span class="line">  result &#x3D;&gt; console.log(result),</span><br><span class="line">  error &#x3D;&gt; console.log(error),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>上面的範例，就是展示當 <code>Promise</code> 物件執行失敗，並呼叫 <code>reject</code> function 回傳結果後， <code>then</code> 的第二個參數 function 被呼叫的寫法。</p>
+<p>如果我們只在意 Promise 執行成功後的結果的話，上面的範例，可以簡寫成下面這樣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const promise &#x3D; new Promise(resolve &#x3D;&gt; setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">  resolve(&#39;success&#39;)</span><br><span class="line">&#125;, 1000))</span><br><span class="line"></span><br><span class="line">promise.then(</span><br><span class="line">  result &#x3D;&gt; console.log(result),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>或者，你想要讓彈窗顯示執行成功後的結果的話，可以改寫成這樣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const promise &#x3D; new Promise(resolve &#x3D;&gt; setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">  resolve(&#39;success&#39;)</span><br><span class="line">&#125;, 1000))</span><br><span class="line"></span><br><span class="line">promise.then(alert)</span><br></pre></td></tr></table></figure>
+
+<h2 id="catch"><a href="#catch" class="headerlink" title="catch"></a><code>catch</code></h2><p>如果，我們只在意執行錯誤後的結果的話，可以把 <code>then</code> 的第一個參數 function 帶入 <code>null</code>，並只定義第二個 function。</p>
+<p>另一個寫法的話，就是用 <code>catch</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const promise &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  setTimeout(() &#x3D;&gt; &#123; reject(new Error(&#39;failed&#39;)) &#125;, 2000)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 用 then 的寫法</span><br><span class="line">promise.then(</span><br><span class="line">  null, </span><br><span class="line">  error &#x3D;&gt; console.log(error)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 用 catch 寫法</span><br><span class="line">promise.catch(error &#x3D;&gt; console.log(error))</span><br></pre></td></tr></table></figure>
+<p>由此可以看的出來 .catch(f) 的寫法，其實就是 .then(null, f) 的所寫寫法。</p>
+<h2 id="finally"><a href="#finally" class="headerlink" title="finally"></a><code>finally</code></h2><p>當 Promise 物件呼叫完 <code>resolve</code> 或 <code>reject</code> function 後，我們可以通稱它為一個 <strong>settled</strong> 的 Promise，<br>跟 Promise 的 <code>state</code> 成員屬性不一樣喔，settled 並不在 state 的值裡面，不要搞混了。</p>
+<p>Ok，現在就可以說明 finally 啟動的時機，<br>當 Promise 已經 settled (i.e. 已經完成呼叫 resolve 或 reject)，則 finally function 就會被啟動。</p>
+<p>先來上個範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  setTimeout(() &#x3D;&gt; &#123; resolve(&#39;success&#39;) &#125;, 2000)</span><br><span class="line">&#125;)</span><br><span class="line">.finally(() &#x3D;&gt; console.log(&#39;finally&#39;)),</span><br><span class="line">.then(result &#x3D;&gt; console.log(result))</span><br></pre></td></tr></table></figure>
+
+<p>上面的範例會發現，<br>在兩秒後，resolve 被呼叫，<br>接著會執行 finally function，再來執行 then，並且由 resolve 夾帶的 value 會傳到 then 裡面，不會說因為中間接了一個 finally function 而有所影響。</p>
+<p>今天如果把上面的範例改成 Promise 執行失敗，並呼叫 <code>reject</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  setTimeout(() &#x3D;&gt; &#123; reject(new Error(&#39;failed&#39;)) &#125;, 2000)</span><br><span class="line">&#125;)</span><br><span class="line">.finally(() &#x3D;&gt; console.log(&#39;finally&#39;)),</span><br><span class="line">.then(</span><br><span class="line">  null, </span><br><span class="line">  error &#x3D;&gt; console.log(error)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>在兩秒後，reject 被呼叫，<br>接著會執行 finally function，再來執行 then 的第二個參數 function，並且由 reject 夾帶的 error 會傳到 then 裡面，不會說因為中間接了一個 finally function 而有所影響。</p>
+<p>所以，依照以上兩個範例，我們可以看到 <code>finally</code> 有以下特性<br>． <code>finally</code> 沒有參數需要帶入。<br>．不管今天 Promise 是執行成功或失敗，都會呼叫 <code>finally</code>。<br>． <code>finally</code> 不會影響由 <code>reject</code> 或 <code>resolve</code> 夾帶的結果，該結果會直接傳到後面<strong>適合</strong>的 handler (若是 resolve就傳給 <code>then</code> ，若是 reject 則傳給 <code>catch</code>，或 <code>then</code> 的第二個參數 function)。</p>
+<p>另外，finally 在回傳部分，<br>照道理來說，finally 是不應該回傳任何東西的，若有回傳，則該回傳的內容會自動的被忽略，</p>
+<p>但有例外，如果 finally 丟出 error 的話，則由原本的 Promise 物件回傳的結果，就不再被傳遞到 finally 後面的 handler，轉而是將 finally 丟出的 error 傳遞到後面<strong>適合</strong>的 handler 來接收。<br>舉個範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">const promise &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  setTimeout(() &#x3D;&gt; &#123; resolve(&#39;success&#39;) &#125;, 1000)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">promise</span><br><span class="line">  .finally(() &#x3D;&gt; &#123;</span><br><span class="line">    throw(new Error(&#39;failed&#39;))</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(</span><br><span class="line">    res &#x3D;&gt; console.log(res),</span><br><span class="line">    err &#x3D;&gt; console.log(err)</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+
+<p>上面的範例，原本的 Promise 是執行成功並呼叫 resolve 來回傳結果，<br>但因為在 promise 的 stream 裡面，finally 丟出錯誤，所以，後面的 stream 轉而會由 then 的第二個參數 function 接受到這個 error 內容。</p>
+<p>根據以上的 finally 的特性，我們可以在 finally 裡寫一些清除狀態的內容，因為，它並不會影響 Promise 執行完成後回傳的結果，並且不管執行成功或失敗都會被呼叫。</p>
+<h3 id="❗-可以為-settled-的-Promise-加入-handler"><a href="#❗-可以為-settled-的-Promise-加入-handler" class="headerlink" title="❗ 可以為 settled 的 Promise 加入 handler"></a>❗ 可以為 settled 的 Promise 加入 handler</h3><p>若我們在已完成呼叫 resolve 或 reject 的 Promise 即 settled 的 Promise，加入其他的 handler (即 then 或 catch)，則會立即取得回傳的結果。</p>
+<h3 id="Example-loadScript"><a href="#Example-loadScript" class="headerlink" title="Example: loadScript"></a>Example: loadScript</h3><p>在文章中的範例，利用 <code>Promise</code> 來改寫原本利用 callback function 來作為 <code>script.onload</code> 完成後要執行的內容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function loadScript(src) &#123;</span><br><span class="line">  return new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    const script &#x3D; document.createElement(&#39;script&#39;);</span><br><span class="line">    script.src &#x3D; src;</span><br><span class="line">    </span><br><span class="line">    script.onload &#x3D; () &#x3D;&gt; resolve(script)</span><br><span class="line">    script.onerror &#x3D; () &#x3D;&gt; reject(new Error(&#96;Script load error for $&#123;src&#125;&#96;))</span><br><span class="line">    </span><br><span class="line">    document.head.append(script);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const promise &#x3D; loadScript(&quot;https:&#x2F;&#x2F;cdnjs.cloudflare.com&#x2F;ajax&#x2F;libs&#x2F;lodash.js&#x2F;4.17.11&#x2F;lodash.js&quot;);</span><br><span class="line">promise</span><br><span class="line">  .then(</span><br><span class="line">    script &#x3D;&gt; alert(&#96;$&#123;script.src&#125; is loaded&#96;),</span><br><span class="line">    error &#x3D;&gt; alert(&#96;Error: $&#123;error.message&#125;&#96;),</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">promise.then(script &#x3D;&gt; alert(&#39;Another handler...&#39;))</span><br></pre></td></tr></table></figure>
+
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ol>
+<li><p>Promise 物件的成員函式 <code>then</code> -<br>有兩個參數可以定義，皆為 function，<br>第一個參數的 function，會在Promise 物件完成呼叫 <code>resolve</code> 後被呼叫。<br>第二個參數的 function，會在Promise 物件完成呼叫 <code>reject</code> 後被呼叫。</p>
+</li>
+<li><p> Promise 物件的成員函式 <code>catch</code> -<br>專門用在接收當 Promise 呼叫 reject 的情境，其實就是 <code>then(null, f)</code> 的簡潔寫法。</p>
+</li>
+<li><p> Promise 物件的成員函式 <code>finally</code> -<br>． <code>finally</code> 沒有參數需要帶入。<br>．不管今天 Promise 是執行成功或失敗，都會呼叫 <code>finally</code>。<br>． <code>finally</code> 不會影響由 <code>reject</code> 或 <code>resolve</code> 夾帶的結果，該結果會直接傳到後面<strong>適合</strong>的 handler (若是 resolve就傳給 <code>then</code> ，若是 reject 則傳給 <code>catch</code>，或 <code>then</code> 的第二個參數 function)。<br>． <code>finally</code> 不會回傳任何內容，若有寫入回傳內容，則回傳的部分會直接被忽略。</p>
+</li>
+</ol>
+<p>． <code>finally</code> 若有寫入 <code>throw</code> 的內容，則由原始 Promise 回傳回來的結果會直接被拋棄，轉而由 <code>finally</code> <code>throw</code> 的結果當作後續 stream 要傳遞的內容，並且會由後續適合的 handler(即會被 <code>catch</code> 或者 <code>then</code> 的 第二個參數 function) 來接收。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/promise-basics">https://javascript.info/promise-basics</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally">有關 finally 的 throw 的執行流程簡介</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/Promise/" rel="tag"># Promise</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/10/22/Promise-I-state-%E5%92%8C-result-%E7%9A%84%E6%94%B9%E8%AE%8A/" rel="prev" title="Promise (I) - state 和 result 的改變">
+      <i class="fa fa-chevron-left"></i> Promise (I) - state 和 result 的改變
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E9%96%8B%E5%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">本文開始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#then"><span class="nav-number">2.</span> <span class="nav-text">then</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#catch"><span class="nav-number">3.</span> <span class="nav-text">catch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#finally"><span class="nav-number">4.</span> <span class="nav-text">finally</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9D%97-%E5%8F%AF%E4%BB%A5%E7%82%BA-settled-%E7%9A%84-Promise-%E5%8A%A0%E5%85%A5-handler"><span class="nav-number">4.1.</span> <span class="nav-text">❗ 可以為 settled 的 Promise 加入 handler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example-loadScript"><span class="nav-number">4.2.</span> <span class="nav-text">Example: loadScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">5.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">136</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
