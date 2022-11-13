@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄在 Promise 中撰寫 error handling">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise (IV)- Error handling">
+<meta property="og:url" content="https://landy510.github.io/2022/11/13/Promise-IV-Error-handling/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄在 Promise 中撰寫 error handling">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-11-13T01:32:05.000Z">
+<meta property="article:modified_time" content="2022-11-13T02:02:46.900Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Promise">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2022/11/13/Promise-IV-Error-handling/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Promise (IV)- Error handling | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2022/11/13/Promise-IV-Error-handling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Promise (IV)- Error handling
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-11-13 09:32:05 / 修改時間：10:02:46" itemprop="dateCreated datePublished" datetime="2022-11-13T09:32:05+08:00">2022-11-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄在 Promise 中撰寫 error handling</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="本文開始"><a href="#本文開始" class="headerlink" title="本文開始"></a>本文開始</h2><p>在一個 Promise chaining 中，如果某一個階段的 promise 呼叫了 <code>reject</code> ，則該 chaining 的處理位置會直接從呼叫 reject 的 promise 那邊，跳到離它最近的的 rejection handler。</p>
+<p>上個範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  reject(&#39;error&#39;); &#x2F;&#x2F; 呼叫 reject</span><br><span class="line">&#125;)</span><br><span class="line">  .then(res &#x3D;&gt; console.log(&#39;fulfilled&#39; + res))</span><br><span class="line">  .then(res &#x3D;&gt; console.log(&#39;fulfilled&#39; + res))</span><br><span class="line">  .then(res &#x3D;&gt; console.log(&#39;fulfilled&#39; + res))</span><br><span class="line">  .catch(err &#x3D;&gt; console.log(&#39;reject &#39; + err)) &#x2F;&#x2F; 它被觸發，並印出 reject error</span><br></pre></td></tr></table></figure>
+<p>由上面的範例就可以看得出來 catch 不需要是接在呼叫 reject 的那個 Promise 後面的第一個鏈結對象，即便中間跨過很多的<code>.then</code> ，但仍然會直接呼叫到離發生地點最近的 catch 。</p>
+<h3 id="Implicit-try…catch"><a href="#Implicit-try…catch" class="headerlink" title="Implicit try…catch"></a>Implicit <code>try…catch</code></h3><p>在 promise executor(<code>new Promise</code> 在寫的) 和 handler function (傳入 <code>.then</code> 的 function) 都會有一個看不見的 <code>try…catch</code> 包裹在它們外圍。<br>如果有一個 例外情況(exception) 發生了，則它會會被接起來，並自動呼叫 reject 。</p>
+<p>先來個範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  throw new Error(&quot;Whooops!&quot;)</span><br><span class="line">&#125;)</span><br><span class="line">  .catch(alert); &#x2F;&#x2F; Error: Whooops!</span><br></pre></td></tr></table></figure>
+<p>上面的程式碼可以寫成下面這樣，有一樣的效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  reject(new Error(&quot;Whooops!&quot;))</span><br><span class="line">&#125;)</span><br><span class="line">  .catch(alert) &#x2F;&#x2F; Error: Whooops!</span><br></pre></td></tr></table></figure>
+<p>從上面的範例可以看出來，在 executor 周圍的隱形的 <code>try…catch</code> 會自動的把 error 接起來，並將它當為 reject 的值。</p>
+<p>上面的範例，都是寫在 executor 裡面拋出錯誤，下面也來寫個由 handler function 拋出錯誤的範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  resolve(&quot;ok&quot;);</span><br><span class="line">&#125;)</span><br><span class="line">  .then(res &#x3D;&gt; &#123;</span><br><span class="line">    throw new Error(&quot;Whooops!!&quot;) &#x2F;&#x2F; 丟出錯誤，並自動被包裹在 reject 裡面</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(alert); &#x2F;&#x2F; 被觸發，並顯示 Error: Whooops!!</span><br></pre></td></tr></table></figure>
+<p>除了上面都是拋出錯誤的範例，下面這邊是程式碼撰寫上發生的錯誤，呼叫沒有被定義的 function</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  resolve(&#39;123&#39;)</span><br><span class="line">&#125;)</span><br><span class="line">  .then(() &#x3D;&gt;  nonDefinedFnc())</span><br><span class="line">  .catch(alert); &#x2F;&#x2F; ReferenceError: nonDefinedFnc is not defined</span><br></pre></td></tr></table></figure>
+
+<h3 id="Rethrowing"><a href="#Rethrowing" class="headerlink" title="Rethrowing"></a>Rethrowing</h3><p>假設一個 Promise chaining 執行的流程，因為遇到 <code>throw</code> 而進入到某個 <code>.catch</code> ，<br>此時，這個 chaining 執行的流程將會取決於這個 .catch 不同的操作，而執行後續不一樣的路線，</p>
+<p>假設<br>在 <code>.catch</code> 又再 <code>throw</code> 一次，則這個 stream 又會跑到離這個 <code>.catch</code> 最近的下一個 error handler 。<br>但如果我們在 <code>.catch</code> 執行過後，讓他正常的結束，則它會繼續執行下一個 <code>.then</code> 。</p>
+<p>下面的範例是讓 <code>.catch</code> 正常的結束，往後執行其它的 <code>.then</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  reject(&#39;error&#39;);</span><br><span class="line">&#125;)</span><br><span class="line">  .catch(() &#x3D;&gt; alert(&quot;The error is handled, continue normally&quot;))</span><br><span class="line">  .then(() &#x3D;&gt; alert(&quot;Next Success handler runs&quot;))</span><br></pre></td></tr></table></figure>
+
+<p>下面的範例，就是在一個 <code>.catch</code> 裡面再用 throw ，讓 stream 進入到下一個最近的 error handler 中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  throw new Error(&quot;Whooops!!&quot;);</span><br><span class="line">&#125;)</span><br><span class="line">  .catch(err &#x3D;&gt; &#123;  &#x2F;&#x2F; step 1</span><br><span class="line">    if(err instanceof URIError) &#123;</span><br><span class="line">      &#x2F;&#x2F; ...</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">      alert(&quot;Can&#39;t handle such error&quot;);</span><br><span class="line"></span><br><span class="line">      throw err; &#x2F;&#x2F; 將 error 丟出來</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(() &#x3D;&gt; &#123;&#125;)</span><br><span class="line">  .catch(error &#x3D;&gt; &#123; &#x2F;&#x2F; step 2 - 會接住由 step 1 丟出來的錯誤</span><br><span class="line"></span><br><span class="line">    alert(&#96;The unknown error has occurred: $&#123;error&#125;&#96;);</span><br><span class="line">    &#x2F;&#x2F; don&#39;t return anything &#x3D;&gt; execution goes the normal way</span><br><span class="line"></span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>上面的範例就會先執行 step 1 ，因為在 step 1 throw 東西出來，所以再進到 step 2 裡面。</p>
+<h2 id="Unhandled-rejections"><a href="#Unhandled-rejections" class="headerlink" title="Unhandled rejections"></a>Unhandled rejections</h2><p>如果，Promise 執行的 stream 裡面，有拋出錯誤，但是，沒有任何 error handler 去承接這個錯誤的話，會發生什麼事呢?</p>
+<p>像下面這個範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">  noSuchFnc(); &#x2F;&#x2F; Error 發生 (no such defined)</span><br><span class="line">&#125;)</span><br><span class="line">  .then(() &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; 成功的 Promise 會執行的地方</span><br><span class="line">  &#125;);</span><br><span class="line">  &#x2F;&#x2F; 後續沒有 .catch 來承接錯誤</span><br></pre></td></tr></table></figure>
+
+<p>上面的範例，當 promise 呼叫了 reject，照理來接下來就要跳到最近的 error handler 來承接，但是，卻沒有這個 error handler，這個時候，error 會 “卡” 住，因為沒有人可以接續後面的處理。</p>
+<p>如果，有錯誤發生但沒有被 <code>try…catch</code> 給接起來的話，JS 會卡住並丟出一個訊息到 console 裡，那沒有被接住的 promise rejection 也會發生類似的事情。</p>
+<p>JS 其實會追蹤這種沒有被接住的錯誤，並在追蹤到這種狀況發生的時候，丟出一個全域性的錯誤。</p>
+<p>並且可以利用 <code>unhandledRejection</code> 這個 function 來監聽這種錯誤的發生，<br>用法如以下範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">window.addEventListener(&#39;unhandledRejection&#39;, function (event) &#123;</span><br><span class="line">  &#x2F;&#x2F; the event object has two special properties</span><br><span class="line">  console.log(event.promise); &#x2F;&#x2F; [object Promise] - error</span><br><span class="line">  console.log(event.reason); &#x2F;&#x2F; Error: Error!! - the unhandled error</span><br><span class="line">&#125;);</span><br><span class="line">new Promise(function () &#123;</span><br><span class="line">	noSuchFunction();</span><br><span class="line">&#125;); &#x2F;&#x2F; no catch to handle the error</span><br></pre></td></tr></table></figure>
+
+<p>以上的範例，加在 <code>unhandledRejection</code> 的 callback function 會傳入一個 event，而這個 event 就會包含觸發這個事件的 error 內容。</p>
+<p>而這種沒有錯誤機制去承接錯誤的這種狀況，通常最好的應對方式就是通知使用者發生這種問題了，並且回報此問題給 server。</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>用 Promise 來做錯誤處理是蠻方便的，因為，我們可以直接將 <code>.catch</code> 接在 Promise chaining 中，它就會接住由前面的發送出來的錯誤 (不管是 reject 傳出來的, throw 出來的 或者 undefined error 都會被接住)。~~</p>
+<p>最後，我們會需要使用 <code>unhandledRejection</code> 來替我們處理當有一些沒有做錯誤承接的錯誤發生的時候的處理或通知。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/promise-error-handling">https://javascript.info/promise-error-handling</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/Promise/" rel="tag"># Promise</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/13/Promise-III-chaining/" rel="prev" title="Promise (III) - chaining">
+      <i class="fa fa-chevron-left"></i> Promise (III) - chaining
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E9%96%8B%E5%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">本文開始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Implicit-try%E2%80%A6catch"><span class="nav-number">1.1.</span> <span class="nav-text">Implicit try…catch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rethrowing"><span class="nav-number">1.2.</span> <span class="nav-text">Rethrowing</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unhandled-rejections"><span class="nav-number">2.</span> <span class="nav-text">Unhandled rejections</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">3.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">138</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
