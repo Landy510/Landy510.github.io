@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄如何 Promise 化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise(XV) - Promisification - Promise 化">
+<meta property="og:url" content="https://landy510.github.io/2022/11/13/Promise-XV-Promisification-Promise-%E5%8C%96/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄如何 Promise 化">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://landy510.github.io/image/promisification.png">
+<meta property="og:image" content="https://landy510.github.io/image/promisificationError.png">
+<meta property="article:published_time" content="2022-11-13T02:51:24.000Z">
+<meta property="article:modified_time" content="2022-11-13T03:13:55.069Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Promise">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://landy510.github.io/image/promisification.png">
+
+<link rel="canonical" href="https://landy510.github.io/2022/11/13/Promise-XV-Promisification-Promise-%E5%8C%96/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Promise(XV) - Promisification - Promise 化 | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2022/11/13/Promise-XV-Promisification-Promise-%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Promise(XV) - Promisification - Promise 化
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-11-13 10:51:24 / 修改時間：11:13:55" itemprop="dateCreated datePublished" datetime="2022-11-13T10:51:24+08:00">2022-11-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄如何 Promise 化</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="本文開始"><a href="#本文開始" class="headerlink" title="本文開始"></a>本文開始</h2><p>Promisification(Promise 化) 是代表將一個 function 轉換成可以接受 callback function 並且這個 callback function 是會回傳 Promise 的。<br>會需要這樣將原本是 callback 機制做回傳的 function 或外部函式庫轉換成回傳 Promise 物件的機制是因為 Promise 操作起來比 callback function 更方便。<br>以<a target="_blank" rel="noopener" href="https://javascript.info/promise-basics#loadscript">這一系列的教學文章</a>中的提到過的 loadScript 為例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function loadScript(src, callback) &#123;</span><br><span class="line">	const script &#x3D; document.createElement(&#39;script&#39;);</span><br><span class="line">	script.src &#x3D; src;</span><br><span class="line"></span><br><span class="line">	script.onload &#x3D; callback(null, script);</span><br><span class="line">	script.onerror &#x3D; callback(new Error(&#96;Script load error for $&#123;src&#125;&#96;));</span><br><span class="line"></span><br><span class="line">	document.head.append(script);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面這個範例撰寫的形式就是都用 callback function 來做處理。<br>以下就把上面的範例 Promise 化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function loadScript(src, callback) &#123;</span><br><span class="line">  let script &#x3D; document.createElement(&#39;script&#39;);</span><br><span class="line">  script.src &#x3D; src;</span><br><span class="line"></span><br><span class="line">  script.onload &#x3D; () &#x3D;&gt; callback(null, script);</span><br><span class="line">  script.onerror &#x3D; () &#x3D;&gt; callback(new Error(&#96;Script load error for $&#123;src&#125;&#96;), null);</span><br><span class="line"></span><br><span class="line">  document.head.append(script);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let loadScriptPromise &#x3D; function(src) &#123;</span><br><span class="line">  return new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    loadScript(src, (err, script) &#x3D;&gt; &#123;</span><br><span class="line">      if (err) reject(err);</span><br><span class="line">      else resolve(script);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">loadScriptPromise(&#39;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;bootstrap@3.3.7&#x2F;dist&#x2F;js&#x2F;bootstrap.min.js&#39;)</span><br><span class="line">  .then(res &#x3D;&gt; console.log(res))</span><br><span class="line">  .catch(error &#x3D;&gt; console.log(error))</span><br></pre></td></tr></table></figure>
+
+<p>可以看到上面範例的改動部分，就是把原本的傳入 loadScript 的 callback function 改成回傳 promise 的 callback function，也就是以下這一段程式碼</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(err, script) &#x3D;&gt; &#123;</span><br><span class="line">  if(err) reject(err);</span><br><span class="line">  else resolve(script);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最後如果上面範例載入成功，應就可以在 console.log 裡面看到以下的內容<br><img src="/image/promisification.png"><br>如果，把上面的網址改成<br><code>htxxxwefetps://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js</code></p>
+<p>這時候看 console.log 裡面的結果如下<br><img src="/image/promisificationError.png"></p>
+<h3 id="Change-promise-base-into-a-helper"><a href="#Change-promise-base-into-a-helper" class="headerlink" title="Change promise-base into a helper"></a>Change promise-base into a helper</h3><p>那如果，在專案中有多處都會需要有這種將原本 callback-base 的function 轉成 promise-base 的功能的化，那我們應該要把這種轉化的功能寫成一個公用的 helper。</p>
+<p>首先先來看看， callback-base 的範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const getSumAsync &#x3D; (num1, num2, callback) &#x3D;&gt; &#123;</span><br><span class="line"> if(!num1 || !num2) return callback(new Error(&#39;Missing arguments&#39;), null) ;</span><br><span class="line"> </span><br><span class="line"> return callback(null, num1+ num2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getSumAsync(1, 2, (err, result) &#x3D;&gt; &#123;</span><br><span class="line">  if(err) &#123;</span><br><span class="line">    alert(err);</span><br><span class="line">  &#125;</span><br><span class="line">  else &#123;</span><br><span class="line">    console.log(result); &#x2F;&#x2F; 3</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Wrap-into-a-promise"><a href="#Wrap-into-a-promise" class="headerlink" title="Wrap into a promise"></a>Wrap into a promise</h3><p>把上面的 callback-base function 改成用 Promise 的 resolve 和 reject 來回傳錯誤或執行成功的結果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const getSumAsync &#x3D; (num1, num2) &#x3D;&gt; &#123;</span><br><span class="line"> return new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">   if(!num1 || !num2) reject(new Error(&#96;Missing arguments&#96;));</span><br><span class="line">   resolve(num1 + num2);</span><br><span class="line"> &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getSumAsync(1, null)</span><br><span class="line">  .then(res &#x3D;&gt; console.log(res))</span><br><span class="line">  .catch(alert)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Promisify"><a href="#Promisify" class="headerlink" title="Promisify"></a>Promisify</h2><p>接下來，會跟著<a target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/write-your-own-promisify-function-from-scratch/">另一篇文章</a>拆解<a target="_blank" rel="noopener" href="https://javascript.info/promisify">原本這一篇</a>教學裡面寫的 promisify function 的流程，一步一步操作。</p>
+<h2 id="NodeJS’s-promisify"><a href="#NodeJS’s-promisify" class="headerlink" title="NodeJS’s promisify"></a>NodeJS’s promisify</h2><p>先來看看 Node.js 的 <code>util.promisify()</code> 的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const util &#x3D; require(&#39;util&#39;);</span><br><span class="line"></span><br><span class="line">const getSumAsync &#x3D; (num1, num2, callback) &#x3D;&gt; &#123;</span><br><span class="line"> if(!num1 || !num2) return callback(new Error(&#39;Missing arguments&#39;), null) ;</span><br><span class="line"> </span><br><span class="line"> return callback(null, num1+ num2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const getSumPromise &#x3D; util.promisify(getSumAsync); &#x2F;&#x2F; setp1</span><br><span class="line">getSumPromise(1, 1) &#x2F;&#x2F; setp2</span><br><span class="line">  .then(result &#x3D;&gt; &#123;</span><br><span class="line">    console.log(result);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(err &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; error hadnling</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="自訂義-promisify-function"><a href="#自訂義-promisify-function" class="headerlink" title="自訂義 promisify function"></a>自訂義 promisify function</h3><p>接下來，我們就來藉由解析 NodeJS 的 promisify 的方法，進而來撰寫自己的 promisify function</p>
+<p><strong>看看 step 1.</strong></p>
+<p>NodeJs 的 promisify function 會先丟進 function，由此先來定義一個可以丟入 function 的參數的 function</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const myPromisify &#x3D; fn &#x3D;&gt; &#123;&#125;;</span><br><span class="line"></span><br><span class="line">const getSumPromise &#x3D; myPromisify(getSumAsync);</span><br></pre></td></tr></table></figure>
+
+<p><strong>看看 step 2.</strong></p>
+<p>getSumPromise(1, 1) 是一個呼叫 function 的用法，如此一來，我們知道自訂義的 myPromisify 要回傳一個 function。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const myPromisify &#x3D; fn &#x3D;&gt; &#123;</span><br><span class="line">  return (...args) &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>這邊的細節為在回傳的 function 的參數中，我們使用了展開餘數的方式做撰寫，因為，我們並不知道當外部在使用的時候會傳入多少的參數進來。</p>
+<p>那 getSumPromise(1, 1) 後面是直接接了 chaining <code>.then</code> 和 <code>.catch</code> ，由此可知我們剛剛在 myPromisify 裡面定義的那個回傳的 function ，它自身會回傳一個 Promise 物件，如此一來，才有辦法做 Promise chaining 的操作。</p>
+<p>故再加上回傳 Promise 物件的內容，會變得像下面這樣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const myPromise &#x3D; (fn) &#x3D;&gt; &#123;</span><br><span class="line">  return (...args) &#x3D;&gt; &#123;</span><br><span class="line">    return new Promise(resolv, reject) &#123;</span><br><span class="line">      &#x2F;&#x2F; executor</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下來，要如何得知是什麼時機點要呼叫回傳 Promise 的 resolve 和 reject 的?</p>
+<p>這個時機點，就需要靠傳入被 promisify 的 function 的 callback function 來決定囉，寫法如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const myPromise &#x3D; (fn) &#x3D;&gt; &#123;</span><br><span class="line">  return (...args) &#x3D;&gt; &#123;</span><br><span class="line">    return new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">      function callbackFnc(err, result) &#123;</span><br><span class="line">        if(err) reject(err);  &#x2F;&#x2F; 有 err 傳入 callbackFnc 時，呼叫 reject</span><br><span class="line">        else resolve(result); &#x2F;&#x2F; 有 result 傳入 callbackFnc 時，呼叫 resolve</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是，傳入 myPromise 的 function，本身並不知道 callbackFnc 的存在，所以，我們會透過將 callbackFnc 一併塞入 args 的做法，來讓傳入 myPromise  的 function，不僅獲得傳入參數的內容，同時，也可以使用 callbackFnc。</p>
+<p>寫法如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">const myPromise &#x3D; (fn) &#x3D;&gt; &#123;</span><br><span class="line">  return (...args) &#x3D;&gt; &#123;</span><br><span class="line">    return new Promise(resolve, reject) &#123;</span><br><span class="line">      function callbackFnc(err, script) &#123;</span><br><span class="line">        if(err) reject(err);</span><br><span class="line">        else resolve(result);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      args.push(callbackFnc);</span><br><span class="line">      fn.call(this, ...args);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const getSumAync &#x3D; (num1, num2, callback) &#x3D;&gt; &#123;</span><br><span class="line">  if(!num1 || !num2) &#123;</span><br><span class="line">    return callback(new Error(&#39;Missing arguments&#39;), null);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  return callback(null, num1 + num2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const getSumAsync &#x3D; myPromise(getSumAync);</span><br><span class="line">getSumAsync(1, 2)</span><br><span class="line">  .then(res &#x3D;&gt; console.log(res))</span><br><span class="line">  .catch(alert)</span><br></pre></td></tr></table></figure>
+
+<p>最後，我們加入了 <code>[fn.call](http://fn.call)(this, ...args)</code> 它的功用，<br>不僅是透過 fn.call 來執行傳入 myPromise 的 function 之外，<br>我們在 <code>call</code> 第一個傳入參數 <code>this</code> 是 window 物件，<br>第二個參數我們利用展開餘數，將傳入 args 展開，如此一來，它就會按照順序的為  <code>getSumAync = (num1, num2, callback)</code> 的三個參數依序賦值。</p>
+<p>以上的步驟，就是撰寫我們自己的 promisify function 的流程。</p>
+<h3 id="若傳入的-callback-function-會傳入多組結果的話怎麼辦"><a href="#若傳入的-callback-function-會傳入多組結果的話怎麼辦" class="headerlink" title="若傳入的 callback function 會傳入多組結果的話怎麼辦?"></a>若傳入的 callback function 會傳入多組結果的話怎麼辦?</h3><p>也就是說 callbackFnc(err, result) 不再只有一個 result 參數，它會傳入多個像這樣 callbackFnc(err, result1, result2 …)</p>
+<p>那我們就要做以下的改寫</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">const myPromise &#x3D; (fn) &#x3D;&gt; &#123;</span><br><span class="line">  return (...args) &#x3D;&gt; &#123;</span><br><span class="line">    return new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">      function callbackFnc(err, ...results) &#123;</span><br><span class="line">        if(err) reject(err);</span><br><span class="line">        else resolve(results.length &#x3D;&#x3D;&#x3D; 1 ? results[0]:results);</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      args.push(callbackFnc);</span><br><span class="line">      fn.call(this, ...args);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const getSumAync &#x3D; (num1, num2, callback) &#x3D;&gt; &#123;</span><br><span class="line">  if(!num1 || !num2) &#123;</span><br><span class="line">    return callback(new Error(&#39;Missing arguments&#39;), null);</span><br><span class="line">  &#125;</span><br><span class="line">  const sum &#x3D; num1 + num2;</span><br><span class="line">  const message &#x3D; &#96;Sum is $&#123;sum&#125;&#96;</span><br><span class="line">  return callback(null, sum, message);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const getSumAsync &#x3D; myPromise(getSumAync);</span><br><span class="line">getSumAsync(1, 2)</span><br><span class="line">  .then(res &#x3D;&gt; console.log(res))  &#x2F;&#x2F; [3, &quot;Sum is 3&quot;]</span><br><span class="line">  .catch(alert)</span><br></pre></td></tr></table></figure>
+
+<p>以上就是拆解 promisify function 的經過囉~</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/promisify">https://javascript.info/promisify</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/write-your-own-promisify-function-from-scratch/">詳細拆解 promisify function 製作步驟的文章</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/Promise/" rel="tag"># Promise</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/13/Promise-V-Promise-API/" rel="prev" title="Promise(V) - Promise API">
+      <i class="fa fa-chevron-left"></i> Promise(V) - Promise API
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E9%96%8B%E5%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">本文開始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Change-promise-base-into-a-helper"><span class="nav-number">1.1.</span> <span class="nav-text">Change promise-base into a helper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wrap-into-a-promise"><span class="nav-number">1.2.</span> <span class="nav-text">Wrap into a promise</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promisify"><span class="nav-number">2.</span> <span class="nav-text">Promisify</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NodeJS%E2%80%99s-promisify"><span class="nav-number">3.</span> <span class="nav-text">NodeJS’s promisify</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E8%A8%82%E7%BE%A9-promisify-function"><span class="nav-number">3.1.</span> <span class="nav-text">自訂義 promisify function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8B%A5%E5%82%B3%E5%85%A5%E7%9A%84-callback-function-%E6%9C%83%E5%82%B3%E5%85%A5%E5%A4%9A%E7%B5%84%E7%B5%90%E6%9E%9C%E7%9A%84%E8%A9%B1%E6%80%8E%E9%BA%BC%E8%BE%A6"><span class="nav-number">3.2.</span> <span class="nav-text">若傳入的 callback function 會傳入多組結果的話怎麼辦?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

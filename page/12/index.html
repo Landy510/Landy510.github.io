@@ -164,6 +164,118 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/19/bootstrap-Modal%E4%BA%92%E5%8B%95%E8%A6%96%E7%AA%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/19/bootstrap-Modal%E4%BA%92%E5%8B%95%E8%A6%96%E7%AA%97/" class="post-title-link" itemprop="url">bootstrap_Modal互動視窗</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-19 10:23:51" itemprop="dateCreated datePublished" datetime="2021-01-19T10:23:51+08:00">2021-01-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-30 15:09:55" itemprop="dateModified" datetime="2021-01-30T15:09:55+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bootstrap/" itemprop="url" rel="index"><span itemprop="name">Bootstrap</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Modal是一個彈出的互動視窗"><a href="#Modal是一個彈出的互動視窗" class="headerlink" title="Modal是一個彈出的互動視窗"></a>Modal是一個彈出的互動視窗</h1><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;#exampleModal&quot;&gt;</span><br><span class="line">    Launch by id</span><br><span class="line">  &lt;&#x2F;button&gt;</span><br><span class="line">  &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;.exampleModal_class&quot;&gt;</span><br><span class="line">    Launch by className</span><br><span class="line">  &lt;&#x2F;button&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;!-- Modal --&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;modal fade exampleModal_class&quot; id&#x3D;&quot;exampleModal&quot; tabindex&#x3D;&quot;-1&quot; role&#x3D;&quot;dialog&quot; aria-labelledby&#x3D;&quot;exampleModalLabel&quot; aria-hidden&#x3D;&quot;true&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;modal-dialog&quot; role&#x3D;&quot;document&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;modal-content&quot;&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;modal-header&quot;&gt;</span><br><span class="line">          &lt;h5 class&#x3D;&quot;modal-title&quot; id&#x3D;&quot;exampleModalLabel&quot;&gt;Modal title&lt;&#x2F;h5&gt;</span><br><span class="line">          &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; data-dismiss&#x3D;&quot;modal&quot; aria-label&#x3D;&quot;Close&quot;&gt;</span><br><span class="line">            &lt;span aria-hidden&#x3D;&quot;true&quot;&gt;&amp;times;&lt;&#x2F;span&gt;</span><br><span class="line">          &lt;&#x2F;button&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;modal-body&quot;&gt;</span><br><span class="line">          ...</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;modal-footer&quot;&gt;</span><br><span class="line">          &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-secondary&quot; data-dismiss&#x3D;&quot;modal&quot;&gt;Close&lt;&#x2F;button&gt;</span><br><span class="line">          &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Save changes&lt;&#x2F;button&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="data-toggle和data-target"><a href="#data-toggle和data-target" class="headerlink" title="data-toggle和data-target"></a>data-toggle和data-target</h2><p>以上這個範例可以看到<code>button</code>上面有綁定<code>data-toggle=&quot;modal&quot;</code>和<code>data-target=&quot;#exampleModal&quot;</code><br>如此就可以看得出來該<code>button</code>要觸發的區塊是<code>id</code>為exampleModal，<br>接下來你只要為那個被觸發的區塊的<code>id</code>取上exampleModal，就可以實現Modal的功能囉。</p>
+<h3 id="data-target綁定的對象"><a href="#data-target綁定的對象" class="headerlink" title="data-target綁定的對象"></a>data-target綁定的對象</h3><p><code>data-target</code>除了可以綁定<code>id</code>以外，也可以綁定className喔，<br>你可以看到上面Launch by className的按鈕，他的<code>data-target</code>就是去綁定對應區塊的className。</p>
+<h2 id="data-dismiss"><a href="#data-dismiss" class="headerlink" title="data-dismiss"></a>data-dismiss</h2><p>這個功能是在跳出來的區塊中，右上方會有一個叉叉，當你按下這個叉叉後，就可以將這個跳出的區塊取消掉了。<br>那達成這個取消的功能，還有另一種方法，就是你按這個跳出的區塊以外的範圍就可以了。</p>
+<h2 id="Modal觸發區塊尺寸大小"><a href="#Modal觸發區塊尺寸大小" class="headerlink" title="Modal觸發區塊尺寸大小"></a>Modal觸發區塊尺寸大小</h2><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;button class&#x3D;&quot;btn btn-primary&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;.bd-example-modal-1&quot;&gt;Large modal&lt;&#x2F;button&gt;</span><br><span class="line"></span><br><span class="line">  &lt;div class&#x3D;&quot;modal fade bd-example-modal-1&quot; tabindex&#x3D;&quot;-1&quot; role&#x3D;&quot;dialog&quot; aria-labelledby&#x3D;&quot;myLargeModalLabel&quot; aria-hidden&#x3D;&quot;true&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;modal-dialog modal-lg&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;modal-content&quot;&gt;</span><br><span class="line">        ...</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;!-- Small modal --&gt;</span><br><span class="line">  &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;.bd-example-modal-2&quot;&gt;Small modal&lt;&#x2F;button&gt;</span><br><span class="line"></span><br><span class="line">  &lt;div class&#x3D;&quot;modal fade bd-example-modal-2&quot; tabindex&#x3D;&quot;-1&quot; role&#x3D;&quot;dialog&quot; aria-labelledby&#x3D;&quot;mySmallModalLabel&quot; aria-hidden&#x3D;&quot;true&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;modal-dialog modal-sm&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;modal-content&quot;&gt;</span><br><span class="line">        ...</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>以上的範例你可以看到我們在彈出的區塊中的<code>class</code>名稱加入<code>modal-lg</code> 或 <code>modal-sm</code>，如此，就可以控制這個彈出視窗的大小囉。</p>
+<h1 id="Navbar-可以被隱藏起來"><a href="#Navbar-可以被隱藏起來" class="headerlink" title="Navbar 可以被隱藏起來"></a>Navbar 可以被隱藏起來</h1><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;nav class&#x3D;&quot;navbar navbar-expand-md navbar-light bg-light&quot;&gt;</span><br><span class="line">    &lt;a class&#x3D;&quot;navbar-brand&quot; href&#x3D;&quot;#&quot;&gt;Navbar&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;button class&#x3D;&quot;navbar-toggler&quot; type&#x3D;&quot;button&quot; data-toggle&#x3D;&quot;collapse&quot; data-target&#x3D;&quot;#navbarSupportedContent&quot; aria-controls&#x3D;&quot;navbarSupportedContent&quot; aria-expanded&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Toggle navigation&quot;&gt;</span><br><span class="line">      &lt;span class&#x3D;&quot;navbar-toggler-icon&quot;&gt;&lt;&#x2F;span&gt;</span><br><span class="line">    &lt;&#x2F;button&gt;</span><br><span class="line"></span><br><span class="line">    &lt;div class&#x3D;&quot;collapse navbar-collapse&quot; id&#x3D;&quot;navbarSupportedContent&quot;&gt;</span><br><span class="line">      &lt;ul class&#x3D;&quot;navbar-nav mr-auto&quot;&gt;</span><br><span class="line">        &lt;li class&#x3D;&quot;nav-item active&quot;&gt;</span><br><span class="line">          &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;#&quot;&gt;Home &lt;span class&#x3D;&quot;sr-only&quot;&gt;(current)&lt;&#x2F;span&gt;&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">          &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;#&quot;&gt;Link&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;&#x2F;li&gt;</span><br><span class="line">        &lt;li class&#x3D;&quot;nav-item&quot;&gt;</span><br><span class="line">          &lt;a class&#x3D;&quot;nav-link disabled&quot; href&#x3D;&quot;#&quot;&gt;Disabled&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;&#x2F;li&gt;</span><br><span class="line">      &lt;&#x2F;ul&gt;</span><br><span class="line">      &lt;form class&#x3D;&quot;form-inline my-2 my-lg-0&quot;&gt;</span><br><span class="line">        &lt;input class&#x3D;&quot;form-control mr-sm-2&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Search&quot; aria-label&#x3D;&quot;Search&quot;&gt;</span><br><span class="line">        &lt;button class&#x3D;&quot;btn btn-outline-success my-2 my-sm-0&quot; type&#x3D;&quot;submit&quot;&gt;Search&lt;&#x2F;button&gt;</span><br><span class="line">      &lt;&#x2F;form&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;nav&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="navbar響應式"><a href="#navbar響應式" class="headerlink" title="navbar響應式"></a>navbar響應式</h2><p>你可以看到在<code>nav</code>標籤裡面有一個<code>navbar-expand-md</code>的class名稱，你將後面的<code>md</code>改成<code>sm</code>或<code>lg</code>其他斷點的className，就可以自己決定在哪個斷點下，該<code>navbar</code>會被隱藏起來。</p>
+<h2 id="navbar對應id"><a href="#navbar對應id" class="headerlink" title="navbar對應id"></a>navbar對應id</h2><p>上面有講了怎麼讓該<code>navbar</code>的內容隱藏起來，接著，你要為相對的漢堡選單按鈕的<code>data-target</code>加入該被隱藏起來的區塊的<code>id</code>，如此一來，你就可以透過該漢堡選單來開闔這個被隱藏起來的選單。</p>
+<h3 id="漢堡選單按鈕加入data-toggle-”collapse”"><a href="#漢堡選單按鈕加入data-toggle-”collapse”" class="headerlink" title="漢堡選單按鈕加入data-toggle=”collapse”"></a>漢堡選單按鈕加入data-toggle=”collapse”</h3><p>另外，你也要為這個<code>navbar</code>的漢堡選單按鈕加上<code>data-toggle=&quot;collapse&quot;</code>的內容喔，如此，他才會有收闔的功能。</p>
+<h2 id="navbar-brand"><a href="#navbar-brand" class="headerlink" title="navbar-brand"></a>navbar-brand</h2><p>如果你要在<code>navbar</code>中加入你的品牌，此時，就可以使用<code>navbar-brand</code><br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;nav class&#x3D;&quot;navbar navbar-light bg-light&quot;&gt;</span><br><span class="line">    &lt;a class&#x3D;&quot;navbar-brand&quot; href&#x3D;&quot;#&quot;&gt;</span><br><span class="line">      &lt;img src&#x3D;&quot;http:&#x2F;&#x2F;www.hexschool.com&#x2F;images&#x2F;logo.png&quot; width&#x3D;&quot;164&quot; height&#x3D;&quot;39&quot; alt&#x3D;&quot;&quot;&gt;  </span><br><span class="line">    &lt;&#x2F;a&gt;</span><br><span class="line">  &lt;&#x2F;nav&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>他就會幫你這個品牌的區塊加上一些設定，讓他更協調。</p>
+<h2 id="navbar定位"><a href="#navbar定位" class="headerlink" title="navbar定位"></a>navbar定位</h2><p>分別有以下幾種定位方式</p>
+<ol>
+<li><code>fixed-top</code></li>
+<li><code>fixed-bottom</code></li>
+<li><code>sticky-top</code><h3 id="fixed-top"><a href="#fixed-top" class="headerlink" title="fixed-top"></a>fixed-top</h3>ex:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;nav class&#x3D;&quot;navbar navbar-light bg-light fixed-yop&quot;&gt;</span><br><span class="line">    &lt;a class&#x3D;&quot;navbar-brand&quot; href&#x3D;&quot;#&quot;&gt;Fixed top&lt;&#x2F;a&gt;</span><br><span class="line">  &lt;&#x2F;nav&gt;</span><br></pre></td></tr></table></figure>
+<code>navbar</code>會被固定在上方<h3 id="fixed-bottom"><a href="#fixed-bottom" class="headerlink" title="fixed-bottom"></a>fixed-bottom</h3>ex:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;nav class&#x3D;&quot;navbar navbar-light bg-light fixed-bottom&quot;&gt;</span><br><span class="line">    &lt;a class&#x3D;&quot;navbar-brand&quot; href&#x3D;&quot;#&quot;&gt;Fixed bottom&lt;&#x2F;a&gt;</span><br><span class="line">  &lt;&#x2F;nav&gt;</span><br><span class="line"> &lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<code>navbar</code>會被固定在下方</li>
+</ol>
+<h3 id="sticky-top"><a href="#sticky-top" class="headerlink" title="sticky-top"></a>sticky-top</h3><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;list-group&quot;&gt;</span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;alerts.html&quot;  class&#x3D;&quot;list-group-item  sticky-top&quot; style&#x3D;&quot;top&#x3D;&quot;10px&quot;;&quot;&gt;</span><br><span class="line">        Alerts</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;badge.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Badge</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;breadcrumb.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Breadcrumb</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;buttons.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Buttons</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;button-group.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Button Group</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;card.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Card</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;carousel.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Carousel</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;collapse.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Collapse</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;dropdowns.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Dropdowns</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;forms.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Forms</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;input-group.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Input Group</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;jumbotron.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Jumbotron</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;list-group.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        List Group</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;modal.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Modal</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;nav.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Nav</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;navbar.html&quot;  class&#x3D;&quot;list-group-item active&quot;&gt;</span><br><span class="line">        Navbar</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;pagination.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Pagination</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;popovers.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Popovers</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;progress.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Progress</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;scrollspy.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Scrollspy</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">      &lt;a href&#x3D;&quot;&#x2F;components&#x2F;tooltips.html&quot;  class&#x3D;&quot;list-group-item&quot;&gt;</span><br><span class="line">        Tooltip</span><br><span class="line">      &lt;&#x2F;a&gt;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>它會將被加入<code>sticky-top</code>的目標，當你的畫面往下捲，要捲超過該區塊的時候，這個區塊會被固定在畫面上方。<br>以上這個範例，你就可以看到最上面的<code>alert</code>的className被加上<code>sticky-top</code>，當你的畫面往下滑的時候，這個區塊會被凍結在最上方。</p>
+<h3 id="sticky-top小技巧"><a href="#sticky-top小技巧" class="headerlink" title="sticky-top小技巧"></a>sticky-top小技巧</h3><p>另外，你可以注意到該被加入<code>sticky-top</code>的選項，他的css樣式，有特別加入<code>top:10px</code>，<br>為的是要讓當該選項的<code>sticky-top</code>效果觸發時，該選項會和網頁最上方保留<code>10px</code>的空間，視覺上比較舒服。</p>
+<h1 id="進階-Modal-使用，動態傳入參數"><a href="#進階-Modal-使用，動態傳入參數" class="headerlink" title="進階 Modal 使用，動態傳入參數"></a>進階 Modal 使用，動態傳入參數</h1><p>教導怎麼跳出相對應的<code>Modal</code>內容 和 怎麼按下按鈕就刪除該選項的功能。</p>
+<iframe src="https://codepen.io/RandyChen/embed/VwKVpdB?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<h2 id="加入相對應的參數"><a href="#加入相對應的參數" class="headerlink" title="加入相對應的參數"></a>加入相對應的參數</h2><p>在Bootstrap的文件的Modal文件中，有一段內容叫Varying modal content<br>他就是教你怎麼做出跳出相對應內容的Modal的。</p>
+<p>首先，先建立一個按鈕，並且按下他可以跳出相對應的Modal內容。<br>接著，上面這個範例中，我們為這個按鈕加上一個<code>data-title</code>的屬性，並將其屬性值設為”快速下單”，<br>這邊的data-title的title部分，你可以自己命名，這是自訂義的。</p>
+<p>接著，我們在JavaScript部分，<br>寫入一些JQ的內容，<br>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$(document).ready(function()&#123;</span><br><span class="line"></span><br><span class="line">  $(&#39;#exampleModal&#39;).on(&#39;shown.bs.modal&#39;, function (event) &#123;</span><br><span class="line">    let button &#x3D; $(event.relatedTarget); &#x2F;&#x2F; Button that triggered the modal</span><br><span class="line">    let title &#x3D; button.data(&#39;title&#39;);</span><br><span class="line">    let modal &#x3D; $(this);</span><br><span class="line">    modal.find(&#39;.modal-title&#39;).text(title);</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>這個內容就是說，當Modal被觸發時，找到是哪個按鈕觸發他的，並找到該btn的data-title的值，<br>將該值存到title裡面，並將變數title的內容，去替換掉modal的.modal-title的內容。</p>
+<h3 id="data-backdrop-”static”"><a href="#data-backdrop-”static”" class="headerlink" title="data-backdrop=”static”"></a>data-backdrop=”static”</h3><p>當我們再輸入跳出來的modal內的資料時，如果，不小心按到modal以外的區域，會直接讓modal跳出來，<br>這樣一來剛剛辛苦輸入的內容就都不見了。<br>所以，要防止這樣的情況，我們就需要用<code>data-backdrop=&quot;static&quot;</code>的屬性，來防止這種問題的發生，<br>像是上面的範例，我們就都有在兩個modal的區塊的<code>div</code>裡面加上<code>data-backdrop=&quot;static&quot;</code>的程式碼內容囉。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -964,102 +1076,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-01/" class="post-title-link" itemprop="url">bootstrap form的功能筆記-01</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-01-09 11:02:06" itemprop="dateCreated datePublished" datetime="2021-01-09T11:02:06+08:00">2021-01-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-30 15:09:36" itemprop="dateModified" datetime="2021-01-30T15:09:36+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bootstrap/" itemprop="url" rel="index"><span itemprop="name">Bootstrap</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>接續上一篇還沒紀錄完的bootstrap form元件的內容。</p>
-<h1 id="form-check"><a href="#form-check" class="headerlink" title="form-check"></a>form-check</h1><p>當裡面是要使用<code>checkbox</code>和<code>radiobox</code>元件的時候，它們的外層，是要用<code>form-check</code>包裹起來喔。</p>
-<ol>
-<li>checkbox<iframe src="https://codepen.io/RandyChen/embed/ExgpQGV?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-</li>
-</ol>
-<p>在以上這個範例可以看到在<code>checkbox</code>中的其中一個<code>input</code>標籤上有寫了<code>disabled</code>，<br>代表該<code>input</code>無法被點取囉。<br>如果你希望整個checkbox都無法被選取的話，你要在這些checkbox的外層用一個<code>&lt;fieldset&gt;&lt;/fieldset&gt;</code>標籤把他們整個包起來，並在這個<code>fieldset</code>的html標籤上加入<code>disabled</code>屬性就可以達成囉。</p>
-<ol start="2">
-<li>radiobox<iframe src="https://codepen.io/RandyChen/embed/eYdjVLq?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-</li>
-</ol>
-<p>那這個<code>radiobox</code>的範例，你可以看到有三個<code>form-check</code>構成這個radiobox。<br>那你可以看到每一個<code>form-check</code>裡面的<code>input</code>欄位的name屬性值都是一樣的，代表它們是屬於同一個<code>radiobox</code>。<br>那它的<code>type</code>要寫入<code>radio</code>，它會變成<code>radiobox</code>的選項模式。<br>那在每個<code>form-check</code>的<code>input</code>的class名稱一樣是要寫入<code>form-check-input</code>，而<code>label</code>標籤的class名稱是<code>form-check-label</code>。<br>在最後一個<code>input</code>欄位中，加入了<code>disabled</code>屬性，所以，該選項就無法被選取囉~</p>
-<h2 id="form-check-inline-使選項水平排列"><a href="#form-check-inline-使選項水平排列" class="headerlink" title="form-check-inline 使選項水平排列"></a>form-check-inline 使選項水平排列</h2><p>如果我們不希望<code>heckbox</code>和<code>radiobox</code>它們的選項不要垂直排列的話，<br>我們只需要在外層的<code>form-check</code>的class中，再加上<code>form-check-inline</code>，就可以囉。<br>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;demo&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox1&quot; value&#x3D;&quot;option1&quot;&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox1&quot;&gt;1&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox2&quot; value&#x3D;&quot;option2&quot;&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox2&quot;&gt;2&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;form-check form-check-inline&quot;&gt;</span><br><span class="line">    &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot; id&#x3D;&quot;inlineCheckbox3&quot; value&#x3D;&quot;option3&quot; disabled&gt;</span><br><span class="line">    &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;inlineCheckbox3&quot;&gt;3 (disabled)&lt;&#x2F;label&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-01/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1129,7 +1145,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">139</span>
+          <span class="site-state-item-count">140</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

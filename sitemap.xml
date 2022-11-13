@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://landy510.github.io/2022/11/13/Promise-XV-Promisification-Promise-%E5%8C%96/</loc>
+    
+    <lastmod>2022-11-13</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://landy510.github.io/2022/11/13/Promise-V-Promise-API/</loc>
     
     <lastmod>2022-11-13</lastmod>
@@ -1180,14 +1187,14 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/image-Preview/</loc>
+    <loc>https://landy510.github.io/tags/Angular-custom-modal/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/Angular-custom-modal/</loc>
+    <loc>https://landy510.github.io/tags/image-Preview/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1285,20 +1292,6 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/flex-grow/</loc>
-    <lastmod>2022-11-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://landy510.github.io/tags/jQuery/</loc>
-    <lastmod>2022-11-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://landy510.github.io/tags/getBoundingClientRect/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>daily</changefreq>
@@ -1307,6 +1300,20 @@
   
   <url>
     <loc>https://landy510.github.io/tags/lazyload/</loc>
+    <lastmod>2022-11-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://landy510.github.io/tags/flex-grow/</loc>
+    <lastmod>2022-11-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://landy510.github.io/tags/jQuery/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
