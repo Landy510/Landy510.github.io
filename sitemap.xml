@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://landy510.github.io/2022/11/13/Promise-V-Promise-API/</loc>
+    
+    <lastmod>2022-11-13</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://landy510.github.io/2022/11/13/Promise-IV-Error-handling/</loc>
     
     <lastmod>2022-11-13</lastmod>
@@ -1173,14 +1180,14 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/Angular-custom-modal/</loc>
+    <loc>https://landy510.github.io/tags/image-Preview/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/image-Preview/</loc>
+    <loc>https://landy510.github.io/tags/Angular-custom-modal/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1250,6 +1257,13 @@
   </url>
   
   <url>
+    <loc>https://landy510.github.io/tags/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/</loc>
+    <lastmod>2022-11-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://landy510.github.io/tags/HTML/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>daily</changefreq>
@@ -1271,14 +1285,14 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/</loc>
+    <loc>https://landy510.github.io/tags/flex-grow/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/flex-grow/</loc>
+    <loc>https://landy510.github.io/tags/jQuery/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1293,13 +1307,6 @@
   
   <url>
     <loc>https://landy510.github.io/tags/lazyload/</loc>
-    <lastmod>2022-11-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://landy510.github.io/tags/jQuery/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1392,14 +1399,14 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/categories/HTML/</loc>
+    <loc>https://landy510.github.io/categories/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://landy510.github.io/categories/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/</loc>
+    <loc>https://landy510.github.io/categories/HTML/</loc>
     <lastmod>2022-11-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
