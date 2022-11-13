@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄如何使用 async&#x2F;await">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise(VIII) - Async&#x2F;await">
+<meta property="og:url" content="https://landy510.github.io/2022/11/13/Promise-VIII-Async-await/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄如何使用 async&#x2F;await">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-11-13T03:34:04.000Z">
+<meta property="article:modified_time" content="2022-11-13T03:49:33.829Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Promise">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2022/11/13/Promise-VIII-Async-await/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Promise(VIII) - Async/await | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2022/11/13/Promise-VIII-Async-await/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Promise(VIII) - Async/await
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2022-11-13 11:34:04 / 修改時間：11:49:33" itemprop="dateCreated datePublished" datetime="2022-11-13T11:34:04+08:00">2022-11-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄如何使用 async/await</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="本文開始"><a href="#本文開始" class="headerlink" title="本文開始"></a>本文開始</h2><p>撰寫有關 Promise 的程式碼有另外一個更輕鬆的寫法就是用 <code>async/await</code> 來撰寫。</p>
+<h2 id="Async-function"><a href="#Async-function" class="headerlink" title="Async function"></a><code>Async</code> function</h2><p>如果，我們在一個 function 前面加上 <code>async</code> 這個關鍵字，<br>a. 就代表了這個 function <strong>一定</strong>會回傳 Promise。</p>
+<p>b. 如果，是回傳其他不是 Promise 類型的值得話，就會自動被包裹成 <strong>resolved Promise</strong> 的樣子。</p>
+<p>來一些簡單的範例</p>
+<p>以下這個範例，就是會隱性的被 async 將回傳值包裹成 resolved Promise 的範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">async function implicitFnc() &#123;</span><br><span class="line">  return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">implicitFnc().then(res &#x3D;&gt; console.log(res)); &#x2F;&#x2F; 1</span><br></pre></td></tr></table></figure>
+
+<p>以下這個範例，就是顯性的撰寫回傳 resolved Promise 的範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">async function explicitFnc() &#123;</span><br><span class="line">  return Promise.resolve(&#39;This is a result&#39;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">explicitFnc().then(res &#x3D;&gt; console.log(res)); &#x2F;&#x2F; &#39;This is a result&#39;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Await"><a href="#Await" class="headerlink" title="Await"></a><code>Await</code></h2><p>await 的特性就是</p>
+<ol>
+<li><strong>它只有在 <code>async</code> 的 function 底下有作用</strong>。</li>
+<li>它會等到跟它對應的 Promise 完成之後，才往下進行後面的程式碼，並且它會接收到由其對應的 Promise 回傳後的結果。</li>
+</ol>
+<p>來個範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">async function fnc() &#123;</span><br><span class="line">  const promise &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    setTimeout(() &#x3D;&gt; resolve(&quot;Done!!!!&quot;), 3000)</span><br><span class="line">  &#125;)</span><br><span class="line">  const result &#x3D; await promise; &#x2F;&#x2F; step 1 - 等到 promise 結束為止，才往下執行</span><br><span class="line">  alert(result);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fnc();</span><br></pre></td></tr></table></figure>
+
+<p>上面的範例，<br>程式碼會在 step 1 這邊停住，直到 promise 完成之後，才往下執行，並且 promise 回傳的結果，會存在 result 裡。</p>
+<p>雖然，fnc 這個 function 會暫停在 step 1 這一行，直到 promise 完成執行為止，但這並不代表整個 JS 都會停在這一行程式碼不執行，它還是一樣可以同一時間去執行其他的任務內容的。</p>
+<blockquote>
+<p>Notice:<br>這邊再次強調， <code>await</code> 只有在 <code>async</code> 的 function 底下有作用。<br>如果你在不是 <code>async</code> 的 function 底下使用 <code>await</code> 是會報錯的優。<br>試試下面這個範例</p>
+<p>function fnc() {<br>  const promise = Promise.then(1);<br>  const result = await promise;   // error<br>}</p>
+<p>fnc();</p>
+</blockquote>
+<p>直接用 <code>async…await</code> 來改寫一下在 Promise chaining 的範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">async function fnc() &#123;</span><br><span class="line">  const response &#x3D; await fetch(&#39;https:&#x2F;&#x2F;randomuser.me&#x2F;api&#x2F;&#39;);</span><br><span class="line">  const responseJson &#x3D; await response.json();</span><br><span class="line">  const userInfo &#x3D; responseJson.results[0];</span><br><span class="line">  const img &#x3D; document.createElement(&#39;img&#39;);</span><br><span class="line">  img.src &#x3D; userInfo.picture.large;</span><br><span class="line">  document.body.append(img);</span><br><span class="line">  </span><br><span class="line">  const name &#x3D; await new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">      const userName &#x3D; Object.keys(userInfo.name).reduce((acc, crr) &#x3D;&gt; &#123;</span><br><span class="line">        return acc +&#x3D; userInfo.name[&#96;$&#123;crr&#125;&#96;] + &#39; &#39;;</span><br><span class="line">      &#125;, &#39;&#39;);</span><br><span class="line">      </span><br><span class="line">      resolve(userName);</span><br><span class="line">    &#125;, 3000);</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  img.remove();</span><br><span class="line">  alert(&#96;Showing $&#123;name&#125;&#96;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fnc();</span><br></pre></td></tr></table></figure>
+
+<h3 id="Allow-top-level-await-in-modules"><a href="#Allow-top-level-await-in-modules" class="headerlink" title="Allow top-level await in modules"></a>Allow top-level <code>await</code> in modules</h3><p>在現代的瀏覽器是允許 <code>await</code> 關鍵字出現在 <code>modules</code> 的上方出現的喔。<br>舉下面的範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const enLangFile &#x3D; fetch(&#39;..&#x2F;assets&#x2F;i18n&#x2F;en.json&#39;).then(res &#x3D;&gt; res.json());</span><br><span class="line"></span><br><span class="line">export default await enLangFile; &#x2F;&#x2F; await enLangFile resolove</span><br></pre></td></tr></table></figure>
+
+<p>上面這個範例，只要有其他地方引入這個模組，都會先等 enLangFile 這個 Promise 解析完成之後，在繼續執行後續的內容。</p>
+<p>感覺蠻方便的?</p>
+<p>但是，若是比較舊版本的瀏覽器就沒有辦法讓我們這樣直接加 <code>await</code> 在 modules 上面的。<br>但是，我們可以改用下面的寫法，會有一樣的效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--- 改用 IIFE 來改寫 ---</span><br><span class="line">(async() &#x3D;&gt; &#123;</span><br><span class="line">  const enLangFile &#x3D; fetch(&#39;..&#x2F;assets&#x2F;i18n&#x2F;en.json&#39;).then(res &#x3D;&gt; res.json());</span><br><span class="line">  export default await enLangFile; &#x2F;&#x2F; await enLangFile resolove</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<h3 id="await-accepts-Thenable"><a href="#await-accepts-Thenable" class="headerlink" title="await accepts Thenable"></a>await accepts Thenable</h3><p>await 也可以用在某些本身具有 then method 的物件喔。<br>就是在 Promise chaining 那邊有提到，在某些第三方套件會用這樣的手法，來讓我們可以使用 Promise chaining 的效果。</p>
+<p>舉個範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Thenable &#123;</span><br><span class="line">  constructor(num) &#123;</span><br><span class="line">    this.num &#x3D; num; </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  then(resolve, reject) &#123;</span><br><span class="line">    setTimeout(() &#x3D;&gt; resolve(this.num), 1000); &#x2F;&#x2F; 在一秒後 resolve its num value  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">async function fnc() &#123;</span><br><span class="line">  const result &#x3D; await new Thenable(2);</span><br><span class="line">  alert(result);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fnc();</span><br></pre></td></tr></table></figure>
+
+<p>上面範例的 <code>await</code> 就會得到一個帶有 <code>.then</code> 方法的 non-Promise 的物件，await 會直接去呼叫該 object 的 <code>.then</code> 方法(這個方法將 JS 內建的 <code>resovle</code> 和 <code>reject</code> 當成其參數，就像 Promise 那樣)。<br>接著，await 就會等到 <code>resolve</code> 和 <code>reject</code> 其中一個被呼叫，並解出回傳出來的結果。</p>
+<h3 id="在-class-裡面定義-async-method"><a href="#在-class-裡面定義-async-method" class="headerlink" title="在 class 裡面定義 async method"></a>在 class 裡面定義 async method</h3><p>若要在 class 中定義 <code>async</code> 方法，就直接在該方法名稱前面加上 <code>async</code> 即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Waiter &#123;</span><br><span class="line">  async wait() &#123;</span><br><span class="line">    return await Promise.resolve(2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">new Waiter()</span><br><span class="line">  .wait()</span><br><span class="line">  .then(res &#x3D;&gt; console.log(res)); &#x2F;&#x2F; 2</span><br></pre></td></tr></table></figure>
+
+<p>上面的範例，因為 <code>async</code> 會自動地將不是 Promise 型別的結果，包裹成 Promise 型別並回傳，所以，透過 <code>await</code> 解析出來的結果，會透過 <code>async</code> implicitly transform into Promise type.</p>
+<p>那最後，我們再用 <code>.then</code> 來接由該 <code>async</code> 方法回傳的結果。</p>
+<h2 id="Error-handling"><a href="#Error-handling" class="headerlink" title="Error handling"></a>Error handling</h2><p>當我們用 <code>await</code> 來接一個 呼叫 <code>reject</code> 的 Promise。<br>await 會隱性地 throw the error.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">async function f() &#123;</span><br><span class="line">  await Promise.reject(new Error(&quot;This is an error.&quot;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的程式碼等同於用下面這樣寫</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">async function f() &#123;</span><br><span class="line">  throw new Error(&quot;This is an error.&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那也因為 <code>await</code> 有以上這樣的特性，我們可以搭配 <code>try…catch</code> 來做 error handling mechanism.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">async function f() &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    const result &#x3D; await fetch(&quot;http:&#x2F;&#x2F;no-such-url&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  catch(err) &#123;</span><br><span class="line">    alert(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f();</span><br></pre></td></tr></table></figure>
+
+<p>上面的範例， <code>catch</code> 會接到由 <code>await</code> 丟出來的 error。</p>
+<p>以上的範例，有可以改由用 <code>.catch</code> 來承接丟出來的錯誤。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async function f() &#123;</span><br><span class="line">  const response &#x3D; await fetch(&#39;http:&#x2F;&#x2F;no-suc-url&#39;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; f() becomes a rejected promise</span><br><span class="line">f().catch(alert);</span><br></pre></td></tr></table></figure>
+
+<p>那如果丟出來的錯誤，沒有後續的人來承接的話，我們也可以用 <code>unhandledrejection</code> 這個 eventListener 來承接。</p>
+<p>同時寫兩個錯誤的範例，第一個出現 error 的部分，會被丟到 <code>.catch</code> 裡，<br>以下面的範例 step 1 會被執行而且丟出錯誤，而 step 2 就不會被執行，<br>而 <code>catch</code> 區域接到的錯誤就是 step 1 丟出的錯誤。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">async function f() &#123;</span><br><span class="line"></span><br><span class="line">  try &#123;</span><br><span class="line">    let response &#x3D; await fetch(&#39;https:&#x2F;&#x2F;rxxxuser.me&#x2F;api&#x2F;?seed&#x3D;1&#39;); &#x2F;&#x2F; step 1 丟出錯誤</span><br><span class="line">    let json &#x3D; await response.json(); &#x2F;&#x2F; step 2 不會被執行</span><br><span class="line">    </span><br><span class="line">  &#125; catch(err) &#123;</span><br><span class="line">    &#x2F;&#x2F; catches errors both in fetch and response.json</span><br><span class="line">    alert(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f();</span><br></pre></td></tr></table></figure>
+
+<h3 id="．await-搭配-Promise-all-一起使用"><a href="#．await-搭配-Promise-all-一起使用" class="headerlink" title="．await 搭配 Promise.all 一起使用"></a>．<code>await</code> 搭配 <code>Promise.all</code> 一起使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const urls &#x3D; [</span><br><span class="line">  &#39;https:&#x2F;&#x2F;randomuser.me&#x2F;api&#x2F;?seed&#x3D;1&#39;,</span><br><span class="line">  &#39;https:&#x2F;&#x2F;randomuser.me&#x2F;api&#x2F;?seed&#x3D;2&#39;,</span><br><span class="line">  &#39;https:&#x2F;&#x2F;randomuser.me&#x2F;api&#x2F;?seed&#x3D;3&#39;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">const promises &#x3D; urls.map(url &#x3D;&gt; fetch(url));</span><br><span class="line"></span><br><span class="line">async function result() &#123;</span><br><span class="line">  const responses &#x3D; await Promise.all(promises);</span><br><span class="line">  return responses.map(async result &#x3D;&gt; await result.json());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">result().then(res &#x3D;&gt; &#123;</span><br><span class="line">  res.forEach(item &#x3D;&gt; &#123;</span><br><span class="line">    item.then(res &#x3D;&gt; &#123;</span><br><span class="line">      console.log(res.results)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="．await-和-Promise-all-加入-try…catch-的-error-handling"><a href="#．await-和-Promise-all-加入-try…catch-的-error-handling" class="headerlink" title="．await 和 Promise.all 加入 try…catch 的 error handling"></a>．<code>await</code> 和 <code>Promise.all</code> 加入 <code>try…catch</code> 的 error handling</h3><p>我們可以利用 <code>try…catch</code> 來承接 <code>Promise.all</code> 出現錯誤的狀況。<br>要注意的是， <code>Promise.all</code> 只要其中一個元素發生錯誤，其他結果會直接被忽略</p>
+<p>範例如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">const urls &#x3D; [</span><br><span class="line">  &#39;https:&#x2F;&#x2F;randomuser.me&#x2F;api&#x2F;?seed&#x3D;1&#39;,</span><br><span class="line">  &#39;https:&#x2F;&#x2F;randomuser.me&#x2F;api&#x2F;?seed&#x3D;2&#39;,</span><br><span class="line">  &#39;http:&#x2F;&#x2F;no-such-ulr&#39; &#x2F;&#x2F; 這個元素會發生錯誤</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">const promises &#x3D; urls.map(url &#x3D;&gt; fetch(url));</span><br><span class="line"></span><br><span class="line">async function result() &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    const responses &#x3D; await Promise.all(promises);  &#x2F;&#x2F; 會發生錯誤，並 throw error</span><br><span class="line">    return responses.map(async result &#x3D;&gt; await result.json());</span><br><span class="line">  &#125;</span><br><span class="line">  catch(err) &#123;</span><br><span class="line">    alert(err);</span><br><span class="line">    return Promise.reject(new Error(err)) &#x2F;&#x2F; 回傳出錯的內容</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">result().then(res &#x3D;&gt; &#123;</span><br><span class="line">  res.forEach(item &#x3D;&gt; &#123;</span><br><span class="line">    item.then(res &#x3D;&gt; &#123;</span><br><span class="line">      console.log(res.results)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">.catch(alert) &#x2F;&#x2F; 傳出來的錯誤在這裡被接起來</span><br></pre></td></tr></table></figure>
+
+<h2 id="Homework"><a href="#Homework" class="headerlink" title="Homework"></a>Homework</h2><h3 id="Task-1"><a href="#Task-1" class="headerlink" title="Task 1"></a>Task 1</h3><p>改寫成 <code>async…await</code> 的用法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">async function loadJson(url) &#123;</span><br><span class="line">  const response &#x3D; await fetch(url);</span><br><span class="line">  if(response.status &#x3D;&#x3D;&#x3D; 200) &#123;</span><br><span class="line">    return await response.json();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  throw Error(response);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">loadJson(&#39;https:&#x2F;&#x2F;randomuser.me&#x2F;api&#x2F;?seed&#x3D;1&#39;)</span><br><span class="line">  .then(res &#x3D;&gt; console.log(res.results[0].email))</span><br><span class="line">  .catch(alert)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Task-2"><a href="#Task-2" class="headerlink" title="Task 2"></a>Task 2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class HttpError extends Error &#123;</span><br><span class="line">  constructor(response) &#123;</span><br><span class="line">    super(&#96;$&#123;response.status&#125; for $&#123;response.url&#125;&#96;);</span><br><span class="line">    this.name &#x3D; name;</span><br><span class="line">    this.response &#x3D; response;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">async function loadJson(url) &#123;</span><br><span class="line">  const response &#x3D; await fetch(url);</span><br><span class="line">  if(response.status &#x3D;&#x3D;&#x3D; 200) &#123;</span><br><span class="line">    return response.json();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  throw new HttpError(response);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">async function demoUserInfo() &#123;</span><br><span class="line">  const name &#x3D; prompt(&#39;Enter a name?&#39;);</span><br><span class="line">  try &#123;</span><br><span class="line">    const result &#x3D; await loadJson(&#96;https:&#x2F;&#x2F;no-such-url&#x2F;?seed&#x3D;$&#123;name&#125;&#96;);</span><br><span class="line">    console.log(result.results[0].name);</span><br><span class="line">  &#125;</span><br><span class="line">  catch(err) &#123;</span><br><span class="line">    alert(err)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">demoUserInfo();</span><br></pre></td></tr></table></figure>
+
+<h3 id="Task-3"><a href="#Task-3" class="headerlink" title="Task 3"></a>Task 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">async function wait() &#123;</span><br><span class="line">  await new Promise(resolve &#x3D;&gt; setTimeout(resolve, 1000));</span><br><span class="line">  </span><br><span class="line">  return 10;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function f() &#123;</span><br><span class="line">  wait().then(res &#x3D;&gt; console.log(res));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://javascript.info/async-await#await">https://javascript.info/async-await#await</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await#:~:text=Top%20level%20await,other%20child%20modules%20from%20loading.">Example of top-level await in module</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/Promise/" rel="tag"># Promise</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/13/Promise-XV-Promisification-Promise-%E5%8C%96/" rel="prev" title="Promise(XV) - Promisification - Promise 化">
+      <i class="fa fa-chevron-left"></i> Promise(XV) - Promisification - Promise 化
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E9%96%8B%E5%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">本文開始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Async-function"><span class="nav-number">2.</span> <span class="nav-text">Async function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Await"><span class="nav-number">3.</span> <span class="nav-text">Await</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Allow-top-level-await-in-modules"><span class="nav-number">3.1.</span> <span class="nav-text">Allow top-level await in modules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#await-accepts-Thenable"><span class="nav-number">3.2.</span> <span class="nav-text">await accepts Thenable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8-class-%E8%A3%A1%E9%9D%A2%E5%AE%9A%E7%BE%A9-async-method"><span class="nav-number">3.3.</span> <span class="nav-text">在 class 裡面定義 async method</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Error-handling"><span class="nav-number">4.</span> <span class="nav-text">Error handling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%8Eawait-%E6%90%AD%E9%85%8D-Promise-all-%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">．await 搭配 Promise.all 一起使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%8Eawait-%E5%92%8C-Promise-all-%E5%8A%A0%E5%85%A5-try%E2%80%A6catch-%E7%9A%84-error-handling"><span class="nav-number">4.2.</span> <span class="nav-text">．await 和 Promise.all 加入 try…catch 的 error handling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Homework"><span class="nav-number">5.</span> <span class="nav-text">Homework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-1"><span class="nav-number">5.1.</span> <span class="nav-text">Task 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-2"><span class="nav-number">5.2.</span> <span class="nav-text">Task 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-3"><span class="nav-number">5.3.</span> <span class="nav-text">Task 3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

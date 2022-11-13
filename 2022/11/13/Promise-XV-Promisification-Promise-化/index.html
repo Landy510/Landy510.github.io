@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://landy510.github.io/image/promisification.png">
 <meta property="og:image" content="https://landy510.github.io/image/promisificationError.png">
 <meta property="article:published_time" content="2022-11-13T02:51:24.000Z">
-<meta property="article:modified_time" content="2022-11-13T03:13:55.069Z">
+<meta property="article:modified_time" content="2022-11-13T03:17:09.485Z">
 <meta property="article:author" content="Landy">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="Promise">
@@ -198,7 +198,7 @@
               <span class="post-meta-item-text">發表於</span>
               
 
-              <time title="創建時間：2022-11-13 10:51:24 / 修改時間：11:13:55" itemprop="dateCreated datePublished" datetime="2022-11-13T10:51:24+08:00">2022-11-13</time>
+              <time title="創建時間：2022-11-13 10:51:24 / 修改時間：11:17:09" itemprop="dateCreated datePublished" datetime="2022-11-13T10:51:24+08:00">2022-11-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -223,7 +223,7 @@
 
       
         <h2 id="本文開始"><a href="#本文開始" class="headerlink" title="本文開始"></a>本文開始</h2><p>Promisification(Promise 化) 是代表將一個 function 轉換成可以接受 callback function 並且這個 callback function 是會回傳 Promise 的。<br>會需要這樣將原本是 callback 機制做回傳的 function 或外部函式庫轉換成回傳 Promise 物件的機制是因為 Promise 操作起來比 callback function 更方便。<br>以<a target="_blank" rel="noopener" href="https://javascript.info/promise-basics#loadscript">這一系列的教學文章</a>中的提到過的 loadScript 為例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function loadScript(src, callback) &#123;</span><br><span class="line">	const script &#x3D; document.createElement(&#39;script&#39;);</span><br><span class="line">	script.src &#x3D; src;</span><br><span class="line"></span><br><span class="line">	script.onload &#x3D; callback(null, script);</span><br><span class="line">	script.onerror &#x3D; callback(new Error(&#96;Script load error for $&#123;src&#125;&#96;));</span><br><span class="line"></span><br><span class="line">	document.head.append(script);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function loadScript(src, callback) &#123;</span><br><span class="line">  const script &#x3D; document.createElement(&#39;script&#39;);</span><br><span class="line">  script.src &#x3D; src;</span><br><span class="line"></span><br><span class="line">  script.onload &#x3D; callback(null, script);</span><br><span class="line">  script.onerror &#x3D; callback(new Error(&#96;Script load error for $&#123;src&#125;&#96;));</span><br><span class="line"></span><br><span class="line">  document.head.append(script);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上面這個範例撰寫的形式就是都用 callback function 來做處理。<br>以下就把上面的範例 Promise 化</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function loadScript(src, callback) &#123;</span><br><span class="line">  let script &#x3D; document.createElement(&#39;script&#39;);</span><br><span class="line">  script.src &#x3D; src;</span><br><span class="line"></span><br><span class="line">  script.onload &#x3D; () &#x3D;&gt; callback(null, script);</span><br><span class="line">  script.onerror &#x3D; () &#x3D;&gt; callback(new Error(&#96;Script load error for $&#123;src&#125;&#96;), null);</span><br><span class="line"></span><br><span class="line">  document.head.append(script);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let loadScriptPromise &#x3D; function(src) &#123;</span><br><span class="line">  return new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    loadScript(src, (err, script) &#x3D;&gt; &#123;</span><br><span class="line">      if (err) reject(err);</span><br><span class="line">      else resolve(script);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">loadScriptPromise(&#39;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;bootstrap@3.3.7&#x2F;dist&#x2F;js&#x2F;bootstrap.min.js&#39;)</span><br><span class="line">  .then(res &#x3D;&gt; console.log(res))</span><br><span class="line">  .catch(error &#x3D;&gt; console.log(error))</span><br></pre></td></tr></table></figure>
 
@@ -297,7 +297,10 @@
     <a href="/2022/11/13/Promise-V-Promise-API/" rel="prev" title="Promise(V) - Promise API">
       <i class="fa fa-chevron-left"></i> Promise(V) - Promise API
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/13/Promise-VIII-Async-await/" rel="next" title="Promise(VIII) - Async/await">
+      Promise(VIII) - Async/await <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -370,7 +373,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">140</span>
+          <span class="site-state-item-count">141</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
