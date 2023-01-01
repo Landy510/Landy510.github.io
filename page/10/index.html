@@ -164,6 +164,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/29/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E6%92%B0%E5%AF%ABDashBoard/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/29/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E6%92%B0%E5%AF%ABDashBoard/" class="post-title-link" itemprop="url">Vue-vue出一個電商網站-撰寫DashBoard</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-29 09:34:16" itemprop="dateCreated datePublished" datetime="2021-01-29T09:34:16+08:00">2021-01-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-30 15:06:59" itemprop="dateModified" datetime="2021-01-30T15:06:59+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="套用-Bootstrap-Dashboard-版型"><a href="#套用-Bootstrap-Dashboard-版型" class="headerlink" title="套用 Bootstrap Dashboard 版型"></a>套用 Bootstrap Dashboard 版型</h1><p>step1.<br>首先，你可以先去<a target="_blank" rel="noopener" href="https://getbootstrap.com/docs/5.0/examples/">Bootstrap的公版的網站</a> 中，選取Dashboard的主題，來當作我們的Dashboard的版型。</p>
+<p>step2.<br>接著，你點開Dashboard的主題，然後對這個網頁點擊右鍵查看原始碼，為的是要將這個Dashboard的html程式碼抓下來。</p>
+<p>step3.<br>去你的專案檔中的assets資料夾目錄底下，新增一個_Dashboard.scss檔案，<br>接著，去你剛剛在察看Dashboard原始碼的頁面中，找尋dashboard.css這個關鍵字，<br>並把這個超連結打開，裡面的內容就是這個Dashboard所用到的css樣式。</p>
+<p>step4.<br>將你剛剛開的dashboard.css裡面的內容，複製起來貼到你的_Dashboard.scss檔案中。<br>接著，在all.scss檔案中將這個_Dashboard.scss檔案給<code>import</code>進來。</p>
+<p>step5.<br>去components資料夾底下，新增一個DashBoard.vue的元件檔<br>並將dashboard公版內的html內容加入到你的DashBoard.vue的元件檔中。<br>記得，在公版的<code>script</code>部分的內容是不需要複製的喔，因為，我們只有要用html的內容部份。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/29/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E6%92%B0%E5%AF%ABDashBoard/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/28/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git-%E7%92%B0%E5%A2%83%E5%AE%89%E8%A3%9D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -907,90 +992,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-CSS-jQuery%E5%90%84%E5%BC%8F%E5%90%84%E6%A8%A3%E7%9A%84%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-CSS-jQuery%E5%90%84%E5%BC%8F%E5%90%84%E6%A8%A3%E7%9A%84%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C/" class="post-title-link" itemprop="url">jQuery課程筆記-CSS+jQuery各式各樣的動畫效果</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-01-23 16:53:20" itemprop="dateCreated datePublished" datetime="2021-01-23T16:53:20+08:00">2021-01-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-30 15:14:37" itemprop="dateModified" datetime="2021-01-30T15:14:37+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jQuery/" itemprop="url" rel="index"><span itemprop="name">jQuery</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="preventDefault-取消默認行為"><a href="#preventDefault-取消默認行為" class="headerlink" title="preventDefault 取消默認行為"></a>preventDefault 取消默認行為</h1><p>ex:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;a href&#x3D;&quot;http:&#x2F;&#x2F;www.google.com.tw&quot; class&#x3D;&quot;close&gt;按鈕&lt;&#x2F;a&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">	$(&#39;.close&#39;).click(function(e)&#123;</span><br><span class="line">		e.preventDefault();</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>由以上的程式碼就可以將原本<code>a</code>連結的預設效果給取消。<br>所以，當我們按下這個<code>a</code>連結，就不會跳轉到<a target="_blank" rel="noopener" href="http://www.google.com.tw/">http://www.google.com.tw</a> 網址囉。</p>
-<p>那為什麼要在<code>a</code>連結的js中，加上<code>preventDefault</code>呢，是因為今天該<code>a</code>連結<br>如果，只有要觸發某個事件，並沒有要讓頁面連到別的網頁的時候，<br>就需要用到<code>preventDefault</code>囉。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/23/jQuery%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-CSS-jQuery%E5%90%84%E5%BC%8F%E5%90%84%E6%A8%A3%E7%9A%84%E5%8B%95%E7%95%AB%E6%95%88%E6%9E%9C/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1060,7 +1061,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">142</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -1073,7 +1074,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -1100,7 +1101,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

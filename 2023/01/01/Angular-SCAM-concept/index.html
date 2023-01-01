@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄如何在 Angular 專案中，加入 SCAM 的概念">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular-SCAM concept">
+<meta property="og:url" content="https://landy510.github.io/2023/01/01/Angular-SCAM-concept/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄如何在 Angular 專案中，加入 SCAM 的概念">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-01-01T09:12:13.000Z">
+<meta property="article:modified_time" content="2023-01-01T09:58:52.451Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="Angular">
+<meta property="article:tag" content="SCAM">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2023/01/01/Angular-SCAM-concept/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Angular-SCAM concept | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2023/01/01/Angular-SCAM-concept/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Angular-SCAM concept
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2023-01-01 17:12:13 / 修改時間：17:58:52" itemprop="dateCreated datePublished" datetime="2023-01-01T17:12:13+08:00">2023-01-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular/" itemprop="url" rel="index"><span itemprop="name">Angular</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄如何在 Angular 專案中，加入 SCAM 的概念</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="本文開始"><a href="#本文開始" class="headerlink" title="本文開始"></a>本文開始</h2><p>在大型的 Angular Application ，都會使用大量的 Module 來將元件需要使用的功能給引用進來，但是，當我們在同一個 Module 裡面定義多個 Component 的時候，就需要從外部引入多個功能進來以讓這些 Component 都能吃到它們自身需要使用到的功能。</p>
+<p>以上這種情況就會導致下面這個問題，假設這個模組有 A, B 兩個元件，當模組引入 A 元件需要使用的功能，但這些功能 B 元件都不需要使用，而模組也引入 B 元件需要使用的功能，但 A 元件都用不到，這樣子的情況會導致這個模組要做的事情太雜，且其功能也意義不明。</p>
+<p>來舉個範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  providers: [</span><br><span class="line">    ConfigService, </span><br><span class="line">    PromotionService, </span><br><span class="line">    AppService,</span><br><span class="line">  ],</span><br><span class="line">  declarations: [</span><br><span class="line">    StringSlicePipe,</span><br><span class="line">    CustomerFormatterPipe,</span><br><span class="line">    ShoppingCartDealPipe,</span><br><span class="line">    CurrencyFormatterPipe,</span><br><span class="line">    CustomerCardComponent,</span><br><span class="line">    ShoppingCartComponent,</span><br><span class="line">    CustomerPortalComponent,</span><br><span class="line">  ],</span><br><span class="line">&#125;)</span><br><span class="line">export class CustomerPortalModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>假設今天我們除了在 CustomerPortalModule 會需要使用到 ShoppingCartComponent 以外，在其他的模組中也會需要使用到 ShoppingCartComponent 很自然地我們會寫出以下程式碼</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  declarations: [</span><br><span class="line">    ShoppingCartComponent,</span><br><span class="line">    AnotherPageComponent,</span><br><span class="line">  ],</span><br><span class="line">&#125;)</span><br><span class="line">export class AnotherPageModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>Ok，加完了，接下來我們先看看 ShoppingCartComponent 的建構式裡有注入哪些 service ，因為也需要引入進這個模組，如此一來 ShoppingCartComponent  才能在這個模組正常運作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Component(&#123;...&#125;)</span><br><span class="line">export class ShoppingCartComponent &#123;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">  constructor(private ConfigService) &#123;&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到它有加入 ConfigService 這個服務，所以，我們要在 AnotherPageModule  引入它</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  providers: [</span><br><span class="line">    ConfigService &#x2F;&#x2F; 加入 ConfigService</span><br><span class="line">  ],</span><br><span class="line">  declarations: [</span><br><span class="line">    ShoppingCartComponent,</span><br><span class="line">    AnotherPageComponent,</span><br><span class="line">  ],</span><br><span class="line">&#125;)</span><br><span class="line">export class AnotherPageModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是，這樣還是無法運作!! 因為 ConfigService 自己又引入了 PromotionService 這個服務，所以，為了 ConfigService 我們要再引入 PromotionService，所以，再改寫一下 AnotherPageModule </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  providers: [</span><br><span class="line">    ConfigService,</span><br><span class="line">    PromotionService  &#x2F;&#x2F; 加入 PromotionService</span><br><span class="line">  ],</span><br><span class="line">  declarations: [</span><br><span class="line">    ShoppingCartComponent,</span><br><span class="line">    AnotherPageComponent,</span><br><span class="line">  ],</span><br><span class="line">&#125;)</span><br><span class="line">export class AnotherPageModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接著，我們來看看 ShoppingCartComponent 的 template，發現它還有用一些 pipe 的功能，所以，要再引入這些 pipe 到模組中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  providers: [</span><br><span class="line">    ConfigService,</span><br><span class="line">    PromotionService</span><br><span class="line">  ],</span><br><span class="line">  declarations: [</span><br><span class="line">    CurrencyFormatterPipe, &#x2F;&#x2F; 加入 pipe</span><br><span class="line">    CustomerCardComponent, &#x2F;&#x2F; 加入 pipe</span><br><span class="line">    ShoppingCartComponent,</span><br><span class="line">    AnotherPageComponent,</span><br><span class="line">  ],</span><br><span class="line">&#125;)</span><br><span class="line">export class AnotherPageModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>經過以上一連串的引入，有發現了嗎?<br>當我們需要在其他地方使用某個元件的時候，就會要因為該元件有使用和注入的所有功能再次在這個模組再次引入這些功能。</p>
+<h3 id="巨大的-ShareModule-臭味"><a href="#巨大的-ShareModule-臭味" class="headerlink" title="巨大的 ShareModule 臭味"></a>巨大的 ShareModule 臭味</h3><p>而以上這樣的問題，也就造就了為什麼很多專案裡面都會使用 ShareModule，在這個 Module 裡面一次引入所有元件需要使用到的功能，然後，在不同的模組間引入 ShareModule 以解決以上的問替。</p>
+<p>It kinda works 🤔. But 有使用過 ShareModule 的方法的人應該都知道，這個 ShareModule 最終隨著專案擴充，會越長越大~<br>而這個巨大的 ShareModule 就會隱隱地飄出 bad code 的臭味 💨 (因為還是會落入 A 模組引入了 shareModule，但是 shareModule 裡有一半以上的功能 A 模組可能都不需要使用)~~</p>
+<p>而我們就要透過 SCAM 這個概念來解決以上這些問題囉~</p>
+<h2 id="什麼是-SCAM-樣板"><a href="#什麼是-SCAM-樣板" class="headerlink" title="什麼是 SCAM 樣板?"></a>什麼是 SCAM 樣板?</h2><p>它的全名叫做 Single Component Angular Module。<br>這個樣板的概念就是，直接讓元件客製化屬於它自己的 Module 。<br>Angular 的 Module 原本的用意，是用來封裝該模組中，所包含的元件彼此之間相關的程式碼(e.g. 元件所需的共用方法)，但是，我們用 ShareModule 的概念把所有不相關的功能通通引入到同一個模組裡面，等於直接拋棄原本 Angular 模組的精神。</p>
+<p>來個簡單的範例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  declarations: [</span><br><span class="line">    CustomerCardComponent,</span><br><span class="line">    CustomerFormatterPipe</span><br><span class="line">  ],</span><br><span class="line">  exports: [CustomerCardComponent]</span><br><span class="line">&#125;)</span><br><span class="line">export class CustomerCardComponentModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上這個寫法是傳統的寫法，需要什麼就全部引入，因為 CustomerCardComponent 需要使用 CustomerFormatterPipe 所以，需要引用它。</p>
+<p>那現在我們把它們拆開來，<br>Step 1. 為 CustomerFormatterPipe 定義屬於它自己的 Module</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  declarations: [</span><br><span class="line">    CustomerFormatterPipe</span><br><span class="line">  ],</span><br><span class="line">  exports: [CustomerFormatterPipe]</span><br><span class="line">&#125;)</span><br><span class="line">export class CustomerFormatterPipeModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Step 2. 在 CustomerCardComponentModule  引入 CustomerFormatterPipeModule<br>接下來，改寫一下原本在 CustomerCardComponentModule  直接引入 CustomerFormatterPipe 的寫法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    CustomerFormatterPipeModule </span><br><span class="line">  ],</span><br><span class="line">  declarations: [</span><br><span class="line">    CustomerCardComponent</span><br><span class="line">  ],</span><br><span class="line">  exports: [CustomerCardComponent]</span><br><span class="line">&#125;)</span><br><span class="line">export class CustomerCardComponentModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>以上就是 SCAM 樣板的執行方式。</p>
+<p>那我們把以上的執行方式，套用到最一開始的 ShoppingCartComponent 的範例<br>Step 1. 為元件定義屬於它自己個 Module</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  &#x2F;&#x2F; I wont bother with these services, as we really should be making them providedIn: &#39;root&#39;!</span><br><span class="line">  providers: [</span><br><span class="line">    ConfigService, </span><br><span class="line">    PromotionService,</span><br><span class="line">  ],</span><br><span class="line">  imports: [</span><br><span class="line">    CustomerCardComponentModule,</span><br><span class="line">    CurrencyFormatterPipeModule,</span><br><span class="line">  ],</span><br><span class="line">  declarations: [</span><br><span class="line">    ShoppingCartComponent,</span><br><span class="line">  ],</span><br><span class="line">  export: [ShoppingCartComponent]</span><br><span class="line">&#125;)</span><br><span class="line">export class ShoppingCartComponentModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Step 2. 引入 ShoppingCartComponentModule 模組到 CustomerPortalModule  裡</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    ShoppingCartComponentModule &#x2F;&#x2F; 引入 ShoppingCartComponentModule </span><br><span class="line">  ],</span><br><span class="line">  declarations: [</span><br><span class="line">    StringSlicePipe,</span><br><span class="line">    CustomerFormatterPipe,</span><br><span class="line">    ShoppingCartDealPipe,</span><br><span class="line">    &#x2F;&#x2F; CurrencyFormatterPipe, 可以拿掉</span><br><span class="line">    &#x2F;&#x2F; CustomerCardComponent, 可以拿掉</span><br><span class="line">    &#x2F;&#x2F; ShoppingCartComponent, 可以拿掉</span><br><span class="line">    CustomerPortalComponent,</span><br><span class="line">  ],</span><br><span class="line">  exports: [CustomerPortalComponent]</span><br><span class="line">&#125;)</span><br><span class="line">export class CustomerPortalModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到上面我們透過 SCAM 的模板設計方式先建造出屬於 ShoppingCartComponent 自己的模組後，再直接引入到 CustomerPortalModule ，如此一來是不是 Module 就可以少寫很多額外的程式碼，也不用引入東引入西的。</p>
+<p>另外，我們在另外一個模組 AnotherPageModule 要使用 ShoppingCartComponent 也是直接引入 ShoppingCartComponentModule  就好，改寫如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@NgModule(&#123;</span><br><span class="line">  imports: [</span><br><span class="line">    ShoppingCartComponentModule &#x2F;&#x2F; 引入 ShoppingCartComponentModule </span><br><span class="line">  ],</span><br><span class="line">  declarations: [</span><br><span class="line">    AnotherPageComponent,</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line">export class AnotherPageModule &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>是不是模組內部乾淨多了呢~~</p>
+<h2 id="PrimeNG-UI-framework-的-SCAM-樣板寫法"><a href="#PrimeNG-UI-framework-的-SCAM-樣板寫法" class="headerlink" title="PrimeNG UI framework 的 SCAM 樣板寫法"></a>PrimeNG UI framework 的 SCAM 樣板寫法</h2><p>在 Angular 專案中，很常用一個叫 Primeng 的 UI Framework。<br>有別於這一篇教學文章使直接寫出一個 module.ts 檔案，在 PrimeNG 裡 SCAM 樣板寫法應該都是直接將 module 定義在各元件的定義檔裡。<br>這樣一來就不需要用像 shareModule 這個一大包的共用 Module 了。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://angular-training-guide.rangle.io/modules/module-scam-pattern#the-angular-module-scam-pattern">Angular scam tutorial</a></li>
+<li><a target="_blank" rel="noopener" href="https://marmicode.io/blog/your-angular-module-is-a-scam">Intro of Angular SCAM</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/primefaces/primeng/tree/master/src/app/components">PrimeNG - component sourceCode</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Angular/" rel="tag"># Angular</a>
+              <a href="/tags/SCAM/" rel="tag"># SCAM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/13/Promise-VIII-Async-await/" rel="prev" title="Promise(VIII) - Async/await">
+      <i class="fa fa-chevron-left"></i> Promise(VIII) - Async/await
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E9%96%8B%E5%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">本文開始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A8%E5%A4%A7%E7%9A%84-ShareModule-%E8%87%AD%E5%91%B3"><span class="nav-number">1.1.</span> <span class="nav-text">巨大的 ShareModule 臭味</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-SCAM-%E6%A8%A3%E6%9D%BF"><span class="nav-number">2.</span> <span class="nav-text">什麼是 SCAM 樣板?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PrimeNG-UI-framework-%E7%9A%84-SCAM-%E6%A8%A3%E6%9D%BF%E5%AF%AB%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">PrimeNG UI framework 的 SCAM 樣板寫法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
