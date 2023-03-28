@@ -164,6 +164,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/30/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Hoisting%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/30/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Hoisting%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">JS核心篇-Hoisting概念</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-03-30 10:22:34 / 修改時間：10:31:06" itemprop="dateCreated datePublished" datetime="2021-03-30T10:22:34+08:00">2021-03-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本篇是用來記錄一下有關Hoisting不太熟悉的部分。</p>
+<h1 id="函式傳入參數以及一般變數宣告同時出現時的提升優先順序"><a href="#函式傳入參數以及一般變數宣告同時出現時的提升優先順序" class="headerlink" title="函式傳入參數以及一般變數宣告同時出現時的提升優先順序"></a>函式傳入參數以及一般變數宣告同時出現時的提升優先順序</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function test (a) &#123;</span><br><span class="line">	console.log(a)</span><br><span class="line">	var a &#x3D; 12</span><br><span class="line">&#125;</span><br><span class="line">test(10)</span><br></pre></td></tr></table></figure>
+<p>本題的答案會是10。<br>那我們就進行以下的拆解，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function test (a) &#123;</span><br><span class="line">	var a &#x3D; 10;  &#x2F;&#x2F; 它就是你呼叫時，傳入的參數</span><br><span class="line">	var a;</span><br><span class="line">	console.log(a);</span><br><span class="line">	a &#x3D; 12;</span><br><span class="line">&#125;</span><br><span class="line">test(10);</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/30/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Hoisting%E6%A6%82%E5%BF%B5/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/03/30/JS%E6%A0%B8%E5%BF%83%E7%AF%87-Let%E5%92%8CConst%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -902,91 +980,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/24/JS%E6%A0%B8%E5%BF%83-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/24/JS%E6%A0%B8%E5%BF%83-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">JS核心-第四章筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-02-24 16:30:37" itemprop="dateCreated datePublished" datetime="2021-02-24T16:30:37+08:00">2021-02-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-03-09 12:50:52" itemprop="dateModified" datetime="2021-03-09T12:50:52+08:00">2021-03-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>JS是一個「事件驅動」的程式語言，必須等到事件被觸發後，才會去執行相對應的內容。</p>
-<h1 id="事件機制的原理"><a href="#事件機制的原理" class="headerlink" title="事件機制的原理"></a>事件機制的原理</h1><p>事件觸發-&gt;去做相對應的內容</p>
-<h1 id="事件流程"><a href="#事件流程" class="headerlink" title="事件流程"></a>事件流程</h1><p>網頁元素接收事件的順序<br>分別有以下兩種:<br>Event Capturing: 事件捕獲 -從document，由上往下傳遞，直到找到啟動元素為止。<br>Event Bubbling: 事件冒泡 - 從觸發事件的目標元素，由下往上傳遞，直到找到document為止。</p>
-<p>那在<code>addEventListener</code>的事件監聽的第三個參數，<code>true</code>代表捕獲，<code>false</code>代表冒泡。</p>
-<h2 id="事件傳遞"><a href="#事件傳遞" class="headerlink" title="事件傳遞"></a>事件傳遞</h2><p>我覺得在事件流程中的捕獲和冒泡的機制，我最不習慣的是事件會傳遞的部分。阿不就點到誰就該由誰跳出來嗎(誤XDD)<br>在JS中，事件會因為捕獲和冒泡的機制而往上傳遞 或 往下傳遞，那這類的應用在本章的最後面的<font color=#FF0000>事件指派</font>的部分，<br>你就會感受到<del>事件傳遞的麻煩</del>，阿不是，是事件傳遞的威力囉~~</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/24/JS%E6%A0%B8%E5%BF%83-%E7%AC%AC%E5%9B%9B%E7%AB%A0%E7%AD%86%E8%A8%98/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1056,20 +1049,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-count">143</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>

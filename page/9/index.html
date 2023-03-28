@@ -164,6 +164,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/11/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-BOM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/11/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-BOM/" class="post-title-link" itemprop="url">JavaScript學徒篇-BOM</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-02-11 10:57:40" itemprop="dateCreated datePublished" datetime="2021-02-11T10:57:40+08:00">2021-02-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-02-13 15:16:34" itemprop="dateModified" datetime="2021-02-13T15:16:34+08:00">2021-02-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="瀏覽器功能簡介"><a href="#瀏覽器功能簡介" class="headerlink" title="瀏覽器功能簡介"></a>瀏覽器功能簡介</h1><p>BOM (Browser Object Model)<br>我們可以利用BOM元件來了解瀏覽器的資訊。<br>注意!! 通常我們都是擷取網頁的資訊，但是，<br>BOM元件是可以得知瀏覽器的資訊，像是，使用者目前是不是有網際網路連線的狀態。</p>
+<h1 id="回上頁功能實作"><a href="#回上頁功能實作" class="headerlink" title="回上頁功能實作"></a>回上頁功能實作</h1><p>這個小節就介紹History這個BOM元件的功能。<br>在HTML檔案裏面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;a href&#x3D;&quot;b_page.html&quot;&gt;到下一頁&lt;&#x2F;a&gt;</span><br><span class="line">&lt;a href&#x3D;&quot;#&quot; id&#x3D;&quot;next&quot;&gt;到下一頁(JS版本)&lt;&#x2F;a&gt;</span><br><span class="line"></span><br><span class="line">---JavaScript---</span><br><span class="line">&lt;script&gt;</span><br><span class="line">   document.getElementById(&#39;.next&#39;).onclick &#x3D; function()&#123;</span><br><span class="line">      window.history.forward();</span><br><span class="line">   &#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">---在b_page.html中---</span><br><span class="line">&lt;a href&#x3D;#&quot; id&#x3D;&quot;back&quot;&gt;回到上一頁&lt;&#x2F;a&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">   document.getElementById(&quot;back&quot;).onclick &#x3D; function()&#123;</span><br><span class="line">      window.history.back();</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p>以上的範例你可以看到在Javascrip中使用的BOM元件是history，<br>並使用了history的<code>back()</code>和<code>forward()</code>，兩種指令，分別代表回到上一頁和前往下一頁的功能。</p>
+<h1 id="透過-JS-設計列印功能"><a href="#透過-JS-設計列印功能" class="headerlink" title="透過 JS 設計列印功能"></a>透過 JS 設計列印功能</h1><p>在這一小節中，介紹了三種功能，</p>
+<ol>
+<li>分別為呼叫列印功能 <code>window.print();</code></li>
+<li>擷取瀏覽器location資訊功能 <code>location;</code><br>其中，<code>location</code>有一個<code>href</code>，當你在這個屬性裡面塞入你想要移動到的頁面網址，<br>你就可以移動到那個網頁喔~~<br>例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.href &#x3D; &quot;https:&#x2F;&#x2F;www.google.com&#x2F;&quot;;</span><br></pre></td></tr></table></figure></li>
+<li>移動到特定網頁的功能<code>window.open(&quot;https://www.google.com/&quot;);</code>，<code>open</code>裡面就塞你想移動到哪個網頁</li>
+</ol>
+<h1 id="動態擷取瀏覽器高度-innerHeight"><a href="#動態擷取瀏覽器高度-innerHeight" class="headerlink" title="動態擷取瀏覽器高度 - innerHeight"></a>動態擷取瀏覽器高度 - innerHeight</h1><p>這一小節的<code>innerHeight</code>的功能，<br>用在當設計師希望最開頭的banner能一直佔滿瀏覽器當下的畫面，<br>不管使用者將瀏覽器縮小或放大，除非使用者往下滑離開那個banner的區域範圍。</p>
+<p>當使用者縮小或放大瀏覽器時，網頁的當下畫面高度值會改變，<br>此時，就可以用<code>innerHeight</code>來擷取到改變完後的網頁畫面的高度值，<br>並將這個高度值塞到banner區塊的高度屬性內，如此，就能達成囉~~</p>
+<iframe src="https://codepen.io/RandyChen/embed/qBqdjvE?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>由以上的例子可以看到，<br>在javascript檔案中，利用當瀏覽器觸發<code>onresize</code>的事件時，<br>就會將網頁的高度塞給banner的高度，如此，就可以動態的改變banner的大小，<br>進而達到banner不管瀏覽器被放大或縮小，都可以占滿網頁版面的效果。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/11/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-DOM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -863,90 +951,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/29/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E6%92%B0%E5%AF%ABDashBoard-02/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/29/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E6%92%B0%E5%AF%ABDashBoard-02/" class="post-title-link" itemprop="url">Vue-vue出一個電商網站-撰寫DashBoard-02</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-01-29 10:30:39" itemprop="dateCreated datePublished" datetime="2021-01-29T10:30:39+08:00">2021-01-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-30 15:06:54" itemprop="dateModified" datetime="2021-01-30T15:06:54+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="增加使用者體驗-讀取中效果製作"><a href="#增加使用者體驗-讀取中效果製作" class="headerlink" title="增加使用者體驗 - 讀取中效果製作"></a>增加使用者體驗 - 讀取中效果製作</h1><p>製作局部和全部的loading效果。<br>step1.</p>
-<h2 id="全域loading效果-Vue-Loading-Overlay"><a href="#全域loading效果-Vue-Loading-Overlay" class="headerlink" title="全域loading效果 - Vue Loading Overlay"></a>全域loading效果 - Vue Loading Overlay</h2><p>在這邊我們會直接安裝Vue Loading Overlay套件，來達成全域的loading效果。<br>輸入指令 <code>npm install vue-loading-overlay</code> ，來為你的編譯器安裝這個套件。</p>
-<p>step2.<br>在main.js檔案中，加入overlay的套件，也要加入啟用的程式碼</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">---main.js---</span><br><span class="line">import Vue from &#39;vue&#39;</span><br><span class="line">import axios from &#39;axios&#39;</span><br><span class="line">import VueAxios from &#39;vue-axios&#39;</span><br><span class="line">import Loading from &#39;vue-loading-overlay&#39;;          &#x2F;&#x2F; 引入overlay元件</span><br><span class="line">import &#39;vue-loading-overlay&#x2F;dist&#x2F;vue-loading.css&#39;;  &#x2F;&#x2F; 引入overlay元件</span><br><span class="line">import &#39;bootstrap&#39;</span><br><span class="line">import App from &#39;.&#x2F;App&#39;</span><br><span class="line">import router from &#39;.&#x2F;router&#39;</span><br><span class="line">Vue.use(VueAxios, axios)</span><br><span class="line">Vue.config.productionTip &#x3D; false</span><br><span class="line">Vue.component(&#39;Loading&#39;, Loading);  &#x2F;&#x2F; 將overlay元件宣告成全域的元件</span><br><span class="line"></span><br><span class="line">axios.defaults.withCredentials &#x3D; true;</span><br><span class="line">&#x2F;* eslint-disable no-new *&#x2F;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#39;#app&#39;,</span><br><span class="line">  router,</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: &#39;&lt;App&#x2F;&gt;&#39;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/29/Vue-vue%E5%87%BA%E4%B8%80%E5%80%8B%E9%9B%BB%E5%95%86%E7%B6%B2%E7%AB%99-%E6%92%B0%E5%AF%ABDashBoard-02/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1016,20 +1020,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">142</span>
+          <span class="site-state-item-count">143</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">分類</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
