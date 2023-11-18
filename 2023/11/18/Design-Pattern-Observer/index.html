@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/owlBig.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/owl.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="紀錄 Observer 內容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Design Pattern - Observer">
+<meta property="og:url" content="https://landy510.github.io/2023/11/18/Design-Pattern-Observer/index.html">
+<meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄 Observer 內容">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-11-18T02:11:08.000Z">
+<meta property="article:modified_time" content="2023-11-18T02:19:01.977Z">
+<meta property="article:author" content="Landy">
+<meta property="article:tag" content="DesignPattern">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://landy510.github.io/2023/11/18/Design-Pattern-Observer/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Design Pattern - Observer | Landy Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1T19DR0SEG');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Landy Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2023/11/18/Design-Pattern-Observer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Design Pattern - Observer
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2023-11-18 10:11:08 / 修改時間：10:19:01" itemprop="dateCreated datePublished" datetime="2023-11-18T10:11:08+08:00">2023-11-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DesignPattern/" itemprop="url" rel="index"><span itemprop="name">DesignPattern</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄 Observer 內容</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>這是一種訂閱機制，讓眾多訂閱者可以接收到變化的通知，當它們的訂閱對象發生改變的時候。</p>
+<h2 id="DOM-事件"><a href="#DOM-事件" class="headerlink" title="DOM 事件"></a>DOM 事件</h2><p>我們常用的 <code>addEventListener</code> 也算是一種觀察者模式的實現。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const btnEl &#x3D; document.querySelector(&#39;btn&#39;);</span><br><span class="line">btnEl.addEventListener(&#39;click&#39;, e &#x3D; &gt; &#123;...&#125;);</span><br></pre></td></tr></table></figure>
+<p>以上的範例，透過在特定按鈕上監聽特定的事件，因為我們不知道該綁定事件會在什麼時候被觸發，每當使用者點擊按鈕時，就會觸發該按鈕點擊事件綁定的 callback function。</p>
+<h2 id="真實事件-網站登錄"><a href="#真實事件-網站登錄" class="headerlink" title="真實事件 - 網站登錄"></a>真實事件 - 網站登錄</h2><p>在 <em>JavaScript 設計模式與開發實踐</em> 一書中有提供一個實例，也就是接收登入者的資訊。<br>在網站中，頁面上各個元件基本都需要知道登入者的資訊，已得知該使用者有哪些權限，好判斷哪些內容可以被登入者檢視。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">const login &#x3D; &#123;</span><br><span class="line">	evtList: &#123;&#125;,</span><br><span class="line">	listen: function(evtName, fn) &#123;...&#125;,</span><br><span class="line">	trigger: function() &#123;</span><br><span class="line">		const key &#x3D; Array.prototype.shift.call(arguments);</span><br><span class="line">		const fns &#x3D; this.evtList[key];</span><br><span class="line">		</span><br><span class="line">		for(let i &#x3D; 0; i &lt; fns.length; i++) &#123;</span><br><span class="line">			fns[i].call(this, arguments);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fetch(&#39;https:&#x2F;&#x2F;xxx.com?login&#39;)</span><br><span class="line">	.then(res &#x3D;&gt; res.json())</span><br><span class="line">	.then(res &#x3D;&gt; &#123;</span><br><span class="line">		login.trigger(&#39;loginSucc&#39;, res);</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; --- 其他需要訂閱 loginSucc 事件的元件 ---</span><br><span class="line">const avatar &#x3D; (function() &#123;</span><br><span class="line">	login.listen(&#39;loginSucc&#39;, function(data) &#123;</span><br><span class="line">		header.setAvatar()</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	return &#123;</span><br><span class="line">		setAvatar: function() &#123;</span><br><span class="line">			console.log(&#39;time to set Avatar&#39;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">const nav &#x3D;  (fnuction()&#123;</span><br><span class="line">	login.listen(&#39;loginSucc&#39;, function(data) &#123;</span><br><span class="line">		nav.displayOptions(data)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	return &#123;</span><br><span class="line">		displayOptions: function(data) &#123;</span><br><span class="line">			console.log(&#96;base on $&#123;data&#125; to filter options&#96;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>以上的內容就是在需要登入者資訊的元件中監聽特定事件 loginSucc，等到登入成功後，自動去觸發登錄在 login 裡的 loginSucc ，如此一來有監聽這個 loginSucc 事件的訂閱者們都會接受到登入者的資訊，再做後續的操作。</p>
+<h2 id="RxJS"><a href="#RxJS" class="headerlink" title="RxJS"></a>RxJS</h2><p>在 Angular 框架裡面內建需要使用的 RxJS 套件，就有觀察者模式的機制的 api，<br>像是 <code>BehaviorSubject</code> 或 <code>Subject</code> 這兩個 api，就很常會用在當使用者成功登入之後，透過這些 api 來 broadcast 登入者的資料給有訂閱以上這兩個 api 的訂閱者。</p>
+<h2 id="Pros-and-Cons"><a href="#Pros-and-Cons" class="headerlink" title="Pros and Cons"></a>Pros and Cons</h2><p><strong>pros:</strong><br>我們可以減低訂閱者和被訂閱者之間的耦合程度</p>
+<p><strong>cons:</strong><br>如果訂閱者太多，往後若發生 bug 時，在查錯的過程就會很耗時，因為需要去一個一個查訂閱者接收的內容是哪邊出錯了。</p>
+<h2 id="Reference-Link"><a href="#Reference-Link" class="headerlink" title="Reference Link"></a>Reference Link</h2><p><a target="_blank" rel="noopener" href="https://www.tenlong.com.tw/products/9787115388889">JavaScript 設計模式與開發實踐</a><br><a target="_blank" rel="noopener" href="https://refactoring.guru/design-patterns/observer">https://refactoring.guru/design-patterns/observer</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DesignPattern/" rel="tag"># DesignPattern</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/15/TypeScript-%E7%AC%AC%E5%B9%BE%E6%8B%9B-Record-Keys-Type/" rel="prev" title="TypeScript-第幾招- Record&lt;Keys, Type&gt;">
+      <i class="fa fa-chevron-left"></i> TypeScript-第幾招- Record&lt;Keys, Type&gt;
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intro"><span class="nav-number">1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM-%E4%BA%8B%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">DOM 事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9C%9F%E5%AF%A6%E4%BA%8B%E4%BB%B6-%E7%B6%B2%E7%AB%99%E7%99%BB%E9%8C%84"><span class="nav-number">3.</span> <span class="nav-text">真實事件 - 網站登錄</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RxJS"><span class="nav-number">4.</span> <span class="nav-text">RxJS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pros-and-Cons"><span class="nav-number">5.</span> <span class="nav-text">Pros and Cons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference-Link"><span class="nav-number">6.</span> <span class="nav-text">Reference Link</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Landy</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Landy</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
