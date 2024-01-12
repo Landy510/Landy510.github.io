@@ -1222,6 +1222,13 @@
   </url>
   
   <url>
+    <loc>https://landy510.github.io/tags/SCAM/</loc>
+    <lastmod>2024-01-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://landy510.github.io/tags/Angular-class-binding/</loc>
     <lastmod>2024-01-12</lastmod>
     <changefreq>daily</changefreq>
@@ -1230,13 +1237,6 @@
   
   <url>
     <loc>https://landy510.github.io/tags/Angular-style-binding/</loc>
-    <lastmod>2024-01-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://landy510.github.io/tags/SCAM/</loc>
     <lastmod>2024-01-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1271,14 +1271,14 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/CSS-background/</loc>
+    <loc>https://landy510.github.io/tags/CSS-pseudo-element/</loc>
     <lastmod>2024-01-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/CSS-pseudo-element/</loc>
+    <loc>https://landy510.github.io/tags/CSS-background/</loc>
     <lastmod>2024-01-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1327,21 +1327,7 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/DesignPattern/</loc>
-    <lastmod>2024-01-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://landy510.github.io/tags/HTML/</loc>
-    <lastmod>2024-01-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://landy510.github.io/tags/flex-grow/</loc>
     <lastmod>2024-01-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1362,7 +1348,14 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/tags/jQuery/</loc>
+    <loc>https://landy510.github.io/tags/DesignPattern/</loc>
+    <lastmod>2024-01-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://landy510.github.io/tags/flex-grow/</loc>
     <lastmod>2024-01-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1384,6 +1377,13 @@
   
   <url>
     <loc>https://landy510.github.io/tags/JavaScript/</loc>
+    <lastmod>2024-01-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://landy510.github.io/tags/jQuery/</loc>
     <lastmod>2024-01-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1497,13 +1497,6 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/categories/DesignPattern/</loc>
-    <lastmod>2024-01-12</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://landy510.github.io/categories/HTML/</loc>
     <lastmod>2024-01-12</lastmod>
     <changefreq>daily</changefreq>
@@ -1511,7 +1504,7 @@
   </url>
   
   <url>
-    <loc>https://landy510.github.io/categories/jQuery/</loc>
+    <loc>https://landy510.github.io/categories/DesignPattern/</loc>
     <lastmod>2024-01-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1519,6 +1512,13 @@
   
   <url>
     <loc>https://landy510.github.io/categories/JavaScript/</loc>
+    <lastmod>2024-01-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://landy510.github.io/categories/jQuery/</loc>
     <lastmod>2024-01-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
