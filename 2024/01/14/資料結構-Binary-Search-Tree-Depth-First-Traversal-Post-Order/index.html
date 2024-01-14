@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Alex宅幹嘛ReVue-Day13 紀錄 Vue 中 transition 的 State_Transition 的內容，可以實現網頁中數字跑動的動畫效果">
+  <meta name="description" content="紀錄 Binary Search Tree 的 Depth First Traversal 在 Post order 的狀態下是怎麼遍歷的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Alex宅幹嘛ReVue-Day13_State_Transition">
-<meta property="og:url" content="https://landy510.github.io/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day13-State-Transition/index.html">
+<meta property="og:title" content="資料結構-Binary Search Tree - Depth First Traversal - Post Order">
+<meta property="og:url" content="https://landy510.github.io/2024/01/14/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Binary-Search-Tree-Depth-First-Traversal-Post-Order/index.html">
 <meta property="og:site_name" content="Landy Blog">
-<meta property="og:description" content="Alex宅幹嘛ReVue-Day13 紀錄 Vue 中 transition 的 State_Transition 的內容，可以實現網頁中數字跑動的動畫效果">
+<meta property="og:description" content="紀錄 Binary Search Tree 的 Depth First Traversal 在 Post order 的狀態下是怎麼遍歷的">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2021-06-22T14:48:03.000Z">
-<meta property="article:modified_time" content="2021-06-26T03:58:07.688Z">
+<meta property="article:published_time" content="2024-01-14T15:26:10.000Z">
+<meta property="article:modified_time" content="2024-01-14T15:32:02.716Z">
 <meta property="article:author" content="Landy">
-<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="DataStructure">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://landy510.github.io/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day13-State-Transition/">
+<link rel="canonical" href="https://landy510.github.io/2024/01/14/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Binary-Search-Tree-Depth-First-Traversal-Post-Order/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>Alex宅幹嘛ReVue-Day13_State_Transition | Landy Blog</title>
+  <title>資料結構-Binary Search Tree - Depth First Traversal - Post Order | Landy Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
     <script>
@@ -170,7 +170,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day13-State-Transition/">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2024/01/14/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Binary-Search-Tree-Depth-First-Traversal-Post-Order/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -183,7 +183,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Alex宅幹嘛ReVue-Day13_State_Transition
+          資料結構-Binary Search Tree - Depth First Traversal - Post Order
         </h1>
 
         <div class="post-meta">
@@ -192,28 +192,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">發表於</span>
+              
 
-              <time title="創建時間：2021-06-22 22:48:03" itemprop="dateCreated datePublished" datetime="2021-06-22T22:48:03+08:00">2021-06-22</time>
+              <time title="創建時間：2024-01-14 23:26:10 / 修改時間：23:32:02" itemprop="dateCreated datePublished" datetime="2024-01-14T23:26:10+08:00">2024-01-14</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-06-26 11:58:07" itemprop="dateModified" datetime="2021-06-26T11:58:07+08:00">2021-06-26</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                  <a href="/categories/DataStructure/" itemprop="url" rel="index"><span itemprop="name">DataStructure</span></a>
                 </span>
             </span>
 
           
-            <div class="post-description">Alex宅幹嘛ReVue-Day13 紀錄 Vue 中 transition 的 State_Transition 的內容，可以實現網頁中數字跑動的動畫效果</div>
+            <div class="post-description">紀錄 Binary Search Tree 的 Depth First Traversal 在 Post order 的狀態下是怎麼遍歷的</div>
 
         </div>
       </header>
@@ -224,14 +218,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>接續<a href="/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day13-Transition/" title="上一篇">上一篇</a> 還沒做完的筆記在這邊接續下來做。<br>這邊的話，主要是紀錄 Vue 的 transition 的 State_Transition 的內容。</p>
-<h1 id="State-Transition"><a href="#State-Transition" class="headerlink" title="State_Transition"></a>State_Transition</h1><p>在上一篇的 Enter/Leave &amp; List Transitions 部分，主要是在教我們怎麼加入進退場的動畫。<br>在這邊主要是要介紹，引入一些第三放的套件，並加上 Vue 本身的功能，來為我們自己的資料加上動畫的方法。</p>
-<h2 id="Animating-State-with-Watchers"><a href="#Animating-State-with-Watchers" class="headerlink" title="Animating State with Watchers"></a>Animating State with Watchers</h2><p>通常會有兩種是值，一個是我們的原始數值，另一個是用來跑畫面效果的數值。<br>那我們在改的是原始數值，在呈現的是另一個數值，這種實作的概念要記得。</p>
-<h1 id="Organizing-Transitions-into-Components"><a href="#Organizing-Transitions-into-Components" class="headerlink" title="Organizing Transitions into Components"></a>Organizing Transitions into Components</h1><p>這個 Vue 所寫的套件，Alex 大大蠻推薦的，用來呈現數字跑動的效果。<br>但要小心的是，這個套件是和 tween.js 相依的。</p>
-<iframe src="https://codepen.io/RandyChen/embed/BaWedLR?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-<p>你可以看到以上這個範例，我們畫面呈現的資料是 tweeningValue 而實記載更改的數字就是利用元件的 props 的 value 來接進來，並藉由 tween 套件來更新畫面上的數值。<br>這個 Vue 物件是一個很推薦效果喔。</p>
-<h1 id="Alex宅幹嘛-眉眉角角"><a href="#Alex宅幹嘛-眉眉角角" class="headerlink" title="Alex宅幹嘛-眉眉角角"></a>Alex宅幹嘛-眉眉角角</h1><h2 id="呈現動畫的概念"><a href="#呈現動畫的概念" class="headerlink" title="呈現動畫的概念"></a>呈現動畫的概念</h2><p>通常會有兩種是值，一個是我們的原始數值，另一個是用來跑畫面效果的數值。<br>那我們在改的是原始數值，在呈現的則是另一個數值，這種實作的概念要記得。</p>
-<h2 id="推薦的-library"><a href="#推薦的-library" class="headerlink" title="推薦的 library"></a>推薦的 library</h2><p>這邊也有推薦在 Vue 範例中使用到的 <a target="_blank" rel="noopener" href="https://www.createjs.com/tweenjs">tweenJS</a> 的套件，很推薦去看看它怎麼用的。<br>它是一個輕量化的 JS 套件，我們只需要給它起始值、結束值、過程需花費多少時間，其他的中間值會自動被計算出來。<br>接著，我們可以利用 Vue 的 animated-integer 套件來實現數字跑動的動畫效果囉~</p>
+        <h2 id="post-order-的遍歷特性"><a href="#post-order-的遍歷特性" class="headerlink" title="post-order 的遍歷特性"></a>post-order 的遍歷特性</h2><ol>
+<li>先遍歷到整個 tree 的最左邊且最末端的 node(i.e. 值最小的 node)。</li>
+<li>對 step 1 這個最左邊的 node 執行傳入的 iteratorFnc，<br>再來對這個最左邊 node 所隸屬的 sub tree 的 right-side child node 執行傳入的 iteratorFnc。</li>
+<li>最後再對 step 2 這個 sub tree 的 parent node 執行傳入的 iteratorFnc。</li>
+<li>接著，就是一直往上對不同層的 sub tree 不停地執行 step 1 - step 3 這個流程的操作。</li>
+</ol>
+<p>由此我們可以知道 post-order ，<br>會先觸碰 left-side child node ，<br>再碰 right-side child node，<br>最後才碰 parent node。</p>
+<p><strong>這樣子先處理 sub tree 的所有 child node 的特性，很適合在刪除 tree 的操作時使用</strong>，因為我們可以確保當 child node 都被刪除後，才會往 parent node 繼續做刪除的動作。</p>
+<p>程式碼的寫法如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; ...</span><br><span class="line">BST.prototype.depthFirstTraversal &#x3D; function(iteratorFnc, order) &#123;</span><br><span class="line">  if(order &#x3D;&#x3D;&#x3D; &#39;pre-order&#39;) iteratorFnc(this.value);</span><br><span class="line">  if(this.left) this.left.depthFirstTraversal(iteratorFnc, order);</span><br><span class="line">  if(order &#x3D;&#x3D;&#x3D; &#39;in-order&#39;) iteratorFnc(this.value);</span><br><span class="line">  if(this.right) this.right.depthFirstTraversal(iteratorFnc, order);</span><br><span class="line">  if(order &#x3D;&#x3D;&#x3D; &#39;post-order&#39;) iteratorFnc(this.value); &#x2F;&#x2F; 就加這一行判斷 order 是否為 post-order 進去</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const bst &#x3D; new BST(50);</span><br><span class="line">bst.insert(30);</span><br><span class="line">bst.insert(70);</span><br><span class="line">bst.insert(100);</span><br><span class="line">bst.insert(40);</span><br><span class="line">bst.insert(60);</span><br><span class="line">bst.depthFirstTraversal(getValue, &#39;post-order&#39;); &#x2F;&#x2F; 40 30 60 100 70</span><br><span class="line">function getValue(value) &#123;</span><br><span class="line">  console.log(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
+<li>post order 執行傳入 function 的次序為 left node -&gt; right node -&gt; parent node。</li>
+<li>pre order 這種執行特性，適合用在刪除 tree 的需求。</li>
+</ul>
+<h2 id="Reference-Link"><a href="#Reference-Link" class="headerlink" title="Reference Link"></a>Reference Link</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.udemy.com/course/learning-data-structures-in-javascript-from-scratch/">Learning Data Structures in JavaScript from Scratch</a> by Eric Traub @ Udemy</li>
+</ul>
 
     </div>
 
@@ -241,7 +245,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Vue/" rel="tag"># Vue</a>
+              <a href="/tags/DataStructure/" rel="tag"># DataStructure</a>
           </div>
 
         
@@ -250,13 +254,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day13-Transition/" rel="prev" title="Alex宅幹嘛ReVue-Day13_Transition">
-      <i class="fa fa-chevron-left"></i> Alex宅幹嘛ReVue-Day13_Transition
+    <a href="/2024/01/14/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Binary-Search-Tree-Depth-First-Traversal-Pre-Order/" rel="prev" title="資料結構-Binary Search Tree - Depth First Traversal - Pre Order">
+      <i class="fa fa-chevron-left"></i> 資料結構-Binary Search Tree - Depth First Traversal - Pre Order
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day14%E7%AD%86%E8%A8%98-Directive/" rel="next" title="Alex宅幹嘛_ReVue_Day14筆記_Directive">
-      Alex宅幹嘛_ReVue_Day14筆記_Directive <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -315,7 +316,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#State-Transition"><span class="nav-number">1.</span> <span class="nav-text">State_Transition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Animating-State-with-Watchers"><span class="nav-number">1.1.</span> <span class="nav-text">Animating State with Watchers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Organizing-Transitions-into-Components"><span class="nav-number">2.</span> <span class="nav-text">Organizing Transitions into Components</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alex%E5%AE%85%E5%B9%B9%E5%98%9B-%E7%9C%89%E7%9C%89%E8%A7%92%E8%A7%92"><span class="nav-number">3.</span> <span class="nav-text">Alex宅幹嘛-眉眉角角</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%88%E7%8F%BE%E5%8B%95%E7%95%AB%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">3.1.</span> <span class="nav-text">呈現動畫的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%96%A6%E7%9A%84-library"><span class="nav-number">3.2.</span> <span class="nav-text">推薦的 library</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#post-order-%E7%9A%84%E9%81%8D%E6%AD%B7%E7%89%B9%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">post-order 的遍歷特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">2.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference-Link"><span class="nav-number">3.</span> <span class="nav-text">Reference Link</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
