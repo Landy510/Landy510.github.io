@@ -164,6 +164,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/20/Vue%E5%B8%B8%E7%94%A8API-02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/20/Vue%E5%B8%B8%E7%94%A8API-02/" class="post-title-link" itemprop="url">Vue常用API-02</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-20 11:17:19" itemprop="dateCreated datePublished" datetime="2021-01-20T11:17:19+08:00">2021-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-04-28 12:24:08" itemprop="dateModified" datetime="2021-04-28T12:24:08+08:00">2021-04-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p> 接續<a href="/2021/01/08/Vue-js%E5%85%83%E4%BB%B6/" title="上一篇">上一篇</a>內容。</p>
+<h1 id="Directive-開發自己的互動UI"><a href="#Directive-開發自己的互動UI" class="headerlink" title="Directive 開發自己的互動UI"></a>Directive 開發自己的互動UI</h1><p>Directive的功用為，Vue.js 提供自定義指令讓開發者直接從底層操作 DOM 物件。</p>
+<h2 id="Directive-有屬於它自己的生命周期。"><a href="#Directive-有屬於它自己的生命周期。" class="headerlink" title="Directive 有屬於它自己的生命周期。"></a>Directive 有屬於它自己的生命周期。</h2><p>ex:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">---HTML---</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">  &lt;input type&#x3D;&quot;text&quot; v-focus&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---Javascript---</span><br><span class="line">Vue.directive(&#39;focus&#39;, &#123;</span><br><span class="line">  &#x2F;&#x2F; 當綁定元素插入父元素後，會觸發 inserted hook 內的內容</span><br><span class="line">  inserted: function (el) &#123;</span><br><span class="line">    el.focus()  &#x2F;&#x2F; 聚焦元素</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">  el:&#39;#app&#39;,</span><br><span class="line">  data:&#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以上這個範例，可以看出來<code>directive</code>有它自己的生命週期。<br><code>bind</code>: 只會執行一次，即該自訂義事件第一次跟被綁定元素綁定時會觸發這個hook的內容。<br><code>inserted</code>: 當被綁定元素，完成插入父元素之後，會觸發inerted hook 的內容。<br><code>update</code>: 綁定元素在模版更新時，會觸發<br>它不只有上面三種生命週期，可以直接去看官方看看其他生命週期介紹。<br><a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/custom-directive.html">官方文件</a></p>
+<h2 id="directive-的-Hook函式所能使用的參數"><a href="#directive-的-Hook函式所能使用的參數" class="headerlink" title="directive 的 Hook函式所能使用的參數"></a>directive 的 Hook函式所能使用的參數</h2><p>在官方文件中有提供，<code>directive</code>的Hook有一些參數可以直接使用<br><code>el</code>: 可以獲得被自訂義指令綁定的目標元素，且直接操縱這個被綁定的目標元素<br><code>binding</code>: 被綁定目標元素的特性，有以下幾個，我只簡列幾項</p>
+<ul>
+<li><code>name</code>: 沒有前綴詞<code>v-</code>的自訂義事件名稱，像上面範例的<code>v-focus</code>，去掉<code>v-</code>，它的自訂義事件的name屬性就是<code>focus</code>。<br>有關<code>binding</code>還有其他的參數可以使用，可以看一下官方文件。</li>
+</ul>
+<p>那以上這個範例，每次頁面刷新的時候，該<code>input</code>欄位就會藉由v-focus來觸發在<code>directive</code>中自訂義的focus內容，自動將畫面焦點移到這個<code>input</code>欄位中。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/20/Vue%E5%B8%B8%E7%94%A8API-02/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/19/Bootstrap%E4%BD%9C%E5%93%81%E9%9B%86-%E6%8A%80%E5%B7%A7%E7%AD%86%E8%A8%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -980,100 +1070,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">JavaScript ES6 課程筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-01-18 09:14:59" itemprop="dateCreated datePublished" datetime="2021-01-18T09:14:59+08:00">2021-01-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-04-27 16:30:40" itemprop="dateModified" datetime="2021-04-27T16:30:40+08:00">2021-04-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="使用let-與-const-宣告變數"><a href="#使用let-與-const-宣告變數" class="headerlink" title="使用let 與 const 宣告變數"></a>使用let 與 const 宣告變數</h1><p>ex: (var 宣告)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(mom); &#x2F;&#x2F; undefined</span><br><span class="line">var mom &#x3D; &#39;老媽&#39;;</span><br><span class="line">(function()&#123;</span><br><span class="line">    console.log(mom); &#x2F;&#x2F; 老媽</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-<p>ex: (let 宣告)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(mom);  &#x2F;&#x2F; &quot;ReferenceError: Cannot access &#39;ming&#39; before initialization&quot;</span><br><span class="line">let mom &#x3D; &#39;老媽&#39;;</span><br><span class="line">(function()&#123;</span><br><span class="line">    console.log(mom); &#x2F;&#x2F; 老媽</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-<p>以上這兩個宣告方法的差異可以看出來，用<code>let</code>宣告是沒有Hoisting的特性，<br>所以，導致在<code>let</code>定義變數之前，就取用該變數的話，會跳出在初始化該變數之前無法調用該變數的錯誤，<br>而<code>var</code>宣告是有Hoisting的特性，<br>所以，在<code>var</code>定義變數之前，就取用該變數的話，只會跳出<code>undefined</code>的值。</p>
-<h2 id="var-與-let-作用域的不同"><a href="#var-與-let-作用域的不同" class="headerlink" title="var 與 let 作用域的不同"></a>var 與 let 作用域的不同</h2><p><code>var</code>的作用域是function scope<br><code>let</code>的作用域是block</p>
-<p>ex: (var 作用域)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function varMing() &#123;</span><br><span class="line">    var ming &#x3D; &#39;小明&#39;;</span><br><span class="line">    if(true)&#123;</span><br><span class="line">        var ming &#x3D; &#39;傑哥&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(ming); &#x2F;&#x2F; 傑哥</span><br><span class="line">&#125;</span><br><span class="line">varMing()</span><br></pre></td></tr></table></figure>
-<p>以上範例可以看到，<code>if</code>判斷式的範圍跟外層的<code>var ming = &#39;小明&#39;</code>作用域範圍是相同的，<br>因為，它們都是存在同一個function scope裡面(即函式varMing裡面)，不要被<code>if</code>判斷式的花括號給誤導了，<br>所以，再重新定義一次變數ming是會影響最後變數ming的數值。</p>
-<p>ex:(let 作用域)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function varMing()&#123;</span><br><span class="line">    let ming &#x3D; &#39;小明&#39;;</span><br><span class="line">    if(true)&#123;</span><br><span class="line">        let ming &#x3D; &#39;傑哥&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(ming); &#x2F;&#x2F; 小明</span><br><span class="line">&#125;</span><br><span class="line">varMing()</span><br></pre></td></tr></table></figure>
-<p>以上這個範例可以看到，最終結果是小明，<br>原因是<code>let</code>的作用域是用block來區分，所以，<code>if</code>判斷式中的作用域跟外層的作用域是分開的，<br>所以，我們在<code>if</code>中再次對ming變數做定義，是不會影響到外層變數ming的值的。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/18/JavaScript-ES6-%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1143,7 +1139,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">155</span>
+          <span class="site-state-item-count">156</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

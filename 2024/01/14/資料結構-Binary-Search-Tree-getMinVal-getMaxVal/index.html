@@ -20,15 +20,20 @@
     var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Landy Blog">
-<meta property="og:url" content="https://landy510.github.io/categories/Bootstrap/index.html">
+  <meta name="description" content="紀錄 Binary Search Tree 取得最大值 和 取得最小值 的實作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="資料結構-Binary Search Tree - getMinVal &amp;&amp; getMaxVal">
+<meta property="og:url" content="https://landy510.github.io/2024/01/14/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Binary-Search-Tree-getMinVal-getMaxVal/index.html">
 <meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄 Binary Search Tree 取得最大值 和 取得最小值 的實作">
 <meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2024-01-14T15:48:08.000Z">
+<meta property="article:modified_time" content="2024-01-14T15:50:11.683Z">
 <meta property="article:author" content="Landy">
+<meta property="article:tag" content="DataStructure">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://landy510.github.io/categories/Bootstrap/">
+<link rel="canonical" href="https://landy510.github.io/2024/01/14/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Binary-Search-Tree-getMinVal-getMaxVal/">
 
 
 <script id="page-configurations">
@@ -36,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-TW'
   };
 </script>
 
-  <title>分類: Bootstrap | Landy Blog</title>
+  <title>資料結構-Binary Search Tree - getMinVal && getMaxVal | Landy Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
     <script>
@@ -158,235 +163,97 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Bootstrap
-          <small>分類</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2024/01/14/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Binary-Search-Tree-getMinVal-getMaxVal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          資料結構-Binary Search Tree - getMinVal && getMaxVal
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2024-01-14 23:48:08 / 修改時間：23:50:11" itemprop="dateCreated datePublished" datetime="2024-01-14T23:48:08+08:00">2024-01-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DataStructure/" itemprop="url" rel="index"><span itemprop="name">DataStructure</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄 Binary Search Tree 取得最大值 和 取得最小值 的實作</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
+        <h2 id="程式碼如下"><a href="#程式碼如下" class="headerlink" title="程式碼如下"></a>程式碼如下</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; ...</span><br><span class="line">BST.prototype.getMinVal &#x3D; function() &#123;</span><br><span class="line">  if(this.left) return this.left.getMinVal();</span><br><span class="line">  else return this.value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">BST.prototype.getMaxVal &#x3D; function() &#123;</span><br><span class="line">  if(this.right) return this.right.getMaxVal();</span><br><span class="line">  else return this.value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const bst &#x3D; new BST(50);</span><br><span class="line">bst.insert(30);</span><br><span class="line">bst.insert(70);</span><br><span class="line">bst.insert(1000);</span><br><span class="line">bst.insert(-1);</span><br><span class="line">console.log(&#39;MIN&#39;, bst.getMinVal()); &#x2F;&#x2F; -1</span><br><span class="line">console.log(&#39;MAX&#39;, bst.getMaxVal()); &#x2F;&#x2F; 1000</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-14T09:22:02+08:00"
-              content="2021-05-14">
-          05-14
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/14/Bootstrap-%E6%80%8E%E9%BA%BC%E7%9C%8B%E5%AE%83%E7%9A%84hover%E6%95%88%E6%9E%9C%E6%A8%A3%E5%BC%8F/" itemprop="url">
-            <span itemprop="name">Bootstrap-怎麼看它的hover效果樣式</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-01-19T17:58:26+08:00"
-              content="2021-01-19">
-          01-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/01/19/Bootstrap%E4%BD%9C%E5%93%81%E9%9B%86-%E6%8A%80%E5%B7%A7%E7%AD%86%E8%A8%98/" itemprop="url">
-            <span itemprop="name">Bootstrap作品集_技巧筆記</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-01-19T10:53:10+08:00"
-              content="2021-01-19">
-          01-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/01/19/bootstrap-%E4%BD%9C%E5%93%81%E9%9B%86dropdown%E5%95%8F%E9%A1%8C/" itemprop="url">
-            <span itemprop="name">bootstrap_作品集dropdown問題</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-01-19T10:50:39+08:00"
-              content="2021-01-19">
-          01-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/01/19/bootstrap-Modal%E7%8B%80%E6%B3%81/" itemprop="url">
-            <span itemprop="name">bootstrap_Modal狀況</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-01-19T10:37:01+08:00"
-              content="2021-01-19">
-          01-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/01/19/bootstrap-%E8%A3%BD%E4%BD%9C%E8%B3%BC%E7%89%A9%E8%BB%8A%E7%B6%B2%E9%A0%81/" itemprop="url">
-            <span itemprop="name">bootstrap_製作購物車網頁</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-01-19T10:23:51+08:00"
-              content="2021-01-19">
-          01-19
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/01/19/bootstrap-Modal%E4%BA%92%E5%8B%95%E8%A6%96%E7%AA%97/" itemprop="url">
-            <span itemprop="name">bootstrap_Modal互動視窗</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-01-09T18:55:20+08:00"
-              content="2021-01-09">
-          01-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-03-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89/" itemprop="url">
-            <span itemprop="name">bootstrap-form的功能筆記-03-表單驗證</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-01-09T18:25:21+08:00"
-              content="2021-01-09">
-          01-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-02/" itemprop="url">
-            <span itemprop="name">bootstrap-form的功能筆記-02</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-01-09T11:02:06+08:00"
-              content="2021-01-09">
-          01-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-01/" itemprop="url">
-            <span itemprop="name">bootstrap form的功能筆記-01</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-01-09T09:55:55+08:00"
-              content="2021-01-09">
-          01-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98/" itemprop="url">
-            <span itemprop="name">bootstrap form的功能筆記</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
+<p><code>getMinVal</code> 的做法就是一直去判斷是否當前被遍歷到的 node 還有沒有 left-side child node，<br>若有，就往下遍歷到 left-side node，<br>若沒有，就代表這個 node 是 tree 的最左邊且最末端的 node，也就是最小值的 node。</p>
+<p><code>getMaxVal</code> 的做法就是一直去判斷是否當前被遍歷到的 node 還有沒有 right-side child node，<br>若有，就往下遍歷到 right-side node，<br>若沒有，就代表這個 node 是 tree 的最右邊且最末端的 node，也就是最大值的 node。</p>
+<h2 id="Reference-Link"><a href="#Reference-Link" class="headerlink" title="Reference Link"></a>Reference Link</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.udemy.com/course/learning-data-structures-in-javascript-from-scratch/">Learning Data Structures in JavaScript from Scratch</a> by Eric Traub @ Udemy</li>
+</ul>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DataStructure/" rel="tag"># DataStructure</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/14/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-Binary-Search-Tree-Breath-First-Traversal-part-2/" rel="prev" title="資料結構-Binary Search Tree - Breath First Traversal - part 2">
+      <i class="fa fa-chevron-left"></i> 資料結構-Binary Search Tree - Breath First Traversal - part 2
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/categories/Bootstrap/page/2/">2</a><a class="extend next" rel="next" href="/categories/Bootstrap/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
-  </nav>
+  
+  
 
 
 
@@ -438,6 +305,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BC%8F%E7%A2%BC%E5%A6%82%E4%B8%8B"><span class="nav-number">1.</span> <span class="nav-text">程式碼如下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference-Link"><span class="nav-number">2.</span> <span class="nav-text">Reference Link</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
