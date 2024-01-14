@@ -164,6 +164,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/05/%E7%AC%AC%E4%B8%83%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/05/%E7%AC%AC%E4%B8%83%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">第七週前端課程筆記</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-05 09:45:06" itemprop="dateCreated datePublished" datetime="2021-01-05T09:45:06+08:00">2021-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-30 15:16:11" itemprop="dateModified" datetime="2021-01-30T15:16:11+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">前端體驗營切版</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li><p>坊間有兩套css reset<br>一套是meyerweb，另一套是Normalize。<br>但要記得，它們兩個不能共同使用。<br>所以，當你使用bootstrap的scss的時候，就不要再使用meyerweb了，<br>因為，bootstrap的css reset就有載入normalize了。</p>
+</li>
+<li><p>在專案的<code>head</code>中，常用的語法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;HTML、CSS教學&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;link rel&#x3D;&quot;shortcut icon&quot; href&#x3D;&quot;favicon.ico&quot;&gt;</span><br><span class="line">    &lt;meta name&#x3D;&#39;description&#39; content&#x3D;&#39;網站描述文字&#39; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;meta property&#x3D;&quot;og:title&quot; content&#x3D;&quot;FB的標題&quot; &#x2F;&gt;</span><br><span class="line">    &lt;meta property&#x3D;&quot;og:description&quot; content&#x3D;&quot;FB的描述&quot;&gt;</span><br><span class="line">    &lt;meta property&#x3D;&quot;og:type&quot; content&#x3D;&quot;website&quot; &#x2F;&gt;</span><br><span class="line">    &lt;meta property&#x3D;&quot;og:url&quot; content&#x3D;&quot;FB上的網址&quot; &#x2F;&gt;</span><br><span class="line">    &lt;meta property&#x3D;&quot;og:image&quot; content&#x3D;&quot;FB的圖片&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;link href&#x3D;&quot;圖片路徑&quot; rel&#x3D;&quot;apple-touch-icon&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;meta http-equiv&#x3D;&quot;X-UA-Compatible&quot; content&#x3D;&quot;IE&#x3D;Edge&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;CSS檔案路徑&quot;&gt;</span><br><span class="line">    &lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;JS檔案路徑&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/05/%E7%AC%AC%E4%B8%83%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2020/12/31/JavaScript%E4%B8%AD%E7%9A%84this/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1011,7 +1096,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">149</span>
+          <span class="site-state-item-count">150</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
