@@ -164,6 +164,70 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2020/12/31/JavaScript%E4%B8%AD%E7%9A%84this/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/31/JavaScript%E4%B8%AD%E7%9A%84this/" class="post-title-link" itemprop="url">JavaScript中的this</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2020-12-31 18:01:59 / 修改時間：18:09:12" itemprop="dateCreated datePublished" datetime="2020-12-31T18:01:59+08:00">2020-12-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ol>
+<li>不同的物件呼叫同一個function，在該function的this會不同。</li>
+<li>巢狀函式造成的不同的this<br> a. 因為JavaScript的變數的最小區分單位是function<br> b. 在JavaScript中，this變數預設綁定的是window物件<br> c. 這種情況可以利用用一個變數存存外層的this，在傳入內層函式</li>
+<li>強制綁定this<br> a. 箭頭函式<br> b. bind()<br> c. call()<br> d. apply()<br> e. 關鍵字new來創建一個新物件</li>
+<li>‘use strict’造成this無法再預設綁定成window物件了。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2020/12/31/%E7%AE%AD%E9%A0%AD%E5%87%BD%E5%BC%8F%E8%88%87this/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -947,7 +1011,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">158</span>
+          <span class="site-state-item-count">159</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>

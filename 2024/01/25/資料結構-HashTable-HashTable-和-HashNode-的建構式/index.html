@@ -20,15 +20,20 @@
     var CONFIG = {"hostname":"landy510.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Landy Blog">
-<meta property="og:url" content="https://landy510.github.io/archives/2021/06/index.html">
+  <meta name="description" content="紀錄如何實作 Hash Table 和 HashNode 的建構式，以利後續創建 HashTable 和 HashNode 的 instance。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="資料結構-HashTable-HashTable 和 HashNode 的建構式">
+<meta property="og:url" content="https://landy510.github.io/2024/01/25/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-HashTable-HashTable-%E5%92%8C-HashNode-%E7%9A%84%E5%BB%BA%E6%A7%8B%E5%BC%8F/index.html">
 <meta property="og:site_name" content="Landy Blog">
+<meta property="og:description" content="紀錄如何實作 Hash Table 和 HashNode 的建構式，以利後續創建 HashTable 和 HashNode 的 instance。">
 <meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2024-01-25T14:36:18.000Z">
+<meta property="article:modified_time" content="2024-01-25T14:43:32.627Z">
 <meta property="article:author" content="Landy">
+<meta property="article:tag" content="DataStructure">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://landy510.github.io/archives/2021/06/">
+<link rel="canonical" href="https://landy510.github.io/2024/01/25/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-HashTable-HashTable-%E5%92%8C-HashNode-%E7%9A%84%E5%BB%BA%E6%A7%8B%E5%BC%8F/">
 
 
 <script id="page-configurations">
@@ -36,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-TW'
   };
 </script>
 
-  <title>歸檔 | Landy Blog</title>
+  <title>資料結構-HashTable-HashTable 和 HashNode 的建構式 | Landy Blog</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1T19DR0SEG"></script>
     <script>
@@ -158,235 +163,99 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">非常好! 目前共有 159 篇文章。 繼續努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2024/01/25/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-HashTable-HashTable-%E5%92%8C-HashNode-%E7%9A%84%E5%BB%BA%E6%A7%8B%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          資料結構-HashTable-HashTable 和 HashNode 的建構式
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2024-01-25 22:36:18 / 修改時間：22:43:32" itemprop="dateCreated datePublished" datetime="2024-01-25T22:36:18+08:00">2024-01-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DataStructure/" itemprop="url" rel="index"><span itemprop="name">DataStructure</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">紀錄如何實作 Hash Table 和 HashNode 的建構式，以利後續創建 HashTable 和 HashNode 的 instance。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
+        <h2 id="程式碼如下"><a href="#程式碼如下" class="headerlink" title="程式碼如下"></a>程式碼如下</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function HashTable(size) &#123;</span><br><span class="line">  this.buckets &#x3D; Array(size);</span><br><span class="line">  this.numBuckets &#x3D; this.buckets.length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function HashNode(key, value, next) &#123;</span><br><span class="line">  this.key &#x3D; key;</span><br><span class="line">  this.value &#x3D; value;</span><br><span class="line">  this.next &#x3D; next || null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const myHT &#x3D; new HashTable(10);</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>這邊解釋一下上面的程式碼在幹嘛</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function HashTable(size) &#123;</span><br><span class="line">  this.buckets &#x3D; Array(size); &#x2F;&#x2F; 這個 Hash Table 本身的陣列</span><br><span class="line">  this.numBuckets &#x3D; this.buckets.length; &#x2F;&#x2F; 這個陣列的長度</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function HashNode(key, value, next) &#123;</span><br><span class="line">  this.key &#x3D; key; &#x2F;&#x2F; 這個 node 的 key 值</span><br><span class="line">  this.value &#x3D; value; &#x2F;&#x2F; 這個 node 的 value 值</span><br><span class="line">  this.next &#x3D; next || null; &#x2F;&#x2F; 這個 node 指向的其他 node 的參照，若這個新增的 node 是該 Linked List 的最後一個 node 的話，則指向 null</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-26T12:34:46+08:00"
-              content="2021-06-26">
-          06-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day15%E7%AD%86%E8%A8%98-Plugin%E5%92%8CFilter/" itemprop="url">
-            <span itemprop="name">Alex宅幹嘛_ReVue_Day15筆記_Plugin和Filter</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-26T12:23:27+08:00"
-              content="2021-06-26">
-          06-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day14%E7%AD%86%E8%A8%98-Mixin/" itemprop="url">
-            <span itemprop="name">Alex宅幹嘛_ReVue_Day14筆記_Mixin</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-26T12:03:34+08:00"
-              content="2021-06-26">
-          06-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/26/Alex%E5%AE%85%E5%B9%B9%E5%98%9B-ReVue-Day14%E7%AD%86%E8%A8%98-Directive/" itemprop="url">
-            <span itemprop="name">Alex宅幹嘛_ReVue_Day14筆記_Directive</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-22T22:48:03+08:00"
-              content="2021-06-22">
-          06-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day13-State-Transition/" itemprop="url">
-            <span itemprop="name">Alex宅幹嘛ReVue-Day13_State_Transition</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-22T22:42:27+08:00"
-              content="2021-06-22">
-          06-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day13-Transition/" itemprop="url">
-            <span itemprop="name">Alex宅幹嘛ReVue-Day13_Transition</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-22T22:31:32+08:00"
-              content="2021-06-22">
-          06-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/22/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day12/" itemprop="url">
-            <span itemprop="name">Alex宅幹嘛ReVue-Day12</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-17T23:51:04+08:00"
-              content="2021-06-17">
-          06-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/17/axios%E5%A5%97%E4%BB%B6%E7%B6%B2%E8%B7%AF%E8%AB%8B%E6%B1%82%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%B4%B9/" itemprop="url">
-            <span itemprop="name">axios套件網路請求使用介紹</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-14T15:18:31+08:00"
-              content="2021-06-14">
-          06-14
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/14/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day11-%E5%AE%A2%E8%A3%BD%E5%8C%96%E5%85%83%E4%BB%B6%E7%9A%84props%E7%94%A8%E6%B3%95/" itemprop="url">
-            <span itemprop="name">Alex宅幹嘛ReVue-Day11.客製化元件的props用法</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-13T17:47:29+08:00"
-              content="2021-06-13">
-          06-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/13/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day09-vue%E5%85%83%E4%BB%B6/" itemprop="url">
-            <span itemprop="name">Alex宅幹嘛ReVue-Day09-vue元件</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-06-13T17:12:44+08:00"
-              content="2021-06-13">
-          06-13
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/06/13/Alex%E5%AE%85%E5%B9%B9%E5%98%9BReVue-Day10-%E5%85%83%E4%BB%B6props/" itemprop="url">
-            <span itemprop="name">Alex宅幹嘛ReVue-Day10-元件props</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<h2 id="Reference-Link"><a href="#Reference-Link" class="headerlink" title="Reference Link"></a>Reference Link</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.udemy.com/course/learning-data-structures-in-javascript-from-scratch/">Learning Data Structures in JavaScript from Scratch</a> by Eric Traub @ Udemy</li>
+</ul>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DataStructure/" rel="tag"># DataStructure</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/25/%E8%B3%87%E6%96%99%E7%B5%90%E6%A7%8B-HashTable-Intro/" rel="prev" title="資料結構-HashTable-Intro">
+      <i class="fa fa-chevron-left"></i> 資料結構-HashTable-Intro
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2021/06/page/2/">2</a><a class="extend next" rel="next" href="/archives/2021/06/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
-  </nav>
+  
+  
 
 
 
@@ -438,6 +307,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BC%8F%E7%A2%BC%E5%A6%82%E4%B8%8B"><span class="nav-number">1.</span> <span class="nav-text">程式碼如下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference-Link"><span class="nav-number">2.</span> <span class="nav-text">Reference Link</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
