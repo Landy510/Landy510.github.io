@@ -164,6 +164,101 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-03-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-03-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89/" class="post-title-link" itemprop="url">bootstrap-form的功能筆記-03-表單驗證</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2021-01-09 18:55:20" itemprop="dateCreated datePublished" datetime="2021-01-09T18:55:20+08:00">2021-01-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2021-01-30 15:09:45" itemprop="dateModified" datetime="2021-01-30T15:09:45+08:00">2021-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Bootstrap/" itemprop="url" rel="index"><span itemprop="name">Bootstrap</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>bootstrap有提供兩種驗證方法</p>
+<ol>
+<li>伺服器端驗證</li>
+<li>瀏覽器端驗證</li>
+</ol>
+<p>透過<code>:invalid</code>和<code>:valid</code>來驗證是否該欄位是否通過驗證，<br>若沒通過該欄位外框呈現紅色，若有通過該欄位外框呈現綠色。</p>
+<p>如果，是伺服器端驗證的話，需要自己手動在相對應元件的class中加入<code>.is-invalid</code>和<code>.is-valid</code>，<br>來替換掉<code>:invalid</code>和<code>:valid</code>。</p>
+<h1 id="伺服器端驗證"><a href="#伺服器端驗證" class="headerlink" title="伺服器端驗證"></a>伺服器端驗證</h1><p>首先，來介紹伺服器端驗證的範例</p>
+<iframe src="https://codepen.io/RandyChen/embed/OJRwwxd?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>首先，你要記得在那些要被驗證<code>input</code>的html標籤中加入<code>required</code>屬性。<br>接著，以上的範例，你可以看到，我們故意在firstname的<code>input</code>欄位和lastname的<code>input</code>欄位的class中加入<code>is-valid</code>，<br>此時，在畫面中，可以看到它們的<code>input</code>外框呈現綠色的，代表驗證正確。<br>那我們在下面的City, State, Road的<code>input</code>欄位的class中，都加入了<code>is-invalid</code>，<br>在畫面中，可以看到他們的<code>input</code>外框呈現紅色的，代表驗證錯誤。<br>那在驗證錯誤的欄位附近會呈現一段回饋的提示訊息，<br>這段回饋的提示訊息，你需要在相對應區塊中加入<code>div</code>區塊，並為這<code>div</code>區塊加入class名稱<code>invalid-feedback</code>，<br>接著，你在這個<code>invalid-feedback</code>的區塊裡面加入你想要呈現的錯誤回饋內容即可。</p>
+<p>伺服器端驗證的範例中的<code>is-valid</code>和<code>is-invalid</code>，其實，實際的運作是當使用者輸入的內容，會由後端判斷其內容是否符合規範，此時，後端會回傳<br>是否使用者內容符合規範的提示給前端，接著前端再為這些<code>input</code>欄位的className中，動態地加入<code>is-valid</code>或<code>is-invalid</code>這兩個className。</p>
+<h1 id="瀏覽器端驗證"><a href="#瀏覽器端驗證" class="headerlink" title="瀏覽器端驗證"></a>瀏覽器端驗證</h1><p>它是透過bootstrap提供的JavaScript內容去觸發某個還沒有被驗證的相對應表單，等到瀏覽器驗證完成後，再由瀏覽器回饋給我們。<br>所以，<br>我們必須在想要被驗證的<code>form</code>命名一個<code>id</code>名稱，並將該<code>id</code>名稱提供給script。<br>並且，也要在該<code>form</code>的html標籤加上<code>novalidate</code>，代表該表單還沒有被驗證。<br>那些需要錯誤回饋部分，一樣要加入class名稱為<code>invalid-feedback</code>的區塊，就像伺服器驗證那樣加到相對應的區塊中。</p>
+<p>接著，你要加入bootstrap官網提供的script驗證的程式碼，而這段驗證的程式碼，在bootstrap的官網上就有提供了～～</p>
+<iframe src="https://codepen.io/RandyChen/embed/vYXaVpg?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-03-%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/09/bootstrap-form%E7%9A%84%E5%8A%9F%E8%83%BD%E7%AD%86%E8%A8%98-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -976,98 +1071,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/" class="post-title-link" itemprop="url">第四週前端課程筆記</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2021-01-05 10:20:36" itemprop="dateCreated datePublished" datetime="2021-01-05T10:20:36+08:00">2021-01-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2021-01-30 15:16:17" itemprop="dateModified" datetime="2021-01-30T15:16:17+08:00">2021-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF%E9%AB%94%E9%A9%97%E7%87%9F%E5%88%87%E7%89%88/" itemprop="url" rel="index"><span itemprop="name">前端體驗營切版</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，"><a href="#在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，" class="headerlink" title="在css文件中，加入以下的程式碼，就可以對div區塊做出由左到右的移動，"></a>在css文件中，加入以下的程式碼，就可以對<code>div</code>區塊做出由左到右的移動，</h2><p>與<code>background</code>顏色漸變的動畫。</p>
-<iframe src="https://codepen.io/RandyChen/embed/vYXJMXQ?height=265&theme-id=light&default-tab=css,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
-
-<p>接下來介紹一下上面的動畫程式碼</p>
-<h3 id="keyframes-example"><a href="#keyframes-example" class="headerlink" title="@keyframes example"></a><code>@keyframes example</code></h3><p>在<code>@keyframes</code>的右邊名稱example就是你為這段動畫效果的命名。<br>那這個名稱必須要跟，要做這段動畫效果的區塊中的css樣式中<code>animation-name</code>一樣。</p>
-<h3 id="animation-duration"><a href="#animation-duration" class="headerlink" title="animation-duration"></a><code>animation-duration</code></h3><p>在要做這段動畫效果的區塊中的css樣式中的<code>animation-duration</code>的值，<br>是代表這段動畫總共要做多少時間。<br>像以上這段codepen的範例，就是設定4s，也就是這段動畫總共時間是4秒。<br><img src="/image/animation_duration.png"></p>
-<p>那在<code>@keyframe</code>中，有寫0%, 25%, 50%, 75%, 100%的內容，<br>就像上面這張圖畫的一樣，它會將<code>animation-duration</code>的時間，平均分到這些區間裡面，<br>所以，這邊的code總共有4段，所以，4s/4 = 1s。<br>也就是每一段動畫的執行時間是1秒。</p>
-<h3 id="animation-delay"><a href="#animation-delay" class="headerlink" title="animation-delay"></a><code>animation-delay</code></h3><p>這段程式碼表示這段動畫要延後<code>animation-delay</code>所設定的時間後，才會開始執行這段動畫。</p>
-<h3 id="animation-fill-mode"><a href="#animation-fill-mode" class="headerlink" title="animation-fill-mode"></a><code>animation-fill-mode</code></h3><p>這段程式碼以下三種選項可以寫:<br><code>forwards</code>: 代表動畫效果會停留到最後的效果，以上面的codepen為例，<code>div</code>會停留在最後的<br><code>background:pink;left:0px;top:-2000px;</code> 的位置。</p>
-<p><code>backwards</code>: 代表這段動畫執行完成後，執行這段動畫的區塊會回到這個區塊原本的狀態。<br>以上面的codepen為例，<code>div</code>會回到一開始的<code>background:pink;left:0px;top:0px;</code> 的位置。</p>
-<p><code>both</code>: 同時擁有<code>forwards</code>和<code>backwards</code>的效果。</p>
-<h3 id="animation-iteration-count"><a href="#animation-iteration-count" class="headerlink" title="animation-iteration-count"></a><code>animation-iteration-count</code></h3><p>這段程式碼表示你設計的這段動畫總共要執行多少次。<br>以上面的codepen為例，這段動畫總共會做2次。<br>如果你想要無限循環執行這段動畫的話，你就將這個屬性的值設為<code>Infinity</code>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/05/%E7%AC%AC%E5%9B%9B%E9%80%B1%E5%89%8D%E7%AB%AF%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1137,7 +1140,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-count">162</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
