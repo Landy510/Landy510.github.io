@@ -164,6 +164,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/13/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-localStorage%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Landy">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Landy Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/13/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-localStorage%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98/" class="post-title-link" itemprop="url">JavaScript學徒篇- localStorage資料儲存</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+              
+
+              <time title="創建時間：2021-02-13 15:18:25 / 修改時間：15:21:30" itemprop="dateCreated datePublished" datetime="2021-02-13T15:18:25+08:00">2021-02-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="什麼是-localStorage-？"><a href="#什麼是-localStorage-？" class="headerlink" title="什麼是 localStorage ？"></a>什麼是 localStorage ？</h1><p>它可以將網頁中的資料儲存在本地端中。<br>也就是說它可以將用戶的瀏覽資料存在本地端的瀏覽器中。</p>
+<h2 id="localStorage的重要特性"><a href="#localStorage的重要特性" class="headerlink" title="localStorage的重要特性"></a>localStorage的重要特性</h2><p>目前瀏覽器中都會把localStorage的值型別限定為<code>string</code>型別<br>因為，以上這個特性，導致我們在存取資料到localStorage或取出資料時，需要做一些轉換。<br><img src="/image/localstorage.png"></p>
+<p>以上這張圖的流程，簡易的說明了在localStorage資料的傳遞轉換的過程，以下是程式碼實現的內容</p>
+<iframe src="https://codepen.io/RandyChen/embed/ExNjWoK?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>以上，這幾行程式碼就是先將陣列形式的原始資料轉成<code>string</code>型別。<br>接著，將這個轉換成<code>string</code>型別的原始資料，存入localStorage中。<br>再來，用<code>getItem</code>將這個<code>string</code>型別的原始資料取出來。<br>最後，再將這個<code>string</code>型別的資列轉回陣列形式。<br>最終，我們就可以用取用JSON格式資料的方式來取用內部的資料囉~~~</p>
+<p>那你可以用開發者介面中的Application選項中，有一個localStorage的選項，你點開應該就可以看到你在這個網站上儲存的localStorage的資料囉~~<br>reference:<br><a target="_blank" rel="noopener" href="https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/232745/">程式前沿文章</a></p>
+<h1 id="data-透過-dataset-讀取自訂資料"><a href="#data-透過-dataset-讀取自訂資料" class="headerlink" title="data-* - 透過 dataset 讀取自訂資料"></a>data-* - 透過 dataset 讀取自訂資料</h1><iframe src="https://codepen.io/RandyChen/embed/oNYXZMe?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>你可以看到，我們為<code>li</code>標籤裡面新增了<code>data-*</code>之類的標籤，<br>並在js中利用<code>dataset.data</code>標籤名稱，來取得相關的<code>data-*</code>內的值。</p>
+<p>另外，<code>data-*</code>和<code>for</code>迴圈的運用</p>
+<iframe src="https://codepen.io/RandyChen/embed/poNJeqo?height=265&theme-id=light&default-tab=html,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>你可以看到我們用<code>for</code>迴圈的方式，來動態產生<code>li</code>的內容。 接著，透過<code>dataset</code>來擷取<code>data-whatever</code>的內容囉。</p>
+<h1 id="splice-刪除-array-資料"><a href="#splice-刪除-array-資料" class="headerlink" title="splice - 刪除 array 資料"></a>splice - 刪除 array 資料</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var myFish &#x3D; [&#39;angel&#39;, &#39;clown&#39;, &#39;drum&#39;, &#39;mandarin&#39;, &#39;sturgeon&#39;];</span><br><span class="line">var removed &#x3D; myFish.splice(3, 1);</span><br><span class="line">console.log(myFish);  [&#39;angel&#39;, &#39;clown&#39;, &#39;drum&#39;, &#39;sturgeon&#39;]</span><br></pre></td></tr></table></figure>
+<p>上面這個範例就是從索引3開始，然後，刪除一個元素。</p>
+<h1 id="localStorage作業"><a href="#localStorage作業" class="headerlink" title="localStorage作業"></a>localStorage作業</h1><p>這邊的作業是結合了localStorage功能的todolist。<br>所以，我的作業是下面這樣。</p>
+<iframe src="https://codepen.io/RandyChen/embed/XWNbRQE?height=265&theme-id=light&default-tab=js,result" width="100%" height="300" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/02/11/JavaScript%E5%AD%B8%E5%BE%92%E7%AF%87-Event/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -938,74 +1023,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://landy510.github.io/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%9C%98%E9%9A%8A%E5%90%88%E4%BD%9C%E7%AF%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Landy">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Landy Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%9C%98%E9%9A%8A%E5%90%88%E4%BD%9C%E7%AF%87/" class="post-title-link" itemprop="url">github課程筆記-Git團隊合作篇</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              
-
-              <time title="創建時間：2021-01-30 11:14:56 / 修改時間：11:25:35" itemprop="dateCreated datePublished" datetime="2021-01-30T11:14:56+08:00">2021-01-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="git-remote-遠端數據庫"><a href="#git-remote-遠端數據庫" class="headerlink" title="git remote - 遠端數據庫"></a>git remote - 遠端數據庫</h1><p>這小節要教導如何推送其他的branch上去遠端數據庫。<br>step1.<br>若今天你在分支的支線上，直接使用git push，是會失敗的。<br>原因是Github不確定你是要推送到哪一個遠端數據庫上，是推到正式主機上 或是 推送到github上呢?</p>
-<p>step2.<br>先用<code>git remote</code> 查詢遠端數據庫</p>
-<h2 id="git-remote-查詢遠端數據庫"><a href="#git-remote-查詢遠端數據庫" class="headerlink" title="git remote - 查詢遠端數據庫"></a>git remote - 查詢遠端數據庫</h2><p>你輸入完這個指令之後，git Bash應該會出現origin，這個origin就代表<br>你用<code>git clone</code> 拉下來的數據庫的名稱，預設叫origin，所以，<br>如果你有很多數據庫的話，你用<code>git remote</code>就會出現很多數據庫的名稱囉。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/30/github%E8%AA%B2%E7%A8%8B%E7%AD%86%E8%A8%98-Git%E5%9C%98%E9%9A%8A%E5%90%88%E4%BD%9C%E7%AF%87/#more" rel="contents">
-                閱讀全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1075,7 +1092,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">164</span>
+          <span class="site-state-item-count">165</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
